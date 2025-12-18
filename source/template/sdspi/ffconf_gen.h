@@ -26,10 +26,11 @@
 /---------------------------------------------------------------------------*/
 
 #define FFCONF_DEF	80286	/* Revision ID */
+
 /*---------------------------------------------------------------------------/
 / MSDK adaptation configuration
 /---------------------------------------------------------------------------*/
-#define SD_DISK_ENABLE 1
+#define USB_DISK_ENABLE 1
 /* Available options are:
 /      RAM_DISK_ENABLE 1
 /      USB_DISK_ENABLE 1

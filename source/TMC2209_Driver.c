@@ -17,12 +17,10 @@
 #include "fsl_debug_console.h"
 
 /* FreeRTOS kernel includes. */
-#include "FreeRTOS.h"
-#include "task.h"
 
 /* TODO: insert other include files here. */
-#include "TMC2209.h"
-#include "CLI.h"
+#include "application.h"
+
 /* TODO: insert other definitions and declarations here. */
 
 /* Task priorities. */
@@ -35,7 +33,7 @@
 
  ******************************************************************************/
 
-static void my_task(void *pvParameters);
+static void my_task(void * pvParameters);
 
 /*!
 
@@ -43,10 +41,10 @@ static void my_task(void *pvParameters);
 
  */
 
-static void my_task(void *pvParameters)
+/*static void TMC_Task(void * pvParameters)
 
 {
-TMC_Init();
+    TMC_Init();
     for (;;)
     {
         uint32_t data = 0b11;
@@ -58,23 +56,26 @@ TMC_Init();
         vTaskDelay(100);
     }
 
-}
+}*/
 
-static void lpuart0(void *pvParameters)
+/*static void FS_Task(void * pvParameters)
 {
-    CLI_Init();
+
+
+
+
     for (;;)
     {
-        CLI_Process();
         vTaskDelay(1);
     }
 
-}
+}*/
 
 /*
  * @brief   Application entry point.
  */
-int main(void) {
+int main(void)
+{
 
     /* Init board hardware. */
     BOARD_InitBootPins();
@@ -84,41 +85,40 @@ int main(void) {
     /* Init FSL debug console. */
     BOARD_InitDebugConsole();
 #endif
-    if (xTaskCreate(lpuart0, "lpuart0", configMINIMAL_STACK_SIZE + 100, NULL, my_task_PRIORITY, NULL) != pdPASS)
 
-            {
+    /*if (xTaskCreate(FS_Task, "FS_Task", configMINIMAL_STACK_SIZE + 100, NULL, my_task_PRIORITY, NULL) != pdPASS)
 
-                PRINTF("Task creation failed!.\r\n");
-                while (1)
-                    ;
+    {
 
-            }
-/*    if (xTaskCreate(my_task, "my_task", configMINIMAL_STACK_SIZE + 100, NULL, my_task_PRIORITY, NULL) != pdPASS)
+        PRINTF("Task creation failed!.\r\n");
+        while (1)
+            ;
 
-        {
+    }
+    if (xTaskCreate(TMC_Task, "TMC_Task", configMINIMAL_STACK_SIZE + 100, NULL, my_task_PRIORITY, NULL) != pdPASS)
 
-            PRINTF("Task creation failed!.\r\n");
-            while (1)
-                ;
+    {
 
-        }*/
+        PRINTF("Task creation failed!.\r\n");
+        while (1)
+            ;
 
+    }*/
 
-        vTaskStartScheduler();
-    PRINTF("Hello World\r\n");
+    APP_Init();
+
+    APP_Run();
 
     /* Force the counter to be placed into memory. */
-    volatile static int i = 0 ;
+    volatile static int i = 0;
     /* Enter an infinite loop, just incrementing a counter. */
-    while(1) {
-        i++ ;
+    while (1)
+    {
+        i++;
         /* 'Dummy' NOP to allow source level single stepping of
-            tight while() loop */
+         tight while() loop */
         __asm volatile ("nop");
     }
-    return 0 ;
+    return 0;
 }
-
-
-
 

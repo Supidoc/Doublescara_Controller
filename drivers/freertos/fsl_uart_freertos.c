@@ -332,7 +332,7 @@ int UART_RTOS_Receive(uart_rtos_handle_t *handle, uint8_t *buffer, uint32_t leng
         return kStatus_Fail;
     }
 
-    TickType_t timeoutTicks = pdMS_TO_TICKS(timeout);
+    TickType_t timeoutTicks = pdMS_TO_TICKS(timeoutMs);
 
     ev = xEventGroupWaitBits(handle->rxEvent,
                              RTOS_UART_COMPLETE | RTOS_UART_RING_BUFFER_OVERRUN | RTOS_UART_HARDWARE_BUFFER_OVERRUN,

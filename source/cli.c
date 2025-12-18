@@ -5,30 +5,51 @@
  *      Author: dg
  */
 
+
 #include "peripherals.h"
-#include "string.h"
-#include "FreeRTOS_CLI.h"
 
-#define MAX_INPUT_LENGTH    50
-#define MAX_OUTPUT_LENGTH   100
+#include "cli.h"
 
-BaseType_t xPingCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString);
+status_t CLI_Init(void);
+static void CLI_Process(void);
+static BaseType_t xPingCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString);
+
+static SemaphoreHandle_t cliMutex = NULL;
 
 static const CLI_Command_Definition_t xPingCommandDefinition =
-
-{ .pcCommand = "ping", .pcHelpString = "ping: Returns Pong", .pxCommandInterpreter = xPingCommand, .cExpectedNumberOfParameters = 0 };
+{ .pcCommand = "ping", .pcHelpString = "ping: Returns Pong\r\n", .pxCommandInterpreter = xPingCommand, .cExpectedNumberOfParameters = 0 };
 
 status_t CLI_Init(void)
 {
     BaseType_t status;
-    status = FreeRTOS_CLIRegisterCommand(&xPingCommandDefinition);
-    if (status != pdTRUE)
+
+    cliMutex = xSemaphoreCreateMutex();
+    if(cliMutex == NULL)
+        return kStatus_Fail;
+
+    status = CLI_RegisterCommand(&xPingCommandDefinition);
+    if (status != kStatus_Success)
         return kStatus_Fail;
 
     return kStatus_Success;
 }
 
-void CLI_Process(void)
+status_t CLI_RegisterCommand(const CLI_Command_Definition_t * const pxCommandToRegister ){
+    BaseType_t status;
+    if(xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED){
+    if( xSemaphoreTake( cliMutex, portMAX_DELAY ) != pdTRUE )
+        return kStatus_Fail;
+    }
+    status = FreeRTOS_CLIRegisterCommand(pxCommandToRegister);
+    if (status != pdTRUE)
+        return kStatus_Fail;
+
+    if(xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    xSemaphoreGive( cliMutex );
+    return kStatus_Success;
+}
+
+static void CLI_Process(void)
 {
 
     uint8_t cRxedChar;
@@ -50,12 +71,15 @@ void CLI_Process(void)
     if (cRxedChar == '\n')
 
     {
-
+        if( xSemaphoreTake( cliMutex, portMAX_DELAY ) != pdTRUE )
+            return;
         /* A newline character was received, so the input command string is
          complete and can be processed. Transmit a line separator, just to
          make the output easier to read. */
 
         LPUART_RTOS_Send(&LPUART0_rtos_handle, (unsigned char*) "\r\n", strlen("\r\n"));
+
+
 
         /* The command interpreter is called repeatedly until it returns
          pdFALSE. See the "Implementing a command" documentation for an
@@ -84,6 +108,8 @@ void CLI_Process(void)
 
         cInputIndex = 0;
         memset(pcInputString, 0x00, MAX_INPUT_LENGTH);
+
+        xSemaphoreGive( cliMutex );
     }
     else
     {
@@ -127,10 +153,19 @@ void CLI_Process(void)
 
     }
 }
-BaseType_t xPingCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString)
+
+static BaseType_t xPingCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString)
 {
-
-    strncpy(pcWriteBuffer, "Pong", strlen("Pong")+1);
+    strncpy(pcWriteBuffer, "Pong", strlen("Pong") + 1);
     return pdFALSE;
-
 }
+
+void CLI_Task(void * pvParameters)
+{
+    for (;;)
+    {
+        CLI_Process();
+        vTaskDelay(1);
+    }
+}
+

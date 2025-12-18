@@ -71,7 +71,6 @@ instance:
       - 0: []
       - 1: []
       - 2: []
-      - 3: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -229,77 +228,6 @@ static void GPIOA_init(void) {
 }
 
 /***********************************************************************************************************************
- * SPI0 initialization code
- **********************************************************************************************************************/
-/* clang-format off */
-/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
-instance:
-- name: 'SPI0'
-- type: 'dspi'
-- mode: 'freertos'
-- custom_name_enabled: 'false'
-- type_id: 'dspi_2.2.0'
-- functional_group: 'BOARD_InitPeripherals'
-- peripheral: 'SPI0'
-- config_sets:
-  - fsl_dspi:
-    - dspi_mode: 'kDSPI_Master'
-    - clockSource: 'BusInterfaceClock'
-    - clockSourceFreq: 'GetFreq'
-    - rtos_handle:
-      - enable_custom_name: 'false'
-    - dspi_master_config:
-      - whichCtar: 'kDSPI_Ctar0'
-      - ctarConfig:
-        - baudRate: '500000'
-        - bitsPerFrame: '8'
-        - cpol: 'kDSPI_ClockPolarityActiveHigh'
-        - cpha: 'kDSPI_ClockPhaseFirstEdge'
-        - direction: 'kDSPI_MsbFirst'
-        - pcsToSckDelayInNanoSec: '1000'
-        - lastSckToPcsDelayInNanoSec: '1000'
-        - betweenTransferDelayInNanoSec: '1000'
-      - whichPcs: 'PCS3'
-      - pcsActiveHighOrLow: 'kDSPI_PcsActiveLow'
-      - enableContinuousSCK: 'false'
-      - enableRxFifoOverWrite: 'false'
-      - enableModifiedTimingFormat: 'false'
-      - samplePoint: 'kDSPI_SckToSin0Clock'
-    - interrupt_rx_tx:
-      - IRQn: 'SPI0_IRQn'
-      - enable_priority: 'true'
-      - priority: '8'
- * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
-/* clang-format on */
-dspi_rtos_handle_t SPI0_rtosHandle;
-const dspi_master_config_t SPI0_config = {
-  .whichCtar = kDSPI_Ctar0,
-  .ctarConfig = {
-    .baudRate = 500000UL,
-    .bitsPerFrame = 8UL,
-    .cpol = kDSPI_ClockPolarityActiveHigh,
-    .cpha = kDSPI_ClockPhaseFirstEdge,
-    .direction = kDSPI_MsbFirst,
-    .pcsToSckDelayInNanoSec = 1000UL,
-    .lastSckToPcsDelayInNanoSec = 1000UL,
-    .betweenTransferDelayInNanoSec = 1000UL
-  },
-  .whichPcs = kDSPI_Pcs3,
-  .pcsActiveHighOrLow = kDSPI_PcsActiveLow,
-  .enableContinuousSCK = false,
-  .enableRxFifoOverWrite = false,
-  .enableModifiedTimingFormat = false,
-  .samplePoint = kDSPI_SckToSin0Clock
-};
-
-static void SPI0_init(void) {
-  /* Initialization function */
-  DSPI_RTOS_Init(&SPI0_rtosHandle, SPI0_PERIPHERAL, &SPI0_config, SPI0_CLK_FREQ);
-  /* Interrupt vector SPI0_IRQn priority settings in the NVIC. */
-  NVIC_SetPriority(SPI0_IRQN, SPI0_IRQ_PRIORITY);
-}
-
-/***********************************************************************************************************************
  * FATFS initialization code
  **********************************************************************************************************************/
 /* clang-format off */
@@ -413,7 +341,6 @@ void BOARD_InitPeripherals(void)
   UART1_init();
   LPUART0_init();
   GPIOA_init();
-  SPI0_init();
 }
 
 /***********************************************************************************************************************

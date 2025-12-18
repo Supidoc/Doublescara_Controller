@@ -19,25 +19,11 @@ static void _build_write_package(TMC2209_Write_Datagram_t * datagram, uint8_t * 
 static void _calcCRC(uint8_t * datagram, size_t datagramLength);
 static uint8_t _dump_rx_buffer(uint8_t dumpCount);
 
-void UART1_UserCallback(UART_Type * base, uart_handle_t * handle, status_t status, void * userData);
-
-typedef enum _ReadTransferStatus
-{
-    READ_IDLE = 0x0, READ_STARTED_TRANSMITTING = 0x1, READ_TRANSMITTING_COMPLETED = 0x2, READ_STARTED_RECEIVING = 0x4, READ_RECEIVING_COMPLETE = 0x8,
-} ReadTransferStatus_t;
-
-typedef enum _WriteTransferStatus
-{
-    WRITE_IDLE = 0x0, WRITE_STARTED_TRANSMITTING = 0x1, WRITE_TRANSMITTING_COMPLETED = 0x2,
-} WriteTransferStatus_t;
-
 
 
 static uint8_t transmit_read_package[TMC_READ_PACKAGE_SIZE];
 static uint8_t transmit_response_package[TMC_WRITE_PACKAGE_SIZE];
 static uint8_t transmit_write_package[TMC_WRITE_PACKAGE_SIZE];
-static ReadTransferStatus_t ReadTransferStatus = 0;
-static WriteTransferStatus_t WriteTransferStatus = 0;
 
 static uint8_t interfaceTransmissionCount[4];
 static TMC_SlaveStatus_t slaveStatus;
@@ -137,8 +123,6 @@ status_t TMC_write(TMC_SerialAddress_t serialAddress, uint8_t regAddr, uint32_t 
     _create_write_datagram(&writeDatagram, serialAddress, regAddr, *data);
 
     _build_write_package(&writeDatagram, transmit_write_package);
-
-    WriteTransferStatus = WRITE_STARTED_TRANSMITTING;
 
     status = UART_RTOS_Send(&UART1_rtos_handle, transmit_write_package,
     TMC_WRITE_PACKAGE_SIZE);

@@ -16,8 +16,6 @@
 #include "fsl_lpuart.h"
 #include "fsl_lpuart_freertos.h"
 #include "fsl_gpio.h"
-#include "fsl_dspi.h"
-#include "fsl_dspi_freertos.h"
 #include "ff.h"
 #include "diskio.h"
 
@@ -53,17 +51,6 @@ extern "C" {
 #define LPUART0_IRQ_PRIORITY 7
 /* Alias for GPIOA peripheral */
 #define GPIOA_GPIO GPIOA
-/* BOARD_InitPeripherals defines for SPI0 */
-/* Definition of peripheral ID */
-#define SPI0_PERIPHERAL SPI0
-/* Definition of the clock source */
-#define SPI0_CLOCK_SOURCE DSPI0_CLK_SRC
-/* Definition of the clock source frequency */
-#define SPI0_CLK_FREQ CLOCK_GetFreq(SPI0_CLOCK_SOURCE)
-/* SPI0 interrupt vector ID (number). */
-#define SPI0_IRQN SPI0_IRQn
-/* SPI0 interrupt vector priority. */
-#define SPI0_IRQ_PRIORITY 8
 
 /***********************************************************************************************************************
  * Global variables
@@ -74,8 +61,6 @@ extern uart_rtos_config_t UART1_rtos_config;
 extern lpuart_rtos_handle_t LPUART0_rtos_handle;
 extern lpuart_handle_t LPUART0_lpuart_handle;
 extern lpuart_rtos_config_t LPUART0_rtos_config;
-extern dspi_rtos_handle_t SPI0_rtosHandle;
-extern const dspi_master_config_t SPI0_config;
 /* FATFS System object */
 extern FATFS FATFS_System_0;
 
