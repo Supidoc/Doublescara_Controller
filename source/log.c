@@ -12,6 +12,7 @@
 #include "queue.h"
 #include "FreeRTOS_CLI.h"
 #include "cli.h"
+#include "cli_utilities.h"
 
 #define LOG_MAGIC 0x4C4F4746  // Magic Number to identify fileformat ASCII "LOGF"
 
@@ -59,11 +60,12 @@ static void LOG_AssembleLogString(char * dest, LOG_QueueItem_t queueItem);
 static status_t LOG_AppendToFile(uint8_t * buffer, size_t bufferLength);
 static void LOG_Process(void);
 static status_t LOG_SetSessionId(void);
+static void LOG_AssembleHeaderString(char * dest, LOG_LogHeader_t header);
 
 static const CLI_Command_Definition_t xLogCommandDefinition =
 { .pcCommand = "log", .pcHelpString =
-        "log [OPTIONS]: \r\n-s show logs since last boot, add a number afterwards to get log of previous runs\r\n-l filter by loglevel", .pxCommandInterpreter =
-        LOG_LogCommand, .cExpectedNumberOfParameters = 0 };
+        "log [OPTIONS]: gets the log for the specified sessionId \r\n-s [sessionId] if no sessionId is given the current sessions log will be used\r\n",
+        .pxCommandInterpreter = LOG_LogCommand, .cExpectedNumberOfParameters = -1 };
 
 status_t LOG_Init(void)
 {
@@ -156,6 +158,24 @@ static void LOG_AssembleLogString(char * dest, LOG_QueueItem_t queueItem)
     strcat(dest, " \r\n\0");
 }
 
+static void LOG_AssembleHeaderString(char * dest, LOG_LogHeader_t header)
+{
+
+    strcpy(dest, "Session: ");
+
+    char sessionIdString[11];
+    sprintf(sessionIdString, "%lu\0", header.sessionId);
+    strcat(dest, sessionIdString);
+
+    strcat(dest, " Version: ");
+
+    char versionString[6];
+    sprintf(versionString, "%d\0", header.version);
+    strcat(dest, versionString);
+
+    strcat(dest, " \r\n\0");
+}
+
 static status_t LOG_AppendToFile(uint8_t * buffer, size_t bufferLength)
 {
     FRESULT res;
@@ -213,7 +233,7 @@ static status_t LOG_SetSessionId(void)
     f_rewind(&file);
     if (br != sizeof(sessionId))
     {
-        sessionId = 0;
+        sessionId = 1;
     }
     else
     {
@@ -232,58 +252,82 @@ static status_t LOG_SetSessionId(void)
 BaseType_t LOG_LogCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString)
 {
     static uint8_t fileOpened = 0;
+    static uint32_t fileSessionId;
     FRESULT res;
     LOG_LogHeaderPrefix_t prefix;
     static LOG_LogHeader_t header;
     UINT br;
+    static char localLogFilePath[11];
+    static FIL localLogFile;
 
     if (fileOpened != 1u)
     {
-        res = f_open(&logFile, LogFilePath,
+        uint8_t parameterFound;
+        const char * pcParameter = NULL;
+        BaseType_t parameterStringLength;
+        CLU_GetParameterValueString("-s", pcCommandString, &parameterFound, &pcParameter, &parameterStringLength);
+        if (parameterFound == 0 || parameterStringLength == 0)
+        {
+            fileSessionId = sessionId;
+        }
+        else
+        {
+            fileSessionId = strtoul(pcParameter, NULL, 0);
+        }
+        sprintf(localLogFilePath, DISK_SD_PATH "%u", fileSessionId);
+
+        res = f_open(&localLogFile, localLogFilePath,
         FA_READ | FA_OPEN_ALWAYS);
         if (res != FR_OK)
             return kStatus_Fail;
 
-
-
-        res = f_read(&logFile, &prefix, sizeof(prefix), &br);
+        res = f_read(&localLogFile, &prefix, sizeof(prefix), &br);
         if (res != FR_OK || br != sizeof(prefix))
         {
-            pcWriteBuffer = "Invalid file format";
+            strncpy(pcWriteBuffer, "Invalid file format", strlen("Invalid file format") + 1);
             return pdFALSE;
         }
 
         if (prefix.magic != LOG_MAGIC)
         {
-            pcWriteBuffer = "Invalid file format";
+            strncpy(pcWriteBuffer, "Invalid file format", strlen("Invalid file format") + 1);
             return pdFALSE;
         }
 
-        f_rewind(&logFile);
-        res = f_read(&logFile, &header, sizeof(header), &br);
+        f_rewind(&localLogFile);
+        res = f_read(&localLogFile, &header, sizeof(header), &br);
         if (res != FR_OK || br != sizeof(header))
         {
-            pcWriteBuffer = "Invalid file format";
+            strncpy(pcWriteBuffer, "Invalid file format", strlen("Invalid file format") + 1);
             return pdFALSE;
         }
+
+        LOG_AssembleHeaderString(pcWriteBuffer, header);
 
         fileOpened = 1u;
     }
+    else
+    {
 
-    LOG_QueueItem_t queueItem;
-    res = f_read(&logFile, &queueItem, sizeof(LOG_QueueItem_t), &br);
+        LOG_QueueItem_t queueItem;
+        res = f_read(&localLogFile, &queueItem, sizeof(LOG_QueueItem_t), &br);
 
-    if(br == sizeof(LOG_QueueItem_t)){
-        LOG_AssembleLogString(pcWriteBuffer, queueItem);
+        if (br == sizeof(LOG_QueueItem_t))
+        {
+            LOG_AssembleLogString(pcWriteBuffer, queueItem);
+        }
     }
-    if(f_eof(&logFile) == 0){
+    if (f_eof(&localLogFile) == 0)
+    {
         return pdTRUE;
     }
 
-    f_close(&logFile);
+    f_close(&localLogFile);
     fileOpened = 0u;
     return pdFALSE;
 }
+
+
 
 void LOG_Task(void * pvParameters)
 {

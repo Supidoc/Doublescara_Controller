@@ -7,45 +7,70 @@
 
 
 #include "peripherals.h"
-
 #include "cli.h"
 
-status_t CLI_Init(void);
+/* Private function prototypes */
 static void CLI_Process(void);
-static BaseType_t xPingCommand(char * pcWriteBuffer, size_t xWriteBufferLen, const char * pcCommandString);
+static void CLI_ProcessNewline(uint8_t *pcInputString, uint8_t *pcOutputString, uint8_t *cInputIndex);
+static void CLI_ProcessCharacter(uint8_t cRxedChar, uint8_t *pcInputString, uint8_t *cInputIndex);
+static BaseType_t xPingCommand(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString);
 
+/* Private variables */
 static SemaphoreHandle_t cliMutex = NULL;
 
-static const CLI_Command_Definition_t xPingCommandDefinition =
-{ .pcCommand = "ping", .pcHelpString = "ping: Returns Pong\r\n", .pxCommandInterpreter = xPingCommand, .cExpectedNumberOfParameters = 0 };
+static const CLI_Command_Definition_t xPingCommandDefinition = {
+    .pcCommand = "ping",
+    .pcHelpString = "ping: Returns Pong\r\n",
+    .pxCommandInterpreter = xPingCommand,
+    .cExpectedNumberOfParameters = 0
+};
+
+/*******************************************************************************
+ * Public API Implementation
+ ******************************************************************************/
 
 status_t CLI_Init(void)
 {
     BaseType_t status;
 
     cliMutex = xSemaphoreCreateMutex();
-    if(cliMutex == NULL)
+    if (cliMutex == NULL)
+    {
         return kStatus_Fail;
+    }
 
     status = CLI_RegisterCommand(&xPingCommandDefinition);
     if (status != kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     return kStatus_Success;
 }
 
-status_t CLI_RegisterCommand(const CLI_Command_Definition_t * const pxCommandToRegister ){
+status_t CLI_RegisterCommand(const CLI_Command_Definition_t * const pxCommandToRegister)
+{
     BaseType_t status;
-    if(xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED){
-    if( xSemaphoreTake( cliMutex, portMAX_DELAY ) != pdTRUE )
-        return kStatus_Fail;
+    
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    {
+        if (xSemaphoreTake(cliMutex, portMAX_DELAY) != pdTRUE)
+        {
+            return kStatus_Fail;
+        }
     }
+    
     status = FreeRTOS_CLIRegisterCommand(pxCommandToRegister);
     if (status != pdTRUE)
+    {
         return kStatus_Fail;
+    }
 
-    if(xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
-    xSemaphoreGive( cliMutex );
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    {
+        xSemaphoreGive(cliMutex);
+    }
+    
     return kStatus_Success;
 }
 
