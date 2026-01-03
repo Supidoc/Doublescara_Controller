@@ -1,10 +1,14 @@
-/*
- * application.c
- *
- *  Created on: 18 Dec 2025
- *      Author: dg
- */
+/************************************************************
+ * @file    application.c
+ * @brief   Implementation file for module
+ * @author  dg
+ * @date    18 Dec 2025
+ ************************************************************/
 
+/********************
+ *     Includes		*
+ ********************/
+#include <log.h>
 #include "application.h"
 
 #include <stdio.h>
@@ -20,14 +24,33 @@
 
 #include "disk.h"
 #include "cli.h"
-#include "log.h"
 
-/* Private function prototypes */
+/************************************
+ *     Private Macros / Defines		*
+ ************************************/
+
+/***************************
+ *     Private Typedefs	   *
+ ***************************/
+
+/*****************************************
+ *     Private Function Declarations     *
+ *****************************************/
+
 static status_t APP_CreateTask(TaskFunction_t taskFunction, const char *taskName, 
                                  uint16_t stackSize, UBaseType_t priority);
 
-/* Public API implementation */
+/****************************
+ *     Public Variables     *
+ ****************************/
 
+/*****************************
+ *     Private Variables     *
+ *****************************/
+
+/*******************************************
+ *     Public Function Implementations     *
+ *******************************************/
 void APP_Init(void)
 {
     DISK_Init();
@@ -52,8 +75,9 @@ void APP_Run(void)
     vTaskStartScheduler();
 }
 
-/* Private helper functions */
-
+/********************************************
+ *     Private Function Implementations     *
+ ********************************************/
 static status_t APP_CreateTask(TaskFunction_t taskFunction, const char *taskName, 
                                  uint16_t stackSize, UBaseType_t priority)
 {

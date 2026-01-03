@@ -1,12 +1,40 @@
-/*
- * cli_utilities.c
- *
- *  Created on: 19 Dec 2025
- *      Author: dg
- */
-#include "cli_utilities.h"
+/************************************************************
+ * @file    cli_utilities.c
+ * @brief   Implementation file for module
+ * @author  dg
+ * @date    18 Dec 2025
+ ************************************************************/
 
+/********************
+ *     Includes		*
+ ********************/
+
+#include "cli_utilities.h"
 #include "string.h"
+
+/************************************
+ *     Private Macros / Defines		*
+ ************************************/
+
+/***************************
+ *     Private Typedefs	   *
+ ***************************/
+
+/*****************************************
+ *     Private Function Declarations     *
+ *****************************************/
+
+/****************************
+ *     Public Variables     *
+ ****************************/
+
+/*****************************
+ *     Private Variables     *
+ *****************************/
+
+/*******************************************
+ *     Public Function Implementations     *
+ *******************************************/
 
 status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pcCommandString, uint8_t * parameterFound, const char ** pcParameter,
         BaseType_t * parameterStringLength)
@@ -47,3 +75,7 @@ status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pc
     } while (*pcParameter != NULL);
     return kStatus_Fail;
 }
+
+/********************************************
+ *     Private Function Implementations     *
+ ********************************************/
