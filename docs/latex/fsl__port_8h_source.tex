@@ -1,0 +1,456 @@
+\doxysection{fsl\+\_\+port.\+h}
+\hypertarget{fsl__port_8h_source}{}\label{fsl__port_8h_source}\index{drivers/fsl\_port.h@{drivers/fsl\_port.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2022,\ 2024-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ FSL\_PORT\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ FSL\_PORT\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00018}00018\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00019}00019\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00020}00020\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00022}00022\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00023}00023\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00024}00024\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.port"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00025}00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00030}\doxymbox{\hyperlink{group__port_ga75a0a23a423adf79cd0f83a5fa2567a3}{00030}}\ \textcolor{preprocessor}{\#define\ FSL\_PORT\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 5,\ 1))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00033}00033\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00035}00035\ \textcolor{keyword}{enum}\ \_port\_pull}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00037}00037\ \ \ \ \ kPORT\_PullDisable\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00038}00038\ \ \ \ \ kPORT\_PullDown\ \ \ \ =\ 2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00039}00039\ \ \ \ \ kPORT\_PullUp\ \ \ \ \ \ =\ 3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00041}00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00043}00043\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00045}00045\ \textcolor{keyword}{enum}\ \_port\_pull\_value}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00047}00047\ \ \ \ \ kPORT\_LowPullResistor\ \ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00048}00048\ \ \ \ \ kPORT\_HighPullResistor\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00049}00049\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00050}00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00052}00052\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00054}00054\ \textcolor{keyword}{enum}\ \_port\_slew\_rate}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00055}00055\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00056}00056\ \ \ \ \ kPORT\_FastSlewRate\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00057}00057\ \ \ \ \ kPORT\_SlowSlewRate\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00058}00058\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00059}00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00061}00061\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00063}00063\ \textcolor{keyword}{enum}\ \_port\_open\_drain\_enable}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00065}00065\ \ \ \ \ kPORT\_OpenDrainDisable\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00066}00066\ \ \ \ \ kPORT\_OpenDrainEnable\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00067}00067\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00068}00068\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00070}00070\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PASSIVE\_FILTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PASSIVE\_FILTER}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00072}00072\ \textcolor{keyword}{enum}\ \_port\_passive\_filter\_enable}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00073}00073\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00074}00074\ \ \ \ \ kPORT\_PassiveFilterDisable\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00075}00075\ \ \ \ \ kPORT\_PassiveFilterEnable\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00076}00076\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00077}00077\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00079}00079\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00081}00081\ \textcolor{keyword}{enum}\ \_port\_drive\_strength}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00083}00083\ \ \ \ \ kPORT\_LowDriveStrength\ \ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00084}00084\ \ \ \ \ kPORT\_HighDriveStrength\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00085}00085\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00086}00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00088}00088\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00090}00090\ \textcolor{keyword}{enum}\ \_port\_drive\_strength1}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00091}00091\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00092}00092\ \ \ \ \ kPORT\_NormalDriveStrength\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00093}00093\ \ \ \ \ kPORT\_DoubleDriveStrength\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00094}00094\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00095}00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00097}00097\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00099}00099\ \textcolor{keyword}{enum}\ \_port\_input\_buffer}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00100}00100\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00101}00101\ \ \ \ \ kPORT\_InputBufferDisable\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00102}00102\ \ \ \ \ kPORT\_InputBufferEnable\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00103}00103\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00104}00104\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00106}00106\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00108}00108\ \textcolor{keyword}{enum}\ \_port\_invet\_input}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00109}00109\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00110}00110\ \ \ \ \ kPORT\_InputNormal\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00111}00111\ \ \ \ \ kPORT\_InputInvert\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00112}00112\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00113}00113\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00115}00115\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00117}00117\ \textcolor{keyword}{enum}\ \_port\_lock\_register}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00118}00118\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00119}00119\ \ \ \ \ kPORT\_UnlockRegister\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00120}00120\ \ \ \ \ kPORT\_LockRegister\ \ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00121}00121\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00122}00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00124}00124\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00126}00126\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_port\_mux}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00127}00127\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00128}00128\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_GPIO)\ \&\&\ (FSL\_FEATURE\_PORT\_PCR\_MUX\_GPIO\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00129}00129\ \ \ \ \ kPORT\_MuxAsGpio\ \ \ \ \ \ \ \ \ \ \ =\ 0U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00130}00130\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00131}00131\ \ \ \ \ kPORT\_PinDisabledOrAnalog\ =\ 0U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00132}00132\ \ \ \ \ kPORT\_MuxAsGpio\ \ \ \ \ \ \ \ \ \ \ =\ 1U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00133}00133\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00134}00134\ \ \ \ \ kPORT\_MuxAlt0\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00135}00135\ \ \ \ \ kPORT\_MuxAlt1\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00136}00136\ \ \ \ \ kPORT\_MuxAlt2\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 2U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00137}00137\ \ \ \ \ kPORT\_MuxAlt3\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 3U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00138}00138\ \ \ \ \ kPORT\_MuxAlt4\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 4U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00139}00139\ \ \ \ \ kPORT\_MuxAlt5\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 5U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00140}00140\ \ \ \ \ kPORT\_MuxAlt6\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 6U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00141}00141\ \ \ \ \ kPORT\_MuxAlt7\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 7U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00142}00142\ \ \ \ \ kPORT\_MuxAlt8\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 8U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00143}00143\ \ \ \ \ kPORT\_MuxAlt9\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 9U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00144}00144\ \ \ \ \ kPORT\_MuxAlt10\ \ \ \ \ \ \ \ \ \ \ \ =\ 10U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00145}00145\ \ \ \ \ kPORT\_MuxAlt11\ \ \ \ \ \ \ \ \ \ \ \ =\ 11U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00146}00146\ \ \ \ \ kPORT\_MuxAlt12\ \ \ \ \ \ \ \ \ \ \ \ =\ 12U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00147}00147\ \ \ \ \ kPORT\_MuxAlt13\ \ \ \ \ \ \ \ \ \ \ \ =\ 13U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00148}00148\ \ \ \ \ kPORT\_MuxAlt14\ \ \ \ \ \ \ \ \ \ \ \ =\ 14U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00149}00149\ \ \ \ \ kPORT\_MuxAlt15\ \ \ \ \ \ \ \ \ \ \ \ =\ 15U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00150}00150\ \}\ port\_mux\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00151}00151\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00153}00153\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00155}\doxymbox{\hyperlink{group__port_gafd69f8203c1c62d7c81088dc92423dce}{00155}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__port_gafd69f8203c1c62d7c81088dc92423dce}{\_port\_interrupt}}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00157}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea3a632495179d065e620ada24a6521ac6}{00157}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea3a632495179d065e620ada24a6521ac6}{kPORT\_InterruptOrDMADisabled}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00158}00158\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DMA\_REQUEST)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DMA\_REQUEST\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00159}00159\ \ \ \ \ kPORT\_DMARisingEdge\ \ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00160}00160\ \ \ \ \ kPORT\_DMAFallingEdge\ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00161}00161\ \ \ \ \ kPORT\_DMAEitherEdge\ \ =\ 0x3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00162}00162\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00163}00163\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_IRQC\_FLAG)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_IRQC\_FLAG\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00164}00164\ \ \ \ \ kPORT\_FlagRisingEdge\ \ =\ 0x05U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00165}00165\ \ \ \ \ kPORT\_FlagFallingEdge\ =\ 0x06U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00166}00166\ \ \ \ \ kPORT\_FlagEitherEdge\ \ =\ 0x07U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00167}00167\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00168}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea4001279f550382ce823ad62136970f14}{00168}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea4001279f550382ce823ad62136970f14}{kPORT\_InterruptLogicZero}}\ \ \ =\ 0x8U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00169}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea2f8db24e21fd5fabfc8dc5250fbc6471}{00169}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea2f8db24e21fd5fabfc8dc5250fbc6471}{kPORT\_InterruptRisingEdge}}\ \ =\ 0x9U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00170}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dceafe8f52eaca9af2ce2087a2991f50c463}{00170}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dceafe8f52eaca9af2ce2087a2991f50c463}{kPORT\_InterruptFallingEdge}}\ =\ 0xAU,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00171}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea02b1f5ef221c395aa49960c8c32943d2}{00171}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dcea02b1f5ef221c395aa49960c8c32943d2}{kPORT\_InterruptEitherEdge}}\ \ =\ 0xBU,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00172}\doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dceaa10b78a566c8439f00d14d18897f765c}{00172}}\ \ \ \ \ \doxymbox{\hyperlink{group__port_ggafd69f8203c1c62d7c81088dc92423dceaa10b78a566c8439f00d14d18897f765c}{kPORT\_InterruptLogicOne}}\ \ \ \ =\ 0xCU,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00173}00173\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_IRQC\_TRIGGER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_IRQC\_TRIGGER\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00174}00174\ \ \ \ \ kPORT\_ActiveHighTriggerOutputEnable\ =\ 0xDU,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00175}00175\ \ \ \ \ kPORT\_ActiveLowTriggerOutputEnable\ \ =\ 0xEU,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00176}00176\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00177}\doxymbox{\hyperlink{group__port_ga02b88c712384b46f1c8a01b041d78b13}{00177}}\ \}\ \doxymbox{\hyperlink{group__port_ga02b88c712384b46f1c8a01b041d78b13}{port\_interrupt\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00178}00178\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00180}00180\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00182}00182\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_port\_digital\_filter\_clock\_source}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00183}00183\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00184}00184\ \ \ \ \ kPORT\_BusClock\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00185}00185\ \ \ \ \ kPORT\_LpoClock\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00186}00186\ \}\ port\_digital\_filter\_clock\_source\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00189}00189\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_port\_digital\_filter\_config}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00190}00190\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00191}00191\ \ \ \ \ uint32\_t\ digitalFilterWidth;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00192}00192\ \ \ \ \ port\_digital\_filter\_clock\_source\_t\ clockSource;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00193}00193\ \}\ port\_digital\_filter\_config\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00194}00194\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00196}00196\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00198}00198\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_port\_pin\_config}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00199}00199\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00200}00200\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00201}00201\ \ \ \ \ uint16\_t\ pullSelect\ :\ 2;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00202}00202\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00203}00203\ \ \ \ \ uint16\_t\ :\ 2;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00204}00204\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_PULL\_ENABLE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00206}00206\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00207}00207\ \ \ \ \ uint16\_t\ pullValueSelect\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00208}00208\ \textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00210}00210\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00211}00211\ \ \ \ \ uint16\_t\ slewRate\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00212}00212\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00213}00213\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00214}00214\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_SLEW\_RATE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00216}00216\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00217}00217\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00218}00218\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00220}00220\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PASSIVE\_FILTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PASSIVE\_FILTER}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00221}00221\ \ \ \ \ uint16\_t\ passiveFilterEnable\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00222}00222\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00223}00223\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00224}00224\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_PASSIVE\_FILTER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00226}00226\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00227}00227\ \ \ \ \ uint16\_t\ openDrainEnable\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00228}00228\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00229}00229\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00230}00230\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_OPEN\_DRAIN\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00232}00232\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00233}00233\ \ \ \ \ uint16\_t\ driveStrength\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00234}00234\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00235}00235\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00236}00236\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00238}00238\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00239}00239\ \ \ \ \ uint16\_t\ driveStrength1\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00240}00240\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00241}00241\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00242}00242\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00244}00244\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH)\ \&\&\ (FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH\ ==\ 3)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00245}00245\ \ \ \ \ uint16\_t\ mux\ :\ 3;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00246}00246\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00247}00247\ \textcolor{preprocessor}{\#elif\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH)\ \&\&\ (FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH\ ==\ 4)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00248}00248\ \ \ \ \ uint16\_t\ mux\ :\ 4;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00249}00249\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00250}00250\ \ \ \ \ uint16\_t\ :\ 4;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00251}00251\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00253}00253\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00254}00254\ \ \ \ \ uint16\_t\ inputBuffer\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00255}00255\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00256}00256\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00257}00257\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_INPUT\_BUFFER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00259}00259\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00260}00260\ \ \ \ \ uint16\_t\ invertInput\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00261}00261\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00262}00262\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00263}00263\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_INVERT\_INPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00265}00265\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00267}00267\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00268}00268\ \ \ \ \ uint16\_t\ lockRegister\ :\ 1;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00269}00269\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00270}00270\ \ \ \ \ uint16\_t\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00271}00271\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_PIN\_CONTROL\_LOCK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00272}00272\ \}\ port\_pin\_config\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00273}00273\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00275}00275\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00277}00277\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_port\_version\_info}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00278}00278\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00279}00279\ \ \ \ \ uint16\_t\ feature;\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00280}00280\ \ \ \ \ uint8\_t\ minor;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00281}00281\ \ \ \ \ uint8\_t\ major;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00282}00282\ \}\ port\_version\_info\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00283}00283\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00285}00285\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE)\ \&\&\ FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00287}00287\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_port\_voltage\_range}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00288}00288\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00289}00289\ \ \ \ \ kPORT\_VoltageRange1Dot71V\_3Dot6V\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00290}00290\ \ \ \ \ kPORT\_VoltageRange2Dot70V\_3Dot6V\ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00291}00291\ \}\ port\_voltage\_range\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00292}00292\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00294}00294\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00295}00295\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00296}00296\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00298}00298\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00299}00299\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00300}00300\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00305}00305\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00307}00307\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00314}00314\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_GetVersionInfo(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ port\_version\_info\_t\ *info)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00315}00315\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00316}00316\ \ \ \ \ uint32\_t\ verid\ =\ base-\/>VERID;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00317}00317\ \ \ \ \ info-\/>feature\ =\ (uint16\_t)((verid\ \&\ PORT\_VERID\_FEATURE\_MASK)\ >>\ PORT\_VERID\_FEATURE\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00318}00318\ \ \ \ \ info-\/>minor\ \ \ =\ (uint8\_t)((verid\ \&\ PORT\_VERID\_MINOR\_MASK)\ >>\ PORT\_VERID\_MINOR\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00319}00319\ \ \ \ \ info-\/>major\ \ \ =\ (uint8\_t)((verid\ \&\ PORT\_VERID\_MAJOR\_MASK)\ >>\ PORT\_VERID\_MAJOR\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00320}00320\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00321}00321\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_VERSION\_INFO\_REGISTER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00323}00323\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE)\ \&\&\ FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00333}00333\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SecletPortVoltageRange(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ port\_voltage\_range\_t\ range)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00334}00334\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00335}00335\ \ \ \ \ base-\/>CONFIG\ =\ (uint32\_t)range;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00336}00336\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00337}00337\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_SUPPORT\_DIFFERENT\_VOLTAGE\_RANGE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00360}00360\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetPinConfig(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ \textcolor{keyword}{const}\ port\_pin\_config\_t\ *config)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00361}00361\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00362}00362\ \ \ \ \ assert(config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00363}00363\ \ \ \ \ uint32\_t\ addr\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ (uint32\_t)\&base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin];}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00364}00364\ \ \ \ \ *(\textcolor{keyword}{volatile}\ uint16\_t\ *)(addr)\ =\ *((\textcolor{keyword}{const}\ uint16\_t\ *)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *)config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00365}00365\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00389}00389\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetMultiplePinsConfig(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ mask,\ \textcolor{keyword}{const}\ port\_pin\_config\_t\ *config)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00390}00390\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00391}00391\ \ \ \ \ assert(config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00393}00393\ \ \ \ \ uint16\_t\ pcrl\ =\ *((\textcolor{keyword}{const}\ uint16\_t\ *)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *)config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00395}00395\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (mask\ \&\ 0xffffU))}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00396}00396\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00397}00397\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a6015e8dc700967833a3688123e214943}{GPCLR}}\ =\ ((mask\ \&\ 0xffffU)\ <<\ 16)\ |\ pcrl;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00398}00398\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00399}00399\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (mask\ >>\ 16))}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00400}00400\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00401}00401\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a321f9705d7e30248050d0a9fa3f1c075}{GPCHR}}\ =\ (mask\ \&\ 0xffff0000U)\ |\ pcrl;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00402}00402\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00403}00403\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00405}00405\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_MULTIPLE\_IRQ\_CONFIG)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_MULTIPLE\_IRQ\_CONFIG}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00427}00427\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetMultipleInterruptPinsConfig(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ mask,\ \doxymbox{\hyperlink{group__port_ga02b88c712384b46f1c8a01b041d78b13}{port\_interrupt\_t}}\ config)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00428}00428\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00429}00429\ \ \ \ \ assert(config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00431}00431\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ ((uint32\_t)mask\ \&\ 0xffffU))}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00432}00432\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00433}00433\ \ \ \ \ \ \ \ \ base-\/>GICLR\ =\ ((uint32\_t)config\ <<\ 16U)\ |\ ((uint32\_t)mask\ \&\ 0xffffU);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00434}00434\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00435}00435\ \ \ \ \ mask\ =\ mask\ >>\ 16;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00436}00436\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ mask)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00437}00437\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00438}00438\ \ \ \ \ \ \ \ \ base-\/>GICHR\ =\ ((uint32\_t)config\ <<\ 16U)\ |\ ((uint32\_t)mask\ \&\ 0xffffU);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00439}00439\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00440}00440\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00441}00441\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00463}00463\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetPinMux(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ port\_mux\_t\ mux)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00464}00464\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00465}00465\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ =\ (base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ \&\ \string~PORT\_PCR\_MUX\_MASK)\ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga13b6c873e0e5385583b1f7907a9f796a}{PORT\_PCR\_MUX}}(mux);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00466}00466\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00467}00467\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_MUX\_WIDTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00469}00469\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00470}00470\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00478}00478\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_EnablePinsDigitalFilter(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ mask,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00479}00479\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00480}00480\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00481}00481\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00482}00482\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a5fd39916c06d54202f0dc1a50b5e1041}{DFER}}\ |=\ mask;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00483}00483\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00484}00484\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00485}00485\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00486}00486\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a5fd39916c06d54202f0dc1a50b5e1041}{DFER}}\ \&=\ \string~mask;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00487}00487\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00488}00488\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00496}00496\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetDigitalFilterConfig(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ \textcolor{keyword}{const}\ port\_digital\_filter\_config\_t\ *config)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00497}00497\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00498}00498\ \ \ \ \ assert(config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00500}00500\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a8d4e0a725169fa8fe22fe55a3d3311a0}{DFCR}}\ =\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga3cf2c4c253ca645f6c93c5f2237a88c3}{PORT\_DFCR\_CS}}(config-\/>clockSource);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00501}00501\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_af58c3f35d9f1036282d4e4edabfb77c2}{DFWR}}\ =\ \doxymbox{\hyperlink{group__PORT__Register__Masks_gad79add2c6df026fd06198143aa198c99}{PORT\_DFWR\_FILT}}(config-\/>digitalFilterWidth);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00502}00502\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00504}00504\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_HAS\_DIGITAL\_FILTER\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00510}00510\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00532}\doxymbox{\hyperlink{group__port_ga001584128ac80df3857c8df6cf5245ff}{00532}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__port_ga001584128ac80df3857c8df6cf5245ff}{PORT\_SetPinInterruptConfig}}(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ \doxymbox{\hyperlink{group__port_ga02b88c712384b46f1c8a01b041d78b13}{port\_interrupt\_t}}\ config)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00533}00533\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00534}00534\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ =\ (base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ \&\ \string~PORT\_PCR\_IRQC\_MASK)\ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga7e6b6f68db9e76cf6fa34774c9b9b8f9}{PORT\_PCR\_IRQC}}(config);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00535}00535\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00536}00536\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00538}00538\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00548}00548\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetPinDriveStrength(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ uint8\_t\ strength)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00549}00549\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00550}00550\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ =\ (base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ \&\ \string~PORT\_PCR\_DSE\_MASK)\ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga991775ce627dd1e581bdaf4508239240}{PORT\_PCR\_DSE}}(strength);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00551}00551\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00552}00552\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00554}00554\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_DRIVE\_STRENGTH1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00562}00562\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_EnablePinDoubleDriveStrength(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00563}00563\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00564}00564\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00565}00565\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00566}00566\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ |=\ PORT\_PCR\_DSE1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00567}00567\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00568}00568\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00569}00569\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00570}00570\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ \&=\ \string~PORT\_PCR\_DSE1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00571}00571\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00572}00572\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00573}00573\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00575}00575\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE)\ \&\&\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00585}00585\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_SetPinPullValue(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ pin,\ uint8\_t\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00586}00586\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00587}00587\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ =\ (base-\/>\doxymbox{\hyperlink{structPORT__Type_aaff2dbd34524778e934445d8cecca063}{PCR}}[pin]\ \&\ \string~PORT\_PCR\_PV\_MASK)\ |\ PORT\_PCR\_PV(value);}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00588}00588\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00589}00589\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_PCR\_HAS\_PULL\_VALUE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00591}00591\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)\ \&\&\ FSL\_FEATURE\_PORT\_HAS\_NO\_INTERRUPT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00605}\doxymbox{\hyperlink{group__port_ga50cecfe358ab8f9cad6ab881be2f8899}{00605}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__port_ga50cecfe358ab8f9cad6ab881be2f8899}{PORT\_GetPinsInterruptFlags}}(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00606}00606\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00607}00607\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{structPORT__Type_a20069f4ac88fc12066ba90eea8fcbb58}{ISFR}};}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00608}00608\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00616}\doxymbox{\hyperlink{group__port_gadb6ede61f32b89a54049b899cd576ff7}{00616}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__port_gadb6ede61f32b89a54049b899cd576ff7}{PORT\_ClearPinsInterruptFlags}}(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ mask)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00617}00617\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00618}00618\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structPORT__Type_a20069f4ac88fc12066ba90eea8fcbb58}{ISFR}}\ =\ mask;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00619}00619\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00620}00620\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00622}00622\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_PORT\_SUPPORT\_EFT)\ \&\&\ FSL\_FEATURE\_PORT\_SUPPORT\_EFT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00629}00629\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ PORT\_GetEFTDetectFlags(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00630}00630\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00631}00631\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>EDFR;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00632}00632\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00633}00633\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00640}00640\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_EnableEFTDetectInterrupts(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00641}00641\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00642}00642\ \ \ \ \ base-\/>EDIER\ |=\ interrupt;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00643}00643\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00644}00644\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00651}00651\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_DisableEFTDetectInterrupts(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base,\ uint32\_t\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00652}00652\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00653}00653\ \ \ \ \ base-\/>EDIER\ \&=\ \string~interrupt;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00654}00654\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00655}00655\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00664}00664\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_ClearAllLowEFTDetectors(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00665}00665\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00666}00666\ \ \ \ \ base-\/>EDCR\ |=\ PORT\_EDCR\_EDLC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00667}00667\ \ \ \ \ base-\/>EDCR\ \&=\ \string~PORT\_EDCR\_EDLC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00668}00668\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00669}00669\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00676}00676\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ PORT\_ClearAllHighEFTDetectors(\doxymbox{\hyperlink{structPORT__Type}{PORT\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00677}00677\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00678}00678\ \ \ \ \ base-\/>EDCR\ |=\ PORT\_EDCR\_EDHC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00679}00679\ \ \ \ \ base-\/>EDCR\ \&=\ \string~PORT\_EDCR\_EDHC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00680}00680\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00681}00681\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_PORT\_SUPPORT\_EFT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00684}00684\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00685}00685\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00686}00686\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00687}00687\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00688}00688\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{fsl__port_8h_source_l00691}00691\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_PORT\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

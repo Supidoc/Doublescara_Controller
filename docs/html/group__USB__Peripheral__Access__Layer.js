@@ -1,0 +1,38 @@
+var group__USB__Peripheral__Access__Layer =
+[
+    [ "USB Register Masks", "group__USB__Register__Masks.html", "group__USB__Register__Masks" ],
+    [ "USB_Type", "structUSB__Type.html", [
+      [ "ADDINFO", "structUSB__Type.html#a7271c06f949d448fa10196e2bb10bd93", null ],
+      [ "ADDR", "structUSB__Type.html#a8705f1ca0cd919f17cdd610a401de206", null ],
+      [ "BDTPAGE1", "structUSB__Type.html#ae38659ba2c226f6bbe8618f9a2437ba3", null ],
+      [ "BDTPAGE2", "structUSB__Type.html#af2c91cae21a7dc71675b828c242ff14a", null ],
+      [ "BDTPAGE3", "structUSB__Type.html#a37e2eedfdddb0094778c619167cac252", null ],
+      [ "CLK_RECOVER_CTRL", "structUSB__Type.html#ae1fac00c5ed2a5d93d87ab429a2e7f4f", null ],
+      [ "CLK_RECOVER_INT_STATUS", "structUSB__Type.html#a4029c33c535571c3fd55577bc1c37cc4", null ],
+      [ "CLK_RECOVER_IRC_EN", "structUSB__Type.html#a80fb0714f5079cacf75a9b8d1e8bd4ed", null ],
+      [ "CONTROL", "structUSB__Type.html#a093d9b4052a399ff21b6694034333f08", null ],
+      [ "CTL", "structUSB__Type.html#ad66155614624c6dbd95f696e1a9f0f35", null ],
+      [ "ENDPT", "structUSB__Type.html#ae31e5076afa4cee3a94c6b57b374426a", null ],
+      [ "ERREN", "structUSB__Type.html#a29f6538d60be550166683242c93649a7", null ],
+      [ "ERRSTAT", "structUSB__Type.html#af3e1c49392d797dfdc81155e0b37a80b", null ],
+      [ "FRMNUMH", "structUSB__Type.html#a5d81326ef75b015cfa68f73b9c8434bf", null ],
+      [ "FRMNUML", "structUSB__Type.html#af0454bfe2e97064f2b6bd616350ec802", null ],
+      [ "IDCOMP", "structUSB__Type.html#afff047b66a448cfa17baf6acf33fd58a", null ],
+      [ "INTEN", "structUSB__Type.html#afbe12dd614f13edb2741464672b0d411", null ],
+      [ "ISTAT", "structUSB__Type.html#aaea8dad14f2d470b66a880384aef09d8", null ],
+      [ "OBSERVE", "structUSB__Type.html#aa8cbc53b1ddc255d7be917ba3fc6b1f1", null ],
+      [ "OTGCTL", "structUSB__Type.html#a29fdcad4635573158769b379244874c6", null ],
+      [ "OTGICR", "structUSB__Type.html#ac63531ec3a52f634997a5f27a938232e", null ],
+      [ "OTGISTAT", "structUSB__Type.html#a33ddb4989093727ebbeaabdcbb30a9be", null ],
+      [ "OTGSTAT", "structUSB__Type.html#adb73c0ed8ec05b05499d164fee6a6d9c", null ],
+      [ "PERID", "structUSB__Type.html#a2e5e3896393e567c46fbcfe1ea92bade", null ],
+      [ "REV", "structUSB__Type.html#aebfcc05a57aa51e7cdeb38d058ccd5f1", null ],
+      [ "SOFTHLD", "structUSB__Type.html#a5567027779ec927376c0d8a60d53fb24", null ],
+      [ "STAT", "structUSB__Type.html#a54025377f3daec606230cd235bd81916", null ],
+      [ "TOKEN", "structUSB__Type.html#a58b9187d7f4a00613210eae025612065", null ],
+      [ "USBCTRL", "structUSB__Type.html#a7d0fdec2bab11d450d49677fc0bf729c", null ],
+      [ "USBFRMADJUST", "structUSB__Type.html#a32e51e60eb32b6754162c3e4a9a054e1", null ],
+      [ "USBTRC0", "structUSB__Type.html#a0381c5afae0f997f54326c00e494d71c", null ]
+    ] ],
+    [ "USB_ENDPOINT_COUNT", "group__USB__Peripheral__Access__Layer.html#gaf3d792252bf7d3b2a624614acbed197e", null ]
+];

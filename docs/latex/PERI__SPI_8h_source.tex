@@ -1,0 +1,485 @@
+\doxysection{PERI\+\_\+\+SPI.\+h}
+\hypertarget{PERI__SPI_8h_source}{}\label{PERI__SPI_8h_source}\index{device/periph20/PERI\_SPI.h@{device/periph20/PERI\_SPI.h}}
+\doxymbox{\hyperlink{PERI__SPI_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00002}00002\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Processors:\ \ \ \ \ \ \ \ \ \ MK22FN512CAP12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VDC12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VFX12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLL12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VMP12}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Version:\ \ \ \ \ \ \ \ \ \ \ \ \ rev.\ 3.0,\ 2024-\/10-\/29}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ Build:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b250520}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00012}00012\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ Abstract:}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ CMSIS\ Peripheral\ Access\ Layer\ for\ SPI}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 1997-\/2016\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00019}00019\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ http:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ www.nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ mail:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ support@nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00022}00022\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ Revisions:}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00024}00024\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.0\ (2013-\/07-\/23)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Initial\ version.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.1\ (2013-\/09-\/17)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ RM\ rev.\ 0.4\ update.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00028}00028\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.0\ (2013-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Register\ accessor\ macros\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Symbols\ for\ Processor\ Expert\ memory\ map\ compatibility\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00031}00031\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Startup\ file\ for\ gcc\ has\ been\ updated\ according\ to\ CMSIS\ 3.2.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ System\ initialization\ updated.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.1\ (2013-\/10-\/30)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Definition\ of\ BITBAND\ macros\ updated\ to\ support\ peripherals\ with\ 32-\/bit\ acces\ disabled.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.2\ (2013-\/12-\/20)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.6,}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.3\ (2014-\/01-\/13)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.61,}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.4\ (2014-\/02-\/10)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ The\ declaration\ of\ clock\ configurations\ has\ been\ moved\ to\ separate\ header\ file\ system\_MK22F51212.h}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.5\ (2014-\/05-\/06)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 1.0,}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ and\ startup\ files.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Module\ access\ macro\ module\_BASES\ replaced\ by\ module\_BASE\_PTRS.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00045}00045\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.6\ (2014-\/08-\/28)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ files\ -\/\ default\ clock\ configuration\ changed.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00047}00047\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ startup\ files\ -\/\ possibility\ to\ override\ DefaultISR\ added.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.7\ (2014-\/10-\/14)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Interrupt\ INT\_LPTimer\ renamed\ to\ INT\_LPTMR0,\ interrupt\ INT\_Watchdog\ renamed\ to\ INT\_WDOG\_EWM.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00050}00050\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.8\ (2015-\/02-\/19)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Renamed\ interrupt\ vector\ LLW\ to\ LLWU.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.9\ (2016-\/03-\/21)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Added\ MK22FN512VFX12\ part.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00054}00054\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GPIO\ -\/\ renamed\ port\ instances:\ PTx\ -\/>\ GPIOx.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 3.0\ (2024-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Change\ the\ device\ header\ file\ from\ single\ flat\ file\ to\ multiple\ files\ based\ on\ peripherals,}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ each\ peripheral\ with\ dedicated\ header\ file\ located\ in\ periphN\ folder.}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00058}00058\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00059}00059\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00060}00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00071}00071\ \textcolor{preprocessor}{\#if\ !defined(PERI\_SPI\_H\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00072}\doxymbox{\hyperlink{PERI__SPI_8h_ab9c9075626a8cb56044e26e5433c6964}{00072}}\ \textcolor{preprocessor}{\#define\ PERI\_SPI\_H\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00074}00074\ \textcolor{preprocessor}{\#if\ (defined(CPU\_MK22FN512CAP12)\ ||\ defined(CPU\_MK22FN512VDC12)\ ||\ defined(CPU\_MK22FN512VFX12)\ ||\ defined(CPU\_MK22FN512VLH12)\ ||\ defined(CPU\_MK22FN512VLL12)\ ||\ defined(CPU\_MK22FN512VMP12))}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00075}00075\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{MK22F51212__COMMON_8h}{MK22F51212\_COMMON.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00076}00076\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \#error\ "{}No\ valid\ CPU\ defined!"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00078}00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00080}00080\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ -\/-\/\ Device\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00090}00090\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00091}00091\ \textcolor{comment}{**\ Start\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00092}00092\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00094}00094\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ anon\_unions}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00101}00101\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \#pragma\ cpp\_extensions\ on}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00104}00104\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00105}00105\ \ \ \textcolor{comment}{/*\ anonymous\ unions\ are\ enabled\ by\ default\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00106}00106\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \#pragma\ language=extended}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00108}00108\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00110}00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00112}00112\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ -\/-\/\ SPI\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00122}\doxymbox{\hyperlink{group__SPI__Peripheral__Access__Layer_gab7d0703b6dea77a4a75bb29a7e967840}{00122}}\ \textcolor{preprocessor}{\#define\ SPI\_MODE\_MASTER\_CTAR\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2u}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00123}00123\ \textcolor{preprocessor}{\#define\ SPI\_MODE\_SLAVE\_CTAR\_SLAVE\_COUNT\ \ \ \ \ \ \ \ \ \ \ 1u}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00126}\doxymbox{\hyperlink{structSPI__Type}{00126}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00127}\doxymbox{\hyperlink{structSPI__Type_a651ac70598a7c82ab57fc9eb672f3d70}{00127}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a651ac70598a7c82ab57fc9eb672f3d70}{MCR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00128}00128\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_0[4];}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00129}\doxymbox{\hyperlink{structSPI__Type_af7eab4d0bc295e978e3c0c28d7129481}{00129}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_af7eab4d0bc295e978e3c0c28d7129481}{TCR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00130}00130\ \ \ \textcolor{keyword}{union\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0xC\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00131}\doxymbox{\hyperlink{structSPI__Type_a9089dae4db0f403271add5d1c7450f01}{00131}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a9089dae4db0f403271add5d1c7450f01}{CTAR}}[\doxymbox{\hyperlink{group__SPI__Peripheral__Access__Layer_gab7d0703b6dea77a4a75bb29a7e967840}{SPI\_MODE\_MASTER\_CTAR\_COUNT}}];\ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00132}\doxymbox{\hyperlink{structSPI__Type_a8b33f8a673b0a9609a104d87ea220507}{00132}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a8b33f8a673b0a9609a104d87ea220507}{CTAR\_SLAVE}}[SPI\_MODE\_SLAVE\_CTAR\_SLAVE\_COUNT];\ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00133}00133\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00134}00134\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_1[24];}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00135}\doxymbox{\hyperlink{structSPI__Type_ad088a564a1fe1bdbf211c57a2a782139}{00135}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_ad088a564a1fe1bdbf211c57a2a782139}{SR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00136}\doxymbox{\hyperlink{structSPI__Type_a107d9410bde132e409d2238beea64d07}{00136}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a107d9410bde132e409d2238beea64d07}{RSER}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00137}00137\ \ \ \textcolor{keyword}{union\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0x34\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00138}\doxymbox{\hyperlink{structSPI__Type_a6c80b733dbeb338bd00a076a787d1586}{00138}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a6c80b733dbeb338bd00a076a787d1586}{PUSHR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00139}\doxymbox{\hyperlink{structSPI__Type_a333d186477ff4f51d447d342354aaead}{00139}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a333d186477ff4f51d447d342354aaead}{PUSHR\_SLAVE}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00140}00140\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00141}\doxymbox{\hyperlink{structSPI__Type_a05364b40687e08bc41dac6e8c36c902e}{00141}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a05364b40687e08bc41dac6e8c36c902e}{POPR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00142}\doxymbox{\hyperlink{structSPI__Type_a249653bf4e8d64e2c4c5936421ea9927}{00142}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a249653bf4e8d64e2c4c5936421ea9927}{TXFR0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00143}\doxymbox{\hyperlink{structSPI__Type_abb8a5ba4a6ec647e27fa59f3d9657dc6}{00143}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_abb8a5ba4a6ec647e27fa59f3d9657dc6}{TXFR1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00144}\doxymbox{\hyperlink{structSPI__Type_a0f0d6e3942d20c38cdf19ef8c48116d2}{00144}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a0f0d6e3942d20c38cdf19ef8c48116d2}{TXFR2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00145}\doxymbox{\hyperlink{structSPI__Type_a67d77705e336870c3747e28d1f549b1d}{00145}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a67d77705e336870c3747e28d1f549b1d}{TXFR3}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00146}00146\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_2[48];}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00147}\doxymbox{\hyperlink{structSPI__Type_af53d225f3bd16875b4fcf2f9e6e0cfdc}{00147}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_af53d225f3bd16875b4fcf2f9e6e0cfdc}{RXFR0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00148}\doxymbox{\hyperlink{structSPI__Type_a8c3198672d66f0035b4d22a9ca93d8ed}{00148}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a8c3198672d66f0035b4d22a9ca93d8ed}{RXFR1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00149}\doxymbox{\hyperlink{structSPI__Type_a9f8fcb4decbddd5297058b2c5409a8aa}{00149}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_a9f8fcb4decbddd5297058b2c5409a8aa}{RXFR2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00150}\doxymbox{\hyperlink{structSPI__Type_aeb39b56090b9626153ac0501c17ed1cc}{00150}}\ \ \ \_\_I\ \ uint32\_t\ \doxymbox{\hyperlink{structSPI__Type_aeb39b56090b9626153ac0501c17ed1cc}{RXFR3}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00151}00151\ \}\ \doxymbox{\hyperlink{structSPI__Type}{SPI\_Type}};}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00153}00153\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00154}00154\ \textcolor{comment}{\ \ \ -\/-\/\ SPI\ Register\ Masks}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00155}00155\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00165}00165\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_HALT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00166}00166\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_HALT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00171}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga615e3c6718820a26ff62dde21b352b27}{00171}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_HALT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_HALT\_SHIFT))\ \&\ SPI\_MCR\_HALT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00173}00173\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_SMPL\_PT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x300U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00174}00174\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_SMPL\_PT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00181}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga85a76d4d3ea961f858f6eed9882bfd99}{00181}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_SMPL\_PT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_SMPL\_PT\_SHIFT))\ \&\ SPI\_MCR\_SMPL\_PT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00183}00183\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_RXF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00184}00184\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_RXF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00189}\doxymbox{\hyperlink{group__SPI__Register__Masks_gaae3c74d637272a70177d20cfde606d6d}{00189}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_RXF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_CLR\_RXF\_SHIFT))\ \&\ SPI\_MCR\_CLR\_RXF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00191}00191\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_TXF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x800U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00192}00192\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_TXF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (11U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00197}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga3556df040389407ff335eb2c0829231a}{00197}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CLR\_TXF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_CLR\_TXF\_SHIFT))\ \&\ SPI\_MCR\_CLR\_TXF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00199}00199\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_RXF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00200}00200\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_RXF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00205}\doxymbox{\hyperlink{group__SPI__Register__Masks_gabef7124a5c4ecb95b364f88d8e98cefc}{00205}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_RXF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_DIS\_RXF\_SHIFT))\ \&\ SPI\_MCR\_DIS\_RXF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00207}00207\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_TXF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00208}00208\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_TXF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (13U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00213}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga161db05dd7fdd6904090126c0407ea01}{00213}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DIS\_TXF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_DIS\_TXF\_SHIFT))\ \&\ SPI\_MCR\_DIS\_TXF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00215}00215\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MDIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00216}00216\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MDIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (14U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00221}\doxymbox{\hyperlink{group__SPI__Register__Masks_gafaab696ae478ac9e423d8262502aae38}{00221}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MDIS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_MDIS\_SHIFT))\ \&\ SPI\_MCR\_MDIS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00223}00223\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DOZE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00224}00224\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DOZE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (15U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00229}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga4b82cf6a4a4b286b6ec8c1dad08c746a}{00229}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DOZE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_DOZE\_SHIFT))\ \&\ SPI\_MCR\_DOZE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00231}00231\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3F0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00232}00232\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00237}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga81637c9ef8f34bdb499086de99c99858}{00237}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSIS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_PCSIS\_SHIFT))\ \&\ SPI\_MCR\_PCSIS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00239}00239\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_ROOE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00240}00240\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_ROOE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (24U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00245}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga976b4b71102dac6e646d34dc6f91351b}{00245}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_ROOE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_ROOE\_SHIFT))\ \&\ SPI\_MCR\_ROOE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00247}00247\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSSE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00248}00248\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSSE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00253}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga17a788925747b7b947327e528b87ba1c}{00253}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_PCSSE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_PCSSE\_SHIFT))\ \&\ SPI\_MCR\_PCSSE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00255}00255\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MTFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00256}00256\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MTFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (26U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00261}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga8e3423c2e937dc66be10e2314542ee28}{00261}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MTFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_MTFE\_SHIFT))\ \&\ SPI\_MCR\_MTFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00263}00263\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_FRZ\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00264}00264\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_FRZ\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00269}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga5afa13e7f27cebb89bb952630967834f}{00269}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_FRZ(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_FRZ\_SHIFT))\ \&\ SPI\_MCR\_FRZ\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00271}00271\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DCONF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x30000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00272}00272\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DCONF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (28U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00279}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga4157226a8f489e3d1d8321beed0afcb6}{00279}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_DCONF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_DCONF\_SHIFT))\ \&\ SPI\_MCR\_DCONF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00281}00281\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CONT\_SCKE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00282}00282\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CONT\_SCKE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (30U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00287}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga741c4834ced3eb76c50fd2e161791689}{00287}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_CONT\_SCKE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_CONT\_SCKE\_SHIFT))\ \&\ SPI\_MCR\_CONT\_SCKE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00289}00289\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MSTR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00290}00290\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MSTR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (31U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00295}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga8c511b3daf106ff16f3b1ecec55ef2d2}{00295}}\ \textcolor{preprocessor}{\#define\ SPI\_MCR\_MSTR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_MCR\_MSTR\_SHIFT))\ \&\ SPI\_MCR\_MSTR\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00301}00301\ \textcolor{preprocessor}{\#define\ SPI\_TCR\_SPI\_TCNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFF0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00302}00302\ \textcolor{preprocessor}{\#define\ SPI\_TCR\_SPI\_TCNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00304}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga3e79144ff705279f17e657cd3d596afa}{00304}}\ \textcolor{preprocessor}{\#define\ SPI\_TCR\_SPI\_TCNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TCR\_SPI\_TCNT\_SHIFT))\ \&\ SPI\_TCR\_SPI\_TCNT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00310}00310\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_BR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00311}00311\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_BR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00313}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga8ef1d047cb27c76c57b494ffeada5259}{00313}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_BR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_BR\_SHIFT))\ \&\ SPI\_CTAR\_BR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00315}00315\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00316}00316\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00318}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga48f6e8c7555056687cfcc2c56fc63c46}{00318}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_DT\_SHIFT))\ \&\ SPI\_CTAR\_DT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00320}00320\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_ASC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF00U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00321}00321\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_ASC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00323}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga2cd43b6b9241829083a88d903cc1ca2a}{00323}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_ASC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_ASC\_SHIFT))\ \&\ SPI\_CTAR\_ASC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00325}00325\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CSSCK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00326}00326\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CSSCK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00328}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga3c988f51f8a9ffc42af2b1c780796666}{00328}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CSSCK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_CSSCK\_SHIFT))\ \&\ SPI\_CTAR\_CSSCK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00330}00330\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PBR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x30000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00331}00331\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PBR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00338}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga32e4047abbaf3dcf3d1cb2ab30142442}{00338}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PBR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_PBR\_SHIFT))\ \&\ SPI\_CTAR\_PBR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00340}00340\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PDT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xC0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00341}00341\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PDT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (18U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00348}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga9b8b72764c75d047a2b4deb5a6a15619}{00348}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PDT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_PDT\_SHIFT))\ \&\ SPI\_CTAR\_PDT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00350}00350\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PASC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x300000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00351}00351\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PASC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (20U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00358}\doxymbox{\hyperlink{group__SPI__Register__Masks_gae16156d09743ff57feb66a1e4c96d8c8}{00358}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PASC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_PASC\_SHIFT))\ \&\ SPI\_CTAR\_PASC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00360}00360\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PCSSCK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xC00000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00361}00361\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PCSSCK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (22U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00368}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga1d67f4830c56355cfbee79721e4d30d3}{00368}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_PCSSCK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_PCSSCK\_SHIFT))\ \&\ SPI\_CTAR\_PCSSCK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00370}00370\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_LSBFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00371}00371\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_LSBFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (24U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00376}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga4c9cea463fa7641c820c5622500cd296}{00376}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_LSBFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_LSBFE\_SHIFT))\ \&\ SPI\_CTAR\_LSBFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00378}00378\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPHA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00379}00379\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPHA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00384}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga967844b3614749fa16ce2ddc72549653}{00384}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPHA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_CPHA\_SHIFT))\ \&\ SPI\_CTAR\_CPHA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00386}00386\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPOL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00387}00387\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPOL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (26U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00392}\doxymbox{\hyperlink{group__SPI__Register__Masks_gad04548e76bbaa595940fc1d043cdbace}{00392}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_CPOL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_CPOL\_SHIFT))\ \&\ SPI\_CTAR\_CPOL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00394}00394\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_FMSZ\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x78000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00395}00395\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_FMSZ\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00397}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga217a65114bc44312a9c953c3fd394464}{00397}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_FMSZ(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_FMSZ\_SHIFT))\ \&\ SPI\_CTAR\_FMSZ\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00399}00399\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DBR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00400}00400\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DBR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (31U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00405}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga77bad716c1594f4effc799394f6a2483}{00405}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_DBR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_DBR\_SHIFT))\ \&\ SPI\_CTAR\_DBR\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00408}00408\ \textcolor{comment}{/*\ The\ count\ of\ SPI\_CTAR\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00409}00409\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPHA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00415}00415\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPHA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00420}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga28951f37b39ab32bd77c07318b53e94f}{00420}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPHA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_SLAVE\_CPHA\_SHIFT))\ \&\ SPI\_CTAR\_SLAVE\_CPHA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00422}00422\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPOL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00423}00423\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPOL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (26U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00428}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga56f54251b5751bd87f577f5a3144446e}{00428}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_CPOL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_SLAVE\_CPOL\_SHIFT))\ \&\ SPI\_CTAR\_SLAVE\_CPOL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00430}00430\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_FMSZ\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00431}00431\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_FMSZ\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00433}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga20fc13a457a7df6331fdfdcbbc89c972}{00433}}\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_FMSZ(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_CTAR\_SLAVE\_FMSZ\_SHIFT))\ \&\ SPI\_CTAR\_SLAVE\_FMSZ\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00436}00436\ \textcolor{comment}{/*\ The\ count\ of\ SPI\_CTAR\_SLAVE\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00437}00437\ \textcolor{preprocessor}{\#define\ SPI\_CTAR\_SLAVE\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00442}00442\ \textcolor{preprocessor}{\#define\ SPI\_SR\_POPNXTPTR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00443}00443\ \textcolor{preprocessor}{\#define\ SPI\_SR\_POPNXTPTR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00445}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7524dc6520cf5bcea82f6d62db3a5ee8}{00445}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_POPNXTPTR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_POPNXTPTR\_SHIFT))\ \&\ SPI\_SR\_POPNXTPTR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00447}00447\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RXCTR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00448}00448\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RXCTR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00450}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga2b05bb18cd3b859747bf5bff6e0eda29}{00450}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RXCTR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_RXCTR\_SHIFT))\ \&\ SPI\_SR\_RXCTR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00452}00452\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXNXTPTR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF00U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00453}00453\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXNXTPTR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00455}\doxymbox{\hyperlink{group__SPI__Register__Masks_gabc6d25e4bdcb3abacedb397ad24b0bc3}{00455}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXNXTPTR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TXNXTPTR\_SHIFT))\ \&\ SPI\_SR\_TXNXTPTR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00457}00457\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXCTR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00458}00458\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXCTR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00460}\doxymbox{\hyperlink{group__SPI__Register__Masks_gad5bd8906225c5b7e8ed97cacd8a0d3bd}{00460}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXCTR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TXCTR\_SHIFT))\ \&\ SPI\_SR\_TXCTR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00462}00462\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFDF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00463}00463\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFDF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00468}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga6b4decf126f2648e8892c9c8341d2402}{00468}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFDF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_RFDF\_SHIFT))\ \&\ SPI\_SR\_RFDF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00470}00470\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00471}00471\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (19U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00476}\doxymbox{\hyperlink{group__SPI__Register__Masks_gaf1ae7f8c5ea26bf9393400bb355ec60c}{00476}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_RFOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_RFOF\_SHIFT))\ \&\ SPI\_SR\_RFOF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00478}00478\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFFF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00479}00479\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFFF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00484}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7f465919edfc1e08d99f45a23fff3f08}{00484}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFFF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TFFF\_SHIFT))\ \&\ SPI\_SR\_TFFF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00485}00485\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00486}00486\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFUF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00487}00487\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFUF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00492}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga3dbffba5f6f5bb828b87a6b2329b6276}{00492}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TFUF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TFUF\_SHIFT))\ \&\ SPI\_SR\_TFUF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00494}00494\ \textcolor{preprocessor}{\#define\ SPI\_SR\_EOQF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00495}00495\ \textcolor{preprocessor}{\#define\ SPI\_SR\_EOQF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (28U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00500}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga78a6c798b522222613b13ff15bc0a19c}{00500}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_EOQF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_EOQF\_SHIFT))\ \&\ SPI\_SR\_EOQF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00501}00501\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00502}00502\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXRXS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00503}00503\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXRXS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (30U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00508}\doxymbox{\hyperlink{group__SPI__Register__Masks_gac82b2f662a1fdec456fa374282d26d5d}{00508}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TXRXS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TXRXS\_SHIFT))\ \&\ SPI\_SR\_TXRXS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00510}00510\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TCF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00511}00511\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TCF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (31U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00516}\doxymbox{\hyperlink{group__SPI__Register__Masks_gaef8ce3128f64525ab4aead7fc9fd4c60}{00516}}\ \textcolor{preprocessor}{\#define\ SPI\_SR\_TCF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_SR\_TCF\_SHIFT))\ \&\ SPI\_SR\_TCF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00522}00522\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_DIRS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00523}00523\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_DIRS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00528}\doxymbox{\hyperlink{group__SPI__Register__Masks_gac0822dc99c670f67d28ee973bc6dd9ec}{00528}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_DIRS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_RFDF\_DIRS\_SHIFT))\ \&\ SPI\_RSER\_RFDF\_DIRS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00530}00530\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00531}00531\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00536}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga220c88340bd372ec2b1a91557caac1b6}{00536}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFDF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_RFDF\_RE\_SHIFT))\ \&\ SPI\_RSER\_RFDF\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00538}00538\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFOF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00539}00539\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFOF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (19U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00544}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga23fe74057428ef330f653fe2115d270b}{00544}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_RFOF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_RFOF\_RE\_SHIFT))\ \&\ SPI\_RSER\_RFOF\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00546}00546\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_DIRS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00547}00547\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_DIRS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (24U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00552}\doxymbox{\hyperlink{group__SPI__Register__Masks_gacec859c23755e68e8b6ca6ee2d42cec4}{00552}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_DIRS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_TFFF\_DIRS\_SHIFT))\ \&\ SPI\_RSER\_TFFF\_DIRS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00554}00554\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00555}00555\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00560}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga57eacd49a756b99850d51f17e5d80475}{00560}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFFF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_TFFF\_RE\_SHIFT))\ \&\ SPI\_RSER\_TFFF\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00562}00562\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFUF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00563}00563\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFUF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00568}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga0d53d442648e115ee18c1f0f6ed065c3}{00568}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TFUF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_TFUF\_RE\_SHIFT))\ \&\ SPI\_RSER\_TFUF\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00569}00569\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00570}00570\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_EOQF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00571}00571\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_EOQF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (28U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00576}\doxymbox{\hyperlink{group__SPI__Register__Masks_gad3604b04d87365a05286029814555e09}{00576}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_EOQF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_EOQF\_RE\_SHIFT))\ \&\ SPI\_RSER\_EOQF\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00577}00577\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00578}00578\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TCF\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00579}00579\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TCF\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (31U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00584}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga619908c67a62a0a51b8514f9629e0361}{00584}}\ \textcolor{preprocessor}{\#define\ SPI\_RSER\_TCF\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RSER\_TCF\_RE\_SHIFT))\ \&\ SPI\_RSER\_TCF\_RE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00589}00589\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00590}00590\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00591}00591\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00593}\doxymbox{\hyperlink{group__SPI__Register__Masks_gad19c7faf45531d7c7a6703a54ac2f69d}{00593}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_TXDATA\_SHIFT))\ \&\ SPI\_PUSHR\_TXDATA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00595}00595\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_PCS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3F0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00596}00596\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_PCS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00601}\doxymbox{\hyperlink{group__SPI__Register__Masks_gad551a287ffb207f5d78c2ac04d393a9b}{00601}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_PCS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_PCS\_SHIFT))\ \&\ SPI\_PUSHR\_PCS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00603}00603\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTCNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00604}00604\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTCNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (26U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00609}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga4662cfbebbea26e0c427a9e4c310d9b2}{00609}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTCNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_CTCNT\_SHIFT))\ \&\ SPI\_PUSHR\_CTCNT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00610}00610\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00611}00611\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_EOQ\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00612}00612\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_EOQ\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00617}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga91c3110a4dbb544395f48a657b22dabe}{00617}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_EOQ(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_EOQ\_SHIFT))\ \&\ SPI\_PUSHR\_EOQ\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00619}00619\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTAS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x70000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00620}00620\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTAS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (28U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00631}\doxymbox{\hyperlink{group__SPI__Register__Masks_gadc43fdbca4e34579e7ede4ac104c7ae5}{00631}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CTAS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_CTAS\_SHIFT))\ \&\ SPI\_PUSHR\_CTAS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00633}00633\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CONT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00634}00634\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CONT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (31U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00639}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7efcf8c8ad046b928c6aa218e9d63be7}{00639}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_CONT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_CONT\_SHIFT))\ \&\ SPI\_PUSHR\_CONT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00641}00641\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00644}00644\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00645}00645\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_SLAVE\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00646}00646\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_SLAVE\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00648}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga5833d343153e57cb3493f85b0342989e}{00648}}\ \textcolor{preprocessor}{\#define\ SPI\_PUSHR\_SLAVE\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_PUSHR\_SLAVE\_TXDATA\_SHIFT))\ \&\ SPI\_PUSHR\_SLAVE\_TXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00650}00650\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00654}00654\ \textcolor{preprocessor}{\#define\ SPI\_POPR\_RXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00655}00655\ \textcolor{preprocessor}{\#define\ SPI\_POPR\_RXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00657}\doxymbox{\hyperlink{group__SPI__Register__Masks_gae6858b63bc7af767270dafed1e9c5060}{00657}}\ \textcolor{preprocessor}{\#define\ SPI\_POPR\_RXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_POPR\_RXDATA\_SHIFT))\ \&\ SPI\_POPR\_RXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00659}00659\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00663}00663\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00664}00664\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00666}\doxymbox{\hyperlink{group__SPI__Register__Masks_gae09e375e6cc7f496ac90d900888f7d9c}{00666}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR0\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR0\_TXDATA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00668}00668\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXCMD\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFF0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00669}00669\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXCMD\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00671}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7534e83201b7ea6c7beb55f2ed16ecaa}{00671}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR0\_TXCMD\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR0\_TXCMD\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR0\_TXCMD\_TXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00673}00673\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00676}00676\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00677}00677\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00678}00678\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00680}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7f5fddb0dfde74876bf4b6ff4603dd56}{00680}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR1\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR1\_TXDATA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00681}00681\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00682}00682\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXCMD\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFF0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00683}00683\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXCMD\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00685}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga7aee126ae71c905a5041e9313be0bbea}{00685}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR1\_TXCMD\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR1\_TXCMD\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR1\_TXCMD\_TXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00687}00687\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00691}00691\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00692}00692\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00694}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga250949668a77db2805371541e9bb8e16}{00694}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR2\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR2\_TXDATA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00695}00695\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00696}00696\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXCMD\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFF0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00697}00697\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXCMD\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00699}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga75b102ae2a2b880227933ea731c97323}{00699}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR2\_TXCMD\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR2\_TXCMD\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR2\_TXCMD\_TXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00701}00701\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00704}00704\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00705}00705\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00706}00706\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00708}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga49209a3863af39f655a385ddd5b917c4}{00708}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR3\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR3\_TXDATA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00709}00709\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00710}00710\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXCMD\_TXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFF0000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00711}00711\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXCMD\_TXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00713}\doxymbox{\hyperlink{group__SPI__Register__Masks_gabd1aff6c08d7a7334407f5a122fb2684}{00713}}\ \textcolor{preprocessor}{\#define\ SPI\_TXFR3\_TXCMD\_TXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_TXFR3\_TXCMD\_TXDATA\_SHIFT))\ \&\ SPI\_TXFR3\_TXCMD\_TXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00715}00715\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00718}00718\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00719}00719\ \textcolor{preprocessor}{\#define\ SPI\_RXFR0\_RXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00720}00720\ \textcolor{preprocessor}{\#define\ SPI\_RXFR0\_RXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00722}\doxymbox{\hyperlink{group__SPI__Register__Masks_gaefa909022ef28f93b77915a01f7456c6}{00722}}\ \textcolor{preprocessor}{\#define\ SPI\_RXFR0\_RXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RXFR0\_RXDATA\_SHIFT))\ \&\ SPI\_RXFR0\_RXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00724}00724\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00727}00727\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00728}00728\ \textcolor{preprocessor}{\#define\ SPI\_RXFR1\_RXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00729}00729\ \textcolor{preprocessor}{\#define\ SPI\_RXFR1\_RXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00731}\doxymbox{\hyperlink{group__SPI__Register__Masks_gac6df902214c0e119f65e494ad20d21c6}{00731}}\ \textcolor{preprocessor}{\#define\ SPI\_RXFR1\_RXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RXFR1\_RXDATA\_SHIFT))\ \&\ SPI\_RXFR1\_RXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00733}00733\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00736}00736\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00737}00737\ \textcolor{preprocessor}{\#define\ SPI\_RXFR2\_RXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00738}00738\ \textcolor{preprocessor}{\#define\ SPI\_RXFR2\_RXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00740}\doxymbox{\hyperlink{group__SPI__Register__Masks_ga88f81c7a0134abe2eb9dac410625fee3}{00740}}\ \textcolor{preprocessor}{\#define\ SPI\_RXFR2\_RXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RXFR2\_RXDATA\_SHIFT))\ \&\ SPI\_RXFR2\_RXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00742}00742\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00745}00745\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00746}00746\ \textcolor{preprocessor}{\#define\ SPI\_RXFR3\_RXDATA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00747}00747\ \textcolor{preprocessor}{\#define\ SPI\_RXFR3\_RXDATA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00749}\doxymbox{\hyperlink{group__SPI__Register__Masks_gaa0268e30e0adb838413ec371a2afecf7}{00749}}\ \textcolor{preprocessor}{\#define\ SPI\_RXFR3\_RXDATA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ SPI\_RXFR3\_RXDATA\_SHIFT))\ \&\ SPI\_RXFR3\_RXDATA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00751}00751\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00752}00752\ \ \textcolor{comment}{/*\ end\ of\ group\ SPI\_Register\_Masks\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00756}00756\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00757}00757\ \ \textcolor{comment}{/*\ end\ of\ group\ SPI\_Peripheral\_Access\_Layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00761}00761\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00762}00762\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00763}00763\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00764}00764\ \textcolor{comment}{**\ End\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00765}00765\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00767}00767\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00768}00768\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00769}00769\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00770}00770\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00771}00771\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00772}00772\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00773}00773\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00774}00774\ \textcolor{preprocessor}{\ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00775}00775\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00776}00776\ \ \ \textcolor{comment}{/*\ leave\ anonymous\ unions\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00777}00777\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00778}00778\ \textcolor{preprocessor}{\ \ \#pragma\ language=default}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00779}00779\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00780}00780\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00781}00781\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00782}00782\ \ \textcolor{comment}{/*\ end\ of\ group\ Peripheral\_access\_layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00786}00786\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00787}00787\ }
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00788}00788\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ PERI\_SPI\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__SPI_8h_source_l00789}00789\ }
+
+\end{DoxyCode}

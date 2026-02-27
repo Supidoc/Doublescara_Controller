@@ -1,0 +1,120 @@
+\doxysection{application.\+c}
+\hypertarget{application_8c_source}{}\label{application_8c_source}\index{source/application.c@{source/application.c}}
+\doxymbox{\hyperlink{application_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ application.c}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Implementation\ file\ for\ application\ module}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 18\ Dec\ 2025}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{application_8h}{application.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{log.h}}>}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}board.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}clock\_config.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}fsl\_debug\_console.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}pin\_mux.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00021}00021\ \textcolor{comment}{/*\ FreeRTOS\ kernel\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}task.h"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli_8h}{cli.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{disk_8h}{disk.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__test_8h}{motor\_test.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{step_8h}{step.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tmc2209_8h}{tmc2209.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00031}00031\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00032}00032\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00033}00033\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00035}00035\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00036}00036\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00037}00037\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00039}00039\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00040}00040\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00041}00041\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00043}00043\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(TaskFunction\_t\ taskFunction,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ taskName,\ uint16\_t\ stackSize,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UBaseType\_t\ priority);}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00046}00046\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00047}00047\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00048}00048\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00050}00050\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00051}00051\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00052}00052\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00054}00054\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00055}00055\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00056}00056\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00057}\doxymbox{\hyperlink{group__APP__Module_ga72f08d66d0b37cf7c4d539fbc2e2ce10}{00057}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__APP__Module_ga72f08d66d0b37cf7c4d539fbc2e2ce10}{APP\_init}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00058}00058\ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00059}00059\ \ \ \ \ \doxymbox{\hyperlink{group__DISK__Module_gaa890889c692a0bd26a1bbf2f823c08a7}{DISK\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00060}00060\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{CLI\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00061}00061\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_gad8fb5a8d2383abe85c0696d80e0372f1}{LOG\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00062}00062\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00063}00063\ \ \ \ \ \doxymbox{\hyperlink{group__TMC2209__Module_ga626120616f06e287f92803166d5b38f3}{TMC\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00064}00064\ \ \ \ \ \doxymbox{\hyperlink{group__MotorTest__Module_ga11f9dad9e90b33ea5009a7fc316d3013}{MTT\_init}}();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00067}\doxymbox{\hyperlink{group__APP__Module_gacaae54c435f87a7a30cb2adcce881c83}{00067}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__APP__Module_gacaae54c435f87a7a30cb2adcce881c83}{APP\_run}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(\doxymbox{\hyperlink{group__LOG__Module_gaf4aa1ff2f9562bf7fce62e14f5c8df9b}{LOG\_task}},\ \textcolor{stringliteral}{"{}LOG\_Task"{}},\ configMINIMAL\_STACK\_SIZE\ +\ 200,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configMAX\_PRIORITIES\ -\/\ 5)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00071}00071\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(\doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{CLI\_task}},\ \textcolor{stringliteral}{"{}CLI\_Task"{}},\ configMINIMAL\_STACK\_SIZE\ +\ 200,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configMAX\_PRIORITIES\ -\/\ 5)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(\doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\_task}},\ \textcolor{stringliteral}{"{}STP\_Task"{}},\ configMINIMAL\_STACK\_SIZE\ +\ 200,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configMAX\_PRIORITIES\ -\/\ 5)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(\doxymbox{\hyperlink{group__TMC2209__Module_ga4d6999bb2640adbe2a2fce2c6ec570b2}{TMC\_task}},\ \textcolor{stringliteral}{"{}TMC\_Task"{}},\ configMINIMAL\_STACK\_SIZE\ +\ 200,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configMAX\_PRIORITIES\ -\/\ 5)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00090}00090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00093}00093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(\doxymbox{\hyperlink{group__MotorTest__Module_ga80fd5c109666d1e41f570606b48037c9}{MTT\_task}},\ \textcolor{stringliteral}{"{}MTT\_Task"{}},\ configMINIMAL\_STACK\_SIZE\ +\ 200,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ configMAX\_PRIORITIES\ -\/\ 5)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00100}00100\ \ \ \ \ vTaskStartScheduler();}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00103}00103\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00104}00104\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00105}00105\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00106}\doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{00106}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{application_8c_a47661d7afb3091040c1b320f15e3d8dd}{create\_task}}(TaskFunction\_t\ taskFunction,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ taskName,\ uint16\_t\ stackSize,}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UBaseType\_t\ priority)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00108}00108\ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskCreate(taskFunction,\ taskName,\ stackSize,\ NULL,\ priority,\ NULL)\ !=\ pdPASS)}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00113}00113\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{application_8c_source_l00114}00114\ \}}
+
+\end{DoxyCode}

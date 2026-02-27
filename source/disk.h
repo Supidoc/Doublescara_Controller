@@ -13,6 +13,11 @@
  * @date    18 Dec 2025
  ************************************************************/
 
+/**
+ * @defgroup DISK_Module SD Card Disk Module
+ * @brief   Functions for initializing and managing SD card filesystem
+ * @{
+ */
 
 #ifndef DISK_H_
 #define DISK_H_
@@ -22,8 +27,8 @@
  ********************/
 
 #include "ff.h"
-#include "diskio.h"
 #include "fsl_common.h"
+#include "diskio.h"
 
 /***********************************
  *     Public Macros / Defines	   *
@@ -62,7 +67,6 @@
  */
 extern FATFS fs;
 
-
 /**************************************
  *     Public Function Prototypes	  *
  **************************************/
@@ -71,11 +75,22 @@ extern FATFS fs;
  * @brief Initializes the disk and mounts the filesystem.
  *
  * This function mounts the filesystem on the specified disk path. It must be called
- * before performing any file operations on the disk.
+ * before performing any file operations on the disk. This should be one of the first
+ * initialization functions called in your application startup sequence.
+ *
+ * @note This function is NOT task-safe and must be called during system initialization.
+ * @note Other modules that depend on disk access (e.g., LOG) require this to be initialized first.
+ * @warning File operations are not safe until this function completes successfully.
+ * @note Ensure SD card hardware is properly connected and detected before calling this.
  *
  * @return kStatus_Success if the filesystem is successfully mounted.
- *         kStatus_Fail if the mounting operation fails.
+ *         kStatus_Fail if the mounting operation fails (card not detected or corrupted).
+ *
+ * @see fs (external filesystem object)
+ * @see DISK_SD_PATH
  */
-status_t DISK_Init(void);
+status_t DISK_init(void);
+
+/** @} */ // End of DISK_Module
 
 #endif /* DISK_H_ */

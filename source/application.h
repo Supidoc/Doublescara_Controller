@@ -17,6 +17,11 @@
  * @date    18 Dec 2025
  ************************************************************/
 
+/**
+ * @defgroup APP_Module Application Module
+ * @brief   Application initialization and runtime entry points
+ * @{
+ */
 
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
@@ -49,7 +54,7 @@
  *
  * @note This function is typically called once during system startup.
  */
-void APP_Init(void);
+void APP_init(void);
 
 /**
  * @brief Runs the main application loop.
@@ -59,5 +64,8 @@ void APP_Init(void);
  *
  * @note This function should not return under normal operation.
  */
-void APP_Run(void);
+void APP_run(void);
+
+/** @} */ // End of APP_Module
+
 #endif /* APPLICATION_H_ */

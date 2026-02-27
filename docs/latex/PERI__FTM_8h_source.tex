@@ -1,0 +1,935 @@
+\doxysection{PERI\+\_\+\+FTM.\+h}
+\hypertarget{PERI__FTM_8h_source}{}\label{PERI__FTM_8h_source}\index{device/periph20/PERI\_FTM.h@{device/periph20/PERI\_FTM.h}}
+\doxymbox{\hyperlink{PERI__FTM_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00002}00002\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Processors:\ \ \ \ \ \ \ \ \ \ MK22FN512CAP12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VDC12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VFX12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLL12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VMP12}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Version:\ \ \ \ \ \ \ \ \ \ \ \ \ rev.\ 3.0,\ 2024-\/10-\/29}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ Build:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b250520}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00012}00012\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ Abstract:}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ CMSIS\ Peripheral\ Access\ Layer\ for\ FTM}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 1997-\/2016\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00019}00019\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ http:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ www.nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ mail:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ support@nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00022}00022\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ Revisions:}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00024}00024\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.0\ (2013-\/07-\/23)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Initial\ version.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.1\ (2013-\/09-\/17)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ RM\ rev.\ 0.4\ update.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00028}00028\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.0\ (2013-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Register\ accessor\ macros\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Symbols\ for\ Processor\ Expert\ memory\ map\ compatibility\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00031}00031\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Startup\ file\ for\ gcc\ has\ been\ updated\ according\ to\ CMSIS\ 3.2.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ System\ initialization\ updated.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.1\ (2013-\/10-\/30)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Definition\ of\ BITBAND\ macros\ updated\ to\ support\ peripherals\ with\ 32-\/bit\ acces\ disabled.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.2\ (2013-\/12-\/20)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.6,}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.3\ (2014-\/01-\/13)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.61,}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.4\ (2014-\/02-\/10)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ The\ declaration\ of\ clock\ configurations\ has\ been\ moved\ to\ separate\ header\ file\ system\_MK22F51212.h}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.5\ (2014-\/05-\/06)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 1.0,}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ and\ startup\ files.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Module\ access\ macro\ module\_BASES\ replaced\ by\ module\_BASE\_PTRS.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00045}00045\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.6\ (2014-\/08-\/28)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ files\ -\/\ default\ clock\ configuration\ changed.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00047}00047\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ startup\ files\ -\/\ possibility\ to\ override\ DefaultISR\ added.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.7\ (2014-\/10-\/14)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Interrupt\ INT\_LPTimer\ renamed\ to\ INT\_LPTMR0,\ interrupt\ INT\_Watchdog\ renamed\ to\ INT\_WDOG\_EWM.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00050}00050\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.8\ (2015-\/02-\/19)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Renamed\ interrupt\ vector\ LLW\ to\ LLWU.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.9\ (2016-\/03-\/21)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Added\ MK22FN512VFX12\ part.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00054}00054\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GPIO\ -\/\ renamed\ port\ instances:\ PTx\ -\/>\ GPIOx.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 3.0\ (2024-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Change\ the\ device\ header\ file\ from\ single\ flat\ file\ to\ multiple\ files\ based\ on\ peripherals,}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ each\ peripheral\ with\ dedicated\ header\ file\ located\ in\ periphN\ folder.}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00058}00058\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00059}00059\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00060}00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00071}00071\ \textcolor{preprocessor}{\#if\ !defined(PERI\_FTM\_H\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00072}\doxymbox{\hyperlink{PERI__FTM_8h_a56c6492bc0f6431299614f5cb76fe01f}{00072}}\ \textcolor{preprocessor}{\#define\ PERI\_FTM\_H\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00074}00074\ \textcolor{preprocessor}{\#if\ (defined(CPU\_MK22FN512CAP12)\ ||\ defined(CPU\_MK22FN512VDC12)\ ||\ defined(CPU\_MK22FN512VFX12)\ ||\ defined(CPU\_MK22FN512VLH12)\ ||\ defined(CPU\_MK22FN512VLL12)\ ||\ defined(CPU\_MK22FN512VMP12))}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00075}00075\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{MK22F51212__COMMON_8h}{MK22F51212\_COMMON.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00076}00076\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \#error\ "{}No\ valid\ CPU\ defined!"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00078}00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00080}00080\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ -\/-\/\ Device\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00090}00090\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00091}00091\ \textcolor{comment}{**\ Start\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00092}00092\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00094}00094\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ anon\_unions}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00101}00101\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \#pragma\ cpp\_extensions\ on}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00104}00104\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00105}00105\ \ \ \textcolor{comment}{/*\ anonymous\ unions\ are\ enabled\ by\ default\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00106}00106\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \#pragma\ language=extended}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00108}00108\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00110}00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00112}00112\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ -\/-\/\ FTM\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00122}\doxymbox{\hyperlink{group__FTM__Peripheral__Access__Layer_gab050b2cb66ee1d6cf811af5983b2319c}{00122}}\ \textcolor{preprocessor}{\#define\ FTM\_CONTROLS\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 8u}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00125}\doxymbox{\hyperlink{structFTM__Type}{00125}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00126}\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{00126}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00127}\doxymbox{\hyperlink{structFTM__Type_aafebc28d2a0aa309a2e6eb71cc646c1b}{00127}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_aafebc28d2a0aa309a2e6eb71cc646c1b}{CNT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00128}\doxymbox{\hyperlink{structFTM__Type_aeb4a6a58257ebece333d61778bde756c}{00128}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_aeb4a6a58257ebece333d61778bde756c}{MOD}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00129}00129\ \ \ \textcolor{keyword}{struct\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0xC,\ array\ step:\ 0x8\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00130}\doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{00130}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{CnSC}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00131}\doxymbox{\hyperlink{structFTM__Type_a4a374e850fc48c7559277888b350539c}{00131}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a4a374e850fc48c7559277888b350539c}{CnV}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00132}00132\ \ \ \}\ CONTROLS[\doxymbox{\hyperlink{group__FTM__Peripheral__Access__Layer_gab050b2cb66ee1d6cf811af5983b2319c}{FTM\_CONTROLS\_COUNT}}];}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00133}\doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{00133}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{CNTIN}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00134}\doxymbox{\hyperlink{structFTM__Type_aa89cff385d101610ed0d60e0a0b50c6c}{00134}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_aa89cff385d101610ed0d60e0a0b50c6c}{STATUS}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00135}\doxymbox{\hyperlink{structFTM__Type_a18f2ef364d8c9e9217b35054fc5726be}{00135}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a18f2ef364d8c9e9217b35054fc5726be}{MODE}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00136}\doxymbox{\hyperlink{structFTM__Type_ad7f41548c14fec6c57dc5490b01c1b58}{00136}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_ad7f41548c14fec6c57dc5490b01c1b58}{SYNC}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00137}\doxymbox{\hyperlink{structFTM__Type_aeed5243aad98ae4a5f0f4eb769ee5da9}{00137}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_aeed5243aad98ae4a5f0f4eb769ee5da9}{OUTINIT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00138}\doxymbox{\hyperlink{structFTM__Type_a624050c92b74b9952d2cde560e5ee41c}{00138}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a624050c92b74b9952d2cde560e5ee41c}{OUTMASK}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00139}\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{00139}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00140}\doxymbox{\hyperlink{structFTM__Type_a7ef7e543dc67cfc33c569f78b2aa2e4b}{00140}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a7ef7e543dc67cfc33c569f78b2aa2e4b}{DEADTIME}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00141}\doxymbox{\hyperlink{structFTM__Type_ae705852108790f7c8c005b3b9d944b41}{00141}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_ae705852108790f7c8c005b3b9d944b41}{EXTTRIG}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00142}\doxymbox{\hyperlink{structFTM__Type_a1a1989ba477755de85476e2c012fd918}{00142}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a1a1989ba477755de85476e2c012fd918}{POL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00143}\doxymbox{\hyperlink{structFTM__Type_adba577540e3be5b0e96ba5bc7538eac2}{00143}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_adba577540e3be5b0e96ba5bc7538eac2}{FMS}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00144}\doxymbox{\hyperlink{structFTM__Type_a15a781ea3e00391d0723b3bf3d13444f}{00144}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a15a781ea3e00391d0723b3bf3d13444f}{FILTER}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00145}\doxymbox{\hyperlink{structFTM__Type_ac3f55a671f3ec1b0024d894ea9a86f01}{00145}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_ac3f55a671f3ec1b0024d894ea9a86f01}{FLTCTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00146}\doxymbox{\hyperlink{structFTM__Type_a0a07f1a16c3d7714947e8ad3fb070592}{00146}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a0a07f1a16c3d7714947e8ad3fb070592}{QDCTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00147}\doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{00147}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{CONF}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00148}\doxymbox{\hyperlink{structFTM__Type_af3bab26c41de8b03fd2d925abdc3eaea}{00148}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_af3bab26c41de8b03fd2d925abdc3eaea}{FLTPOL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00149}\doxymbox{\hyperlink{structFTM__Type_a845f63d5c3bdf59235b7d629dc60207a}{00149}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a845f63d5c3bdf59235b7d629dc60207a}{SYNCONF}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00150}\doxymbox{\hyperlink{structFTM__Type_a5d7825cc57a84230359220fa95b990d0}{00150}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a5d7825cc57a84230359220fa95b990d0}{INVCTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00151}\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{00151}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00152}\doxymbox{\hyperlink{structFTM__Type_a28478e01da54c088007371f44451b2d7}{00152}}\ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{structFTM__Type_a28478e01da54c088007371f44451b2d7}{PWMLOAD}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00153}00153\ \}\ \doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}};}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00155}00155\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00156}00156\ \textcolor{comment}{\ \ \ -\/-\/\ FTM\ Register\ Masks}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00157}00157\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00167}00167\ \textcolor{preprocessor}{\#define\ FTM\_SC\_PS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00168}00168\ \textcolor{preprocessor}{\#define\ FTM\_SC\_PS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00179}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga065038b692ab15f728ec344376d66c5b}{00179}}\ \textcolor{preprocessor}{\#define\ FTM\_SC\_PS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SC\_PS\_SHIFT))\ \&\ FTM\_SC\_PS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00181}00181\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CLKS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x18U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00182}00182\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CLKS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00189}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4c0b108bf05899c019de06f311cb5c89}{00189}}\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CLKS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SC\_CLKS\_SHIFT))\ \&\ FTM\_SC\_CLKS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00191}00191\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CPWMS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00192}00192\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CPWMS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00197}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5215fcd780a2699aca2587695aa7d038}{00197}}\ \textcolor{preprocessor}{\#define\ FTM\_SC\_CPWMS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SC\_CPWMS\_SHIFT))\ \&\ FTM\_SC\_CPWMS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00199}00199\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00200}00200\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00205}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab8e6d826825f08865adeca4382c52136}{00205}}\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SC\_TOIE\_SHIFT))\ \&\ FTM\_SC\_TOIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00207}00207\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00208}00208\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00213}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga08982e86ca9af79918fba991c8640746}{00213}}\ \textcolor{preprocessor}{\#define\ FTM\_SC\_TOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SC\_TOF\_SHIFT))\ \&\ FTM\_SC\_TOF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00219}00219\ \textcolor{preprocessor}{\#define\ FTM\_CNT\_COUNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00220}00220\ \textcolor{preprocessor}{\#define\ FTM\_CNT\_COUNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00222}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga96ac13f31821791e3456cf6672b6a3b6}{00222}}\ \textcolor{preprocessor}{\#define\ FTM\_CNT\_COUNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CNT\_COUNT\_SHIFT))\ \&\ FTM\_CNT\_COUNT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00228}00228\ \textcolor{preprocessor}{\#define\ FTM\_MOD\_MOD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00229}00229\ \textcolor{preprocessor}{\#define\ FTM\_MOD\_MOD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00230}00230\ \textcolor{preprocessor}{\#define\ FTM\_MOD\_MOD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MOD\_MOD\_SHIFT))\ \&\ FTM\_MOD\_MOD\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00236}00236\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_DMA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00237}00237\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_DMA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00242}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga05a6c57def867940cac9a371dd7d0e25}{00242}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_DMA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_DMA\_SHIFT))\ \&\ FTM\_CnSC\_DMA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00244}00244\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ICRST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ICRST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00250}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga475b3e6f80f67fbb9d2b3a905f18970f}{00250}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ICRST(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_ICRST\_SHIFT))\ \&\ FTM\_CnSC\_ICRST\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00252}00252\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00253}00253\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00255}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga8c962526f103acfc261479bdd21f5bae}{00255}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_ELSA\_SHIFT))\ \&\ FTM\_CnSC\_ELSA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00257}00257\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSB\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00258}00258\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSB\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00260}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac412f4d8345a144bbaaaaffe4d9daba5}{00260}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_ELSB(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_ELSB\_SHIFT))\ \&\ FTM\_CnSC\_ELSB\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00262}00262\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00263}00263\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00265}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaecd029a7d5911c7c6287cd117f7c3ff1}{00265}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_MSA\_SHIFT))\ \&\ FTM\_CnSC\_MSA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00267}00267\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSB\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00268}00268\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSB\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00270}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga26e08186d9d10869db12ddfe3bf39d25}{00270}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_MSB(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_MSB\_SHIFT))\ \&\ FTM\_CnSC\_MSB\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00272}00272\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00273}00273\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00278}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf5bf6e0605f50be055c79b4c60a2d212}{00278}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_CHIE\_SHIFT))\ \&\ FTM\_CnSC\_CHIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00280}00280\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00281}00281\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00286}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga446917a6d809030218b9c8b208a19928}{00286}}\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_CHF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnSC\_CHF\_SHIFT))\ \&\ FTM\_CnSC\_CHF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00289}00289\ \textcolor{comment}{/*\ The\ count\ of\ FTM\_CnSC\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00290}00290\ \textcolor{preprocessor}{\#define\ FTM\_CnSC\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00295}00295\ \textcolor{preprocessor}{\#define\ FTM\_CnV\_VAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00296}00296\ \textcolor{preprocessor}{\#define\ FTM\_CnV\_VAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00298}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaee6cacf155d736fa3c12612eae539dca}{00298}}\ \textcolor{preprocessor}{\#define\ FTM\_CnV\_VAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CnV\_VAL\_SHIFT))\ \&\ FTM\_CnV\_VAL\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00301}00301\ \textcolor{comment}{/*\ The\ count\ of\ FTM\_CnV\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00302}00302\ \textcolor{preprocessor}{\#define\ FTM\_CnV\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00307}00307\ \textcolor{preprocessor}{\#define\ FTM\_CNTIN\_INIT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00308}00308\ \textcolor{preprocessor}{\#define\ FTM\_CNTIN\_INIT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00309}00309\ \textcolor{preprocessor}{\#define\ FTM\_CNTIN\_INIT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CNTIN\_INIT\_SHIFT))\ \&\ FTM\_CNTIN\_INIT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00315}00315\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH0F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00316}00316\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH0F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00321}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaea84608cacf9d428af32ffad31f07563}{00321}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH0F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH0F\_SHIFT))\ \&\ FTM\_STATUS\_CH0F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00323}00323\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH1F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00324}00324\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH1F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00329}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad9335dea9b1d091d355a7c5a945721d2}{00329}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH1F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH1F\_SHIFT))\ \&\ FTM\_STATUS\_CH1F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00331}00331\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH2F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00332}00332\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH2F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00337}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0eea044d1ce2b4cf6a7a202f00ae6afd}{00337}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH2F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH2F\_SHIFT))\ \&\ FTM\_STATUS\_CH2F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00339}00339\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH3F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00340}00340\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH3F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00345}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0aeb1d19fc5d86bf39b883bd7fd6c02f}{00345}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH3F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH3F\_SHIFT))\ \&\ FTM\_STATUS\_CH3F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00347}00347\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH4F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00348}00348\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH4F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00353}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf1cbd34863ebfe47c877617acfd71611}{00353}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH4F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH4F\_SHIFT))\ \&\ FTM\_STATUS\_CH4F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00355}00355\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH5F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00356}00356\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH5F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00361}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab6e2bb91f4bd4923607c3fe8dc5efdde}{00361}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH5F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH5F\_SHIFT))\ \&\ FTM\_STATUS\_CH5F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00363}00363\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH6F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00364}00364\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH6F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00369}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga96e173f5193636ec321eabe8f8b7a437}{00369}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH6F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH6F\_SHIFT))\ \&\ FTM\_STATUS\_CH6F\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00371}00371\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH7F\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00372}00372\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH7F\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00377}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab275c6876f818de51943eee0deaa618a}{00377}}\ \textcolor{preprocessor}{\#define\ FTM\_STATUS\_CH7F(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_STATUS\_CH7F\_SHIFT))\ \&\ FTM\_STATUS\_CH7F\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00383}00383\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FTMEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00384}00384\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FTMEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00389}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9546f297f398bafc35e8c72c670b07a0}{00389}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FTMEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_FTMEN\_SHIFT))\ \&\ FTM\_MODE\_FTMEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00391}00391\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_INIT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00392}00392\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_INIT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00394}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga263317f5ce69cdbd5bf2353b64d65325}{00394}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_INIT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_INIT\_SHIFT))\ \&\ FTM\_MODE\_INIT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00396}00396\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_WPDIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00397}00397\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_WPDIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00402}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga89ad39cf15c00197e31e5c3d695fcecc}{00402}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_WPDIS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_WPDIS\_SHIFT))\ \&\ FTM\_MODE\_WPDIS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00404}00404\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_PWMSYNC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00405}00405\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_PWMSYNC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00411}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga7979eeb69e6f705a7a74d874e74d474c}{00411}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_PWMSYNC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_PWMSYNC\_SHIFT))\ \&\ FTM\_MODE\_PWMSYNC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00413}00413\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_CAPTEST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_CAPTEST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00419}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae1781c120c7860ed6187aec8edc7dc9f}{00419}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_CAPTEST(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_CAPTEST\_SHIFT))\ \&\ FTM\_MODE\_CAPTEST\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00421}00421\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x60U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00422}00422\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00429}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae199f2cb5b5206cfc5fd06f4ad420759}{00429}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_FAULTM\_SHIFT))\ \&\ FTM\_MODE\_FAULTM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00431}00431\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00432}00432\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00437}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab384cb9654ad7d1b652ea98270f4b387}{00437}}\ \textcolor{preprocessor}{\#define\ FTM\_MODE\_FAULTIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_MODE\_FAULTIE\_SHIFT))\ \&\ FTM\_MODE\_FAULTIE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00443}00443\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMIN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00444}00444\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMIN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00449}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga42673950c5b108f03b504626100ed6ed}{00449}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMIN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_CNTMIN\_SHIFT))\ \&\ FTM\_SYNC\_CNTMIN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00451}00451\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMAX\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00452}00452\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMAX\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00457}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaaf2c28c6d25b4cf0cb48d706ccd05f87}{00457}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_CNTMAX(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_CNTMAX\_SHIFT))\ \&\ FTM\_SYNC\_CNTMAX\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00459}00459\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_REINIT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00460}00460\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_REINIT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00465}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5b5c2815a448f95eb9e106ba2dc0299c}{00465}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_REINIT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_REINIT\_SHIFT))\ \&\ FTM\_SYNC\_REINIT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00467}00467\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SYNCHOM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00468}00468\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SYNCHOM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00473}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5ec19a767e48d01dafd69822b4d0c38a}{00473}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SYNCHOM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_SYNCHOM\_SHIFT))\ \&\ FTM\_SYNC\_SYNCHOM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00475}00475\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00476}00476\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00481}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab555153ce967562e8b70bca372deef32}{00481}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_TRIG0\_SHIFT))\ \&\ FTM\_SYNC\_TRIG0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00483}00483\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00484}00484\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00489}\doxymbox{\hyperlink{group__FTM__Register__Masks_gadb27c14a5c747a02434b263591702d20}{00489}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_TRIG1\_SHIFT))\ \&\ FTM\_SYNC\_TRIG1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00491}00491\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00492}00492\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00497}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga010c2114cf40b7fb36c2a45cd845a5bd}{00497}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_TRIG2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_TRIG2\_SHIFT))\ \&\ FTM\_SYNC\_TRIG2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00499}00499\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SWSYNC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00500}00500\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SWSYNC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00505}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad51f7031b82c9e9e067fc8435dc176ed}{00505}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNC\_SWSYNC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNC\_SWSYNC\_SHIFT))\ \&\ FTM\_SYNC\_SWSYNC\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00511}00511\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH0OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00512}00512\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH0OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00517}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaecdb7878dd9df3732ec7f58928c5305e}{00517}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH0OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH0OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH0OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00519}00519\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH1OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00520}00520\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH1OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00525}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab85f577a1ac5945122bf9bca922eabcc}{00525}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH1OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH1OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH1OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00526}00526\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00527}00527\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH2OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00528}00528\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH2OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00533}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaeba168c144acbe442b319fb327b6ed3b}{00533}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH2OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH2OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH2OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00535}00535\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH3OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00536}00536\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH3OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00541}\doxymbox{\hyperlink{group__FTM__Register__Masks_gafc9350009db91a634c495c3b6002b7fd}{00541}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH3OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH3OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH3OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00543}00543\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH4OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00544}00544\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH4OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00549}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga07bc64daa490dd8483f0be50128615a1}{00549}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH4OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH4OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH4OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00551}00551\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH5OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00552}00552\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH5OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00557}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa75e8fd93c51aa69aaf53ff1c23322e9}{00557}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH5OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH5OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH5OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00558}00558\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00559}00559\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH6OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00560}00560\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH6OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00565}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad32d23b6b0a69a4038bf035eb9143387}{00565}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH6OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH6OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH6OI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00567}00567\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH7OI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00568}00568\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH7OI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00573}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae080cb2cb74b86db3fb849dc14e57aee}{00573}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTINIT\_CH7OI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTINIT\_CH7OI\_SHIFT))\ \&\ FTM\_OUTINIT\_CH7OI\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00575}00575\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00578}00578\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00579}00579\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH0OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00580}00580\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH0OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00585}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga29c54f6c0849f286fa7e2b94765732c9}{00585}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH0OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH0OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH0OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00587}00587\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH1OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00588}00588\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH1OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00593}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0c25f542d434104bac5215c45a111ce6}{00593}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH1OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH1OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH1OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00595}00595\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH2OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00596}00596\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH2OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00601}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga19377c45f3a5b49254f07c83999066c2}{00601}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH2OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH2OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH2OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00603}00603\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH3OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00604}00604\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH3OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00609}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9a801dba69df9ee28748b333a8d472a6}{00609}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH3OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH3OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH3OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00610}00610\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00611}00611\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH4OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00612}00612\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH4OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00617}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3c90f751e1f18470abe07398a9d826e9}{00617}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH4OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH4OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH4OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00619}00619\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH5OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00620}00620\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH5OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00625}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga57c87660ca78b45b93d3e950fec0566b}{00625}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH5OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH5OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH5OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00626}00626\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00627}00627\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH6OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00628}00628\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH6OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00633}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae32bd5c014c07e893fe3356fc80cbeb3}{00633}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH6OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH6OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH6OM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00635}00635\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH7OM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00636}00636\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH7OM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00641}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5e61202e66c6aecf3207d8428e2efe4d}{00641}}\ \textcolor{preprocessor}{\#define\ FTM\_OUTMASK\_CH7OM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_OUTMASK\_CH7OM\_SHIFT))\ \&\ FTM\_OUTMASK\_CH7OM\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00646}00646\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00647}00647\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00648}00648\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00653}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga8806f5704b5a301aedb626f561421381}{00653}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMBINE0\_SHIFT))\ \&\ FTM\_COMBINE\_COMBINE0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00654}00654\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00655}00655\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00656}00656\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00661}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa7fb26256978b84ad1abe6b92592ceb7}{00661}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMP0\_SHIFT))\ \&\ FTM\_COMBINE\_COMP0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00663}00663\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00664}00664\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00669}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga65b8ad7bee151a6ac741da7e9b569cfb}{00669}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAPEN0\_SHIFT))\ \&\ FTM\_COMBINE\_DECAPEN0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00670}00670\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00671}00671\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00672}00672\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00677}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0e2341e3003ac500312d30d634e14859}{00677}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAP0\_SHIFT))\ \&\ FTM\_COMBINE\_DECAP0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00678}00678\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00679}00679\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00680}00680\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00685}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga795235a6e1d018480ae22da95749dbf3}{00685}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DTEN0\_SHIFT))\ \&\ FTM\_COMBINE\_DTEN0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00686}00686\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00687}00687\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00688}00688\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00693}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga30cbb24caf12c0b44ca398b323f168f1}{00693}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_SYNCEN0\_SHIFT))\ \&\ FTM\_COMBINE\_SYNCEN0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00694}00694\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00695}00695\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00696}00696\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00701}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae14836bc86482b52397c966dedf6a0be}{00701}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_FAULTEN0\_SHIFT))\ \&\ FTM\_COMBINE\_FAULTEN0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00702}00702\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00703}00703\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x100U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00704}00704\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00709}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab0aa20c8e0685ebd2b8d9c8b90241a9e}{00709}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMBINE1\_SHIFT))\ \&\ FTM\_COMBINE\_COMBINE1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00710}00710\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00711}00711\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00712}00712\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (9U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00717}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga601232a815c83c712141d10935955163}{00717}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMP1\_SHIFT))\ \&\ FTM\_COMBINE\_COMP1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00718}00718\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00719}00719\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00720}00720\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00725}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga2a975e52b781302c17d53c1be8400328}{00725}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAPEN1\_SHIFT))\ \&\ FTM\_COMBINE\_DECAPEN1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00726}00726\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00727}00727\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x800U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00728}00728\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (11U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00733}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae2a20c64ee4a3990891ef5afedea0e68}{00733}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAP1\_SHIFT))\ \&\ FTM\_COMBINE\_DECAP1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00734}00734\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00735}00735\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00736}00736\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00741}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac1916dfac8312b21d827ae5f7e0b8ce2}{00741}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DTEN1\_SHIFT))\ \&\ FTM\_COMBINE\_DTEN1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00742}00742\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00743}00743\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00744}00744\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (13U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00749}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0ebb5f7016c1bda71bf39e292429263e}{00749}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_SYNCEN1\_SHIFT))\ \&\ FTM\_COMBINE\_SYNCEN1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00750}00750\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00751}00751\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00752}00752\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (14U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00757}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0f6531f28cf80a7de3d9881ccd95a460}{00757}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_FAULTEN1\_SHIFT))\ \&\ FTM\_COMBINE\_FAULTEN1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00758}00758\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00759}00759\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00760}00760\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00765}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga27e45ede52c46f3c8b246af538213103}{00765}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMBINE2\_SHIFT))\ \&\ FTM\_COMBINE\_COMBINE2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00767}00767\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00768}00768\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00773}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga101e5f8ae6e5b4500e2d1365bd61b039}{00773}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMP2\_SHIFT))\ \&\ FTM\_COMBINE\_COMP2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00774}00774\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00775}00775\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00776}00776\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (18U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00781}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga554a247460d9a03052c249dc9d1adebd}{00781}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAPEN2\_SHIFT))\ \&\ FTM\_COMBINE\_DECAPEN2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00782}00782\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00783}00783\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00784}00784\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (19U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00789}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga031613804280ad2bd27cfaf049782e85}{00789}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAP2\_SHIFT))\ \&\ FTM\_COMBINE\_DECAP2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00791}00791\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x100000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00792}00792\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (20U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00797}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa483e9e7320045ff6f31699c875a0ca1}{00797}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DTEN2\_SHIFT))\ \&\ FTM\_COMBINE\_DTEN2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00799}00799\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00800}00800\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (21U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00805}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga8984672015cf9be29a7a87d831b11e42}{00805}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_SYNCEN2\_SHIFT))\ \&\ FTM\_COMBINE\_SYNCEN2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00806}00806\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00807}00807\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00808}00808\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (22U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00813}\doxymbox{\hyperlink{group__FTM__Register__Masks_gabfa4413da2e92513679bbf35c329a267}{00813}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_FAULTEN2\_SHIFT))\ \&\ FTM\_COMBINE\_FAULTEN2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00814}00814\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00815}00815\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00816}00816\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (24U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00821}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae48fdfc910447cda6b16336fb16bb730}{00821}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMBINE3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMBINE3\_SHIFT))\ \&\ FTM\_COMBINE\_COMBINE3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00822}00822\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00823}00823\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00824}00824\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (25U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00829}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9e313aaf89f69deb597b6366655cdf3f}{00829}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_COMP3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_COMP3\_SHIFT))\ \&\ FTM\_COMBINE\_COMP3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00831}00831\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00832}00832\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (26U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00837}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4b1e743849ccce333604eabd7b43a40d}{00837}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAPEN3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAPEN3\_SHIFT))\ \&\ FTM\_COMBINE\_DECAPEN3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00838}00838\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00839}00839\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00840}00840\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (27U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00845}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga08aa7213f8cde61ac95d82ab7b8169cb}{00845}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DECAP3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DECAP3\_SHIFT))\ \&\ FTM\_COMBINE\_DECAP3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00846}00846\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00847}00847\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00848}00848\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (28U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00853}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga187293f92005114481d80ef5a3ea4f32}{00853}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_DTEN3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_DTEN3\_SHIFT))\ \&\ FTM\_COMBINE\_DTEN3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00854}00854\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00855}00855\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00856}00856\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (29U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00861}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga55f542587ffa13b9edd19f5a7890e8f7}{00861}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_SYNCEN3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_SYNCEN3\_SHIFT))\ \&\ FTM\_COMBINE\_SYNCEN3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00862}00862\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00863}00863\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40000000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00864}00864\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (30U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00869}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac2e41b393d137d701a322c1bb89549ca}{00869}}\ \textcolor{preprocessor}{\#define\ FTM\_COMBINE\_FAULTEN3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_COMBINE\_FAULTEN3\_SHIFT))\ \&\ FTM\_COMBINE\_FAULTEN3\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00871}00871\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00875}00875\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00876}00876\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00878}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3a313efb41a03923ef2e16146fb31ab2}{00878}}\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_DEADTIME\_DTVAL\_SHIFT))\ \&\ FTM\_DEADTIME\_DTVAL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00879}00879\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00880}00880\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTPS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xC0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00881}00881\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTPS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00887}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf1a7c61f4e08ca45f70154070500695d}{00887}}\ \textcolor{preprocessor}{\#define\ FTM\_DEADTIME\_DTPS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_DEADTIME\_DTPS\_SHIFT))\ \&\ FTM\_DEADTIME\_DTPS\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00889}00889\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00892}00892\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00893}00893\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH2TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00894}00894\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH2TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00899}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga179ecdb7546b430801a0c899cc275995}{00899}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH2TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH2TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH2TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00900}00900\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00901}00901\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH3TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00902}00902\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH3TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00907}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac6e75bfc9a11c26ea99b819a3d83886c}{00907}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH3TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH3TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH3TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00908}00908\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00909}00909\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH4TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00910}00910\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH4TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00915}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga268b90292a159a4846512873ee2a6b38}{00915}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH4TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH4TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH4TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00916}00916\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00917}00917\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH5TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00918}00918\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH5TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00923}\doxymbox{\hyperlink{group__FTM__Register__Masks_gace9076e72b2a9124f74b304df3a7e124}{00923}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH5TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH5TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH5TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00924}00924\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00925}00925\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH0TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00926}00926\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH0TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00931}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5033d41dbadd83cd16af4cc20467a6e6}{00931}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH0TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH0TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH0TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00932}00932\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00933}00933\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH1TRIG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00934}00934\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH1TRIG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00939}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga02b719fe5917b044b235e615b7ecf15d}{00939}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_CH1TRIG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_CH1TRIG\_SHIFT))\ \&\ FTM\_EXTTRIG\_CH1TRIG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00940}00940\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00941}00941\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_INITTRIGEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00942}00942\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_INITTRIGEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00947}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga6c3513d49a0b33891d6a2109e3e25c99}{00947}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_INITTRIGEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_INITTRIGEN\_SHIFT))\ \&\ FTM\_EXTTRIG\_INITTRIGEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00948}00948\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00949}00949\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_TRIGF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00950}00950\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_TRIGF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00955}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaabd6b57692c91089f23f19e85d02b31c}{00955}}\ \textcolor{preprocessor}{\#define\ FTM\_EXTTRIG\_TRIGF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_EXTTRIG\_TRIGF\_SHIFT))\ \&\ FTM\_EXTTRIG\_TRIGF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00957}00957\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00960}00960\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00961}00961\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00962}00962\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00967}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9217b819a8226fa7c1a2ecd60fa5eff6}{00967}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL0\_SHIFT))\ \&\ FTM\_POL\_POL0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00968}00968\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00969}00969\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00970}00970\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00975}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga2d91be4d053750be93b985e163de6602}{00975}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL1\_SHIFT))\ \&\ FTM\_POL\_POL1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00976}00976\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00977}00977\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00978}00978\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00983}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaadf9efff3951aac4c22d1650e2b29485}{00983}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL2\_SHIFT))\ \&\ FTM\_POL\_POL2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00984}00984\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00985}00985\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00986}00986\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00991}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf1514ee4e7dffd41247ad736f65c4c53}{00991}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL3\_SHIFT))\ \&\ FTM\_POL\_POL3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00992}00992\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00993}00993\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL4\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00994}00994\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL4\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l00999}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga1d5fa9d8bbd23fc355da8454e28eabf1}{00999}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL4(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL4\_SHIFT))\ \&\ FTM\_POL\_POL4\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01000}01000\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01001}01001\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL5\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01002}01002\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL5\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01007}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga1aad0418dc0d79f5eb39f9a1771ef71c}{01007}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL5(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL5\_SHIFT))\ \&\ FTM\_POL\_POL5\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01008}01008\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01009}01009\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL6\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01010}01010\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL6\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01015}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga45db2080dc7be67bb158280b96df3839}{01015}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL6(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL6\_SHIFT))\ \&\ FTM\_POL\_POL6\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01016}01016\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01017}01017\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL7\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01018}01018\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL7\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01023}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5c07ce70605671fb4befe0a08d0a9415}{01023}}\ \textcolor{preprocessor}{\#define\ FTM\_POL\_POL7(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_POL\_POL7\_SHIFT))\ \&\ FTM\_POL\_POL7\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01025}01025\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01028}01028\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01029}01029\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01030}01030\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01035}\doxymbox{\hyperlink{group__FTM__Register__Masks_gafc549e46a9904729fb6994555a952421}{01035}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTF0\_SHIFT))\ \&\ FTM\_FMS\_FAULTF0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01036}01036\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01037}01037\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01038}01038\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01043}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5200455fb40ddd79f2686c6f1343f202}{01043}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTF1\_SHIFT))\ \&\ FTM\_FMS\_FAULTF1\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01044}01044\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01045}01045\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01046}01046\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01051}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga7b94c3078227d809c25b6125cea45d4f}{01051}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTF2\_SHIFT))\ \&\ FTM\_FMS\_FAULTF2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01052}01052\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01053}01053\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF3\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01054}01054\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF3\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01059}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaba6be31b229fb3aa5aa32f9ff9b14b15}{01059}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF3(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTF3\_SHIFT))\ \&\ FTM\_FMS\_FAULTF3\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01060}01060\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01061}01061\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTIN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01062}01062\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTIN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01067}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga165e5b25d1ee4a7a90b113bab883cb28}{01067}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTIN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTIN\_SHIFT))\ \&\ FTM\_FMS\_FAULTIN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01068}01068\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01069}01069\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_WPEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01070}01070\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_WPEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01075}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga8a24573e13cff5e6f505d29b674d69e0}{01075}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_WPEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_WPEN\_SHIFT))\ \&\ FTM\_FMS\_WPEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01076}01076\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01077}01077\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01078}01078\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01083}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae1cf4e66cf8ccda33c76a9bc6da3de78}{01083}}\ \textcolor{preprocessor}{\#define\ FTM\_FMS\_FAULTF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FMS\_FAULTF\_SHIFT))\ \&\ FTM\_FMS\_FAULTF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01085}01085\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01088}01088\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01089}01089\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH0FVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01090}01090\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH0FVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01092}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga8ca64d4437bf63561c5222244e8a696a}{01092}}\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH0FVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FILTER\_CH0FVAL\_SHIFT))\ \&\ FTM\_FILTER\_CH0FVAL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01093}01093\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01094}01094\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH1FVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01095}01095\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH1FVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01097}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3face5c96a8f83237f9e95786fc4a014}{01097}}\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH1FVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FILTER\_CH1FVAL\_SHIFT))\ \&\ FTM\_FILTER\_CH1FVAL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01098}01098\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01099}01099\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH2FVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF00U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01100}01100\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH2FVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01102}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga56a86c7e68150dbdb4b8df6b3762d46d}{01102}}\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH2FVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FILTER\_CH2FVAL\_SHIFT))\ \&\ FTM\_FILTER\_CH2FVAL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01103}01103\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01104}01104\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH3FVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01105}01105\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH3FVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01107}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga777ead7813671a9cacf617c172c1181b}{01107}}\ \textcolor{preprocessor}{\#define\ FTM\_FILTER\_CH3FVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FILTER\_CH3FVAL\_SHIFT))\ \&\ FTM\_FILTER\_CH3FVAL\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01109}01109\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01112}01112\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01113}01113\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT0EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01114}01114\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT0EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01119}\doxymbox{\hyperlink{group__FTM__Register__Masks_gadd99b4b5d43d56b77a82663121f406ca}{01119}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT0EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FAULT0EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FAULT0EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01120}01120\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01121}01121\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT1EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01122}01122\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT1EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01127}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab58dc8d810f6bff6363659535e5dee0e}{01127}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT1EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FAULT1EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FAULT1EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01128}01128\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01129}01129\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT2EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01130}01130\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT2EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01135}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga540dc5f265670d1b6e46e1a40f725027}{01135}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT2EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FAULT2EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FAULT2EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01136}01136\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01137}01137\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT3EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01138}01138\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT3EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01143}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac89767de9c5d87936b38decd6da70be0}{01143}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FAULT3EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FAULT3EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FAULT3EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01144}01144\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01145}01145\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR0EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01146}01146\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR0EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01151}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga66a4409cba2b91c54894340c4881ae2a}{01151}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR0EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FFLTR0EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FFLTR0EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01152}01152\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01153}01153\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR1EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01154}01154\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR1EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01159}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf92a86f87c6d2150e30541ce3a77c32f}{01159}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR1EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FFLTR1EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FFLTR1EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01160}01160\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01161}01161\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR2EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01162}01162\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR2EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01167}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga00c13716481a0975c18efca22f7036b6}{01167}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR2EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FFLTR2EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FFLTR2EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01168}01168\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01169}01169\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR3EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01170}01170\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR3EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01175}\doxymbox{\hyperlink{group__FTM__Register__Masks_gabf54d82481a6065595a33c61533992a5}{01175}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFLTR3EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FFLTR3EN\_SHIFT))\ \&\ FTM\_FLTCTRL\_FFLTR3EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01176}01176\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01177}01177\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFVAL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF00U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01178}01178\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFVAL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01180}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga2d74d328f8b0e1bf184935031c644ae7}{01180}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTCTRL\_FFVAL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTCTRL\_FFVAL\_SHIFT))\ \&\ FTM\_FLTCTRL\_FFVAL\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01182}01182\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01185}01185\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01186}01186\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01187}01187\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01192}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9c3b0a5193cfecdfe0c18cbcfb79ae4a}{01192}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_QUADEN\_SHIFT))\ \&\ FTM\_QDCTRL\_QUADEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01193}01193\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01194}01194\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_TOFDIR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01195}01195\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_TOFDIR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01202}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga1faa9cb9c6e97319f53df8066a327b2a}{01202}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_TOFDIR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_TOFDIR\_SHIFT))\ \&\ FTM\_QDCTRL\_TOFDIR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01203}01203\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01204}01204\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADIR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01205}01205\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADIR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01210}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaaf4c9fe454a99d47b615ebd48c534d5e}{01210}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADIR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_QUADIR\_SHIFT))\ \&\ FTM\_QDCTRL\_QUADIR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01211}01211\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01212}01212\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADMODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01213}01213\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADMODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01218}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0abc036e51f9b62b3512a7a33ed69fe7}{01218}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_QUADMODE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_QUADMODE\_SHIFT))\ \&\ FTM\_QDCTRL\_QUADMODE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01219}01219\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01220}01220\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBPOL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01221}01221\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBPOL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01226}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga2353eb99f10faed2a6fc26b0388826c4}{01226}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBPOL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_PHBPOL\_SHIFT))\ \&\ FTM\_QDCTRL\_PHBPOL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01227}01227\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01228}01228\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAPOL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01229}01229\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAPOL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01234}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4890e37ad76f3b43a673a82db58f11a7}{01234}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAPOL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_PHAPOL\_SHIFT))\ \&\ FTM\_QDCTRL\_PHAPOL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01235}01235\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01236}01236\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBFLTREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01237}01237\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBFLTREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01242}\doxymbox{\hyperlink{group__FTM__Register__Masks_gabf7e3bb664bd431e779bbe6e4c2c8de2}{01242}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHBFLTREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_PHBFLTREN\_SHIFT))\ \&\ FTM\_QDCTRL\_PHBFLTREN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01243}01243\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01244}01244\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAFLTREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01245}01245\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAFLTREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01250}\doxymbox{\hyperlink{group__FTM__Register__Masks_gafbb9db9f8aea1e2cb8cad98a07f10c4b}{01250}}\ \textcolor{preprocessor}{\#define\ FTM\_QDCTRL\_PHAFLTREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_QDCTRL\_PHAFLTREN\_SHIFT))\ \&\ FTM\_QDCTRL\_PHAFLTREN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01252}01252\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01255}01255\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01256}01256\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_NUMTOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01257}01257\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_NUMTOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01259}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa084b68452f9be9a4f5231e046ff416e}{01259}}\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_NUMTOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CONF\_NUMTOF\_SHIFT))\ \&\ FTM\_CONF\_NUMTOF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01260}01260\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01261}01261\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_BDMMODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xC0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01262}01262\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_BDMMODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01264}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac35551a6fb1df02d6a0d83b0ec4df82a}{01264}}\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_BDMMODE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CONF\_BDMMODE\_SHIFT))\ \&\ FTM\_CONF\_BDMMODE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01265}01265\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01266}01266\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01267}01267\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (9U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01272}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf0c17ca25c72f05ea05fd8d375223d73}{01272}}\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CONF\_GTBEEN\_SHIFT))\ \&\ FTM\_CONF\_GTBEEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01273}01273\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01274}01274\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEOUT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01275}01275\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEOUT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01280}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa14db924a3ea8dd3a08a9b0cdc670e3e}{01280}}\ \textcolor{preprocessor}{\#define\ FTM\_CONF\_GTBEOUT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_CONF\_GTBEOUT\_SHIFT))\ \&\ FTM\_CONF\_GTBEOUT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01282}01282\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01285}01285\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01286}01286\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT0POL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01287}01287\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT0POL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01292}\doxymbox{\hyperlink{group__FTM__Register__Masks_gadaacd100d78453d1cd175156838852b2}{01292}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT0POL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTPOL\_FLT0POL\_SHIFT))\ \&\ FTM\_FLTPOL\_FLT0POL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01293}01293\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01294}01294\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT1POL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01295}01295\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT1POL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01300}\doxymbox{\hyperlink{group__FTM__Register__Masks_gade53bcaf8eca6b77bc235d1d290f3801}{01300}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT1POL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTPOL\_FLT1POL\_SHIFT))\ \&\ FTM\_FLTPOL\_FLT1POL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01301}01301\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01302}01302\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT2POL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01303}01303\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT2POL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01308}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaeb97f9dbdbf6c1686cb47385ddf34186}{01308}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT2POL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTPOL\_FLT2POL\_SHIFT))\ \&\ FTM\_FLTPOL\_FLT2POL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01309}01309\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01310}01310\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT3POL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01311}01311\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT3POL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01316}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3f0dd548b377ac411ed455073958f9bd}{01316}}\ \textcolor{preprocessor}{\#define\ FTM\_FLTPOL\_FLT3POL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_FLTPOL\_FLT3POL\_SHIFT))\ \&\ FTM\_FLTPOL\_FLT3POL\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01318}01318\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01321}01321\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01322}01322\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWTRIGMODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01323}01323\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWTRIGMODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01328}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga7a8519f25a7be7aff167cefd6e38c29c}{01328}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWTRIGMODE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWTRIGMODE\_SHIFT))\ \&\ FTM\_SYNCONF\_HWTRIGMODE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01329}01329\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01330}01330\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_CNTINC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01331}01331\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_CNTINC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01336}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5040b0e7f8451e0b2e7bf7414ef75fd5}{01336}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_CNTINC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_CNTINC\_SHIFT))\ \&\ FTM\_SYNCONF\_CNTINC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01337}01337\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01338}01338\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_INVC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01339}01339\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_INVC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01344}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae3ea15079b2f1791e82bacac36d01ee4}{01344}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_INVC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_INVC\_SHIFT))\ \&\ FTM\_SYNCONF\_INVC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01345}01345\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01346}01346\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01347}01347\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01352}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad16f1278f09bcd20c1dcce9130fa120d}{01352}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWOC\_SHIFT))\ \&\ FTM\_SYNCONF\_SWOC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01353}01353\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01354}01354\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SYNCMODE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01355}01355\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SYNCMODE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01360}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4df4d5eabdad09a823397bfac6aa3ce9}{01360}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SYNCMODE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SYNCMODE\_SHIFT))\ \&\ FTM\_SYNCONF\_SYNCMODE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01361}01361\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01362}01362\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWRSTCNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x100U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01363}01363\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWRSTCNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01368}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf7aedb92f197d91fee0d0ce94dded4cc}{01368}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWRSTCNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWRSTCNT\_SHIFT))\ \&\ FTM\_SYNCONF\_SWRSTCNT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01369}01369\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01370}01370\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWWRBUF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01371}01371\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWWRBUF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (9U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01376}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa4c730f6c97c32671c97ff4da59f9524}{01376}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWWRBUF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWWRBUF\_SHIFT))\ \&\ FTM\_SYNCONF\_SWWRBUF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01377}01377\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01378}01378\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01379}01379\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01384}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga16eed46674efbb87ab3a78d8c700dda5}{01384}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWOM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWOM\_SHIFT))\ \&\ FTM\_SYNCONF\_SWOM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01385}01385\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01386}01386\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWINVC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x800U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01387}01387\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWINVC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (11U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01392}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad3e6bcef815f5099b35ea7c8f5d358d5}{01392}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWINVC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWINVC\_SHIFT))\ \&\ FTM\_SYNCONF\_SWINVC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01393}01393\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01394}01394\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWSOC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01395}01395\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWSOC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01400}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga52b3de790cb0a7f11bdccce198f8b670}{01400}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_SWSOC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_SWSOC\_SHIFT))\ \&\ FTM\_SYNCONF\_SWSOC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01401}01401\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01402}01402\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWRSTCNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01403}01403\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWRSTCNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01408}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaae0b2e7326522d8ee5c84b4aea0ec9a1}{01408}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWRSTCNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWRSTCNT\_SHIFT))\ \&\ FTM\_SYNCONF\_HWRSTCNT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01409}01409\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01410}01410\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWWRBUF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01411}01411\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWWRBUF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (17U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01416}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaafb28aa23c9f9aa2cae0c9952c793574}{01416}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWWRBUF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWWRBUF\_SHIFT))\ \&\ FTM\_SYNCONF\_HWWRBUF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01417}01417\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01418}01418\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWOM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01419}01419\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWOM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (18U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01424}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3e6ed12fc2f75d2fe6e37758d2579c0e}{01424}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWOM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWOM\_SHIFT))\ \&\ FTM\_SYNCONF\_HWOM\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01425}01425\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01426}01426\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWINVC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01427}01427\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWINVC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (19U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01432}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga2aa079e123f9f8b04951a308f4be1067}{01432}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWINVC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWINVC\_SHIFT))\ \&\ FTM\_SYNCONF\_HWINVC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01433}01433\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01434}01434\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWSOC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x100000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01435}01435\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWSOC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (20U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01440}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga44ebfa4f3debf8155573c3571616e362}{01440}}\ \textcolor{preprocessor}{\#define\ FTM\_SYNCONF\_HWSOC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SYNCONF\_HWSOC\_SHIFT))\ \&\ FTM\_SYNCONF\_HWSOC\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01442}01442\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01445}01445\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01446}01446\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV0EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01447}01447\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV0EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01452}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga679ec6bef1d875fb7e92a3ea737a28b2}{01452}}\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV0EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_INVCTRL\_INV0EN\_SHIFT))\ \&\ FTM\_INVCTRL\_INV0EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01453}01453\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01454}01454\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV1EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01455}01455\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV1EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01460}\doxymbox{\hyperlink{group__FTM__Register__Masks_gab39299fc30d8d23a0be05de473fc6901}{01460}}\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV1EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_INVCTRL\_INV1EN\_SHIFT))\ \&\ FTM\_INVCTRL\_INV1EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01461}01461\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01462}01462\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV2EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01463}01463\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV2EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01468}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaab5508d48988ad41a34596564a8d883c}{01468}}\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV2EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_INVCTRL\_INV2EN\_SHIFT))\ \&\ FTM\_INVCTRL\_INV2EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01469}01469\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01470}01470\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV3EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01471}01471\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV3EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01476}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4ff1169ec15053ed292d505477ed5641}{01476}}\ \textcolor{preprocessor}{\#define\ FTM\_INVCTRL\_INV3EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_INVCTRL\_INV3EN\_SHIFT))\ \&\ FTM\_INVCTRL\_INV3EN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01478}01478\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01481}01481\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01482}01482\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01483}01483\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01488}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0ca08d761be3c09177764f75a1b7d898}{01488}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH0OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH0OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01489}01489\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01490}01490\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01491}01491\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01496}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga174e069cd4a4719cccab79a58e0fe97c}{01496}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH1OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH1OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01497}01497\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01498}01498\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01499}01499\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01504}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga9c318f90f38466a3f812f2e839c10d4f}{01504}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH2OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH2OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01505}01505\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01506}01506\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01507}01507\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01512}\doxymbox{\hyperlink{group__FTM__Register__Masks_gacdf8e9437f7582f05b61e1fb9c0c6f42}{01512}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH3OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH3OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01513}01513\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01514}01514\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01515}01515\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01520}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga904e54d8b014c3174108ede250b6a989}{01520}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH4OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH4OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01521}01521\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01522}01522\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01523}01523\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01528}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3956be5930d36f0ffb77159d125273ef}{01528}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH5OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH5OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01529}01529\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01530}01530\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01531}01531\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01536}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga4c117e0f0dd99bce4828074069783d8f}{01536}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH6OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH6OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01537}01537\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01538}01538\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01539}01539\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01544}\doxymbox{\hyperlink{group__FTM__Register__Masks_gacd0814cdc69663caa79942a4214f5e2a}{01544}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH7OC\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH7OC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01545}01545\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01546}01546\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x100U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01547}01547\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01552}\doxymbox{\hyperlink{group__FTM__Register__Masks_gac96895592539ac8ac65cdd99cc6e0180}{01552}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH0OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH0OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH0OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01553}01553\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01554}01554\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01555}01555\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (9U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01560}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga0cbac441ec1e538018fee7b97a3ec6a7}{01560}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH1OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH1OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH1OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01561}01561\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01562}01562\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x400U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01563}01563\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (10U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01568}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae4824379acd8198a481c6048cdcee338}{01568}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH2OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH2OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH2OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01569}01569\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01570}01570\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x800U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01571}01571\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (11U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01576}\doxymbox{\hyperlink{group__FTM__Register__Masks_gad162f1505741cc11f178e5c4cc20360f}{01576}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH3OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH3OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH3OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01577}01577\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01578}01578\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01579}01579\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (12U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01584}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga487831196dda6d4e0cf7efc6a679a32a}{01584}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH4OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH4OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH4OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01585}01585\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01586}01586\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01587}01587\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (13U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01592}\doxymbox{\hyperlink{group__FTM__Register__Masks_gadde80fa74501817163a18fd55f0160f2}{01592}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH5OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH5OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH5OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01593}01593\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01594}01594\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01595}01595\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (14U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01600}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae60bcae6377bbb5d6e646e6c10b16489}{01600}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH6OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH6OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH6OCV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01601}01601\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01602}01602\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OCV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8000U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01603}01603\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OCV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (15U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01608}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaf82a5ca7281f1d3e40adb5292caae6e1}{01608}}\ \textcolor{preprocessor}{\#define\ FTM\_SWOCTRL\_CH7OCV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_SWOCTRL\_CH7OCV\_SHIFT))\ \&\ FTM\_SWOCTRL\_CH7OCV\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01610}01610\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01613}01613\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01614}01614\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH0SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01615}01615\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH0SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01620}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa6c36bb351452bfa99090e139d5d227e}{01620}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH0SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH0SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH0SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01621}01621\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01622}01622\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH1SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01623}01623\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH1SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01628}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga62f50a5200044f5e158c8147df8d0284}{01628}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH1SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH1SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH1SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01629}01629\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01630}01630\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH2SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01631}01631\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH2SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01636}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga26bb85953a05f7cc5361ba19c0d370e0}{01636}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH2SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH2SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH2SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01637}01637\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01638}01638\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH3SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01639}01639\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH3SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01644}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga3dc1ac539f974e6ff787e17537ac840e}{01644}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH3SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH3SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH3SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01645}01645\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01646}01646\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH4SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01647}01647\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH4SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01652}\doxymbox{\hyperlink{group__FTM__Register__Masks_gae89b817d5a34036c5016bab89d228429}{01652}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH4SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH4SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH4SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01653}01653\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01654}01654\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH5SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01655}01655\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH5SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01660}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga5f6d9ecd1dcaa4833457e24f64a08dd1}{01660}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH5SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH5SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH5SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01661}01661\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01662}01662\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH6SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01663}01663\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH6SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01668}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga082fcdc7905410cdca8b65fde7e9d440}{01668}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH6SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH6SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH6SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01669}01669\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01670}01670\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH7SEL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01671}01671\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH7SEL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01676}\doxymbox{\hyperlink{group__FTM__Register__Masks_ga1df7f1ac2c8f8c63003ae538d6d15a2c}{01676}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_CH7SEL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_CH7SEL\_SHIFT))\ \&\ FTM\_PWMLOAD\_CH7SEL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01677}01677\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01678}01678\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_LDOK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x200U)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01679}01679\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_LDOK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (9U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01684}\doxymbox{\hyperlink{group__FTM__Register__Masks_gaa6f91a65a92615804b5d162801bb5933}{01684}}\ \textcolor{preprocessor}{\#define\ FTM\_PWMLOAD\_LDOK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)(((uint32\_t)(x))\ <<\ FTM\_PWMLOAD\_LDOK\_SHIFT))\ \&\ FTM\_PWMLOAD\_LDOK\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01686}01686\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01687}01687\ \ \textcolor{comment}{/*\ end\ of\ group\ FTM\_Register\_Masks\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01691}01691\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01692}01692\ \ \textcolor{comment}{/*\ end\ of\ group\ FTM\_Peripheral\_Access\_Layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01696}01696\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01697}01697\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01698}01698\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01699}01699\ \textcolor{comment}{**\ End\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01700}01700\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01701}01701\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01702}01702\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01703}01703\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01704}01704\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01705}01705\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01706}01706\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01707}01707\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01708}01708\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01709}01709\ \textcolor{preprocessor}{\ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01710}01710\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01711}01711\ \ \ \textcolor{comment}{/*\ leave\ anonymous\ unions\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01712}01712\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01713}01713\ \textcolor{preprocessor}{\ \ \#pragma\ language=default}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01714}01714\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01715}01715\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01716}01716\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01717}01717\ \ \textcolor{comment}{/*\ end\ of\ group\ Peripheral\_access\_layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01721}01721\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01722}01722\ }
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01723}01723\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ PERI\_FTM\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__FTM_8h_source_l01724}01724\ }
+
+\end{DoxyCode}

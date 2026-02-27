@@ -1,0 +1,844 @@
+\doxysection{fsl\+\_\+common\+\_\+arm.\+h}
+\hypertarget{fsl__common__arm_8h_source}{}\label{fsl__common__arm_8h_source}\index{drivers/fsl\_common\_arm.h@{drivers/fsl\_common\_arm.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2022,\ 2024\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00009}00009\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMMON\_ARM\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00010}00010\ \textcolor{preprocessor}{\#define\ FSL\_COMMON\_ARM\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00012}00012\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00013}00013\ \textcolor{comment}{\ *\ For\ CMSIS\ pack\ RTE.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00014}00014\ \textcolor{comment}{\ *\ CMSIS\ pack\ RTE\ generates\ "{}RTC\_Components.h"{}\ which\ contains\ the\ statements}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00015}00015\ \textcolor{comment}{\ *\ of\ the\ related\ <RTE\_Components\_h>\ element\ for\ all\ selected\ software\ components.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00016}00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00017}00017\ \textcolor{preprocessor}{\#ifdef\ \_RTE\_}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}RTE\_Components.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00019}00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00084}00084\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00085}00085\ \textcolor{preprocessor}{\#if\ ((defined(\_\_ARM\_ARCH\_7M\_\_\ \ \ \ \ )\ \&\&\ (\_\_ARM\_ARCH\_7M\_\_\ \ \ \ \ \ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_7EM\_\_\ \ \ \ )\ \&\&\ (\_\_ARM\_ARCH\_7EM\_\_\ \ \ \ \ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00087}00087\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_8M\_MAIN\_\_)\ \&\&\ (\_\_ARM\_ARCH\_8M\_MAIN\_\_\ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00088}00088\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_8M\_BASE\_\_)\ \&\&\ (\_\_ARM\_ARCH\_8M\_BASE\_\_\ ==\ 1)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00089}00089\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00091}00091\ \textcolor{comment}{/*\ If\ the\ LDREX\ and\ STREX\ are\ supported,\ use\ them.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00092}00092\ \textcolor{preprocessor}{\#define\ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ val,\ ops)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00094}00094\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (val)\ =\ \_\_LDREXB(addr);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (ops);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0UL\ !=\ \_\_STREXB((val),\ (addr)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00099}00099\ \textcolor{preprocessor}{\#define\ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ val,\ ops)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (val)\ =\ \_\_LDREXH(addr);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (ops);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0UL\ !=\ \_\_STREXH((val),\ (addr)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00106}00106\ \textcolor{preprocessor}{\#define\ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ val,\ ops)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00108}00108\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (val)\ =\ \_\_LDREXW(addr);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (ops);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00111}00111\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0UL\ !=\ \_\_STREXW((val),\ (addr)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00113}00113\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalAdd1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00114}00114\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00115}00115\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00117}00117\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ +=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00118}00118\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00120}00120\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalAdd2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00121}00121\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00122}00122\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00124}00124\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ +=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00127}00127\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalAdd4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00128}00128\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00129}00129\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00131}00131\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ +=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00134}00134\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSub1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00135}00135\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00136}00136\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00138}00138\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ -\/=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00141}00141\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSub2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00142}00142\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00143}00143\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00145}00145\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ -\/=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00146}00146\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00148}00148\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSub4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ val)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00149}00149\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00150}00150\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00152}00152\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ -\/=\ val);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00155}00155\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSet1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00157}00157\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00159}00159\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ |=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00162}00162\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSet2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00163}00163\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00164}00164\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00166}00166\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ |=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00167}00167\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00169}00169\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalSet4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00170}00170\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00171}00171\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00173}00173\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ |=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00174}00174\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00176}00176\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClear1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00177}00177\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00178}00178\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00180}00180\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ \&=\ \string~bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00181}00181\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00183}00183\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClear2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00184}00184\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00185}00185\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00187}00187\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ \&=\ \string~bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00188}00188\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00190}00190\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClear4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00191}00191\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00192}00192\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00194}00194\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ \&=\ \string~bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00195}00195\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00197}00197\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalToggle1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00198}00198\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00199}00199\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00201}00201\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ \string^=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00202}00202\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00204}00204\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalToggle2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00205}00205\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00206}00206\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00208}00208\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ \string^=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00211}00211\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalToggle4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ bits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00212}00212\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00213}00213\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00215}00215\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ \string^=\ bits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00216}00216\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00218}00218\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClearAndSet1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ clearBits,\ uint8\_t\ setBits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00219}00219\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00220}00220\ \ \ \ \ uint8\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00222}00222\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_1BYTE(addr,\ s\_val,\ s\_val\ =\ (s\_val\ \&\ \string~clearBits)\ |\ setBits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00223}00223\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00225}00225\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClearAndSet2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ clearBits,\ uint16\_t\ setBits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00226}00226\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00227}00227\ \ \ \ \ uint16\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00229}00229\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_2BYTE(addr,\ s\_val,\ s\_val\ =\ (s\_val\ \&\ \string~clearBits)\ |\ setBits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00230}00230\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00232}00232\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_SDK\_AtomicLocalClearAndSet4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ clearBits,\ uint32\_t\ setBits)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00233}00233\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00234}00234\ \ \ \ \ uint32\_t\ s\_val;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00236}00236\ \ \ \ \ \_SDK\_ATOMIC\_LOCAL\_OPS\_4BYTE(addr,\ s\_val,\ s\_val\ =\ (s\_val\ \&\ \string~clearBits)\ |\ setBits);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00237}00237\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00239}00239\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_ADD(addr,\ val)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00240}00240\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00241}00241\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalAdd1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(val))\ :\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00242}00242\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \_SDK\_AtomicLocalAdd2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(val))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00243}00243\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalAdd4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(val))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_SUB(addr,\ val)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00246}00246\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00247}00247\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalSub1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(val))\ :\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00248}00248\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \_SDK\_AtomicLocalSub2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(val))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00249}00249\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalSub4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(val))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_SET(addr,\ bits)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00252}00252\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00253}00253\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalSet1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(bits))\ :\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00254}00254\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \_SDK\_AtomicLocalSet2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(bits))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00255}00255\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalSet4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(bits))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00257}00257\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_CLEAR(addr,\ bits)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00258}00258\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00259}00259\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClear1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(bits))\ :\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00260}00260\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00261}00261\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClear2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(bits))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00262}00262\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClear4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(bits))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00264}00264\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_TOGGLE(addr,\ bits)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00265}00265\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00266}00266\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalToggle1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(bits))\ :\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00267}00267\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00268}00268\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalToggle2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(bits))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00269}00269\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalToggle4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(bits))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00271}00271\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_CLEAR\_AND\_SET(addr,\ clearBits,\ setBits)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00272}00272\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00273}00273\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClearAndSet1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(clearBits),\ (uint8\_t)(setBits))\ :\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00274}00274\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00275}00275\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClearAndSet2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(clearBits),\ (uint16\_t)(setBits))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00276}00276\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalClearAndSet4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(clearBits),\ (uint32\_t)(setBits))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00278}00278\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_COMPARE\_AND\_SET(addr,\ expected,\ newValue)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00279}00279\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00280}00280\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalCompareAndSet1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(expected),\ (uint8\_t)(newValue))\ :\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00281}00281\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00282}00282\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalCompareAndSet2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(expected),\ (uint16\_t)(newValue))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00283}00283\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalCompareAndSet4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(expected),\ (uint32\_t)(newValue))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00285}00285\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_TEST\_AND\_SET(addr,\ newValue)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00286}00286\ \textcolor{preprocessor}{\ \ \ \ ((1UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00287}00287\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalTestAndSet1Byte((volatile\ uint8\_t\ *)(volatile\ void\ *)(addr),\ (uint8\_t)(newValue))\ :\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00288}00288\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ ((2UL\ ==\ sizeof(*(addr)))\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00289}00289\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalTestAndSet2Byte((volatile\ uint16\_t\ *)(volatile\ void\ *)(addr),\ (uint16\_t)(newValue))\ :\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00290}00290\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_SDK\_AtomicLocalTestAndSet4Byte((volatile\ uint32\_t\ *)(volatile\ void\ *)(addr),\ (uint32\_t)(newValue))))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00291}00291\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00293}\doxymbox{\hyperlink{group__ksdk__common_ga957fd03848a6eb9dbca45a30dcdcc139}{00293}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_ADD(addr,\ val)\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00294}00294\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00295}00295\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00296}00296\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00297}00297\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00298}00298\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ +=\ (val);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00299}00299\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00300}00300\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00302}\doxymbox{\hyperlink{group__ksdk__common_gae82c4d49594c973ce454a8c03cdf7d88}{00302}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_SUB(addr,\ val)\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00303}00303\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00304}00304\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00305}00305\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00306}00306\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00307}00307\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ -\/=\ (val);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00308}00308\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00309}00309\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00311}\doxymbox{\hyperlink{group__ksdk__common_gade7ec3533b9f508554ee1535b7b8bc8c}{00311}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_SET(addr,\ bits)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00312}00312\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00313}00313\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00314}00314\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00315}00315\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00316}00316\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ |=\ (bits);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00317}00317\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00318}00318\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00320}\doxymbox{\hyperlink{group__ksdk__common_ga50f13aaa6905b92a83c762e1513471c8}{00320}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_CLEAR(addr,\ bits)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00321}00321\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00322}00322\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00323}00323\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00324}00324\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00325}00325\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ \&=\ \string~(bits);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00326}00326\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00327}00327\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00329}\doxymbox{\hyperlink{group__ksdk__common_ga022210ec2f02da145599baef78fbeb5a}{00329}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_TOGGLE(addr,\ bits)\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00330}00330\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00331}00331\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00332}00332\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00333}00333\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00334}00334\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ \string^=\ (bits);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00335}00335\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00336}00336\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00338}\doxymbox{\hyperlink{group__ksdk__common_ga2bfce8f92b8539d9b2eedc4d52b35dd1}{00338}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_CLEAR\_AND\_SET(addr,\ clearBits,\ setBits)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00339}00339\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00340}00340\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00341}00341\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ uint32\_t\ s\_atomicOldInt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00342}00342\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ s\_atomicOldInt\ =\ DisableGlobalIRQ();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00343}00343\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(addr)\ \ \ \ \ \ \ \ =\ (*(addr)\ \&\ \string~(clearBits))\ |\ (setBits);\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00344}00344\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ EnableGlobalIRQ(s\_atomicOldInt);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00345}00345\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (false)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00347}\doxymbox{\hyperlink{group__ksdk__common_ga01b3e5f60e8b1f6c7aa6738da5e9a619}{00347}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_COMPARE\_AND\_SET(addr,\ expected,\ newValue)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00348}00348\ \textcolor{preprocessor}{\ \ \ \ \_SDK\_AtomicLocalCompareAndSet((uint32\_t\ *)addr,\ (uint32\_t)expected,\ (uint32\_t)newValue)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00350}\doxymbox{\hyperlink{group__ksdk__common_ga920db370d62cec9edb1ba807cc92d515}{00350}}\ \textcolor{preprocessor}{\#define\ SDK\_ATOMIC\_LOCAL\_TEST\_AND\_SET(addr,\ newValue)\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00351}00351\ \textcolor{preprocessor}{\ \ \ \ \_SDK\_AtomicTestAndSet((uint32\_t\ *)addr,\ (uint32\_t)newValue)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00353}00353\ \textcolor{preprocessor}{\#endif}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00359}\doxymbox{\hyperlink{group__ksdk__common_gad5639aadf668899775fc7506a5e19dc1}{00359}}\ \textcolor{preprocessor}{\#define\ USEC\_TO\_COUNT(us,\ clockFreqInHz)\ (uint64\_t)(((uint64\_t)(us)\ *\ (clockFreqInHz))\ /\ 1000000U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00361}\doxymbox{\hyperlink{group__ksdk__common_ga601b69842ec962d1babd627e5a3541fd}{00361}}\ \textcolor{preprocessor}{\#define\ COUNT\_TO\_USEC(count,\ clockFreqInHz)\ (uint64\_t)((uint64\_t)(count)*1000000U\ /\ (clockFreqInHz))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00364}\doxymbox{\hyperlink{group__ksdk__common_gaa9fb2136029d807bd7c349c30348b52a}{00364}}\ \textcolor{preprocessor}{\#define\ MSEC\_TO\_COUNT(ms,\ clockFreqInHz)\ (uint64\_t)((uint64\_t)(ms)\ *\ (clockFreqInHz)\ /\ 1000U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00366}\doxymbox{\hyperlink{group__ksdk__common_gafa0fe6bd95d5455c99aee949cb285b20}{00366}}\ \textcolor{preprocessor}{\#define\ COUNT\_TO\_MSEC(count,\ clockFreqInHz)\ (uint64\_t)((uint64\_t)(count)*1000U\ /\ (clockFreqInHz))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00378}00378\ \textcolor{preprocessor}{\#if\ (defined\ \_\_CORTEX\_M)\ \&\&\ ((\_\_CORTEX\_M\ ==\ 4U)\ ||\ (\_\_CORTEX\_M\ ==\ 7U))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00379}00379\ \textcolor{preprocessor}{\#define\ SDK\_ISR\_EXIT\_BARRIER\ \_\_DSB()}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00380}00380\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00381}00381\ \textcolor{preprocessor}{\#define\ SDK\_ISR\_EXIT\_BARRIER}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00382}00382\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00388}00388\ \textcolor{preprocessor}{\#if\ (defined(\_\_ICCARM\_\_))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00389}00389\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00390}00390\ \textcolor{comment}{\ *\ Workaround\ to\ disable\ MISRA\ C\ message\ suppress\ warnings\ for\ IAR\ compiler.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00391}00391\ \textcolor{comment}{\ *\ http:/\ /supp.iar.com/Support/?note=24725}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00392}00392\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00393}00393\ \_Pragma(\textcolor{stringliteral}{"{}diag\_suppress=Pm120"{}})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00394}00394\ \textcolor{preprocessor}{\#define\ SDK\_PRAGMA(x)\ \_Pragma(\#x)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00395}00395\ \ \ \ \ \_Pragma(\textcolor{stringliteral}{"{}diag\_error=Pm120"{}})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00397}00397\ \textcolor{preprocessor}{\#define\ SDK\_ALIGN(var,\ alignbytes)\ SDK\_PRAGMA(data\_alignment\ =\ alignbytes)\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00398}00398\ \textcolor{preprocessor}{\#elif\ defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00400}00400\ \textcolor{preprocessor}{\#define\ SDK\_ALIGN(var,\ alignbytes)\ \_\_attribute\_\_((aligned(alignbytes)))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00401}00401\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)\ ||\ defined(DOXYGEN\_OUTPUT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00403}00403\ \textcolor{preprocessor}{\#define\ SDK\_ALIGN(var,\ alignbytes)\ var\ \_\_attribute\_\_((aligned(alignbytes)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00404}00404\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00405}00405\ \textcolor{preprocessor}{\#error\ Toolchain\ not\ supported}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00406}00406\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00409}00409\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_L1DCACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00410}00410\ \textcolor{preprocessor}{\#define\ SDK\_L1DCACHE\_ALIGN(var)\ SDK\_ALIGN(var,\ FSL\_FEATURE\_L1DCACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00411}00411\ \textcolor{preprocessor}{\#endif}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00413}00413\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_L2CACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ SDK\_L2CACHE\_ALIGN(var)\ SDK\_ALIGN(var,\ FSL\_FEATURE\_L2CACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00415}00415\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00416}00416\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00418}\doxymbox{\hyperlink{group__ksdk__common_ga44d24ac5229dbbd054f046331b58d43b}{00418}}\ \textcolor{preprocessor}{\#define\ SDK\_SIZEALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00419}00419\ \textcolor{preprocessor}{\ \ \ \ ((unsigned\ int)((var)\ +\ ((alignbytes)-\/1U))\ \&\ (unsigned\ int)(\string~(unsigned\ int)((alignbytes)-\/1U)))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00452}00452\ \textcolor{preprocessor}{\#if\ ((!(defined(FSL\_FEATURE\_HAS\_NO\_NONCACHEABLE\_SECTION)\ \&\&\ FSL\_FEATURE\_HAS\_NO\_NONCACHEABLE\_SECTION))\ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00453}00453\ \textcolor{preprocessor}{\ \ \ \ \ defined(FSL\_FEATURE\_L1ICACHE\_LINESIZE\_BYTE))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00454}00454\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00455}00455\ \textcolor{preprocessor}{\#if\ (defined(\_\_ICCARM\_\_))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00456}00456\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ @"{}NonCacheable"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00457}00457\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN(var,\ alignbytes)\ SDK\_PRAGMA(data\_alignment\ =\ alignbytes)\ var\ @"{}NonCacheable"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00458}00458\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_INIT(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ @"{}NonCacheable.init"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00459}00459\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN\_INIT(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00460}00460\ \textcolor{preprocessor}{\ \ \ \ SDK\_PRAGMA(data\_alignment\ =\ alignbytes)\ var\ @"{}NonCacheable.init"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00462}00462\ \textcolor{preprocessor}{\#elif\ (defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00463}00463\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_INIT(var)\ \_\_attribute\_\_((section("{}NonCacheable.init"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00464}00464\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN\_INIT(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00465}00465\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}NonCacheable.init"{})))\ \_\_attribute\_\_((aligned(alignbytes)))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00466}00466\ \textcolor{preprocessor}{\#if\ (defined(\_\_CC\_ARM))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00467}00467\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION(var)\ \_\_attribute\_\_((section("{}NonCacheable"{}),\ zero\_init))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00468}00468\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00469}00469\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}NonCacheable"{}),\ zero\_init))\ \_\_attribute\_\_((aligned(alignbytes)))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00470}00470\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00471}00471\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION(var)\ \_\_attribute\_\_((section("{}.bss.NonCacheable"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00472}00472\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00473}00473\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}.bss.NonCacheable"{})))\ \_\_attribute\_\_((aligned(alignbytes)))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00474}00474\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00476}00476\ \textcolor{preprocessor}{\#elif\ (defined(\_\_GNUC\_\_))\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00477}00477\ \textcolor{comment}{/*\ For\ GCC,\ when\ the\ non-\/cacheable\ section\ is\ required,\ please\ define\ "{}\_\_STARTUP\_INITIALIZE\_NONCACHEDATA"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00478}00478\ \textcolor{comment}{\ *\ in\ your\ projects\ to\ make\ sure\ the\ non-\/cacheable\ section\ variables\ will\ be\ initialized\ in\ system\ startup.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00479}00479\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00480}00480\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_INIT(var)\ \_\_attribute\_\_((section("{}NonCacheable.init"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00481}00481\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN\_INIT(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00482}00482\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}NonCacheable.init"{})))\ var\ \_\_attribute\_\_((aligned(alignbytes)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00483}00483\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION(var)\ \_\_attribute\_\_((section("{}NonCacheable,\(\backslash\)"{}aw\(\backslash\)"{},\%nobits\ @"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00484}00484\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00485}00485\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}NonCacheable,\(\backslash\)"{}aw\(\backslash\)"{},\%nobits\ @"{})))\ var\ \_\_attribute\_\_((aligned(alignbytes)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00486}00486\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00487}00487\ \textcolor{preprocessor}{\#error\ Toolchain\ not\ supported.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00488}00488\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00490}00490\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00492}\doxymbox{\hyperlink{group__ksdk__common_gad98e0c70f9195609e3c3d9e635bc207d}{00492}}\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00493}\doxymbox{\hyperlink{group__ksdk__common_ga545036768d164aad61b71502371e7165}{00493}}\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN(var,\ alignbytes)\ \ \ \ \ \ SDK\_ALIGN(var,\ alignbytes)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00494}\doxymbox{\hyperlink{group__ksdk__common_ga0e6dbf5a33f2390db8f141f2df5055aa}{00494}}\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_INIT(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00495}\doxymbox{\hyperlink{group__ksdk__common_ga5861db7ec245a076dbb525bb75255cf0}{00495}}\ \textcolor{preprocessor}{\#define\ AT\_NONCACHEABLE\_SECTION\_ALIGN\_INIT(var,\ alignbytes)\ SDK\_ALIGN(var,\ alignbytes)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00497}00497\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00522}00522\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_L1DCACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00523}00523\ \textcolor{preprocessor}{\#define\ CACHE\_LINE\_DATA\ SDK\_L1DCACHE\_ALIGN}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00524}00524\ \textcolor{preprocessor}{\#elif\ defined(FSL\_FEATURE\_L2CACHE\_LINESIZE\_BYTE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00525}00525\ \textcolor{preprocessor}{\#define\ CACHE\_LINE\_DATA\ SDK\_L2CACHE\_ALIGN}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00526}00526\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00528}00528\ \textcolor{preprocessor}{\#if\ (defined(\_\_ICCARM\_\_))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00529}00529\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CACHE\_LINE\_DATA(var)\ @"{}CacheLineData"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00530}00530\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION\_INIT(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ CACHE\_LINE\_DATA(var)\ @"{}CacheLineData.init"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00531}00531\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00532}00532\ \textcolor{preprocessor}{\#elif\ (defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00533}00533\ \textcolor{preprocessor}{\#if\ (defined(\_\_CC\_ARM))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00534}00534\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_attribute\_\_((section("{}CacheLineData"{}),\ zero\_init))\ CACHE\_LINE\_DATA(var)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00535}00535\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00536}00536\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_attribute\_\_((section("{}CacheLineData"{})))\ CACHE\_LINE\_DATA(var)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00537}00537\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00538}00538\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION\_INIT(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_attribute\_\_((section("{}CacheLineData.init"{})))\ CACHE\_LINE\_DATA(var)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00540}00540\ \textcolor{preprocessor}{\#elif\ (defined(\_\_GNUC\_\_))\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00541}00541\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_attribute\_\_((section("{}CacheLineData,\(\backslash\)"{}aw\(\backslash\)"{},\%nobits\ @"{})))\ CACHE\_LINE\_DATA(var)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00542}00542\ \textcolor{preprocessor}{\#define\ AT\_CACHE\_LINE\_SECTION\_INIT(var)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_attribute\_\_((section("{}CacheLineData.init"{})))\ CACHE\_LINE\_DATA(var)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00544}00544\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00545}00545\ \textcolor{preprocessor}{\#error\ Toolchain\ not\ supported.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00546}00546\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00547}00547\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00566}00566\ \textcolor{preprocessor}{\#if\ (defined(\_\_ICCARM\_\_))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00567}00567\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_CODE(func)\ func\ @"{}CodeQuickAccess"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00568}00568\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA(var)\ \ var\ @"{}DataQuickAccess"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00569}00569\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00570}00570\ \textcolor{preprocessor}{\ \ \ \ SDK\_PRAGMA(data\_alignment\ =\ alignbytes)\ var\ @"{}DataQuickAccess"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00571}00571\ \textcolor{preprocessor}{\#elif\ (defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00572}00572\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_CODE(func)\ \_\_attribute\_\_((section("{}CodeQuickAccess"{}),\ \_\_noinline\_\_))\ func}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00573}00573\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA(var)\ \ \_\_attribute\_\_((section("{}DataQuickAccess"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00574}00574\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00575}00575\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}DataQuickAccess"{})))\ \_\_attribute\_\_((aligned(alignbytes)))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00576}00576\ \textcolor{preprocessor}{\#elif\ (defined(\_\_GNUC\_\_))\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00577}00577\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_CODE(func)\ \_\_attribute\_\_((section("{}CodeQuickAccess"{}),\ \_\_noinline\_\_))\ func}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00578}00578\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA(var)\ \ \_\_attribute\_\_((section("{}DataQuickAccess"{})))\ var}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00579}00579\ \textcolor{preprocessor}{\#define\ AT\_QUICKACCESS\_SECTION\_DATA\_ALIGN(var,\ alignbytes)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00580}00580\ \textcolor{preprocessor}{\ \ \ \ \_\_attribute\_\_((section("{}DataQuickAccess"{})))\ var\ \_\_attribute\_\_((aligned(alignbytes)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00581}00581\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00582}00582\ \textcolor{preprocessor}{\#error\ Toolchain\ not\ supported.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00583}00583\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_\_ICCARM\_\_)\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00585}00585\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00593}00593\ \textcolor{preprocessor}{\#if\ (defined(\_\_ICCARM\_\_))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00594}00594\ \textcolor{preprocessor}{\#define\ RAMFUNCTION\_SECTION\_CODE(func)\ func\ @"{}RamFunction"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00595}00595\ \textcolor{preprocessor}{\#elif\ (defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00596}00596\ \textcolor{preprocessor}{\#define\ RAMFUNCTION\_SECTION\_CODE(func)\ \_\_attribute\_\_((section("{}RamFunction"{})))\ func}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00597}00597\ \textcolor{preprocessor}{\#elif\ (defined(\_\_GNUC\_\_))\ ||\ defined(DOXYGEN\_OUTPUT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00598}00598\ \textcolor{preprocessor}{\#define\ RAMFUNCTION\_SECTION\_CODE(func)\ \_\_attribute\_\_((section("{}RamFunction"{})))\ func}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00599}00599\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00600}00600\ \textcolor{preprocessor}{\#error\ Toolchain\ not\ supported.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00601}00601\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_\_ICCARM\_\_)\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00603}00603\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00612}00612\ \textcolor{preprocessor}{\#if\ (defined(\_\_ARM\_FEATURE\_CMSE)\ \&\&\ (\_\_ARM\_FEATURE\_CMSE\ \&\ 0x2))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00613}00613\ \textcolor{preprocessor}{\#define\ MSDK\_REG\_SECURE\_ADDR(x)\ ((uintptr\_t)(x)\ |\ (0x1UL\ <<\ 28))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00614}00614\ \textcolor{preprocessor}{\#define\ MSDK\_REG\_NONSECURE\_ADDR(x)\ ((uintptr\_t)(x)\ \&\ \string~(0x1UL\ <<\ 28))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00615}00615\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00616}\doxymbox{\hyperlink{group__ksdk__common_ga48714099c4ca9d174b706011312dab72}{00616}}\ \textcolor{preprocessor}{\#define\ MSDK\_REG\_SECURE\_ADDR(x)\ (x)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00617}\doxymbox{\hyperlink{group__ksdk__common_ga76507b45e2924c3a5da32d4fb2227806}{00617}}\ \textcolor{preprocessor}{\#define\ MSDK\_REG\_NONSECURE\_ADDR(x)\ (x)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00618}00618\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00623}\doxymbox{\hyperlink{group__ksdk__common_gae7158c29694b27d9e4836aa8781ba85d}{00623}}\ \textcolor{preprocessor}{\#define\ MSDK\_INVALID\_IRQ\_HANDLER\ UINT32\_MAX}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00624}00624\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00625}00625\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)\ \&\&\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00626}00626\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ DefaultISR(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00627}00627\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00628}00628\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00629}00629\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00630}00630\ \textcolor{comment}{\ *\ The\ fsl\_clock.h\ is\ included\ here\ because\ it\ needs\ MAKE\_VERSION/MAKE\_STATUS/status\_t}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00631}00631\ \textcolor{comment}{\ *\ defined\ in\ previous\ of\ this\ file.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00632}00632\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00633}00633\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{fsl__clock_8h}{fsl\_clock.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00635}00635\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00636}00636\ \textcolor{comment}{\ *\ Chip\ level\ peripheral\ reset\ API,\ for\ MCUs\ that\ implement\ peripheral\ reset\ control\ external\ to\ a\ peripheral}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00637}00637\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00638}00638\ \textcolor{preprocessor}{\#if\ ((defined(FSL\_FEATURE\_SOC\_SYSCON\_COUNT)\ \&\&\ (FSL\_FEATURE\_SOC\_SYSCON\_COUNT\ >\ 0))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00639}00639\ \textcolor{preprocessor}{\ \ \ \ \ (defined(FSL\_FEATURE\_SOC\_ASYNC\_SYSCON\_COUNT)\ \&\&\ (FSL\_FEATURE\_SOC\_ASYNC\_SYSCON\_COUNT\ >\ 0)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00640}00640\ \textcolor{preprocessor}{\#include\ "{}fsl\_reset.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00641}00641\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00642}00642\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00643}00643\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM\ >\ 0)\ \&\&\ defined(FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00644}00644\ \textcolor{keywordtype}{void}\ IRQSTEER\_EnableInterrupt(int32\_t\ instIdx,\ IRQn\_Type\ irq);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00645}00645\ \textcolor{keywordtype}{void}\ IRQSTEER\_DisableInterrupt(int32\_t\ instIdx,\ IRQn\_Type\ irq);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00646}00646\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00648}00648\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00649}00649\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00650}00650\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00651}00651\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00652}00652\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00653}00653\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00654}00654\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00655}00655\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00672}\doxymbox{\hyperlink{group__ksdk__common_ga2b92855a9ebf6eadeed1527b8339d50a}{00672}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ksdk__common_ga2b92855a9ebf6eadeed1527b8339d50a}{EnableIRQ}}(IRQn\_Type\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00673}00673\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00674}00674\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00676}00676\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Interrupt__vector__numbers_gga666eb0caeb12ec0e281415592ae89083a1f4ef0294648930fce11a95a3000197d}{NotAvail\_IRQn}}\ ==\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00677}00677\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00678}00678\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00679}00679\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00680}00680\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00681}00681\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)\ \&\&\ (FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00682}00682\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((int32\_t)interrupt\ >=\ (int32\_t)FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00683}00683\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00684}00684\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM\ >\ 0)\ \&\&\ defined(FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00685}00685\ \ \ \ \ \ \ \ \ int32\_t\ irqsteerInstIdx\ =\ (int32\_t)((interrupt\ +\ 1\ -\/\ FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX)\ /\ FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00686}00686\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00687}00687\ \ \ \ \ \ \ \ \ IRQSTEER\_EnableInterrupt(irqsteerInstIdx,\ interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00688}00688\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00689}00689\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00690}00690\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00691}00691\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00692}00692\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00693}00693\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00694}00694\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00695}00695\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00696}00696\ \textcolor{preprocessor}{\#if\ defined(\_\_GIC\_PRIO\_BITS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00697}00697\ \ \ \ \ \ \ \ \ GIC\_EnableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00698}00698\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00699}00699\ \ \ \ \ \ \ \ \ NVIC\_EnableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00700}00700\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00701}00701\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00702}00702\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00703}00703\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00704}00704\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00722}\doxymbox{\hyperlink{group__ksdk__common_ga7f9bbd23e70eaf6670d3425683753961}{00722}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ksdk__common_ga7f9bbd23e70eaf6670d3425683753961}{DisableIRQ}}(IRQn\_Type\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00723}00723\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00724}00724\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00725}00725\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00726}00726\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Interrupt__vector__numbers_gga666eb0caeb12ec0e281415592ae89083a1f4ef0294648930fce11a95a3000197d}{NotAvail\_IRQn}}\ ==\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00727}00727\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00728}00728\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00729}00729\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00730}00730\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00731}00731\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)\ \&\&\ (FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00732}00732\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((int32\_t)interrupt\ >=\ (int32\_t)FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00733}00733\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00734}00734\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM\ >\ 0)\ \&\&\ defined(FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX)\ \&\&\ (FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00735}00735\ \ \ \ \ \ \ \ \ int32\_t\ irqsteerInstIdx\ =\ (int32\_t)((interrupt\ -\/\ FSL\_FEATURE\_IRQSTEER\_IRQ\_START\_INDEX)\ /\ FSL\_FEATURE\_IRQSTEER\_EXT\_INT\_MAX\_NUM);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00736}00736\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00737}00737\ \ \ \ \ \ \ \ \ IRQSTEER\_DisableInterrupt(irqsteerInstIdx,\ interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00738}00738\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00739}00739\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00740}00740\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00741}00741\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00742}00742\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00743}00743\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00744}00744\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00745}00745\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00746}00746\ \textcolor{preprocessor}{\#if\ defined(\_\_GIC\_PRIO\_BITS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00747}00747\ \ \ \ \ \ \ \ \ GIC\_DisableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00748}00748\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00749}00749\ \ \ \ \ \ \ \ \ NVIC\_DisableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00750}00750\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00751}00751\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00752}00752\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00753}00753\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00754}00754\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00755}00755\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00773}\doxymbox{\hyperlink{group__ksdk__common_gaa9463731425e110e2d841820f4559a3f}{00773}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ksdk__common_gaa9463731425e110e2d841820f4559a3f}{EnableIRQWithPriority}}(IRQn\_Type\ interrupt,\ uint8\_t\ priNum)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00774}00774\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00775}00775\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00776}00776\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00777}00777\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Interrupt__vector__numbers_gga666eb0caeb12ec0e281415592ae89083a1f4ef0294648930fce11a95a3000197d}{NotAvail\_IRQn}}\ ==\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00778}00778\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00779}00779\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00780}00780\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00781}00781\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00782}00782\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)\ \&\&\ (FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00783}00783\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((int32\_t)interrupt\ >=\ (int32\_t)FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00784}00784\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00785}00785\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00786}00786\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00787}00787\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00788}00788\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00789}00789\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00790}00790\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00791}00791\ \textcolor{preprocessor}{\#if\ defined(\_\_GIC\_PRIO\_BITS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00792}00792\ \ \ \ \ \ \ \ \ GIC\_SetPriority(interrupt,\ priNum);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00793}00793\ \ \ \ \ \ \ \ \ GIC\_EnableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00794}00794\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00795}00795\ \ \ \ \ \ \ \ \ NVIC\_SetPriority(interrupt,\ priNum);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00796}00796\ \ \ \ \ \ \ \ \ NVIC\_EnableIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00797}00797\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00798}00798\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00799}00799\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00800}00800\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00801}00801\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00802}00802\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00821}\doxymbox{\hyperlink{group__ksdk__common_ga9d1df086c696c7864d98ea6ec28846f3}{00821}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ksdk__common_ga9d1df086c696c7864d98ea6ec28846f3}{IRQ\_SetPriority}}(IRQn\_Type\ interrupt,\ uint8\_t\ priNum)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00822}00822\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00823}00823\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00824}00824\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00825}00825\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Interrupt__vector__numbers_gga666eb0caeb12ec0e281415592ae89083a1f4ef0294648930fce11a95a3000197d}{NotAvail\_IRQn}}\ ==\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00826}00826\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00827}00827\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00828}00828\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00829}00829\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00830}00830\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)\ \&\&\ (FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00831}00831\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((int32\_t)interrupt\ >=\ (int32\_t)FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00832}00832\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00833}00833\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00834}00834\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00835}00835\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00836}00836\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00837}00837\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00838}00838\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00839}00839\ \textcolor{preprocessor}{\#if\ defined(\_\_GIC\_PRIO\_BITS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00840}00840\ \ \ \ \ \ \ \ \ GIC\_SetPriority(interrupt,\ priNum);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00841}00841\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00842}00842\ \ \ \ \ \ \ \ \ NVIC\_SetPriority(interrupt,\ priNum);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00843}00843\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00844}00844\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00845}00845\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00846}00846\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00847}00847\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00848}00848\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00866}\doxymbox{\hyperlink{group__ksdk__common_gac9b0f720fcb617b3aa9cb554d87dbc55}{00866}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ksdk__common_gac9b0f720fcb617b3aa9cb554d87dbc55}{IRQ\_ClearPendingIRQ}}(IRQn\_Type\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00867}00867\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00868}00868\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00869}00869\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00870}00870\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Interrupt__vector__numbers_gga666eb0caeb12ec0e281415592ae89083a1f4ef0294648930fce11a95a3000197d}{NotAvail\_IRQn}}\ ==\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00871}00871\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00873}00873\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00875}00875\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)\ \&\&\ (FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS\ >\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00876}00876\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((int32\_t)interrupt\ >=\ (int32\_t)FSL\_FEATURE\_NUMBER\_OF\_LEVEL1\_INT\_VECTORS)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00877}00877\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00878}00878\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00879}00879\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00880}00880\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00881}00881\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00882}00882\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00883}00883\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00884}00884\ \textcolor{preprocessor}{\#if\ defined(\_\_GIC\_PRIO\_BITS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00885}00885\ \ \ \ \ \ \ \ \ GIC\_ClearPendingIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00886}00886\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00887}00887\ \ \ \ \ \ \ \ \ NVIC\_ClearPendingIRQ(interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00888}00888\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00889}00889\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00890}00890\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00891}00891\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00892}00892\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00893}00893\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00902}\doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{00902}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00903}00903\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00904}00904\ \ \ \ \ uint32\_t\ mask;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00905}00905\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00906}00906\ \textcolor{preprocessor}{\#if\ defined(CPSR\_I\_Msk)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00907}00907\ \ \ \ \ mask\ =\ \_\_get\_CPSR()\ \&\ CPSR\_I\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00908}00908\ \textcolor{preprocessor}{\#elif\ defined(DAIF\_I\_BIT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00909}00909\ \ \ \ \ mask\ =\ \_\_get\_DAIF()\ \&\ DAIF\_I\_BIT;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00910}00910\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00911}00911\ \ \ \ \ mask\ =\ \_\_get\_PRIMASK();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00912}00912\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00913}00913\ \ \ \ \ \_\_disable\_irq();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00914}00914\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00915}00915\ \ \ \ \ \textcolor{keywordflow}{return}\ mask;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00916}00916\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00917}00917\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00928}\doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{00928}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(uint32\_t\ primask)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00929}00929\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00930}00930\ \textcolor{preprocessor}{\#if\ defined(CPSR\_I\_Msk)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00931}00931\ \ \ \ \ \_\_set\_CPSR((\_\_get\_CPSR()\ \&\ \string~CPSR\_I\_Msk)\ |\ primask);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00932}00932\ \textcolor{preprocessor}{\#elif\ defined(DAIF\_I\_BIT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00933}00933\ \ \ \ \ \textcolor{keywordflow}{if}\ (0UL\ ==\ primask)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00934}00934\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00935}00935\ \ \ \ \ \ \ \ \ \_\_enable\_irq();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00936}00936\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00937}00937\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00938}00938\ \ \ \ \ \_\_set\_PRIMASK(primask);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00939}00939\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00940}00940\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00941}00941\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00942}00942\ \textcolor{preprocessor}{\#if\ defined(ENABLE\_RAM\_VECTOR\_TABLE)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00951}00951\ uint32\_t\ InstallIRQHandler(IRQn\_Type\ irq,\ uint32\_t\ irqHandler);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00952}00952\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ENABLE\_RAM\_VECTOR\_TABLE.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00953}00953\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00954}00954\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SOC\_SYSCON\_COUNT)\ \&\&\ (FSL\_FEATURE\_SOC\_SYSCON\_COUNT\ >\ 0))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00955}00955\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00956}00956\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00957}00957\ \textcolor{comment}{\ *\ When\ FSL\_FEATURE\_POWERLIB\_EXTEND\ is\ defined\ to\ non-\/zero\ value,}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00958}00958\ \textcolor{comment}{\ *\ powerlib\ should\ be\ used\ instead\ of\ these\ functions.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00959}00959\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00960}00960\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_POWERLIB\_EXTEND)\ \&\&\ (FSL\_FEATURE\_POWERLIB\_EXTEND\ !=\ 0))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00974}00974\ \textcolor{keywordtype}{void}\ EnableDeepSleepIRQ(IRQn\_Type\ interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00975}00975\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00989}00989\ \textcolor{keywordtype}{void}\ DisableDeepSleepIRQ(IRQn\_Type\ interrupt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00990}00990\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_POWERLIB\_EXTEND\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00991}00991\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SOC\_SYSCON\_COUNT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00992}00992\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00993}00993\ \textcolor{preprocessor}{\#if\ defined(DWT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00997}00997\ \textcolor{keywordtype}{void}\ MSDK\_EnableCpuCycleCounter(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l00998}00998\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01004}01004\ uint32\_t\ MSDK\_GetCpuCycleCount(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01005}01005\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01006}01006\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01007}01007\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION)\ \&\&\ (FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION\ !=\ 0)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01008}01008\ \textcolor{keyword}{typedef}\ uint32\_t\ (*getTimestamp\_t)(void);\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01009}01009\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01016}01016\ \textcolor{keywordtype}{void}\ InitCriticalSectionMeasurementContext(getTimestamp\_t\ func);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01017}01017\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01028}01028\ uint32\_t\ DisableGlobalIRQEx(uint32\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01029}01029\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01040}01040\ \textcolor{keywordtype}{void}\ EnableGlobalIRQEx(uint32\_t\ primask);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01041}01041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01042}01042\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01043}01043\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01044}01044\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01045}01045\ \textcolor{preprocessor}{\#if\ ((defined(\_\_ARM\_ARCH\_7M\_\_\ \ \ \ \ )\ \&\&\ (\_\_ARM\_ARCH\_7M\_\_\ \ \ \ \ \ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01046}01046\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_7EM\_\_\ \ \ \ )\ \&\&\ (\_\_ARM\_ARCH\_7EM\_\_\ \ \ \ \ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01047}01047\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_8M\_MAIN\_\_)\ \&\&\ (\_\_ARM\_ARCH\_8M\_MAIN\_\_\ ==\ 1))\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01048}01048\ \textcolor{preprocessor}{\ \ \ \ \ (defined(\_\_ARM\_ARCH\_8M\_BASE\_\_)\ \&\&\ (\_\_ARM\_ARCH\_8M\_BASE\_\_\ ==\ 1)))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01049}01049\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01050}01050\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \_SDK\_AtomicLocalCompareAndSet1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ expected,\ uint8\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01051}01051\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01052}01052\ \ \ \ \ uint8\_t\ s\_actual;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01053}01053\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01054}01054\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01055}01055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01056}01056\ \ \ \ \ \ \ \ \ s\_actual\ =\ \_\_LDREXB(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01057}01057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_actual\ !=\ expected)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01058}01058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01059}01059\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_CLREX();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01060}01060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01061}01061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01062}01062\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXB((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01063}01063\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01064}01064\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01065}01065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01066}01066\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01067}01067\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01068}01068\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \_SDK\_AtomicLocalCompareAndSet2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ expected,\ uint16\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01069}01069\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01070}01070\ \ \ \ \ uint16\_t\ s\_actual;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01071}01071\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01072}01072\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01073}01073\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01074}01074\ \ \ \ \ \ \ \ \ s\_actual\ =\ \_\_LDREXH(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01075}01075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_actual\ !=\ expected)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01076}01076\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01077}01077\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_CLREX();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01078}01078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01079}01079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01080}01080\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXH((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01081}01081\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01082}01082\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01083}01083\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01084}01084\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01085}01085\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \_SDK\_AtomicLocalCompareAndSet4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ expected,\ uint32\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01086}01086\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01087}01087\ \ \ \ \ uint32\_t\ s\_actual;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01088}01088\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01089}01089\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01090}01090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01091}01091\ \ \ \ \ \ \ \ \ s\_actual\ =\ \_\_LDREXW(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01092}01092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_actual\ !=\ expected)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01093}01093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01094}01094\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_CLREX();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01095}01095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01096}01096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01097}01097\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXW((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01098}01098\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01099}01099\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01100}01100\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01101}01101\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01102}01102\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ \_SDK\_AtomicLocalTestAndSet1Byte(\textcolor{keyword}{volatile}\ uint8\_t\ *addr,\ uint8\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01103}01103\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01104}01104\ \ \ \ \ uint8\_t\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01105}01105\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01106}01106\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01107}01107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01108}01108\ \ \ \ \ \ \ \ \ s\_old\ =\ \_\_LDREXB(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01109}01109\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXB((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01110}01110\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01111}01111\ \ \ \ \ \textcolor{keywordflow}{return}\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01112}01112\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01113}01113\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01114}01114\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint16\_t\ \_SDK\_AtomicLocalTestAndSet2Byte(\textcolor{keyword}{volatile}\ uint16\_t\ *addr,\ uint16\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01115}01115\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01116}01116\ \ \ \ \ uint16\_t\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01117}01117\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01118}01118\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01119}01119\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01120}01120\ \ \ \ \ \ \ \ \ s\_old\ =\ \_\_LDREXH(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01121}01121\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXH((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01122}01122\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01123}01123\ \ \ \ \ \textcolor{keywordflow}{return}\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01124}01124\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01125}01125\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01126}01126\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \_SDK\_AtomicLocalTestAndSet4Byte(\textcolor{keyword}{volatile}\ uint32\_t\ *addr,\ uint32\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01127}01127\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01128}01128\ \ \ \ \ uint32\_t\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01129}01129\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01130}01130\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01131}01131\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01132}01132\ \ \ \ \ \ \ \ \ s\_old\ =\ \_\_LDREXW(addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01133}01133\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\_\_STREXW((newValue),\ (addr)));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01134}01134\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01135}01135\ \ \ \ \ \textcolor{keywordflow}{return}\ s\_old;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01136}01136\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01137}01137\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01138}01138\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01139}01139\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \_SDK\_AtomicLocalCompareAndSet(uint32\_t\ *addr,\ uint32\_t\ expected,\ uint32\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01140}01140\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01141}01141\ \ \ \ \ uint32\_t\ s\_atomicOldInt;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01142}01142\ \ \ \ \ uint32\_t\ s\_actual;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01143}01143\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01144}01144\ \ \ \ \ s\_atomicOldInt\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01145}01145\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01146}01146\ \ \ \ \ s\_actual\ =\ *addr;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01147}01147\ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_actual\ ==\ expected)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01148}01148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01149}01149\ \ \ \ \ \ \ \ \ *addr\ =\ newValue;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01150}01150\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(s\_atomicOldInt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01151}01151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01152}01152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01153}01153\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01154}01154\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01155}01155\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(s\_atomicOldInt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01156}01156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01157}01157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01158}01158\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01159}01159\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01160}01160\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \_SDK\_AtomicTestAndSet(uint32\_t\ *addr,\ uint32\_t\ newValue)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01161}01161\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01162}01162\ \ \ \ \ uint32\_t\ s\_atomicOldInt\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01163}01163\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01164}01164\ \ \ \ \ uint32\_t\ oldValue\ =\ (uint32\_t)(*addr);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01165}01165\ \ \ \ \ *addr\ =\ newValue;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01166}01166\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01167}01167\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(s\_atomicOldInt);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01168}01168\ \ \ \ \ \textcolor{keywordflow}{return}\ oldValue;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01169}01169\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01170}01170\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01171}01171\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01172}01172\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01173}01173\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01174}01174\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01175}01175\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01176}01176\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01178}01178\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8h_source_l01179}01179\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_COMMON\_ARM\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

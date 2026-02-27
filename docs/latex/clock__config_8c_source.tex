@@ -1,0 +1,199 @@
+\doxysection{clock\+\_\+config.\+c}
+\hypertarget{clock__config_8c_source}{}\label{clock__config_8c_source}\index{board/clock\_config.c@{board/clock\_config.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00001}00001\ \textcolor{comment}{/***********************************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00002}00002\ \textcolor{comment}{\ *\ This\ file\ was\ generated\ by\ the\ MCUXpresso\ Config\ Tools.\ Any\ manual\ edits\ made\ to\ this\ file}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00003}00003\ \textcolor{comment}{\ *\ will\ be\ overwritten\ if\ the\ respective\ MCUXpresso\ Config\ Tools\ is\ used\ to\ update\ this\ file.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00004}00004\ \textcolor{comment}{\ **********************************************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00005}00005\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00006}00006\ \textcolor{comment}{\ *\ How\ to\ setup\ clock\ using\ clock\ driver\ functions:}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00008}00008\ \textcolor{comment}{\ *\ 1.\ CLOCK\_SetSimSafeDivs,\ to\ make\ sure\ core\ clock,\ bus\ clock,\ flexbus\ clock}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ and\ flash\ clock\ are\ in\ allowed\ range\ during\ clock\ mode\ switch.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00010}00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00011}00011\ \textcolor{comment}{\ *\ 2.\ Call\ CLOCK\_Osc0Init\ to\ setup\ OSC\ clock,\ if\ it\ is\ used\ in\ target\ mode.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00013}00013\ \textcolor{comment}{\ *\ 3.\ Set\ MCG\ configuration,\ MCG\ includes\ three\ parts:\ FLL\ clock,\ PLL\ clock\ and}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00014}00014\ \textcolor{comment}{\ *\ \ \ \ internal\ reference\ clock(MCGIRCLK).\ Follow\ the\ steps\ to\ setup:}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00015}00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00016}00016\ \textcolor{comment}{\ *\ \ \ \ 1).\ Call\ CLOCK\_BootToXxxMode\ to\ set\ MCG\ to\ target\ mode.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00018}00018\ \textcolor{comment}{\ *\ \ \ \ 2).\ If\ target\ mode\ is\ FBI/BLPI/PBI\ mode,\ the\ MCGIRCLK\ has\ been\ configured}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ correctly.\ For\ other\ modes,\ need\ to\ call\ CLOCK\_SetInternalRefClkConfig}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ explicitly\ to\ setup\ MCGIRCLK.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00021}00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00022}00022\ \textcolor{comment}{\ *\ \ \ \ 3).\ Don't\ need\ to\ configure\ FLL\ explicitly,\ because\ if\ target\ mode\ is\ FLL}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ mode,\ then\ FLL\ has\ been\ configured\ by\ the\ function\ CLOCK\_BootToXxxMode,}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00024}00024\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ if\ the\ target\ mode\ is\ not\ FLL\ mode,\ the\ FLL\ is\ disabled.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00025}00025\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00026}00026\ \textcolor{comment}{\ *\ \ \ \ 4).\ If\ target\ mode\ is\ PEE/PBE/PEI/PBI\ mode,\ then\ the\ related\ PLL\ has\ been}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ setup\ by\ CLOCK\_BootToXxxMode.\ In\ FBE/FBI/FEE/FBE\ mode,\ the\ PLL\ could}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00028}00028\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ be\ enabled\ independently,\ call\ CLOCK\_EnablePll0\ explicitly\ in\ this\ case.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00029}00029\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00030}00030\ \textcolor{comment}{\ *\ 4.\ Call\ CLOCK\_SetSimConfig\ to\ set\ the\ clock\ configuration\ in\ SIM.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00031}00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00033}00033\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00034}00034\ \textcolor{comment}{/*\ TEXT\ BELOW\ IS\ USED\ AS\ SETTING\ FOR\ TOOLS\ *************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00035}00035\ \textcolor{comment}{!!GlobalInfo}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00036}00036\ \textcolor{comment}{product:\ Clocks\ v17.0}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00037}00037\ \textcolor{comment}{processor:\ MK22FN512xxx12}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00038}00038\ \textcolor{comment}{package\_id:\ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00039}00039\ \textcolor{comment}{mcu\_data:\ ksdk2\_0}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00040}00040\ \textcolor{comment}{processor\_version:\ 25.06.10}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00041}00041\ \textcolor{comment}{\ *\ BE\ CAREFUL\ MODIFYING\ THIS\ COMMENT\ -\/\ IT\ IS\ YAML\ SETTINGS\ FOR\ TOOLS\ **********/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00042}00042\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00044}00044\ \textcolor{preprocessor}{\#include\ "{}clock\_config.h"{}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00046}00046\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00047}00047\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00048}00048\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00049}00049\ \textcolor{preprocessor}{\#define\ MCG\_PLL\_DISABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0U\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00050}00050\ \textcolor{preprocessor}{\#define\ OSC\_CAP0P\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0U\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00051}00051\ \textcolor{preprocessor}{\#define\ SIM\_LPUART\_CLK\_SEL\_PLLFLLSEL\_CLK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1U\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00052}00052\ \textcolor{preprocessor}{\#define\ SIM\_OSC32KSEL\_OSC32KCLK\_CLK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0U\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00053}00053\ \textcolor{preprocessor}{\#define\ SIM\_PLLFLLSEL\_MCGPLLCLK\_CLK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1U\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00055}00055\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00056}00056\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00057}00057\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00059}00059\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00060}00060\ \textcolor{comment}{\ *\ Code}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00061}00061\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00062}00062\ \textcolor{comment}{/*FUNCTION**********************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00063}00063\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00064}00064\ \textcolor{comment}{\ *\ Function\ Name\ :\ CLOCK\_CONFIG\_SetFllExtRefDiv}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00065}00065\ \textcolor{comment}{\ *\ Description\ \ \ :\ Configure\ FLL\ external\ reference\ divider\ (FRDIV).}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00066}00066\ \textcolor{comment}{\ *\ Param\ frdiv\ \ \ :\ The\ value\ to\ set\ FRDIV.}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00067}00067\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00068}00068\ \textcolor{comment}{\ *END**************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00069}00069\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ CLOCK\_CONFIG\_SetFllExtRefDiv(uint8\_t\ frdiv)}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00070}00070\ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00071}00071\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ \string~MCG\_C1\_FRDIV\_MASK)\ |\ \doxymbox{\hyperlink{group__MCG__Register__Masks_ga39519f6e6a3b433988eca107d0e7d460}{MCG\_C1\_FRDIV}}(frdiv));}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00074}00074\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00075}00075\ \textcolor{comment}{\ ************************\ BOARD\_InitBootClocks\ function\ ************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00076}00076\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00077}00077\ \textcolor{keywordtype}{void}\ BOARD\_InitBootClocks(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00078}00078\ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00079}00079\ \ \ \ \ BOARD\_BootClockRUN();}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00082}00082\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00083}00083\ \textcolor{comment}{\ **********************\ Configuration\ BOARD\_BootClockRUN\ ***********************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00084}00084\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00085}00085\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00086}00086\ \textcolor{comment}{/*\ TEXT\ BELOW\ IS\ USED\ AS\ SETTING\ FOR\ TOOLS\ *************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00087}00087\ \textcolor{comment}{!!Configuration}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00088}00088\ \textcolor{comment}{name:\ BOARD\_BootClockRUN}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00089}00089\ \textcolor{comment}{called\_from\_default\_init:\ true}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00090}00090\ \textcolor{comment}{outputs:}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00091}00091\ \textcolor{comment}{-\/\ \{id:\ Bus\_clock.outFreq,\ value:\ 48\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00092}00092\ \textcolor{comment}{-\/\ \{id:\ Core\_clock.outFreq,\ value:\ 48\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00093}00093\ \textcolor{comment}{-\/\ \{id:\ Flash\_clock.outFreq,\ value:\ 24\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00094}00094\ \textcolor{comment}{-\/\ \{id:\ FlexBus\_clock.outFreq,\ value:\ 24\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00095}00095\ \textcolor{comment}{-\/\ \{id:\ LPO\_clock.outFreq,\ value:\ 1\ kHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00096}00096\ \textcolor{comment}{-\/\ \{id:\ LPUARTCLK.outFreq,\ value:\ 96\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00097}00097\ \textcolor{comment}{-\/\ \{id:\ MCGFFCLK.outFreq,\ value:\ 250\ kHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00098}00098\ \textcolor{comment}{-\/\ \{id:\ MCGIRCLK.outFreq,\ value:\ 32.768\ kHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00099}00099\ \textcolor{comment}{-\/\ \{id:\ OSCERCLK.outFreq,\ value:\ 4\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00100}00100\ \textcolor{comment}{-\/\ \{id:\ OSCERCLK\_UNDIV.outFreq,\ value:\ 8\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00101}00101\ \textcolor{comment}{-\/\ \{id:\ PLLFLLCLK.outFreq,\ value:\ 96\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00102}00102\ \textcolor{comment}{-\/\ \{id:\ System\_clock.outFreq,\ value:\ 48\ MHz\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00103}00103\ \textcolor{comment}{settings:}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00104}00104\ \textcolor{comment}{-\/\ \{id:\ MCGMode,\ value:\ PEE\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00105}00105\ \textcolor{comment}{-\/\ \{id:\ LPUARTClkConfig,\ value:\ 'yes'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00106}00106\ \textcolor{comment}{-\/\ \{id:\ MCG.FRDIV.scale,\ value:\ '32'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00107}00107\ \textcolor{comment}{-\/\ \{id:\ MCG.IREFS.sel,\ value:\ MCG.FRDIV\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00108}00108\ \textcolor{comment}{-\/\ \{id:\ MCG.PLLS.sel,\ value:\ MCG.PLL\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00109}00109\ \textcolor{comment}{-\/\ \{id:\ MCG.PRDIV.scale,\ value:\ '2'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00110}00110\ \textcolor{comment}{-\/\ \{id:\ MCG\_C1\_IRCLKEN\_CFG,\ value:\ Enabled\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00111}00111\ \textcolor{comment}{-\/\ \{id:\ MCG\_C2\_OSC\_MODE\_CFG,\ value:\ ModeOscLowPower\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00112}00112\ \textcolor{comment}{-\/\ \{id:\ MCG\_C2\_RANGE0\_CFG,\ value:\ High\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00113}00113\ \textcolor{comment}{-\/\ \{id:\ MCG\_C2\_RANGE0\_FRDIV\_CFG,\ value:\ High\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00114}00114\ \textcolor{comment}{-\/\ \{id:\ OSC.ERPS.scale,\ value:\ '2',\ locked:\ true\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00115}00115\ \textcolor{comment}{-\/\ \{id:\ OSC\_CR\_ERCLKEN\_CFG,\ value:\ Enabled\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00116}00116\ \textcolor{comment}{-\/\ \{id:\ OSC\_CR\_ERCLKEN\_UNDIV\_CFG,\ value:\ Enabled\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00117}00117\ \textcolor{comment}{-\/\ \{id:\ SIM.LPUARTSRCSEL.sel,\ value:\ SIM.PLLFLLSEL\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00118}00118\ \textcolor{comment}{-\/\ \{id:\ SIM.OUTDIV1.scale,\ value:\ '2'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00119}00119\ \textcolor{comment}{-\/\ \{id:\ SIM.OUTDIV2.scale,\ value:\ '2'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00120}00120\ \textcolor{comment}{-\/\ \{id:\ SIM.OUTDIV3.scale,\ value:\ '4'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00121}00121\ \textcolor{comment}{-\/\ \{id:\ SIM.OUTDIV4.scale,\ value:\ '4'\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00122}00122\ \textcolor{comment}{-\/\ \{id:\ SIM.PLLFLLSEL.sel,\ value:\ MCG.MCGPLLCLK\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00123}00123\ \textcolor{comment}{sources:}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00124}00124\ \textcolor{comment}{-\/\ \{id:\ OSC.OSC.outFreq,\ value:\ 8\ MHz,\ enabled:\ true\}}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00125}00125\ \textcolor{comment}{\ *\ BE\ CAREFUL\ MODIFYING\ THIS\ COMMENT\ -\/\ IT\ IS\ YAML\ SETTINGS\ FOR\ TOOLS\ **********/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00126}00126\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00128}00128\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00129}00129\ \textcolor{comment}{\ *\ Variables\ for\ BOARD\_BootClockRUN\ configuration}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00130}00130\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00131}00131\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__clock_ga08ae02d80a8028784fb267a3e4860ad7}{mcg\_config\_t}}\ mcgConfig\_BOARD\_BootClockRUN\ =}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ .mcgMode\ =\ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aad8390f279279d98dc10ddbffd2c679ad}{kMCG\_ModePEE}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ PEE\ -\/\ PLL\ Engaged\ External\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ .irclkEnableMode\ =\ \doxymbox{\hyperlink{group__clock_ggaf987f0b26fa368661c772c2906dfd043af97faf30a5f25b365eba69174f747ecc}{kMCG\_IrclkEnable}},\ \ \ \ \ \ \textcolor{comment}{/*\ MCGIRCLK\ enabled,\ MCGIRCLK\ disabled\ in\ STOP\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ .ircs\ =\ \doxymbox{\hyperlink{group__clock_ggae418d7be28756b56c72b845724bb8825a8161f7b31734aca20a3df71d4cb6e33a}{kMCG\_IrcSlow}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Slow\ internal\ reference\ clock\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ .fcrdiv\ =\ 0x1U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Fast\ IRC\ divider:\ divided\ by\ 2\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ .frdiv\ =\ 0x0U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ FLL\ reference\ clock\ divider:\ divided\ by\ 32\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ .drs\ =\ \doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a0c65c697608cf1e2aabd165d4ebfd4fa}{kMCG\_DrsLow}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Low\ frequency\ range\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ .dmx32\ =\ \doxymbox{\hyperlink{group__clock_ggae00bb0e95c525a5645b5639bf26a91fbaf530a87aefdc94b3645666fbca754699}{kMCG\_Dmx32Default}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ DCO\ has\ a\ default\ range\ of\ 25\%\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ .oscsel\ =\ \doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aaebadda41c33d5064e5466d35100f9181}{kMCG\_OscselOsc}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Selects\ System\ Oscillator\ (OSCCLK)\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ .pll0Config\ =}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .enableMode\ =\ MCG\_PLL\_DISABLE,\ \ \ \ \textcolor{comment}{/*\ MCGPLLCLK\ disabled\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .prdiv\ =\ 0x1U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ PLL\ Reference\ divider:\ divided\ by\ 2\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .vdiv\ =\ 0x0U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ VCO\ divider:\ multiplied\ by\ 24\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00147}00147\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00148}00148\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__clock_gaf295a6f1e5114d7a534d5773d2997ad8}{sim\_clock\_config\_t}}\ simConfig\_BOARD\_BootClockRUN\ =}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00149}00149\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ .pllFllSel\ =\ SIM\_PLLFLLSEL\_MCGPLLCLK\_CLK,\ \textcolor{comment}{/*\ PLLFLL\ select:\ MCGPLLCLK\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ .er32kSrc\ =\ SIM\_OSC32KSEL\_OSC32KCLK\_CLK,\ \ \textcolor{comment}{/*\ OSC32KSEL\ select:\ OSC32KCLK\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ .clkdiv1\ =\ 0x11330000U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ SIM\_CLKDIV1\ -\/\ OUTDIV1:\ /2,\ OUTDIV2:\ /2,\ OUTDIV3:\ /4,\ OUTDIV4:\ /4\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00153}00153\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00154}00154\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__clock_ga5a46989b0f514536b1809c59a45d603f}{osc\_config\_t}}\ oscConfig\_BOARD\_BootClockRUN\ =}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ .freq\ =\ 8000000U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Oscillator\ frequency:\ 8000000Hz\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ .capLoad\ =\ (OSC\_CAP0P),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Oscillator\ capacity\ load:\ 0pF\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ .workMode\ =\ \doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa4412c07d6d2fd83dfa4c788f5bd72f18}{kOSC\_ModeOscLowPower}},\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Oscillator\ low\ power\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ .oscerConfig\ =}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .enableMode\ =\ \doxymbox{\hyperlink{group__clock_gga4d273c4ee3cf6ad651bc9aacc48bc87fa3a8d4dec0d80100e2f69db38357970da}{kOSC\_ErClkEnable}},\ \ \ \textcolor{comment}{/*\ Enable\ external\ reference\ clock,\ disable\ external\ reference\ clock\ in\ STOP\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .erclkDiv\ =\ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Divider\ for\ OSCERCLK:\ divided\ by\ 2\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00164}00164\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00166}00166\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00167}00167\ \textcolor{comment}{\ *\ Code\ for\ BOARD\_BootClockRUN\ configuration}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00168}00168\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00169}00169\ \textcolor{keywordtype}{void}\ BOARD\_BootClockRUN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00170}00170\ \{}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00171}00171\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ system\ clock\ dividers\ in\ SIM\ to\ safe\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00172}00172\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga66760c2d7d5cff9225e57a30c3da1eb2}{CLOCK\_SetSimSafeDivs}}();}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00173}00173\ \ \ \ \ \textcolor{comment}{/*\ Initializes\ OSC0\ according\ to\ board\ configuration.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00174}00174\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga7fd566b301526150b4e2be076006029f}{CLOCK\_InitOsc0}}(\&oscConfig\_BOARD\_BootClockRUN);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00175}00175\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga4e6eaa25aab1a10fbf0486551457eb5e}{CLOCK\_SetXtal0Freq}}(oscConfig\_BOARD\_BootClockRUN.freq);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00176}00176\ \ \ \ \ \textcolor{comment}{/*\ Configure\ the\ Internal\ Reference\ clock\ (MCGIRCLK).\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00177}00177\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gad9ad302c9dd07e99396916073a4a5b65}{CLOCK\_SetInternalRefClkConfig}}(mcgConfig\_BOARD\_BootClockRUN.irclkEnableMode,}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mcgConfig\_BOARD\_BootClockRUN.ircs,\ }
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mcgConfig\_BOARD\_BootClockRUN.fcrdiv);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00180}00180\ \ \ \ \ \textcolor{comment}{/*\ Configure\ FLL\ external\ reference\ divider\ (FRDIV).\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00181}00181\ \ \ \ \ CLOCK\_CONFIG\_SetFllExtRefDiv(mcgConfig\_BOARD\_BootClockRUN.frdiv);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00182}00182\ \ \ \ \ \textcolor{comment}{/*\ Set\ MCG\ to\ PEE\ mode.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00183}00183\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae574e8251548228209ccdc9b37d8198f}{CLOCK\_BootToPeeMode}}(mcgConfig\_BOARD\_BootClockRUN.oscsel,}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga34b64ff2e935b09b3f3ae070da66b7d8aec59a1d9072c2d2a939d03d51b1b2e57}{kMCG\_PllClkSelPll0}},}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&mcgConfig\_BOARD\_BootClockRUN.pll0Config);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00186}00186\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ clock\ configuration\ in\ SIM\ module.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00187}00187\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gaf72980630bd050338cffd07f7d3b4944}{CLOCK\_SetSimConfig}}(\&simConfig\_BOARD\_BootClockRUN);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00188}00188\ \ \ \ \ \textcolor{comment}{/*\ Set\ SystemCoreClock\ variable.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00189}00189\ \ \ \ \ SystemCoreClock\ =\ BOARD\_BOOTCLOCKRUN\_CORE\_CLOCK;}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00190}00190\ \ \ \ \ \textcolor{comment}{/*\ Set\ LPUART\ clock\ source.\ */}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00191}00191\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga074ebe969bc07dd936f0faf09102dae1}{CLOCK\_SetLpuartClock}}(SIM\_LPUART\_CLK\_SEL\_PLLFLLSEL\_CLK);}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00192}00192\ \}}
+\DoxyCodeLine{\Hypertarget{clock__config_8c_source_l00193}00193\ }
+
+\end{DoxyCode}

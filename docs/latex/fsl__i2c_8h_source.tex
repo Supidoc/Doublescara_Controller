@@ -1,0 +1,361 @@
+\doxysection{fsl\+\_\+i2c.\+h}
+\hypertarget{fsl__i2c_8h_source}{}\label{fsl__i2c_8h_source}\index{drivers/fsl\_i2c.h@{drivers/fsl\_i2c.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2020,\ 2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ FSL\_I2C\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ FSL\_I2C\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00018}00018\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00019}00019\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00020}00020\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00025}\doxymbox{\hyperlink{group__i2c__driver_ga60fdaec284298758a650ce1122aef231}{00025}}\ \textcolor{preprocessor}{\#define\ FSL\_I2C\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 0,\ 10))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ I2C\_RETRY\_TIMES}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00030}\doxymbox{\hyperlink{group__i2c__driver_gaac288786aaa7d0cb947c91591baf42d7}{00030}}\ \textcolor{preprocessor}{\#define\ I2C\_RETRY\_TIMES\ 0U\ }\textcolor{comment}{/*\ Define\ to\ zero\ means\ keep\ waiting\ until\ the\ flag\ is\ assert/deassert.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00031}00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00035}00035\ \textcolor{preprocessor}{\#ifndef\ I2C\_MASTER\_FACK\_CONTROL}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00036}\doxymbox{\hyperlink{group__i2c__driver_gace639c1e5e7cdcecb1cca2e52c669029}{00036}}\ \textcolor{preprocessor}{\#define\ I2C\_MASTER\_FACK\_CONTROL\ 0U\ }\textcolor{comment}{/*\ Default\ defines\ to\ zero\ means\ master\ will\ send\ ack\ automatically.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00037}00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00039}00039\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ defined(FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT)}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00041}00041\ \textcolor{preprocessor}{\#define\ I2C\_HAS\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00042}00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT\ /\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00045}00045\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00047}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a49091894b590d7e479605bf113918952}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a49091894b590d7e479605bf113918952}{kStatus\_I2C\_Busy}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00048}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a628d242f7bc0e3d5949c7f73eafaa508}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a628d242f7bc0e3d5949c7f73eafaa508}{kStatus\_I2C\_Idle}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00049}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a72fd33d0b5263a63766e62f71d16be00}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a72fd33d0b5263a63766e62f71d16be00}{kStatus\_I2C\_Nak}}\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00050}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a139b52cc3305ec2c06d0ac94313c221f}{00050}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a139b52cc3305ec2c06d0ac94313c221f}{kStatus\_I2C\_ArbitrationLost}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00051}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a81ad7cc198436cabbe91ea55c5288747}{00051}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414a81ad7cc198436cabbe91ea55c5288747}{kStatus\_I2C\_Timeout}}\ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00052}\doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414adf7437bfedcc0d57338ed33f1be5c805}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggad51727b1194e3dbf2d3ac78794389414adf7437bfedcc0d57338ed33f1be5c805}{kStatus\_I2C\_Addr\_Nak}}\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a5c67a60e98e49151455f565c2834d228}{kStatusGroup\_I2C}},\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00053}00053\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00061}\doxymbox{\hyperlink{group__i2c__driver_ga1f1337bbe9d0b184d9dcee31f9ebade2}{00061}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_ga1f1337bbe9d0b184d9dcee31f9ebade2}{\_i2c\_flags}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00062}00062\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00063}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a4c3c2928e17ddbfbc1c346c6b9a8dccd}{00063}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a4c3c2928e17ddbfbc1c346c6b9a8dccd}{kI2C\_ReceiveNakFlag}}\ \ \ \ \ \ \ \ =\ I2C\_S\_RXAK\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00064}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a647d0b1d1f9514ad483bef3ea3926c3b}{00064}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a647d0b1d1f9514ad483bef3ea3926c3b}{kI2C\_IntPendingFlag}}\ \ \ \ \ \ \ \ =\ I2C\_S\_IICIF\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00065}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a249f698970909f33b1b96139c05bd969}{00065}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a249f698970909f33b1b96139c05bd969}{kI2C\_TransferDirectionFlag}}\ =\ I2C\_S\_SRW\_MASK,\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00066}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2aac2c3a26d38c01fba1554eddc0c6b8b5}{00066}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2aac2c3a26d38c01fba1554eddc0c6b8b5}{kI2C\_RangeAddressMatchFlag}}\ =\ I2C\_S\_RAM\_MASK,\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00067}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a39fab5ef04e74d00ef4c4574899ab589}{00067}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a39fab5ef04e74d00ef4c4574899ab589}{kI2C\_ArbitrationLostFlag}}\ \ \ =\ I2C\_S\_ARBL\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00068}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a37fb20742a15a63c1bc2551b997cdcff}{00068}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a37fb20742a15a63c1bc2551b997cdcff}{kI2C\_BusBusyFlag}}\ \ \ \ \ \ \ \ \ \ \ =\ I2C\_S\_BUSY\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00069}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a10cd5797b1b8f809192423486a85d5fe}{00069}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a10cd5797b1b8f809192423486a85d5fe}{kI2C\_AddressMatchFlag}}\ \ \ \ \ \ =\ I2C\_S\_IAAS\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00070}\doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2adb8f10365dfc2a3e849f05173fa4d83e}{00070}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2adb8f10365dfc2a3e849f05173fa4d83e}{kI2C\_TransferCompleteFlag}}\ \ =\ I2C\_S\_TCF\_MASK,\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00071}00071\ \textcolor{preprocessor}{\#ifdef\ I2C\_HAS\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00072}00072\ \ \ \ \ kI2C\_StopDetectFlag\ =\ I2C\_FLT\_STOPF\_MASK\ <<\ 8,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00073}00073\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT\ /\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00075}00075\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00076}00076\ \ \ \ \ kI2C\_StartDetectFlag\ =\ I2C\_FLT\_STARTF\_MASK\ <<\ 8,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00077}00077\ \textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00078}00078\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00081}\doxymbox{\hyperlink{group__i2c__driver_ga87c81dd985dad07dc26cb93125a94ec7}{00081}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_ga87c81dd985dad07dc26cb93125a94ec7}{\_i2c\_interrupt\_enable}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00083}\doxymbox{\hyperlink{group__i2c__driver_gga87c81dd985dad07dc26cb93125a94ec7a5526e27ef6e8317ba928849da890b3b2}{00083}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87c81dd985dad07dc26cb93125a94ec7a5526e27ef6e8317ba928849da890b3b2}{kI2C\_GlobalInterruptEnable}}\ =\ I2C\_C1\_IICIE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00085}00085\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00086}00086\ \ \ \ \ kI2C\_StopDetectInterruptEnable\ =\ I2C\_FLT\_STOPIE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00087}00087\ \textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00089}00089\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00090}00090\ \ \ \ \ kI2C\_StartStopDetectInterruptEnable\ =\ I2C\_FLT\_SSIE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00092}00092\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00095}\doxymbox{\hyperlink{group__i2c__driver_ga1625497320644ba123718bafdd2c1f39}{00095}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_ga1625497320644ba123718bafdd2c1f39}{\_i2c\_direction}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00096}00096\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00097}\doxymbox{\hyperlink{group__i2c__driver_gga1625497320644ba123718bafdd2c1f39a93b476b469c2a4bfed5916b458ae9bb0}{00097}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1625497320644ba123718bafdd2c1f39a93b476b469c2a4bfed5916b458ae9bb0}{kI2C\_Write}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00098}\doxymbox{\hyperlink{group__i2c__driver_gga1625497320644ba123718bafdd2c1f39a3a7bb24dc8d1c1be8925603eeafe9b30}{00098}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga1625497320644ba123718bafdd2c1f39a3a7bb24dc8d1c1be8925603eeafe9b30}{kI2C\_Read}}\ \ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00099}\doxymbox{\hyperlink{group__i2c__driver_ga8b55706f918048745dd2f6dfd29e8d1b}{00099}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga8b55706f918048745dd2f6dfd29e8d1b}{i2c\_direction\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00102}\doxymbox{\hyperlink{group__i2c__driver_gae1e1e45d8491652a249bf48530911ac7}{00102}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_gae1e1e45d8491652a249bf48530911ac7}{\_i2c\_slave\_address\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00103}00103\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00104}\doxymbox{\hyperlink{group__i2c__driver_ggae1e1e45d8491652a249bf48530911ac7a3e2c7f1f917939d0d7595224e3700dd4}{00104}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggae1e1e45d8491652a249bf48530911ac7a3e2c7f1f917939d0d7595224e3700dd4}{kI2C\_Address7bit}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00105}\doxymbox{\hyperlink{group__i2c__driver_ggae1e1e45d8491652a249bf48530911ac7aa2c312f87691c542c466ff747d21f70a}{00105}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ggae1e1e45d8491652a249bf48530911ac7aa2c312f87691c542c466ff747d21f70a}{kI2C\_RangeMatch}}\ \ =\ 0X2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00106}\doxymbox{\hyperlink{group__i2c__driver_ga1f9f1a52a5dec4827c2ac981f0f370c8}{00106}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga1f9f1a52a5dec4827c2ac981f0f370c8}{i2c\_slave\_address\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00109}\doxymbox{\hyperlink{group__i2c__driver_ga87ea07668194cfb46c7c368d2cb42433}{00109}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_ga87ea07668194cfb46c7c368d2cb42433}{\_i2c\_master\_transfer\_flags}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00111}\doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433ae80f7b768b1621e42ac965d3d23de5e2}{00111}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433ae80f7b768b1621e42ac965d3d23de5e2}{kI2C\_TransferDefaultFlag}}\ =\ 0x0U,\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00112}\doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433a5cb44bf860c0482c0ca0165cf0d31d8a}{00112}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433a5cb44bf860c0482c0ca0165cf0d31d8a}{kI2C\_TransferNoStartFlag}}\ =\ 0x1U,\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00114}\doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433aadf112471ef12f194985a093cd9b9721}{00114}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433aadf112471ef12f194985a093cd9b9721}{kI2C\_TransferRepeatedStartFlag}}\ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00115}\doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433afb8aeea71b5b7475e3d3df86220db566}{00115}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87ea07668194cfb46c7c368d2cb42433afb8aeea71b5b7475e3d3df86220db566}{kI2C\_TransferNoStopFlag}}\ \ \ \ \ \ \ \ =\ 0x4U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00116}00116\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00128}\doxymbox{\hyperlink{group__i2c__driver_ga87e42e170b60f17f657ef3c06a918133}{00128}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__i2c__driver_ga87e42e170b60f17f657ef3c06a918133}{\_i2c\_slave\_transfer\_event}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00130}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133acb1ae174dd6798a6fd79800a9e39a3c6}{00130}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133acb1ae174dd6798a6fd79800a9e39a3c6}{kI2C\_SlaveAddressMatchEvent}}\ =\ 0x01U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00131}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a2f85039a57379838909876a1d509b7aa}{00131}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a2f85039a57379838909876a1d509b7aa}{kI2C\_SlaveTransmitEvent}}\ \ \ \ \ =\ 0x02U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00133}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133aac8593e808a8137d1b5d3a51640779de}{00133}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133aac8593e808a8137d1b5d3a51640779de}{kI2C\_SlaveReceiveEvent}}\ =\ 0x04U,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00135}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a43c045da27fa60e7a0540c743eca4e79}{00135}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a43c045da27fa60e7a0540c743eca4e79}{kI2C\_SlaveTransmitAckEvent}}\ =\ 0x08U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00136}00136\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00137}00137\ \ \ \ \ kI2C\_SlaveStartEvent\ =\ 0x10U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00138}00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00139}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a38cca3cd668e73f51b8e574835d419df}{00139}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a38cca3cd668e73f51b8e574835d419df}{kI2C\_SlaveCompletionEvent}}\ \ =\ 0x20U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00140}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a5063c09cccc4d8047aa3d33ff979657b}{00140}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a5063c09cccc4d8047aa3d33ff979657b}{kI2C\_SlaveGenaralcallEvent}}\ =\ 0x40U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00143}\doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a94b030ebdac378a84961893ae567bfbc}{00143}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a94b030ebdac378a84961893ae567bfbc}{kI2C\_SlaveAllEvents}}\ =\ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133acb1ae174dd6798a6fd79800a9e39a3c6}{kI2C\_SlaveAddressMatchEvent}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a2f85039a57379838909876a1d509b7aa}{kI2C\_SlaveTransmitEvent}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133aac8593e808a8137d1b5d3a51640779de}{kI2C\_SlaveReceiveEvent}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00144}00144\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kI2C\_SlaveStartEvent\ |}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00146}00146\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a38cca3cd668e73f51b8e574835d419df}{kI2C\_SlaveCompletionEvent}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga87e42e170b60f17f657ef3c06a918133a5063c09cccc4d8047aa3d33ff979657b}{kI2C\_SlaveGenaralcallEvent}},}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00148}\doxymbox{\hyperlink{group__i2c__driver_ga0a044d21f51a843c7f559209cf776077}{00148}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga0a044d21f51a843c7f559209cf776077}{i2c\_slave\_transfer\_event\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00151}00151\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00152}00152\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00154}00154\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00155}00155\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga4db40dd1639a06f4bb203cb0eedb2875aa1b63825794cdea9cee35573ef4c35e5}{kClearFlags}}\ =\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a39fab5ef04e74d00ef4c4574899ab589}{kI2C\_ArbitrationLostFlag}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a647d0b1d1f9514ad483bef3ea3926c3b}{kI2C\_IntPendingFlag}}\ |\ kI2C\_StartDetectFlag\ |\ kI2C\_StopDetectFlag,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00156}00156\ \ \ \ \ kIrqFlags\ \ \ =\ \doxymbox{\hyperlink{group__i2c__driver_gga87c81dd985dad07dc26cb93125a94ec7a5526e27ef6e8317ba928849da890b3b2}{kI2C\_GlobalInterruptEnable}}\ |\ kI2C\_StartStopDetectInterruptEnable,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00157}00157\ \textcolor{preprocessor}{\#elif\ defined(FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00158}00158\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga4db40dd1639a06f4bb203cb0eedb2875aa1b63825794cdea9cee35573ef4c35e5}{kClearFlags}}\ =\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a39fab5ef04e74d00ef4c4574899ab589}{kI2C\_ArbitrationLostFlag}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a647d0b1d1f9514ad483bef3ea3926c3b}{kI2C\_IntPendingFlag}}\ |\ kI2C\_StopDetectFlag,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00159}00159\ \ \ \ \ kIrqFlags\ \ \ =\ \doxymbox{\hyperlink{group__i2c__driver_gga87c81dd985dad07dc26cb93125a94ec7a5526e27ef6e8317ba928849da890b3b2}{kI2C\_GlobalInterruptEnable}}\ |\ kI2C\_StopDetectInterruptEnable,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00160}00160\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00161}\doxymbox{\hyperlink{group__i2c__driver_gga4db40dd1639a06f4bb203cb0eedb2875aa1b63825794cdea9cee35573ef4c35e5}{00161}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gga4db40dd1639a06f4bb203cb0eedb2875aa1b63825794cdea9cee35573ef4c35e5}{kClearFlags}}\ =\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a39fab5ef04e74d00ef4c4574899ab589}{kI2C\_ArbitrationLostFlag}}\ |\ \doxymbox{\hyperlink{group__i2c__driver_gga1f1337bbe9d0b184d9dcee31f9ebade2a647d0b1d1f9514ad483bef3ea3926c3b}{kI2C\_IntPendingFlag}},}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00162}00162\ \ \ \ \ kIrqFlags\ \ \ =\ \doxymbox{\hyperlink{group__i2c__driver_gga87c81dd985dad07dc26cb93125a94ec7a5526e27ef6e8317ba928849da890b3b2}{kI2C\_GlobalInterruptEnable}},}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00163}00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00164}00164\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00167}\doxymbox{\hyperlink{struct__i2c__master__config}{00167}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__master__config}{\_i2c\_master\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00168}00168\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00169}\doxymbox{\hyperlink{struct__i2c__master__config_a7a58fd313d0615ac1ca70d2b4f17ae9a}{00169}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__master__config_a7a58fd313d0615ac1ca70d2b4f17ae9a}{enableMaster}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00170}00170\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_STOP\_HOLD\_OFF)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_STOP\_HOLD\_OFF}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00171}00171\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableStopHold;\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00172}00172\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00173}00173\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_DOUBLE\_BUFFER\_ENABLE)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_DOUBLE\_BUFFER\_ENABLE}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00174}00174\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableDoubleBuffering;\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00176}00176\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00177}\doxymbox{\hyperlink{struct__i2c__master__config_a282b6a9bd8e98bf35e8183665488d98c}{00177}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__i2c__master__config_a282b6a9bd8e98bf35e8183665488d98c}{baudRate\_Bps}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00178}\doxymbox{\hyperlink{struct__i2c__master__config_aa4b37238d6ae63282caf0e0d3ac6b018}{00178}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__i2c__master__config_aa4b37238d6ae63282caf0e0d3ac6b018}{glitchFilterWidth}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00179}\doxymbox{\hyperlink{group__i2c__driver_gadfabd3a0ab169df884871047ab88d824}{00179}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_gadfabd3a0ab169df884871047ab88d824}{i2c\_master\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00182}\doxymbox{\hyperlink{struct__i2c__slave__config}{00182}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__slave__config}{\_i2c\_slave\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00183}00183\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00184}\doxymbox{\hyperlink{struct__i2c__slave__config_ad720331a891010209a1209585056a2b7}{00184}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__slave__config_ad720331a891010209a1209585056a2b7}{enableSlave}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00185}\doxymbox{\hyperlink{struct__i2c__slave__config_a84c7c8599005d18bfc2d59eda0f819bf}{00185}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__slave__config_a84c7c8599005d18bfc2d59eda0f819bf}{enableGeneralCall}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00186}\doxymbox{\hyperlink{struct__i2c__slave__config_a0c8e49d73b44eb374c6ad9eaa9d28085}{00186}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__slave__config_a0c8e49d73b44eb374c6ad9eaa9d28085}{enableWakeUp}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00187}00187\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_DOUBLE\_BUFFER\_ENABLE)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_DOUBLE\_BUFFER\_ENABLE}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00188}00188\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableDoubleBuffering;\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00190}00190\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00191}\doxymbox{\hyperlink{struct__i2c__slave__config_a40977851284d289e40482d8970d8a7a0}{00191}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__slave__config_a40977851284d289e40482d8970d8a7a0}{enableBaudRateCtl}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00192}\doxymbox{\hyperlink{struct__i2c__slave__config_a60784d4b0182f877068255d5c2f54732}{00192}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__i2c__slave__config_a60784d4b0182f877068255d5c2f54732}{slaveAddress}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00193}\doxymbox{\hyperlink{struct__i2c__slave__config_a0736edacc0e7833facc613181209cb7d}{00193}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__i2c__slave__config_a0736edacc0e7833facc613181209cb7d}{upperAddress}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00194}00194\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga1f9f1a52a5dec4827c2ac981f0f370c8}{i2c\_slave\_address\_mode\_t}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00195}\doxymbox{\hyperlink{struct__i2c__slave__config_aa8534ccd91e4ba5c073cf7c3a7bcd2cf}{00195}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__i2c__slave__config_aa8534ccd91e4ba5c073cf7c3a7bcd2cf}{addressingMode}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00196}\doxymbox{\hyperlink{struct__i2c__slave__config_ab8d990d75d9e07d2db5afd85713cfb2e}{00196}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__i2c__slave__config_ab8d990d75d9e07d2db5afd85713cfb2e}{sclStopHoldTime\_ns}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00199}\doxymbox{\hyperlink{group__i2c__driver_ga274f94465fc90ace978683e1f1e4f4c8}{00199}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga274f94465fc90ace978683e1f1e4f4c8}{i2c\_slave\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00202}\doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{00202}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__master__handle}{\_i2c\_master\_handle}}\ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00205}\doxymbox{\hyperlink{group__i2c__driver_gafa39d30cd808d79b774361874f227204}{00205}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__i2c__driver_gafa39d30cd808d79b774361874f227204}{i2c\_master\_transfer\_callback\_t}})(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}}\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__i2c__master__handle_a862e1a312eb8b2bd537f1a22a48f455f}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00211}\doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{00211}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__slave__handle}{\_i2c\_slave\_handle}}\ \doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{i2c\_slave\_handle\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00214}\doxymbox{\hyperlink{struct__i2c__master__transfer}{00214}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__master__transfer}{\_i2c\_master\_transfer}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00215}00215\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00216}\doxymbox{\hyperlink{struct__i2c__master__transfer_a84861e140902bd67ae901b2f4c53bfc0}{00216}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a84861e140902bd67ae901b2f4c53bfc0}{flags}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00217}\doxymbox{\hyperlink{struct__i2c__master__transfer_aa6d93caa78fc9bf0f0aac10f66b8eba1}{00217}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__i2c__master__transfer_aa6d93caa78fc9bf0f0aac10f66b8eba1}{slaveAddress}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00218}\doxymbox{\hyperlink{struct__i2c__master__transfer_a7bd3afcf89b78d9397b2f0c55f9deb27}{00218}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga8b55706f918048745dd2f6dfd29e8d1b}{i2c\_direction\_t}}\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a7bd3afcf89b78d9397b2f0c55f9deb27}{direction}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00219}\doxymbox{\hyperlink{struct__i2c__master__transfer_a7a4f43a16e63d9f286bc41b6255b5e3f}{00219}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a7a4f43a16e63d9f286bc41b6255b5e3f}{subaddress}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00220}\doxymbox{\hyperlink{struct__i2c__master__transfer_a810393f12a8bd6360e04b79ea83fcf3b}{00220}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a810393f12a8bd6360e04b79ea83fcf3b}{subaddressSize}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00221}\doxymbox{\hyperlink{struct__i2c__master__transfer_a89a3ac8137ef778590d0ab3581187a60}{00221}}\ \ \ \ \ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a89a3ac8137ef778590d0ab3581187a60}{data}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00222}\doxymbox{\hyperlink{struct__i2c__master__transfer_a2e4cb139c00e6dd854232d4b2bfcf87a}{00222}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__i2c__master__transfer_a2e4cb139c00e6dd854232d4b2bfcf87a}{dataSize}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00223}\doxymbox{\hyperlink{group__i2c__driver_ga7edd253f4df51a13bd0a6a0461b9f93a}{00223}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga7edd253f4df51a13bd0a6a0461b9f93a}{i2c\_master\_transfer\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00226}\doxymbox{\hyperlink{struct__i2c__master__handle}{00226}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__master__handle}{\_i2c\_master\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00227}00227\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00228}\doxymbox{\hyperlink{struct__i2c__master__handle_a403d5da02efab45e1ebb8bef2ae063d5}{00228}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga7edd253f4df51a13bd0a6a0461b9f93a}{i2c\_master\_transfer\_t}}\ \doxymbox{\hyperlink{struct__i2c__master__handle_a403d5da02efab45e1ebb8bef2ae063d5}{transfer}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00229}\doxymbox{\hyperlink{struct__i2c__master__handle_aab5058b059faf2268848645a1b204cfe}{00229}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__i2c__master__handle_aab5058b059faf2268848645a1b204cfe}{transferSize}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00230}\doxymbox{\hyperlink{struct__i2c__master__handle_ade67a2d6339836711ee255a18405e750}{00230}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__i2c__master__handle_ade67a2d6339836711ee255a18405e750}{state}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00231}\doxymbox{\hyperlink{struct__i2c__master__handle_a0c6862e22cf2047661ce05975756093a}{00231}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gafa39d30cd808d79b774361874f227204}{i2c\_master\_transfer\_callback\_t}}\ \doxymbox{\hyperlink{struct__i2c__master__handle_a0c6862e22cf2047661ce05975756093a}{completionCallback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00232}\doxymbox{\hyperlink{struct__i2c__master__handle_a862e1a312eb8b2bd537f1a22a48f455f}{00232}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__i2c__master__handle_a862e1a312eb8b2bd537f1a22a48f455f}{userData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00233}00233\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00236}\doxymbox{\hyperlink{struct__i2c__slave__transfer}{00236}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__slave__transfer}{\_i2c\_slave\_transfer}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00237}00237\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00238}\doxymbox{\hyperlink{struct__i2c__slave__transfer_a461d482d4a91765e8820b55b17e7e53c}{00238}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga0a044d21f51a843c7f559209cf776077}{i2c\_slave\_transfer\_event\_t}}\ \doxymbox{\hyperlink{struct__i2c__slave__transfer_a461d482d4a91765e8820b55b17e7e53c}{event}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00239}\doxymbox{\hyperlink{struct__i2c__slave__transfer_a0d4fde45f82fa9dfdb7d13d4e123a894}{00239}}\ \ \ \ \ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__i2c__slave__transfer_a0d4fde45f82fa9dfdb7d13d4e123a894}{data}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00240}\doxymbox{\hyperlink{struct__i2c__slave__transfer_a59fbecd8b66464de8013c39e40eb4b30}{00240}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__i2c__slave__transfer_a59fbecd8b66464de8013c39e40eb4b30}{dataSize}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00241}\doxymbox{\hyperlink{struct__i2c__slave__transfer_a5c09cb680bd188a4176823b6dfa21335}{00241}}\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{struct__i2c__slave__transfer_a5c09cb680bd188a4176823b6dfa21335}{completionStatus}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00243}\doxymbox{\hyperlink{struct__i2c__slave__transfer_aae53c04dd44495a5f8cf8813e715a53e}{00243}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__i2c__slave__transfer_aae53c04dd44495a5f8cf8813e715a53e}{transferredCount}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00245}\doxymbox{\hyperlink{group__i2c__driver_ga14cf3e2a4678d195f68897bef5582ed9}{00245}}\ \}\ \doxymbox{\hyperlink{group__i2c__driver_ga14cf3e2a4678d195f68897bef5582ed9}{i2c\_slave\_transfer\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00248}\doxymbox{\hyperlink{group__i2c__driver_ga2583e3d8ebf8d3de410d8b6263238c35}{00248}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__i2c__driver_ga2583e3d8ebf8d3de410d8b6263238c35}{i2c\_slave\_transfer\_callback\_t}})(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga14cf3e2a4678d195f68897bef5582ed9}{i2c\_slave\_transfer\_t}}\ *xfer,\ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00251}\doxymbox{\hyperlink{struct__i2c__slave__handle}{00251}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__i2c__slave__handle}{\_i2c\_slave\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00252}00252\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00253}\doxymbox{\hyperlink{struct__i2c__slave__handle_af6d7a3aa8f16a2ddacb9cf58977fd67c}{00253}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__i2c__slave__handle_af6d7a3aa8f16a2ddacb9cf58977fd67c}{isBusy}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00254}\doxymbox{\hyperlink{struct__i2c__slave__handle_a1dc2ffa11e396aad054370efeb3f2510}{00254}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga14cf3e2a4678d195f68897bef5582ed9}{i2c\_slave\_transfer\_t}}\ \doxymbox{\hyperlink{struct__i2c__slave__handle_a1dc2ffa11e396aad054370efeb3f2510}{transfer}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00255}\doxymbox{\hyperlink{struct__i2c__slave__handle_a769c9b64e73a1ddb99dfbf8cbc244b14}{00255}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__i2c__slave__handle_a769c9b64e73a1ddb99dfbf8cbc244b14}{eventMask}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00256}\doxymbox{\hyperlink{struct__i2c__slave__handle_aa1a2ab536368e7b2e8981879f1a3f5ca}{00256}}\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga2583e3d8ebf8d3de410d8b6263238c35}{i2c\_slave\_transfer\_callback\_t}}\ \doxymbox{\hyperlink{struct__i2c__slave__handle_aa1a2ab536368e7b2e8981879f1a3f5ca}{callback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00257}\doxymbox{\hyperlink{struct__i2c__slave__handle_a0c21a56aa399763f1969a28fbea35054}{00257}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__i2c__slave__handle_a0c21a56aa399763f1969a28fbea35054}{userData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00258}00258\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00260}00260\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00261}00261\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00262}00262\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00264}00264\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00265}00265\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00266}00266\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\_cplusplus.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00298}00298\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga29f967b3ae8487a36ba2a58deb01ccae}{I2C\_MasterInit}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__i2c__driver_gadfabd3a0ab169df884871047ab88d824}{i2c\_master\_config\_t}}\ *masterConfig,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00327}00327\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gaf2397a88554ea896f212dd262f9bc731}{I2C\_SlaveInit}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__i2c__driver_ga274f94465fc90ace978683e1f1e4f4c8}{i2c\_slave\_config\_t}}\ *slaveConfig,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00334}00334\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gadcf7122f0a38d4d9da0f052fcb167957}{I2C\_MasterDeinit}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00341}00341\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gadb50014db29dd75ea2001fb7bc837e77}{I2C\_SlaveDeinit}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00348}00348\ uint32\_t\ \doxymbox{\hyperlink{group__i2c__driver_ga07cc6bd20f700249c335893427bf462a}{I2C\_GetInstance}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00363}00363\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gad69f2d63ea756dda60749ff6b09f587d}{I2C\_MasterGetDefaultConfig}}(\doxymbox{\hyperlink{group__i2c__driver_gadfabd3a0ab169df884871047ab88d824}{i2c\_master\_config\_t}}\ *masterConfig);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00377}00377\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga7115f80e28b62bbbd3be1a2a918529ba}{I2C\_SlaveGetDefaultConfig}}(\doxymbox{\hyperlink{group__i2c__driver_ga274f94465fc90ace978683e1f1e4f4c8}{i2c\_slave\_config\_t}}\ *slaveConfig);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00385}\doxymbox{\hyperlink{group__i2c__driver_gaaaaab1e83cb8c6117046bdb5bcbf9ac6}{00385}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gaaaaab1e83cb8c6117046bdb5bcbf9ac6}{I2C\_Enable}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00386}00386\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00387}00387\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00388}00388\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00389}00389\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_a8dc1b42eab0063baa1ddb76888a51bd3}{C1}}\ |=\ I2C\_C1\_IICEN\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00390}00390\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00391}00391\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00392}00392\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00393}00393\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_a8dc1b42eab0063baa1ddb76888a51bd3}{C1}}\ \&=\ \string~(uint8\_t)I2C\_C1\_IICEN\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00394}00394\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00395}00395\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00410}00410\ uint32\_t\ \doxymbox{\hyperlink{group__i2c__driver_ga721e41295dedc83b424e80e53065e625}{I2C\_MasterGetStatusFlags}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00418}\doxymbox{\hyperlink{group__i2c__driver_gac2794e138d94d9b6a761c074ad0899cd}{00418}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__i2c__driver_gac2794e138d94d9b6a761c074ad0899cd}{I2C\_SlaveGetStatusFlags}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00419}00419\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00420}00420\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__i2c__driver_ga721e41295dedc83b424e80e53065e625}{I2C\_MasterGetStatusFlags}}(base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00421}00421\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00436}\doxymbox{\hyperlink{group__i2c__driver_ga437271ffb955b77df0a5dee9ea80cc63}{00436}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga437271ffb955b77df0a5dee9ea80cc63}{I2C\_MasterClearStatusFlags}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint32\_t\ statusMask)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00437}00437\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00438}00438\ \textcolor{comment}{/*\ Must\ clear\ the\ STARTF\ /\ STOPF\ bits\ prior\ to\ clearing\ IICIF\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00439}00439\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_START\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00440}00440\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)kI2C\_StartDetectFlag\ ==\ (statusMask\ \&\ (uint32\_t)kI2C\_StartDetectFlag))}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00441}00441\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ the\ odd-\/ball\ flags\ back\ into\ place.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00443}00443\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_ad1329971804f2071ee4684b0513b7cfc}{FLT}}\ |=\ (uint8\_t)(statusMask\ >>\ 8U);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00444}00444\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00445}00445\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00447}00447\ \textcolor{preprocessor}{\#ifdef\ I2C\_HAS\_STOP\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00448}00448\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint32\_t)kI2C\_StopDetectFlag\ ==\ (statusMask\ \&\ (uint32\_t)kI2C\_StopDetectFlag))}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00449}00449\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00450}00450\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Shift\ the\ odd-\/ball\ flags\ back\ into\ place.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00451}00451\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_ad1329971804f2071ee4684b0513b7cfc}{FLT}}\ |=\ (uint8\_t)(statusMask\ >>\ 8U);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00452}00452\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00453}00453\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00454}00454\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00455}00455\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_a162318256d0b1b10410f02ffee1faeb3}{S}}\ =\ (uint8\_t)statusMask;}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00456}00456\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00471}\doxymbox{\hyperlink{group__i2c__driver_ga545c1a43d8d49c4675de493d45a4063a}{00471}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga545c1a43d8d49c4675de493d45a4063a}{I2C\_SlaveClearStatusFlags}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint32\_t\ statusMask)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00472}00472\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00473}00473\ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga437271ffb955b77df0a5dee9ea80cc63}{I2C\_MasterClearStatusFlags}}(base,\ statusMask);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00474}00474\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00493}00493\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga577e094cc4d39b88ec5bbe49bc199c77}{I2C\_EnableInterrupts}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00505}00505\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga9839c1fd49a0f62f42b0adfa74f62853}{I2C\_DisableInterrupts}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00512}00512\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_I2C\_HAS\_DMA\_SUPPORT)\ \&\&\ FSL\_FEATURE\_I2C\_HAS\_DMA\_SUPPORT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00519}00519\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I2C\_EnableDMA(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00520}00520\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00521}00521\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00522}00522\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00523}00523\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_a8dc1b42eab0063baa1ddb76888a51bd3}{C1}}\ |=\ I2C\_C1\_DMAEN\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00524}00524\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00525}00525\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00526}00526\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00527}00527\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structI2C__Type_a8dc1b42eab0063baa1ddb76888a51bd3}{C1}}\ \&=\ \string~(uint8\_t)I2C\_C1\_DMAEN\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00528}00528\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00529}00529\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00531}00531\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_I2C\_HAS\_DMA\_SUPPORT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00540}\doxymbox{\hyperlink{group__i2c__driver_gaf3238d6c3de8e7e8aa7a6c3a8d645769}{00540}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__i2c__driver_gaf3238d6c3de8e7e8aa7a6c3a8d645769}{I2C\_GetDataRegAddr}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00541}00541\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00542}00542\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(\&(base-\/>\doxymbox{\hyperlink{structI2C__Type_a545035e76e1c914229d2a60cce227fa0}{D}}));}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00543}00543\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00544}00544\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00551}00551\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00559}00559\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gafeab1d5249a8b39c8d9e1a54a85c23f0}{I2C\_MasterSetBaudRate}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint32\_t\ baudRate\_Bps,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00573}00573\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga7664234966e4162e952b6d57efcaa8a6}{I2C\_MasterStart}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint8\_t\ address,\ \doxymbox{\hyperlink{group__i2c__driver_ga8b55706f918048745dd2f6dfd29e8d1b}{i2c\_direction\_t}}\ direction);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00581}00581\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gaf46a8cc094fc18c6cadea8de71448723}{I2C\_MasterStop}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00592}00592\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga42ff265d25e713326c7d152adf350147}{I2C\_MasterRepeatedStart}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint8\_t\ address,\ \doxymbox{\hyperlink{group__i2c__driver_ga8b55706f918048745dd2f6dfd29e8d1b}{i2c\_direction\_t}}\ direction);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00593}00593\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00606}00606\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gac4e1a954243aa852cb4d358e90091efd}{I2C\_MasterWriteBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keyword}{const}\ uint8\_t\ *txBuff,\ \textcolor{keywordtype}{size\_t}\ txSize,\ uint32\_t\ flags);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00607}00607\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00623}00623\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gaf77526f32a16109abf265dbb022a26ba}{I2C\_MasterReadBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint8\_t\ *rxBuff,\ \textcolor{keywordtype}{size\_t}\ rxSize,\ uint32\_t\ flags);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00624}00624\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00635}00635\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga280404c6b1ede542f2c1c20bd382869c}{I2C\_SlaveWriteBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keyword}{const}\ uint8\_t\ *txBuff,\ \textcolor{keywordtype}{size\_t}\ txSize);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00636}00636\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00646}00646\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga89baaf8bc82b19c837032665e89a1707}{I2C\_SlaveReadBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ uint8\_t\ *rxBuff,\ \textcolor{keywordtype}{size\_t}\ rxSize);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00662}00662\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga35cae3a5b4aa50ce8db28e3eb703a027}{I2C\_MasterTransferBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga7edd253f4df51a13bd0a6a0461b9f93a}{i2c\_master\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00663}00663\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00665}00665\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00670}00670\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00679}00679\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga31e3de02b57801c6896e6045c4a31268}{I2C\_MasterTransferCreateHandle}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}}\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_gafa39d30cd808d79b774361874f227204}{i2c\_master\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00682}00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00699}00699\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gac7f76a04b6f6873c52ad176d58901fe9}{I2C\_MasterTransferNonBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}}\ *handle,\ \doxymbox{\hyperlink{group__i2c__driver_ga7edd253f4df51a13bd0a6a0461b9f93a}{i2c\_master\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00700}00700\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00710}00710\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_ga7d720842e68161d2d52d56d119f20665}{I2C\_MasterTransferGetCount}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{size\_t}\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00711}00711\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00723}00723\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gabb386e53b2bc64e29b2915bdfac36800}{I2C\_MasterTransferAbort}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga2fd51f58b8cfd309be985bce4b817fdc}{i2c\_master\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00724}00724\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00731}00731\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gad091cd1857d2bd8ce64583739b3a35d5}{I2C\_MasterTransferHandleIRQ}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *i2cHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00732}00732\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00741}00741\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_gac9b90f575d92ff8ad3cc350a5c8ad1b9}{I2C\_SlaveTransferCreateHandle}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00742}00742\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{i2c\_slave\_handle\_t}}\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00743}00743\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__i2c__driver_ga2583e3d8ebf8d3de410d8b6263238c35}{i2c\_slave\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00744}00744\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00745}00745\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00770}00770\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gaa387d81ea08a9d4b39cfeb3dfec505f7}{I2C\_SlaveTransferNonBlocking}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{i2c\_slave\_handle\_t}}\ *handle,\ uint32\_t\ eventMask);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00780}00780\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga5ae9f5e6e854d14d33ba3029128bd6f0}{I2C\_SlaveTransferAbort}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{i2c\_slave\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00781}00781\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00791}00791\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__i2c__driver_gabf38a498bd3527ea0b7cc947ae71e17e}{I2C\_SlaveTransferGetCount}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \doxymbox{\hyperlink{group__i2c__driver_ga394e5278816efe62815de9d25be84752}{i2c\_slave\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{size\_t}\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00792}00792\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00799}00799\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__i2c__driver_ga097c0b20503381de44cccba311dcf236}{I2C\_SlaveTransferHandleIRQ}}(\doxymbox{\hyperlink{structI2C__Type}{I2C\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *i2cHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00800}00800\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00802}00802\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00803}00803\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00804}00804\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\_cplusplus.\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00806}00806\ }
+\DoxyCodeLine{\Hypertarget{fsl__i2c_8h_source_l00807}00807\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_I2C\_H\_*/}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

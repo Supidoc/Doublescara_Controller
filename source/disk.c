@@ -1,6 +1,6 @@
 /************************************************************
  * @file    disk.c
- * @brief   Implementation file for module
+ * @brief   Implementation file for disk module
  * @author  dg
  * @date    18 Dec 2025
  ************************************************************/
@@ -26,17 +26,18 @@
  *     Public Variables     *
  ****************************/
 
- FATFS fs;
+FATFS fs;
 
 /*****************************
  *     Private Variables     *
  *****************************/
 
- /*******************************************
-  *     Public Function Implementations     *
-  *******************************************/
+/*******************************************
+ *     Public Function Implementations     *
+ *******************************************/
 
-status_t DISK_Init(void){
+status_t DISK_init(void)
+{
 
     FRESULT res;
 

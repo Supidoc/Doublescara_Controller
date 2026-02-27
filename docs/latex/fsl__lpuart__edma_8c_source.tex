@@ -1,0 +1,367 @@
+\doxysection{fsl\+\_\+lpuart\+\_\+edma.\+c}
+\hypertarget{fsl__lpuart__edma_8c_source}{}\label{fsl__lpuart__edma_8c_source}\index{drivers/fsl\_lpuart\_edma.c@{drivers/fsl\_lpuart\_edma.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2022\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}fsl\_lpuart\_edma.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00010}00010\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00011}00011\ \textcolor{comment}{\ *\ \$Coverage\ Justification\ Reference\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00013}00013\ \textcolor{comment}{\ *\ \$Justification\ fsl\_lpuart\_edma\_c\_ref\_1\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ EDMA\ handle\ is\ only\ used\ by\ the\ LPUART\ EDMA\ driver,\ with\ the\ LPUART\ EDMA\ driver\ workflow,}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00015}00015\ \textcolor{comment}{\ *\ the\ callback\ is\ only\ called\ when\ EDMA\ transfer\ done.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00017}00017\ \textcolor{comment}{\ *\ \$Justification\ fsl\_lpuart\_edma\_c\_ref\_2\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00018}00018\ \textcolor{comment}{\ *\ This\ function\ only\ handles\ the\ kLPUART\_TransmissionCompleteFlag\ event.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00019}00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00020}00020\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00021}00021\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00022}00022\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00023}00023\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00025}00025\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00027}00027\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.lpuart\_edma"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00028}00028\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00030}00030\ \textcolor{comment}{/*<!\ Structure\ definition\ for\ lpuart\_edma\_private\_handle\_t.\ The\ structure\ is\ private.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00031}\doxymbox{\hyperlink{struct__lpuart__edma__private__handle}{00031}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__edma__private__handle}{\_lpuart\_edma\_private\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00033}00033\ \ \ \ \ \doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00034}00034\ \ \ \ \ lpuart\_edma\_handle\_t\ *handle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00035}00035\ \}\ lpuart\_edma\_private\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00037}00037\ \textcolor{comment}{/*\ LPUART\ EDMA\ transfer\ handle.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00038}00038\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00040}00040\ \ \ \ \ kLPUART\_TxIdle,\ \textcolor{comment}{/*\ TX\ idle.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00041}00041\ \ \ \ \ kLPUART\_TxBusy,\ \textcolor{comment}{/*\ TX\ busy.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00042}00042\ \ \ \ \ kLPUART\_RxIdle,\ \textcolor{comment}{/*\ RX\ idle.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00043}00043\ \ \ \ \ kLPUART\_RxBusy\ \ \textcolor{comment}{/*\ RX\ busy.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00044}00044\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00046}00046\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00047}00047\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00048}00048\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00049}00049\ \textcolor{comment}{/*\ Array\ of\ LPUART\ peripheral\ base\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00050}00050\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *\textcolor{keyword}{const}\ s\_lpuartBases[]\ =\ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a23d9c24323d49602ca4e69ed873982de}{LPUART\_BASE\_PTRS}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00052}00052\ \textcolor{comment}{/*<!\ Private\ handle\ only\ used\ for\ internally.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00053}00053\ \textcolor{keyword}{static}\ lpuart\_edma\_private\_handle\_t\ s\_lpuartEdmaPrivateHandle[\doxymbox{\hyperlink{group__ksdk__common_ga6242a25f9d996f0cc4f4cdb911218b75}{ARRAY\_SIZE}}(s\_lpuartBases)];}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00055}00055\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00056}00056\ \textcolor{comment}{\ *\ Prototypes}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00057}00057\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00068}00068\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ LPUART\_SendEDMACallback(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{void}\ *param,\ \textcolor{keywordtype}{bool}\ transferDone,\ uint32\_t\ tcds);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00079}00079\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ LPUART\_ReceiveEDMACallback(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{void}\ *param,\ \textcolor{keywordtype}{bool}\ transferDone,\ uint32\_t\ tcds);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00081}00081\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00082}00082\ \textcolor{comment}{\ *\ Code}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00083}00083\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00085}00085\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ LPUART\_SendEDMACallback(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{void}\ *param,\ \textcolor{keywordtype}{bool}\ transferDone,\ uint32\_t\ tcds)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00086}00086\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00087}00087\ \ \ \ \ assert(NULL\ !=\ param);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00089}00089\ \ \ \ \ lpuart\_edma\_private\_handle\_t\ *lpuartPrivateHandle\ =\ (lpuart\_edma\_private\_handle\_t\ *)param;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00091}00091\ \ \ \ \ \textcolor{comment}{/*\ Avoid\ the\ warning\ for\ unused\ variables.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00092}00092\ \ \ \ \ handle\ =\ handle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00093}00093\ \ \ \ \ tcds\ \ \ =\ tcds;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00094}00094\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00095}00095\ \textcolor{comment}{\ \ \ \ \ *\ \$Branch\ Coverage\ Justification\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00096}00096\ \textcolor{comment}{\ \ \ \ \ *\ \$ref\ fsl\_lpuart\_edma\_c\_ref\_1\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00097}00097\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{if}\ (transferDone)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00099}00099\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ LPUART\ TX\ EDMA.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ LPUART\_EnableTxDMA(lpuartPrivateHandle-\/>base,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Stop\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2098cf6995bc79b25c5c9588f1c711e9}{EDMA\_AbortTransfer}}(handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ tx\ complete\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745}{LPUART\_EnableInterrupts}}(lpuartPrivateHandle-\/>base,\ (uint32\_t)\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{kLPUART\_TransmissionCompleteInterruptEnable}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00108}00108\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00109}00109\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00111}00111\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ LPUART\_ReceiveEDMACallback(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \textcolor{keywordtype}{void}\ *param,\ \textcolor{keywordtype}{bool}\ transferDone,\ uint32\_t\ tcds)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00112}00112\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00113}00113\ \ \ \ \ assert(NULL\ !=\ param);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00115}00115\ \ \ \ \ lpuart\_edma\_private\_handle\_t\ *lpuartPrivateHandle\ =\ (lpuart\_edma\_private\_handle\_t\ *)param;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00117}00117\ \ \ \ \ \textcolor{comment}{/*\ Avoid\ warning\ for\ unused\ parameters.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00118}00118\ \ \ \ \ handle\ =\ handle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00119}00119\ \ \ \ \ tcds\ \ \ =\ tcds;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00120}00120\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ *\ \$Branch\ Coverage\ Justification\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00122}00122\ \textcolor{comment}{\ \ \ \ \ *\ \$ref\ fsl\_lpuart\_edma\_c\_ref\_1\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00123}00123\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{if}\ (transferDone)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00125}00125\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__edma__driver_gaf4160e8481b5d0861fa2f4ea14ccc13e}{LPUART\_TransferAbortReceiveEDMA}}(lpuartPrivateHandle-\/>base,\ lpuartPrivateHandle-\/>handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ lpuartPrivateHandle-\/>handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a265b1cbd7ed0c77b69061e1f1bd3f510}{callback}})}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ lpuartPrivateHandle-\/>handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a265b1cbd7ed0c77b69061e1f1bd3f510}{callback}}(lpuartPrivateHandle-\/>base,\ lpuartPrivateHandle-\/>handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088}{kStatus\_LPUART\_RxIdle}},\ lpuartPrivateHandle-\/>handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a187949f527e4f0cf3d01fd303179bbd4}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00134}00134\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00135}00135\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00149}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga4891d980e0e489932e8d3b5c52588c2e}{00149}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga4891d980e0e489932e8d3b5c52588c2e}{LPUART\_TransferCreateHandleEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lpuart\_edma\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga525a0447304b0ca2939cd3962197d23d}{lpuart\_edma\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *txEdmaHandle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *rxEdmaHandle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00155}00155\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00156}00156\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00158}00158\ \ \ \ \ uint32\_t\ instance\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gaaf4c8ce1f1730cdbf094931033d9b52c}{LPUART\_GetInstance}}(base);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00160}00160\ \ \ \ \ s\_lpuartEdmaPrivateHandle[instance].base\ \ \ =\ base;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00161}00161\ \ \ \ \ s\_lpuartEdmaPrivateHandle[instance].handle\ =\ handle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00163}00163\ \ \ \ \ (void)memset(handle,\ 0,\ \textcolor{keyword}{sizeof}(*handle));}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00165}00165\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a6f42343dc7cb9f0cd6b8cd7ab163ac60}{rxState}}\ =\ (uint8\_t)kLPUART\_RxIdle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00166}00166\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}}\ =\ (uint8\_t)kLPUART\_TxIdle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00168}00168\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}}\ =\ rxEdmaHandle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00169}00169\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}}\ =\ txEdmaHandle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00171}00171\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a265b1cbd7ed0c77b69061e1f1bd3f510}{callback}}\ =\ callback;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00172}00172\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a187949f527e4f0cf3d01fd303179bbd4}{userData}}\ =\ userData;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00174}00174\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00175}00175\ \ \ \ \ \textcolor{comment}{/*\ Note:}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00176}00176\ \textcolor{comment}{\ \ \ \ \ \ \ Take\ care\ of\ the\ RX\ FIFO,\ EDMA\ request\ only\ assert\ when\ received\ bytes}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00177}00177\ \textcolor{comment}{\ \ \ \ \ \ \ equal\ or\ more\ than\ RX\ water\ mark,\ there\ is\ potential\ issue\ if\ RX\ water}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00178}00178\ \textcolor{comment}{\ \ \ \ \ \ \ mark\ larger\ than\ 1.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00179}00179\ \textcolor{comment}{\ \ \ \ \ \ \ For\ example,\ if\ RX\ FIFO\ water\ mark\ is\ 2,\ upper\ layer\ needs\ 5\ bytes\ and}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00180}00180\ \textcolor{comment}{\ \ \ \ \ \ \ 5\ bytes\ are\ received.\ the\ last\ byte\ will\ be\ saved\ in\ FIFO\ but\ not\ trigger}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00181}00181\ \textcolor{comment}{\ \ \ \ \ \ \ EDMA\ transfer\ because\ the\ water\ mark\ is\ 2.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00182}00182\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ rxEdmaHandle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00184}00184\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ base-\/>WATER\ \&=\ (\string~LPUART\_WATER\_RXWATER\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00186}00186\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00187}00187\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00189}00189\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ handle\ in\ global\ variables\ to\ support\ the\ double\ weak\ mechanism.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00190}00190\ \ \ \ \ s\_lpuartHandle[instance]\ =\ handle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00191}00191\ \ \ \ \ \textcolor{comment}{/*\ Set\ LPUART\_TransferEdmaHandleIRQ\ as\ DMA\ IRQ\ handler\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00192}00192\ \ \ \ \ s\_lpuartIsr[instance]\ =\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga898e2e544106c928c6930605ff59fc43}{LPUART\_TransferEdmaHandleIRQ}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00193}00193\ \ \ \ \ \textcolor{comment}{/*\ Disable\ all\ LPUART\ internal\ interrupts\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00194}00194\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}{LPUART\_DisableInterrupts}}(base,\ (uint32\_t)kLPUART\_AllInterruptEnable);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00195}00195\ \ \ \ \ \textcolor{comment}{/*\ Enable\ interrupt\ in\ NVIC.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00196}00196\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_SEPARATE\_RX\_TX\_IRQ)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_SEPARATE\_RX\_TX\_IRQ}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00197}00197\ \ \ \ \ (void)\doxymbox{\hyperlink{group__ksdk__common_ga2b92855a9ebf6eadeed1527b8339d50a}{EnableIRQ}}(s\_lpuartTxIRQ[instance]);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00198}00198\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00199}00199\ \ \ \ \ (void)\doxymbox{\hyperlink{group__ksdk__common_ga2b92855a9ebf6eadeed1527b8339d50a}{EnableIRQ}}(s\_lpuartIRQ[instance]);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00200}00200\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00202}00202\ \ \ \ \ \textcolor{comment}{/*\ Configure\ TX.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00203}00203\ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ txEdmaHandle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00204}00204\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga945ae6f5db8b32c9b39ec0954073d65d}{EDMA\_SetCallback}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}},\ LPUART\_SendEDMACallback,\ \&s\_lpuartEdmaPrivateHandle[instance]);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00206}00206\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00208}00208\ \ \ \ \ \textcolor{comment}{/*\ Configure\ RX.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00209}00209\ \ \ \ \ \textcolor{keywordflow}{if}\ (NULL\ !=\ rxEdmaHandle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00210}00210\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga945ae6f5db8b32c9b39ec0954073d65d}{EDMA\_SetCallback}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}},\ LPUART\_ReceiveEDMACallback,\ \&s\_lpuartEdmaPrivateHandle[instance]);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00212}00212\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00213}00213\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00228}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga24c9dff9f142243ed5ffb3112a356386}{00228}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga24c9dff9f142243ed5ffb3112a356386}{LPUART\_SendEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ *xfer)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00229}00229\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00230}00230\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00231}00231\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00232}00232\ \ \ \ \ assert(NULL\ !=\ xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00233}00233\ \ \ \ \ assert(NULL\ !=\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{data}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00234}00234\ \ \ \ \ assert(0U\ !=\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00236}00236\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ xferConfig;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00237}00237\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00239}00239\ \ \ \ \ \textcolor{comment}{/*\ If\ previous\ TX\ not\ finished.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)kLPUART\_TxBusy\ ==\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}})}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00241}00241\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}{kStatus\_LPUART\_TxBusy}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00244}00244\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00245}00245\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}}\ \ \ \ \ \ \ =\ (uint8\_t)kLPUART\_TxBusy;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a19d5baf779d4bf44d755fc51ad1eab45}{txDataSizeAll}}\ =\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Prepare\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga7b9fea80d9316b081f4dfb33b393bbb0}{EDMA\_PrepareTransfer}}(\&xferConfig,\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{data}},\ \textcolor{keyword}{sizeof}(uint8\_t),}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{void}\ *)(uint32\_t\ *)LPUART\_GetDataRegisterAddress(base),\ \textcolor{keyword}{sizeof}(uint8\_t),\ \textcolor{keyword}{sizeof}(uint8\_t),}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}},\ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea172d3e1f201639f3157563f4a1a275bf}{kEDMA\_MemoryToPeripheral}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ initially\ configured\ eDMA\ minor\ byte\ transfer\ count\ into\ the\ LPUART\ handle\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a03dc8e0516d31d6e8c51e8e9304861cf}{nbytes}}\ =\ (uint8\_t)\textcolor{keyword}{sizeof}(uint8\_t);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Submit\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}}\ !=}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga8a78ca4c4c941f0ba5fa60033b81b61b}{EDMA\_SubmitTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}},\ (\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *)(uint32\_t)\&xferConfig))}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_gab4a5570a9a0936f6666ec3c6a619296f}{EDMA\_StartTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ LPUART\ TX\ EDMA.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ LPUART\_EnableTxDMA(base,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00269}00269\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00272}00272\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00287}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga57b356ccc56276a557b3ddf53f6a7c0f}{00287}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga57b356ccc56276a557b3ddf53f6a7c0f}{LPUART\_ReceiveEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ *xfer)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00288}00288\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00289}00289\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00290}00290\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00291}00291\ \ \ \ \ assert(NULL\ !=\ xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00292}00292\ \ \ \ \ assert(NULL\ !=\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{data}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00293}00293\ \ \ \ \ assert(0U\ !=\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00295}00295\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ xferConfig;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00296}00296\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00298}00298\ \ \ \ \ \textcolor{comment}{/*\ If\ previous\ RX\ not\ finished.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00299}00299\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)kLPUART\_RxBusy\ ==\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a6f42343dc7cb9f0cd6b8cd7ab163ac60}{rxState}})}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00300}00300\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}{kStatus\_LPUART\_RxBusy}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00302}00302\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00303}00303\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00304}00304\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a6f42343dc7cb9f0cd6b8cd7ab163ac60}{rxState}}\ \ \ \ \ \ \ =\ (uint8\_t)kLPUART\_RxBusy;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a4bf4bac1ca23b855cdf622eefb985e83}{rxDataSizeAll}}\ =\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Prepare\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00309}00309\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga7b9fea80d9316b081f4dfb33b393bbb0}{EDMA\_PrepareTransfer}}(\&xferConfig,\ (\textcolor{keywordtype}{void}\ *)(uint32\_t\ *)LPUART\_GetDataRegisterAddress(base),\ \textcolor{keyword}{sizeof}(uint8\_t),}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{data}},\ \textcolor{keyword}{sizeof}(uint8\_t),\ \textcolor{keyword}{sizeof}(uint8\_t),\ xfer-\/>\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}},\ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea1041287c7dc311d81017f529a51734e6}{kEDMA\_PeripheralToMemory}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00312}00312\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ initially\ configured\ eDMA\ minor\ byte\ transfer\ count\ into\ the\ LPUART\ handle\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a03dc8e0516d31d6e8c51e8e9304861cf}{nbytes}}\ =\ (uint8\_t)\textcolor{keyword}{sizeof}(uint8\_t);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00315}00315\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Submit\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}}\ !=}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga8a78ca4c4c941f0ba5fa60033b81b61b}{EDMA\_SubmitTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}},\ (\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *)(uint32\_t)\&xferConfig))}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_gab4a5570a9a0936f6666ec3c6a619296f}{EDMA\_StartTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ LPUART\ RX\ EDMA.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ LPUART\_EnableRxDMA(base,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00329}00329\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00330}00330\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00340}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga48033a0651d1e68133bbb73ded3d9309}{00340}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga48033a0651d1e68133bbb73ded3d9309}{LPUART\_TransferAbortSendEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00341}00341\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00342}00342\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00343}00343\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00345}00345\ \ \ \ \ \textcolor{comment}{/*\ Disable\ LPUART\ TX\ EDMA.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00346}00346\ \ \ \ \ LPUART\_EnableTxDMA(base,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00348}00348\ \ \ \ \ \textcolor{comment}{/*\ Stop\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00349}00349\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2098cf6995bc79b25c5c9588f1c711e9}{EDMA\_AbortTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00351}00351\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}}\ =\ (uint8\_t)kLPUART\_TxIdle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00352}00352\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00362}\doxymbox{\hyperlink{group__lpuart__edma__driver_gaf4160e8481b5d0861fa2f4ea14ccc13e}{00362}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_gaf4160e8481b5d0861fa2f4ea14ccc13e}{LPUART\_TransferAbortReceiveEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00363}00363\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00364}00364\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00365}00365\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00367}00367\ \ \ \ \ \textcolor{comment}{/*\ Disable\ LPUART\ RX\ EDMA.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00368}00368\ \ \ \ \ LPUART\_EnableRxDMA(base,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00370}00370\ \ \ \ \ \textcolor{comment}{/*\ Stop\ transfer.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00371}00371\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2098cf6995bc79b25c5c9588f1c711e9}{EDMA\_AbortTransfer}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00373}00373\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a6f42343dc7cb9f0cd6b8cd7ab163ac60}{rxState}}\ =\ (uint8\_t)kLPUART\_RxIdle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00374}00374\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00388}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga433b9163c0d46f0e8b65b5ded880a1f8}{00388}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga433b9163c0d46f0e8b65b5ded880a1f8}{LPUART\_TransferGetReceiveCountEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle,\ uint32\_t\ *count)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00389}00389\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00390}00390\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00391}00391\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00392}00392\ \ \ \ \ assert(NULL\ !=\ count);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00394}00394\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)kLPUART\_RxIdle\ ==\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a6f42343dc7cb9f0cd6b8cd7ab163ac60}{rxState}})}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00395}00395\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00396}00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{kStatus\_NoTransferInProgress}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00397}00397\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00399}00399\ \ \ \ \ *count\ =\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a4bf4bac1ca23b855cdf622eefb985e83}{rxDataSizeAll}}\ -\/}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a03dc8e0516d31d6e8c51e8e9304861cf}{nbytes}}\ *}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga097a1bad709b591528fc967867e98d14}{EDMA\_GetRemainingMajorLoopCount}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}}-\/>\doxymbox{\hyperlink{struct__edma__handle_a224fed6f3c431fee4bef697e39d609fe}{base}},\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a73e048fbe31a9bc446ca834433161a22}{rxEdmaHandle}}-\/>\doxymbox{\hyperlink{struct__edma__handle_ab685b8268377f03b6c660ceca8f119c3}{channel}}));}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00403}00403\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00404}00404\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00419}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga0369d8b3a9238d88f2ef527b2cdbf152}{00419}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga0369d8b3a9238d88f2ef527b2cdbf152}{LPUART\_TransferGetSendCountEDMA}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_edma\_handle\_t\ *handle,\ uint32\_t\ *count)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00420}00420\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00421}00421\ \ \ \ \ assert(NULL\ !=\ handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00422}00422\ \ \ \ \ assert(NULL\ !=\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00423}00423\ \ \ \ \ assert(NULL\ !=\ count);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00425}00425\ \ \ \ \ \textcolor{keywordflow}{if}\ ((uint8\_t)kLPUART\_TxIdle\ ==\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}})}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00426}00426\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{kStatus\_NoTransferInProgress}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00428}00428\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00430}00430\ \ \ \ \ *count\ =\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a19d5baf779d4bf44d755fc51ad1eab45}{txDataSizeAll}}\ -\/}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ ((uint32\_t)handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a03dc8e0516d31d6e8c51e8e9304861cf}{nbytes}}\ *}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga097a1bad709b591528fc967867e98d14}{EDMA\_GetRemainingMajorLoopCount}}(handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}}-\/>\doxymbox{\hyperlink{struct__edma__handle_a224fed6f3c431fee4bef697e39d609fe}{base}},\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a76902815f37ba3b8054399f4599627ca}{txEdmaHandle}}-\/>\doxymbox{\hyperlink{struct__edma__handle_ab685b8268377f03b6c660ceca8f119c3}{channel}}));}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00434}00434\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00435}00435\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00448}\doxymbox{\hyperlink{group__lpuart__edma__driver_ga898e2e544106c928c6930605ff59fc43}{00448}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__edma__driver_ga898e2e544106c928c6930605ff59fc43}{LPUART\_TransferEdmaHandleIRQ}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *lpuartEdmaHandle)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00449}00449\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00450}00450\ \ \ \ \ assert(lpuartEdmaHandle\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00451}00451\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00452}00452\ \textcolor{comment}{\ \ \ \ \ *\ \$Branch\ Coverage\ Justification\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00453}00453\ \textcolor{comment}{\ \ \ \ \ *\ \$ref\ fsl\_lpuart\_edma\_c\_ref\_2\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00454}00454\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00455}00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (((uint32\_t)\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}{kLPUART\_TransmissionCompleteFlag}}\ \&\ \doxymbox{\hyperlink{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09}{LPUART\_GetStatusFlags}}(base))\ !=\ 0U)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00456}00456\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ lpuart\_edma\_handle\_t\ *handle\ =\ (lpuart\_edma\_handle\_t\ *)lpuartEdmaHandle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ tx\ complete\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00460}00460\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}{LPUART\_DisableInterrupts}}(base,\ (uint32\_t)\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{kLPUART\_TransmissionCompleteInterruptEnable}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00462}00462\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a8921d228d567642a1c84e33b81df6b65}{txState}}\ =\ (uint8\_t)kLPUART\_TxIdle;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00464}00464\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a265b1cbd7ed0c77b69061e1f1bd3f510}{callback}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00465}00465\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a265b1cbd7ed0c77b69061e1f1bd3f510}{callback}}(base,\ handle,\ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}{kStatus\_LPUART\_TxIdle}},\ handle-\/>\doxymbox{\hyperlink{struct__lpuart__edma__handle_a187949f527e4f0cf3d01fd303179bbd4}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00467}00467\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00468}00468\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__edma_8c_source_l00469}00469\ \}}
+
+\end{DoxyCode}

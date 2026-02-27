@@ -1,6 +1,6 @@
 /************************************************************
  * @file    cli.c
- * @brief   Implementation file for module
+ * @brief   Implementation file for CLI module
  * @author  dg
  * @date    18 Dec 2025
  ************************************************************/
@@ -8,10 +8,12 @@
 /********************
  *     Includes		*
  ********************/
-
-#include <log.h>
-#include "peripherals.h"
 #include "cli.h"
+#include "FreeRTOS.h"
+#include "FreeRTOS_CLI.h"
+#include "peripherals.h"
+#include "stdio.h"
+#include <log.h>
 
 /************************************
  *     Private Macros / Defines		*
@@ -25,13 +27,9 @@
  *     Private Function Declarations     *
  *****************************************/
 
-static void CLI_Process(void);
-static void CLI_ProcessNewline(uint8_t *pcInputString, uint8_t *pcOutputString,
-		uint8_t *cInputIndex);
-static void CLI_ProcessCharacter(uint8_t cRxedChar, uint8_t *pcInputString,
-		uint8_t *cInputIndex);
-static BaseType_t xPingCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
-		const char *pcCommandString);
+static void       process(void);
+static BaseType_t x_ping_command(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                 const char* pcCommandString);
 
 /****************************
  *     Public Variables     *
@@ -43,165 +41,201 @@ static BaseType_t xPingCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
 
 static SemaphoreHandle_t cliMutex = NULL;
 
-static const CLI_Command_Definition_t xPingCommandDefinition = { .pcCommand =
-		"ping", .pcHelpString = "ping: Returns Pong\r\n",
-		.pxCommandInterpreter = xPingCommand, .cExpectedNumberOfParameters = 0 };
+static const CLI_Command_Definition_t xPingCommandDefinition = {
+    .pcCommand                   = "ping",
+    .pcHelpString                = "ping: Returns Pong\r\n",
+    .pxCommandInterpreter        = x_ping_command,
+    .cExpectedNumberOfParameters = 0};
 
 /*******************************************
  *     Public Function Implementations     *
  *******************************************/
 
-status_t CLI_Init(void) {
-	BaseType_t status;
+status_t CLI_init(void)
+{
+    BaseType_t status;
 
-	cliMutex = xSemaphoreCreateMutex();
-	if (cliMutex == NULL) {
-		return kStatus_Fail;
-	}
+    cliMutex = xSemaphoreCreateMutex();
+    if (cliMutex == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-	status = CLI_RegisterCommand(&xPingCommandDefinition);
-	if (status != kStatus_Success) {
-		return kStatus_Fail;
-	}
+    status = CLI_register_command(&xPingCommandDefinition);
+    if (status != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
 
-	return kStatus_Success;
+    return kStatus_Success;
 }
 
-status_t CLI_RegisterCommand(
-		const CLI_Command_Definition_t *const pxCommandToRegister) {
-	BaseType_t status;
+status_t CLI_register_command(const CLI_Command_Definition_t* const pxCommandToRegister)
+{
+    BaseType_t status;
 
-	if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
-		if (xSemaphoreTake(cliMutex, portMAX_DELAY) != pdTRUE) {
-			return kStatus_Fail;
-		}
-	}
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    {
+        if (xSemaphoreTake(cliMutex, portMAX_DELAY) != pdTRUE)
+        {
+            LOG_ERROR("Failed to acquire CLI mutex for command registration");
+            return kStatus_Fail;
+        }
+    }
 
-	status = FreeRTOS_CLIRegisterCommand(pxCommandToRegister);
-	if (status != pdTRUE) {
-		return kStatus_Fail;
-	}
+    status = FreeRTOS_CLIRegisterCommand(pxCommandToRegister);
+    if (status != pdTRUE)
+    {
+        if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+        {
+            LOG_ERROR("Failed to register CLI command");
+            xSemaphoreGive(cliMutex);
+        }
+        return kStatus_Fail;
+    }
 
-	if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
-		xSemaphoreGive(cliMutex);
-	}
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    {
+        char logMsg[60];
+        snprintf(logMsg, sizeof(logMsg), "Registered CLI command: %s",
+                 pxCommandToRegister->pcCommand);
+        LOG_DEBUG(logMsg);
+        xSemaphoreGive(cliMutex);
+    }
 
-	return kStatus_Success;
+    return kStatus_Success;
 }
 
-void CLI_Task(void *pvParameters) {
-	LOG_INFO("Started CLI Task");
-	for (;;) {
-		CLI_Process();
-		vTaskDelay(1);
-	}
+void CLI_task(void* pvParameters)
+{
+    LOG_INFO("Started CLI Task");
+    for (;;)
+    {
+        process();
+        vTaskDelay(1);
+    }
 }
 
 /********************************************
  *     Private Function Implementations     *
  ********************************************/
 
-static void CLI_Process(void) {
+static void process(void)
+{
 
-	uint8_t cRxedChar;
-	static uint8_t cInputIndex = 0;
-	size_t rxReceivedCount;
-	BaseType_t xMoreDataToFollow;
+    uint8_t        cRxedChar;
+    static uint8_t cInputIndex = 0;
+    size_t         rxReceivedCount;
+    BaseType_t     xMoreDataToFollow;
 
-	/* The input and output buffers are declared static to keep them off the stack. */
-	static uint8_t pcOutputString[MAX_OUTPUT_LENGTH];
-	static uint8_t pcInputString[MAX_INPUT_LENGTH];
+    /* The input and output buffers are declared static to keep them off the stack. */
+    static uint8_t pcOutputString[CLI_MAX_OUTPUT_LENGTH];
+    static uint8_t pcInputString[CLI_MAX_INPUT_LENGTH];
 
-	/* This implementation reads a single character at a time. Wait in the
+    /* This implementation reads a single character at a time. Wait in the
 
-	 Blocked state until a character is received. */
+     Blocked state until a character is received. */
 
-	LPUART_RTOS_Receive(&LPUART0_rtos_handle, &cRxedChar, 1, &rxReceivedCount);
-	if (rxReceivedCount == 0)
-		return;
-	if (cRxedChar == '\n')
+    LPUART_RTOS_Receive(&LPUART0_rtos_handle, &cRxedChar, 1, &rxReceivedCount);
+    if (rxReceivedCount == 0)
+        return;
+    if (cRxedChar == '\n')
 
-	{
-		if ( xSemaphoreTake( cliMutex, portMAX_DELAY ) != pdTRUE)
-			return;
-		/* A newline character was received, so the input command string is
-		 complete and can be processed. Transmit a line separator, just to
-		 make the output easier to read. */
+    {
+        if (xSemaphoreTake(cliMutex, portMAX_DELAY) != pdTRUE)
+        {
+            LOG_ERROR("Failed to acquire CLI mutex for command processing");
+            return;
+        }
+        /* A newline character was received, so the input command string is
+         complete and can be processed. Transmit a line separator, just to
+         make the output easier to read. */
 
-		LPUART_RTOS_Send(&LPUART0_rtos_handle, (unsigned char*) "\r\n",
-				strlen("\r\n"));
+        LPUART_RTOS_Send(&LPUART0_rtos_handle, (unsigned char*)"\r\n", strlen("\r\n"));
 
-		/* The command interpreter is called repeatedly until it returns
-		 pdFALSE. See the "Implementing a command" documentation for an
-		 exaplanation of why this is. */
-		do
+        snprintf((char*)pcOutputString, sizeof(pcOutputString), "USER: %s", pcInputString);
+#if CLI_SHOW_COMMAND_INPUT
+        LOG_INFO((char*)pcOutputString);
+#else
+        LOG_INFO_SILENT((char*)pcOutputString);
+#endif
+        memset(pcOutputString, 0x00, CLI_MAX_OUTPUT_LENGTH);
 
-		{
+        /* The command interpreter is called repeatedly until it returns
+         pdFALSE. See the "Implementing a command" documentation for an
+         exaplanation of why this is. */
+        do
 
-			/* Send the command string to the command interpreter. Any
-			 output generated by the command interpreter will be placed in the
-			 pcOutputString buffer. */
+        {
 
-			xMoreDataToFollow = FreeRTOS_CLIProcessCommand(
-					(char*) pcInputString, /* The command string.*/
-					(char*) pcOutputString, /* The output buffer. */
-					MAX_OUTPUT_LENGTH/* The size of the output buffer. */
-					);
+            /* Send the command string to the command interpreter. Any
+             output generated by the command interpreter will be placed in the
+             pcOutputString buffer. */
 
-			/* Write the output generated by the command interpreter to the
-			 console. */
-			LPUART_RTOS_Send(&LPUART0_rtos_handle, pcOutputString,
-					strlen((char*) pcOutputString));
-		} while (xMoreDataToFollow != pdFALSE);
+            xMoreDataToFollow = FreeRTOS_CLIProcessCommand(
+                (char*)pcInputString,  /* The command string.*/
+                (char*)pcOutputString, /* The output buffer. */
+                CLI_MAX_OUTPUT_LENGTH  /* The size of the output buffer. */
+            );
 
-		/* All the strings generated by the input command have been sent.
-		 Processing of the command is complete. Clear the input string ready
-		 to receive the next command. */
+            /* Write the output generated by the command interpreter to the
+             console. */
+            LPUART_RTOS_Send(&LPUART0_rtos_handle, pcOutputString, strlen((char*)pcOutputString));
+        } while (xMoreDataToFollow != pdFALSE);
 
-		cInputIndex = 0;
-		memset(pcInputString, 0x00, MAX_INPUT_LENGTH);
+        /* All the strings generated by the input command have been sent.
+         Processing of the command is complete. Clear the input string ready
+         to receive the next command. */
 
-		xSemaphoreGive(cliMutex);
-	} else {
-		/* The if() clause performs the processing after a newline character
-		 is received. This else clause performs the processing if any other
-		 character is received. */
+        cInputIndex = 0;
+        memset(pcInputString, 0x00, CLI_MAX_INPUT_LENGTH);
 
-		if (cRxedChar == '\r')
+        xSemaphoreGive(cliMutex);
+    }
+    else
+    {
+        /* The if() clause performs the processing after a newline character
+         is received. This else clause performs the processing if any other
+         character is received. */
 
-		{
-			/* Ignore carriage returns. */
-		} else if (cRxedChar == '\0')
+        if (cRxedChar == '\r')
 
-		{
-			/* Ignore null termination. */
-		} else if (cRxedChar == '\b') {
-			/* Backspace was pressed. Erase the last character in the input
-			 buffer - if there are any. */
-			if (cInputIndex > 0) {
-				cInputIndex--;
-				pcInputString[cInputIndex] = '\0';
-			}
-		} else {
-			/* A character was entered. It was not a new line, backspace
-			 or carriage return, so it is accepted as part of the input and
-			 placed into the input buffer. When a n is entered the complete
-			 string will be passed to the command interpreter. */
-			if (cInputIndex < MAX_INPUT_LENGTH) {
-				pcInputString[cInputIndex] = cRxedChar;
-				cInputIndex++;
-			}
+        {
+            /* Ignore carriage returns. */
+        }
+        else if (cRxedChar == '\0')
 
-		}
-
-	}
+        {
+            /* Ignore null termination. */
+        }
+        else if (cRxedChar == '\b')
+        {
+            /* Backspace was pressed. Erase the last character in the input
+             buffer - if there are any. */
+            if (cInputIndex > 0)
+            {
+                cInputIndex--;
+                pcInputString[cInputIndex] = '\0';
+            }
+        }
+        else
+        {
+            /* A character was entered. It was not a new line, backspace
+             or carriage return, so it is accepted as part of the input and
+             placed into the input buffer. When a n is entered the complete
+             string will be passed to the command interpreter. */
+            if (cInputIndex < CLI_MAX_INPUT_LENGTH)
+            {
+                pcInputString[cInputIndex] = cRxedChar;
+                cInputIndex++;
+            }
+        }
+    }
 }
 
-static BaseType_t xPingCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
-		const char *pcCommandString) {
-	strncpy(pcWriteBuffer, "Pong", strlen("Pong") + 1);
-	return pdFALSE;
+static BaseType_t x_ping_command(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                 const char* pcCommandString)
+{
+    strncpy(pcWriteBuffer, "Pong", strlen("Pong") + 1);
+    return pdFALSE;
 }
-
-
-

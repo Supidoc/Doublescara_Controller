@@ -1,0 +1,692 @@
+\doxysection{PERI\+\_\+\+UART.\+h}
+\hypertarget{PERI__UART_8h_source}{}\label{PERI__UART_8h_source}\index{device/periph20/PERI\_UART.h@{device/periph20/PERI\_UART.h}}
+\doxymbox{\hyperlink{PERI__UART_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00002}00002\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Processors:\ \ \ \ \ \ \ \ \ \ MK22FN512CAP12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VDC12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VFX12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLL12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VMP12}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Version:\ \ \ \ \ \ \ \ \ \ \ \ \ rev.\ 3.0,\ 2024-\/10-\/29}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ Build:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b250520}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00012}00012\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ Abstract:}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ CMSIS\ Peripheral\ Access\ Layer\ for\ UART}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 1997-\/2016\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00019}00019\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ http:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ www.nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ mail:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ support@nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00022}00022\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ Revisions:}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00024}00024\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.0\ (2013-\/07-\/23)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Initial\ version.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.1\ (2013-\/09-\/17)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ RM\ rev.\ 0.4\ update.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00028}00028\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.0\ (2013-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Register\ accessor\ macros\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Symbols\ for\ Processor\ Expert\ memory\ map\ compatibility\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00031}00031\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Startup\ file\ for\ gcc\ has\ been\ updated\ according\ to\ CMSIS\ 3.2.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ System\ initialization\ updated.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.1\ (2013-\/10-\/30)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Definition\ of\ BITBAND\ macros\ updated\ to\ support\ peripherals\ with\ 32-\/bit\ acces\ disabled.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.2\ (2013-\/12-\/20)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.6,}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.3\ (2014-\/01-\/13)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.61,}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.4\ (2014-\/02-\/10)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ The\ declaration\ of\ clock\ configurations\ has\ been\ moved\ to\ separate\ header\ file\ system\_MK22F51212.h}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.5\ (2014-\/05-\/06)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 1.0,}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ and\ startup\ files.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Module\ access\ macro\ module\_BASES\ replaced\ by\ module\_BASE\_PTRS.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00045}00045\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.6\ (2014-\/08-\/28)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ files\ -\/\ default\ clock\ configuration\ changed.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00047}00047\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ startup\ files\ -\/\ possibility\ to\ override\ DefaultISR\ added.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.7\ (2014-\/10-\/14)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Interrupt\ INT\_LPTimer\ renamed\ to\ INT\_LPTMR0,\ interrupt\ INT\_Watchdog\ renamed\ to\ INT\_WDOG\_EWM.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00050}00050\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.8\ (2015-\/02-\/19)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Renamed\ interrupt\ vector\ LLW\ to\ LLWU.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.9\ (2016-\/03-\/21)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Added\ MK22FN512VFX12\ part.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00054}00054\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GPIO\ -\/\ renamed\ port\ instances:\ PTx\ -\/>\ GPIOx.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 3.0\ (2024-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Change\ the\ device\ header\ file\ from\ single\ flat\ file\ to\ multiple\ files\ based\ on\ peripherals,}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ each\ peripheral\ with\ dedicated\ header\ file\ located\ in\ periphN\ folder.}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00058}00058\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00059}00059\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00060}00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00071}00071\ \textcolor{preprocessor}{\#if\ !defined(PERI\_UART\_H\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00072}\doxymbox{\hyperlink{PERI__UART_8h_af4f9c68737504d857a5424d0a785bbaa}{00072}}\ \textcolor{preprocessor}{\#define\ PERI\_UART\_H\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00074}00074\ \textcolor{preprocessor}{\#if\ (defined(CPU\_MK22FN512CAP12)\ ||\ defined(CPU\_MK22FN512VDC12)\ ||\ defined(CPU\_MK22FN512VFX12)\ ||\ defined(CPU\_MK22FN512VLH12)\ ||\ defined(CPU\_MK22FN512VLL12)\ ||\ defined(CPU\_MK22FN512VMP12))}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00075}00075\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{MK22F51212__COMMON_8h}{MK22F51212\_COMMON.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00076}00076\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \#error\ "{}No\ valid\ CPU\ defined!"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00078}00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00080}00080\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ -\/-\/\ Device\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00090}00090\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00091}00091\ \textcolor{comment}{**\ Start\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00092}00092\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00094}00094\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ anon\_unions}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00101}00101\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \#pragma\ cpp\_extensions\ on}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00104}00104\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00105}00105\ \ \ \textcolor{comment}{/*\ anonymous\ unions\ are\ enabled\ by\ default\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00106}00106\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \#pragma\ language=extended}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00108}00108\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00110}00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00112}00112\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ -\/-\/\ UART\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00122}\doxymbox{\hyperlink{structUART__Type}{00122}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00123}\doxymbox{\hyperlink{structUART__Type_a64b68e0c2e2c00962c1f6ff05768a247}{00123}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a64b68e0c2e2c00962c1f6ff05768a247}{BDH}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00124}\doxymbox{\hyperlink{structUART__Type_a82d811085ff9f014e2412f0306ca99cc}{00124}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a82d811085ff9f014e2412f0306ca99cc}{BDL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00125}\doxymbox{\hyperlink{structUART__Type_a7d2060193a370f0e9a31ccbcc18324af}{00125}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a7d2060193a370f0e9a31ccbcc18324af}{C1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00126}\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{00126}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00127}\doxymbox{\hyperlink{structUART__Type_ab085fb9bbfccce5ace6b752d9784ee26}{00127}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ab085fb9bbfccce5ace6b752d9784ee26}{S1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00128}\doxymbox{\hyperlink{structUART__Type_ad9178df20b457eace88576a7cb26d75d}{00128}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ad9178df20b457eace88576a7cb26d75d}{S2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00129}\doxymbox{\hyperlink{structUART__Type_a23270f53f190afb3fe05203af6bc0059}{00129}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a23270f53f190afb3fe05203af6bc0059}{C3}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00130}\doxymbox{\hyperlink{structUART__Type_af5e2df4671867807c472469a394c0619}{00130}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_af5e2df4671867807c472469a394c0619}{D}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00131}\doxymbox{\hyperlink{structUART__Type_a73acabe00975b26ce347736f07c80925}{00131}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a73acabe00975b26ce347736f07c80925}{MA1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00132}\doxymbox{\hyperlink{structUART__Type_a32e576e5777a71fe5d082448e7a452ed}{00132}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a32e576e5777a71fe5d082448e7a452ed}{MA2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00133}\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{00133}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00134}\doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{00134}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{C5}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00135}\doxymbox{\hyperlink{structUART__Type_a7d4dbb62f5f502e4e6190f7574d6e372}{00135}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a7d4dbb62f5f502e4e6190f7574d6e372}{ED}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00136}\doxymbox{\hyperlink{structUART__Type_af9d2946e7652e7f1a1bf56fa019ffaf0}{00136}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_af9d2946e7652e7f1a1bf56fa019ffaf0}{MODEM}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00137}\doxymbox{\hyperlink{structUART__Type_ad836545a70769f43817e1cc2b4e1af00}{00137}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ad836545a70769f43817e1cc2b4e1af00}{IR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00138}00138\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_0[1];}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00139}\doxymbox{\hyperlink{structUART__Type_acd53b65af524f9b87c0dc07ccfb922cc}{00139}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_acd53b65af524f9b87c0dc07ccfb922cc}{PFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00140}\doxymbox{\hyperlink{structUART__Type_a1789480a2f51e46911338c5837a6fc68}{00140}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a1789480a2f51e46911338c5837a6fc68}{CFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00141}\doxymbox{\hyperlink{structUART__Type_a288d7a13955e4a2637a2021d9ba2e0a8}{00141}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a288d7a13955e4a2637a2021d9ba2e0a8}{SFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00142}\doxymbox{\hyperlink{structUART__Type_a7ab7656c715ebc0ab2632f35903f2a42}{00142}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a7ab7656c715ebc0ab2632f35903f2a42}{TWFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00143}\doxymbox{\hyperlink{structUART__Type_a84b8e4511219e743ccd3308ac0290572}{00143}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a84b8e4511219e743ccd3308ac0290572}{TCFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00144}\doxymbox{\hyperlink{structUART__Type_a2d214e3cdbe0ac2d09bcf20ab132439e}{00144}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a2d214e3cdbe0ac2d09bcf20ab132439e}{RWFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00145}\doxymbox{\hyperlink{structUART__Type_ac56a9dbfe3a97f625a4cb0a787303c2d}{00145}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ac56a9dbfe3a97f625a4cb0a787303c2d}{RCFIFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00146}00146\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_1[1];}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00147}\doxymbox{\hyperlink{structUART__Type_a289733e31a513073ee9a94532afc2b72}{00147}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a289733e31a513073ee9a94532afc2b72}{C7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00148}\doxymbox{\hyperlink{structUART__Type_a970303bbe82348655affe06e79e8f6e3}{00148}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a970303bbe82348655affe06e79e8f6e3}{IE7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00149}\doxymbox{\hyperlink{structUART__Type_a3ad7c2421ffeffae79c6c92b40d4751c}{00149}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a3ad7c2421ffeffae79c6c92b40d4751c}{IS7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00150}\doxymbox{\hyperlink{structUART__Type_a38fc6456d2e8feae7c8b42ff2d939254}{00150}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a38fc6456d2e8feae7c8b42ff2d939254}{WP7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00151}\doxymbox{\hyperlink{structUART__Type_a3c5baa7756fc680009fd014c7ffb6a0f}{00151}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a3c5baa7756fc680009fd014c7ffb6a0f}{WN7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00152}\doxymbox{\hyperlink{structUART__Type_a5fc0251bba4980051f8991db62e18c2a}{00152}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a5fc0251bba4980051f8991db62e18c2a}{WF7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00153}\doxymbox{\hyperlink{structUART__Type_adb5e3ab142d426d631595daaf8e5220e}{00153}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_adb5e3ab142d426d631595daaf8e5220e}{ET7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00154}\doxymbox{\hyperlink{structUART__Type_ac13e6db552f61befb71ea95d93af7dee}{00154}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ac13e6db552f61befb71ea95d93af7dee}{TL7816}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00155}00155\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_2[26];}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00156}\doxymbox{\hyperlink{structUART__Type_abb7ccad245163900a9899edc04f5c364}{00156}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_abb7ccad245163900a9899edc04f5c364}{AP7816A\_T0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00157}\doxymbox{\hyperlink{structUART__Type_aca8dfd03974bbaa55be2262fa545475b}{00157}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_aca8dfd03974bbaa55be2262fa545475b}{AP7816B\_T0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00158}00158\ \ \ \textcolor{keyword}{union\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0x3C\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00159}00159\ \ \ \ \ \textcolor{keyword}{struct\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0x3C\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00160}\doxymbox{\hyperlink{structUART__Type_a027f822a9c37c54baba90c858fc49c4d}{00160}}\ \ \ \ \ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a027f822a9c37c54baba90c858fc49c4d}{WP7816A\_T0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00161}\doxymbox{\hyperlink{structUART__Type_adb6447b5f07afe6b42b1017f20fdddff}{00161}}\ \ \ \ \ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_adb6447b5f07afe6b42b1017f20fdddff}{WP7816B\_T0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00162}00162\ \ \ \ \ \}\ TYPE0;}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00163}00163\ \ \ \ \ \textcolor{keyword}{struct\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0x3C\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00164}\doxymbox{\hyperlink{structUART__Type_a733238bed3b7ba8680a979220e174b8c}{00164}}\ \ \ \ \ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a733238bed3b7ba8680a979220e174b8c}{WP7816A\_T1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00165}\doxymbox{\hyperlink{structUART__Type_a60a15a3d4273bccb814d617dfeb33b44}{00165}}\ \ \ \ \ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a60a15a3d4273bccb814d617dfeb33b44}{WP7816B\_T1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00166}00166\ \ \ \ \ \}\ TYPE1;}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00167}00167\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00168}\doxymbox{\hyperlink{structUART__Type_ace68f46afe9ded7a7e1a67bbefd61781}{00168}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_ace68f46afe9ded7a7e1a67bbefd61781}{WGP7816\_T1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00169}\doxymbox{\hyperlink{structUART__Type_a54d1c8b1c8a8106acd99eefbd6533639}{00169}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUART__Type_a54d1c8b1c8a8106acd99eefbd6533639}{WP7816C\_T1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00170}00170\ \}\ \doxymbox{\hyperlink{structUART__Type}{UART\_Type}};}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00172}00172\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00173}00173\ \textcolor{comment}{\ \ \ -\/-\/\ UART\ Register\ Masks}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00174}00174\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00184}00184\ \textcolor{preprocessor}{\#define\ UART\_BDH\_SBR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00185}00185\ \textcolor{preprocessor}{\#define\ UART\_BDH\_SBR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00187}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7d337242135cdbd812b7da47758fbdb6}{00187}}\ \textcolor{preprocessor}{\#define\ UART\_BDH\_SBR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_BDH\_SBR\_SHIFT))\ \&\ UART\_BDH\_SBR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00189}00189\ \textcolor{preprocessor}{\#define\ UART\_BDH\_RXEDGIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00190}00190\ \textcolor{preprocessor}{\#define\ UART\_BDH\_RXEDGIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00195}\doxymbox{\hyperlink{group__UART__Register__Masks_ga2f219c309508a7b5a350e2b5cdb1f0bf}{00195}}\ \textcolor{preprocessor}{\#define\ UART\_BDH\_RXEDGIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_BDH\_RXEDGIE\_SHIFT))\ \&\ UART\_BDH\_RXEDGIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00197}00197\ \textcolor{preprocessor}{\#define\ UART\_BDH\_LBKDIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00198}00198\ \textcolor{preprocessor}{\#define\ UART\_BDH\_LBKDIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00203}\doxymbox{\hyperlink{group__UART__Register__Masks_gaf83a19b13a4cc75386904298b32c62a4}{00203}}\ \textcolor{preprocessor}{\#define\ UART\_BDH\_LBKDIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_BDH\_LBKDIE\_SHIFT))\ \&\ UART\_BDH\_LBKDIE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00209}00209\ \textcolor{preprocessor}{\#define\ UART\_BDL\_SBR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00210}00210\ \textcolor{preprocessor}{\#define\ UART\_BDL\_SBR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00212}\doxymbox{\hyperlink{group__UART__Register__Masks_ga558b42c8b256ac9201985ce5c618f642}{00212}}\ \textcolor{preprocessor}{\#define\ UART\_BDL\_SBR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_BDL\_SBR\_SHIFT))\ \&\ UART\_BDL\_SBR\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00218}00218\ \textcolor{preprocessor}{\#define\ UART\_C1\_PT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00219}00219\ \textcolor{preprocessor}{\#define\ UART\_C1\_PT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00224}\doxymbox{\hyperlink{group__UART__Register__Masks_gaf1c2f3c8a89397e4ccce509a2800250a}{00224}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_PT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_PT\_SHIFT))\ \&\ UART\_C1\_PT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00226}00226\ \textcolor{preprocessor}{\#define\ UART\_C1\_PE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00227}00227\ \textcolor{preprocessor}{\#define\ UART\_C1\_PE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00232}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5aa3c8b737df2a5511d41513d4e4533f}{00232}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_PE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_PE\_SHIFT))\ \&\ UART\_C1\_PE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00234}00234\ \textcolor{preprocessor}{\#define\ UART\_C1\_ILT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00235}00235\ \textcolor{preprocessor}{\#define\ UART\_C1\_ILT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00240}\doxymbox{\hyperlink{group__UART__Register__Masks_ga1598f03dbad6c945f32558c959ac6395}{00240}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_ILT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_ILT\_SHIFT))\ \&\ UART\_C1\_ILT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00242}00242\ \textcolor{preprocessor}{\#define\ UART\_C1\_WAKE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00243}00243\ \textcolor{preprocessor}{\#define\ UART\_C1\_WAKE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00248}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3a2197e67db725e3c544ba09ad5e0bbf}{00248}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_WAKE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_WAKE\_SHIFT))\ \&\ UART\_C1\_WAKE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00250}00250\ \textcolor{preprocessor}{\#define\ UART\_C1\_M\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ UART\_C1\_M\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00256}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3af9677680bdf096bee0166fef054578}{00256}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_M(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_M\_SHIFT))\ \&\ UART\_C1\_M\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00258}00258\ \textcolor{preprocessor}{\#define\ UART\_C1\_RSRC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00259}00259\ \textcolor{preprocessor}{\#define\ UART\_C1\_RSRC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00264}\doxymbox{\hyperlink{group__UART__Register__Masks_gada4ce6830d36936f49a6877cbf95ef88}{00264}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_RSRC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_RSRC\_SHIFT))\ \&\ UART\_C1\_RSRC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00266}00266\ \textcolor{preprocessor}{\#define\ UART\_C1\_UARTSWAI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00267}00267\ \textcolor{preprocessor}{\#define\ UART\_C1\_UARTSWAI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00272}\doxymbox{\hyperlink{group__UART__Register__Masks_ga24b2a5dabba09b799a98658f73767eca}{00272}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_UARTSWAI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_UARTSWAI\_SHIFT))\ \&\ UART\_C1\_UARTSWAI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00274}00274\ \textcolor{preprocessor}{\#define\ UART\_C1\_LOOPS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00275}00275\ \textcolor{preprocessor}{\#define\ UART\_C1\_LOOPS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00280}\doxymbox{\hyperlink{group__UART__Register__Masks_gaa1bea216b81e950a7517643e4c53f1b8}{00280}}\ \textcolor{preprocessor}{\#define\ UART\_C1\_LOOPS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C1\_LOOPS\_SHIFT))\ \&\ UART\_C1\_LOOPS\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00286}00286\ \textcolor{preprocessor}{\#define\ UART\_C2\_SBK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00287}00287\ \textcolor{preprocessor}{\#define\ UART\_C2\_SBK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00292}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5d861d856f5540b2349706263333089b}{00292}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_SBK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_SBK\_SHIFT))\ \&\ UART\_C2\_SBK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00294}00294\ \textcolor{preprocessor}{\#define\ UART\_C2\_RWU\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00295}00295\ \textcolor{preprocessor}{\#define\ UART\_C2\_RWU\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00301}\doxymbox{\hyperlink{group__UART__Register__Masks_gadbfac0194fbb2ff77f387fc784c43db9}{00301}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_RWU(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_RWU\_SHIFT))\ \&\ UART\_C2\_RWU\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00303}00303\ \textcolor{preprocessor}{\#define\ UART\_C2\_RE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00304}00304\ \textcolor{preprocessor}{\#define\ UART\_C2\_RE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00309}\doxymbox{\hyperlink{group__UART__Register__Masks_gabc3ac11f306e028e40b72324f9ad2134}{00309}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_RE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_RE\_SHIFT))\ \&\ UART\_C2\_RE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00311}00311\ \textcolor{preprocessor}{\#define\ UART\_C2\_TE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00312}00312\ \textcolor{preprocessor}{\#define\ UART\_C2\_TE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00317}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5d3a9fe7e0515bf26c00deeb9feee1f7}{00317}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_TE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_TE\_SHIFT))\ \&\ UART\_C2\_TE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00319}00319\ \textcolor{preprocessor}{\#define\ UART\_C2\_ILIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00320}00320\ \textcolor{preprocessor}{\#define\ UART\_C2\_ILIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00325}\doxymbox{\hyperlink{group__UART__Register__Masks_ga474c8e26d806cf79cbddfdf496fc0364}{00325}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_ILIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_ILIE\_SHIFT))\ \&\ UART\_C2\_ILIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00327}00327\ \textcolor{preprocessor}{\#define\ UART\_C2\_RIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ UART\_C2\_RIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00333}\doxymbox{\hyperlink{group__UART__Register__Masks_gaed8f6d904d9a0d90e1d229c80feba333}{00333}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_RIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_RIE\_SHIFT))\ \&\ UART\_C2\_RIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00335}00335\ \textcolor{preprocessor}{\#define\ UART\_C2\_TCIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00336}00336\ \textcolor{preprocessor}{\#define\ UART\_C2\_TCIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00341}\doxymbox{\hyperlink{group__UART__Register__Masks_gad31f5502fa085d8e935b3b0b39e2bc1c}{00341}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_TCIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_TCIE\_SHIFT))\ \&\ UART\_C2\_TCIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00343}00343\ \textcolor{preprocessor}{\#define\ UART\_C2\_TIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00344}00344\ \textcolor{preprocessor}{\#define\ UART\_C2\_TIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00349}\doxymbox{\hyperlink{group__UART__Register__Masks_gabf3aa2f03e44054106f21bf212203ef0}{00349}}\ \textcolor{preprocessor}{\#define\ UART\_C2\_TIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C2\_TIE\_SHIFT))\ \&\ UART\_C2\_TIE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00355}00355\ \textcolor{preprocessor}{\#define\ UART\_S1\_PF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00356}00356\ \textcolor{preprocessor}{\#define\ UART\_S1\_PF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00362}\doxymbox{\hyperlink{group__UART__Register__Masks_ga2bac368f791a24b95f7f99618b6c4200}{00362}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_PF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_PF\_SHIFT))\ \&\ UART\_S1\_PF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00364}00364\ \textcolor{preprocessor}{\#define\ UART\_S1\_FE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00365}00365\ \textcolor{preprocessor}{\#define\ UART\_S1\_FE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00370}\doxymbox{\hyperlink{group__UART__Register__Masks_ga04b763409625dda02fc70e246fe93896}{00370}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_FE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_FE\_SHIFT))\ \&\ UART\_S1\_FE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00372}00372\ \textcolor{preprocessor}{\#define\ UART\_S1\_NF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00373}00373\ \textcolor{preprocessor}{\#define\ UART\_S1\_NF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00379}\doxymbox{\hyperlink{group__UART__Register__Masks_ga760a28191818b8f67d146ea395e0fe5c}{00379}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_NF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_NF\_SHIFT))\ \&\ UART\_S1\_NF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00381}00381\ \textcolor{preprocessor}{\#define\ UART\_S1\_OR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00382}00382\ \textcolor{preprocessor}{\#define\ UART\_S1\_OR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00387}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6a14f8ba40e6532f7ec986123702c119}{00387}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_OR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_OR\_SHIFT))\ \&\ UART\_S1\_OR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00389}00389\ \textcolor{preprocessor}{\#define\ UART\_S1\_IDLE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00390}00390\ \textcolor{preprocessor}{\#define\ UART\_S1\_IDLE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00395}\doxymbox{\hyperlink{group__UART__Register__Masks_ga59de164dc42e25b8ecf4625ad1271025}{00395}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_IDLE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_IDLE\_SHIFT))\ \&\ UART\_S1\_IDLE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00397}00397\ \textcolor{preprocessor}{\#define\ UART\_S1\_RDRF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00398}00398\ \textcolor{preprocessor}{\#define\ UART\_S1\_RDRF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00404}\doxymbox{\hyperlink{group__UART__Register__Masks_gac46eb706bfaad219357e4a1968daf839}{00404}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_RDRF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_RDRF\_SHIFT))\ \&\ UART\_S1\_RDRF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00406}00406\ \textcolor{preprocessor}{\#define\ UART\_S1\_TC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00407}00407\ \textcolor{preprocessor}{\#define\ UART\_S1\_TC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00412}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6547a749564447be3c48693c268e0373}{00412}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_TC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_TC\_SHIFT))\ \&\ UART\_S1\_TC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ UART\_S1\_TDRE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00415}00415\ \textcolor{preprocessor}{\#define\ UART\_S1\_TDRE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00421}\doxymbox{\hyperlink{group__UART__Register__Masks_gac96f17340c0eafb40ca8a6688fc08a88}{00421}}\ \textcolor{preprocessor}{\#define\ UART\_S1\_TDRE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S1\_TDRE\_SHIFT))\ \&\ UART\_S1\_TDRE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00427}00427\ \textcolor{preprocessor}{\#define\ UART\_S2\_RAF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00428}00428\ \textcolor{preprocessor}{\#define\ UART\_S2\_RAF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00433}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6fb68989d33d0cd0c7908bd5bf3e498b}{00433}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_RAF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_RAF\_SHIFT))\ \&\ UART\_S2\_RAF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00435}00435\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00436}00436\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00441}\doxymbox{\hyperlink{group__UART__Register__Masks_ga9530c0874c11c618df017716adb0131b}{00441}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_LBKDE\_SHIFT))\ \&\ UART\_S2\_LBKDE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00443}00443\ \textcolor{preprocessor}{\#define\ UART\_S2\_BRK13\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00444}00444\ \textcolor{preprocessor}{\#define\ UART\_S2\_BRK13\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00449}\doxymbox{\hyperlink{group__UART__Register__Masks_ga239a880d2d8279a8d9b91ac1a828735e}{00449}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_BRK13(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_BRK13\_SHIFT))\ \&\ UART\_S2\_BRK13\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00451}00451\ \textcolor{preprocessor}{\#define\ UART\_S2\_RWUID\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00452}00452\ \textcolor{preprocessor}{\#define\ UART\_S2\_RWUID\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00457}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7e1318e556cb7bc793cf3949d11ed655}{00457}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_RWUID(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_RWUID\_SHIFT))\ \&\ UART\_S2\_RWUID\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00459}00459\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXINV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00460}00460\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXINV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00465}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3cf566570570ff8a6a70e2cbea1959a8}{00465}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXINV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_RXINV\_SHIFT))\ \&\ UART\_S2\_RXINV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00467}00467\ \textcolor{preprocessor}{\#define\ UART\_S2\_MSBF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00468}00468\ \textcolor{preprocessor}{\#define\ UART\_S2\_MSBF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00476}\doxymbox{\hyperlink{group__UART__Register__Masks_ga4df4aaa4974f36b04468c277f050dc18}{00476}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_MSBF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_MSBF\_SHIFT))\ \&\ UART\_S2\_MSBF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00478}00478\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXEDGIF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00479}00479\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXEDGIF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00484}\doxymbox{\hyperlink{group__UART__Register__Masks_ga459c87da07a68b9fe3cf87e1e1791a96}{00484}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_RXEDGIF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_RXEDGIF\_SHIFT))\ \&\ UART\_S2\_RXEDGIF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00485}00485\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00486}00486\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDIF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00487}00487\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDIF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00492}\doxymbox{\hyperlink{group__UART__Register__Masks_ga8778da18e412ed69b15b1a99daa53ce3}{00492}}\ \textcolor{preprocessor}{\#define\ UART\_S2\_LBKDIF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_S2\_LBKDIF\_SHIFT))\ \&\ UART\_S2\_LBKDIF\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00498}00498\ \textcolor{preprocessor}{\#define\ UART\_C3\_PEIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00499}00499\ \textcolor{preprocessor}{\#define\ UART\_C3\_PEIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00504}\doxymbox{\hyperlink{group__UART__Register__Masks_gab96d251fa95f8fdd25ae55374c23f698}{00504}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_PEIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_PEIE\_SHIFT))\ \&\ UART\_C3\_PEIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00506}00506\ \textcolor{preprocessor}{\#define\ UART\_C3\_FEIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00507}00507\ \textcolor{preprocessor}{\#define\ UART\_C3\_FEIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00512}\doxymbox{\hyperlink{group__UART__Register__Masks_gae7d1ccc17fbd5c274fd85b1e8dca26c3}{00512}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_FEIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_FEIE\_SHIFT))\ \&\ UART\_C3\_FEIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00514}00514\ \textcolor{preprocessor}{\#define\ UART\_C3\_NEIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00515}00515\ \textcolor{preprocessor}{\#define\ UART\_C3\_NEIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00520}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7582f63e07e8c9277c1b946740b7ae65}{00520}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_NEIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_NEIE\_SHIFT))\ \&\ UART\_C3\_NEIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00522}00522\ \textcolor{preprocessor}{\#define\ UART\_C3\_ORIE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00523}00523\ \textcolor{preprocessor}{\#define\ UART\_C3\_ORIE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00528}\doxymbox{\hyperlink{group__UART__Register__Masks_ga04167af161829d23c6b8ab2a6a2a85d0}{00528}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_ORIE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_ORIE\_SHIFT))\ \&\ UART\_C3\_ORIE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00530}00530\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXINV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00531}00531\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXINV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00536}\doxymbox{\hyperlink{group__UART__Register__Masks_gaa6ad5229b8a54a92275e3b0df3e7fa34}{00536}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXINV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_TXINV\_SHIFT))\ \&\ UART\_C3\_TXINV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00538}00538\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXDIR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00539}00539\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXDIR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00544}\doxymbox{\hyperlink{group__UART__Register__Masks_gad35a402902991eca559706c36b3d03b1}{00544}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_TXDIR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_TXDIR\_SHIFT))\ \&\ UART\_C3\_TXDIR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00546}00546\ \textcolor{preprocessor}{\#define\ UART\_C3\_T8\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00547}00547\ \textcolor{preprocessor}{\#define\ UART\_C3\_T8\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00549}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3b929e2da40f805287829de95e818a27}{00549}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_T8(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_T8\_SHIFT))\ \&\ UART\_C3\_T8\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00551}00551\ \textcolor{preprocessor}{\#define\ UART\_C3\_R8\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00552}00552\ \textcolor{preprocessor}{\#define\ UART\_C3\_R8\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00554}\doxymbox{\hyperlink{group__UART__Register__Masks_gac668b91c6cd9a74233365d17fdd23f47}{00554}}\ \textcolor{preprocessor}{\#define\ UART\_C3\_R8(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C3\_R8\_SHIFT))\ \&\ UART\_C3\_R8\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00556}00556\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00559}00559\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00560}00560\ \textcolor{preprocessor}{\#define\ UART\_D\_RT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00561}00561\ \textcolor{preprocessor}{\#define\ UART\_D\_RT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00562}00562\ \textcolor{preprocessor}{\#define\ UART\_D\_RT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_D\_RT\_SHIFT))\ \&\ UART\_D\_RT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00568}00568\ \textcolor{preprocessor}{\#define\ UART\_MA1\_MA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00569}00569\ \textcolor{preprocessor}{\#define\ UART\_MA1\_MA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00571}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6602fd7e07866385c7cd1ad2784fe334}{00571}}\ \textcolor{preprocessor}{\#define\ UART\_MA1\_MA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MA1\_MA\_SHIFT))\ \&\ UART\_MA1\_MA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00576}00576\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00577}00577\ \textcolor{preprocessor}{\#define\ UART\_MA2\_MA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00578}00578\ \textcolor{preprocessor}{\#define\ UART\_MA2\_MA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00580}\doxymbox{\hyperlink{group__UART__Register__Masks_gaf2427a2534075e01475f46219e742b00}{00580}}\ \textcolor{preprocessor}{\#define\ UART\_MA2\_MA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MA2\_MA\_SHIFT))\ \&\ UART\_MA2\_MA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00585}00585\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00586}00586\ \textcolor{preprocessor}{\#define\ UART\_C4\_BRFA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00587}00587\ \textcolor{preprocessor}{\#define\ UART\_C4\_BRFA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00589}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6f2c51a18bd4fe60b12fc2e68a18988b}{00589}}\ \textcolor{preprocessor}{\#define\ UART\_C4\_BRFA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C4\_BRFA\_SHIFT))\ \&\ UART\_C4\_BRFA\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00591}00591\ \textcolor{preprocessor}{\#define\ UART\_C4\_M10\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00592}00592\ \textcolor{preprocessor}{\#define\ UART\_C4\_M10\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00597}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7cf6f5b1c9f67f2caf54ed725b3ba92e}{00597}}\ \textcolor{preprocessor}{\#define\ UART\_C4\_M10(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C4\_M10\_SHIFT))\ \&\ UART\_C4\_M10\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00598}00598\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00599}00599\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00600}00600\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00608}\doxymbox{\hyperlink{group__UART__Register__Masks_gab2614230f0e93d3d59cf0c644411be46}{00608}}\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C4\_MAEN2\_SHIFT))\ \&\ UART\_C4\_MAEN2\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00609}00609\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00610}00610\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00611}00611\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00619}\doxymbox{\hyperlink{group__UART__Register__Masks_gafa848be1edfc0802b6988e09a2b7a3a4}{00619}}\ \textcolor{preprocessor}{\#define\ UART\_C4\_MAEN1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C4\_MAEN1\_SHIFT))\ \&\ UART\_C4\_MAEN1\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00624}00624\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00625}00625\ \textcolor{preprocessor}{\#define\ UART\_C5\_RDMAS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00626}00626\ \textcolor{preprocessor}{\#define\ UART\_C5\_RDMAS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00631}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3e482d8d4ea645ab1cb89bad9c899194}{00631}}\ \textcolor{preprocessor}{\#define\ UART\_C5\_RDMAS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C5\_RDMAS\_SHIFT))\ \&\ UART\_C5\_RDMAS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00633}00633\ \textcolor{preprocessor}{\#define\ UART\_C5\_TDMAS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00634}00634\ \textcolor{preprocessor}{\#define\ UART\_C5\_TDMAS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00639}\doxymbox{\hyperlink{group__UART__Register__Masks_gaea4ac16ae4172f75bf05eb28f8bcd6d5}{00639}}\ \textcolor{preprocessor}{\#define\ UART\_C5\_TDMAS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C5\_TDMAS\_SHIFT))\ \&\ UART\_C5\_TDMAS\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00641}00641\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00644}00644\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00645}00645\ \textcolor{preprocessor}{\#define\ UART\_ED\_PARITYE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00646}00646\ \textcolor{preprocessor}{\#define\ UART\_ED\_PARITYE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00651}\doxymbox{\hyperlink{group__UART__Register__Masks_ga53731287ee7b9ebb2313101c8115c293}{00651}}\ \textcolor{preprocessor}{\#define\ UART\_ED\_PARITYE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_ED\_PARITYE\_SHIFT))\ \&\ UART\_ED\_PARITYE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00653}00653\ \textcolor{preprocessor}{\#define\ UART\_ED\_NOISY\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00654}00654\ \textcolor{preprocessor}{\#define\ UART\_ED\_NOISY\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00659}\doxymbox{\hyperlink{group__UART__Register__Masks_ga679117a3349699feddda25a5349d7426}{00659}}\ \textcolor{preprocessor}{\#define\ UART\_ED\_NOISY(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_ED\_NOISY\_SHIFT))\ \&\ UART\_ED\_NOISY\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00661}00661\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00664}00664\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00665}00665\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXCTSE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00666}00666\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXCTSE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00674}\doxymbox{\hyperlink{group__UART__Register__Masks_ga1d7f317bb31f92adff50ff7dc49e121b}{00674}}\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXCTSE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MODEM\_TXCTSE\_SHIFT))\ \&\ UART\_MODEM\_TXCTSE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00676}00676\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00677}00677\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00684}\doxymbox{\hyperlink{group__UART__Register__Masks_gac312596f02740a89dc6254f0aeb84dd8}{00684}}\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MODEM\_TXRTSE\_SHIFT))\ \&\ UART\_MODEM\_TXRTSE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00685}00685\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00686}00686\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSPOL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00687}00687\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSPOL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00692}\doxymbox{\hyperlink{group__UART__Register__Masks_ga741690168f975ff0c401791b7bde7254}{00692}}\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_TXRTSPOL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MODEM\_TXRTSPOL\_SHIFT))\ \&\ UART\_MODEM\_TXRTSPOL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00693}00693\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00694}00694\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_RXRTSE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00695}00695\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_RXRTSE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00702}\doxymbox{\hyperlink{group__UART__Register__Masks_ga959ac0c1d060aa20552e2e454d226779}{00702}}\ \textcolor{preprocessor}{\#define\ UART\_MODEM\_RXRTSE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_MODEM\_RXRTSE\_SHIFT))\ \&\ UART\_MODEM\_RXRTSE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00704}00704\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00707}00707\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00708}00708\ \textcolor{preprocessor}{\#define\ UART\_IR\_TNP\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00709}00709\ \textcolor{preprocessor}{\#define\ UART\_IR\_TNP\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00716}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5c51f9fcc539b3d1c55ede0ca356e506}{00716}}\ \textcolor{preprocessor}{\#define\ UART\_IR\_TNP(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IR\_TNP\_SHIFT))\ \&\ UART\_IR\_TNP\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00717}00717\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00718}00718\ \textcolor{preprocessor}{\#define\ UART\_IR\_IREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00719}00719\ \textcolor{preprocessor}{\#define\ UART\_IR\_IREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00724}\doxymbox{\hyperlink{group__UART__Register__Masks_gac149f7dde9651c4a2839d2c985d3d0b9}{00724}}\ \textcolor{preprocessor}{\#define\ UART\_IR\_IREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IR\_IREN\_SHIFT))\ \&\ UART\_IR\_IREN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00726}00726\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00729}00729\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00730}00730\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFIFOSIZE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00731}00731\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFIFOSIZE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00742}\doxymbox{\hyperlink{group__UART__Register__Masks_gae66abbd658a1f8eb533f5b5eee9e5c98}{00742}}\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFIFOSIZE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_PFIFO\_RXFIFOSIZE\_SHIFT))\ \&\ UART\_PFIFO\_RXFIFOSIZE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00743}00743\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00744}00744\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00745}00745\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00750}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7aa339f776da1eaf995aae0829ea92b8}{00750}}\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_RXFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_PFIFO\_RXFE\_SHIFT))\ \&\ UART\_PFIFO\_RXFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00751}00751\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00752}00752\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFIFOSIZE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x70U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00753}00753\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFIFOSIZE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00764}\doxymbox{\hyperlink{group__UART__Register__Masks_ga4c13afc31f45e633d2dc02707b332d11}{00764}}\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFIFOSIZE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_PFIFO\_TXFIFOSIZE\_SHIFT))\ \&\ UART\_PFIFO\_TXFIFOSIZE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00765}00765\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00766}00766\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00767}00767\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00772}\doxymbox{\hyperlink{group__UART__Register__Masks_ga229ce94532ef3923587d6e9c50434e42}{00772}}\ \textcolor{preprocessor}{\#define\ UART\_PFIFO\_TXFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_PFIFO\_TXFE\_SHIFT))\ \&\ UART\_PFIFO\_TXFE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00774}00774\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00777}00777\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00778}00778\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXUFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00779}00779\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXUFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00784}\doxymbox{\hyperlink{group__UART__Register__Masks_gaebc839c68c50cd87376700f11d84efd6}{00784}}\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXUFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_CFIFO\_RXUFE\_SHIFT))\ \&\ UART\_CFIFO\_RXUFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00785}00785\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00786}00786\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXOFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00787}00787\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXOFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00792}\doxymbox{\hyperlink{group__UART__Register__Masks_ga77202250a663019c206a9d329a903fa2}{00792}}\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXOFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_CFIFO\_TXOFE\_SHIFT))\ \&\ UART\_CFIFO\_TXOFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00793}00793\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00794}00794\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXOFE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00795}00795\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXOFE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00800}\doxymbox{\hyperlink{group__UART__Register__Masks_ga641d6506471805bac4ffffe4293a52ce}{00800}}\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXOFE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_CFIFO\_RXOFE\_SHIFT))\ \&\ UART\_CFIFO\_RXOFE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00802}00802\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXFLUSH\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00803}00803\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXFLUSH\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00808}\doxymbox{\hyperlink{group__UART__Register__Masks_ga1ac863330ba7a63c7e7eccab10cd0c83}{00808}}\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_RXFLUSH(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_CFIFO\_RXFLUSH\_SHIFT))\ \&\ UART\_CFIFO\_RXFLUSH\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00809}00809\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00810}00810\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXFLUSH\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00811}00811\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXFLUSH\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00816}\doxymbox{\hyperlink{group__UART__Register__Masks_gaeb1ccf62a67ec3c74e6b6651b7604fb7}{00816}}\ \textcolor{preprocessor}{\#define\ UART\_CFIFO\_TXFLUSH(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_CFIFO\_TXFLUSH\_SHIFT))\ \&\ UART\_CFIFO\_TXFLUSH\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00818}00818\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00821}00821\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00822}00822\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXUF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00823}00823\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXUF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00828}\doxymbox{\hyperlink{group__UART__Register__Masks_ga852c761060d0bbc667d9a7ef62167bc1}{00828}}\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXUF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_SFIFO\_RXUF\_SHIFT))\ \&\ UART\_SFIFO\_RXUF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00829}00829\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00830}00830\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00831}00831\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00836}\doxymbox{\hyperlink{group__UART__Register__Masks_ga739c0f1a105489ea3c6c28e4d41b9233}{00836}}\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_SFIFO\_TXOF\_SHIFT))\ \&\ UART\_SFIFO\_TXOF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00837}00837\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00838}00838\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00839}00839\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00844}\doxymbox{\hyperlink{group__UART__Register__Masks_ga94fd3d784999bb71baa0ffa5154520c2}{00844}}\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_SFIFO\_RXOF\_SHIFT))\ \&\ UART\_SFIFO\_RXOF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00845}00845\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00846}00846\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXEMPT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00847}00847\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXEMPT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00852}\doxymbox{\hyperlink{group__UART__Register__Masks_gac6de42a22258666ffa8ea8120e822694}{00852}}\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_RXEMPT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_SFIFO\_RXEMPT\_SHIFT))\ \&\ UART\_SFIFO\_RXEMPT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00853}00853\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00854}00854\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXEMPT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00855}00855\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXEMPT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00860}\doxymbox{\hyperlink{group__UART__Register__Masks_gae3bc3c25c56a4a524b23b537c4cbaf2c}{00860}}\ \textcolor{preprocessor}{\#define\ UART\_SFIFO\_TXEMPT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_SFIFO\_TXEMPT\_SHIFT))\ \&\ UART\_SFIFO\_TXEMPT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00862}00862\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00865}00865\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00866}00866\ \textcolor{preprocessor}{\#define\ UART\_TWFIFO\_TXWATER\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00867}00867\ \textcolor{preprocessor}{\#define\ UART\_TWFIFO\_TXWATER\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00869}\doxymbox{\hyperlink{group__UART__Register__Masks_gaefe25e2834c190a10976bb2a2c0708db}{00869}}\ \textcolor{preprocessor}{\#define\ UART\_TWFIFO\_TXWATER(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_TWFIFO\_TXWATER\_SHIFT))\ \&\ UART\_TWFIFO\_TXWATER\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00871}00871\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00874}00874\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00875}00875\ \textcolor{preprocessor}{\#define\ UART\_TCFIFO\_TXCOUNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00876}00876\ \textcolor{preprocessor}{\#define\ UART\_TCFIFO\_TXCOUNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00878}\doxymbox{\hyperlink{group__UART__Register__Masks_gad083a41f9d63f7351e3b8e7507ad42f5}{00878}}\ \textcolor{preprocessor}{\#define\ UART\_TCFIFO\_TXCOUNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_TCFIFO\_TXCOUNT\_SHIFT))\ \&\ UART\_TCFIFO\_TXCOUNT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00883}00883\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00884}00884\ \textcolor{preprocessor}{\#define\ UART\_RWFIFO\_RXWATER\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00885}00885\ \textcolor{preprocessor}{\#define\ UART\_RWFIFO\_RXWATER\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00887}\doxymbox{\hyperlink{group__UART__Register__Masks_ga76c4f184df06a869746af551b84e5105}{00887}}\ \textcolor{preprocessor}{\#define\ UART\_RWFIFO\_RXWATER(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_RWFIFO\_RXWATER\_SHIFT))\ \&\ UART\_RWFIFO\_RXWATER\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00889}00889\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00892}00892\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00893}00893\ \textcolor{preprocessor}{\#define\ UART\_RCFIFO\_RXCOUNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00894}00894\ \textcolor{preprocessor}{\#define\ UART\_RCFIFO\_RXCOUNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00896}\doxymbox{\hyperlink{group__UART__Register__Masks_gab386960a2ffd4a878651b2b8072c2756}{00896}}\ \textcolor{preprocessor}{\#define\ UART\_RCFIFO\_RXCOUNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_RCFIFO\_RXCOUNT\_SHIFT))\ \&\ UART\_RCFIFO\_RXCOUNT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00898}00898\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00901}00901\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00902}00902\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ISO\_7816E\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00903}00903\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ISO\_7816E\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00908}\doxymbox{\hyperlink{group__UART__Register__Masks_ga66f91cf519df746474ee52bd1bf7e71a}{00908}}\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ISO\_7816E(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C7816\_ISO\_7816E\_SHIFT))\ \&\ UART\_C7816\_ISO\_7816E\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00909}00909\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00910}00910\ \textcolor{preprocessor}{\#define\ UART\_C7816\_TTYPE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00911}00911\ \textcolor{preprocessor}{\#define\ UART\_C7816\_TTYPE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00916}\doxymbox{\hyperlink{group__UART__Register__Masks_gaf3a33b295da01f9685476c4c0b5f6350}{00916}}\ \textcolor{preprocessor}{\#define\ UART\_C7816\_TTYPE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C7816\_TTYPE\_SHIFT))\ \&\ UART\_C7816\_TTYPE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00917}00917\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00918}00918\ \textcolor{preprocessor}{\#define\ UART\_C7816\_INIT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00919}00919\ \textcolor{preprocessor}{\#define\ UART\_C7816\_INIT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00924}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5d84e7b71c75740849fcda8982c796b6}{00924}}\ \textcolor{preprocessor}{\#define\ UART\_C7816\_INIT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C7816\_INIT\_SHIFT))\ \&\ UART\_C7816\_INIT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00925}00925\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00926}00926\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ANACK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00927}00927\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ANACK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00932}\doxymbox{\hyperlink{group__UART__Register__Masks_ga4bfeb7fd58add67276f19313c42f1d1c}{00932}}\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ANACK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C7816\_ANACK\_SHIFT))\ \&\ UART\_C7816\_ANACK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00933}00933\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00934}00934\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ONACK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00935}00935\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ONACK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00940}\doxymbox{\hyperlink{group__UART__Register__Masks_ga200b02f63886684317bac797dae1e51f}{00940}}\ \textcolor{preprocessor}{\#define\ UART\_C7816\_ONACK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_C7816\_ONACK\_SHIFT))\ \&\ UART\_C7816\_ONACK\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00942}00942\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00945}00945\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00946}00946\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_RXTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00947}00947\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_RXTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00952}\doxymbox{\hyperlink{group__UART__Register__Masks_ga89648c58d4459c6a081c0abf7eda34b8}{00952}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_RXTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_RXTE\_SHIFT))\ \&\ UART\_IE7816\_RXTE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00953}00953\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00954}00954\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_TXTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00955}00955\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_TXTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00960}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3e38b84d9d75fc7645f9ab3b82966e62}{00960}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_TXTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_TXTE\_SHIFT))\ \&\ UART\_IE7816\_TXTE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00961}00961\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00962}00962\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_GTVE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00963}00963\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_GTVE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00968}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3b3565dc080fe2075a27f7fab807a2e5}{00968}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_GTVE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_GTVE\_SHIFT))\ \&\ UART\_IE7816\_GTVE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00969}00969\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00970}00970\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_ADTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00971}00971\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_ADTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00976}\doxymbox{\hyperlink{group__UART__Register__Masks_gab4c33943d2e28a7d4419e55332468359}{00976}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_ADTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_ADTE\_SHIFT))\ \&\ UART\_IE7816\_ADTE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00977}00977\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00978}00978\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_INITDE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00979}00979\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_INITDE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00984}\doxymbox{\hyperlink{group__UART__Register__Masks_ga37032c1701a391f5504551e0f0f8c426}{00984}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_INITDE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_INITDE\_SHIFT))\ \&\ UART\_IE7816\_INITDE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00985}00985\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00986}00986\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_BWTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00987}00987\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_BWTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00992}\doxymbox{\hyperlink{group__UART__Register__Masks_ga3ebc6409120580e2f760c4960738f09f}{00992}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_BWTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_BWTE\_SHIFT))\ \&\ UART\_IE7816\_BWTE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00993}00993\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00994}00994\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_CWTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l00995}00995\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_CWTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01000}\doxymbox{\hyperlink{group__UART__Register__Masks_ga32006913f3d9f3e3729bf5d0d65bd088}{01000}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_CWTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_CWTE\_SHIFT))\ \&\ UART\_IE7816\_CWTE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01001}01001\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01002}01002\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_WTE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01003}01003\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_WTE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01008}\doxymbox{\hyperlink{group__UART__Register__Masks_gacc2fef97f7c84a787ad71005dc0c3c30}{01008}}\ \textcolor{preprocessor}{\#define\ UART\_IE7816\_WTE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IE7816\_WTE\_SHIFT))\ \&\ UART\_IE7816\_WTE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01010}01010\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01013}01013\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01014}01014\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_RXT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01015}01015\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_RXT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01021}\doxymbox{\hyperlink{group__UART__Register__Masks_ga2e07a29afc64917b4d040b221e2ea415}{01021}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_RXT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_RXT\_SHIFT))\ \&\ UART\_IS7816\_RXT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01022}01022\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01023}01023\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_TXT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01024}01024\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_TXT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01029}\doxymbox{\hyperlink{group__UART__Register__Masks_gaa1871af657f4b1ccc1968d276e6f465a}{01029}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_TXT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_TXT\_SHIFT))\ \&\ UART\_IS7816\_TXT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01030}01030\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01031}01031\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_GTV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01032}01032\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_GTV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01037}\doxymbox{\hyperlink{group__UART__Register__Masks_ga5ab2b6e3feea53f32153dbca3f56dbc5}{01037}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_GTV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_GTV\_SHIFT))\ \&\ UART\_IS7816\_GTV\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01038}01038\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01039}01039\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_ADT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01040}01040\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_ADT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01045}\doxymbox{\hyperlink{group__UART__Register__Masks_ga1aac9c296b1be00fb8648f738ca5855f}{01045}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_ADT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_ADT\_SHIFT))\ \&\ UART\_IS7816\_ADT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01046}01046\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01047}01047\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_INITD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01048}01048\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_INITD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01053}\doxymbox{\hyperlink{group__UART__Register__Masks_ga6cb4bb7d090cf81948ed5b7b36dd4ca1}{01053}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_INITD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_INITD\_SHIFT))\ \&\ UART\_IS7816\_INITD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01054}01054\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01055}01055\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_BWT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01056}01056\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_BWT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01061}\doxymbox{\hyperlink{group__UART__Register__Masks_gab6391c2de33ce9e7609bef16473015d3}{01061}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_BWT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_BWT\_SHIFT))\ \&\ UART\_IS7816\_BWT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01062}01062\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01063}01063\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_CWT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01064}01064\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_CWT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01069}\doxymbox{\hyperlink{group__UART__Register__Masks_ga62240001cf0b6b573bb22129b1bd31d8}{01069}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_CWT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_CWT\_SHIFT))\ \&\ UART\_IS7816\_CWT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01070}01070\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01071}01071\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_WT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01072}01072\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_WT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01077}\doxymbox{\hyperlink{group__UART__Register__Masks_gac0bff69c43a767ff07d220e4ae91f68a}{01077}}\ \textcolor{preprocessor}{\#define\ UART\_IS7816\_WT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_IS7816\_WT\_SHIFT))\ \&\ UART\_IS7816\_WT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01079}01079\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01082}01082\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01083}01083\ \textcolor{preprocessor}{\#define\ UART\_WP7816\_WTX\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01084}01084\ \textcolor{preprocessor}{\#define\ UART\_WP7816\_WTX\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01086}\doxymbox{\hyperlink{group__UART__Register__Masks_gae574b729c7e8a7f314fb22be9b5ad305}{01086}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816\_WTX(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816\_WTX\_SHIFT))\ \&\ UART\_WP7816\_WTX\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01088}01088\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01091}01091\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01092}01092\ \textcolor{preprocessor}{\#define\ UART\_WN7816\_GTN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01093}01093\ \textcolor{preprocessor}{\#define\ UART\_WN7816\_GTN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01095}\doxymbox{\hyperlink{group__UART__Register__Masks_gace5f01806058a7519f09ca698a48dedd}{01095}}\ \textcolor{preprocessor}{\#define\ UART\_WN7816\_GTN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WN7816\_GTN\_SHIFT))\ \&\ UART\_WN7816\_GTN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01097}01097\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01100}01100\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01101}01101\ \textcolor{preprocessor}{\#define\ UART\_WF7816\_GTFD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01102}01102\ \textcolor{preprocessor}{\#define\ UART\_WF7816\_GTFD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01104}\doxymbox{\hyperlink{group__UART__Register__Masks_ga1deec30c17d2cc28d8db76346756785f}{01104}}\ \textcolor{preprocessor}{\#define\ UART\_WF7816\_GTFD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WF7816\_GTFD\_SHIFT))\ \&\ UART\_WF7816\_GTFD\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01106}01106\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01109}01109\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01110}01110\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_RXTHRESHOLD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01111}01111\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_RXTHRESHOLD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01113}\doxymbox{\hyperlink{group__UART__Register__Masks_ga497482306b260f45732d82ac5503aba4}{01113}}\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_RXTHRESHOLD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_ET7816\_RXTHRESHOLD\_SHIFT))\ \&\ UART\_ET7816\_RXTHRESHOLD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01114}01114\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01115}01115\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_TXTHRESHOLD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01116}01116\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_TXTHRESHOLD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01121}\doxymbox{\hyperlink{group__UART__Register__Masks_ga0f26cca6a1f58b4b08ff7b471d66881d}{01121}}\ \textcolor{preprocessor}{\#define\ UART\_ET7816\_TXTHRESHOLD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_ET7816\_TXTHRESHOLD\_SHIFT))\ \&\ UART\_ET7816\_TXTHRESHOLD\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01123}01123\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01126}01126\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01127}01127\ \textcolor{preprocessor}{\#define\ UART\_TL7816\_TLEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01128}01128\ \textcolor{preprocessor}{\#define\ UART\_TL7816\_TLEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01130}\doxymbox{\hyperlink{group__UART__Register__Masks_gaf537ccbe6ddd913ae8f3a988393519e4}{01130}}\ \textcolor{preprocessor}{\#define\ UART\_TL7816\_TLEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_TL7816\_TLEN\_SHIFT))\ \&\ UART\_TL7816\_TLEN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01132}01132\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01135}01135\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01136}01136\ \textcolor{preprocessor}{\#define\ UART\_AP7816A\_T0\_ADTI\_H\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01137}01137\ \textcolor{preprocessor}{\#define\ UART\_AP7816A\_T0\_ADTI\_H\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01139}\doxymbox{\hyperlink{group__UART__Register__Masks_ga43e9b61e16a5f00b4c010750f710a9f5}{01139}}\ \textcolor{preprocessor}{\#define\ UART\_AP7816A\_T0\_ADTI\_H(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_AP7816A\_T0\_ADTI\_H\_SHIFT))\ \&\ UART\_AP7816A\_T0\_ADTI\_H\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01141}01141\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01144}01144\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01145}01145\ \textcolor{preprocessor}{\#define\ UART\_AP7816B\_T0\_ADTI\_L\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01146}01146\ \textcolor{preprocessor}{\#define\ UART\_AP7816B\_T0\_ADTI\_L\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01148}\doxymbox{\hyperlink{group__UART__Register__Masks_ga68bd535b3ad544b5a9bb603fed834668}{01148}}\ \textcolor{preprocessor}{\#define\ UART\_AP7816B\_T0\_ADTI\_L(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_AP7816B\_T0\_ADTI\_L\_SHIFT))\ \&\ UART\_AP7816B\_T0\_ADTI\_L\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01150}01150\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01153}01153\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01154}01154\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T0\_WI\_H\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01155}01155\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T0\_WI\_H\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01157}\doxymbox{\hyperlink{group__UART__Register__Masks_ga7aece2206d6a0c77bbc9d1e9f90841dd}{01157}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T0\_WI\_H(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816A\_T0\_WI\_H\_SHIFT))\ \&\ UART\_WP7816A\_T0\_WI\_H\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01159}01159\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01162}01162\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01163}01163\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T0\_WI\_L\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01164}01164\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T0\_WI\_L\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01166}\doxymbox{\hyperlink{group__UART__Register__Masks_ga24121de4ed246d82e431c8a3d030e0ec}{01166}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T0\_WI\_L(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816B\_T0\_WI\_L\_SHIFT))\ \&\ UART\_WP7816B\_T0\_WI\_L\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01168}01168\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01171}01171\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01172}01172\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T1\_BWI\_H\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01173}01173\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T1\_BWI\_H\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01175}\doxymbox{\hyperlink{group__UART__Register__Masks_ga8dc80e4a4bc9204991479a41218bbaad}{01175}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816A\_T1\_BWI\_H(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816A\_T1\_BWI\_H\_SHIFT))\ \&\ UART\_WP7816A\_T1\_BWI\_H\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01177}01177\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01180}01180\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01181}01181\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T1\_BWI\_L\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01182}01182\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T1\_BWI\_L\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01184}\doxymbox{\hyperlink{group__UART__Register__Masks_ga0248c8e1ada933b11672a04e695d25df}{01184}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816B\_T1\_BWI\_L(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816B\_T1\_BWI\_L\_SHIFT))\ \&\ UART\_WP7816B\_T1\_BWI\_L\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01186}01186\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01189}01189\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01190}01190\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_BGI\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01191}01191\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_BGI\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01193}\doxymbox{\hyperlink{group__UART__Register__Masks_ga2c8a42e98bc4476d4e926e0be6f9c700}{01193}}\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_BGI(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WGP7816\_T1\_BGI\_SHIFT))\ \&\ UART\_WGP7816\_T1\_BGI\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01194}01194\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01195}01195\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_CWI1\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01196}01196\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_CWI1\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01198}\doxymbox{\hyperlink{group__UART__Register__Masks_gae1898bf4e8ee7c26f4a5529488d5b82d}{01198}}\ \textcolor{preprocessor}{\#define\ UART\_WGP7816\_T1\_CWI1(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WGP7816\_T1\_CWI1\_SHIFT))\ \&\ UART\_WGP7816\_T1\_CWI1\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01200}01200\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01203}01203\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01204}01204\ \textcolor{preprocessor}{\#define\ UART\_WP7816C\_T1\_CWI2\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01205}01205\ \textcolor{preprocessor}{\#define\ UART\_WP7816C\_T1\_CWI2\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01207}\doxymbox{\hyperlink{group__UART__Register__Masks_ga4cbdb62fb02c1c723440646bc9d444fa}{01207}}\ \textcolor{preprocessor}{\#define\ UART\_WP7816C\_T1\_CWI2(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ UART\_WP7816C\_T1\_CWI2\_SHIFT))\ \&\ UART\_WP7816C\_T1\_CWI2\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01209}01209\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01210}01210\ \ \textcolor{comment}{/*\ end\ of\ group\ UART\_Register\_Masks\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01214}01214\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01215}01215\ \ \textcolor{comment}{/*\ end\ of\ group\ UART\_Peripheral\_Access\_Layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01219}01219\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01220}01220\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01221}01221\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01222}01222\ \textcolor{comment}{**\ End\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01223}01223\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01224}01224\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01225}01225\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01226}01226\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01227}01227\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01228}01228\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01229}01229\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01230}01230\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01231}01231\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01232}01232\ \textcolor{preprocessor}{\ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01233}01233\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01234}01234\ \ \ \textcolor{comment}{/*\ leave\ anonymous\ unions\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01235}01235\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01236}01236\ \textcolor{preprocessor}{\ \ \#pragma\ language=default}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01237}01237\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01238}01238\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01239}01239\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01240}01240\ \ \textcolor{comment}{/*\ end\ of\ group\ Peripheral\_access\_layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01244}01244\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01245}01245\ }
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01246}01246\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ PERI\_UART\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__UART_8h_source_l01247}01247\ }
+
+\end{DoxyCode}

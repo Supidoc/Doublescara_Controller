@@ -12,6 +12,12 @@
  * @date    18 Dec 2025
  ************************************************************/
 
+/**
+ * @defgroup CLI_Utilities_Module CLI Utilities Module
+ * @brief   Utility functions to support the Command Line Interface
+ * @{
+ */
+
 #ifndef CLI_UTILITIES_H_
 #define CLI_UTILITIES_H_
 
@@ -48,16 +54,24 @@
  *
  * @param[in] parameterIdentifier The identifier of the parameter to search for.
  * @param[in] pcCommandString The command string containing the parameters.
- * @param[out] parameterFound Pointer to a variable that will be set to 1 if the parameter is found, or 0 otherwise.
- * @param[out] pcParameter Pointer to a variable that will point to the value of the parameter if found.
- * @param[out] parameterStringLength Pointer to a variable that will hold the length of the parameter value string.
+ * @param[out] parameterFound Pointer to a variable that will be set to 1 if the parameter is found,
+ * or 0 otherwise.
+ * @param[out] pcParameter Pointer to a variable that will point to the first char of the parameter
+ * if found.
+ * @param[out] parameterStringLength Pointer to a variable that will hold the length of the
+ * parameter value string.
  *
- * @return kStatus_Success if the operation completes successfully, even if the parameter is not found.
- *         kStatus_Fail if an error occurs during the operation.
+ * @return kStatus_Success if the operation completes successfully, even if the parameter is not
+ * found. kStatus_Fail if an error occurs during the operation.
  *
  * @note The function uses FreeRTOS_CLIGetParameter to parse the command string.
- *       If a parameter is given without a value it is treated as a boolean and returns the value 1.
+ *       If a parameter is found without a value, the parameterFound can be treated as a boolean
+ * flag indicating the presence of the parameter.
  */
-status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pcCommandString, uint8_t * parameterFound, const char ** pcParameter,
-        BaseType_t * parameterStringLength);
+status_t CLU_get_parameter_value_string(char* parameterIdentifier, const char* pcCommandString,
+                                        uint8_t* parameterFound, const char** pcParameter,
+                                        BaseType_t* parameterStringLength);
+
+/** @} */ // End of CLI_Utilities_Module
+
 #endif /* CLI_UTILITIES_H_ */

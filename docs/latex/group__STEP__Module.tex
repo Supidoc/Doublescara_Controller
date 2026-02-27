@@ -1,0 +1,590 @@
+\doxysection{Stepper Motor Control Module }
+\hypertarget{group__STEP__Module}{}\label{group__STEP__Module}\index{Stepper Motor Control Module@{Stepper Motor Control Module}}
+
+
+Functions for controlling stepper motors using FTM with acceleration/\+deceleration.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Movement\+Handle}}
+\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Handle}}
+\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}~6
+\begin{DoxyCompactList}\small\item\em Maximum number of stepper motor handles that can be created. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb}{STP\+\_\+\+MIN\+\_\+\+STEP\+\_\+\+ACCELERATION}}~10
+\begin{DoxyCompactList}\small\item\em Minimum acceleration for stepper motors (in degrees/\+s²). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_gafede3ab78553a37273452e08d610c880}{STP\+\_\+\+MAX\+\_\+\+STEP\+\_\+\+FREQUENCY}}~100
+\begin{DoxyCompactList}\small\item\em Maximum step frequency for stepper motors (in steps/\+s). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga9be997eb3beb5449a8f3967c3e9050d9}{STP\+\_\+\+MOVEMENT\+\_\+\+QUEUE\+\_\+\+SIZE}}~10
+\begin{DoxyCompactList}\small\item\em Size of the movement command queue. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga40840a26152b33c7da5dd5b776950645}{STP\+\_\+\+CONFIG\+\_\+\+QUEUE\+\_\+\+SIZE}}~3
+\begin{DoxyCompactList}\small\item\em Size of the stepper configuration queue. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825}{STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE}}~3000
+\begin{DoxyCompactList}\small\item\em Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~1
+\begin{DoxyCompactList}\small\item\em Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}~4
+\begin{DoxyCompactList}\small\item\em Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor movement states. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor rotation directions. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Movement\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\+\_\+\+Stepper\+Movement\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}} \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \{ \newline
+\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{STP\+\_\+\+MOVEMENT\+\_\+\+IDLE}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}{STP\+\_\+\+MOVEMENT\+\_\+\+CALLED}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{STP\+\_\+\+MOVEMENT\+\_\+\+PLANNED}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}{STP\+\_\+\+MOVEMENT\+\_\+\+STARTED}}
+, \newline
+\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{STP\+\_\+\+MOVEMENT\+\_\+\+ACCELERATING}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{STP\+\_\+\+MOVEMENT\+\_\+\+CONST\+\_\+\+VELOCITY}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{STP\+\_\+\+MOVEMENT\+\_\+\+DECELRATING}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{STP\+\_\+\+MOVEMENT\+\_\+\+STOPPED}}
+, \newline
+\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{STP\+\_\+\+MOVEMENT\+\_\+\+FINISHED}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{STP\+\_\+\+MOVEMENT\+\_\+\+SUCCESSFUL}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{STP\+\_\+\+MOVEMENT\+\_\+\+FAILED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor movement states. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \{ \doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\+\_\+\+CLOCKWISE}}
+, \doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{STP\+\_\+\+COUNTERCLOCKWISE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor rotation directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the stepper motor control module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing stepper motor commands. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}{STP\+\_\+move\+\_\+relative}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t step\+Count, \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}} direction)
+\begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\+\_\+init\+\_\+stepper}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config)
+\begin{DoxyCompactList}\small\item\em Initializes a stepper motor with the provided configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+id}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Retrieves the stepper motor handle by its label identifier. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6}{STP\+\_\+stop}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t do\+Deceleration)
+\begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for controlling stepper motors using FTM with acceleration/\+deceleration. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__STEP__Module_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_ACCEL\_TABLE\_INTERP\_FACTOR@{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}}
+\index{STP\_ACCEL\_TABLE\_INTERP\_FACTOR@{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0} 
+\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR~1}
+
+
+
+Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}}
+\index{STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_ACCEL\_TABLE\_POOL\_SIZE}{STP\_ACCEL\_TABLE\_POOL\_SIZE}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d} 
+\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE~4}
+
+
+
+Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00081}{81}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga40840a26152b33c7da5dd5b776950645}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_CONFIG\_QUEUE\_SIZE@{STP\_CONFIG\_QUEUE\_SIZE}}
+\index{STP\_CONFIG\_QUEUE\_SIZE@{STP\_CONFIG\_QUEUE\_SIZE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_CONFIG\_QUEUE\_SIZE}{STP\_CONFIG\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga40840a26152b33c7da5dd5b776950645} 
+\+\#define STP\+\_\+\+CONFIG\+\_\+\+QUEUE\+\_\+\+SIZE~3}
+
+
+
+Size of the stepper configuration queue. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00060}{60}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}}
+\index{STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_ACCEL\_TABLE\_SIZE}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE~3000}
+
+
+
+Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00067}{67}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}}
+\index{STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_HANDLE\_COUNT}{STP\_MAX\_HANDLE\_COUNT}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT~6}
+
+
+
+Maximum number of stepper motor handles that can be created. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_gafede3ab78553a37273452e08d610c880}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MAX\_STEP\_FREQUENCY@{STP\_MAX\_STEP\_FREQUENCY}}
+\index{STP\_MAX\_STEP\_FREQUENCY@{STP\_MAX\_STEP\_FREQUENCY}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_STEP\_FREQUENCY}{STP\_MAX\_STEP\_FREQUENCY}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gafede3ab78553a37273452e08d610c880} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+STEP\+\_\+\+FREQUENCY~100}
+
+
+
+Maximum step frequency for stepper motors (in steps/\+s). 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MIN\_STEP\_ACCELERATION@{STP\_MIN\_STEP\_ACCELERATION}}
+\index{STP\_MIN\_STEP\_ACCELERATION@{STP\_MIN\_STEP\_ACCELERATION}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MIN\_STEP\_ACCELERATION}{STP\_MIN\_STEP\_ACCELERATION}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb} 
+\+\#define STP\+\_\+\+MIN\+\_\+\+STEP\+\_\+\+ACCELERATION~10}
+
+
+
+Minimum acceleration for stepper motors (in degrees/\+s²). 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00045}{45}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga9be997eb3beb5449a8f3967c3e9050d9}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_QUEUE\_SIZE@{STP\_MOVEMENT\_QUEUE\_SIZE}}
+\index{STP\_MOVEMENT\_QUEUE\_SIZE@{STP\_MOVEMENT\_QUEUE\_SIZE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MOVEMENT\_QUEUE\_SIZE}{STP\_MOVEMENT\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga9be997eb3beb5449a8f3967c3e9050d9} 
+\+\#define STP\+\_\+\+MOVEMENT\+\_\+\+QUEUE\+\_\+\+SIZE~10}
+
+
+
+Size of the movement command queue. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00055}{55}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__STEP__Module_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_Direction\_t@{STP\_Direction\_t}}
+\index{STP\_Direction\_t@{STP\_Direction\_t}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_Direction\_t}{STP\_Direction\_t}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820} 
+typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}}
+
+
+
+Enumeration of stepper motor rotation directions. 
+
+\Hypertarget{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MovementState\_t@{STP\_MovementState\_t}}
+\index{STP\_MovementState\_t@{STP\_MovementState\_t}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_MovementState\_t}{STP\_MovementState\_t}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827} 
+typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}}}
+
+
+
+Enumeration of stepper motor movement states. 
+
+Represents the current state of a stepper motor movement operation. \Hypertarget{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_StepperConfig\_t@{STP\_StepperConfig\_t}}
+\index{STP\_StepperConfig\_t@{STP\_StepperConfig\_t}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_StepperConfig\_t}{STP\_StepperConfig\_t}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga535eb32d7f105664817feda22180e59b} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}} \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}}
+
+
+
+Configuration structure for initializing a stepper motor. 
+
+Contains all necessary configuration parameters to initialize and set up a new stepper motor control instance. \Hypertarget{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_StepperHandle\_t@{STP\_StepperHandle\_t}}
+\index{STP\_StepperHandle\_t@{STP\_StepperHandle\_t}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_StepperHandle\_t}{STP\_StepperHandle\_t}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}}}
+
+
+
+Handle structure for a stepper motor instance. 
+
+Contains hardware configuration and control parameters for a single stepper motor, including FTM timer settings, GPIO pins, and movement parameters. \Hypertarget{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_StepperMovementHandle\_t@{STP\_StepperMovementHandle\_t}}
+\index{STP\_StepperMovementHandle\_t@{STP\_StepperMovementHandle\_t}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_StepperMovementHandle\_t}{STP\_StepperMovementHandle\_t}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Movement\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\+\_\+\+Stepper\+Movement\+Handle\+\_\+t}}}
+
+
+
+Structure for tracking stepper motor movement state and parameters. 
+
+Contains all necessary information for executing a stepper motor movement, including acceleration/\+deceleration profile, current step count, and motor state. 
+
+\label{doc-enum-members}
+\Hypertarget{group__STEP__Module_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!\_STP\_Direction@{\_STP\_Direction}}
+\index{\_STP\_Direction@{\_STP\_Direction}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{\_STP\_Direction}{\_STP\_Direction}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6} 
+enum \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}}}
+
+
+
+Enumeration of stepper motor rotation directions. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CLOCKWISE@{STP\_CLOCKWISE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_CLOCKWISE@{STP\_CLOCKWISE}}
+}\Hypertarget{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}\label{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812} 
+STP\+\_\+\+CLOCKWISE&Rotate clockwise \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_COUNTERCLOCKWISE@{STP\_COUNTERCLOCKWISE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_COUNTERCLOCKWISE@{STP\_COUNTERCLOCKWISE}}
+}\Hypertarget{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}\label{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54} 
+STP\+\_\+\+COUNTERCLOCKWISE&Rotate counterclockwise \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00110}{110}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+\Hypertarget{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!\_STP\_MovementState@{\_STP\_MovementState}}
+\index{\_STP\_MovementState@{\_STP\_MovementState}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{\_STP\_MovementState}{\_STP\_MovementState}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92} 
+enum \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}}}
+
+
+
+Enumeration of stepper motor movement states. 
+
+Represents the current state of a stepper motor movement operation. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_IDLE@{STP\_MOVEMENT\_IDLE}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_IDLE@{STP\_MOVEMENT\_IDLE}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7} 
+STP\+\_\+\+MOVEMENT\+\_\+\+IDLE&Stepper motor is idling \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_CALLED@{STP\_MOVEMENT\_CALLED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_CALLED@{STP\_MOVEMENT\_CALLED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc} 
+STP\+\_\+\+MOVEMENT\+\_\+\+CALLED&Movement command received \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_PLANNED@{STP\_MOVEMENT\_PLANNED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_PLANNED@{STP\_MOVEMENT\_PLANNED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80} 
+STP\+\_\+\+MOVEMENT\+\_\+\+PLANNED&Movement profile calculated \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_STARTED@{STP\_MOVEMENT\_STARTED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_STARTED@{STP\_MOVEMENT\_STARTED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c} 
+STP\+\_\+\+MOVEMENT\+\_\+\+STARTED&Movement started \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_ACCELERATING@{STP\_MOVEMENT\_ACCELERATING}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_ACCELERATING@{STP\_MOVEMENT\_ACCELERATING}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32} 
+STP\+\_\+\+MOVEMENT\+\_\+\+ACCELERATING&Motor is currently accelerating \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_CONST\_VELOCITY@{STP\_MOVEMENT\_CONST\_VELOCITY}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_CONST\_VELOCITY@{STP\_MOVEMENT\_CONST\_VELOCITY}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce} 
+STP\+\_\+\+MOVEMENT\+\_\+\+CONST\+\_\+\+VELOCITY&Motor is currently running with constant velocity \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_DECELRATING@{STP\_MOVEMENT\_DECELRATING}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_DECELRATING@{STP\_MOVEMENT\_DECELRATING}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3} 
+STP\+\_\+\+MOVEMENT\+\_\+\+DECELRATING&Motor is currently decelerating \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_STOPPED@{STP\_MOVEMENT\_STOPPED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_STOPPED@{STP\_MOVEMENT\_STOPPED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612} 
+STP\+\_\+\+MOVEMENT\+\_\+\+STOPPED&Movement stopped before completion \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_FINISHED@{STP\_MOVEMENT\_FINISHED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_FINISHED@{STP\_MOVEMENT\_FINISHED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559} 
+STP\+\_\+\+MOVEMENT\+\_\+\+FINISHED&Movement completed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_SUCCESSFUL@{STP\_MOVEMENT\_SUCCESSFUL}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_SUCCESSFUL@{STP\_MOVEMENT\_SUCCESSFUL}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f} 
+STP\+\_\+\+MOVEMENT\+\_\+\+SUCCESSFUL&Movement completed successfully \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_FAILED@{STP\_MOVEMENT\_FAILED}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_MOVEMENT\_FAILED@{STP\_MOVEMENT\_FAILED}}
+}\Hypertarget{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}\label{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff} 
+STP\+\_\+\+MOVEMENT\+\_\+\+FAILED&Movement failed \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step_8h_source_l00092}{92}} of file \doxymbox{\hyperlink{step_8h_source}{step.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__STEP__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_get\_handle\_by\_id@{STP\_get\_handle\_by\_id}}
+\index{STP\_get\_handle\_by\_id@{STP\_get\_handle\_by\_id}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_handle\_by\_id()}{STP\_get\_handle\_by\_id()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f} 
+status\+\_\+t STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{label}{, }\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the stepper motor handle by its label identifier. 
+
+This function searches for a stepper motor by its label and returns a pointer to its handle structure if found.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em label} & The label identifier of the stepper motor to find. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em handle} & Pointer to store the found stepper motor handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The label must match exactly as configured during \doxylink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\+\_\+init\+\_\+stepper()}.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the stepper motor is found. k\+Status\+\_\+\+Fail if the stepper motor with the given label is not found.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\+\_\+init\+\_\+stepper()} 
+
+\doxylink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00225}{225}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_init@{STP\_init}}
+\index{STP\_init@{STP\_init}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_init()}{STP\_init()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d} 
+status\+\_\+t STP\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the stepper motor control module. 
+
+This function initializes the movement and configuration queues used for task-\/safe communication. It must be called before using any other functions in this module.
+
+\begin{DoxyNote}{Note}
+This function is NOT task-\/safe and must be called during system initialization. 
+
+The \doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} should be started after this function completes successfully. 
+
+Ensure FTM timer and GPIO peripherals are initialized before calling this.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if initialization is successful. k\+Status\+\_\+\+Fail if queue creation fails.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00139}{139}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_init\_stepper@{STP\_init\_stepper}}
+\index{STP\_init\_stepper@{STP\_init\_stepper}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_init\_stepper()}{STP\_init\_stepper()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gada538bfbae08221ae79de50df018f65a} 
+status\+\_\+t STP\+\_\+init\+\_\+stepper (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a stepper motor with the provided configuration. 
+
+This function sends a configuration command to the stepper control task. The stepper motor will be configured according to the provided parameters.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em config} & Configuration structure containing stepper parameters.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called after \doxylink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()}. 
+
+Configuration is applied asynchronously by the \doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()}. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not modify the config structure after calling this function.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the configuration is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t} 
+
+\doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00212}{212}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_move\_relative@{STP\_move\_relative}}
+\index{STP\_move\_relative@{STP\_move\_relative}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_move\_relative()}{STP\_move\_relative()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8} 
+status\+\_\+t STP\+\_\+move\+\_\+relative (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t}]{step\+Count}{, }\item[{\doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}}]{direction}{}\end{DoxyParamCaption})}
+
+
+
+Sends a relative movement command to a stepper motor. 
+
+This function adds a movement command to the queue for the specified stepper. The movement will be executed asynchronously by the STP\+\_\+task function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Pointer to the stepper motor handle. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em step\+Count} & Number of steps to move. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em direction} & Direction of movement (clockwise or counterclockwise).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The actual movement occurs in the \doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} and is non-\/blocking. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Multiple calls will queue movements to execute sequentially.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00195}{195}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_stop@{STP\_stop}}
+\index{STP\_stop@{STP\_stop}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_stop()}{STP\_stop()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6} 
+status\+\_\+t STP\+\_\+stop (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t}]{do\+Deceleration}{}\end{DoxyParamCaption})}
+
+
+
+Stops a stepper motor movement. 
+
+This function sends a command to stop the specified stepper motor. The motor can be stopped immediately or with a deceleration phase to smoothly bring it to rest, depending on the do\+Deceleration parameter.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Pointer to the stepper motor handle. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em do\+Deceleration} & If 1, the motor will decelerate to a stop. If 0, the motor will stop immediately.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The stop command is queued and executed by the \doxylink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()}.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the stop command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}{STP\+\_\+move\+\_\+relative()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00180}{180}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}\index{Stepper Motor Control Module@{Stepper Motor Control Module}!STP\_task@{STP\_task}}
+\index{STP\_task@{STP\_task}!Stepper Motor Control Module@{Stepper Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{STP\_task()}{STP\_task()}}
+{\footnotesize\ttfamily \label{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67} 
+void STP\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Task function for processing stepper motor commands. 
+
+This function is intended to be run as a Free\+RTOS task. It continuously processes configuration and movement commands from the queues and manages the stepper motor state machine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (not used in this implementation).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This task should be started after \doxylink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()} completes successfully. 
+
+This task is blocked on command queues and wakes when commands are available. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function does not return; it is expected to run as a perpetual Free\+RTOS task.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00169}{169}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+

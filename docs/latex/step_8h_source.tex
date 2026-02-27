@@ -1,0 +1,162 @@
+\doxysection{step.\+h}
+\hypertarget{step_8h_source}{}\label{step_8h_source}\index{source/step.h@{source/step.h}}
+\doxymbox{\hyperlink{step_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ step.h}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Module\ for\ controlling\ stepper\ motors\ with\ FTM}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00005}00005\ \textcolor{comment}{\ *\ This\ module\ provides\ functionality\ for\ controlling\ stepper\ motors\ using}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00006}00006\ \textcolor{comment}{\ *\ the\ FTM\ peripheral.\ It\ supports\ acceleration}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00007}00007\ \textcolor{comment}{\ *\ and\ deceleration\ profiles\ with\ trapezoidal\ velocity\ profiles\ for\ smooth}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00008}00008\ \textcolor{comment}{\ *\ motor\ control.\ The\ module\ uses\ FreeRTOS\ queues\ for\ task-\/safe\ movement}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00009}00009\ \textcolor{comment}{\ *\ commands.}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00010}00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00011}00011\ \textcolor{comment}{\ *\ @note\ \ \ \ Ensure\ the\ FTM\ peripherals\ and\ GPIO\ are\ initialized\ before\ using\ this\ module.}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00012}00012\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00013}00013\ \textcolor{comment}{\ *\ @date\ \ \ \ 4\ Jan\ 2026}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00014}00014\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00022}00022\ \textcolor{preprocessor}{\#ifndef\ STEP\_H\_}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00023}00023\ \textcolor{preprocessor}{\#define\ STEP\_H\_}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00025}00025\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00026}00026\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00027}00027\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}fsl\_ftm.h"{}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}fsl\_gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}fsl\_port.h"{}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00033}00033\ \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00035}00035\ \textcolor{comment}{\ ***********************************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00040}\doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{00040}}\ \textcolor{preprocessor}{\#define\ STP\_MAX\_HANDLE\_COUNT\ 6}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00045}\doxymbox{\hyperlink{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb}{00045}}\ \textcolor{preprocessor}{\#define\ STP\_MIN\_STEP\_ACCELERATION\ 10}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00050}\doxymbox{\hyperlink{group__STEP__Module_gafede3ab78553a37273452e08d610c880}{00050}}\ \textcolor{preprocessor}{\#define\ STP\_MAX\_STEP\_FREQUENCY\ 100}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00055}\doxymbox{\hyperlink{group__STEP__Module_ga9be997eb3beb5449a8f3967c3e9050d9}{00055}}\ \textcolor{preprocessor}{\#define\ STP\_MOVEMENT\_QUEUE\_SIZE\ 10}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00060}\doxymbox{\hyperlink{group__STEP__Module_ga40840a26152b33c7da5dd5b776950645}{00060}}\ \textcolor{preprocessor}{\#define\ STP\_CONFIG\_QUEUE\_SIZE\ 3}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00067}\doxymbox{\hyperlink{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825}{00067}}\ \textcolor{preprocessor}{\#define\ STP\_MAX\_ACCEL\_TABLE\_SIZE\ 3000}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00074}\doxymbox{\hyperlink{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0}{00074}}\ \textcolor{preprocessor}{\#define\ STP\_ACCEL\_TABLE\_INTERP\_FACTOR\ 1}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00081}\doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{00081}}\ \textcolor{preprocessor}{\#define\ STP\_ACCEL\_TABLE\_POOL\_SIZE\ 4}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00083}00083\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00084}00084\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00085}00085\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00092}\doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{00092}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d390caf1f92}{\_STP\_MovementState}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00093}00093\ \{}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00094}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{00094}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{STP\_MOVEMENT\_IDLE}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00095}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}{00095}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}{STP\_MOVEMENT\_CALLED}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00096}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{00096}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{STP\_MOVEMENT\_PLANNED}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00097}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}{00097}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}{STP\_MOVEMENT\_STARTED}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00098}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{00098}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{STP\_MOVEMENT\_ACCELERATING}},\ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00099}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{00099}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{STP\_MOVEMENT\_CONST\_VELOCITY}},\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00100}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{00100}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{STP\_MOVEMENT\_DECELRATING}},\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00101}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{00101}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{STP\_MOVEMENT\_STOPPED}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00102}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{00102}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{STP\_MOVEMENT\_FINISHED}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00103}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{00103}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{STP\_MOVEMENT\_SUCCESSFUL}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00104}\doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{00104}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{STP\_MOVEMENT\_FAILED}}\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00105}\doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{00105}}\ \}\ \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}};}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00110}\doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{00110}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\_STP\_Direction}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00111}00111\ \{}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00112}\doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{00112}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\_CLOCKWISE}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00113}\doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{00113}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{STP\_COUNTERCLOCKWISE}}\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00114}\doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{00114}}\ \}\ \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\_Direction\_t}};}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00122}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{00122}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\_STP\_StepperMovementHandle}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00124}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a69f11970fe939e7eea94241596282570}{00124}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}\ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a69f11970fe939e7eea94241596282570}{state}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00125}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a64438fffaaa95f28c1d772235abac8d0}{00125}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a64438fffaaa95f28c1d772235abac8d0}{totalSteps}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00126}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a1cac57cd57ee4fc0d28d72e0af6c901d}{00126}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a1cac57cd57ee4fc0d28d72e0af6c901d}{accelSteps}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00127}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a7282ea79bad1408f907f9878369c173f}{00127}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a7282ea79bad1408f907f9878369c173f}{endVelocitySteps}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00128}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a5b60f5449aa1591852bec2986e260ba2}{00128}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a5b60f5449aa1591852bec2986e260ba2}{decelSteps}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00129}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8cbf9bbb24b2c204d9f88900f016b523}{00129}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\_Direction\_t}}\ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8cbf9bbb24b2c204d9f88900f016b523}{direction}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00130}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8958eba4b6f65593a37c734ea9cc35d2}{00130}}\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8958eba4b6f65593a37c734ea9cc35d2}{isTrapezoidal}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00131}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_ac03b3dbe5e88e411265691a29bc25a18}{00131}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_ac03b3dbe5e88e411265691a29bc25a18}{currStepCount}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00132}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a2f2f57d1bdf0adef9c9f7ac5861c955c}{00132}}\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a2f2f57d1bdf0adef9c9f7ac5861c955c}{phaseStepCount}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00133}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a66f4d1f9a080aa90caf920337ac90d19}{00133}}\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a66f4d1f9a080aa90caf920337ac90d19}{endVelocityDelay}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00134}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_aee2e20062ccaf8beac303121662fbcbe}{00134}}\ \ \ \ \ int8\_t\ \ \ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_aee2e20062ccaf8beac303121662fbcbe}{accelTablePoolIndex}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00135}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a5f313f5faa56b24aacf4be11ff10247f}{00135}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a5f313f5faa56b24aacf4be11ff10247f}{accelTableSize}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00136}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8cc6b8741c1ffd5d784e48ff8f6a19ca}{00136}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a8cc6b8741c1ffd5d784e48ff8f6a19ca}{accelInterpFactor}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00137}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a122c02083cb6cfb8ebaf2bd4d532639b}{00137}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_a122c02083cb6cfb8ebaf2bd4d532639b}{accelInterpCounter}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00138}\doxymbox{\hyperlink{struct__STP__StepperMovementHandle_aca34f6a323212a4842df78205eba6a15}{00138}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__STP__StepperMovementHandle_aca34f6a323212a4842df78205eba6a15}{accelTableIndex}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00139}\doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{00139}}\ \}\ \doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\_StepperMovementHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00147}\doxymbox{\hyperlink{struct__STP__StepperHandle}{00147}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__STP__StepperHandle}{\_STP\_StepperHandle}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00148}00148\ \{}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00149}\doxymbox{\hyperlink{struct__STP__StepperHandle_aef843c72a9b99822e2fbc34d8cedc48d}{00149}}\ \ \ \ \ FTM\_Type*\ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_aef843c72a9b99822e2fbc34d8cedc48d}{ftmBase}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00150}\doxymbox{\hyperlink{struct__STP__StepperHandle_ab05862c9d0945e5e8ee476a40eca4b24}{00150}}\ \ \ \ \ ftm\_chnl\_t\ \doxymbox{\hyperlink{struct__STP__StepperHandle_ab05862c9d0945e5e8ee476a40eca4b24}{ftmChannel}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00151}\doxymbox{\hyperlink{struct__STP__StepperHandle_acde5b2924fe6c593f913089946d6dcf1}{00151}}\ \ \ \ \ PORT\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperHandle_acde5b2924fe6c593f913089946d6dcf1}{stepPort}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00152}\doxymbox{\hyperlink{struct__STP__StepperHandle_a72a9764593e9d6ba2b1cffcdd7f93163}{00152}}\ \ \ \ \ GPIO\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperHandle_a72a9764593e9d6ba2b1cffcdd7f93163}{stepGPIO}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00153}\doxymbox{\hyperlink{struct__STP__StepperHandle_a17b8a7dc2977332b6a671775d02a5bd2}{00153}}\ \ \ \ \ uint8\_t\ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_a17b8a7dc2977332b6a671775d02a5bd2}{stepPin}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00154}\doxymbox{\hyperlink{struct__STP__StepperHandle_a283717e7b565a4839fcb3a9cb26e9dee}{00154}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperHandle_a283717e7b565a4839fcb3a9cb26e9dee}{stepMuxFTM}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00155}\doxymbox{\hyperlink{struct__STP__StepperHandle_ae257944640ab399e7462be95386bff28}{00155}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperHandle_ae257944640ab399e7462be95386bff28}{stepMuxGPIO}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00156}\doxymbox{\hyperlink{struct__STP__StepperHandle_ad3d89f12a5bdaca634c2df5170744b90}{00156}}\ \ \ \ \ PORT\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperHandle_ad3d89f12a5bdaca634c2df5170744b90}{dirPort}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00157}\doxymbox{\hyperlink{struct__STP__StepperHandle_a8566f63d62482a5b4cafb1fa79d99dd8}{00157}}\ \ \ \ \ GPIO\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperHandle_a8566f63d62482a5b4cafb1fa79d99dd8}{dirGPIO}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00158}\doxymbox{\hyperlink{struct__STP__StepperHandle_ac5eb1f52265784a129d476d346801191}{00158}}\ \ \ \ \ uint8\_t\ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_ac5eb1f52265784a129d476d346801191}{dirPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00159}\doxymbox{\hyperlink{struct__STP__StepperHandle_a139cad2128e0d1e49f8ca3bbcf09f874}{00159}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperHandle_a139cad2128e0d1e49f8ca3bbcf09f874}{dirMux}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00160}\doxymbox{\hyperlink{struct__STP__StepperHandle_a238ac7ea8b3a651e2e46b2c7de195579}{00160}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__STP__StepperHandle_a238ac7ea8b3a651e2e46b2c7de195579}{dirLogicHighClockwise}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00161}\doxymbox{\hyperlink{struct__STP__StepperHandle_aa8306793fad3c5de251e1b5e8e2e9e7f}{00161}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_aa8306793fad3c5de251e1b5e8e2e9e7f}{acceleration}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00162}\doxymbox{\hyperlink{struct__STP__StepperHandle_a371a967ec2103057681013131712bb59}{00162}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_a371a967ec2103057681013131712bb59}{stepAngle}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00163}\doxymbox{\hyperlink{struct__STP__StepperHandle_a911a304b3b25974c0c2fa333072a2ef3}{00163}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_a911a304b3b25974c0c2fa333072a2ef3}{microstepping}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00164}\doxymbox{\hyperlink{struct__STP__StepperHandle_ac8366c302cd7a0823bda8bd218d14fdd}{00164}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_ac8366c302cd7a0823bda8bd218d14fdd}{endVelocity}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00165}\doxymbox{\hyperlink{struct__STP__StepperHandle_a01f044dfdb93049e61a6cff27a3121ea}{00165}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperHandle_a01f044dfdb93049e61a6cff27a3121ea}{label}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00166}\doxymbox{\hyperlink{struct__STP__StepperHandle_ad3a5aae399b48f4178ba9357403b1186}{00166}}\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\_StepperMovementHandle\_t}}\ \doxymbox{\hyperlink{struct__STP__StepperHandle_ad3a5aae399b48f4178ba9357403b1186}{movementHandle}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00167}\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{00167}}\ \}\ \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\_StepperHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00175}\doxymbox{\hyperlink{struct__STP__StepperConfig}{00175}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__STP__StepperConfig}{\_STP\_StepperConfig}}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00176}00176\ \{}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00177}\doxymbox{\hyperlink{struct__STP__StepperConfig_a09b01227df8e70a4ffaa73c5042b88cc}{00177}}\ \ \ \ \ FTM\_Type*\ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_a09b01227df8e70a4ffaa73c5042b88cc}{ftmBase}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00178}\doxymbox{\hyperlink{struct__STP__StepperConfig_a2b002997b9b0252cff1ceca529c1b6f4}{00178}}\ \ \ \ \ ftm\_chnl\_t\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a2b002997b9b0252cff1ceca529c1b6f4}{ftmChannel}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00179}\doxymbox{\hyperlink{struct__STP__StepperConfig_a6439c06307b0273393c936ff7eab1132}{00179}}\ \ \ \ \ PORT\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a6439c06307b0273393c936ff7eab1132}{stepPort}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00180}\doxymbox{\hyperlink{struct__STP__StepperConfig_a972eecf1cbdb97bf9e3c3c51968bc361}{00180}}\ \ \ \ \ GPIO\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a972eecf1cbdb97bf9e3c3c51968bc361}{stepGPIO}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00181}\doxymbox{\hyperlink{struct__STP__StepperConfig_ab874ab92a110d8984438834bad39cee0}{00181}}\ \ \ \ \ uint8\_t\ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_ab874ab92a110d8984438834bad39cee0}{stepPin}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00182}\doxymbox{\hyperlink{struct__STP__StepperConfig_a48f4b6a8eb83efe3d119a7a725738ae8}{00182}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a48f4b6a8eb83efe3d119a7a725738ae8}{stepMuxFTM}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00183}\doxymbox{\hyperlink{struct__STP__StepperConfig_a678bf3e812c48186b8999b2d31de8abf}{00183}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a678bf3e812c48186b8999b2d31de8abf}{stepMuxGPIO}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00184}\doxymbox{\hyperlink{struct__STP__StepperConfig_a2b8a7dea2034d5ec93824f97222848d0}{00184}}\ \ \ \ \ PORT\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a2b8a7dea2034d5ec93824f97222848d0}{dirPort}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00185}\doxymbox{\hyperlink{struct__STP__StepperConfig_a292242c27cf49a515f1b74f8f32353eb}{00185}}\ \ \ \ \ GPIO\_Type*\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a292242c27cf49a515f1b74f8f32353eb}{dirGPIO}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00186}\doxymbox{\hyperlink{struct__STP__StepperConfig_a256d6262b3e859d356cb6c692a732b0b}{00186}}\ \ \ \ \ uint8\_t\ \ \ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_a256d6262b3e859d356cb6c692a732b0b}{dirPin}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00187}\doxymbox{\hyperlink{struct__STP__StepperConfig_a6b2fde3783edbd55ae353efd89e4e39b}{00187}}\ \ \ \ \ port\_mux\_t\ \doxymbox{\hyperlink{struct__STP__StepperConfig_a6b2fde3783edbd55ae353efd89e4e39b}{dirMux}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00188}\doxymbox{\hyperlink{struct__STP__StepperConfig_aa564970684c1890beeac4cf061b5a178}{00188}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__STP__StepperConfig_aa564970684c1890beeac4cf061b5a178}{dirLogicHighClockwise}};\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00189}\doxymbox{\hyperlink{struct__STP__StepperConfig_a5bca4bcca30b524ab2dc2bf94d416eea}{00189}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_a5bca4bcca30b524ab2dc2bf94d416eea}{acceleration}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00190}\doxymbox{\hyperlink{struct__STP__StepperConfig_a4bb3b71164dafe76123c273a7be8922b}{00190}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_a4bb3b71164dafe76123c273a7be8922b}{stepAngle}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00191}\doxymbox{\hyperlink{struct__STP__StepperConfig_a0535c20f9772b091eea41b46867c0063}{00191}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \doxymbox{\hyperlink{struct__STP__StepperConfig_a0535c20f9772b091eea41b46867c0063}{endVelocity}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00192}\doxymbox{\hyperlink{struct__STP__StepperConfig_acd7c7bb05491b0c6e76d9376a57406d3}{00192}}\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{struct__STP__StepperConfig_acd7c7bb05491b0c6e76d9376a57406d3}{label}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00193}\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{00193}}\ \}\ \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\_StepperConfig\_t}};}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00195}00195\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00196}00196\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00197}00197\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00199}00199\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00200}00200\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00201}00201\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00219}00219\ status\_t\ \doxymbox{\hyperlink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00236}00236\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\_task}}(\textcolor{keywordtype}{void}*\ pvParameters);}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00257}00257\ status\_t\ \doxymbox{\hyperlink{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}{STP\_move\_relative}}(\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\_StepperHandle\_t}}*\ handle,\ uint32\_t\ stepCount,}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\_Direction\_t}}\ direction);}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00278}00278\ status\_t\ \doxymbox{\hyperlink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\_init\_stepper}}(\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\_StepperConfig\_t}}\ config);}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00298}00298\ status\_t\ \doxymbox{\hyperlink{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f}{STP\_get\_handle\_by\_id}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ label,\ \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\_StepperHandle\_t}}**\ handle);}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00319}00319\ status\_t\ \doxymbox{\hyperlink{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6}{STP\_stop}}(\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\_StepperHandle\_t}}*\ handle,\ uint8\_t\ doDeceleration);}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00320}00320\ \ \textcolor{comment}{//\ End\ of\ STEP\_Module}}
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{step_8h_source_l00323}00323\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STEP\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

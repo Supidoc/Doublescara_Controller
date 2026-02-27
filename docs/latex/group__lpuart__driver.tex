@@ -1,0 +1,1914 @@
+\doxysection{Lpuart\+\_\+driver }
+\hypertarget{group__lpuart__driver}{}\label{group__lpuart__driver}\index{Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__lpuart__config}{\+\_\+lpuart\+\_\+config}}
+\begin{DoxyCompactList}\small\item\em LPUART configuration structure. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__lpuart__transfer}{\+\_\+lpuart\+\_\+transfer}}
+\begin{DoxyCompactList}\small\item\em LPUART transfer structure. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__lpuart__handle}{\+\_\+lpuart\+\_\+handle}}
+\begin{DoxyCompactList}\small\item\em LPUART handle structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__lpuart__driver_gac0f88b67f77fd05f186a5ec940c340bd}{UART\+\_\+\+RETRY\+\_\+\+TIMES}}~0U /\+\texorpdfstring{$\ast$}{*} Defining to zero means to keep waiting for the flag until it is assert/\+deassert. \texorpdfstring{$\ast$}{*}/\+
+\begin{DoxyCompactList}\small\item\em Retry times for waiting flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1}\label{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1} 
+typedef enum \doxymbox{\hyperlink{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}{\+\_\+lpuart\+\_\+parity\+\_\+mode}} {\bfseries lpuart\+\_\+parity\+\_\+mode\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART parity mode. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_ga6785b5dcafe473d18fd40d490251c5eb}\label{group__lpuart__driver_ga6785b5dcafe473d18fd40d490251c5eb} 
+typedef enum \doxymbox{\hyperlink{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}{\+\_\+lpuart\+\_\+data\+\_\+bits}} {\bfseries lpuart\+\_\+data\+\_\+bits\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART data bits count. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac}\label{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac} 
+typedef enum \doxymbox{\hyperlink{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}{\+\_\+lpuart\+\_\+stop\+\_\+bit\+\_\+count}} {\bfseries lpuart\+\_\+stop\+\_\+bit\+\_\+count\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART stop bit count. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_ga42eaf9d7f780b53a6e974743122eebb0}\label{group__lpuart__driver_ga42eaf9d7f780b53a6e974743122eebb0} 
+typedef enum \doxymbox{\hyperlink{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}{\+\_\+lpuart\+\_\+idle\+\_\+type\+\_\+select}} {\bfseries lpuart\+\_\+idle\+\_\+type\+\_\+select\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART idle flag type defines when the receiver starts counting. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_gaaf5c727d57d2e3dcf413d6dcdb3e74c1}\label{group__lpuart__driver_gaaf5c727d57d2e3dcf413d6dcdb3e74c1} 
+typedef enum \doxymbox{\hyperlink{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}{\+\_\+lpuart\+\_\+idle\+\_\+config}} {\bfseries lpuart\+\_\+idle\+\_\+config\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART idle detected configuration. This structure defines the number of idle characters that must be received before the IDLE flag is set. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}\label{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39} 
+typedef struct \doxymbox{\hyperlink{struct__lpuart__config}{\+\_\+lpuart\+\_\+config}} {\bfseries lpuart\+\_\+config\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART configuration structure. \end{DoxyCompactList}\item 
+\Hypertarget{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}\label{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37} 
+typedef struct \doxymbox{\hyperlink{struct__lpuart__transfer}{\+\_\+lpuart\+\_\+transfer}} {\bfseries lpuart\+\_\+transfer\+\_\+t}
+\begin{DoxyCompactList}\small\item\em LPUART transfer structure. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__lpuart__handle}{\+\_\+lpuart\+\_\+handle}} \doxymbox{\hyperlink{group__lpuart__driver_gaeae5fcbb252991c5f0cdc72dc8deae25}{lpuart\+\_\+handle\+\_\+t}}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\+\_\+transfer\+\_\+callback\+\_\+t}}) (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} status, void \texorpdfstring{$\ast$}{*}user\+Data)
+\begin{DoxyCompactList}\small\item\em LPUART transfer callback function. \end{DoxyCompactList}\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__lpuart__driver_gaf941a288fa3610b1791ea695d32bce0d}{lpuart\+\_\+isr\+\_\+t}}) (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}{k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Busy}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 0)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Busy}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 1)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}{k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 2)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Idle}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 3)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabbee969cb0f7b4c49b44b10c4eb583cc}{k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Watermark\+Too\+Large}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 4)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaca81b4d6e2e792c6d841b95ec25daad9}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Watermark\+Too\+Large}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 5)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb}{k\+Status\+\_\+\+LPUART\+\_\+\+Flag\+Cannot\+Clear\+Manually}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 6)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf069a1997c3d25588d834ccb33dd35f4}{k\+Status\+\_\+\+LPUART\+\_\+\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 7)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba45a7ed684f4c31aec8999b3da68d3b5e}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Ring\+Buffer\+Overrun}}
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 9)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}{k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 10)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}{k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 11)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}{k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 12)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}{k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support}}
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba29540bf056281514eb42c8885f7e2e10}{k\+Status\+\_\+\+LPUART\+\_\+\+Idle\+Line\+Detected}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 14)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{k\+Status\+\_\+\+LPUART\+\_\+\+Timeout}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+LPUART, 15)
+ \}
+\begin{DoxyCompactList}\small\item\em Error codes for the LPUART driver. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}{\+\_\+lpuart\+\_\+parity\+\_\+mode}} \{ \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a}{k\+LPUART\+\_\+\+Parity\+Disabled}} = 0x0U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059ac92adb3fdf11240ca5dee6c6543b6ff7}{k\+LPUART\+\_\+\+Parity\+Even}} = 0x2U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059adab63856e98e0715f4ab289ac0da3575}{k\+LPUART\+\_\+\+Parity\+Odd}} = 0x3U
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART parity mode. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}{\+\_\+lpuart\+\_\+data\+\_\+bits}} \{ \doxymbox{\hyperlink{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899}{k\+LPUART\+\_\+\+Eight\+Data\+Bits}} = 0x0U
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART data bits count. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}{\+\_\+lpuart\+\_\+stop\+\_\+bit\+\_\+count}} \{ \doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901}{k\+LPUART\+\_\+\+One\+Stop\+Bit}} = 0U
+, \doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a6e049e0faaf89ed2dfe493ad8f6c93d4}{k\+LPUART\+\_\+\+Two\+Stop\+Bit}} = 1U
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART stop bit count. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}{\+\_\+lpuart\+\_\+idle\+\_\+type\+\_\+select}} \{ \doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da0644f6b95813c520dede56ee3a944267}{k\+LPUART\+\_\+\+Idle\+Type\+Start\+Bit}} = 0U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da69545f21a3401c126bf295b5cf94225b}{k\+LPUART\+\_\+\+Idle\+Type\+Stop\+Bit}} = 1U
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART idle flag type defines when the receiver starts counting. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}{\+\_\+lpuart\+\_\+idle\+\_\+config}} \{ \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba955e0bb4d3e75e577eef544b440c24be}{k\+LPUART\+\_\+\+Idle\+Character1}} = 0U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba270caa8e77b08697404771af82abd131}{k\+LPUART\+\_\+\+Idle\+Character2}} = 1U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bacab443d3d053070635ea1f859b73f34c}{k\+LPUART\+\_\+\+Idle\+Character4}} = 2U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25baf125ff40887939add6dd0f42d4485bf3}{k\+LPUART\+\_\+\+Idle\+Character8}} = 3U
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bace45d3af9a0c590f053df7bb00e6582a}{k\+LPUART\+\_\+\+Idle\+Character16}} = 4U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba1daee04c54b7e37ca5e7331a3e1e7374}{k\+LPUART\+\_\+\+Idle\+Character32}} = 5U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bac497a53ed2755d26961f3b72fbd180ed}{k\+LPUART\+\_\+\+Idle\+Character64}} = 6U
+, \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba4e080722efa87475f1710f5524e50c67}{k\+LPUART\+\_\+\+Idle\+Character128}} = 7U
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART idle detected configuration. This structure defines the number of idle characters that must be received before the IDLE flag is set. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}} \{ \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a}{k\+LPUART\+\_\+\+Rx\+Active\+Edge\+Interrupt\+Enable}} = (LPUART\+\_\+\+BAUD\+\_\+\+RXEDGIE\+\_\+\+MASK \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} 8U)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+TIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{k\+LPUART\+\_\+\+Transmission\+Complete\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+TCIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+RIE\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d}{k\+LPUART\+\_\+\+Idle\+Line\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+ILIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636}{k\+LPUART\+\_\+\+Rx\+Overrun\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+ORIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e}{k\+LPUART\+\_\+\+Noise\+Error\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+NEIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d}{k\+LPUART\+\_\+\+Framing\+Error\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+FEIE\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466}{k\+LPUART\+\_\+\+Parity\+Error\+Interrupt\+Enable}} = (LPUART\+\_\+\+CTRL\+\_\+\+PEIE\+\_\+\+MASK)
+, {\bfseries k\+LPUART\+\_\+\+All\+Interrupt\+Enable}
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART interrupt configuration structure, default settings all disabled. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}} \{ \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}{k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag}}
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}{k\+LPUART\+\_\+\+Transmission\+Complete\+Flag}}
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f}{k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+RDRF\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}{k\+LPUART\+\_\+\+Idle\+Line\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+IDLE\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}{k\+LPUART\+\_\+\+Rx\+Overrun\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+OR\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}{k\+LPUART\+\_\+\+Noise\+Error\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+NF\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}{k\+LPUART\+\_\+\+Framing\+Error\+Flag}}
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}{k\+LPUART\+\_\+\+Parity\+Error\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+PF\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}{k\+LPUART\+\_\+\+Rx\+Active\+Edge\+Flag}} = (LPUART\+\_\+\+STAT\+\_\+\+RXEDGIF\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799}{k\+LPUART\+\_\+\+Rx\+Active\+Flag}}
+, {\bfseries k\+LPUART\+\_\+\+All\+Clear\+Flags}
+, {\bfseries k\+LPUART\+\_\+\+All\+Flags}
+ \}
+\begin{DoxyCompactList}\small\item\em LPUART status flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__lpuart__driver_ga1100b0c89887e3d4a824c4e898eaee95}{s\+\_\+lpuart\+Handle}} \+[$\,$]\+
+\item 
+\Hypertarget{group__lpuart__driver_gadc6af8d12ba1267b4018773da5e82023}\label{group__lpuart__driver_gadc6af8d12ba1267b4018773da5e82023} 
+const IRQn\+\_\+\+Type {\bfseries s\+\_\+lpuart\+IRQ} \+[$\,$]\+
+\item 
+lpuart\+\_\+isr\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_gae48b44edd6bc6ba0a53f1fd6ea36dd29}{s\+\_\+lpuart\+Isr}} \+[$\,$]\+
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Initialization and deinitialization}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_ga26ce3e5d63d8dd5d317a83f22af9682c}{LPUART\+\_\+\+Init}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, const \doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}config, uint32\+\_\+t src\+Clock\+\_\+\+Hz)
+\begin{DoxyCompactList}\small\item\em Initializes an LPUART instance with the user configuration structure and the peripheral clock. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga303ff3b77767bafa449d96f1e8c921e0}{LPUART\+\_\+\+Deinit}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Deinitializes a LPUART instance. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440}{LPUART\+\_\+\+Get\+Default\+Config}} (\doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Gets the default configuration structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Module configuration}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gaf03d9292f8b4cb6e9748cb0bc1db7577}{LPUART\+\_\+\+Set\+Baud\+Rate}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t baud\+Rate\+\_\+\+Bps, uint32\+\_\+t src\+Clock\+\_\+\+Hz)
+\begin{DoxyCompactList}\small\item\em Sets the LPUART instance baudrate. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_gae7e13bb206bd78070737968610437fb1}{LPUART\+\_\+\+Enable9bit\+Mode}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enable 9-\/bit data mode for LPUART. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_gae4987ccc6a25b2aa8a99a18868fda3eb}{LPUART\+\_\+\+Set\+Match\+Address}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint16\+\_\+t address1, uint16\+\_\+t address2)
+\begin{DoxyCompactList}\small\item\em Set the LPUART address. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_gaafe7ddb53960e2f4cd7ba2a01f00982e}{LPUART\+\_\+\+Enable\+Match\+Address}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool match1, bool match2)
+\begin{DoxyCompactList}\small\item\em Enable the LPUART match address feature. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_ga97eaafd4eba9443bcc11212fee90705f}{LPUART\+\_\+\+Transfer\+Enable16\+Bit}} (lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, bool enable)
+\begin{DoxyCompactList}\small\item\em Sets the LPUART using 16bit transmit, only for 9bit or 10bit mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Status}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09}{LPUART\+\_\+\+Get\+Status\+Flags}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Gets LPUART status flags. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gac6bcdb29d31a2addb8d80d98855ba147}{LPUART\+\_\+\+Clear\+Status\+Flags}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Clears status flags with a provided mask. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Interrupts}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745}{LPUART\+\_\+\+Enable\+Interrupts}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Enables LPUART interrupts according to a provided mask. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}{LPUART\+\_\+\+Disable\+Interrupts}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Disables LPUART interrupts according to a provided mask. \end{DoxyCompactList}\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_ga172b524bae8bacc6dc95d9daf82c97b5}{LPUART\+\_\+\+Get\+Enabled\+Interrupts}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Gets enabled LPUART interrupts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Bus Operations}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_gaaf4c8ce1f1730cdbf094931033d9b52c}{LPUART\+\_\+\+Get\+Instance}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Get the LPUART instance from peripheral base address. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_ga49961d4e9043ff9bd10e477add9258d7}{LPUART\+\_\+\+Enable\+Tx}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enables or disables the LPUART transmitter. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_gaadb8a7199526555e50e65e017da4eae2}{LPUART\+\_\+\+Enable\+Rx}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enables or disables the LPUART receiver. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__lpuart__driver_ga9a9389e1c7bcce6c23e00eb77006a717}{LPUART\+\_\+\+Write\+Byte}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Writes to the transmitter register. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_ga02013105f0aacc7062eaae59d7401d29}{LPUART\+\_\+\+Read\+Byte}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Reads the receiver register. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga85a7dbe15a9f822847791cebe75d5394}{LPUART\+\_\+\+Send\+Address}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint8\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em Transmit an address frame in 9-\/bit data mode. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_ga2699958de62ff4832f95bc2dd8c454a5}{LPUART\+\_\+\+Write\+Blocking}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Writes to the transmitter register using a blocking method. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_ga01d146f5e1b46526d460c5f7aae3891d}{LPUART\+\_\+\+Write\+Blocking16bit}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, const uint16\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Writes to the transmitter register using a blocking method in 9bit or 10bit mode. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gae76aba14dbfe94124082785e2c0ecd9d}{LPUART\+\_\+\+Read\+Blocking}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Reads the receiver data register using a blocking method. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_ga9c95aa20caeceb3d709dd7851ce84eb1}{LPUART\+\_\+\+Read\+Blocking16bit}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint16\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Reads the receiver data register in 9bit or 10bit mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Transactional}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga10eae12610523a624c1016882f8dba5f}{LPUART\+\_\+\+Transfer\+Create\+Handle}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\+\_\+transfer\+\_\+callback\+\_\+t}} callback, void \texorpdfstring{$\ast$}{*}user\+Data)
+\begin{DoxyCompactList}\small\item\em Initializes the LPUART handle. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gafba986c473e5935131e63cb882cf26ff}{LPUART\+\_\+\+Transfer\+Send\+Non\+Blocking}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}xfer)
+\begin{DoxyCompactList}\small\item\em Transmits a buffer of data using the interrupt method. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga5257b77491042af5913a8d91c66318e1}{LPUART\+\_\+\+Transfer\+Start\+Ring\+Buffer}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t \texorpdfstring{$\ast$}{*}ring\+Buffer, size\+\_\+t ring\+Buffer\+Size)
+\begin{DoxyCompactList}\small\item\em Sets up the RX ring buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_gad6a230a664808592aab153ea20e3d60b}{LPUART\+\_\+\+Transfer\+Stop\+Ring\+Buffer}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the background transfer and uninstalls the ring buffer. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{group__lpuart__driver_ga550523d301acfa413919c2f979228bcc}{LPUART\+\_\+\+Transfer\+Get\+Rx\+Ring\+Buffer\+Length}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Get the length of received data in RX ring buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga6dfe9efe9656e126c70ee79fa03f2be3}{LPUART\+\_\+\+Transfer\+Abort\+Send}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the interrupt-\/driven data transmit. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gad80d2469dce0de9361e731e4cefde9fd}{LPUART\+\_\+\+Transfer\+Get\+Send\+Count}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t \texorpdfstring{$\ast$}{*}count)
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes that have been sent out to bus. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918}{LPUART\+\_\+\+Transfer\+Receive\+Non\+Blocking}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}xfer, size\+\_\+t \texorpdfstring{$\ast$}{*}received\+Bytes)
+\begin{DoxyCompactList}\small\item\em Receives a buffer of data using the interrupt method. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga4950fa0f3835992251c109f655a3ca7d}{LPUART\+\_\+\+Transfer\+Abort\+Receive}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the interrupt-\/driven data receiving. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__lpuart__driver_gabfcdc658c463e9e7523cc60c5e8f9672}{LPUART\+\_\+\+Transfer\+Get\+Receive\+Count}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t \texorpdfstring{$\ast$}{*}count)
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes that have been received. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga6377050807e670565fe51b71c95a923c}{LPUART\+\_\+\+Transfer\+Handle\+IRQ}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}irq\+Handle)
+\begin{DoxyCompactList}\small\item\em LPUART IRQ handle function. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_ga277f4cfc074cf67c2c27082df630f2da}{LPUART\+\_\+\+Transfer\+Handle\+Error\+IRQ}} (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}irq\+Handle)
+\begin{DoxyCompactList}\small\item\em LPUART Error IRQ handle function. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__lpuart__driver_gab091154d04cc437a7674ea488233298e}{LPUART\+\_\+\+Driver\+IRQHandler}} (uint32\+\_\+t instance)
+\begin{DoxyCompactList}\small\item\em LPUART driver IRQ handler common entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Driver version}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__lpuart__driver_ga0870fb824ece32739bd35f819f8c408e}{FSL\+\_\+\+LPUART\+\_\+\+DRIVER\+\_\+\+VERSION}}~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 9, 1))
+\begin{DoxyCompactList}\small\item\em LPUART driver version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group__lpuart__driver_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__lpuart__driver_ga0870fb824ece32739bd35f819f8c408e}\index{Lpuart\_driver@{Lpuart\_driver}!FSL\_LPUART\_DRIVER\_VERSION@{FSL\_LPUART\_DRIVER\_VERSION}}
+\index{FSL\_LPUART\_DRIVER\_VERSION@{FSL\_LPUART\_DRIVER\_VERSION}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{FSL\_LPUART\_DRIVER\_VERSION}{FSL\_LPUART\_DRIVER\_VERSION}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga0870fb824ece32739bd35f819f8c408e} 
+\+\#define FSL\+\_\+\+LPUART\+\_\+\+DRIVER\+\_\+\+VERSION~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 9, 1))}
+
+
+
+LPUART driver version. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_gac0f88b67f77fd05f186a5ec940c340bd}\index{Lpuart\_driver@{Lpuart\_driver}!UART\_RETRY\_TIMES@{UART\_RETRY\_TIMES}}
+\index{UART\_RETRY\_TIMES@{UART\_RETRY\_TIMES}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RETRY\_TIMES}{UART\_RETRY\_TIMES}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gac0f88b67f77fd05f186a5ec940c340bd} 
+\+\#define UART\+\_\+\+RETRY\+\_\+\+TIMES~0U /\+\texorpdfstring{$\ast$}{*} Defining to zero means to keep waiting for the flag until it is assert/\+deassert. \texorpdfstring{$\ast$}{*}/\+}
+
+
+
+Retry times for waiting flag. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00029}{29}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__lpuart__driver_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__lpuart__driver_gaeae5fcbb252991c5f0cdc72dc8deae25}\index{Lpuart\_driver@{Lpuart\_driver}!lpuart\_handle\_t@{lpuart\_handle\_t}}
+\index{lpuart\_handle\_t@{lpuart\_handle\_t}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{lpuart\_handle\_t}{lpuart\_handle\_t}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaeae5fcbb252991c5f0cdc72dc8deae25} 
+typedef struct \doxymbox{\hyperlink{struct__lpuart__handle}{\+\_\+lpuart\+\_\+handle}} lpuart\+\_\+handle\+\_\+t}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00286}{286}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_gaf941a288fa3610b1791ea695d32bce0d}\index{Lpuart\_driver@{Lpuart\_driver}!lpuart\_isr\_t@{lpuart\_isr\_t}}
+\index{lpuart\_isr\_t@{lpuart\_isr\_t}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{lpuart\_isr\_t}{lpuart\_isr\_t}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaf941a288fa3610b1791ea695d32bce0d} 
+typedef void(\texorpdfstring{$\ast$}{*} lpuart\+\_\+isr\+\_\+t) (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}handle)}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00331}{331}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}\index{Lpuart\_driver@{Lpuart\_driver}!lpuart\_transfer\_callback\_t@{lpuart\_transfer\_callback\_t}}
+\index{lpuart\_transfer\_callback\_t@{lpuart\_transfer\_callback\_t}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{lpuart\_transfer\_callback\_t}{lpuart\_transfer\_callback\_t}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332} 
+typedef void(\texorpdfstring{$\ast$}{*} lpuart\+\_\+transfer\+\_\+callback\+\_\+t) (\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} status, void \texorpdfstring{$\ast$}{*}user\+Data)}
+
+
+
+LPUART transfer callback function. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00289}{289}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{group__lpuart__driver_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__lpuart__driver_ga2b122bc0e07b67e1c9de094dd34ef6cb}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga2b122bc0e07b67e1c9de094dd34ef6cb} 
+anonymous enum}
+
+
+
+Error codes for the LPUART driver. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_TxBusy@{kStatus\_LPUART\_TxBusy}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_TxBusy@{kStatus\_LPUART\_TxBusy}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Busy&TX busy \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_RxBusy@{kStatus\_LPUART\_RxBusy}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_RxBusy@{kStatus\_LPUART\_RxBusy}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Busy&RX busy \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_TxIdle@{kStatus\_LPUART\_TxIdle}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_TxIdle@{kStatus\_LPUART\_TxIdle}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle&LPUART transmitter is idle. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_RxIdle@{kStatus\_LPUART\_RxIdle}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_RxIdle@{kStatus\_LPUART\_RxIdle}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Idle&LPUART receiver is idle. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_TxWatermarkTooLarge@{kStatus\_LPUART\_TxWatermarkTooLarge}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_TxWatermarkTooLarge@{kStatus\_LPUART\_TxWatermarkTooLarge}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabbee969cb0f7b4c49b44b10c4eb583cc}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabbee969cb0f7b4c49b44b10c4eb583cc} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Watermark\+Too\+Large&TX FIFO watermark too large \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_RxWatermarkTooLarge@{kStatus\_LPUART\_RxWatermarkTooLarge}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_RxWatermarkTooLarge@{kStatus\_LPUART\_RxWatermarkTooLarge}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaca81b4d6e2e792c6d841b95ec25daad9}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaca81b4d6e2e792c6d841b95ec25daad9} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Watermark\+Too\+Large&RX FIFO watermark too large \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_FlagCannotClearManually@{kStatus\_LPUART\_FlagCannotClearManually}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_FlagCannotClearManually@{kStatus\_LPUART\_FlagCannotClearManually}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Flag\+Cannot\+Clear\+Manually&Some flag can\textquotesingle{}t manually clear \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_Error@{kStatus\_LPUART\_Error}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_Error@{kStatus\_LPUART\_Error}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf069a1997c3d25588d834ccb33dd35f4}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf069a1997c3d25588d834ccb33dd35f4} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Error&Error happens on LPUART. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_RxRingBufferOverrun@{kStatus\_LPUART\_RxRingBufferOverrun}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_RxRingBufferOverrun@{kStatus\_LPUART\_RxRingBufferOverrun}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba45a7ed684f4c31aec8999b3da68d3b5e}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba45a7ed684f4c31aec8999b3da68d3b5e} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Ring\+Buffer\+Overrun&LPUART RX software ring buffer overrun. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_RxHardwareOverrun@{kStatus\_LPUART\_RxHardwareOverrun}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_RxHardwareOverrun@{kStatus\_LPUART\_RxHardwareOverrun}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun&LPUART RX receiver overrun. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_NoiseError@{kStatus\_LPUART\_NoiseError}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_NoiseError@{kStatus\_LPUART\_NoiseError}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error&LPUART noise error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_FramingError@{kStatus\_LPUART\_FramingError}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_FramingError@{kStatus\_LPUART\_FramingError}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error&LPUART framing error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_ParityError@{kStatus\_LPUART\_ParityError}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_ParityError@{kStatus\_LPUART\_ParityError}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error&LPUART parity error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_BaudrateNotSupport@{kStatus\_LPUART\_BaudrateNotSupport}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_BaudrateNotSupport@{kStatus\_LPUART\_BaudrateNotSupport}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support&Baudrate is not support in current clock source \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_IdleLineDetected@{kStatus\_LPUART\_IdleLineDetected}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_IdleLineDetected@{kStatus\_LPUART\_IdleLineDetected}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba29540bf056281514eb42c8885f7e2e10}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba29540bf056281514eb42c8885f7e2e10} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Idle\+Line\+Detected&IDLE flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_LPUART\_Timeout@{kStatus\_LPUART\_Timeout}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kStatus\_LPUART\_Timeout@{kStatus\_LPUART\_Timeout}}
+}\Hypertarget{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}\label{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822} 
+k\+Status\+\_\+\+LPUART\+\_\+\+Timeout&LPUART times out. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_data\_bits@{\_lpuart\_data\_bits}}
+\index{\_lpuart\_data\_bits@{\_lpuart\_data\_bits}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_data\_bits}{\_lpuart\_data\_bits}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}{\+\_\+lpuart\+\_\+data\+\_\+bits}}}
+
+
+
+LPUART data bits count. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_EightDataBits@{kLPUART\_EightDataBits}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_EightDataBits@{kLPUART\_EightDataBits}}
+}\Hypertarget{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899}\label{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899} 
+k\+LPUART\+\_\+\+Eight\+Data\+Bits&Eight data bit \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00064}{64}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_flags@{\_lpuart\_flags}}
+\index{\_lpuart\_flags@{\_lpuart\_flags}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_flags}{\_lpuart\_flags}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}}}
+
+
+
+LPUART status flags. 
+
+This provides constants for the LPUART status flags for use in the LPUART functions. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_TxDataRegEmptyFlag@{kLPUART\_TxDataRegEmptyFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_TxDataRegEmptyFlag@{kLPUART\_TxDataRegEmptyFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a} 
+k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag&Transmit data register empty flag, sets when transmit buffer is empty. bit 23 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_TransmissionCompleteFlag@{kLPUART\_TransmissionCompleteFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_TransmissionCompleteFlag@{kLPUART\_TransmissionCompleteFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85} 
+k\+LPUART\+\_\+\+Transmission\+Complete\+Flag&Transmission complete flag, sets when transmission activity complete. bit 22 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxDataRegFullFlag@{kLPUART\_RxDataRegFullFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxDataRegFullFlag@{kLPUART\_RxDataRegFullFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f} 
+k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag&Receive data register full flag, sets when the receive data buffer is full. bit 21 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleLineFlag@{kLPUART\_IdleLineFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleLineFlag@{kLPUART\_IdleLineFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e} 
+k\+LPUART\+\_\+\+Idle\+Line\+Flag&Idle line detect flag, sets when idle line detected. bit 20 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxOverrunFlag@{kLPUART\_RxOverrunFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxOverrunFlag@{kLPUART\_RxOverrunFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1} 
+k\+LPUART\+\_\+\+Rx\+Overrun\+Flag&Receive Overrun, sets when new data is received before data is read from receive register. bit 19 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_NoiseErrorFlag@{kLPUART\_NoiseErrorFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_NoiseErrorFlag@{kLPUART\_NoiseErrorFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f} 
+k\+LPUART\+\_\+\+Noise\+Error\+Flag&Receive takes 3 samples of each received bit. If any of these samples differ, noise flag sets. bit 18 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_FramingErrorFlag@{kLPUART\_FramingErrorFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_FramingErrorFlag@{kLPUART\_FramingErrorFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510} 
+k\+LPUART\+\_\+\+Framing\+Error\+Flag&Frame error flag, sets if logic 0 was detected where stop bit expected. bit 17 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_ParityErrorFlag@{kLPUART\_ParityErrorFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_ParityErrorFlag@{kLPUART\_ParityErrorFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb} 
+k\+LPUART\+\_\+\+Parity\+Error\+Flag&If parity enabled, sets upon parity error detection. bit 16 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxActiveEdgeFlag@{kLPUART\_RxActiveEdgeFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxActiveEdgeFlag@{kLPUART\_RxActiveEdgeFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6} 
+k\+LPUART\+\_\+\+Rx\+Active\+Edge\+Flag&Receive pin active edge interrupt flag, sets when active edge detected. bit 30 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxActiveFlag@{kLPUART\_RxActiveFlag}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxActiveFlag@{kLPUART\_RxActiveFlag}}
+}\Hypertarget{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799}\label{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799} 
+k\+LPUART\+\_\+\+Rx\+Active\+Flag&Receiver Active Flag (RAF), sets at beginning of valid start. bit 24 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00168}{168}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_idle\_config@{\_lpuart\_idle\_config}}
+\index{\_lpuart\_idle\_config@{\_lpuart\_idle\_config}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_idle\_config}{\_lpuart\_idle\_config}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}{\+\_\+lpuart\+\_\+idle\+\_\+config}}}
+
+
+
+LPUART idle detected configuration. This structure defines the number of idle characters that must be received before the IDLE flag is set. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter1@{kLPUART\_IdleCharacter1}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter1@{kLPUART\_IdleCharacter1}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba955e0bb4d3e75e577eef544b440c24be}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba955e0bb4d3e75e577eef544b440c24be} 
+k\+LPUART\+\_\+\+Idle\+Character1&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter2@{kLPUART\_IdleCharacter2}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter2@{kLPUART\_IdleCharacter2}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba270caa8e77b08697404771af82abd131}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba270caa8e77b08697404771af82abd131} 
+k\+LPUART\+\_\+\+Idle\+Character2&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter4@{kLPUART\_IdleCharacter4}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter4@{kLPUART\_IdleCharacter4}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bacab443d3d053070635ea1f859b73f34c}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bacab443d3d053070635ea1f859b73f34c} 
+k\+LPUART\+\_\+\+Idle\+Character4&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter8@{kLPUART\_IdleCharacter8}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter8@{kLPUART\_IdleCharacter8}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25baf125ff40887939add6dd0f42d4485bf3}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25baf125ff40887939add6dd0f42d4485bf3} 
+k\+LPUART\+\_\+\+Idle\+Character8&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter16@{kLPUART\_IdleCharacter16}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter16@{kLPUART\_IdleCharacter16}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bace45d3af9a0c590f053df7bb00e6582a}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bace45d3af9a0c590f053df7bb00e6582a} 
+k\+LPUART\+\_\+\+Idle\+Character16&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter32@{kLPUART\_IdleCharacter32}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter32@{kLPUART\_IdleCharacter32}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba1daee04c54b7e37ca5e7331a3e1e7374}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba1daee04c54b7e37ca5e7331a3e1e7374} 
+k\+LPUART\+\_\+\+Idle\+Character32&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter64@{kLPUART\_IdleCharacter64}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter64@{kLPUART\_IdleCharacter64}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bac497a53ed2755d26961f3b72fbd180ed}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bac497a53ed2755d26961f3b72fbd180ed} 
+k\+LPUART\+\_\+\+Idle\+Character64&the number of idle characters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleCharacter128@{kLPUART\_IdleCharacter128}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleCharacter128@{kLPUART\_IdleCharacter128}}
+}\Hypertarget{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba4e080722efa87475f1710f5524e50c67}\label{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba4e080722efa87475f1710f5524e50c67} 
+k\+LPUART\+\_\+\+Idle\+Character128&the number of idle characters. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00106}{106}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_idle\_type\_select@{\_lpuart\_idle\_type\_select}}
+\index{\_lpuart\_idle\_type\_select@{\_lpuart\_idle\_type\_select}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_idle\_type\_select}{\_lpuart\_idle\_type\_select}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}{\+\_\+lpuart\+\_\+idle\+\_\+type\+\_\+select}}}
+
+
+
+LPUART idle flag type defines when the receiver starts counting. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleTypeStartBit@{kLPUART\_IdleTypeStartBit}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleTypeStartBit@{kLPUART\_IdleTypeStartBit}}
+}\Hypertarget{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da0644f6b95813c520dede56ee3a944267}\label{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da0644f6b95813c520dede56ee3a944267} 
+k\+LPUART\+\_\+\+Idle\+Type\+Start\+Bit&Start counting after a valid start bit. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleTypeStopBit@{kLPUART\_IdleTypeStopBit}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleTypeStopBit@{kLPUART\_IdleTypeStopBit}}
+}\Hypertarget{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da69545f21a3401c126bf295b5cf94225b}\label{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da69545f21a3401c126bf295b5cf94225b} 
+k\+LPUART\+\_\+\+Idle\+Type\+Stop\+Bit&Start counting after a stop bit. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00096}{96}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_interrupt\_enable@{\_lpuart\_interrupt\_enable}}
+\index{\_lpuart\_interrupt\_enable@{\_lpuart\_interrupt\_enable}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_interrupt\_enable}{\_lpuart\_interrupt\_enable}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}}}
+
+
+
+LPUART interrupt configuration structure, default settings all disabled. 
+
+This structure contains the settings for all LPUART interrupt configurations. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxActiveEdgeInterruptEnable@{kLPUART\_RxActiveEdgeInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxActiveEdgeInterruptEnable@{kLPUART\_RxActiveEdgeInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a} 
+k\+LPUART\+\_\+\+Rx\+Active\+Edge\+Interrupt\+Enable&Receive Active Edge. bit 6 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_TxDataRegEmptyInterruptEnable@{kLPUART\_TxDataRegEmptyInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_TxDataRegEmptyInterruptEnable@{kLPUART\_TxDataRegEmptyInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c} 
+k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable&Transmit data register empty. bit 23 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_TransmissionCompleteInterruptEnable@{kLPUART\_TransmissionCompleteInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_TransmissionCompleteInterruptEnable@{kLPUART\_TransmissionCompleteInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14} 
+k\+LPUART\+\_\+\+Transmission\+Complete\+Interrupt\+Enable&Transmission complete. bit 22 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxDataRegFullInterruptEnable@{kLPUART\_RxDataRegFullInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxDataRegFullInterruptEnable@{kLPUART\_RxDataRegFullInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22} 
+k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable&Receiver data register full. bit 21 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_IdleLineInterruptEnable@{kLPUART\_IdleLineInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_IdleLineInterruptEnable@{kLPUART\_IdleLineInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d} 
+k\+LPUART\+\_\+\+Idle\+Line\+Interrupt\+Enable&Idle line. bit 20 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_RxOverrunInterruptEnable@{kLPUART\_RxOverrunInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_RxOverrunInterruptEnable@{kLPUART\_RxOverrunInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636} 
+k\+LPUART\+\_\+\+Rx\+Overrun\+Interrupt\+Enable&Receiver Overrun. bit 27 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_NoiseErrorInterruptEnable@{kLPUART\_NoiseErrorInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_NoiseErrorInterruptEnable@{kLPUART\_NoiseErrorInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e} 
+k\+LPUART\+\_\+\+Noise\+Error\+Interrupt\+Enable&Noise error flag. bit 26 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_FramingErrorInterruptEnable@{kLPUART\_FramingErrorInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_FramingErrorInterruptEnable@{kLPUART\_FramingErrorInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d} 
+k\+LPUART\+\_\+\+Framing\+Error\+Interrupt\+Enable&Framing error flag. bit 25 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_ParityErrorInterruptEnable@{kLPUART\_ParityErrorInterruptEnable}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_ParityErrorInterruptEnable@{kLPUART\_ParityErrorInterruptEnable}}
+}\Hypertarget{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466}\label{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466} 
+k\+LPUART\+\_\+\+Parity\+Error\+Interrupt\+Enable&Parity error flag. bit 24 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00123}{123}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_parity\_mode@{\_lpuart\_parity\_mode}}
+\index{\_lpuart\_parity\_mode@{\_lpuart\_parity\_mode}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_parity\_mode}{\_lpuart\_parity\_mode}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}{\+\_\+lpuart\+\_\+parity\+\_\+mode}}}
+
+
+
+LPUART parity mode. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_ParityDisabled@{kLPUART\_ParityDisabled}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_ParityDisabled@{kLPUART\_ParityDisabled}}
+}\Hypertarget{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a}\label{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a} 
+k\+LPUART\+\_\+\+Parity\+Disabled&Parity disabled \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_ParityEven@{kLPUART\_ParityEven}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_ParityEven@{kLPUART\_ParityEven}}
+}\Hypertarget{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059ac92adb3fdf11240ca5dee6c6543b6ff7}\label{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059ac92adb3fdf11240ca5dee6c6543b6ff7} 
+k\+LPUART\+\_\+\+Parity\+Even&Parity enabled, type even, bit setting:\+ PE\texorpdfstring{$\vert$}{|}\+PT = 10 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_ParityOdd@{kLPUART\_ParityOdd}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_ParityOdd@{kLPUART\_ParityOdd}}
+}\Hypertarget{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059adab63856e98e0715f4ab289ac0da3575}\label{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059adab63856e98e0715f4ab289ac0da3575} 
+k\+LPUART\+\_\+\+Parity\+Odd&Parity enabled, type odd, bit setting:\+ PE\texorpdfstring{$\vert$}{|}\+PT = 11 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}\index{Lpuart\_driver@{Lpuart\_driver}!\_lpuart\_stop\_bit\_count@{\_lpuart\_stop\_bit\_count}}
+\index{\_lpuart\_stop\_bit\_count@{\_lpuart\_stop\_bit\_count}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_lpuart\_stop\_bit\_count}{\_lpuart\_stop\_bit\_count}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155} 
+enum \doxymbox{\hyperlink{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}{\+\_\+lpuart\+\_\+stop\+\_\+bit\+\_\+count}}}
+
+
+
+LPUART stop bit count. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_OneStopBit@{kLPUART\_OneStopBit}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_OneStopBit@{kLPUART\_OneStopBit}}
+}\Hypertarget{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901}\label{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901} 
+k\+LPUART\+\_\+\+One\+Stop\+Bit&One stop bit \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLPUART\_TwoStopBit@{kLPUART\_TwoStopBit}!Lpuart\_driver@{Lpuart\_driver}}
+\index{Lpuart\_driver@{Lpuart\_driver}!kLPUART\_TwoStopBit@{kLPUART\_TwoStopBit}}
+}\Hypertarget{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a6e049e0faaf89ed2dfe493ad8f6c93d4}\label{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a6e049e0faaf89ed2dfe493ad8f6c93d4} 
+k\+LPUART\+\_\+\+Two\+Stop\+Bit&Two stop bits \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00073}{73}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__lpuart__driver_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__lpuart__driver_gac6bcdb29d31a2addb8d80d98855ba147}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_ClearStatusFlags@{LPUART\_ClearStatusFlags}}
+\index{LPUART\_ClearStatusFlags@{LPUART\_ClearStatusFlags}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_ClearStatusFlags()}{LPUART\_ClearStatusFlags()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gac6bcdb29d31a2addb8d80d98855ba147} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Clear\+Status\+Flags (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Clears status flags with a provided mask. 
+
+This function clears LPUART status flags with a provided mask. Automatically cleared flags can\textquotesingle{}t be cleared by this function. Flags that can only cleared or set by hardware are:\+ k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag, k\+LPUART\+\_\+\+Transmission\+Complete\+Flag, k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag, k\+LPUART\+\_\+\+Rx\+Active\+Flag, k\+LPUART\+\_\+\+Noise\+Error\+Flag, k\+LPUART\+\_\+\+Parity\+Error\+Flag, k\+LPUART\+\_\+\+Tx\+Fifo\+Empty\+Flag,k\+LPUART\+\_\+\+Rx\+Fifo\+Empty\+Flag Note:\+ This API should be called when the Tx/\+\+Rx is idle, otherwise it takes no effects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em mask} & the status flags to be cleared. The user can use the enumerators in the \+\_\+lpuart\+\_\+status\+\_\+flag\+\_\+t to do the OR operation and get the mask. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 succeed, others failed. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb}{k\+Status\+\_\+\+LPUART\+\_\+\+Flag\+Cannot\+Clear\+Manually}} & The flag can\textquotesingle{}t be cleared by this function but it is cleared automatically by hardware. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Status in the mask are cleared.\\
+\hline
+\end{DoxyRetVals}
+brief Clears status flags with a provided mask.
+
+This function clears LPUART status flags with a provided mask. Automatically cleared flags can\textquotesingle{}t be cleared by this function. Flags that can only cleared or set by hardware are:\+ k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag, k\+LPUART\+\_\+\+Transmission\+Complete\+Flag, k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag, k\+LPUART\+\_\+\+Rx\+Active\+Flag, k\+LPUART\+\_\+\+Noise\+Error\+Flag, k\+LPUART\+\_\+\+Parity\+Error\+Flag, k\+LPUART\+\_\+\+Tx\+Fifo\+Empty\+Flag,k\+LPUART\+\_\+\+Rx\+Fifo\+Empty\+Flag Note:\+ This API should be called when the Tx/\+\+Rx is idle, otherwise it takes no effects.
+
+param base LPUART peripheral base address. param mask the status flags to be cleared. The user can use the enumerators in the \+\_\+lpuart\+\_\+status\+\_\+flag\+\_\+t to do the OR operation and get the mask. return 0 succeed, others failed. retval k\+Status\+\_\+\+LPUART\+\_\+\+Flag\+Cannot\+Clear\+Manually The flag can\textquotesingle{}t be cleared by this function but it is cleared automatically by hardware. retval k\+Status\+\_\+\+Success Status in the mask are cleared. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01040}{1040}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga303ff3b77767bafa449d96f1e8c921e0}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_Deinit@{LPUART\_Deinit}}
+\index{LPUART\_Deinit@{LPUART\_Deinit}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_Deinit()}{LPUART\_Deinit()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga303ff3b77767bafa449d96f1e8c921e0} 
+void LPUART\+\_\+\+Deinit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Deinitializes a LPUART instance. 
+
+This function waits for transmit to complete, disables TX and RX, and disables the LPUART clock.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address.\\
+\hline
+\end{DoxyParams}
+brief Deinitializes a LPUART instance.
+
+This function waits for transmit to complete, disables TX and RX, and disables the LPUART clock.
+
+param base LPUART peripheral base address. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00591}{591}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_DisableInterrupts@{LPUART\_DisableInterrupts}}
+\index{LPUART\_DisableInterrupts@{LPUART\_DisableInterrupts}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_DisableInterrupts()}{LPUART\_DisableInterrupts()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8} 
+void LPUART\+\_\+\+Disable\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Disables LPUART interrupts according to a provided mask. 
+
+This function disables the LPUART interrupts according to a provided mask. The mask is a logical OR of enumeration members. See \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. This example shows how to disable the TX empty interrupt and RX full interrupt:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}{LPUART\_DisableInterrupts}}(LPUART1,\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{kLPUART\_TxDataRegEmptyInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{kLPUART\_RxDataRegFullInterruptEnable}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em mask} & The interrupts to disable. Logical OR of \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}.\\
+\hline
+\end{DoxyParams}
+brief Disables LPUART interrupts according to a provided mask.
+
+This function disables the LPUART interrupts according to a provided mask. The mask is a logical OR of enumeration members. See ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. This example shows how to disable the TX empty interrupt and RX full interrupt:\+ code LPUART\+\_\+\+Disable\+Interrupts(LPUART1,k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \texorpdfstring{$\vert$}{|} k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable); endcode
+
+param base LPUART peripheral base address. param mask The interrupts to disable. Logical OR of ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00911}{911}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gab091154d04cc437a7674ea488233298e}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_DriverIRQHandler@{LPUART\_DriverIRQHandler}}
+\index{LPUART\_DriverIRQHandler@{LPUART\_DriverIRQHandler}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_DriverIRQHandler()}{LPUART\_DriverIRQHandler()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gab091154d04cc437a7674ea488233298e} 
+void LPUART\+\_\+\+Driver\+IRQHandler (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{instance}{}\end{DoxyParamCaption})}
+
+
+
+LPUART driver IRQ handler common entry. 
+
+This function provides the common IRQ request entry for LPUART.
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & LPUART instance. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l02288}{2288}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gae7e13bb206bd78070737968610437fb1}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_Enable9bitMode@{LPUART\_Enable9bitMode}}
+\index{LPUART\_Enable9bitMode@{LPUART\_Enable9bitMode}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_Enable9bitMode()}{LPUART\_Enable9bitMode()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gae7e13bb206bd78070737968610437fb1} 
+void LPUART\+\_\+\+Enable9bit\+Mode (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})}
+
+
+
+Enable 9-\/bit data mode for LPUART. 
+
+This function set the 9-\/bit mode for LPUART module. The 9th bit is not used for parity thus can be modified by user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em enable} & true to enable, flase to disable.\\
+\hline
+\end{DoxyParams}
+brief Enable 9-\/bit data mode for LPUART.
+
+This function set the 9-\/bit mode for LPUART module. The 9th bit is not used for parity thus can be modified by user.
+
+param base LPUART peripheral base address. param enable true to enable, flase to disable. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00803}{803}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_EnableInterrupts@{LPUART\_EnableInterrupts}}
+\index{LPUART\_EnableInterrupts@{LPUART\_EnableInterrupts}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_EnableInterrupts()}{LPUART\_EnableInterrupts()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745} 
+void LPUART\+\_\+\+Enable\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Enables LPUART interrupts according to a provided mask. 
+
+This function enables the LPUART interrupts according to a provided mask. The mask is a logical OR of enumeration members. See the \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. This examples shows how to enable TX empty interrupt and RX full interrupt:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745}{LPUART\_EnableInterrupts}}(LPUART1,\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{kLPUART\_TxDataRegEmptyInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{kLPUART\_RxDataRegFullInterruptEnable}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em mask} & The interrupts to enable. Logical OR of \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}.\\
+\hline
+\end{DoxyParams}
+brief Enables LPUART interrupts according to a provided mask.
+
+This function enables the LPUART interrupts according to a provided mask. The mask is a logical OR of enumeration members. See the ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. This examples shows how to enable TX empty interrupt and RX full interrupt:\+ code LPUART\+\_\+\+Enable\+Interrupts(LPUART1,k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \texorpdfstring{$\vert$}{|} k\+LPUART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable); endcode
+
+param base LPUART peripheral base address. param mask The interrupts to enable. Logical OR of ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00859}{859}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gaafe7ddb53960e2f4cd7ba2a01f00982e}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_EnableMatchAddress@{LPUART\_EnableMatchAddress}}
+\index{LPUART\_EnableMatchAddress@{LPUART\_EnableMatchAddress}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_EnableMatchAddress()}{LPUART\_EnableMatchAddress()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaafe7ddb53960e2f4cd7ba2a01f00982e} 
+void LPUART\+\_\+\+Enable\+Match\+Address (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{match1}{, }\item[{bool}]{match2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Enable the LPUART match address feature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em match1} & true to enable match address1, false to disable. \\
+\hline
+{\em match2} & true to enable match address2, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00504}{504}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_gaadb8a7199526555e50e65e017da4eae2}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_EnableRx@{LPUART\_EnableRx}}
+\index{LPUART\_EnableRx@{LPUART\_EnableRx}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_EnableRx()}{LPUART\_EnableRx()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaadb8a7199526555e50e65e017da4eae2} 
+void LPUART\+\_\+\+Enable\+Rx (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Enables or disables the LPUART receiver. 
+
+This function enables or disables the LPUART receiver.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em enable} & True to enable, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00773}{773}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga49961d4e9043ff9bd10e477add9258d7}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_EnableTx@{LPUART\_EnableTx}}
+\index{LPUART\_EnableTx@{LPUART\_EnableTx}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_EnableTx()}{LPUART\_EnableTx()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga49961d4e9043ff9bd10e477add9258d7} 
+void LPUART\+\_\+\+Enable\+Tx (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Enables or disables the LPUART transmitter. 
+
+This function enables or disables the LPUART transmitter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em enable} & True to enable, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00753}{753}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_GetDefaultConfig@{LPUART\_GetDefaultConfig}}
+\index{LPUART\_GetDefaultConfig@{LPUART\_GetDefaultConfig}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_GetDefaultConfig()}{LPUART\_GetDefaultConfig()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440} 
+void LPUART\+\_\+\+Get\+Default\+Config (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Gets the default configuration structure. 
+
+This function initializes the LPUART configuration structure to a default value. The default values are:\+ lpuart\+Config-\/\texorpdfstring{$>$}{>}baud\+Rate\+\_\+\+Bps = 115200U; lpuart\+Config-\/\texorpdfstring{$>$}{>}parity\+Mode = k\+LPUART\+\_\+\+Parity\+Disabled; lpuart\+Config-\/\texorpdfstring{$>$}{>}data\+Bits\+Count = k\+LPUART\+\_\+\+Eight\+Data\+Bits; lpuart\+Config-\/\texorpdfstring{$>$}{>}is\+Msb = false; lpuart\+Config-\/\texorpdfstring{$>$}{>}stop\+Bit\+Count = k\+LPUART\+\_\+\+One\+Stop\+Bit; lpuart\+Config-\/\texorpdfstring{$>$}{>}tx\+Fifo\+Watermark = 0; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Fifo\+Watermark = 1; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Idle\+Type = k\+LPUART\+\_\+\+Idle\+Type\+Start\+Bit; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Idle\+Config = k\+LPUART\+\_\+\+Idle\+Character1; lpuart\+Config-\/\texorpdfstring{$>$}{>}enable\+Tx = false; lpuart\+Config-\/\texorpdfstring{$>$}{>}enable\+Rx = false;
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Pointer to a configuration structure.\\
+\hline
+\end{DoxyParams}
+brief Gets the default configuration structure.
+
+This function initializes the LPUART configuration structure to a default value. The default values are:\+ lpuart\+Config-\/\texorpdfstring{$>$}{>}baud\+Rate\+\_\+\+Bps = 115200U; lpuart\+Config-\/\texorpdfstring{$>$}{>}parity\+Mode = k\+LPUART\+\_\+\+Parity\+Disabled; lpuart\+Config-\/\texorpdfstring{$>$}{>}data\+Bits\+Count = k\+LPUART\+\_\+\+Eight\+Data\+Bits; lpuart\+Config-\/\texorpdfstring{$>$}{>}is\+Msb = false; lpuart\+Config-\/\texorpdfstring{$>$}{>}stop\+Bit\+Count = k\+LPUART\+\_\+\+One\+Stop\+Bit; lpuart\+Config-\/\texorpdfstring{$>$}{>}tx\+Fifo\+Watermark = 0; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Fifo\+Watermark = 1; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Idle\+Type = k\+LPUART\+\_\+\+Idle\+Type\+Start\+Bit; lpuart\+Config-\/\texorpdfstring{$>$}{>}rx\+Idle\+Config = k\+LPUART\+\_\+\+Idle\+Character1; lpuart\+Config-\/\texorpdfstring{$>$}{>}enable\+Tx = false; lpuart\+Config-\/\texorpdfstring{$>$}{>}enable\+Rx = false;
+
+param config Pointer to a configuration structure. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00655}{655}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga172b524bae8bacc6dc95d9daf82c97b5}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_GetEnabledInterrupts@{LPUART\_GetEnabledInterrupts}}
+\index{LPUART\_GetEnabledInterrupts@{LPUART\_GetEnabledInterrupts}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_GetEnabledInterrupts()}{LPUART\_GetEnabledInterrupts()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga172b524bae8bacc6dc95d9daf82c97b5} 
+uint32\+\_\+t LPUART\+\_\+\+Get\+Enabled\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Gets enabled LPUART interrupts. 
+
+This function gets the enabled LPUART interrupts. The enabled interrupts are returned as the logical OR value of the enumerators \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. To check a specific interrupt enable status, compare the return value with enumerators in \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. For example, to check whether the TX empty interrupt is enabled:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint32\_t\ enabledInterrupts\ =\ \doxymbox{\hyperlink{group__lpuart__driver_ga172b524bae8bacc6dc95d9daf82c97b5}{LPUART\_GetEnabledInterrupts}}(LPUART1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{kLPUART\_TxDataRegEmptyInterruptEnable}}\ \&\ enabledInterrupts)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+LPUART interrupt flags which are logical OR of the enumerators in \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}.
+\end{DoxyReturn}
+brief Gets enabled LPUART interrupts.
+
+This function gets the enabled LPUART interrupts. The enabled interrupts are returned as the logical OR value of the enumerators ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. To check a specific interrupt enable status, compare the return value with enumerators in ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. For example, to check whether the TX empty interrupt is enabled:\+ code uint32\+\_\+t enabled\+Interrupts = LPUART\+\_\+\+Get\+Enabled\+Interrupts(\+LPUART1);
+
+if (k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \& enabled\+Interrupts) \{ ... \} endcode
+
+param base LPUART peripheral base address. return LPUART interrupt flags which are logical OR of the enumerators in ref \doxylink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\+\_\+lpuart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00969}{969}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gaaf4c8ce1f1730cdbf094931033d9b52c}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_GetInstance@{LPUART\_GetInstance}}
+\index{LPUART\_GetInstance@{LPUART\_GetInstance}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_GetInstance()}{LPUART\_GetInstance()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaaf4c8ce1f1730cdbf094931033d9b52c} 
+uint32\+\_\+t LPUART\+\_\+\+Get\+Instance (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Get the LPUART instance from peripheral base address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+LPUART instance.
+\end{DoxyReturn}
+brief Get the LPUART instance from peripheral base address.
+
+param base LPUART peripheral base address. return LPUART instance. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00195}{195}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_GetStatusFlags@{LPUART\_GetStatusFlags}}
+\index{LPUART\_GetStatusFlags@{LPUART\_GetStatusFlags}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_GetStatusFlags()}{LPUART\_GetStatusFlags()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09} 
+uint32\+\_\+t LPUART\+\_\+\+Get\+Status\+Flags (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Gets LPUART status flags. 
+
+This function gets all LPUART status flags. The flags are returned as the logical OR value of the enumerators \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}. To check for a specific status, compare the return value with enumerators in the \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}. For example, to check whether the TX is empty:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}{kLPUART\_TxDataRegEmptyFlag}}\ \&\ \doxymbox{\hyperlink{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09}{LPUART\_GetStatusFlags}}(LPUART1))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+LPUART status flags which are ORed by the enumerators in the \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}.
+\end{DoxyReturn}
+brief Gets LPUART status flags.
+
+This function gets all LPUART status flags. The flags are returned as the logical OR value of the enumerators ref \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}. To check for a specific status, compare the return value with enumerators in the ref \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}. For example, to check whether the TX is empty:\+ code if (k\+LPUART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag \& LPUART\+\_\+\+Get\+Status\+Flags(\+LPUART1)) \{ ... \} endcode
+
+param base LPUART peripheral base address. return LPUART status flags which are ORed by the enumerators in the \doxylink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\+\_\+lpuart\+\_\+flags}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01007}{1007}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga26ce3e5d63d8dd5d317a83f22af9682c}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_Init@{LPUART\_Init}}
+\index{LPUART\_Init@{LPUART\_Init}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_Init()}{LPUART\_Init()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga26ce3e5d63d8dd5d317a83f22af9682c} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{const \doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{uint32\+\_\+t}]{src\+Clock\+\_\+\+Hz}{}\end{DoxyParamCaption})}
+
+
+
+Initializes an LPUART instance with the user configuration structure and the peripheral clock. 
+
+This function configures the LPUART module with user-\/defined settings. Call the \doxylink{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440}{LPUART\+\_\+\+Get\+Default\+Config()} function to configure the configuration structure and get the default configuration. The example below shows how to use this API to configure the LPUART. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\_config\_t}}\ lpuartConfig;}
+\DoxyCodeLine{lpuartConfig.\doxymbox{\hyperlink{struct__lpuart__config_ae83107a96ce0e34e791aac795a4d04e4}{baudRate\_Bps}}\ =\ 115200U;}
+\DoxyCodeLine{lpuartConfig.\doxymbox{\hyperlink{struct__lpuart__config_a4571e45bcd0dc5e23ef6c9491f415636}{parityMode}}\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a}{kLPUART\_ParityDisabled}};}
+\DoxyCodeLine{lpuartConfig.\doxymbox{\hyperlink{struct__lpuart__config_af78b1ec3d4ad983717c0ddb6fc90a7c3}{dataBitsCount}}\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899}{kLPUART\_EightDataBits}};}
+\DoxyCodeLine{lpuartConfig.\doxymbox{\hyperlink{struct__lpuart__config_a0b1bc6d9fd6be7a792e3f06ef9801ceb}{isMsb}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{lpuartConfig.stopBitCount\ =\ \doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901}{kLPUART\_OneStopBit}};}
+\DoxyCodeLine{lpuartConfig.txFifoWatermark\ =\ 0;}
+\DoxyCodeLine{lpuartConfig.rxFifoWatermark\ =\ 1;}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__lpuart__driver_ga26ce3e5d63d8dd5d317a83f22af9682c}{LPUART\_Init}}(LPUART1,\ \&lpuartConfig,\ 20000000U);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em config} & Pointer to a user-\/defined configuration structure. \\
+\hline
+{\em src\+Clock\+\_\+\+Hz} & LPUART clock source frequency in HZ. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}{k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support}} & Baudrate is not support in current clock source. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & LPUART initialize succeed\\
+\hline
+\end{DoxyRetVals}
+brief Initializes an LPUART instance with the user configuration structure and the peripheral clock.
+
+This function configures the LPUART module with user-\/defined settings. Call the \doxylink{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440}{LPUART\+\_\+\+Get\+Default\+Config()} function to configure the configuration structure and get the default configuration. The example below shows how to use this API to configure the LPUART. code \doxylink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\+\_\+config\+\_\+t} lpuart\+Config; lpuart\+Config.\+baud\+Rate\+\_\+\+Bps = 115200U; lpuart\+Config.\+parity\+Mode = k\+LPUART\+\_\+\+Parity\+Disabled; lpuart\+Config.\+data\+Bits\+Count = k\+LPUART\+\_\+\+Eight\+Data\+Bits; lpuart\+Config.\+is\+Msb = false; lpuart\+Config.\+stop\+Bit\+Count = k\+LPUART\+\_\+\+One\+Stop\+Bit; lpuart\+Config.\+tx\+Fifo\+Watermark = 0; lpuart\+Config.\+rx\+Fifo\+Watermark = 1; LPUART\+\_\+\+Init(\+LPUART1, \&lpuart\+Config, 20000000\+U); endcode
+
+param base LPUART peripheral base address. param config Pointer to a user-\/defined configuration structure. param src\+Clock\+\_\+\+Hz LPUART clock source frequency in HZ. retval k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support Baudrate is not support in current clock source. retval k\+Status\+\_\+\+Success LPUART initialize succeed 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00351}{351}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gae76aba14dbfe94124082785e2c0ecd9d}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_ReadBlocking@{LPUART\_ReadBlocking}}
+\index{LPUART\_ReadBlocking@{LPUART\_ReadBlocking}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_ReadBlocking()}{LPUART\_ReadBlocking()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gae76aba14dbfe94124082785e2c0ecd9d} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Read\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Reads the receiver data register using a blocking method. 
+
+This function polls the receiver register, waits for the receiver register full or receiver FIFO has data, and reads data from the TX register.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em data} & Start address of the buffer to store the received data. \\
+\hline
+{\em length} & Size of the buffer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun}} & Receiver overrun happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}{k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error}} & Noise error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}{k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error}} & Framing error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}{k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error}} & Parity error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{k\+Status\+\_\+\+LPUART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully received all data.\\
+\hline
+\end{DoxyRetVals}
+brief Reads the receiver data register using a blocking method.
+
+This function polls the receiver register, waits for the receiver register full or receiver FIFO has data, and reads data from the TX register.
+
+param base LPUART peripheral base address. param data Start address of the buffer to store the received data. param length Size of the buffer. retval k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun Receiver overrun happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error Noise error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error Framing error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error Parity error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully received all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01215}{1215}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga9c95aa20caeceb3d709dd7851ce84eb1}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_ReadBlocking16bit@{LPUART\_ReadBlocking16bit}}
+\index{LPUART\_ReadBlocking16bit@{LPUART\_ReadBlocking16bit}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_ReadBlocking16bit()}{LPUART\_ReadBlocking16bit()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga9c95aa20caeceb3d709dd7851ce84eb1} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Read\+Blocking16bit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Reads the receiver data register in 9bit or 10bit mode. 
+
+\begin{DoxyNote}{Note}
+This function only support 9bit or 10bit transfer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em data} & Start address of the buffer to store the received data by 16bit, only 10bit is valid. \\
+\hline
+{\em length} & Size of the buffer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun}} & Receiver overrun happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}{k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error}} & Noise error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}{k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error}} & Framing error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}{k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error}} & Parity error happened while receiving data. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{k\+Status\+\_\+\+LPUART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully received all data.\\
+\hline
+\end{DoxyRetVals}
+brief Reads the receiver data register in 9bit or 10bit mode.
+
+note This function only support 9bit or 10bit transfer.
+
+param base LPUART peripheral base address. param data Start address of the buffer to store the received data by 16bit, only 10bit is valid. param length Size of the buffer. retval k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Hardware\+Overrun Receiver overrun happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Noise\+Error Noise error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Framing\+Error Framing error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Parity\+Error Parity error happened while receiving data. retval k\+Status\+\_\+\+LPUART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully received all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01346}{1346}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga02013105f0aacc7062eaae59d7401d29}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_ReadByte@{LPUART\_ReadByte}}
+\index{LPUART\_ReadByte@{LPUART\_ReadByte}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_ReadByte()}{LPUART\_ReadByte()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga02013105f0aacc7062eaae59d7401d29} 
+uint8\+\_\+t LPUART\+\_\+\+Read\+Byte (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Reads the receiver register. 
+
+This function reads data from the receiver register directly. The upper layer must ensure that the receiver register is full or that the RX FIFO has data before calling this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Data read from data register. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00808}{808}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga85a7dbe15a9f822847791cebe75d5394}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_SendAddress@{LPUART\_SendAddress}}
+\index{LPUART\_SendAddress@{LPUART\_SendAddress}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_SendAddress()}{LPUART\_SendAddress()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga85a7dbe15a9f822847791cebe75d5394} 
+void LPUART\+\_\+\+Send\+Address (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint8\+\_\+t}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Transmit an address frame in 9-\/bit data mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em address} & LPUART slave address.\\
+\hline
+\end{DoxyParams}
+brief Transmit an address frame in 9-\/bit data mode.
+
+param base LPUART peripheral base address. param address LPUART slave address. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00837}{837}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gaf03d9292f8b4cb6e9748cb0bc1db7577}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_SetBaudRate@{LPUART\_SetBaudRate}}
+\index{LPUART\_SetBaudRate@{LPUART\_SetBaudRate}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_SetBaudRate()}{LPUART\_SetBaudRate()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gaf03d9292f8b4cb6e9748cb0bc1db7577} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Set\+Baud\+Rate (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{baud\+Rate\+\_\+\+Bps}{, }\item[{uint32\+\_\+t}]{src\+Clock\+\_\+\+Hz}{}\end{DoxyParamCaption})}
+
+
+
+Sets the LPUART instance baudrate. 
+
+This function configures the LPUART module baudrate. This function is used to update the LPUART module baudrate after the LPUART module is initialized by the LPUART\+\_\+\+Init. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__lpuart__driver_gaf03d9292f8b4cb6e9748cb0bc1db7577}{LPUART\_SetBaudRate}}(LPUART1,\ 115200U,\ 20000000U);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em baud\+Rate\+\_\+\+Bps} & LPUART baudrate to be set. \\
+\hline
+{\em src\+Clock\+\_\+\+Hz} & LPUART clock source frequency in HZ. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}{k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support}} & Baudrate is not supported in the current clock source. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Set baudrate succeeded.\\
+\hline
+\end{DoxyRetVals}
+brief Sets the LPUART instance baudrate.
+
+This function configures the LPUART module baudrate. This function is used to update the LPUART module baudrate after the LPUART module is initialized by the LPUART\+\_\+\+Init. code LPUART\+\_\+\+Set\+Baud\+Rate(\+LPUART1, 115200\+U, 20000000\+U); endcode
+
+param base LPUART peripheral base address. param baud\+Rate\+\_\+\+Bps LPUART baudrate to be set. param src\+Clock\+\_\+\+Hz LPUART clock source frequency in HZ. retval k\+Status\+\_\+\+LPUART\+\_\+\+Baudrate\+Not\+Support Baudrate is not supported in the current clock source. retval k\+Status\+\_\+\+Success Set baudrate succeeded. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00703}{703}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gae4987ccc6a25b2aa8a99a18868fda3eb}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_SetMatchAddress@{LPUART\_SetMatchAddress}}
+\index{LPUART\_SetMatchAddress@{LPUART\_SetMatchAddress}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_SetMatchAddress()}{LPUART\_SetMatchAddress()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gae4987ccc6a25b2aa8a99a18868fda3eb} 
+void LPUART\+\_\+\+Set\+Match\+Address (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint16\+\_\+t}]{address1}{, }\item[{uint16\+\_\+t}]{address2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Set the LPUART address. 
+
+This function configures the address for LPUART module that works as slave in 9-\/bit data mode. One or two address fields can be configured. When the address field\textquotesingle{}s match enable bit is set, the frame it receices with MSB being 1 is considered as an address frame, otherwise it is considered as data frame. Once the address frame matches one of slave\textquotesingle{}s own addresses, this slave is addressed. This address frame and its following data frames are stored in the receive buffer, otherwise the frames will be discarded. To un-\/address a slave, just send an address frame with unmatched address.
+
+\begin{DoxyNote}{Note}
+Any LPUART instance joined in the multi-\/slave system can work as slave. The position of the address mark is the same as the parity bit when parity is enabled for 8 bit and 9 bit data formats.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em address1} & LPUART slave address1. \\
+\hline
+{\em address2} & LPUART slave address2. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00490}{490}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_ga4950fa0f3835992251c109f655a3ca7d}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferAbortReceive@{LPUART\_TransferAbortReceive}}
+\index{LPUART\_TransferAbortReceive@{LPUART\_TransferAbortReceive}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferAbortReceive()}{LPUART\_TransferAbortReceive()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga4950fa0f3835992251c109f655a3ca7d} 
+void LPUART\+\_\+\+Transfer\+Abort\+Receive (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the interrupt-\/driven data receiving. 
+
+This function aborts the interrupt-\/driven data receiving. The user can get the remain\+Bytes to find out how many bytes not received yet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the interrupt-\/driven data receiving.
+
+This function aborts the interrupt-\/driven data receiving. The user can get the remain\+Bytes to find out how many bytes not received yet.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01901}{1901}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga6dfe9efe9656e126c70ee79fa03f2be3}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferAbortSend@{LPUART\_TransferAbortSend}}
+\index{LPUART\_TransferAbortSend@{LPUART\_TransferAbortSend}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferAbortSend()}{LPUART\_TransferAbortSend()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga6dfe9efe9656e126c70ee79fa03f2be3} 
+void LPUART\+\_\+\+Transfer\+Abort\+Send (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the interrupt-\/driven data transmit. 
+
+This function aborts the interrupt driven data sending. The user can get the remain\+Btyes to find out how many bytes are not sent out.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the interrupt-\/driven data transmit.
+
+This function aborts the interrupt driven data sending. The user can get the remain\+Btyes to find out how many bytes are not sent out.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01657}{1657}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga10eae12610523a624c1016882f8dba5f}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferCreateHandle@{LPUART\_TransferCreateHandle}}
+\index{LPUART\_TransferCreateHandle@{LPUART\_TransferCreateHandle}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferCreateHandle()}{LPUART\_TransferCreateHandle()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga10eae12610523a624c1016882f8dba5f} 
+void LPUART\+\_\+\+Transfer\+Create\+Handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\+\_\+transfer\+\_\+callback\+\_\+t}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the LPUART handle. 
+
+This function initializes the LPUART handle, which can be used for other LPUART transactional APIs. Usually, for a specified LPUART instance, call this API once to get the initialized handle.
+
+The LPUART driver supports the "{}background"{} receiving, which means that user can set up an RX ring buffer optionally. Data received is stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918}{LPUART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If there is already data received in the ring buffer, the user can get the received data from the ring buffer directly. The ring buffer is disabled if passing NULL as {\ttfamily ring\+Buffer}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em callback} & Callback function. \\
+\hline
+{\em user\+Data} & User data.\\
+\hline
+\end{DoxyParams}
+brief Initializes the LPUART handle.
+
+This function initializes the LPUART handle, which can be used for other LPUART transactional APIs. Usually, for a specified LPUART instance, call this API once to get the initialized handle.
+
+The LPUART driver supports the "{}background"{} receiving, which means that user can set up an RX ring buffer optionally. Data received is stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918}{LPUART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If there is already data received in the ring buffer, the user can get the received data from the ring buffer directly. The ring buffer is disabled if passing NULL as p ring\+Buffer.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param callback Callback function. param user\+Data User data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01461}{1461}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga97eaafd4eba9443bcc11212fee90705f}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferEnable16Bit@{LPUART\_TransferEnable16Bit}}
+\index{LPUART\_TransferEnable16Bit@{LPUART\_TransferEnable16Bit}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferEnable16Bit()}{LPUART\_TransferEnable16Bit()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga97eaafd4eba9443bcc11212fee90705f} 
+void LPUART\+\_\+\+Transfer\+Enable16\+Bit (\begin{DoxyParamCaption}\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Sets the LPUART using 16bit transmit, only for 9bit or 10bit mode. 
+
+This function Enable 16bit Data transmit in lpuart\+\_\+handle\+\_\+t.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em enable} & true to enable, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00562}{562}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+\Hypertarget{group__lpuart__driver_gabfcdc658c463e9e7523cc60c5e8f9672}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferGetReceiveCount@{LPUART\_TransferGetReceiveCount}}
+\index{LPUART\_TransferGetReceiveCount@{LPUART\_TransferGetReceiveCount}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferGetReceiveCount()}{LPUART\_TransferGetReceiveCount()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gabfcdc658c463e9e7523cc60c5e8f9672} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Transfer\+Get\+Receive\+Count (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Gets the number of bytes that have been received. 
+
+This function gets the number of bytes that have been received.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em count} & Receive bytes count. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{k\+Status\+\_\+\+No\+Transfer\+In\+Progress}} & No receive in progress. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Parameter is invalid. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Get successfully through the parameter {\ttfamily count};\\
+\hline
+\end{DoxyRetVals}
+brief Gets the number of bytes that have been received.
+
+This function gets the number of bytes that have been received.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param count Receive bytes count. retval k\+Status\+\_\+\+No\+Transfer\+In\+Progress No receive in progress. retval k\+Status\+\_\+\+Invalid\+Argument Parameter is invalid. retval k\+Status\+\_\+\+Success Get successfully through the parameter {\ttfamily count}; 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01932}{1932}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga550523d301acfa413919c2f979228bcc}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferGetRxRingBufferLength@{LPUART\_TransferGetRxRingBufferLength}}
+\index{LPUART\_TransferGetRxRingBufferLength@{LPUART\_TransferGetRxRingBufferLength}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferGetRxRingBufferLength()}{LPUART\_TransferGetRxRingBufferLength()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga550523d301acfa413919c2f979228bcc} 
+size\+\_\+t LPUART\+\_\+\+Transfer\+Get\+Rx\+Ring\+Buffer\+Length (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Get the length of received data in RX ring buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Length of received data in RX ring buffer.
+\end{DoxyReturn}
+brief Get the length of received data in RX ring buffer.
+
+user\+Data handle LPUART handle pointer. return Length of received data in RX ring buffer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00219}{219}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gad80d2469dce0de9361e731e4cefde9fd}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferGetSendCount@{LPUART\_TransferGetSendCount}}
+\index{LPUART\_TransferGetSendCount@{LPUART\_TransferGetSendCount}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferGetSendCount()}{LPUART\_TransferGetSendCount()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gad80d2469dce0de9361e731e4cefde9fd} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Transfer\+Get\+Send\+Count (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Gets the number of bytes that have been sent out to bus. 
+
+This function gets the number of bytes that have been sent out to bus by an interrupt method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em count} & Send bytes count. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{k\+Status\+\_\+\+No\+Transfer\+In\+Progress}} & No send in progress. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Parameter is invalid. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Get successfully through the parameter {\ttfamily count};\\
+\hline
+\end{DoxyRetVals}
+brief Gets the number of bytes that have been sent out to bus.
+
+This function gets the number of bytes that have been sent out to bus by an interrupt method.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param count Send bytes count. retval k\+Status\+\_\+\+No\+Transfer\+In\+Progress No send in progress. retval k\+Status\+\_\+\+Invalid\+Argument Parameter is invalid. retval k\+Status\+\_\+\+Success Get successfully through the parameter {\ttfamily count}; 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01682}{1682}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga277f4cfc074cf67c2c27082df630f2da}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferHandleErrorIRQ@{LPUART\_TransferHandleErrorIRQ}}
+\index{LPUART\_TransferHandleErrorIRQ@{LPUART\_TransferHandleErrorIRQ}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferHandleErrorIRQ()}{LPUART\_TransferHandleErrorIRQ()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga277f4cfc074cf67c2c27082df630f2da} 
+void LPUART\+\_\+\+Transfer\+Handle\+Error\+IRQ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{irq\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+LPUART Error IRQ handle function. 
+
+This function handles the LPUART error IRQ request.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em irq\+Handle} & LPUART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief LPUART Error IRQ handle function.
+
+This function handles the LPUART error IRQ request.
+
+param base LPUART peripheral base address. param irq\+Handle LPUART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l02283}{2283}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga6377050807e670565fe51b71c95a923c}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferHandleIRQ@{LPUART\_TransferHandleIRQ}}
+\index{LPUART\_TransferHandleIRQ@{LPUART\_TransferHandleIRQ}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferHandleIRQ()}{LPUART\_TransferHandleIRQ()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga6377050807e670565fe51b71c95a923c} 
+void LPUART\+\_\+\+Transfer\+Handle\+IRQ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{irq\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+LPUART IRQ handle function. 
+
+This function handles the LPUART transmit and receive IRQ request.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em irq\+Handle} & LPUART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief LPUART IRQ handle function.
+
+This function handles the LPUART transmit and receive IRQ request.
+
+param base LPUART peripheral base address. param irq\+Handle LPUART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l02225}{2225}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferReceiveNonBlocking@{LPUART\_TransferReceiveNonBlocking}}
+\index{LPUART\_TransferReceiveNonBlocking@{LPUART\_TransferReceiveNonBlocking}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferReceiveNonBlocking()}{LPUART\_TransferReceiveNonBlocking()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Transfer\+Receive\+Non\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{xfer}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{received\+Bytes}{}\end{DoxyParamCaption})}
+
+
+
+Receives a buffer of data using the interrupt method. 
+
+This function receives data using an interrupt method. This is a non-\/blocking function which returns without waiting to ensure that all data are received. If the RX ring buffer is used and not empty, the data in the ring buffer is copied and the parameter {\ttfamily received\+Bytes} shows how many bytes are copied from the ring buffer. After copying, if the data in the ring buffer is not enough for read, the receive request is saved by the LPUART driver. When the new data arrives, the receive request is serviced first. When all data is received, the LPUART driver notifies the upper layer through a callback function and passes a status parameter k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle. For example, the upper layer needs 10 bytes but there are only 5 bytes in ring buffer. The 5 bytes are copied to xfer-\/\texorpdfstring{$>$}{>}data, which returns with the parameter {\ttfamily received\+Bytes} set to 5. For the remaining 5 bytes, the newly arrived data is saved from xfer-\/\texorpdfstring{$>$}{>}data\+[5]\+. When 5 bytes are received, the LPUART driver notifies the upper layer. If the RX ring buffer is not enabled, this function enables the RX and RX interrupt to receive data to xfer-\/\texorpdfstring{$>$}{>}data. When all data is received, the upper layer is notified.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em xfer} & LPUART transfer structure, see \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. \\
+\hline
+{\em received\+Bytes} & Bytes received from the ring buffer directly. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully queue the transfer into the transmit queue. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}{k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Busy}} & Previous receive request is not finished. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Invalid argument.\\
+\hline
+\end{DoxyRetVals}
+brief Receives a buffer of data using the interrupt method.
+
+This function receives data using an interrupt method. This is a non-\/blocking function which returns without waiting to ensure that all data are received. If the RX ring buffer is used and not empty, the data in the ring buffer is copied and the parameter p received\+Bytes shows how many bytes are copied from the ring buffer. After copying, if the data in the ring buffer is not enough for read, the receive request is saved by the LPUART driver. When the new data arrives, the receive request is serviced first. When all data is received, the LPUART driver notifies the upper layer through a callback function and passes a status parameter ref k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle. For example, the upper layer needs 10 bytes but there are only 5 bytes in ring buffer. The 5 bytes are copied to xfer-\/\texorpdfstring{$>$}{>}data, which returns with the parameter p received\+Bytes set to 5. For the remaining 5 bytes, the newly arrived data is saved from xfer-\/\texorpdfstring{$>$}{>}data\+[5]\+. When 5 bytes are received, the LPUART driver notifies the upper layer. If the RX ring buffer is not enabled, this function enables the RX and RX interrupt to receive data to xfer-\/\texorpdfstring{$>$}{>}data. When all data is received, the upper layer is notified.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param xfer LPUART transfer structure, see \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. param received\+Bytes Bytes received from the ring buffer directly. retval k\+Status\+\_\+\+Success Successfully queue the transfer into the transmit queue. retval k\+Status\+\_\+\+LPUART\+\_\+\+Rx\+Busy Previous receive request is not finished. retval k\+Status\+\_\+\+Invalid\+Argument Invalid argument. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01740}{1740}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gafba986c473e5935131e63cb882cf26ff}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferSendNonBlocking@{LPUART\_TransferSendNonBlocking}}
+\index{LPUART\_TransferSendNonBlocking@{LPUART\_TransferSendNonBlocking}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferSendNonBlocking()}{LPUART\_TransferSendNonBlocking()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gafba986c473e5935131e63cb882cf26ff} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Transfer\+Send\+Non\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{xfer}{}\end{DoxyParamCaption})}
+
+
+
+Transmits a buffer of data using the interrupt method. 
+
+This function send data using an interrupt method. This is a non-\/blocking function, which returns directly without waiting for all data written to the transmitter register. When all data is written to the TX register in the ISR, the LPUART driver calls the callback function and passes the \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}{k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle} as status parameter.
+
+\begin{DoxyNote}{Note}
+The k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle is passed to the upper layer when all data are written to the TX register. However, there is no check to ensure that all the data sent out. Before disabling the TX, check the k\+LPUART\+\_\+\+Transmission\+Complete\+Flag to ensure that the transmit is finished.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em xfer} & LPUART transfer structure, see \doxylink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully start the data transmission. \\
+\hline
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}{k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Busy}} & Previous transmission still not finished, data not all written to the TX register. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Invalid argument.\\
+\hline
+\end{DoxyRetVals}
+brief Transmits a buffer of data using the interrupt method.
+
+This function send data using an interrupt method. This is a non-\/blocking function, which returns directly without waiting for all data written to the transmitter register. When all data is written to the TX register in the ISR, the LPUART driver calls the callback function and passes the ref k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle as status parameter.
+
+note The k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Idle is passed to the upper layer when all data are written to the TX register. However, there is no check to ensure that all the data sent out. Before disabling the TX, check the k\+LPUART\+\_\+\+Transmission\+Complete\+Flag to ensure that the transmit is finished.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param xfer LPUART transfer structure, see \doxylink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\+\_\+transfer\+\_\+t}. retval k\+Status\+\_\+\+Success Successfully start the data transmission. retval k\+Status\+\_\+\+LPUART\+\_\+\+Tx\+Busy Previous transmission still not finished, data not all written to the TX register. retval k\+Status\+\_\+\+Invalid\+Argument Invalid argument. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01607}{1607}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga5257b77491042af5913a8d91c66318e1}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferStartRingBuffer@{LPUART\_TransferStartRingBuffer}}
+\index{LPUART\_TransferStartRingBuffer@{LPUART\_TransferStartRingBuffer}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferStartRingBuffer()}{LPUART\_TransferStartRingBuffer()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga5257b77491042af5913a8d91c66318e1} 
+void LPUART\+\_\+\+Transfer\+Start\+Ring\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{ring\+Buffer}{, }\item[{size\+\_\+t}]{ring\+Buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the RX ring buffer. 
+
+This function sets up the RX ring buffer to a specific UART handle.
+
+When the RX ring buffer is used, data received is stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If there is already data received in the ring buffer, the user can get the received data from the ring buffer directly.
+
+\begin{DoxyNote}{Note}
+When using RX ring buffer, one byte is reserved for internal use. In other words, if {\ttfamily ring\+Buffer\+Size} is 32, then only 31 bytes are used for saving data.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer. \\
+\hline
+{\em ring\+Buffer} & Start address of ring buffer for background receiving. Pass NULL to disable the ring buffer. \\
+\hline
+{\em ring\+Buffer\+Size} & size of the ring buffer.\\
+\hline
+\end{DoxyParams}
+brief Sets up the RX ring buffer.
+
+This function sets up the RX ring buffer to a specific UART handle.
+
+When the RX ring buffer is used, data received is stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If there is already data received in the ring buffer, the user can get the received data from the ring buffer directly.
+
+note When using RX ring buffer, one byte is reserved for internal use. In other words, if p ring\+Buffer\+Size is 32, then only 31 bytes are used for saving data.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. param ring\+Buffer Start address of ring buffer for background receiving. Pass NULL to disable the ring buffer. param ring\+Buffer\+Size size of the ring buffer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01533}{1533}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gad6a230a664808592aab153ea20e3d60b}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_TransferStopRingBuffer@{LPUART\_TransferStopRingBuffer}}
+\index{LPUART\_TransferStopRingBuffer@{LPUART\_TransferStopRingBuffer}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_TransferStopRingBuffer()}{LPUART\_TransferStopRingBuffer()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gad6a230a664808592aab153ea20e3d60b} 
+void LPUART\+\_\+\+Transfer\+Stop\+Ring\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{lpuart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the background transfer and uninstalls the ring buffer. 
+
+This function aborts the background transfer and uninstalls the ring buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em handle} & LPUART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the background transfer and uninstalls the ring buffer.
+
+This function aborts the background transfer and uninstalls the ring buffer.
+
+param base LPUART peripheral base address. param handle LPUART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01569}{1569}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga2699958de62ff4832f95bc2dd8c454a5}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_WriteBlocking@{LPUART\_WriteBlocking}}
+\index{LPUART\_WriteBlocking@{LPUART\_WriteBlocking}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_WriteBlocking()}{LPUART\_WriteBlocking()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga2699958de62ff4832f95bc2dd8c454a5} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Write\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Writes to the transmitter register using a blocking method. 
+
+This function polls the transmitter register, first waits for the register to be empty or TX FIFO to have room, and writes data to the transmitter buffer, then waits for the dat to be sent out to the bus.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em data} & Start address of the data to write. \\
+\hline
+{\em length} & Size of the data to write. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{k\+Status\+\_\+\+LPUART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully wrote all data.\\
+\hline
+\end{DoxyRetVals}
+brief Writes to the transmitter register using a blocking method.
+
+This function polls the transmitter register, first waits for the register to be empty or TX FIFO to have room, and writes data to the transmitter buffer, then waits for the data to be sent out to bus.
+
+param base LPUART peripheral base address. param data Start address of the data to write. param length Size of the data to write. retval k\+Status\+\_\+\+LPUART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully wrote all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01090}{1090}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga01d146f5e1b46526d460c5f7aae3891d}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_WriteBlocking16bit@{LPUART\_WriteBlocking16bit}}
+\index{LPUART\_WriteBlocking16bit@{LPUART\_WriteBlocking16bit}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_WriteBlocking16bit()}{LPUART\_WriteBlocking16bit()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga01d146f5e1b46526d460c5f7aae3891d} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} LPUART\+\_\+\+Write\+Blocking16bit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{const uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Writes to the transmitter register using a blocking method in 9bit or 10bit mode. 
+
+\begin{DoxyNote}{Note}
+This function only support 9bit or 10bit transfer. Please make sure only 10bit of data is valid and other bits are 0.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em data} & Start address of the data to write. \\
+\hline
+{\em length} & Size of the data to write. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{k\+Status\+\_\+\+LPUART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully wrote all data.\\
+\hline
+\end{DoxyRetVals}
+brief Writes to the transmitter register using a blocking method in 9bit or 10bit mode.
+
+note This function only support 9bit or 10bit transfer. Please make sure only 10bit of data is valid and other bits are 0.
+
+param base LPUART peripheral base address. param data Start address of the data to write. param length Size of the data to write. retval k\+Status\+\_\+\+LPUART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully wrote all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l01150}{1150}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_ga9a9389e1c7bcce6c23e00eb77006a717}\index{Lpuart\_driver@{Lpuart\_driver}!LPUART\_WriteByte@{LPUART\_WriteByte}}
+\index{LPUART\_WriteByte@{LPUART\_WriteByte}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{LPUART\_WriteByte()}{LPUART\_WriteByte()}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga9a9389e1c7bcce6c23e00eb77006a717} 
+void LPUART\+\_\+\+Write\+Byte (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structLPUART__Type}{LPUART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint8\+\_\+t}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Writes to the transmitter register. 
+
+This function writes data to the transmitter register directly. The upper layer must ensure that the TX register is empty or that the TX FIFO has room before calling this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & LPUART peripheral base address. \\
+\hline
+{\em data} & Data write to the TX register. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8h_source_l00794}{794}} of file \doxymbox{\hyperlink{fsl__lpuart_8h_source}{fsl\+\_\+lpuart.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{group__lpuart__driver_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__lpuart__driver_ga1100b0c89887e3d4a824c4e898eaee95}\index{Lpuart\_driver@{Lpuart\_driver}!s\_lpuartHandle@{s\_lpuartHandle}}
+\index{s\_lpuartHandle@{s\_lpuartHandle}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{s\_lpuartHandle}{s\_lpuartHandle}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_ga1100b0c89887e3d4a824c4e898eaee95} 
+void\texorpdfstring{$\ast$}{*} s\+\_\+lpuart\+Handle\+[$\,$]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00148}{148}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+
+\Hypertarget{group__lpuart__driver_gae48b44edd6bc6ba0a53f1fd6ea36dd29}\index{Lpuart\_driver@{Lpuart\_driver}!s\_lpuartIsr@{s\_lpuartIsr}}
+\index{s\_lpuartIsr@{s\_lpuartIsr}!Lpuart\_driver@{Lpuart\_driver}}
+\doxysubsubsection{\texorpdfstring{s\_lpuartIsr}{s\_lpuartIsr}}
+{\footnotesize\ttfamily \label{group__lpuart__driver_gae48b44edd6bc6ba0a53f1fd6ea36dd29} 
+lpuart\+\_\+isr\+\_\+t s\+\_\+lpuart\+Isr\+[$\,$]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__lpuart_8c_source_l00178}{178}} of file \doxymbox{\hyperlink{fsl__lpuart_8c_source}{fsl\+\_\+lpuart.\+c}}.
+

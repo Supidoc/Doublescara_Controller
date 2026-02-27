@@ -1,0 +1,339 @@
+\doxysection{source/\+log.c File Reference}
+\hypertarget{log_8c}{}\label{log_8c}\index{source/log.c@{source/log.c}}
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS\+\_\+\+CLI.\+h"{}}\newline
+{\ttfamily \+\#include "{}cli.\+h"{}}\newline
+{\ttfamily \+\#include "{}cli\+\_\+utilities.\+h"{}}\newline
+{\ttfamily \+\#include "{}disk.\+h"{}}\newline
+{\ttfamily \+\#include "{}peripherals.\+h"{}}\newline
+{\ttfamily \+\#include "{}queue.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdio.\+h"{}}\newline
+{\ttfamily \+\#include $<$log.\+h$>$}\newline
+Include dependency graph for log.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__LOG__QueueItem}{\+\_\+\+LOG\+\_\+\+Queue\+Item}}
+\item 
+struct \doxymbox{\hyperlink{struct__LOG__LogHeaderPrefix}{\+\_\+\+LOG\+\_\+\+Log\+Header\+Prefix}}
+\item 
+struct \doxymbox{\hyperlink{struct__LOG__LogHeader}{\+\_\+\+LOG\+\_\+\+Log\+Header}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{log_8c_a59a4d3c0b2cc8938975eff89e7f3d682}{LOG\+\_\+\+MAGIC}}~0x4\+C4\+F4746
+\item 
+\+\#define \doxymbox{\hyperlink{log_8c_a8bd2c3efeca31c2a8a212c1c85b49a1f}{LOG\+\_\+\+MAX\+\_\+\+LEVEL\+\_\+\+STRING\+\_\+\+SIZE}}~5
+\item 
+\+\#define \doxymbox{\hyperlink{log_8c_a132efd65168a21fefcc218034a37d825}{LOG\+\_\+\+MAX\+\_\+\+LOG\+\_\+\+LINE\+\_\+\+SIZE}}~(1 + 5 + 3 + config\+MAX\+\_\+\+TASK\+\_\+\+NAME\+\_\+\+LEN + 5 + 20 + 2 + \doxymbox{\hyperlink{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}{LOG\+\_\+\+MAX\+\_\+\+MESSAGE\+\_\+\+SIZE}} + 2)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__LOG__QueueItem}{\+\_\+\+LOG\+\_\+\+Queue\+Item}} \doxymbox{\hyperlink{log_8c_ab33882773f01b0f786eda8576b58fcdb}{LOG\+\_\+\+Queue\+Item\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__LOG__LogHeaderPrefix}{\+\_\+\+LOG\+\_\+\+Log\+Header\+Prefix}} \doxymbox{\hyperlink{log_8c_a5ad8c7523318dcf0aa77331c1086e65a}{LOG\+\_\+\+Log\+Header\+Prefix\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__LOG__LogHeader}{\+\_\+\+LOG\+\_\+\+Log\+Header}} \doxymbox{\hyperlink{log_8c_a690221406b70afa26e79befccdab12cf}{LOG\+\_\+\+Log\+Header\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{log_8c_a32a47ba3327a3e217f5ef2c24ea0b1dd}{assemble\+\_\+log\+\_\+string}} (char \texorpdfstring{$\ast$}{*}dest, \doxymbox{\hyperlink{log_8c_ab33882773f01b0f786eda8576b58fcdb}{LOG\+\_\+\+Queue\+Item\+\_\+t}} queue\+Item)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{log_8c_a624a9dd88c62e44d1bf5b46c6048ef94}{append\+\_\+to\+\_\+file}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+Length)
+\item 
+static void \doxymbox{\hyperlink{log_8c_a6ef0387bd645347b1a61efc620315993}{process}} (void)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{log_8c_a01fc81526c0fa414360ebac8a73c39d0}{set\+\_\+session\+\_\+id}} (void)
+\item 
+static void \doxymbox{\hyperlink{log_8c_a195e333d775b2d89256ce1d67da9ae02}{assemble\+\_\+header\+\_\+string}} (char \texorpdfstring{$\ast$}{*}dest, \doxymbox{\hyperlink{log_8c_a690221406b70afa26e79befccdab12cf}{LOG\+\_\+\+Log\+Header\+\_\+t}} header)
+\item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{log_8c_ac60dcc4a36c6bade741be7462470351e}{log\+\_\+command}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{log_8c_a76d185eeacc3d1437e0ccb5fea47460f}{log\+\_\+2\+\_\+cli\+\_\+command}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__LOG__Module_gad8fb5a8d2383abe85c0696d80e0372f1}{LOG\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the logging module. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}{LOG\+\_\+send\+\_\+log\+\_\+message}} (\doxymbox{\hyperlink{group__LOG__Module_ga6d319de993cc8d4a0b7da064fc94779d}{LOG\+\_\+\+Level\+\_\+t}} level, char \texorpdfstring{$\ast$}{*}message, uint8\+\_\+t silent)
+\begin{DoxyCompactList}\small\item\em Sends a log message to the log queue. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__LOG__Module_gaf4aa1ff2f9562bf7fce62e14f5c8df9b}{LOG\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing log messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+FIL \doxymbox{\hyperlink{log_8c_a735589618833e40aeb952d0741a828e8}{log\+File}}
+\item 
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{log\+Queue}} = NULL
+\item 
+static uint32\+\_\+t \doxymbox{\hyperlink{log_8c_aa0f03c6bf1b666c8a52605befef768ba}{session\+Id}}
+\item 
+static char \doxymbox{\hyperlink{log_8c_abc57636506478a61f444842f8c0555a4}{Log\+File\+Path}} \+[11]\+
+\item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{log_8c_af5c21309de04a8c4ab6feb925ef9d189}{x\+Log\+Command\+Definition}}
+\item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{log_8c_a09545fadddb32b210456f5f309a469db}{x\+Log2\+CLICommand\+Definition}}
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{log_8c_a55eb56205d877ce5359d83fcc6f3a7ac}{enable\+Log\+To\+Console}} = 1
+\item 
+static \doxymbox{\hyperlink{group__LOG__Module_ga6d319de993cc8d4a0b7da064fc94779d}{LOG\+\_\+\+Level\+\_\+t}} \doxymbox{\hyperlink{log_8c_ad0621726a30a5d8802ab4c7c899cd600}{console\+Log\+Level}} = \doxymbox{\hyperlink{group__LOG__Module_ggab7c4d49b9a167a32bbe38935536af90ba538b2b6e011479d408ecd2be0f6d6177}{LOG\+\_\+\+LEVEL\+\_\+\+DEBUG}}
+\item 
+static char \doxymbox{\hyperlink{log_8c_ae821fbad801312ee9cf5a8fe81101db2}{console\+Output\+String}} \+[\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\+\_\+\+MAX\+\_\+\+OUTPUT\+\_\+\+LENGTH}}]\+
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{log_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{log_8c_a59a4d3c0b2cc8938975eff89e7f3d682}\index{log.c@{log.c}!LOG\_MAGIC@{LOG\_MAGIC}}
+\index{LOG\_MAGIC@{LOG\_MAGIC}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_MAGIC}{LOG\_MAGIC}}
+{\footnotesize\ttfamily \label{log_8c_a59a4d3c0b2cc8938975eff89e7f3d682} 
+\+\#define LOG\+\_\+\+MAGIC~0x4\+C4\+F4746}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00025}{25}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a8bd2c3efeca31c2a8a212c1c85b49a1f}\index{log.c@{log.c}!LOG\_MAX\_LEVEL\_STRING\_SIZE@{LOG\_MAX\_LEVEL\_STRING\_SIZE}}
+\index{LOG\_MAX\_LEVEL\_STRING\_SIZE@{LOG\_MAX\_LEVEL\_STRING\_SIZE}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_MAX\_LEVEL\_STRING\_SIZE}{LOG\_MAX\_LEVEL\_STRING\_SIZE}}
+{\footnotesize\ttfamily \label{log_8c_a8bd2c3efeca31c2a8a212c1c85b49a1f} 
+\+\#define LOG\+\_\+\+MAX\+\_\+\+LEVEL\+\_\+\+STRING\+\_\+\+SIZE~5}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00027}{27}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a132efd65168a21fefcc218034a37d825}\index{log.c@{log.c}!LOG\_MAX\_LOG\_LINE\_SIZE@{LOG\_MAX\_LOG\_LINE\_SIZE}}
+\index{LOG\_MAX\_LOG\_LINE\_SIZE@{LOG\_MAX\_LOG\_LINE\_SIZE}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_MAX\_LOG\_LINE\_SIZE}{LOG\_MAX\_LOG\_LINE\_SIZE}}
+{\footnotesize\ttfamily \label{log_8c_a132efd65168a21fefcc218034a37d825} 
+\+\#define LOG\+\_\+\+MAX\+\_\+\+LOG\+\_\+\+LINE\+\_\+\+SIZE~(1 + 5 + 3 + config\+MAX\+\_\+\+TASK\+\_\+\+NAME\+\_\+\+LEN + 5 + 20 + 2 + \doxymbox{\hyperlink{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}{LOG\+\_\+\+MAX\+\_\+\+MESSAGE\+\_\+\+SIZE}} + 2)}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00030}{30}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{log_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{log_8c_a690221406b70afa26e79befccdab12cf}\index{log.c@{log.c}!LOG\_LogHeader\_t@{LOG\_LogHeader\_t}}
+\index{LOG\_LogHeader\_t@{LOG\_LogHeader\_t}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_LogHeader\_t}{LOG\_LogHeader\_t}}
+{\footnotesize\ttfamily \label{log_8c_a690221406b70afa26e79befccdab12cf} 
+typedef struct \doxymbox{\hyperlink{struct__LOG__LogHeader}{\+\_\+\+LOG\+\_\+\+Log\+Header}} \doxymbox{\hyperlink{log_8c_a690221406b70afa26e79befccdab12cf}{LOG\+\_\+\+Log\+Header\+\_\+t}}}
+
+\Hypertarget{log_8c_a5ad8c7523318dcf0aa77331c1086e65a}\index{log.c@{log.c}!LOG\_LogHeaderPrefix\_t@{LOG\_LogHeaderPrefix\_t}}
+\index{LOG\_LogHeaderPrefix\_t@{LOG\_LogHeaderPrefix\_t}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_LogHeaderPrefix\_t}{LOG\_LogHeaderPrefix\_t}}
+{\footnotesize\ttfamily \label{log_8c_a5ad8c7523318dcf0aa77331c1086e65a} 
+typedef struct \doxymbox{\hyperlink{struct__LOG__LogHeaderPrefix}{\+\_\+\+LOG\+\_\+\+Log\+Header\+Prefix}} \doxymbox{\hyperlink{log_8c_a5ad8c7523318dcf0aa77331c1086e65a}{LOG\+\_\+\+Log\+Header\+Prefix\+\_\+t}}}
+
+\Hypertarget{log_8c_ab33882773f01b0f786eda8576b58fcdb}\index{log.c@{log.c}!LOG\_QueueItem\_t@{LOG\_QueueItem\_t}}
+\index{LOG\_QueueItem\_t@{LOG\_QueueItem\_t}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LOG\_QueueItem\_t}{LOG\_QueueItem\_t}}
+{\footnotesize\ttfamily \label{log_8c_ab33882773f01b0f786eda8576b58fcdb} 
+typedef struct \doxymbox{\hyperlink{struct__LOG__QueueItem}{\+\_\+\+LOG\+\_\+\+Queue\+Item}} \doxymbox{\hyperlink{log_8c_ab33882773f01b0f786eda8576b58fcdb}{LOG\+\_\+\+Queue\+Item\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{log_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log_8c_a624a9dd88c62e44d1bf5b46c6048ef94}\index{log.c@{log.c}!append\_to\_file@{append\_to\_file}}
+\index{append\_to\_file@{append\_to\_file}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{append\_to\_file()}{append\_to\_file()}}
+{\footnotesize\ttfamily \label{log_8c_a624a9dd88c62e44d1bf5b46c6048ef94} 
+status\+\_\+t append\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00382}{382}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a195e333d775b2d89256ce1d67da9ae02}\index{log.c@{log.c}!assemble\_header\_string@{assemble\_header\_string}}
+\index{assemble\_header\_string@{assemble\_header\_string}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{assemble\_header\_string()}{assemble\_header\_string()}}
+{\footnotesize\ttfamily \label{log_8c_a195e333d775b2d89256ce1d67da9ae02} 
+void assemble\+\_\+header\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{\doxymbox{\hyperlink{log_8c_a690221406b70afa26e79befccdab12cf}{LOG\+\_\+\+Log\+Header\+\_\+t}}}]{header}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00364}{364}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a32a47ba3327a3e217f5ef2c24ea0b1dd}\index{log.c@{log.c}!assemble\_log\_string@{assemble\_log\_string}}
+\index{assemble\_log\_string@{assemble\_log\_string}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{assemble\_log\_string()}{assemble\_log\_string()}}
+{\footnotesize\ttfamily \label{log_8c_a32a47ba3327a3e217f5ef2c24ea0b1dd} 
+void assemble\+\_\+log\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{dest}{, }\item[{\doxymbox{\hyperlink{log_8c_ab33882773f01b0f786eda8576b58fcdb}{LOG\+\_\+\+Queue\+Item\+\_\+t}}}]{queue\+Item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00319}{319}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a76d185eeacc3d1437e0ccb5fea47460f}\index{log.c@{log.c}!log\_2\_cli\_command@{log\_2\_cli\_command}}
+\index{log\_2\_cli\_command@{log\_2\_cli\_command}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_2\_cli\_command()}{log\_2\_cli\_command()}}
+{\footnotesize\ttfamily \label{log_8c_a76d185eeacc3d1437e0ccb5fea47460f} 
+Base\+Type\+\_\+t log\+\_\+2\+\_\+cli\+\_\+command (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00262}{262}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_ac60dcc4a36c6bade741be7462470351e}\index{log.c@{log.c}!log\_command@{log\_command}}
+\index{log\_command@{log\_command}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_command()}{log\_command()}}
+{\footnotesize\ttfamily \label{log_8c_ac60dcc4a36c6bade741be7462470351e} 
+Base\+Type\+\_\+t log\+\_\+command (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00183}{183}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a6ef0387bd645347b1a61efc620315993}\index{log.c@{log.c}!process@{process}}
+\index{process@{process}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily \label{log_8c_a6ef0387bd645347b1a61efc620315993} 
+void process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00409}{409}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a01fc81526c0fa414360ebac8a73c39d0}\index{log.c@{log.c}!set\_session\_id@{set\_session\_id}}
+\index{set\_session\_id@{set\_session\_id}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{set\_session\_id()}{set\_session\_id()}}
+{\footnotesize\ttfamily \label{log_8c_a01fc81526c0fa414360ebac8a73c39d0} 
+status\+\_\+t set\+\_\+session\+\_\+id (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00426}{426}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{log_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{log_8c_ad0621726a30a5d8802ab4c7c899cd600}\index{log.c@{log.c}!consoleLogLevel@{consoleLogLevel}}
+\index{consoleLogLevel@{consoleLogLevel}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{consoleLogLevel}{consoleLogLevel}}
+{\footnotesize\ttfamily \label{log_8c_ad0621726a30a5d8802ab4c7c899cd600} 
+\doxymbox{\hyperlink{group__LOG__Module_ga6d319de993cc8d4a0b7da064fc94779d}{LOG\+\_\+\+Level\+\_\+t}} console\+Log\+Level = \doxymbox{\hyperlink{group__LOG__Module_ggab7c4d49b9a167a32bbe38935536af90ba538b2b6e011479d408ecd2be0f6d6177}{LOG\+\_\+\+LEVEL\+\_\+\+DEBUG}}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00108}{108}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_ae821fbad801312ee9cf5a8fe81101db2}\index{log.c@{log.c}!consoleOutputString@{consoleOutputString}}
+\index{consoleOutputString@{consoleOutputString}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{consoleOutputString}{consoleOutputString}}
+{\footnotesize\ttfamily \label{log_8c_ae821fbad801312ee9cf5a8fe81101db2} 
+char console\+Output\+String\+[\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\+\_\+\+MAX\+\_\+\+OUTPUT\+\_\+\+LENGTH}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00109}{109}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a55eb56205d877ce5359d83fcc6f3a7ac}\index{log.c@{log.c}!enableLogToConsole@{enableLogToConsole}}
+\index{enableLogToConsole@{enableLogToConsole}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{enableLogToConsole}{enableLogToConsole}}
+{\footnotesize\ttfamily \label{log_8c_a55eb56205d877ce5359d83fcc6f3a7ac} 
+uint8\+\_\+t enable\+Log\+To\+Console = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00107}{107}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a735589618833e40aeb952d0741a828e8}\index{log.c@{log.c}!logFile@{logFile}}
+\index{logFile@{logFile}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{logFile}{logFile}}
+{\footnotesize\ttfamily \label{log_8c_a735589618833e40aeb952d0741a828e8} 
+FIL log\+File}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00085}{85}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_abc57636506478a61f444842f8c0555a4}\index{log.c@{log.c}!LogFilePath@{LogFilePath}}
+\index{LogFilePath@{LogFilePath}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{LogFilePath}{LogFilePath}}
+{\footnotesize\ttfamily \label{log_8c_abc57636506478a61f444842f8c0555a4} 
+char Log\+File\+Path\+[11]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00091}{91}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}\index{log.c@{log.c}!logQueue@{logQueue}}
+\index{logQueue@{logQueue}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{logQueue}{logQueue}}
+{\footnotesize\ttfamily \label{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50} 
+Queue\+Handle\+\_\+t log\+Queue = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00087}{87}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_aa0f03c6bf1b666c8a52605befef768ba}\index{log.c@{log.c}!sessionId@{sessionId}}
+\index{sessionId@{sessionId}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{sessionId}{sessionId}}
+{\footnotesize\ttfamily \label{log_8c_aa0f03c6bf1b666c8a52605befef768ba} 
+uint32\+\_\+t session\+Id\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00089}{89}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_a09545fadddb32b210456f5f309a469db}\index{log.c@{log.c}!xLog2CLICommandDefinition@{xLog2CLICommandDefinition}}
+\index{xLog2CLICommandDefinition@{xLog2CLICommandDefinition}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{xLog2CLICommandDefinition}{xLog2CLICommandDefinition}}
+{\footnotesize\ttfamily \label{log_8c_a09545fadddb32b210456f5f309a469db} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Log2\+CLICommand\+Definition\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{.pcCommand\ \ \ \ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}log2cli"{}},}
+\DoxyCodeLine{.pcHelpString\ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}log2cli\ [LEVEL]:\ Sets\ the\ log\ level\ which\ will\ be\ outputted\ to\ the\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}console.\(\backslash\)r\(\backslash\)n\(\backslash\)t\ Choose\ from:\ NONE,DEBUG,INFO,WARN,ERROR,FATAL\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{.pxCommandInterpreter\ =\ \doxymbox{\hyperlink{log_8c_a76d185eeacc3d1437e0ccb5fea47460f}{log\_2\_cli\_command}},}
+\DoxyCodeLine{.cExpectedNumberOfParameters\ =\ -\/1\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00100}{100}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{log_8c_af5c21309de04a8c4ab6feb925ef9d189}\index{log.c@{log.c}!xLogCommandDefinition@{xLogCommandDefinition}}
+\index{xLogCommandDefinition@{xLogCommandDefinition}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{xLogCommandDefinition}{xLogCommandDefinition}}
+{\footnotesize\ttfamily \label{log_8c_af5c21309de04a8c4ab6feb925ef9d189} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Log\+Command\+Definition\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{.pcCommand\ =\ \textcolor{stringliteral}{"{}log"{}},}
+\DoxyCodeLine{.pcHelpString\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}log\ [OPTIONS]:\ gets\ the\ log\ for\ the\ specified\ sessionId\ \(\backslash\)r\(\backslash\)n\ \(\backslash\)t\ -\/s\ [sessionId]\ if\ no\ "{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}sessionId\ is\ given\ the\ current\ sessions\ log\ will\ be\ used\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{.pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{log_8c_ac60dcc4a36c6bade741be7462470351e}{log\_command}},}
+\DoxyCodeLine{.cExpectedNumberOfParameters\ =\ -\/1\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00093}{93}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+

@@ -1,0 +1,541 @@
+\doxysection{source/\+step.c File Reference}
+\hypertarget{step_8c}{}\label{step_8c}\index{source/step.c@{source/step.c}}
+{\ttfamily \+\#include "{}step.\+h"{}}\newline
+{\ttfamily \+\#include "{}log.\+h"{}}\newline
+{\ttfamily \+\#include "{}math.\+h"{}}\newline
+{\ttfamily \+\#include "{}peripherals.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdio.\+h"{}}\newline
+{\ttfamily \+\#include "{}string.\+h"{}}\newline
+Include dependency graph for step.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{step_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}}
+\begin{DoxyCompactList}\small\item\em Pool item for static acceleration lookup tables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{step_8c_a742a42dd11153d9548874c6a2aa654a0}{STP\+\_\+\+TIMER\+\_\+\+FREQ\+\_\+\+HZ}}~250000
+\item 
+\+\#define \doxymbox{\hyperlink{step_8c_a68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}}~16
+\begin{DoxyCompactList}\small\item\em Fixed-\/point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-\/speed applications Based on principles from "{}\+Generate stepper-\/motor speed profiles in real time"{} by David Austin. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{step_8c_a0151e2810a372d204ed775d1ab17453a}{STP\+\_\+\+DELAY\+\_\+\+SCALE}}~(1 $<$$<$ \doxymbox{\hyperlink{step_8c_a68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \doxymbox{\hyperlink{step_8c_a28d0770a77db2b2d164e65ea4f7fb48b}{STP\+\_\+\+Cmd\+Type\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}} \doxymbox{\hyperlink{step_8c_a3c649ff9eed2e379f833048cb9c33e13}{STP\+\_\+\+Move\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}} \doxymbox{\hyperlink{step_8c_a95360ef9659b5071971a756f1aeedbc3}{STP\+\_\+\+Stop\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}} \doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}} \doxymbox{\hyperlink{step_8c_accb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}} \doxymbox{\hyperlink{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Pool item for static acceleration lookup tables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \{ \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5}{STP\+\_\+\+CMD\+\_\+\+MOVE}}
+, \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f}{STP\+\_\+\+CMD\+\_\+\+STOP}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a1b68168e888209a026ad88634f11eafb}{init\+\_\+handle}} (const \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_aaa8f060483887cc3169699d2381a581f}{step\+\_\+pin\+\_\+mux\+\_\+gpio}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_ad6fecfbfb17b4c527362a2df1a36f826}{step\+\_\+pin\+\_\+mux\+\_\+ftm}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a64a54f3a596d785588cd1ed8c66a6f9e}{plan\+\_\+motion\+\_\+profile}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{calculate\+\_\+acceleration\+\_\+profile}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}lookup\+Table, uint32\+\_\+t num\+Steps, uint16\+\_\+t step\+Zero\+Delay, uint16\+\_\+t end\+Velocity\+Delay)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\+\_\+accel\+\_\+table}} (uint32\+\_\+t table\+Size, int8\+\_\+t \texorpdfstring{$\ast$}{*}pool\+Index)
+\item 
+static void \doxymbox{\hyperlink{step_8c_ae09089881e135a335d2f5b9a30ce381f}{free\+\_\+accel\+\_\+table}} (int8\+\_\+t pool\+Index)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_ab9ba4bc5d5a24905d852fc70efc02d3e}{start\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a66296a7c6754045a6501b7a26eedb4de}{get\+\_\+handle\+\_\+from\+\_\+timer}} (FTM\+\_\+\+Type \texorpdfstring{$\ast$}{*}ftm\+Base, ftm\+\_\+chnl\+\_\+t ftm\+Channel, \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a4aa1d8727e141ede64c144f9c697539b}{reset\+\_\+movement\+\_\+handle}} (\doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\+\_\+\+Stepper\+Movement\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a5c15b423b38f5097a4790c35c1161231}{process\+\_\+movement}} (void)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a29357584de349bef8e194e9c7f2d2a44}{process\+\_\+config}} (void)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_afee64a5b2eb78cc1bd1cf1031fd142d9}{init\+\_\+dir\+\_\+pin}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_aae856c682c28f7bc05fd0e302201c591}{set\+\_\+direction\+\_\+pin}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a1644230654a6269c7ed2b9b44b6c95da}{init\+\_\+step\+\_\+pin}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a535044583cadc710fea45666c94131d4}{calculate\+\_\+step\+\_\+profile}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a443991e39293f31b6839d480960d7a7c}{calculate\+\_\+delays}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint16\+\_\+t \texorpdfstring{$\ast$}{*}step\+Zero\+Delay, uint16\+\_\+t \texorpdfstring{$\ast$}{*}end\+Velocity\+Delay)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a50c6f6b369b9b4e89e68be623193fef3}{calculate\+\_\+acceleration\+\_\+table\+\_\+parameters}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t \texorpdfstring{$\ast$}{*}interp\+Factor, uint32\+\_\+t \texorpdfstring{$\ast$}{*}table\+Size)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a090575ff77c299042d8fc6399fd64695}{create\+\_\+accel\+\_\+table}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t table\+Size, uint16\+\_\+t step\+Zero\+Delay, uint16\+\_\+t end\+Velocity\+Delay, int8\+\_\+t \texorpdfstring{$\ast$}{*}pool\+Index)
+\item 
+static void \doxymbox{\hyperlink{step_8c_aec411a881b3aaf231cabef1dbbfcf89f}{update\+\_\+isr\+\_\+handle\+\_\+cache}} (void)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the stepper motor control module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing stepper motor commands. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6}{STP\+\_\+stop}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t do\+Deceleration)
+\begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}{STP\+\_\+move\+\_\+relative}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t step\+Count, \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}} direction)
+\begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\+\_\+init\+\_\+stepper}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config)
+\begin{DoxyCompactList}\small\item\em Initializes a stepper motor with the provided configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+id}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Retrieves the stepper motor handle by its label identifier. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{step_8c_a889cb58d52a26f7eaa5ea6319c9e0f29}{FTM3\+\_\+\+IRQHandler}} (void)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a071a60c29b068bf21f820a13eaf47e6b}{stop\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t do\+Deceleration)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{step_8c_accb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}} \doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}} \+[\doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
+\item 
+\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \doxymbox{\hyperlink{step_8c_a138cc0dfc0b56f7f1fa610e8275f7e06}{test\+Handler}}
+\item 
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{step_8c_aeb86091cfe0c5168e3dc293683af1f6b}{cmd\+Queue}} = NULL
+\item 
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{step_8c_aa56fb4fc84752e009a44d92ab5746b6a}{config\+Queue}} = NULL
+\item 
+\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{step_8c_abdfcd72eae8af0e607208d5f76c75be0}{FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache}} \+[8]\+
+\item 
+static \doxymbox{\hyperlink{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}} \doxymbox{\hyperlink{step_8c_a1d158ecf1936b775fdaf7688f2135161}{accel\+Table\+Pool}} \+[\doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}]\+
+\begin{DoxyCompactList}\small\item\em Static pool of acceleration lookup tables. Shared by all stepper motor instances to avoid dynamic allocation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{step_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{step_8c_a0151e2810a372d204ed775d1ab17453a}\index{step.c@{step.c}!STP\_DELAY\_SCALE@{STP\_DELAY\_SCALE}}
+\index{STP\_DELAY\_SCALE@{STP\_DELAY\_SCALE}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_DELAY\_SCALE}{STP\_DELAY\_SCALE}}
+{\footnotesize\ttfamily \label{step_8c_a0151e2810a372d204ed775d1ab17453a} 
+\+\#define STP\+\_\+\+DELAY\+\_\+\+SCALE~(1 $<$$<$ \doxymbox{\hyperlink{step_8c_a68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00031}{31}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a68309b58dfcf99bdff3b4c5f1f5dc794}\index{step.c@{step.c}!STP\_DELAY\_SCALE\_BITS@{STP\_DELAY\_SCALE\_BITS}}
+\index{STP\_DELAY\_SCALE\_BITS@{STP\_DELAY\_SCALE\_BITS}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_DELAY\_SCALE\_BITS}{STP\_DELAY\_SCALE\_BITS}}
+{\footnotesize\ttfamily \label{step_8c_a68309b58dfcf99bdff3b4c5f1f5dc794} 
+\+\#define STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS~16}
+
+
+
+Fixed-\/point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-\/speed applications Based on principles from "{}\+Generate stepper-\/motor speed profiles in real time"{} by David Austin. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00030}{30}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a742a42dd11153d9548874c6a2aa654a0}\index{step.c@{step.c}!STP\_TIMER\_FREQ\_HZ@{STP\_TIMER\_FREQ\_HZ}}
+\index{STP\_TIMER\_FREQ\_HZ@{STP\_TIMER\_FREQ\_HZ}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_TIMER\_FREQ\_HZ}{STP\_TIMER\_FREQ\_HZ}}
+{\footnotesize\ttfamily \label{step_8c_a742a42dd11153d9548874c6a2aa654a0} 
+\+\#define STP\+\_\+\+TIMER\+\_\+\+FREQ\+\_\+\+HZ~250000}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00022}{22}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{step_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c}\index{step.c@{step.c}!STP\_AccelTablePoolItem\_t@{STP\_AccelTablePoolItem\_t}}
+\index{STP\_AccelTablePoolItem\_t@{STP\_AccelTablePoolItem\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_AccelTablePoolItem\_t}{STP\_AccelTablePoolItem\_t}}
+{\footnotesize\ttfamily \label{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c} 
+typedef struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}} \doxymbox{\hyperlink{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}}}
+
+
+
+Pool item for static acceleration lookup tables. 
+
+\Hypertarget{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}\index{step.c@{step.c}!STP\_CmdQueueItem\_t@{STP\_CmdQueueItem\_t}}
+\index{STP\_CmdQueueItem\_t@{STP\_CmdQueueItem\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_CmdQueueItem\_t}{STP\_CmdQueueItem\_t}}
+{\footnotesize\ttfamily \label{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8} 
+typedef struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}} \doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}}
+
+\Hypertarget{step_8c_a28d0770a77db2b2d164e65ea4f7fb48b}\index{step.c@{step.c}!STP\_CmdType\_t@{STP\_CmdType\_t}}
+\index{STP\_CmdType\_t@{STP\_CmdType\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_CmdType\_t}{STP\_CmdType\_t}}
+{\footnotesize\ttfamily \label{step_8c_a28d0770a77db2b2d164e65ea4f7fb48b} 
+typedef enum \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \doxymbox{\hyperlink{step_8c_a28d0770a77db2b2d164e65ea4f7fb48b}{STP\+\_\+\+Cmd\+Type\+\_\+t}}}
+
+\Hypertarget{step_8c_accb1eaaa512044d26829364f7c039b76}\index{step.c@{step.c}!STP\_HandlesArrayItem\_t@{STP\_HandlesArrayItem\_t}}
+\index{STP\_HandlesArrayItem\_t@{STP\_HandlesArrayItem\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_HandlesArrayItem\_t}{STP\_HandlesArrayItem\_t}}
+{\footnotesize\ttfamily \label{step_8c_accb1eaaa512044d26829364f7c039b76} 
+typedef struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}} \doxymbox{\hyperlink{step_8c_accb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}}}
+
+\Hypertarget{step_8c_a3c649ff9eed2e379f833048cb9c33e13}\index{step.c@{step.c}!STP\_MoveCmdData\_t@{STP\_MoveCmdData\_t}}
+\index{STP\_MoveCmdData\_t@{STP\_MoveCmdData\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_MoveCmdData\_t}{STP\_MoveCmdData\_t}}
+{\footnotesize\ttfamily \label{step_8c_a3c649ff9eed2e379f833048cb9c33e13} 
+typedef struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}} \doxymbox{\hyperlink{step_8c_a3c649ff9eed2e379f833048cb9c33e13}{STP\+\_\+\+Move\+Cmd\+Data\+\_\+t}}}
+
+\Hypertarget{step_8c_a95360ef9659b5071971a756f1aeedbc3}\index{step.c@{step.c}!STP\_StopCmdData\_t@{STP\_StopCmdData\_t}}
+\index{STP\_StopCmdData\_t@{STP\_StopCmdData\_t}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{STP\_StopCmdData\_t}{STP\_StopCmdData\_t}}
+{\footnotesize\ttfamily \label{step_8c_a95360ef9659b5071971a756f1aeedbc3} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}} \doxymbox{\hyperlink{step_8c_a95360ef9659b5071971a756f1aeedbc3}{STP\+\_\+\+Stop\+Cmd\+Data\+\_\+t}}}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{step_8c_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{step_8c_ac619e3142c0e69b20136d0794b134aa7}\index{step.c@{step.c}!\_STP\_CmdType@{\_STP\_CmdType}}
+\index{\_STP\_CmdType@{\_STP\_CmdType}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{\_STP\_CmdType}{\_STP\_CmdType}}
+{\footnotesize\ttfamily \label{step_8c_ac619e3142c0e69b20136d0794b134aa7} 
+enum \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_MOVE@{STP\_CMD\_MOVE}!step.c@{step.c}}
+\index{step.c@{step.c}!STP\_CMD\_MOVE@{STP\_CMD\_MOVE}}
+}\Hypertarget{step_8c_ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5}\label{step_8c_ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5} 
+STP\+\_\+\+CMD\+\_\+\+MOVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_STOP@{STP\_CMD\_STOP}!step.c@{step.c}}
+\index{step.c@{step.c}!STP\_CMD\_STOP@{STP\_CMD\_STOP}}
+}\Hypertarget{step_8c_ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f}\label{step_8c_ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f} 
+STP\+\_\+\+CMD\+\_\+\+STOP&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00036}{36}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{step_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{step_8c_a47a18d328f3e0085135f6b5a74bc7255}\index{step.c@{step.c}!allocate\_accel\_table@{allocate\_accel\_table}}
+\index{allocate\_accel\_table@{allocate\_accel\_table}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{allocate\_accel\_table()}{allocate\_accel\_table()}}
+{\footnotesize\ttfamily \label{step_8c_a47a18d328f3e0085135f6b5a74bc7255} 
+status\+\_\+t allocate\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{table\+Size}{, }\item[{int8\+\_\+t \texorpdfstring{$\ast$}{*}}]{pool\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00686}{686}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a2d08a460c866d6442e4a3d5a57cd97a5}\index{step.c@{step.c}!calculate\_acceleration\_profile@{calculate\_acceleration\_profile}}
+\index{calculate\_acceleration\_profile@{calculate\_acceleration\_profile}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_acceleration\_profile()}{calculate\_acceleration\_profile()}}
+{\footnotesize\ttfamily \label{step_8c_a2d08a460c866d6442e4a3d5a57cd97a5} 
+status\+\_\+t calculate\+\_\+acceleration\+\_\+profile (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{lookup\+Table}{, }\item[{uint32\+\_\+t}]{num\+Steps}{, }\item[{uint16\+\_\+t}]{step\+Zero\+Delay}{, }\item[{uint16\+\_\+t}]{end\+Velocity\+Delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00716}{716}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a50c6f6b369b9b4e89e68be623193fef3}\index{step.c@{step.c}!calculate\_acceleration\_table\_parameters@{calculate\_acceleration\_table\_parameters}}
+\index{calculate\_acceleration\_table\_parameters@{calculate\_acceleration\_table\_parameters}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_acceleration\_table\_parameters()}{calculate\_acceleration\_table\_parameters()}}
+{\footnotesize\ttfamily \label{step_8c_a50c6f6b369b9b4e89e68be623193fef3} 
+void calculate\+\_\+acceleration\+\_\+table\+\_\+parameters (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{interp\+Factor}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{table\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00625}{625}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a443991e39293f31b6839d480960d7a7c}\index{step.c@{step.c}!calculate\_delays@{calculate\_delays}}
+\index{calculate\_delays@{calculate\_delays}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_delays()}{calculate\_delays()}}
+{\footnotesize\ttfamily \label{step_8c_a443991e39293f31b6839d480960d7a7c} 
+void calculate\+\_\+delays (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{step\+Zero\+Delay}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{end\+Velocity\+Delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00612}{612}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a535044583cadc710fea45666c94131d4}\index{step.c@{step.c}!calculate\_step\_profile@{calculate\_step\_profile}}
+\index{calculate\_step\_profile@{calculate\_step\_profile}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_step\_profile()}{calculate\_step\_profile()}}
+{\footnotesize\ttfamily \label{step_8c_a535044583cadc710fea45666c94131d4} 
+void calculate\+\_\+step\+\_\+profile (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00581}{581}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a090575ff77c299042d8fc6399fd64695}\index{step.c@{step.c}!create\_accel\_table@{create\_accel\_table}}
+\index{create\_accel\_table@{create\_accel\_table}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{create\_accel\_table()}{create\_accel\_table()}}
+{\footnotesize\ttfamily \label{step_8c_a090575ff77c299042d8fc6399fd64695} 
+status\+\_\+t create\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t}]{table\+Size}{, }\item[{uint16\+\_\+t}]{step\+Zero\+Delay}{, }\item[{uint16\+\_\+t}]{end\+Velocity\+Delay}{, }\item[{int8\+\_\+t \texorpdfstring{$\ast$}{*}}]{pool\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00646}{646}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_ae09089881e135a335d2f5b9a30ce381f}\index{step.c@{step.c}!free\_accel\_table@{free\_accel\_table}}
+\index{free\_accel\_table@{free\_accel\_table}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{free\_accel\_table()}{free\_accel\_table()}}
+{\footnotesize\ttfamily \label{step_8c_ae09089881e135a335d2f5b9a30ce381f} 
+void free\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{pool\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00707}{707}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a889cb58d52a26f7eaa5ea6319c9e0f29}\index{step.c@{step.c}!FTM3\_IRQHandler@{FTM3\_IRQHandler}}
+\index{FTM3\_IRQHandler@{FTM3\_IRQHandler}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{FTM3\_IRQHandler()}{FTM3\_IRQHandler()}}
+{\footnotesize\ttfamily \label{step_8c_a889cb58d52a26f7eaa5ea6319c9e0f29} 
+void FTM3\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00250}{250}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a66296a7c6754045a6501b7a26eedb4de}\index{step.c@{step.c}!get\_handle\_from\_timer@{get\_handle\_from\_timer}}
+\index{get\_handle\_from\_timer@{get\_handle\_from\_timer}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{get\_handle\_from\_timer()}{get\_handle\_from\_timer()}}
+{\footnotesize\ttfamily \label{step_8c_a66296a7c6754045a6501b7a26eedb4de} 
+void get\+\_\+handle\+\_\+from\+\_\+timer (\begin{DoxyParamCaption}\item[{FTM\+\_\+\+Type \texorpdfstring{$\ast$}{*}}]{ftm\+Base}{, }\item[{ftm\+\_\+chnl\+\_\+t}]{ftm\+Channel}{, }\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00791}{791}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_afee64a5b2eb78cc1bd1cf1031fd142d9}\index{step.c@{step.c}!init\_dir\_pin@{init\_dir\_pin}}
+\index{init\_dir\_pin@{init\_dir\_pin}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{init\_dir\_pin()}{init\_dir\_pin()}}
+{\footnotesize\ttfamily \label{step_8c_afee64a5b2eb78cc1bd1cf1031fd142d9} 
+status\+\_\+t init\+\_\+dir\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00482}{482}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a1b68168e888209a026ad88634f11eafb}\index{step.c@{step.c}!init\_handle@{init\_handle}}
+\index{init\_handle@{init\_handle}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{init\_handle()}{init\_handle()}}
+{\footnotesize\ttfamily \label{step_8c_a1b68168e888209a026ad88634f11eafb} 
+status\+\_\+t init\+\_\+handle (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00401}{401}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a1644230654a6269c7ed2b9b44b6c95da}\index{step.c@{step.c}!init\_step\_pin@{init\_step\_pin}}
+\index{init\_step\_pin@{init\_step\_pin}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{init\_step\_pin()}{init\_step\_pin()}}
+{\footnotesize\ttfamily \label{step_8c_a1644230654a6269c7ed2b9b44b6c95da} 
+status\+\_\+t init\+\_\+step\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00466}{466}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a64a54f3a596d785588cd1ed8c66a6f9e}\index{step.c@{step.c}!plan\_motion\_profile@{plan\_motion\_profile}}
+\index{plan\_motion\_profile@{plan\_motion\_profile}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{plan\_motion\_profile()}{plan\_motion\_profile()}}
+{\footnotesize\ttfamily \label{step_8c_a64a54f3a596d785588cd1ed8c66a6f9e} 
+status\+\_\+t plan\+\_\+motion\+\_\+profile (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00533}{533}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a29357584de349bef8e194e9c7f2d2a44}\index{step.c@{step.c}!process\_config@{process\_config}}
+\index{process\_config@{process\_config}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{process\_config()}{process\_config()}}
+{\footnotesize\ttfamily \label{step_8c_a29357584de349bef8e194e9c7f2d2a44} 
+void process\+\_\+config (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00387}{387}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a5c15b423b38f5097a4790c35c1161231}\index{step.c@{step.c}!process\_movement@{process\_movement}}
+\index{process\_movement@{process\_movement}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{process\_movement()}{process\_movement()}}
+{\footnotesize\ttfamily \label{step_8c_a5c15b423b38f5097a4790c35c1161231} 
+void process\+\_\+movement (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00898}{898}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a4aa1d8727e141ede64c144f9c697539b}\index{step.c@{step.c}!reset\_movement\_handle@{reset\_movement\_handle}}
+\index{reset\_movement\_handle@{reset\_movement\_handle}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{reset\_movement\_handle()}{reset\_movement\_handle()}}
+{\footnotesize\ttfamily \label{step_8c_a4aa1d8727e141ede64c144f9c697539b} 
+status\+\_\+t reset\+\_\+movement\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\+\_\+\+Stepper\+Movement\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00806}{806}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_aae856c682c28f7bc05fd0e302201c591}\index{step.c@{step.c}!set\_direction\_pin@{set\_direction\_pin}}
+\index{set\_direction\_pin@{set\_direction\_pin}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{set\_direction\_pin()}{set\_direction\_pin()}}
+{\footnotesize\ttfamily \label{step_8c_aae856c682c28f7bc05fd0e302201c591} 
+status\+\_\+t set\+\_\+direction\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00881}{881}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_ab9ba4bc5d5a24905d852fc70efc02d3e}\index{step.c@{step.c}!start\_steps@{start\_steps}}
+\index{start\_steps@{start\_steps}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{start\_steps()}{start\_steps()}}
+{\footnotesize\ttfamily \label{step_8c_ab9ba4bc5d5a24905d852fc70efc02d3e} 
+status\+\_\+t start\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00749}{749}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_ad6fecfbfb17b4c527362a2df1a36f826}\index{step.c@{step.c}!step\_pin\_mux\_ftm@{step\_pin\_mux\_ftm}}
+\index{step\_pin\_mux\_ftm@{step\_pin\_mux\_ftm}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{step\_pin\_mux\_ftm()}{step\_pin\_mux\_ftm()}}
+{\footnotesize\ttfamily \label{step_8c_ad6fecfbfb17b4c527362a2df1a36f826} 
+status\+\_\+t step\+\_\+pin\+\_\+mux\+\_\+ftm (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00517}{517}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_aaa8f060483887cc3169699d2381a581f}\index{step.c@{step.c}!step\_pin\_mux\_gpio@{step\_pin\_mux\_gpio}}
+\index{step\_pin\_mux\_gpio@{step\_pin\_mux\_gpio}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{step\_pin\_mux\_gpio()}{step\_pin\_mux\_gpio()}}
+{\footnotesize\ttfamily \label{step_8c_aaa8f060483887cc3169699d2381a581f} 
+status\+\_\+t step\+\_\+pin\+\_\+mux\+\_\+gpio (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00500}{500}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a071a60c29b068bf21f820a13eaf47e6b}\index{step.c@{step.c}!stop\_steps@{stop\_steps}}
+\index{stop\_steps@{stop\_steps}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{stop\_steps()}{stop\_steps()}}
+{\footnotesize\ttfamily \label{step_8c_a071a60c29b068bf21f820a13eaf47e6b} 
+status\+\_\+t stop\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t}]{do\+Deceleration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00838}{838}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_aec411a881b3aaf231cabef1dbbfcf89f}\index{step.c@{step.c}!update\_isr\_handle\_cache@{update\_isr\_handle\_cache}}
+\index{update\_isr\_handle\_cache@{update\_isr\_handle\_cache}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{update\_isr\_handle\_cache()}{update\_isr\_handle\_cache()}}
+{\footnotesize\ttfamily \label{step_8c_aec411a881b3aaf231cabef1dbbfcf89f} 
+void update\+\_\+isr\+\_\+handle\+\_\+cache (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00676}{676}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{step_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{step_8c_a1d158ecf1936b775fdaf7688f2135161}\index{step.c@{step.c}!accelTablePool@{accelTablePool}}
+\index{accelTablePool@{accelTablePool}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{accelTablePool}{accelTablePool}}
+{\footnotesize\ttfamily \label{step_8c_a1d158ecf1936b775fdaf7688f2135161} 
+\doxymbox{\hyperlink{step_8c_aa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}} accel\+Table\+Pool\+[\doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static pool of acceleration lookup tables. Shared by all stepper motor instances to avoid dynamic allocation. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00133}{133}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_aeb86091cfe0c5168e3dc293683af1f6b}\index{step.c@{step.c}!cmdQueue@{cmdQueue}}
+\index{cmdQueue@{cmdQueue}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{cmdQueue}{cmdQueue}}
+{\footnotesize\ttfamily \label{step_8c_aeb86091cfe0c5168e3dc293683af1f6b} 
+Queue\+Handle\+\_\+t cmd\+Queue = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00124}{124}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_aa56fb4fc84752e009a44d92ab5746b6a}\index{step.c@{step.c}!configQueue@{configQueue}}
+\index{configQueue@{configQueue}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{configQueue}{configQueue}}
+{\footnotesize\ttfamily \label{step_8c_aa56fb4fc84752e009a44d92ab5746b6a} 
+Queue\+Handle\+\_\+t config\+Queue = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00125}{125}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_abdfcd72eae8af0e607208d5f76c75be0}\index{step.c@{step.c}!FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}}
+\index{FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{FTM3\_ISR\_handle\_cache}{FTM3\_ISR\_handle\_cache}}
+{\footnotesize\ttfamily \label{step_8c_abdfcd72eae8af0e607208d5f76c75be0} 
+\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}}\texorpdfstring{$\ast$}{*} FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache\+[8]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00127}{127}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a53e76081d475aef890072a6c88aa3c64}\index{step.c@{step.c}!handles@{handles}}
+\index{handles@{handles}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{handles}{handles}}
+{\footnotesize\ttfamily \label{step_8c_a53e76081d475aef890072a6c88aa3c64} 
+\doxymbox{\hyperlink{step_8c_accb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}} handles\+[\doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00116}{116}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a138cc0dfc0b56f7f1fa610e8275f7e06}\index{step.c@{step.c}!testHandler@{testHandler}}
+\index{testHandler@{testHandler}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{testHandler}{testHandler}}
+{\footnotesize\ttfamily \label{step_8c_a138cc0dfc0b56f7f1fa610e8275f7e06} 
+\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} test\+Handler}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00122}{122}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+

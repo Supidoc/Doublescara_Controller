@@ -1,6 +1,6 @@
 /************************************************************
  * @file    cli_utilities.c
- * @brief   Implementation file for module
+ * @brief   Implementation file for CLI utilities module
  * @author  dg
  * @date    18 Dec 2025
  ************************************************************/
@@ -36,8 +36,9 @@
  *     Public Function Implementations     *
  *******************************************/
 
-status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pcCommandString, uint8_t * parameterFound, const char ** pcParameter,
-        BaseType_t * parameterStringLength)
+status_t CLU_get_parameter_value_string(char* parameterIdentifier, const char* pcCommandString,
+                                        uint8_t* parameterFound, const char** pcParameter,
+                                        BaseType_t* parameterStringLength)
 {
     size_t i = 1;
     do
@@ -46,7 +47,7 @@ status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pc
         if (*pcParameter == NULL)
         {
             *parameterStringLength = 0;
-            *parameterFound = 0;
+            *parameterFound        = 0;
             return kStatus_Success;
         }
         size_t cmp = strncmp(parameterIdentifier, *pcParameter, *parameterStringLength);
@@ -55,18 +56,19 @@ status_t CLU_GetParameterValueString(char * parameterIdentifier, const char * pc
             *pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, i + 1, parameterStringLength);
             if (*pcParameter == NULL)
             {
-                *parameterFound = 1;
+                *parameterFound        = 1;
                 *parameterStringLength = 0;
                 return kStatus_Success;
             }
             else if (**pcParameter == '-')
             {
                 *parameterStringLength = 0;
-                *pcParameter = NULL;
-                *parameterFound = 1;
+                *pcParameter           = NULL;
+                *parameterFound        = 1;
                 return kStatus_Success;
             }
-            else {
+            else
+            {
                 *parameterFound = 1;
                 return kStatus_Success;
             }

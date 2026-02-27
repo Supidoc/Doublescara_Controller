@@ -1,0 +1,32 @@
+var group__FTM__Peripheral__Access__Layer =
+[
+    [ "FTM Register Masks", "group__FTM__Register__Masks.html", "group__FTM__Register__Masks" ],
+    [ "FTM_Type", "structFTM__Type.html", [
+      [ "CnSC", "structFTM__Type.html#a1f30106e7fbc8f5a00b586ddfcfe113a", null ],
+      [ "CNT", "structFTM__Type.html#aafebc28d2a0aa309a2e6eb71cc646c1b", null ],
+      [ "CNTIN", "structFTM__Type.html#a5dde356f5ee4d309ea1d4380a9501eb9", null ],
+      [ "CnV", "structFTM__Type.html#a4a374e850fc48c7559277888b350539c", null ],
+      [ "COMBINE", "structFTM__Type.html#ac4684173f8183e0cf75d1ae384a9de62", null ],
+      [ "CONF", "structFTM__Type.html#aefdaf80da88ac945ee6e55088e7e3587", null ],
+      [ "DEADTIME", "structFTM__Type.html#a7ef7e543dc67cfc33c569f78b2aa2e4b", null ],
+      [ "EXTTRIG", "structFTM__Type.html#ae705852108790f7c8c005b3b9d944b41", null ],
+      [ "FILTER", "structFTM__Type.html#a15a781ea3e00391d0723b3bf3d13444f", null ],
+      [ "FLTCTRL", "structFTM__Type.html#ac3f55a671f3ec1b0024d894ea9a86f01", null ],
+      [ "FLTPOL", "structFTM__Type.html#af3bab26c41de8b03fd2d925abdc3eaea", null ],
+      [ "FMS", "structFTM__Type.html#adba577540e3be5b0e96ba5bc7538eac2", null ],
+      [ "INVCTRL", "structFTM__Type.html#a5d7825cc57a84230359220fa95b990d0", null ],
+      [ "MOD", "structFTM__Type.html#aeb4a6a58257ebece333d61778bde756c", null ],
+      [ "MODE", "structFTM__Type.html#a18f2ef364d8c9e9217b35054fc5726be", null ],
+      [ "OUTINIT", "structFTM__Type.html#aeed5243aad98ae4a5f0f4eb769ee5da9", null ],
+      [ "OUTMASK", "structFTM__Type.html#a624050c92b74b9952d2cde560e5ee41c", null ],
+      [ "POL", "structFTM__Type.html#a1a1989ba477755de85476e2c012fd918", null ],
+      [ "PWMLOAD", "structFTM__Type.html#a28478e01da54c088007371f44451b2d7", null ],
+      [ "QDCTRL", "structFTM__Type.html#a0a07f1a16c3d7714947e8ad3fb070592", null ],
+      [ "SC", "structFTM__Type.html#a539e171615dd7eccfd0c9c4f78c895ab", null ],
+      [ "STATUS", "structFTM__Type.html#aa89cff385d101610ed0d60e0a0b50c6c", null ],
+      [ "SWOCTRL", "structFTM__Type.html#ab45e3f92a7675c23c0ee9227f2a198af", null ],
+      [ "SYNC", "structFTM__Type.html#ad7f41548c14fec6c57dc5490b01c1b58", null ],
+      [ "SYNCONF", "structFTM__Type.html#a845f63d5c3bdf59235b7d629dc60207a", null ]
+    ] ],
+    [ "FTM_CONTROLS_COUNT", "group__FTM__Peripheral__Access__Layer.html#gab050b2cb66ee1d6cf811af5983b2319c", null ]
+];

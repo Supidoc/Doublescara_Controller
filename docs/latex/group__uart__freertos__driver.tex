@@ -1,0 +1,261 @@
+\doxysection{Uart\+\_\+freertos\+\_\+driver }
+\hypertarget{group__uart__freertos__driver}{}\label{group__uart__freertos__driver}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__uart__rtos__config}{\+\_\+uart\+\_\+rtos\+\_\+config}}
+\begin{DoxyCompactList}\small\item\em UART configuration structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__uart__freertos__driver_gac191144ccf5a22be9c7f429eef334fd4}{\+\_\+uart\+\_\+rtos\+\_\+config::\+base}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__freertos__driver_ga9d9f5a4e755d586811a9f25834050edf}{\+\_\+uart\+\_\+rtos\+\_\+config::\+srcclk}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__freertos__driver_gadd6aeb37f668b0c8b70e87c685f43b79}{\+\_\+uart\+\_\+rtos\+\_\+config::\+baudrate}}
+\item 
+\doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{uart\+\_\+parity\+\_\+mode\+\_\+t}} \doxymbox{\hyperlink{group__uart__freertos__driver_gaa6c4a94b2ea3711279823b5b7913344d}{\+\_\+uart\+\_\+rtos\+\_\+config::\+parity}}
+\item 
+\doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{uart\+\_\+stop\+\_\+bit\+\_\+count\+\_\+t}} \doxymbox{\hyperlink{group__uart__freertos__driver_gabf6c32ff0b10479d060d073de6115fe4}{\+\_\+uart\+\_\+rtos\+\_\+config::\+stopbits}}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__uart__freertos__driver_gac82182960bdbd7658891bcdc7517790e}{\+\_\+uart\+\_\+rtos\+\_\+config::\+buffer}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__freertos__driver_gacc63638371afa9d6248b23fba709c8e9}{\+\_\+uart\+\_\+rtos\+\_\+config::\+buffer\+\_\+size}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Driver version}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}\label{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908} 
+typedef struct \doxymbox{\hyperlink{struct__uart__rtos__config}{\+\_\+uart\+\_\+rtos\+\_\+config}} {\bfseries uart\+\_\+rtos\+\_\+config\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART configuration structure. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__uart__freertos__driver_ga0023d77491809dff862358266574febb}{FSL\+\_\+\+UART\+\_\+\+FREERTOS\+\_\+\+DRIVER\+\_\+\+VERSION}}~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 5, 0))
+\begin{DoxyCompactList}\small\item\em UART Free\+RTOS driver version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{UART RTOS Operation}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{group__uart__freertos__driver_ga1ca9d0f6b8d4d5fc3e64c9a57d7ada7d}{UART\+\_\+\+RTOS\+\_\+\+Init}} (uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}t\+\_\+handle, const \doxymbox{\hyperlink{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}{uart\+\_\+rtos\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}cfg)
+\begin{DoxyCompactList}\small\item\em Initializes a UART instance for operation in RTOS. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{group__uart__freertos__driver_gab7ac281cb85e1d290c8f25c83a6facfc}{UART\+\_\+\+RTOS\+\_\+\+Deinit}} (uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Deinitializes a UART instance for operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{UART transactional Operation}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{group__uart__freertos__driver_gac14fc0e6c6cac6818958e92d2f8950bb}{UART\+\_\+\+RTOS\+\_\+\+Send}} (uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, uint32\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Sends data in the background. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{group__uart__freertos__driver_ga18dd039e1e02bc47ad8001f7adc15d85}{UART\+\_\+\+RTOS\+\_\+\+Receive}} (uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, uint32\+\_\+t length, size\+\_\+t \texorpdfstring{$\ast$}{*}received, uint32\+\_\+t timeout\+Ms)
+\begin{DoxyCompactList}\small\item\em Receives data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group__uart__freertos__driver_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__uart__freertos__driver_ga0023d77491809dff862358266574febb}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!FSL\_UART\_FREERTOS\_DRIVER\_VERSION@{FSL\_UART\_FREERTOS\_DRIVER\_VERSION}}
+\index{FSL\_UART\_FREERTOS\_DRIVER\_VERSION@{FSL\_UART\_FREERTOS\_DRIVER\_VERSION}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{FSL\_UART\_FREERTOS\_DRIVER\_VERSION}{FSL\_UART\_FREERTOS\_DRIVER\_VERSION}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_ga0023d77491809dff862358266574febb} 
+\+\#define FSL\+\_\+\+UART\+\_\+\+FREERTOS\+\_\+\+DRIVER\+\_\+\+VERSION~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 5, 0))}
+
+
+
+UART Free\+RTOS driver version. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__uart__freertos__driver_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__uart__freertos__driver_gab7ac281cb85e1d290c8f25c83a6facfc}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!UART\_RTOS\_Deinit@{UART\_RTOS\_Deinit}}
+\index{UART\_RTOS\_Deinit@{UART\_RTOS\_Deinit}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RTOS\_Deinit()}{UART\_RTOS\_Deinit()}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gab7ac281cb85e1d290c8f25c83a6facfc} 
+int UART\+\_\+\+RTOS\+\_\+\+Deinit (\begin{DoxyParamCaption}\item[{uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Deinitializes a UART instance for operation. 
+
+This function deinitializes the UART module, sets all register values to reset value, and frees the resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The RTOS UART handle.\\
+\hline
+\end{DoxyParams}
+brief Deinitializes a UART instance for operation.
+
+This function deinitializes the UART module, sets all register values to reset value, and frees the resources.
+
+param handle The RTOS UART handle. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8c_source_l00185}{185}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8c_source}{fsl\+\_\+uart\+\_\+freertos.\+c}}.
+
+\Hypertarget{group__uart__freertos__driver_ga1ca9d0f6b8d4d5fc3e64c9a57d7ada7d}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!UART\_RTOS\_Init@{UART\_RTOS\_Init}}
+\index{UART\_RTOS\_Init@{UART\_RTOS\_Init}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RTOS\_Init()}{UART\_RTOS\_Init()}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_ga1ca9d0f6b8d4d5fc3e64c9a57d7ada7d} 
+int UART\+\_\+\+RTOS\+\_\+\+Init (\begin{DoxyParamCaption}\item[{uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{t\+\_\+handle}{, }\item[{const \doxymbox{\hyperlink{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}{uart\+\_\+rtos\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cfg}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a UART instance for operation in RTOS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The RTOS UART handle, the pointer to an allocated space for RTOS context. \\
+\hline
+{\em t\+\_\+handle} & The pointer to the allocated space to store the transactional layer internal state. \\
+\hline
+{\em cfg} & The pointer to the parameters required to configure the UART after initialization. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 succeed; otherwise fail.
+\end{DoxyReturn}
+brief Initializes a UART instance for operation in RTOS.
+
+param handle The RTOS UART handle, the pointer to an allocated space for RTOS context. param t\+\_\+handle The pointer to the allocated space to store the transactional layer internal state. param cfg The pointer to the parameters required to configure the UART after initialization. return k\+Status\+\_\+\+Success, otherwise fail. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8c_source_l00071}{71}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8c_source}{fsl\+\_\+uart\+\_\+freertos.\+c}}.
+
+\Hypertarget{group__uart__freertos__driver_ga18dd039e1e02bc47ad8001f7adc15d85}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!UART\_RTOS\_Receive@{UART\_RTOS\_Receive}}
+\index{UART\_RTOS\_Receive@{UART\_RTOS\_Receive}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RTOS\_Receive()}{UART\_RTOS\_Receive()}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_ga18dd039e1e02bc47ad8001f7adc15d85} 
+int UART\+\_\+\+RTOS\+\_\+\+Receive (\begin{DoxyParamCaption}\item[{uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{uint32\+\_\+t}]{length}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{received}{, }\item[{uint32\+\_\+t}]{timeout\+Ms}{}\end{DoxyParamCaption})}
+
+
+
+Receives data. 
+
+This function receives data from UART. It is a synchronous API. If data is immediately available, it is returned immediately and the number of bytes received.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The RTOS UART handle. \\
+\hline
+{\em buffer} & The pointer to the buffer to write received data. \\
+\hline
+{\em length} & The number of bytes to receive. \\
+\hline
+{\em received} & The pointer to a variable of size\+\_\+t where the number of received data is filled.\\
+\hline
+\end{DoxyParams}
+brief Receives data.
+
+This function receives data from UART. It is a synchronous API. If data is immediately available, it is returned immediately and the number of bytes received.
+
+param handle The RTOS UART handle. param buffer The pointer to the buffer to write received data. param length The number of bytes to receive. param received The pointer to a variable of size\+\_\+t where the number of received data is filled. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8c_source_l00291}{291}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8c_source}{fsl\+\_\+uart\+\_\+freertos.\+c}}.
+
+\Hypertarget{group__uart__freertos__driver_gac14fc0e6c6cac6818958e92d2f8950bb}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!UART\_RTOS\_Send@{UART\_RTOS\_Send}}
+\index{UART\_RTOS\_Send@{UART\_RTOS\_Send}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RTOS\_Send()}{UART\_RTOS\_Send()}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gac14fc0e6c6cac6818958e92d2f8950bb} 
+int UART\+\_\+\+RTOS\+\_\+\+Send (\begin{DoxyParamCaption}\item[{uart\+\_\+rtos\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{uint32\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Sends data in the background. 
+
+This function sends data. It is a synchronous API. If the hardware buffer is full, the task is in the blocked state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The RTOS UART handle. \\
+\hline
+{\em buffer} & The pointer to the buffer to send. \\
+\hline
+{\em length} & The number of bytes to send.\\
+\hline
+\end{DoxyParams}
+brief Sends data in the background.
+
+This function sends data. It is a synchronous API. If the hardware buffer is full, the task is in the blocked state.
+
+param handle The RTOS UART handle. param buffer The pointer to the buffer to send. param length The number of bytes to send. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8c_source_l00222}{222}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8c_source}{fsl\+\_\+uart\+\_\+freertos.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{group__uart__freertos__driver_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__uart__freertos__driver_gac191144ccf5a22be9c7f429eef334fd4}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!base@{base}}
+\index{base@{base}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{base}{base}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gac191144ccf5a22be9c7f429eef334fd4} 
+\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}}\texorpdfstring{$\ast$}{*} \+\_\+uart\+\_\+rtos\+\_\+config::\+base}
+
+UART base address 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00034}{34}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_gadd6aeb37f668b0c8b70e87c685f43b79}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!baudrate@{baudrate}}
+\index{baudrate@{baudrate}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{baudrate}{baudrate}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gadd6aeb37f668b0c8b70e87c685f43b79} 
+uint32\+\_\+t \+\_\+uart\+\_\+rtos\+\_\+config::\+baudrate}
+
+Desired communication speed 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00036}{36}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_gac82182960bdbd7658891bcdc7517790e}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!buffer@{buffer}}
+\index{buffer@{buffer}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gac82182960bdbd7658891bcdc7517790e} 
+uint8\+\_\+t\texorpdfstring{$\ast$}{*} \+\_\+uart\+\_\+rtos\+\_\+config::\+buffer}
+
+Buffer for background reception 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_gacc63638371afa9d6248b23fba709c8e9}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!buffer\_size@{buffer\_size}}
+\index{buffer\_size@{buffer\_size}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{buffer\_size}{buffer\_size}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gacc63638371afa9d6248b23fba709c8e9} 
+uint32\+\_\+t \+\_\+uart\+\_\+rtos\+\_\+config::\+buffer\+\_\+size}
+
+Size of buffer for background reception 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_gaa6c4a94b2ea3711279823b5b7913344d}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!parity@{parity}}
+\index{parity@{parity}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{parity}{parity}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gaa6c4a94b2ea3711279823b5b7913344d} 
+\doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{uart\+\_\+parity\+\_\+mode\+\_\+t}} \+\_\+uart\+\_\+rtos\+\_\+config::\+parity}
+
+Parity setting 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00037}{37}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_ga9d9f5a4e755d586811a9f25834050edf}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!srcclk@{srcclk}}
+\index{srcclk@{srcclk}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{srcclk}{srcclk}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_ga9d9f5a4e755d586811a9f25834050edf} 
+uint32\+\_\+t \+\_\+uart\+\_\+rtos\+\_\+config::\+srcclk}
+
+UART source clock in Hz 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+
+\Hypertarget{group__uart__freertos__driver_gabf6c32ff0b10479d060d073de6115fe4}\index{Uart\_freertos\_driver@{Uart\_freertos\_driver}!stopbits@{stopbits}}
+\index{stopbits@{stopbits}!Uart\_freertos\_driver@{Uart\_freertos\_driver}}
+\doxysubsubsection{\texorpdfstring{stopbits}{stopbits}}
+{\footnotesize\ttfamily \label{group__uart__freertos__driver_gabf6c32ff0b10479d060d073de6115fe4} 
+\doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{uart\+\_\+stop\+\_\+bit\+\_\+count\+\_\+t}} \+\_\+uart\+\_\+rtos\+\_\+config::\+stopbits}
+
+Number of stop bits to use 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart__freertos_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{fsl__uart__freertos_8h_source}{fsl\+\_\+uart\+\_\+freertos.\+h}}.
+

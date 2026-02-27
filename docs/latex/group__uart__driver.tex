@@ -1,0 +1,1630 @@
+\doxysection{Uart\+\_\+driver }
+\hypertarget{group__uart__driver}{}\label{group__uart__driver}\index{Uart\_driver@{Uart\_driver}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__uart__config}{\+\_\+uart\+\_\+config}}
+\begin{DoxyCompactList}\small\item\em UART configuration structure. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__uart__transfer}{\+\_\+uart\+\_\+transfer}}
+\begin{DoxyCompactList}\small\item\em UART transfer structure. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__uart__handle}{\+\_\+uart\+\_\+handle}}
+\begin{DoxyCompactList}\small\item\em UART handle structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__uart__driver_gac0f88b67f77fd05f186a5ec940c340bd}{UART\+\_\+\+RETRY\+\_\+\+TIMES}}~0U /\+\texorpdfstring{$\ast$}{*} Defining to zero means to keep waiting for the flag until it is assert/\+deassert. \texorpdfstring{$\ast$}{*}/\+
+\begin{DoxyCompactList}\small\item\em Retry times for waiting flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}\label{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0} 
+typedef enum \doxymbox{\hyperlink{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}{\+\_\+uart\+\_\+parity\+\_\+mode}} {\bfseries uart\+\_\+parity\+\_\+mode\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART parity mode. \end{DoxyCompactList}\item 
+\Hypertarget{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}\label{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6} 
+typedef enum \doxymbox{\hyperlink{group__uart__driver_ga3c656a4365cab1185398ff953272091e}{\+\_\+uart\+\_\+stop\+\_\+bit\+\_\+count}} {\bfseries uart\+\_\+stop\+\_\+bit\+\_\+count\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART stop bit count. \end{DoxyCompactList}\item 
+\Hypertarget{group__uart__driver_ga6bde326a19495e3ff435c08c1da4edf7}\label{group__uart__driver_ga6bde326a19495e3ff435c08c1da4edf7} 
+typedef enum \doxymbox{\hyperlink{group__uart__driver_gae658ead369268edf18141e1903d426f1}{\+\_\+uart\+\_\+idle\+\_\+type\+\_\+select}} {\bfseries uart\+\_\+idle\+\_\+type\+\_\+select\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART idle type select. \end{DoxyCompactList}\item 
+\Hypertarget{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}\label{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7} 
+typedef struct \doxymbox{\hyperlink{struct__uart__config}{\+\_\+uart\+\_\+config}} {\bfseries uart\+\_\+config\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART configuration structure. \end{DoxyCompactList}\item 
+\Hypertarget{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}\label{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50} 
+typedef struct \doxymbox{\hyperlink{struct__uart__transfer}{\+\_\+uart\+\_\+transfer}} {\bfseries uart\+\_\+transfer\+\_\+t}
+\begin{DoxyCompactList}\small\item\em UART transfer structure. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__uart__handle}{\+\_\+uart\+\_\+handle}} \doxymbox{\hyperlink{group__uart__driver_gae4cc0b0d1b32237a516424ff2f60e406}{uart\+\_\+handle\+\_\+t}}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\+\_\+transfer\+\_\+callback\+\_\+t}}) (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} status, void \texorpdfstring{$\ast$}{*}user\+Data)
+\begin{DoxyCompactList}\small\item\em UART transfer callback function. \end{DoxyCompactList}\item 
+typedef void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__uart__driver_gabc35b89155f0d33028cfb1a76affe900}{uart\+\_\+isr\+\_\+t}}) (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}handle)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7}{k\+Status\+\_\+\+UART\+\_\+\+Tx\+Busy}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 0)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Busy}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 1)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6}{k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 2)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 3)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a765913f003819ed87b861d187bf79ab8}{k\+Status\+\_\+\+UART\+\_\+\+Tx\+Watermark\+Too\+Large}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 4)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a720cefde05389830f35f6e6df6f6ac67}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Watermark\+Too\+Large}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 5)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54}{k\+Status\+\_\+\+UART\+\_\+\+Flag\+Cannot\+Clear\+Manually}}
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a950972a9e2ebbaa13c92e8f5a51f785d}{k\+Status\+\_\+\+UART\+\_\+\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 7)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a2e5b644b1e10c426af818bc78657e992}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Ring\+Buffer\+Overrun}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 8)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Hardware\+Overrun}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 9)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb}{k\+Status\+\_\+\+UART\+\_\+\+Noise\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 10)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0}{k\+Status\+\_\+\+UART\+\_\+\+Framing\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 11)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8}{k\+Status\+\_\+\+UART\+\_\+\+Parity\+Error}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 12)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}{k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support}}
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a3e5b488f7ed418cb08399a5db193103e}{k\+Status\+\_\+\+UART\+\_\+\+Idle\+Line\+Detected}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 14)
+, \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}{k\+Status\+\_\+\+UART\+\_\+\+Timeout}} = MAKE\+\_\+\+STATUS(k\+Status\+Group\+\_\+\+UART, 15)
+ \}
+\begin{DoxyCompactList}\small\item\em Error codes for the UART driver. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}{\+\_\+uart\+\_\+parity\+\_\+mode}} \{ \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b}{k\+UART\+\_\+\+Parity\+Disabled}} = 0x0U
+, \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a9e68fe3aba46e045bee5433ed098bff0}{k\+UART\+\_\+\+Parity\+Even}} = 0x2U
+, \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10ae48c7fabc9babf1be626ebeb2627a54c}{k\+UART\+\_\+\+Parity\+Odd}} = 0x3U
+ \}
+\begin{DoxyCompactList}\small\item\em UART parity mode. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__uart__driver_ga3c656a4365cab1185398ff953272091e}{\+\_\+uart\+\_\+stop\+\_\+bit\+\_\+count}} \{ \doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7}{k\+UART\+\_\+\+One\+Stop\+Bit}} = 0U
+, \doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea9704b3ae3ee851acf324eb357f75ab56}{k\+UART\+\_\+\+Two\+Stop\+Bit}} = 1U
+ \}
+\begin{DoxyCompactList}\small\item\em UART stop bit count. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__uart__driver_gae658ead369268edf18141e1903d426f1}{\+\_\+uart\+\_\+idle\+\_\+type\+\_\+select}} \{ \doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a5216f34232b8d01cdd8db1ca01072901}{k\+UART\+\_\+\+Idle\+Type\+Start\+Bit}} = 0U
+, \doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a05771d6cd97e160c6a47d5871d2de013}{k\+UART\+\_\+\+Idle\+Type\+Stop\+Bit}} = 1U
+ \}
+\begin{DoxyCompactList}\small\item\em UART idle type select. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}} \{ \newline
+\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64}{k\+UART\+\_\+\+Rx\+Active\+Edge\+Interrupt\+Enable}} = (UART\+\_\+\+BDH\+\_\+\+RXEDGIE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable}} = (UART\+\_\+\+C2\+\_\+\+TIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 8)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b}{k\+UART\+\_\+\+Transmission\+Complete\+Interrupt\+Enable}} = (UART\+\_\+\+C2\+\_\+\+TCIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 8)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable}} = (UART\+\_\+\+C2\+\_\+\+RIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 8)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed}{k\+UART\+\_\+\+Idle\+Line\+Interrupt\+Enable}} = (UART\+\_\+\+C2\+\_\+\+ILIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 8)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d}{k\+UART\+\_\+\+Rx\+Overrun\+Interrupt\+Enable}} = (UART\+\_\+\+C3\+\_\+\+ORIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 16)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3}{k\+UART\+\_\+\+Noise\+Error\+Interrupt\+Enable}} = (UART\+\_\+\+C3\+\_\+\+NEIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 16)
+, \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5}{k\+UART\+\_\+\+Framing\+Error\+Interrupt\+Enable}} = (UART\+\_\+\+C3\+\_\+\+FEIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 16)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a}{k\+UART\+\_\+\+Parity\+Error\+Interrupt\+Enable}} = (UART\+\_\+\+C3\+\_\+\+PEIE\+\_\+\+MASK \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 16)
+, {\bfseries k\+UART\+\_\+\+All\+Interrupts\+Enable}
+ \}
+\begin{DoxyCompactList}\small\item\em UART interrupt configuration structure, default settings all disabled. \end{DoxyCompactList}\item 
+enum \{ \newline
+\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a}{k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag}} = (UART\+\_\+\+S1\+\_\+\+TDRE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da4468b60b2d78c34b93c9199df9e95d3a}{k\+UART\+\_\+\+Transmission\+Complete\+Flag}} = (UART\+\_\+\+S1\+\_\+\+TC\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daa86a34b2ea609eeeb63f98fea498e540}{k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag}} = (UART\+\_\+\+S1\+\_\+\+RDRF\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dab2fc4e1b1164ed3e3fe7e19a39029b2c}{k\+UART\+\_\+\+Idle\+Line\+Flag}} = (UART\+\_\+\+S1\+\_\+\+IDLE\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da93d3c56466b4656dcce08d9323d7afd8}{k\+UART\+\_\+\+Rx\+Overrun\+Flag}} = (UART\+\_\+\+S1\+\_\+\+OR\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dabd56419f102fb01c7bbc2c38f81ab360}{k\+UART\+\_\+\+Noise\+Error\+Flag}} = (UART\+\_\+\+S1\+\_\+\+NF\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daade5071fa56646adcda3562051443868}{k\+UART\+\_\+\+Framing\+Error\+Flag}} = (UART\+\_\+\+S1\+\_\+\+FE\+\_\+\+MASK)
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da0c92973ab1d527115fa01934c62a053d}{k\+UART\+\_\+\+Parity\+Error\+Flag}} = (UART\+\_\+\+S1\+\_\+\+PF\+\_\+\+MASK)
+, \newline
+\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dadcfe89feb164ff5b1720312922006a7a}{k\+UART\+\_\+\+Rx\+Active\+Edge\+Flag}}
+, \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da7a4521cd44a3272a94784670d1bf5a0c}{k\+UART\+\_\+\+Rx\+Active\+Flag}}
+ \}
+\begin{DoxyCompactList}\small\item\em UART status flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__driver_gadeeb40cdc314638d4355ef906f1c408d}{UART\+\_\+\+Get\+Instance}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Get the UART instance from peripheral base address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__uart__driver_ga5795f92ab50688d9700481929e79c014}{s\+\_\+uart\+Handle}} \+[$\,$]\+
+\item 
+const IRQn\+\_\+\+Type \doxymbox{\hyperlink{group__uart__driver_ga40bc00c2341495de3b56699359d0689b}{s\+\_\+uart\+IRQ}} \+[$\,$]\+
+\item 
+uart\+\_\+isr\+\_\+t \doxymbox{\hyperlink{group__uart__driver_ga2c70996f197c2a9112c6bebbd5d22c47}{s\+\_\+uart\+Isr}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Initialization and deinitialization}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gab5965a8e11f7e1d4d531141291fd5288}{UART\+\_\+\+Init}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, const \doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}config, uint32\+\_\+t src\+Clock\+\_\+\+Hz)
+\begin{DoxyCompactList}\small\item\em Initializes a UART instance with a user configuration structure and peripheral clock. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga3ff48bc211831be33e6fe5c50eb671a0}{UART\+\_\+\+Deinit}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Deinitializes a UART instance. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5}{UART\+\_\+\+Get\+Default\+Config}} (\doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Gets the default configuration structure. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gab3ba5019c11f288cc4f545dd656b6284}{UART\+\_\+\+Set\+Baud\+Rate}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t baud\+Rate\+\_\+\+Bps, uint32\+\_\+t src\+Clock\+\_\+\+Hz)
+\begin{DoxyCompactList}\small\item\em Sets the UART instance baud rate. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_gafd3e76fdfe5edf2da4a87c9373ed9618}{UART\+\_\+\+Enable9bit\+Mode}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enable 9-\/bit data mode for UART. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__uart__driver_ga52151603994f3ffc0a2edab7fcec57b6}{UART\+\_\+\+Set9th\+Transmit\+Bit}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Set UART 9th transmit bit. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__uart__driver_gaf79c7b813eefe84353c31e2d88b3aa76}{UART\+\_\+\+Clear9th\+Transmit\+Bit}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Clear UART 9th transmit bit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Status}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__driver_ga28bf715678c0d3c8c3902e79455ee923}{UART\+\_\+\+Get\+Status\+Flags}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Gets UART status flags. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gacc4cb85534361f836edca9454a6426c6}{UART\+\_\+\+Clear\+Status\+Flags}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Clears status flags with the provided mask. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Interrupts}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga49ecd761481a22956e3f46285038719c}{UART\+\_\+\+Enable\+Interrupts}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Enables UART interrupts according to the provided mask. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga3f24b6b9b730046a9a81918f9abe7d99}{UART\+\_\+\+Disable\+Interrupts}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint32\+\_\+t mask)
+\begin{DoxyCompactList}\small\item\em Disables the UART interrupts according to the provided mask. \end{DoxyCompactList}\item 
+uint32\+\_\+t \doxymbox{\hyperlink{group__uart__driver_ga79bc0b880286ec0dc0543606fc772912}{UART\+\_\+\+Get\+Enabled\+Interrupts}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Gets the enabled UART interrupts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Bus Operations}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{group__uart__driver_gaf2ed68f3dd6ee8a272e9afd8ebd84f93}{UART\+\_\+\+Enable\+Tx}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enables or disables the UART transmitter. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__uart__driver_gaa503e36c8ce82f1042ce186b9863871f}{UART\+\_\+\+Enable\+Rx}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, bool enable)
+\begin{DoxyCompactList}\small\item\em Enables or disables the UART receiver. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__uart__driver_ga371d2ceda535de3a74beba5a3465fab0}{UART\+\_\+\+Write\+Byte}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Writes to the TX register. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__uart__driver_ga3728011ac7906f3e03bb677b0f9cf7b4}{UART\+\_\+\+Read\+Byte}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base)
+\begin{DoxyCompactList}\small\item\em Reads the RX register directly. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gabedf96691af44a8fafec58d5cf6e4dd2}{UART\+\_\+\+Write\+Blocking}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Writes to the TX register using a blocking method. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_ga39d59e8a94f1af451a0db81888596639}{UART\+\_\+\+Read\+Blocking}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Read RX data register using a blocking method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Transactional}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga63db308c32019b7dd6c0647d618e5247}{UART\+\_\+\+Transfer\+Create\+Handle}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\+\_\+transfer\+\_\+callback\+\_\+t}} callback, void \texorpdfstring{$\ast$}{*}user\+Data)
+\begin{DoxyCompactList}\small\item\em Initializes the UART handle. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga223fba584bfabd599629d5ce92f929ac}{UART\+\_\+\+Transfer\+Start\+Ring\+Buffer}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t \texorpdfstring{$\ast$}{*}ring\+Buffer, size\+\_\+t ring\+Buffer\+Size)
+\begin{DoxyCompactList}\small\item\em Sets up the RX ring buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga0c0bc73df49cb31dff0e903630314f5b}{UART\+\_\+\+Transfer\+Stop\+Ring\+Buffer}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the background transfer and uninstalls the ring buffer. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{group__uart__driver_ga3921aa660977ca77dadf95fa35f1c3a9}{UART\+\_\+\+Transfer\+Get\+Rx\+Ring\+Buffer\+Length}} (uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Get the length of received data in RX ring buffer. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gad89afd7db1656c5aef404bb285d0dc05}{UART\+\_\+\+Transfer\+Send\+Non\+Blocking}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}xfer)
+\begin{DoxyCompactList}\small\item\em Transmits a buffer of data using the interrupt method. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_gaa64f9f89d8286fd3ef0736a8c40be2c2}{UART\+\_\+\+Transfer\+Abort\+Send}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the interrupt-\/driven data transmit. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_ga071727ba05b2937ef5ad641ca7faf9c7}{UART\+\_\+\+Transfer\+Get\+Send\+Count}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t \texorpdfstring{$\ast$}{*}count)
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes sent out to bus. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\+\_\+\+Transfer\+Receive\+Non\+Blocking}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}xfer, size\+\_\+t \texorpdfstring{$\ast$}{*}received\+Bytes)
+\begin{DoxyCompactList}\small\item\em Receives a buffer of data using an interrupt method. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_gacc35671622b2401545cc55cc6ae572d4}{UART\+\_\+\+Transfer\+Abort\+Receive}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Aborts the interrupt-\/driven data receiving. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} \doxymbox{\hyperlink{group__uart__driver_ga05df10f570cdca4ac2dff63b069d254e}{UART\+\_\+\+Transfer\+Get\+Receive\+Count}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t \texorpdfstring{$\ast$}{*}count)
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes that have been received. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_ga9b9c99f73429317bfce6065c82b0db3c}{UART\+\_\+\+Transfer\+Handle\+IRQ}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}irq\+Handle)
+\begin{DoxyCompactList}\small\item\em UART IRQ handle function. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__uart__driver_gae3e5fd8a61eb04a96a9e41997845147e}{UART\+\_\+\+Transfer\+Handle\+Error\+IRQ}} (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}irq\+Handle)
+\begin{DoxyCompactList}\small\item\em UART Error IRQ handle function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Driver version}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__uart__driver_ga89f9649bfe350eb7b1e53146f35d3de5}{FSL\+\_\+\+UART\+\_\+\+DRIVER\+\_\+\+VERSION}}~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 5, 1))
+\begin{DoxyCompactList}\small\item\em UART driver version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group__uart__driver_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__uart__driver_ga89f9649bfe350eb7b1e53146f35d3de5}\index{Uart\_driver@{Uart\_driver}!FSL\_UART\_DRIVER\_VERSION@{FSL\_UART\_DRIVER\_VERSION}}
+\index{FSL\_UART\_DRIVER\_VERSION@{FSL\_UART\_DRIVER\_VERSION}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{FSL\_UART\_DRIVER\_VERSION}{FSL\_UART\_DRIVER\_VERSION}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga89f9649bfe350eb7b1e53146f35d3de5} 
+\+\#define FSL\+\_\+\+UART\+\_\+\+DRIVER\+\_\+\+VERSION~(\doxymbox{\hyperlink{group__ksdk__common_ga812138aa3315b0c6953c1a26130bcc37}{MAKE\+\_\+\+VERSION}}(2, 5, 1))}
+
+
+
+UART driver version. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00025}{25}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gac0f88b67f77fd05f186a5ec940c340bd}\index{Uart\_driver@{Uart\_driver}!UART\_RETRY\_TIMES@{UART\_RETRY\_TIMES}}
+\index{UART\_RETRY\_TIMES@{UART\_RETRY\_TIMES}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_RETRY\_TIMES}{UART\_RETRY\_TIMES}}
+{\footnotesize\ttfamily \label{group__uart__driver_gac0f88b67f77fd05f186a5ec940c340bd} 
+\+\#define UART\+\_\+\+RETRY\+\_\+\+TIMES~0U /\+\texorpdfstring{$\ast$}{*} Defining to zero means to keep waiting for the flag until it is assert/\+deassert. \texorpdfstring{$\ast$}{*}/\+}
+
+
+
+Retry times for waiting flag. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00030}{30}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__uart__driver_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__uart__driver_gae4cc0b0d1b32237a516424ff2f60e406}\index{Uart\_driver@{Uart\_driver}!uart\_handle\_t@{uart\_handle\_t}}
+\index{uart\_handle\_t@{uart\_handle\_t}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{uart\_handle\_t}{uart\_handle\_t}}
+{\footnotesize\ttfamily \label{group__uart__driver_gae4cc0b0d1b32237a516424ff2f60e406} 
+typedef struct \doxymbox{\hyperlink{struct__uart__handle}{\+\_\+uart\+\_\+handle}} uart\+\_\+handle\+\_\+t}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00194}{194}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gabc35b89155f0d33028cfb1a76affe900}\index{Uart\_driver@{Uart\_driver}!uart\_isr\_t@{uart\_isr\_t}}
+\index{uart\_isr\_t@{uart\_isr\_t}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{uart\_isr\_t}{uart\_isr\_t}}
+{\footnotesize\ttfamily \label{group__uart__driver_gabc35b89155f0d33028cfb1a76affe900} 
+typedef void(\texorpdfstring{$\ast$}{*} uart\+\_\+isr\+\_\+t) (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, void \texorpdfstring{$\ast$}{*}handle)}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00222}{222}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}\index{Uart\_driver@{Uart\_driver}!uart\_transfer\_callback\_t@{uart\_transfer\_callback\_t}}
+\index{uart\_transfer\_callback\_t@{uart\_transfer\_callback\_t}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{uart\_transfer\_callback\_t}{uart\_transfer\_callback\_t}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga2868b6ea396ab212547f2157380429c5} 
+typedef void(\texorpdfstring{$\ast$}{*} uart\+\_\+transfer\+\_\+callback\+\_\+t) (\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}base, uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}handle, \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} status, void \texorpdfstring{$\ast$}{*}user\+Data)}
+
+
+
+UART transfer callback function. 
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00197}{197}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{group__uart__driver_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__uart__driver_gaef21106da06a265bf5e5895346f7659d}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaef21106da06a265bf5e5895346f7659d} 
+anonymous enum}
+
+
+
+UART status flags. 
+
+This provides constants for the UART status flags for use in the UART functions. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_TxDataRegEmptyFlag@{kUART\_TxDataRegEmptyFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_TxDataRegEmptyFlag@{kUART\_TxDataRegEmptyFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a} 
+k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag&TX data register empty flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_TransmissionCompleteFlag@{kUART\_TransmissionCompleteFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_TransmissionCompleteFlag@{kUART\_TransmissionCompleteFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da4468b60b2d78c34b93c9199df9e95d3a}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da4468b60b2d78c34b93c9199df9e95d3a} 
+k\+UART\+\_\+\+Transmission\+Complete\+Flag&Transmission complete flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxDataRegFullFlag@{kUART\_RxDataRegFullFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxDataRegFullFlag@{kUART\_RxDataRegFullFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daa86a34b2ea609eeeb63f98fea498e540}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daa86a34b2ea609eeeb63f98fea498e540} 
+k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag&RX data register full flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_IdleLineFlag@{kUART\_IdleLineFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_IdleLineFlag@{kUART\_IdleLineFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dab2fc4e1b1164ed3e3fe7e19a39029b2c}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dab2fc4e1b1164ed3e3fe7e19a39029b2c} 
+k\+UART\+\_\+\+Idle\+Line\+Flag&Idle line detect flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxOverrunFlag@{kUART\_RxOverrunFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxOverrunFlag@{kUART\_RxOverrunFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da93d3c56466b4656dcce08d9323d7afd8}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da93d3c56466b4656dcce08d9323d7afd8} 
+k\+UART\+\_\+\+Rx\+Overrun\+Flag&RX overrun flag. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_NoiseErrorFlag@{kUART\_NoiseErrorFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_NoiseErrorFlag@{kUART\_NoiseErrorFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dabd56419f102fb01c7bbc2c38f81ab360}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dabd56419f102fb01c7bbc2c38f81ab360} 
+k\+UART\+\_\+\+Noise\+Error\+Flag&RX takes 3 samples of each received bit. If any of these samples differ, noise flag sets \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_FramingErrorFlag@{kUART\_FramingErrorFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_FramingErrorFlag@{kUART\_FramingErrorFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daade5071fa56646adcda3562051443868}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daade5071fa56646adcda3562051443868} 
+k\+UART\+\_\+\+Framing\+Error\+Flag&Frame error flag, sets if logic 0 was detected where stop bit expected \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_ParityErrorFlag@{kUART\_ParityErrorFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_ParityErrorFlag@{kUART\_ParityErrorFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da0c92973ab1d527115fa01934c62a053d}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da0c92973ab1d527115fa01934c62a053d} 
+k\+UART\+\_\+\+Parity\+Error\+Flag&If parity enabled, sets upon parity error detection \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxActiveEdgeFlag@{kUART\_RxActiveEdgeFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxActiveEdgeFlag@{kUART\_RxActiveEdgeFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dadcfe89feb164ff5b1720312922006a7a}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dadcfe89feb164ff5b1720312922006a7a} 
+k\+UART\+\_\+\+Rx\+Active\+Edge\+Flag&RX pin active edge interrupt flag,sets when active edge detected \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxActiveFlag@{kUART\_RxActiveFlag}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxActiveFlag@{kUART\_RxActiveFlag}}
+}\Hypertarget{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da7a4521cd44a3272a94784670d1bf5a0c}\label{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da7a4521cd44a3272a94784670d1bf5a0c} 
+k\+UART\+\_\+\+Rx\+Active\+Flag&Receiver Active Flag (RAF), sets at beginning of valid start bit \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00122}{122}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga99b83708c78ada9058dbd3bf4f7aeeb4}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga99b83708c78ada9058dbd3bf4f7aeeb4} 
+anonymous enum}
+
+
+
+Error codes for the UART driver. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_TxBusy@{kStatus\_UART\_TxBusy}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_TxBusy@{kStatus\_UART\_TxBusy}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7} 
+k\+Status\+\_\+\+UART\+\_\+\+Tx\+Busy&Transmitter is busy. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_RxBusy@{kStatus\_UART\_RxBusy}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_RxBusy@{kStatus\_UART\_RxBusy}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6} 
+k\+Status\+\_\+\+UART\+\_\+\+Rx\+Busy&Receiver is busy. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_TxIdle@{kStatus\_UART\_TxIdle}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_TxIdle@{kStatus\_UART\_TxIdle}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6} 
+k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle&UART transmitter is idle. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_RxIdle@{kStatus\_UART\_RxIdle}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_RxIdle@{kStatus\_UART\_RxIdle}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407} 
+k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle&UART receiver is idle. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_TxWatermarkTooLarge@{kStatus\_UART\_TxWatermarkTooLarge}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_TxWatermarkTooLarge@{kStatus\_UART\_TxWatermarkTooLarge}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a765913f003819ed87b861d187bf79ab8}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a765913f003819ed87b861d187bf79ab8} 
+k\+Status\+\_\+\+UART\+\_\+\+Tx\+Watermark\+Too\+Large&TX FIFO watermark too large \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_RxWatermarkTooLarge@{kStatus\_UART\_RxWatermarkTooLarge}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_RxWatermarkTooLarge@{kStatus\_UART\_RxWatermarkTooLarge}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a720cefde05389830f35f6e6df6f6ac67}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a720cefde05389830f35f6e6df6f6ac67} 
+k\+Status\+\_\+\+UART\+\_\+\+Rx\+Watermark\+Too\+Large&RX FIFO watermark too large \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_FlagCannotClearManually@{kStatus\_UART\_FlagCannotClearManually}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_FlagCannotClearManually@{kStatus\_UART\_FlagCannotClearManually}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54} 
+k\+Status\+\_\+\+UART\+\_\+\+Flag\+Cannot\+Clear\+Manually&UART flag can\textquotesingle{}t be manually cleared. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_Error@{kStatus\_UART\_Error}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_Error@{kStatus\_UART\_Error}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a950972a9e2ebbaa13c92e8f5a51f785d}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a950972a9e2ebbaa13c92e8f5a51f785d} 
+k\+Status\+\_\+\+UART\+\_\+\+Error&Error happens on UART. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_RxRingBufferOverrun@{kStatus\_UART\_RxRingBufferOverrun}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_RxRingBufferOverrun@{kStatus\_UART\_RxRingBufferOverrun}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a2e5b644b1e10c426af818bc78657e992}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a2e5b644b1e10c426af818bc78657e992} 
+k\+Status\+\_\+\+UART\+\_\+\+Rx\+Ring\+Buffer\+Overrun&UART RX software ring buffer overrun. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_RxHardwareOverrun@{kStatus\_UART\_RxHardwareOverrun}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_RxHardwareOverrun@{kStatus\_UART\_RxHardwareOverrun}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26} 
+k\+Status\+\_\+\+UART\+\_\+\+Rx\+Hardware\+Overrun&UART RX receiver overrun. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_NoiseError@{kStatus\_UART\_NoiseError}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_NoiseError@{kStatus\_UART\_NoiseError}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb} 
+k\+Status\+\_\+\+UART\+\_\+\+Noise\+Error&UART noise error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_FramingError@{kStatus\_UART\_FramingError}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_FramingError@{kStatus\_UART\_FramingError}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0} 
+k\+Status\+\_\+\+UART\+\_\+\+Framing\+Error&UART framing error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_ParityError@{kStatus\_UART\_ParityError}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_ParityError@{kStatus\_UART\_ParityError}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8} 
+k\+Status\+\_\+\+UART\+\_\+\+Parity\+Error&UART parity error. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_BaudrateNotSupport@{kStatus\_UART\_BaudrateNotSupport}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_BaudrateNotSupport@{kStatus\_UART\_BaudrateNotSupport}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2} 
+k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support&Baudrate is not support in current clock source \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_IdleLineDetected@{kStatus\_UART\_IdleLineDetected}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_IdleLineDetected@{kStatus\_UART\_IdleLineDetected}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a3e5b488f7ed418cb08399a5db193103e}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a3e5b488f7ed418cb08399a5db193103e} 
+k\+Status\+\_\+\+UART\+\_\+\+Idle\+Line\+Detected&UART IDLE line detected. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kStatus\_UART\_Timeout@{kStatus\_UART\_Timeout}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kStatus\_UART\_Timeout@{kStatus\_UART\_Timeout}}
+}\Hypertarget{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}\label{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d} 
+k\+Status\+\_\+\+UART\+\_\+\+Timeout&UART times out. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00034}{34}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gae658ead369268edf18141e1903d426f1}\index{Uart\_driver@{Uart\_driver}!\_uart\_idle\_type\_select@{\_uart\_idle\_type\_select}}
+\index{\_uart\_idle\_type\_select@{\_uart\_idle\_type\_select}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_uart\_idle\_type\_select}{\_uart\_idle\_type\_select}}
+{\footnotesize\ttfamily \label{group__uart__driver_gae658ead369268edf18141e1903d426f1} 
+enum \doxymbox{\hyperlink{group__uart__driver_gae658ead369268edf18141e1903d426f1}{\+\_\+uart\+\_\+idle\+\_\+type\+\_\+select}}}
+
+
+
+UART idle type select. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_IdleTypeStartBit@{kUART\_IdleTypeStartBit}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_IdleTypeStartBit@{kUART\_IdleTypeStartBit}}
+}\Hypertarget{group__uart__driver_ggae658ead369268edf18141e1903d426f1a5216f34232b8d01cdd8db1ca01072901}\label{group__uart__driver_ggae658ead369268edf18141e1903d426f1a5216f34232b8d01cdd8db1ca01072901} 
+k\+UART\+\_\+\+Idle\+Type\+Start\+Bit&Start counting after a valid start bit. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_IdleTypeStopBit@{kUART\_IdleTypeStopBit}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_IdleTypeStopBit@{kUART\_IdleTypeStopBit}}
+}\Hypertarget{group__uart__driver_ggae658ead369268edf18141e1903d426f1a05771d6cd97e160c6a47d5871d2de013}\label{group__uart__driver_ggae658ead369268edf18141e1903d426f1a05771d6cd97e160c6a47d5871d2de013} 
+k\+UART\+\_\+\+Idle\+Type\+Stop\+Bit&Start counting after a stop bit. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00072}{72}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}\index{Uart\_driver@{Uart\_driver}!\_uart\_interrupt\_enable@{\_uart\_interrupt\_enable}}
+\index{\_uart\_interrupt\_enable@{\_uart\_interrupt\_enable}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_uart\_interrupt\_enable}{\_uart\_interrupt\_enable}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c} 
+enum \doxymbox{\hyperlink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}}}
+
+
+
+UART interrupt configuration structure, default settings all disabled. 
+
+This structure contains the settings for all of the UART interrupt configurations. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxActiveEdgeInterruptEnable@{kUART\_RxActiveEdgeInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxActiveEdgeInterruptEnable@{kUART\_RxActiveEdgeInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64} 
+k\+UART\+\_\+\+Rx\+Active\+Edge\+Interrupt\+Enable&RX active edge interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_TxDataRegEmptyInterruptEnable@{kUART\_TxDataRegEmptyInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_TxDataRegEmptyInterruptEnable@{kUART\_TxDataRegEmptyInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14} 
+k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable&Transmit data register empty interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_TransmissionCompleteInterruptEnable@{kUART\_TransmissionCompleteInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_TransmissionCompleteInterruptEnable@{kUART\_TransmissionCompleteInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b} 
+k\+UART\+\_\+\+Transmission\+Complete\+Interrupt\+Enable&Transmission complete interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxDataRegFullInterruptEnable@{kUART\_RxDataRegFullInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxDataRegFullInterruptEnable@{kUART\_RxDataRegFullInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3} 
+k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable&Receiver data register full interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_IdleLineInterruptEnable@{kUART\_IdleLineInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_IdleLineInterruptEnable@{kUART\_IdleLineInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed} 
+k\+UART\+\_\+\+Idle\+Line\+Interrupt\+Enable&Idle line interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_RxOverrunInterruptEnable@{kUART\_RxOverrunInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_RxOverrunInterruptEnable@{kUART\_RxOverrunInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d} 
+k\+UART\+\_\+\+Rx\+Overrun\+Interrupt\+Enable&Receiver overrun interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_NoiseErrorInterruptEnable@{kUART\_NoiseErrorInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_NoiseErrorInterruptEnable@{kUART\_NoiseErrorInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3} 
+k\+UART\+\_\+\+Noise\+Error\+Interrupt\+Enable&Noise error flag interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_FramingErrorInterruptEnable@{kUART\_FramingErrorInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_FramingErrorInterruptEnable@{kUART\_FramingErrorInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5} 
+k\+UART\+\_\+\+Framing\+Error\+Interrupt\+Enable&Framing error flag interrupt. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_ParityErrorInterruptEnable@{kUART\_ParityErrorInterruptEnable}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_ParityErrorInterruptEnable@{kUART\_ParityErrorInterruptEnable}}
+}\Hypertarget{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a}\label{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a} 
+k\+UART\+\_\+\+Parity\+Error\+Interrupt\+Enable&Parity error flag interrupt. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00083}{83}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}\index{Uart\_driver@{Uart\_driver}!\_uart\_parity\_mode@{\_uart\_parity\_mode}}
+\index{\_uart\_parity\_mode@{\_uart\_parity\_mode}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_uart\_parity\_mode}{\_uart\_parity\_mode}}
+{\footnotesize\ttfamily \label{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10} 
+enum \doxymbox{\hyperlink{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}{\+\_\+uart\+\_\+parity\+\_\+mode}}}
+
+
+
+UART parity mode. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_ParityDisabled@{kUART\_ParityDisabled}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_ParityDisabled@{kUART\_ParityDisabled}}
+}\Hypertarget{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b}\label{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b} 
+k\+UART\+\_\+\+Parity\+Disabled&Parity disabled \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_ParityEven@{kUART\_ParityEven}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_ParityEven@{kUART\_ParityEven}}
+}\Hypertarget{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a9e68fe3aba46e045bee5433ed098bff0}\label{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a9e68fe3aba46e045bee5433ed098bff0} 
+k\+UART\+\_\+\+Parity\+Even&Parity enabled, type even, bit setting:\+ PE\texorpdfstring{$\vert$}{|}\+PT = 10 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_ParityOdd@{kUART\_ParityOdd}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_ParityOdd@{kUART\_ParityOdd}}
+}\Hypertarget{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10ae48c7fabc9babf1be626ebeb2627a54c}\label{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10ae48c7fabc9babf1be626ebeb2627a54c} 
+k\+UART\+\_\+\+Parity\+Odd&Parity enabled, type odd, bit setting:\+ PE\texorpdfstring{$\vert$}{|}\+PT = 11 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga3c656a4365cab1185398ff953272091e}\index{Uart\_driver@{Uart\_driver}!\_uart\_stop\_bit\_count@{\_uart\_stop\_bit\_count}}
+\index{\_uart\_stop\_bit\_count@{\_uart\_stop\_bit\_count}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{\_uart\_stop\_bit\_count}{\_uart\_stop\_bit\_count}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga3c656a4365cab1185398ff953272091e} 
+enum \doxymbox{\hyperlink{group__uart__driver_ga3c656a4365cab1185398ff953272091e}{\+\_\+uart\+\_\+stop\+\_\+bit\+\_\+count}}}
+
+
+
+UART stop bit count. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_OneStopBit@{kUART\_OneStopBit}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_OneStopBit@{kUART\_OneStopBit}}
+}\Hypertarget{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7}\label{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7} 
+k\+UART\+\_\+\+One\+Stop\+Bit&One stop bit \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kUART\_TwoStopBit@{kUART\_TwoStopBit}!Uart\_driver@{Uart\_driver}}
+\index{Uart\_driver@{Uart\_driver}!kUART\_TwoStopBit@{kUART\_TwoStopBit}}
+}\Hypertarget{group__uart__driver_gga3c656a4365cab1185398ff953272091ea9704b3ae3ee851acf324eb357f75ab56}\label{group__uart__driver_gga3c656a4365cab1185398ff953272091ea9704b3ae3ee851acf324eb357f75ab56} 
+k\+UART\+\_\+\+Two\+Stop\+Bit&Two stop bits \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00065}{65}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__uart__driver_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__uart__driver_gaf79c7b813eefe84353c31e2d88b3aa76}\index{Uart\_driver@{Uart\_driver}!UART\_Clear9thTransmitBit@{UART\_Clear9thTransmitBit}}
+\index{UART\_Clear9thTransmitBit@{UART\_Clear9thTransmitBit}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_Clear9thTransmitBit()}{UART\_Clear9thTransmitBit()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaf79c7b813eefe84353c31e2d88b3aa76} 
+void UART\+\_\+\+Clear9th\+Transmit\+Bit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Clear UART 9th transmit bit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00406}{406}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gacc4cb85534361f836edca9454a6426c6}\index{Uart\_driver@{Uart\_driver}!UART\_ClearStatusFlags@{UART\_ClearStatusFlags}}
+\index{UART\_ClearStatusFlags@{UART\_ClearStatusFlags}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_ClearStatusFlags()}{UART\_ClearStatusFlags()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gacc4cb85534361f836edca9454a6426c6} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Clear\+Status\+Flags (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Clears status flags with the provided mask. 
+
+This function clears UART status flags with a provided mask. An automatically cleared flag can\textquotesingle{}t be cleared by this function. These flags can only be cleared or set by hardware. k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag, k\+UART\+\_\+\+Transmission\+Complete\+Flag, k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag, k\+UART\+\_\+\+Rx\+Active\+Flag, k\+UART\+\_\+\+Noise\+Error\+In\+Rx\+Data\+Reg\+Flag, k\+UART\+\_\+\+Parity\+Error\+In\+Rx\+Data\+Reg\+Flag, k\+UART\+\_\+\+Tx\+Fifo\+Empty\+Flag,k\+UART\+\_\+\+Rx\+Fifo\+Empty\+Flag \begin{DoxyNote}{Note}
+that this API should be called when the Tx/\+\+Rx is idle. Otherwise it has no effect.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em mask} & The status flags to be cleared; it is logical OR value of \+\_\+uart\+\_\+flags. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54}{k\+Status\+\_\+\+UART\+\_\+\+Flag\+Cannot\+Clear\+Manually}} & The flag can\textquotesingle{}t be cleared by this function but it is cleared automatically by hardware. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Status in the mask is cleared.\\
+\hline
+\end{DoxyRetVals}
+brief Clears status flags with the provided mask.
+
+This function clears UART status flags with a provided mask. An automatically cleared flag can\textquotesingle{}t be cleared by this function. These flags can only be cleared or set by hardware. k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag, k\+UART\+\_\+\+Transmission\+Complete\+Flag, k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Flag, k\+UART\+\_\+\+Rx\+Active\+Flag, k\+UART\+\_\+\+Noise\+Error\+In\+Rx\+Data\+Reg\+Flag, k\+UART\+\_\+\+Parity\+Error\+In\+Rx\+Data\+Reg\+Flag, k\+UART\+\_\+\+Tx\+Fifo\+Empty\+Flag,k\+UART\+\_\+\+Rx\+Fifo\+Empty\+Flag Note that this API should be called when the Tx/\+\+Rx is idle. Otherwise it has no effect.
+
+param base UART peripheral base address. param mask The status flags to be cleared; it is logical OR value of ref \+\_\+uart\+\_\+flags. retval k\+Status\+\_\+\+UART\+\_\+\+Flag\+Cannot\+Clear\+Manually The flag can\textquotesingle{}t be cleared by this function but it is cleared automatically by hardware. retval k\+Status\+\_\+\+Success Status in the mask is cleared. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00696}{696}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga3ff48bc211831be33e6fe5c50eb671a0}\index{Uart\_driver@{Uart\_driver}!UART\_Deinit@{UART\_Deinit}}
+\index{UART\_Deinit@{UART\_Deinit}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_Deinit()}{UART\_Deinit()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga3ff48bc211831be33e6fe5c50eb671a0} 
+void UART\+\_\+\+Deinit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Deinitializes a UART instance. 
+
+This function waits for TX complete, disables TX and RX, and disables the UART clock.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address.\\
+\hline
+\end{DoxyParams}
+brief Deinitializes a UART instance.
+
+This function waits for TX complete, disables TX and RX, and disables the UART clock.
+
+param base UART peripheral base address. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00358}{358}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga3f24b6b9b730046a9a81918f9abe7d99}\index{Uart\_driver@{Uart\_driver}!UART\_DisableInterrupts@{UART\_DisableInterrupts}}
+\index{UART\_DisableInterrupts@{UART\_DisableInterrupts}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_DisableInterrupts()}{UART\_DisableInterrupts()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga3f24b6b9b730046a9a81918f9abe7d99} 
+void UART\+\_\+\+Disable\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Disables the UART interrupts according to the provided mask. 
+
+This function disables the UART interrupts according to the provided mask. The mask is a logical OR of enumeration members. See \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to disable TX empty interrupt and RX full interrupt do the following. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__uart__driver_ga3f24b6b9b730046a9a81918f9abe7d99}{UART\_DisableInterrupts}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}},\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{kUART\_TxDataRegEmptyInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{kUART\_RxDataRegFullInterruptEnable}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em mask} & The interrupts to disable. Logical OR of \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}.\\
+\hline
+\end{DoxyParams}
+brief Disables the UART interrupts according to the provided mask.
+
+This function disables the UART interrupts according to the provided mask. The mask is a logical OR of enumeration members. See ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to disable TX empty interrupt and RX full interrupt do the following. code UART\+\_\+\+Disable\+Interrupts(UART1,k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \texorpdfstring{$\vert$}{|} k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable); endcode
+
+param base UART peripheral base address. param mask The interrupts to disable. Logical OR of ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00594}{594}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gafd3e76fdfe5edf2da4a87c9373ed9618}\index{Uart\_driver@{Uart\_driver}!UART\_Enable9bitMode@{UART\_Enable9bitMode}}
+\index{UART\_Enable9bitMode@{UART\_Enable9bitMode}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_Enable9bitMode()}{UART\_Enable9bitMode()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gafd3e76fdfe5edf2da4a87c9373ed9618} 
+void UART\+\_\+\+Enable9bit\+Mode (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})}
+
+
+
+Enable 9-\/bit data mode for UART. 
+
+This function set the 9-\/bit mode for UART module. The 9th bit is not used for parity thus can be modified by user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em enable} & true to enable, flase to disable.\\
+\hline
+\end{DoxyParams}
+brief Enable 9-\/bit data mode for UART.
+
+This function set the 9-\/bit mode for UART module. The 9th bit is not used for parity thus can be modified by user.
+
+param base UART peripheral base address. param enable true to enable, flase to disable. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00513}{513}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga49ecd761481a22956e3f46285038719c}\index{Uart\_driver@{Uart\_driver}!UART\_EnableInterrupts@{UART\_EnableInterrupts}}
+\index{UART\_EnableInterrupts@{UART\_EnableInterrupts}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_EnableInterrupts()}{UART\_EnableInterrupts()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga49ecd761481a22956e3f46285038719c} 
+void UART\+\_\+\+Enable\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{mask}{}\end{DoxyParamCaption})}
+
+
+
+Enables UART interrupts according to the provided mask. 
+
+This function enables the UART interrupts according to the provided mask. The mask is a logical OR of enumeration members. See \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to enable TX empty interrupt and RX full interrupt, do the following. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__uart__driver_ga49ecd761481a22956e3f46285038719c}{UART\_EnableInterrupts}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}},\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{kUART\_TxDataRegEmptyInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{kUART\_RxDataRegFullInterruptEnable}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em mask} & The interrupts to enable. Logical OR of \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}.\\
+\hline
+\end{DoxyParams}
+brief Enables UART interrupts according to the provided mask.
+
+This function enables the UART interrupts according to the provided mask. The mask is a logical OR of enumeration members. See ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to enable TX empty interrupt and RX full interrupt, do the following. code UART\+\_\+\+Enable\+Interrupts(UART1,k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \texorpdfstring{$\vert$}{|} k\+UART\+\_\+\+Rx\+Data\+Reg\+Full\+Interrupt\+Enable); endcode
+
+param base UART peripheral base address. param mask The interrupts to enable. Logical OR of ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00566}{566}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gaa503e36c8ce82f1042ce186b9863871f}\index{Uart\_driver@{Uart\_driver}!UART\_EnableRx@{UART\_EnableRx}}
+\index{UART\_EnableRx@{UART\_EnableRx}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_EnableRx()}{UART\_EnableRx()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaa503e36c8ce82f1042ce186b9863871f} 
+void UART\+\_\+\+Enable\+Rx (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Enables or disables the UART receiver. 
+
+This function enables or disables the UART receiver.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em enable} & True to enable, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00632}{632}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gaf2ed68f3dd6ee8a272e9afd8ebd84f93}\index{Uart\_driver@{Uart\_driver}!UART\_EnableTx@{UART\_EnableTx}}
+\index{UART\_EnableTx@{UART\_EnableTx}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_EnableTx()}{UART\_EnableTx()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaf2ed68f3dd6ee8a272e9afd8ebd84f93} 
+void UART\+\_\+\+Enable\+Tx (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{bool}]{enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Enables or disables the UART transmitter. 
+
+This function enables or disables the UART transmitter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em enable} & True to enable, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00612}{612}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5}\index{Uart\_driver@{Uart\_driver}!UART\_GetDefaultConfig@{UART\_GetDefaultConfig}}
+\index{UART\_GetDefaultConfig@{UART\_GetDefaultConfig}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_GetDefaultConfig()}{UART\_GetDefaultConfig()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5} 
+void UART\+\_\+\+Get\+Default\+Config (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Gets the default configuration structure. 
+
+This function initializes the UART configuration structure to a default value. The default values are as follows. uart\+Config-\/\texorpdfstring{$>$}{>}baud\+Rate\+\_\+\+Bps = 115200U; uart\+Config-\/\texorpdfstring{$>$}{>}bit\+Count\+Per\+Char = k\+UART\+\_\+8\+Bits\+Per\+Char; uart\+Config-\/\texorpdfstring{$>$}{>}parity\+Mode = k\+UART\+\_\+\+Parity\+Disabled; uart\+Config-\/\texorpdfstring{$>$}{>}stop\+Bit\+Count = k\+UART\+\_\+\+One\+Stop\+Bit; uart\+Config-\/\texorpdfstring{$>$}{>}tx\+Fifo\+Watermark = 0; uart\+Config-\/\texorpdfstring{$>$}{>}rx\+Fifo\+Watermark = 1; uart\+Config-\/\texorpdfstring{$>$}{>}idle\+Type = k\+UART\+\_\+\+Idle\+Type\+Start\+Bit; uart\+Config-\/\texorpdfstring{$>$}{>}enable\+Tx = false; uart\+Config-\/\texorpdfstring{$>$}{>}enable\+Rx = false;
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Pointer to configuration structure.\\
+\hline
+\end{DoxyParams}
+brief Gets the default configuration structure.
+
+This function initializes the UART configuration structure to a default value. The default values are as follows. uart\+Config-\/\texorpdfstring{$>$}{>}baud\+Rate\+\_\+\+Bps = 115200U; uart\+Config-\/\texorpdfstring{$>$}{>}bit\+Count\+Per\+Char = k\+UART\+\_\+8\+Bits\+Per\+Char; uart\+Config-\/\texorpdfstring{$>$}{>}parity\+Mode = k\+UART\+\_\+\+Parity\+Disabled; uart\+Config-\/\texorpdfstring{$>$}{>}stop\+Bit\+Count = k\+UART\+\_\+\+One\+Stop\+Bit; uart\+Config-\/\texorpdfstring{$>$}{>}tx\+Fifo\+Watermark = 0; uart\+Config-\/\texorpdfstring{$>$}{>}rx\+Fifo\+Watermark = 1; uart\+Config-\/\texorpdfstring{$>$}{>}idle\+Type = k\+UART\+\_\+\+Idle\+Type\+Start\+Bit; uart\+Config-\/\texorpdfstring{$>$}{>}enable\+Tx = false; uart\+Config-\/\texorpdfstring{$>$}{>}enable\+Rx = false;
+
+param config Pointer to configuration structure. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00397}{397}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga79bc0b880286ec0dc0543606fc772912}\index{Uart\_driver@{Uart\_driver}!UART\_GetEnabledInterrupts@{UART\_GetEnabledInterrupts}}
+\index{UART\_GetEnabledInterrupts@{UART\_GetEnabledInterrupts}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_GetEnabledInterrupts()}{UART\_GetEnabledInterrupts()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga79bc0b880286ec0dc0543606fc772912} 
+uint32\+\_\+t UART\+\_\+\+Get\+Enabled\+Interrupts (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Gets the enabled UART interrupts. 
+
+This function gets the enabled UART interrupts. The enabled interrupts are returned as the logical OR value of the enumerators \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. To check a specific interrupts enable status, compare the return value with enumerators in \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to check whether TX empty interrupt is enabled, do the following. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint32\_t\ enabledInterrupts\ =\ \doxymbox{\hyperlink{group__uart__driver_ga79bc0b880286ec0dc0543606fc772912}{UART\_GetEnabledInterrupts}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{kUART\_TxDataRegEmptyInterruptEnable}}\ \&\ enabledInterrupts)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+UART interrupt flags which are logical OR of the enumerators in \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}.
+\end{DoxyReturn}
+brief Gets the enabled UART interrupts.
+
+This function gets the enabled UART interrupts. The enabled interrupts are returned as the logical OR value of the enumerators ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. To check a specific interrupts enable status, compare the return value with enumerators in ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. For example, to check whether TX empty interrupt is enabled, do the following. code uint32\+\_\+t enabled\+Interrupts = UART\+\_\+\+Get\+Enabled\+Interrupts(\+UART1);
+
+if (k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Interrupt\+Enable \& enabled\+Interrupts) \{ ... \} endcode
+
+param base UART peripheral base address. return UART interrupt flags which are logical OR of the enumerators in ref \doxylink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\+\_\+uart\+\_\+interrupt\+\_\+enable}. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00629}{629}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gadeeb40cdc314638d4355ef906f1c408d}\index{Uart\_driver@{Uart\_driver}!UART\_GetInstance@{UART\_GetInstance}}
+\index{UART\_GetInstance@{UART\_GetInstance}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_GetInstance()}{UART\_GetInstance()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gadeeb40cdc314638d4355ef906f1c408d} 
+uint32\+\_\+t UART\+\_\+\+Get\+Instance (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Get the UART instance from peripheral base address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+UART instance.
+\end{DoxyReturn}
+brief Get the UART instance from peripheral base address.
+
+param base UART peripheral base address. return UART instance. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00128}{128}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga28bf715678c0d3c8c3902e79455ee923}\index{Uart\_driver@{Uart\_driver}!UART\_GetStatusFlags@{UART\_GetStatusFlags}}
+\index{UART\_GetStatusFlags@{UART\_GetStatusFlags}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_GetStatusFlags()}{UART\_GetStatusFlags()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga28bf715678c0d3c8c3902e79455ee923} 
+uint32\+\_\+t UART\+\_\+\+Get\+Status\+Flags (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})}
+
+
+
+Gets UART status flags. 
+
+This function gets all UART status flags. The flags are returned as the logical OR value of the enumerators \+\_\+uart\+\_\+flags. To check a specific status, compare the return value with enumerators in \+\_\+uart\+\_\+flags. For example, to check whether the TX is empty, do the following. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a}{kUART\_TxDataRegEmptyFlag}}\ \&\ \doxymbox{\hyperlink{group__uart__driver_ga28bf715678c0d3c8c3902e79455ee923}{UART\_GetStatusFlags}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}}))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+UART status flags which are ORed by the enumerators in the \+\_\+uart\+\_\+flags.
+\end{DoxyReturn}
+brief Gets UART status flags.
+
+This function gets all UART status flags. The flags are returned as the logical OR value of the enumerators ref \+\_\+uart\+\_\+flags. To check a specific status, compare the return value with enumerators in ref \+\_\+uart\+\_\+flags. For example, to check whether the TX is empty, do the following. code if (k\+UART\+\_\+\+Tx\+Data\+Reg\+Empty\+Flag \& UART\+\_\+\+Get\+Status\+Flags(\+UART1)) \{ ... \} endcode
+
+param base UART peripheral base address. return UART status flags which are ORed by the enumerators in the \+\_\+uart\+\_\+flags. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00661}{661}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gab5965a8e11f7e1d4d531141291fd5288}\index{Uart\_driver@{Uart\_driver}!UART\_Init@{UART\_Init}}
+\index{UART\_Init@{UART\_Init}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_Init()}{UART\_Init()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gab5965a8e11f7e1d4d531141291fd5288} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{const \doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\+\_\+config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{uint32\+\_\+t}]{src\+Clock\+\_\+\+Hz}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a UART instance with a user configuration structure and peripheral clock. 
+
+This function configures the UART module with the user-\/defined settings. The user can configure the configuration structure and also get the default configuration by using the \doxylink{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5}{UART\+\_\+\+Get\+Default\+Config()} function. The example below shows how to use this API to configure UART. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\_config\_t}}\ uartConfig;}
+\DoxyCodeLine{uartConfig.\doxymbox{\hyperlink{struct__uart__config_a7887988d467cbcb940bfb69e30f4b419}{baudRate\_Bps}}\ =\ 115200U;}
+\DoxyCodeLine{uartConfig.\doxymbox{\hyperlink{struct__uart__config_aedd929d32b06c4bc7418067c832ab28f}{parityMode}}\ =\ \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b}{kUART\_ParityDisabled}};}
+\DoxyCodeLine{uartConfig.stopBitCount\ =\ \doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7}{kUART\_OneStopBit}};}
+\DoxyCodeLine{uartConfig.txFifoWatermark\ =\ 0;}
+\DoxyCodeLine{uartConfig.rxFifoWatermark\ =\ 1;}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__uart__driver_gab5965a8e11f7e1d4d531141291fd5288}{UART\_Init}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}},\ \&uartConfig,\ 20000000U);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em config} & Pointer to the user-\/defined configuration structure. \\
+\hline
+{\em src\+Clock\+\_\+\+Hz} & UART clock source frequency in HZ. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}{k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support}} & Baudrate is not support in current clock source. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Status UART initialize succeed\\
+\hline
+\end{DoxyRetVals}
+brief Initializes a UART instance with a user configuration structure and peripheral clock.
+
+This function configures the UART module with the user-\/defined settings. The user can configure the configuration structure and also get the default configuration by using the \doxylink{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5}{UART\+\_\+\+Get\+Default\+Config()} function. The example below shows how to use this API to configure UART. code \doxylink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\+\_\+config\+\_\+t} uart\+Config; uart\+Config.\+baud\+Rate\+\_\+\+Bps = 115200U; uart\+Config.\+parity\+Mode = k\+UART\+\_\+\+Parity\+Disabled; uart\+Config.\+stop\+Bit\+Count = k\+UART\+\_\+\+One\+Stop\+Bit; uart\+Config.\+tx\+Fifo\+Watermark = 0; uart\+Config.\+rx\+Fifo\+Watermark = 1; UART\+\_\+\+Init(\+UART1, \&uart\+Config, 20000000\+U); endcode
+
+param base UART peripheral base address. param config Pointer to the user-\/defined configuration structure. param src\+Clock\+\_\+\+Hz UART clock source frequency in HZ. retval k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support Baudrate is not support in current clock source. retval k\+Status\+\_\+\+Success Status UART initialize succeed 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00213}{213}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga39d59e8a94f1af451a0db81888596639}\index{Uart\_driver@{Uart\_driver}!UART\_ReadBlocking@{UART\_ReadBlocking}}
+\index{UART\_ReadBlocking@{UART\_ReadBlocking}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_ReadBlocking()}{UART\_ReadBlocking()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga39d59e8a94f1af451a0db81888596639} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Read\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Read RX data register using a blocking method. 
+
+This function polls the RX register, waits for the RX register to be full or for RX FIFO to have data, and reads data from the TX register.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em data} & Start address of the buffer to store the received data. \\
+\hline
+{\em length} & Size of the buffer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Hardware\+Overrun}} & Receiver overrun occurred while receiving data. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb}{k\+Status\+\_\+\+UART\+\_\+\+Noise\+Error}} & A noise error occurred while receiving data. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0}{k\+Status\+\_\+\+UART\+\_\+\+Framing\+Error}} & A framing error occurred while receiving data. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8}{k\+Status\+\_\+\+UART\+\_\+\+Parity\+Error}} & A parity error occurred while receiving data. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}{k\+Status\+\_\+\+UART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully received all data.\\
+\hline
+\end{DoxyRetVals}
+brief Read RX data register using a blocking method.
+
+This function polls the RX register, waits for the RX register to be full or for RX FIFO to have data, and reads data from the TX register.
+
+param base UART peripheral base address. param data Start address of the buffer to store the received data. param length Size of the buffer. retval k\+Status\+\_\+\+UART\+\_\+\+Rx\+Hardware\+Overrun Receiver overrun occurred while receiving data. retval k\+Status\+\_\+\+UART\+\_\+\+Noise\+Error A noise error occurred while receiving data. retval k\+Status\+\_\+\+UART\+\_\+\+Framing\+Error A framing error occurred while receiving data. retval k\+Status\+\_\+\+UART\+\_\+\+Parity\+Error A parity error occurred while receiving data. retval k\+Status\+\_\+\+UART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully received all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00828}{828}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga3728011ac7906f3e03bb677b0f9cf7b4}\index{Uart\_driver@{Uart\_driver}!UART\_ReadByte@{UART\_ReadByte}}
+\index{UART\_ReadByte@{UART\_ReadByte}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_ReadByte()}{UART\_ReadByte()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga3728011ac7906f3e03bb677b0f9cf7b4} 
+uint8\+\_\+t UART\+\_\+\+Read\+Byte (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Reads the RX register directly. 
+
+This function reads data from the RX register directly. The upper layer must ensure that the RX register is full or that the TX FIFO has data before calling this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte read from UART data register. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00667}{667}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_ga52151603994f3ffc0a2edab7fcec57b6}\index{Uart\_driver@{Uart\_driver}!UART\_Set9thTransmitBit@{UART\_Set9thTransmitBit}}
+\index{UART\_Set9thTransmitBit@{UART\_Set9thTransmitBit}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_Set9thTransmitBit()}{UART\_Set9thTransmitBit()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga52151603994f3ffc0a2edab7fcec57b6} 
+void UART\+\_\+\+Set9th\+Transmit\+Bit (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Set UART 9th transmit bit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00396}{396}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+\Hypertarget{group__uart__driver_gab3ba5019c11f288cc4f545dd656b6284}\index{Uart\_driver@{Uart\_driver}!UART\_SetBaudRate@{UART\_SetBaudRate}}
+\index{UART\_SetBaudRate@{UART\_SetBaudRate}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_SetBaudRate()}{UART\_SetBaudRate()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gab3ba5019c11f288cc4f545dd656b6284} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Set\+Baud\+Rate (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint32\+\_\+t}]{baud\+Rate\+\_\+\+Bps}{, }\item[{uint32\+\_\+t}]{src\+Clock\+\_\+\+Hz}{}\end{DoxyParamCaption})}
+
+
+
+Sets the UART instance baud rate. 
+
+This function configures the UART module baud rate. This function is used to update the UART module baud rate after the UART module is initialized by the UART\+\_\+\+Init. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__uart__driver_gab3ba5019c11f288cc4f545dd656b6284}{UART\_SetBaudRate}}(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a8d69bf04d07af4fbbab5a8bd291f65ff}{UART1}},\ 115200U,\ 20000000U);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em baud\+Rate\+\_\+\+Bps} & UART baudrate to be set. \\
+\hline
+{\em src\+Clock\+\_\+\+Hz} & UART clock source frequency in Hz. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}{k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support}} & Baudrate is not support in the current clock source. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Set baudrate succeeded.\\
+\hline
+\end{DoxyRetVals}
+brief Sets the UART instance baud rate.
+
+This function configures the UART module baud rate. This function is used to update the UART module baud rate after the UART module is initialized by the UART\+\_\+\+Init. code UART\+\_\+\+Set\+Baud\+Rate(\+UART1, 115200\+U, 20000000\+U); endcode
+
+param base UART peripheral base address. param baud\+Rate\+\_\+\+Bps UART baudrate to be set. param src\+Clock\+\_\+\+Hz UART clock source frequency in Hz. retval k\+Status\+\_\+\+UART\+\_\+\+Baudrate\+Not\+Support Baudrate is not support in the current clock source. retval k\+Status\+\_\+\+Success Set baudrate succeeded. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00437}{437}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gacc35671622b2401545cc55cc6ae572d4}\index{Uart\_driver@{Uart\_driver}!UART\_TransferAbortReceive@{UART\_TransferAbortReceive}}
+\index{UART\_TransferAbortReceive@{UART\_TransferAbortReceive}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferAbortReceive()}{UART\_TransferAbortReceive()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gacc35671622b2401545cc55cc6ae572d4} 
+void UART\+\_\+\+Transfer\+Abort\+Receive (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the interrupt-\/driven data receiving. 
+
+This function aborts the interrupt-\/driven data receiving. The user can get the remain\+Bytes to know how many bytes are not received yet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the interrupt-\/driven data receiving.
+
+This function aborts the interrupt-\/driven data receiving. The user can get the remain\+Bytes to know how many bytes are not received yet.
+
+param base UART peripheral base address. param handle UART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01320}{1320}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gaa64f9f89d8286fd3ef0736a8c40be2c2}\index{Uart\_driver@{Uart\_driver}!UART\_TransferAbortSend@{UART\_TransferAbortSend}}
+\index{UART\_TransferAbortSend@{UART\_TransferAbortSend}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferAbortSend()}{UART\_TransferAbortSend()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaa64f9f89d8286fd3ef0736a8c40be2c2} 
+void UART\+\_\+\+Transfer\+Abort\+Send (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the interrupt-\/driven data transmit. 
+
+This function aborts the interrupt-\/driven data sending. The user can get the remain\+Bytes to find out how many bytes are not sent out.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the interrupt-\/driven data transmit.
+
+This function aborts the interrupt-\/driven data sending. The user can get the remain\+Bytes to find out how many bytes are not sent out.
+
+param base UART peripheral base address. param handle UART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01099}{1099}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga63db308c32019b7dd6c0647d618e5247}\index{Uart\_driver@{Uart\_driver}!UART\_TransferCreateHandle@{UART\_TransferCreateHandle}}
+\index{UART\_TransferCreateHandle@{UART\_TransferCreateHandle}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferCreateHandle()}{UART\_TransferCreateHandle()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga63db308c32019b7dd6c0647d618e5247} 
+void UART\+\_\+\+Transfer\+Create\+Handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\+\_\+transfer\+\_\+callback\+\_\+t}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the UART handle. 
+
+This function initializes the UART handle which can be used for other UART transactional APIs. Usually, for a specified UART instance, call this API once to get the initialized handle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em callback} & The callback function. \\
+\hline
+{\em user\+Data} & The parameter of the callback function.\\
+\hline
+\end{DoxyParams}
+brief Initializes the UART handle.
+
+This function initializes the UART handle which can be used for other UART transactional APIs. Usually, for a specified UART instance, call this API once to get the initialized handle.
+
+param base UART peripheral base address. param handle UART handle pointer. param callback The callback function. param user\+Data The parameter of the callback function. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00932}{932}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga05df10f570cdca4ac2dff63b069d254e}\index{Uart\_driver@{Uart\_driver}!UART\_TransferGetReceiveCount@{UART\_TransferGetReceiveCount}}
+\index{UART\_TransferGetReceiveCount@{UART\_TransferGetReceiveCount}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferGetReceiveCount()}{UART\_TransferGetReceiveCount()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga05df10f570cdca4ac2dff63b069d254e} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Transfer\+Get\+Receive\+Count (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Gets the number of bytes that have been received. 
+
+This function gets the number of bytes that have been received.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em count} & Receive bytes count. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{k\+Status\+\_\+\+No\+Transfer\+In\+Progress}} & No receive in progress. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Parameter is invalid. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Get successfully through the parameter {\ttfamily count};\\
+\hline
+\end{DoxyRetVals}
+brief Gets the number of bytes that have been received.
+
+This function gets the number of bytes that have been received.
+
+param base UART peripheral base address. param handle UART handle pointer. param count Receive bytes count. retval k\+Status\+\_\+\+No\+Transfer\+In\+Progress No receive in progress. retval k\+Status\+\_\+\+Invalid\+Argument Parameter is invalid. retval k\+Status\+\_\+\+Success Get successfully through the parameter {\ttfamily count}; 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01357}{1357}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga3921aa660977ca77dadf95fa35f1c3a9}\index{Uart\_driver@{Uart\_driver}!UART\_TransferGetRxRingBufferLength@{UART\_TransferGetRxRingBufferLength}}
+\index{UART\_TransferGetRxRingBufferLength@{UART\_TransferGetRxRingBufferLength}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferGetRxRingBufferLength()}{UART\_TransferGetRxRingBufferLength()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga3921aa660977ca77dadf95fa35f1c3a9} 
+size\+\_\+t UART\+\_\+\+Transfer\+Get\+Rx\+Ring\+Buffer\+Length (\begin{DoxyParamCaption}\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Get the length of received data in RX ring buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & UART handle pointer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Length of received data in RX ring buffer.
+\end{DoxyReturn}
+brief Get the length of received data in RX ring buffer.
+
+param handle UART handle pointer. return Length of received data in RX ring buffer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00153}{153}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga071727ba05b2937ef5ad641ca7faf9c7}\index{Uart\_driver@{Uart\_driver}!UART\_TransferGetSendCount@{UART\_TransferGetSendCount}}
+\index{UART\_TransferGetSendCount@{UART\_TransferGetSendCount}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferGetSendCount()}{UART\_TransferGetSendCount()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga071727ba05b2937ef5ad641ca7faf9c7} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Transfer\+Get\+Send\+Count (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Gets the number of bytes sent out to bus. 
+
+This function gets the number of bytes sent out to bus by using the interrupt method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em count} & Send bytes count. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a82fc7f2a425a9c3cfcf6636b8c05c06c}{k\+Status\+\_\+\+No\+Transfer\+In\+Progress}} & No send in progress. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & The parameter is invalid. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Get successfully through the parameter {\ttfamily count};\\
+\hline
+\end{DoxyRetVals}
+brief Gets the number of bytes sent out to bus.
+
+This function gets the number of bytes sent out to bus by using the interrupt method.
+
+param base UART peripheral base address. param handle UART handle pointer. param count Send bytes count. retval k\+Status\+\_\+\+No\+Transfer\+In\+Progress No send in progress. retval k\+Status\+\_\+\+Invalid\+Argument The parameter is invalid. retval k\+Status\+\_\+\+Success Get successfully through the parameter {\ttfamily count}; 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01124}{1124}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gae3e5fd8a61eb04a96a9e41997845147e}\index{Uart\_driver@{Uart\_driver}!UART\_TransferHandleErrorIRQ@{UART\_TransferHandleErrorIRQ}}
+\index{UART\_TransferHandleErrorIRQ@{UART\_TransferHandleErrorIRQ}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferHandleErrorIRQ()}{UART\_TransferHandleErrorIRQ()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gae3e5fd8a61eb04a96a9e41997845147e} 
+void UART\+\_\+\+Transfer\+Handle\+Error\+IRQ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{irq\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+UART Error IRQ handle function. 
+
+This function handles the UART error IRQ request.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em irq\+Handle} & UART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief UART Error IRQ handle function.
+
+This function handles the UART error IRQ request.
+
+param base UART peripheral base address. param irq\+Handle UART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01802}{1802}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga9b9c99f73429317bfce6065c82b0db3c}\index{Uart\_driver@{Uart\_driver}!UART\_TransferHandleIRQ@{UART\_TransferHandleIRQ}}
+\index{UART\_TransferHandleIRQ@{UART\_TransferHandleIRQ}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferHandleIRQ()}{UART\_TransferHandleIRQ()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga9b9c99f73429317bfce6065c82b0db3c} 
+void UART\+\_\+\+Transfer\+Handle\+IRQ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{irq\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+UART IRQ handle function. 
+
+This function handles the UART transmit and receive IRQ request.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em irq\+Handle} & UART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief UART IRQ handle function.
+
+This function handles the UART transmit and receive IRQ request.
+
+param base UART peripheral base address. param irq\+Handle UART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01476}{1476}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}\index{Uart\_driver@{Uart\_driver}!UART\_TransferReceiveNonBlocking@{UART\_TransferReceiveNonBlocking}}
+\index{UART\_TransferReceiveNonBlocking@{UART\_TransferReceiveNonBlocking}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferReceiveNonBlocking()}{UART\_TransferReceiveNonBlocking()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Transfer\+Receive\+Non\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{xfer}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{received\+Bytes}{}\end{DoxyParamCaption})}
+
+
+
+Receives a buffer of data using an interrupt method. 
+
+This function receives data using an interrupt method. This is a non-\/blocking function, which returns without waiting for all data to be received. If the RX ring buffer is used and not empty, the data in the ring buffer is copied and the parameter {\ttfamily received\+Bytes} shows how many bytes are copied from the ring buffer. After copying, if the data in the ring buffer is not enough to read, the receive request is saved by the UART driver. When the new data arrives, the receive request is serviced first. When all data is received, the UART driver notifies the upper layer through a callback function and passes the status parameter \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle}. For example, the upper layer needs 10 bytes but there are only 5 bytes in the ring buffer. The 5 bytes are copied to the xfer-\/\texorpdfstring{$>$}{>}data and this function returns with the parameter {\ttfamily received\+Bytes} set to 5. For the left 5 bytes, newly arrived data is saved from the xfer-\/\texorpdfstring{$>$}{>}data\+[5]\+. When 5 bytes are received, the UART driver notifies the upper layer. If the RX ring buffer is not enabled, this function enables the RX and RX interrupt to receive data to the xfer-\/\texorpdfstring{$>$}{>}data. When all data is received, the upper layer is notified.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em xfer} & UART transfer structure, see \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. \\
+\hline
+{\em received\+Bytes} & Bytes received from the ring buffer directly. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully queue the transfer into transmit queue. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6}{k\+Status\+\_\+\+UART\+\_\+\+Rx\+Busy}} & Previous receive request is not finished. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Invalid argument.\\
+\hline
+\end{DoxyRetVals}
+brief Receives a buffer of data using an interrupt method.
+
+This function receives data using an interrupt method. This is a non-\/blocking function, which returns without waiting for all data to be received. If the RX ring buffer is used and not empty, the data in the ring buffer is copied and the parameter p received\+Bytes shows how many bytes are copied from the ring buffer. After copying, if the data in the ring buffer is not enough to read, the receive request is saved by the UART driver. When the new data arrives, the receive request is serviced first. When all data is received, the UART driver notifies the upper layer through a callback function and passes the status parameter ref k\+Status\+\_\+\+UART\+\_\+\+Rx\+Idle. For example, the upper layer needs 10 bytes but there are only 5 bytes in the ring buffer. The 5 bytes are copied to the xfer-\/\texorpdfstring{$>$}{>}data and this function returns with the parameter p received\+Bytes set to 5. For the left 5 bytes, newly arrived data is saved from the xfer-\/\texorpdfstring{$>$}{>}data\+[5]\+. When 5 bytes are received, the UART driver notifies the upper layer. If the RX ring buffer is not enabled, this function enables the RX and RX interrupt to receive data to the xfer-\/\texorpdfstring{$>$}{>}data. When all data is received, the upper layer is notified.
+
+param base UART peripheral base address. param handle UART handle pointer. param xfer UART transfer structure, see \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. param received\+Bytes Bytes received from the ring buffer directly. retval k\+Status\+\_\+\+Success Successfully queue the transfer into transmit queue. retval k\+Status\+\_\+\+UART\+\_\+\+Rx\+Busy Previous receive request is not finished. retval k\+Status\+\_\+\+Invalid\+Argument Invalid argument. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01175}{1175}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gad89afd7db1656c5aef404bb285d0dc05}\index{Uart\_driver@{Uart\_driver}!UART\_TransferSendNonBlocking@{UART\_TransferSendNonBlocking}}
+\index{UART\_TransferSendNonBlocking@{UART\_TransferSendNonBlocking}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferSendNonBlocking()}{UART\_TransferSendNonBlocking()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gad89afd7db1656c5aef404bb285d0dc05} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Transfer\+Send\+Non\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{xfer}{}\end{DoxyParamCaption})}
+
+
+
+Transmits a buffer of data using the interrupt method. 
+
+This function sends data using an interrupt method. This is a non-\/blocking function, which returns directly without waiting for all data to be written to the TX register. When all data is written to the TX register in the ISR, the UART driver calls the callback function and passes the \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6}{k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle} as status parameter.
+
+\begin{DoxyNote}{Note}
+The k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle is passed to the upper layer when all data is written to the TX register. However, it does not ensure that all data is sent out. Before disabling the TX, check the k\+UART\+\_\+\+Transmission\+Complete\+Flag to ensure that the TX is finished.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em xfer} & UART transfer structure. See \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully start the data transmission. \\
+\hline
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7}{k\+Status\+\_\+\+UART\+\_\+\+Tx\+Busy}} & Previous transmission still not finished; data not all written to TX register yet. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{k\+Status\+\_\+\+Invalid\+Argument}} & Invalid argument.\\
+\hline
+\end{DoxyRetVals}
+brief Transmits a buffer of data using the interrupt method.
+
+This function sends data using an interrupt method. This is a non-\/blocking function, which returns directly without waiting for all data to be written to the TX register. When all data is written to the TX register in the ISR, the UART driver calls the callback function and passes the ref k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle as status parameter.
+
+note The k\+Status\+\_\+\+UART\+\_\+\+Tx\+Idle is passed to the upper layer when all data is written to the TX register. However, it does not ensure that all data is sent out. Before disabling the TX, check the k\+UART\+\_\+\+Transmission\+Complete\+Flag to ensure that the TX is finished.
+
+param base UART peripheral base address. param handle UART handle pointer. param xfer UART transfer structure. See \doxylink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\+\_\+transfer\+\_\+t}. retval k\+Status\+\_\+\+Success Successfully start the data transmission. retval k\+Status\+\_\+\+UART\+\_\+\+Tx\+Busy Previous transmission still not finished; data not all written to TX register yet. retval k\+Status\+\_\+\+Invalid\+Argument Invalid argument. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01056}{1056}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga223fba584bfabd599629d5ce92f929ac}\index{Uart\_driver@{Uart\_driver}!UART\_TransferStartRingBuffer@{UART\_TransferStartRingBuffer}}
+\index{UART\_TransferStartRingBuffer@{UART\_TransferStartRingBuffer}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferStartRingBuffer()}{UART\_TransferStartRingBuffer()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga223fba584bfabd599629d5ce92f929ac} 
+void UART\+\_\+\+Transfer\+Start\+Ring\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{ring\+Buffer}{, }\item[{size\+\_\+t}]{ring\+Buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the RX ring buffer. 
+
+This function sets up the RX ring buffer to a specific UART handle.
+
+When the RX ring buffer is used, data received are stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If data is already received in the ring buffer, the user can get the received data from the ring buffer directly.
+
+\begin{DoxyNote}{Note}
+When using the RX ring buffer, one byte is reserved for internal use. In other words, if {\ttfamily ring\+Buffer\+Size} is 32, only 31 bytes are used for saving data.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer. \\
+\hline
+{\em ring\+Buffer} & Start address of the ring buffer for background receiving. Pass NULL to disable the ring buffer. \\
+\hline
+{\em ring\+Buffer\+Size} & Size of the ring buffer.\\
+\hline
+\end{DoxyParams}
+brief Sets up the RX ring buffer.
+
+This function sets up the RX ring buffer to a specific UART handle.
+
+When the RX ring buffer is used, data received are stored into the ring buffer even when the user doesn\textquotesingle{}t call the \doxylink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\+\_\+\+Transfer\+Receive\+Non\+Blocking()} API. If data is already received in the ring buffer, the user can get the received data from the ring buffer directly.
+
+note When using the RX ring buffer, one byte is reserved for internal use. In other words, if p ring\+Buffer\+Size is 32, only 31 bytes are used for saving data.
+
+param base UART peripheral base address. param handle UART handle pointer. param ring\+Buffer Start address of the ring buffer for background receiving. Pass NULL to disable the ring buffer. param ring\+Buffer\+Size Size of the ring buffer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00980}{980}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga0c0bc73df49cb31dff0e903630314f5b}\index{Uart\_driver@{Uart\_driver}!UART\_TransferStopRingBuffer@{UART\_TransferStopRingBuffer}}
+\index{UART\_TransferStopRingBuffer@{UART\_TransferStopRingBuffer}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_TransferStopRingBuffer()}{UART\_TransferStopRingBuffer()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga0c0bc73df49cb31dff0e903630314f5b} 
+void UART\+\_\+\+Transfer\+Stop\+Ring\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uart\+\_\+handle\+\_\+t \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Aborts the background transfer and uninstalls the ring buffer. 
+
+This function aborts the background transfer and uninstalls the ring buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em handle} & UART handle pointer.\\
+\hline
+\end{DoxyParams}
+brief Aborts the background transfer and uninstalls the ring buffer.
+
+This function aborts the background transfer and uninstalls the ring buffer.
+
+param base UART peripheral base address. param handle UART handle pointer. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l01012}{1012}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_gabedf96691af44a8fafec58d5cf6e4dd2}\index{Uart\_driver@{Uart\_driver}!UART\_WriteBlocking@{UART\_WriteBlocking}}
+\index{UART\_WriteBlocking@{UART\_WriteBlocking}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_WriteBlocking()}{UART\_WriteBlocking()}}
+{\footnotesize\ttfamily \label{group__uart__driver_gabedf96691af44a8fafec58d5cf6e4dd2} 
+\doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\+\_\+t}} UART\+\_\+\+Write\+Blocking (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Writes to the TX register using a blocking method. 
+
+This function polls the TX register, waits for the TX register to be empty or for the TX FIFO to have room and writes data to the TX buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em data} & Start address of the data to write. \\
+\hline
+{\em length} & Size of the data to write. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}{k\+Status\+\_\+\+UART\+\_\+\+Timeout}} & Transmission timed out and was aborted. \\
+\hline
+{\em \doxylink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{k\+Status\+\_\+\+Success}} & Successfully wrote all data.\\
+\hline
+\end{DoxyRetVals}
+brief Writes to the TX register using a blocking method.
+
+This function polls the TX register, waits for the TX register to be empty or for the TX FIFO to have room and writes data to the TX buffer.
+
+param base UART peripheral base address. param data Start address of the data to write. param length Size of the data to write. retval k\+Status\+\_\+\+UART\+\_\+\+Timeout Transmission timed out and was aborted. retval k\+Status\+\_\+\+Success Successfully wrote all data. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00756}{756}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga371d2ceda535de3a74beba5a3465fab0}\index{Uart\_driver@{Uart\_driver}!UART\_WriteByte@{UART\_WriteByte}}
+\index{UART\_WriteByte@{UART\_WriteByte}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{UART\_WriteByte()}{UART\_WriteByte()}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga371d2ceda535de3a74beba5a3465fab0} 
+void UART\+\_\+\+Write\+Byte (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structUART__Type}{UART\+\_\+\+Type}} \texorpdfstring{$\ast$}{*}}]{base}{, }\item[{uint8\+\_\+t}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Writes to the TX register. 
+
+This function writes data to the TX register directly. The upper layer must ensure that the TX register is empty or TX FIFO has empty room before calling this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & UART peripheral base address. \\
+\hline
+{\em data} & The byte to write. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8h_source_l00653}{653}} of file \doxymbox{\hyperlink{fsl__uart_8h_source}{fsl\+\_\+uart.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{group__uart__driver_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__uart__driver_ga5795f92ab50688d9700481929e79c014}\index{Uart\_driver@{Uart\_driver}!s\_uartHandle@{s\_uartHandle}}
+\index{s\_uartHandle@{s\_uartHandle}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{s\_uartHandle}{s\_uartHandle}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga5795f92ab50688d9700481929e79c014} 
+void\texorpdfstring{$\ast$}{*} s\+\_\+uart\+Handle\+[$\,$]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+Pointers to uart handles for each instance. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00100}{100}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga40bc00c2341495de3b56699359d0689b}\index{Uart\_driver@{Uart\_driver}!s\_uartIRQ@{s\_uartIRQ}}
+\index{s\_uartIRQ@{s\_uartIRQ}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{s\_uartIRQ}{s\_uartIRQ}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga40bc00c2341495de3b56699359d0689b} 
+const IRQn\+\_\+\+Type s\+\_\+uart\+IRQ\+[$\,$]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00105}{105}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+
+\Hypertarget{group__uart__driver_ga2c70996f197c2a9112c6bebbd5d22c47}\index{Uart\_driver@{Uart\_driver}!s\_uartIsr@{s\_uartIsr}}
+\index{s\_uartIsr@{s\_uartIsr}!Uart\_driver@{Uart\_driver}}
+\doxysubsubsection{\texorpdfstring{s\_uartIsr}{s\_uartIsr}}
+{\footnotesize\ttfamily \label{group__uart__driver_ga2c70996f197c2a9112c6bebbd5d22c47} 
+uart\+\_\+isr\+\_\+t s\+\_\+uart\+Isr\hspace{0.3cm}{\ttfamily [extern]}}
+
+Pointer to uart IRQ handler for each instance. 
+
+Definition at line \doxymbox{\hyperlink{fsl__uart_8c_source_l00115}{115}} of file \doxymbox{\hyperlink{fsl__uart_8c_source}{fsl\+\_\+uart.\+c}}.
+

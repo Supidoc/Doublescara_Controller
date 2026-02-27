@@ -1,0 +1,87 @@
+\doxysection{fsl\+\_\+uart\+\_\+freertos.\+h}
+\hypertarget{fsl__uart__freertos_8h_source}{}\label{fsl__uart__freertos_8h_source}\index{drivers/freertos/fsl\_uart\_freertos.h@{drivers/freertos/fsl\_uart\_freertos.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2020\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ \_\_FSL\_UART\_RTOS\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ \_\_FSL\_UART\_RTOS\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_uart.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <FreeRTOS.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <event\_groups.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <semphr.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00021}00021\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00022}00022\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00023}00023\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00028}\doxymbox{\hyperlink{group__uart__freertos__driver_ga0023d77491809dff862358266574febb}{00028}}\ \textcolor{preprocessor}{\#define\ FSL\_UART\_FREERTOS\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 5,\ 0))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00032}\doxymbox{\hyperlink{struct__uart__rtos__config}{00032}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__rtos__config}{\_uart\_rtos\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00034}\doxymbox{\hyperlink{group__uart__freertos__driver_gac191144ccf5a22be9c7f429eef334fd4}{00034}}\ \ \ \ \ \doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *\doxymbox{\hyperlink{group__uart__freertos__driver_gac191144ccf5a22be9c7f429eef334fd4}{base}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00035}\doxymbox{\hyperlink{group__uart__freertos__driver_ga9d9f5a4e755d586811a9f25834050edf}{00035}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__uart__freertos__driver_ga9d9f5a4e755d586811a9f25834050edf}{srcclk}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00036}\doxymbox{\hyperlink{group__uart__freertos__driver_gadd6aeb37f668b0c8b70e87c685f43b79}{00036}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__uart__freertos__driver_gadd6aeb37f668b0c8b70e87c685f43b79}{baudrate}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00037}\doxymbox{\hyperlink{group__uart__freertos__driver_gaa6c4a94b2ea3711279823b5b7913344d}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{uart\_parity\_mode\_t}}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gaa6c4a94b2ea3711279823b5b7913344d}{parity}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00038}\doxymbox{\hyperlink{group__uart__freertos__driver_gabf6c32ff0b10479d060d073de6115fe4}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{uart\_stop\_bit\_count\_t}}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gabf6c32ff0b10479d060d073de6115fe4}{stopbits}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00039}\doxymbox{\hyperlink{group__uart__freertos__driver_gac82182960bdbd7658891bcdc7517790e}{00039}}\ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{group__uart__freertos__driver_gac82182960bdbd7658891bcdc7517790e}{buffer}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00040}\doxymbox{\hyperlink{group__uart__freertos__driver_gacc63638371afa9d6248b23fba709c8e9}{00040}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__uart__freertos__driver_gacc63638371afa9d6248b23fba709c8e9}{buffer\_size}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00041}\doxymbox{\hyperlink{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}{00041}}\ \}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}{uart\_rtos\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00051}00051\ \textcolor{preprocessor}{\#define\ RTOS\_UART\_COMPLETE\ 0x1U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00053}00053\ \textcolor{preprocessor}{\#define\ RTOS\_UART\_RING\_BUFFER\_OVERRUN\ 0x2U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00055}00055\ \textcolor{preprocessor}{\#define\ RTOS\_UART\_HARDWARE\_BUFFER\_OVERRUN\ 0x4U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00059}00059\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_uart\_rtos\_handle}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00060}00060\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00061}00061\ \ \ \ \ UART\_Type\ *base;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00062}00062\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ txTransfer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00063}00063\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ rxTransfer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00064}00064\ \ \ \ \ SemaphoreHandle\_t\ rxSemaphore;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00065}00065\ \ \ \ \ SemaphoreHandle\_t\ txSemaphore;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00066}00066\ \ \ \ \ EventGroupHandle\_t\ rxEvent;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00067}00067\ \ \ \ \ EventGroupHandle\_t\ txEvent;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{void}\ *t\_state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00069}00069\ \textcolor{preprocessor}{\#if\ (configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00070}00070\ \ \ \ \ StaticSemaphore\_t\ txSemaphoreBuffer;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00071}00071\ \ \ \ \ StaticSemaphore\_t\ rxSemaphoreBuffer;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00072}00072\ \ \ \ \ StaticEventGroup\_t\ txEventBuffer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00073}00073\ \ \ \ \ StaticEventGroup\_t\ rxEventBuffer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00074}00074\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00075}00075\ \}\ uart\_rtos\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00078}00078\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00079}00079\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00080}00080\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00082}00082\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00083}00083\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00084}00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00099}00099\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__uart__freertos__driver_ga1ca9d0f6b8d4d5fc3e64c9a57d7ada7d}{UART\_RTOS\_Init}}(uart\_rtos\_handle\_t\ *handle,\ uart\_handle\_t\ *t\_handle,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gab9836b10d05ed8d15a6fecf19dd90908}{uart\_rtos\_config\_t}}\ *cfg);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00109}00109\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gab7ac281cb85e1d290c8f25c83a6facfc}{UART\_RTOS\_Deinit}}(uart\_rtos\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00126}00126\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__uart__freertos__driver_gac14fc0e6c6cac6818958e92d2f8950bb}{UART\_RTOS\_Send}}(uart\_rtos\_handle\_t\ *handle,\ uint8\_t\ *buffer,\ uint32\_t\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00139}00139\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__uart__freertos__driver_ga18dd039e1e02bc47ad8001f7adc15d85}{UART\_RTOS\_Receive}}(uart\_rtos\_handle\_t\ *handle,\ uint8\_t\ *buffer,\ uint32\_t\ length,\ \textcolor{keywordtype}{size\_t}\ *received,\ uint32\_t\ timeoutMs);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00141}00141\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00143}00143\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00144}00144\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00145}00145\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__freertos_8h_source_l00149}00149\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FSL\_UART\_RTOS\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

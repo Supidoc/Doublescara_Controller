@@ -1,0 +1,406 @@
+\doxysection{fsl\+\_\+edma.\+h}
+\hypertarget{fsl__edma_8h_source}{}\label{fsl__edma_8h_source}\index{drivers/fsl\_edma.h@{drivers/fsl\_edma.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2022\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00009}00009\ \textcolor{preprocessor}{\#ifndef\ FSL\_EDMA\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00010}00010\ \textcolor{preprocessor}{\#define\ FSL\_EDMA\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00019}00019\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00020}00020\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00021}00021\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00026}\doxymbox{\hyperlink{group__edma_ga5f0841e9527b371724ef4418e6807643}{00026}}\ \textcolor{preprocessor}{\#define\ FSL\_EDMA\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 4,\ 5))\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00030}\doxymbox{\hyperlink{group__edma_ga6f2ecddbfb5e68cd1c9243dc141ec275}{00030}}\ \textcolor{preprocessor}{\#define\ DMA\_DCHPRI\_INDEX(channel)\ (((channel)\ \&\ \string~0x03U)\ |\ (3U\ -\/\ ((channel)\&0x03U)))}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00033}\doxymbox{\hyperlink{group__edma_ga4ffcbd8f86285f5c162ae70a6fe155bd}{00033}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga4ffcbd8f86285f5c162ae70a6fe155bd}{\_edma\_transfer\_size}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00034}00034\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00035}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bdacb4e50cd0e23c0d36edf958be77c8dc2}{00035}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bdacb4e50cd0e23c0d36edf958be77c8dc2}{kEDMA\_TransferSize1Bytes}}\ \ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00036}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda589480546c8db2d1372e62a7946fbb2c}{00036}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda589480546c8db2d1372e62a7946fbb2c}{kEDMA\_TransferSize2Bytes}}\ \ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00037}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda4d91559541642b997418406ec927c454}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda4d91559541642b997418406ec927c454}{kEDMA\_TransferSize4Bytes}}\ \ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00038}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda3c361ee4008e6ba8097557e3d4a55ce8}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda3c361ee4008e6ba8097557e3d4a55ce8}{kEDMA\_TransferSize8Bytes}}\ \ =\ 0x3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00039}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda0d4cdfd536f2985eea3e8111eecd3c43}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bda0d4cdfd536f2985eea3e8111eecd3c43}{kEDMA\_TransferSize16Bytes}}\ =\ 0x4U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00040}\doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bdad7e2421e513fc84a29cd20ab47409229}{00040}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4ffcbd8f86285f5c162ae70a6fe155bdad7e2421e513fc84a29cd20ab47409229}{kEDMA\_TransferSize32Bytes}}\ =\ 0x5U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00041}\doxymbox{\hyperlink{group__edma_ga9cf5de93d1fe2ad5963b04d60a37c74a}{00041}}\ \}\ \doxymbox{\hyperlink{group__edma_ga9cf5de93d1fe2ad5963b04d60a37c74a}{edma\_transfer\_size\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00044}\doxymbox{\hyperlink{group__edma_ga1a7d7ef429d6168ce7c9e43cee40d539}{00044}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga1a7d7ef429d6168ce7c9e43cee40d539}{\_edma\_modulo}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00046}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab77c38c19ddcc44212b258bdafe2f207}{00046}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab77c38c19ddcc44212b258bdafe2f207}{kEDMA\_ModuloDisable}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00047}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af7cbe0618a06406e5473ec1aa11195a0}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af7cbe0618a06406e5473ec1aa11195a0}{kEDMA\_Modulo2bytes}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00048}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a2eaf98fea83570be353ff21fde4b8d53}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a2eaf98fea83570be353ff21fde4b8d53}{kEDMA\_Modulo4bytes}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00049}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a99fad23e0502470cddec1391edc483e2}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a99fad23e0502470cddec1391edc483e2}{kEDMA\_Modulo8bytes}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00050}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539abd6ec81a3b0822ea6c3a7c77215e85a8}{00050}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539abd6ec81a3b0822ea6c3a7c77215e85a8}{kEDMA\_Modulo16bytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00051}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539acd0d2322a93a86bb7bb1160217184569}{00051}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539acd0d2322a93a86bb7bb1160217184569}{kEDMA\_Modulo32bytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00052}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af60e65e2fdc306df458cabaa77c0a62c}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af60e65e2fdc306df458cabaa77c0a62c}{kEDMA\_Modulo64bytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00053}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ac5b734f88d8fbe08c19f4b881e643ebd}{00053}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ac5b734f88d8fbe08c19f4b881e643ebd}{kEDMA\_Modulo128bytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00054}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab6354112d539cb71083057f72a43f282}{00054}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab6354112d539cb71083057f72a43f282}{kEDMA\_Modulo256bytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00055}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a56d31f1fa472122b9edf4d8c8d437359}{00055}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a56d31f1fa472122b9edf4d8c8d437359}{kEDMA\_Modulo512bytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00056}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a7b85b92e30afea2d7d2eb11e40751496}{00056}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a7b85b92e30afea2d7d2eb11e40751496}{kEDMA\_Modulo1Kbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00057}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539acd26e0c0dc1a6518dca27c0a418df484}{00057}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539acd26e0c0dc1a6518dca27c0a418df484}{kEDMA\_Modulo2Kbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00058}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ae9f8fd54c7f183214653a750775b1e1c}{00058}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ae9f8fd54c7f183214653a750775b1e1c}{kEDMA\_Modulo4Kbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00059}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a568ad80f68673d4f57362dc48701aec6}{00059}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a568ad80f68673d4f57362dc48701aec6}{kEDMA\_Modulo8Kbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00060}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a6e8595a1168272eab8923212c1cabaee}{00060}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a6e8595a1168272eab8923212c1cabaee}{kEDMA\_Modulo16Kbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00061}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af12cea48af625688f7d3a6e9e2d19d56}{00061}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539af12cea48af625688f7d3a6e9e2d19d56}{kEDMA\_Modulo32Kbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00062}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aab39052aeb4a70843c6ddd61b94f95a0}{00062}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aab39052aeb4a70843c6ddd61b94f95a0}{kEDMA\_Modulo64Kbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00063}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539afb80c06c8d24882fdeb592a37673e499}{00063}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539afb80c06c8d24882fdeb592a37673e499}{kEDMA\_Modulo128Kbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00064}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ae1c82fe430bd6a43cd8bfca46671cca1}{00064}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ae1c82fe430bd6a43cd8bfca46671cca1}{kEDMA\_Modulo256Kbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00065}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aff7dbf518027bc1d2a84a4dcfe7f0adc}{00065}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aff7dbf518027bc1d2a84a4dcfe7f0adc}{kEDMA\_Modulo512Kbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00066}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a48ff619715bb526b6d917d6b37686b8a}{00066}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a48ff619715bb526b6d917d6b37686b8a}{kEDMA\_Modulo1Mbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00067}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a5c2909e6956a01efc28bb70a73ddb9f5}{00067}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a5c2909e6956a01efc28bb70a73ddb9f5}{kEDMA\_Modulo2Mbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00068}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a4b07b0456e0aadbde3a32790e423f4d7}{00068}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a4b07b0456e0aadbde3a32790e423f4d7}{kEDMA\_Modulo4Mbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00069}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ad4f068091510d3fc90b8a21bd2492a38}{00069}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ad4f068091510d3fc90b8a21bd2492a38}{kEDMA\_Modulo8Mbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00070}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a3ff219951928d6e40f658f612f9106c0}{00070}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a3ff219951928d6e40f658f612f9106c0}{kEDMA\_Modulo16Mbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00071}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ade7587c87a42242eb0e47a1dbac5f686}{00071}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ade7587c87a42242eb0e47a1dbac5f686}{kEDMA\_Modulo32Mbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00072}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aedc3a67726be1cdac9385a37556c7056}{00072}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539aedc3a67726be1cdac9385a37556c7056}{kEDMA\_Modulo64Mbytes}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00073}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a0f2c2ca6e26fcf1edefe6bd091504041}{00073}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a0f2c2ca6e26fcf1edefe6bd091504041}{kEDMA\_Modulo128Mbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00074}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a50818bce765be0d7ccfac7490242c119}{00074}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a50818bce765be0d7ccfac7490242c119}{kEDMA\_Modulo256Mbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00075}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a2289cd131c9052e9ab097abbff3499e7}{00075}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a2289cd131c9052e9ab097abbff3499e7}{kEDMA\_Modulo512Mbytes}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00076}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a22c8078316841b5cc5886d506f95a8e3}{00076}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539a22c8078316841b5cc5886d506f95a8e3}{kEDMA\_Modulo1Gbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00077}\doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab4a779add96a309505f06a540d75340f}{00077}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga1a7d7ef429d6168ce7c9e43cee40d539ab4a779add96a309505f06a540d75340f}{kEDMA\_Modulo2Gbytes}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00078}\doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{00078}}\ \}\ \doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{edma\_modulo\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00081}\doxymbox{\hyperlink{group__edma_ga273a47c42205f63e7a5457114d5b1e21}{00081}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga273a47c42205f63e7a5457114d5b1e21}{\_edma\_bandwidth}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00083}\doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21aeb09bbf3022f40b276ab9b94035ef308}{00083}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21aeb09bbf3022f40b276ab9b94035ef308}{kEDMA\_BandwidthStallNone}}\ \ \ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00084}\doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21a443b7698b1950201d47d97de1b643f3c}{00084}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21a443b7698b1950201d47d97de1b643f3c}{kEDMA\_BandwidthStall4Cycle}}\ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00085}\doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21ac21c278bddfbadae35d53cc565bca9d9}{00085}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga273a47c42205f63e7a5457114d5b1e21ac21c278bddfbadae35d53cc565bca9d9}{kEDMA\_BandwidthStall8Cycle}}\ =\ 0x3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00086}\doxymbox{\hyperlink{group__edma_gabf3ac5063a2c94a947b0f186d5342e42}{00086}}\ \}\ \doxymbox{\hyperlink{group__edma_gabf3ac5063a2c94a947b0f186d5342e42}{edma\_bandwidth\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00089}\doxymbox{\hyperlink{group__edma_ga3c4715f55d4d2460fa6ea7e579088eb3}{00089}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga3c4715f55d4d2460fa6ea7e579088eb3}{\_edma\_channel\_link\_type}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00090}00090\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00091}\doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3aba8b1349b47c8e99c950c179b5548caa}{00091}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3aba8b1349b47c8e99c950c179b5548caa}{kEDMA\_LinkNone}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00092}\doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3a804db702dd385d11a01dd512f3e1606c}{00092}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3a804db702dd385d11a01dd512f3e1606c}{kEDMA\_MinorLink}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00093}\doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3ab9798ac8a18b9632a7d3fabf0bd76881}{00093}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga3c4715f55d4d2460fa6ea7e579088eb3ab9798ac8a18b9632a7d3fabf0bd76881}{kEDMA\_MajorLink}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00094}\doxymbox{\hyperlink{group__edma_gad5a727bf11f63448974a3ef250ddbb7b}{00094}}\ \}\ \doxymbox{\hyperlink{group__edma_gad5a727bf11f63448974a3ef250ddbb7b}{edma\_channel\_link\_type\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00097}00097\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00098}00098\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00099}\doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58a3fc49e0e9df4c15438fac350d2d7da56}{00099}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58a3fc49e0e9df4c15438fac350d2d7da56}{kEDMA\_DoneFlag}}\ \ \ \ \ \ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00100}\doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58a2c5dd54b1cb8bd4917b99a914c7bdc84}{00100}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58a2c5dd54b1cb8bd4917b99a914c7bdc84}{kEDMA\_ErrorFlag}}\ \ \ \ \ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00101}\doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58afca58961c7da506e2f1c05451d16f4d9}{00101}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga9085cc34c1c661847507df87c1dade58afca58961c7da506e2f1c05451d16f4d9}{kEDMA\_InterruptFlag}}\ =\ 0x4U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00102}00102\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00105}00105\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00107}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa54ca64713f21fd2337d165b273d6f680}{00107}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa54ca64713f21fd2337d165b273d6f680}{kEDMA\_DestinationBusErrorFlag}}\ \ \ \ =\ DMA\_ES\_DBE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00108}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa5eb8315759ff492642e8fde45cd3d244}{00108}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa5eb8315759ff492642e8fde45cd3d244}{kEDMA\_SourceBusErrorFlag}}\ \ \ \ \ \ \ \ \ =\ DMA\_ES\_SBE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00109}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa9aeb6aad3c245959ab91944bc0136479}{00109}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa9aeb6aad3c245959ab91944bc0136479}{kEDMA\_ScatterGatherErrorFlag}}\ \ \ \ \ =\ DMA\_ES\_SGE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00110}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aacc8bc58b1704ba1f4f4ee1533f69c98e}{00110}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aacc8bc58b1704ba1f4f4ee1533f69c98e}{kEDMA\_NbytesErrorFlag}}\ \ \ \ \ \ \ \ \ \ \ \ =\ DMA\_ES\_NCE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00111}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aaa53400970fa05f5d2790f20338aa6d06}{00111}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aaa53400970fa05f5d2790f20338aa6d06}{kEDMA\_DestinationOffsetErrorFlag}}\ =\ DMA\_ES\_DOE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00112}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aae516e9e9db0a946f1565e1c2e3175574}{00112}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aae516e9e9db0a946f1565e1c2e3175574}{kEDMA\_DestinationAddressErrorFlag}}\ =\ DMA\_ES\_DAE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00113}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aad611243e3bd0baed42ed2343e5e575ac}{00113}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aad611243e3bd0baed42ed2343e5e575ac}{kEDMA\_SourceOffsetErrorFlag}}\ \ \ \ \ \ \ =\ DMA\_ES\_SOE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00114}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa4c0642a49305653638e275415320f0f0}{00114}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa4c0642a49305653638e275415320f0f0}{kEDMA\_SourceAddressErrorFlag}}\ \ \ \ \ \ =\ DMA\_ES\_SAE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00115}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa2cc6d4262814dc42f05843199e9540c1}{00115}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa2cc6d4262814dc42f05843199e9540c1}{kEDMA\_ErrorChannelFlag}}\ \ \ \ \ \ \ \ \ \ \ \ =\ DMA\_ES\_ERRCHN\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00116}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa6f919249e70bf24808d10ff0aaeedbae}{00116}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa6f919249e70bf24808d10ff0aaeedbae}{kEDMA\_ChannelPriorityErrorFlag}}\ \ \ \ =\ DMA\_ES\_CPE\_MASK,\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00117}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa1c6f9d050df7f2f0aa945b5f1c46e230}{00117}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aa1c6f9d050df7f2f0aa945b5f1c46e230}{kEDMA\_TransferCanceledFlag}}\ \ \ \ \ \ \ \ =\ DMA\_ES\_ECX\_MASK,\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00118}00118\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_EDMA\_CHANNEL\_GROUP\_COUNT)\ \&\&\ (FSL\_FEATURE\_EDMA\_CHANNEL\_GROUP\_COUNT\ >\ 1)}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00119}00119\ \ \ \ \ kEDMA\_GroupPriorityErrorFlag\ =\ DMA\_ES\_GPE\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00120}00120\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00121}\doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aab930c63068a6d7ee6ccb21df993bd48f}{00121}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga42bd725f4430ab8844373b0cd72cbb7aab930c63068a6d7ee6ccb21df993bd48f}{kEDMA\_ValidFlag}}\ =\ (int)DMA\_ES\_VLD\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00122}00122\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00125}\doxymbox{\hyperlink{group__edma_ga4b9e8a6e5ac90d2b80f8b995a9e8e7ef}{00125}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga4b9e8a6e5ac90d2b80f8b995a9e8e7ef}{\_edma\_interrupt\_enable}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00126}00126\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00127}\doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efab2be76dc7af93bec6801d76376f924c0}{00127}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efab2be76dc7af93bec6801d76376f924c0}{kEDMA\_ErrorInterruptEnable}}\ =\ 0x1U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00128}\doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efa19c5998906a159df3204e818033a3c0e}{00128}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efa19c5998906a159df3204e818033a3c0e}{kEDMA\_MajorInterruptEnable}}\ =\ DMA\_CSR\_INTMAJOR\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00129}\doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efa2f1573636dcd4a54d9189bdee4cf39d0}{00129}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga4b9e8a6e5ac90d2b80f8b995a9e8e7efa2f1573636dcd4a54d9189bdee4cf39d0}{kEDMA\_HalfInterruptEnable}}\ \ =\ DMA\_CSR\_INTHALF\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00130}\doxymbox{\hyperlink{group__edma_ga4195139973289fdaa72651fa3e82df3b}{00130}}\ \}\ \doxymbox{\hyperlink{group__edma_ga4195139973289fdaa72651fa3e82df3b}{edma\_interrupt\_enable\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00133}\doxymbox{\hyperlink{group__edma_ga2ff12bc109f968bb2841fca1a9d3499e}{00133}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__edma_ga2ff12bc109f968bb2841fca1a9d3499e}{\_edma\_transfer\_type}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00134}00134\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00135}\doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499eaba1ccd03368799d9752bd6001f5373a5}{00135}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499eaba1ccd03368799d9752bd6001f5373a5}{kEDMA\_MemoryToMemory}}\ =\ 0x0U,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00136}\doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea1041287c7dc311d81017f529a51734e6}{00136}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea1041287c7dc311d81017f529a51734e6}{kEDMA\_PeripheralToMemory}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00137}\doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea172d3e1f201639f3157563f4a1a275bf}{00137}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea172d3e1f201639f3157563f4a1a275bf}{kEDMA\_MemoryToPeripheral}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00138}\doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea5c9cc27e04a3c22204b90ba07b860727}{00138}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga2ff12bc109f968bb2841fca1a9d3499ea5c9cc27e04a3c22204b90ba07b860727}{kEDMA\_PeripheralToPeripheral}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00139}\doxymbox{\hyperlink{group__edma_gae662655363f3c334558735103a95f661}{00139}}\ \}\ \doxymbox{\hyperlink{group__edma_gae662655363f3c334558735103a95f661}{edma\_transfer\_type\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00142}00142\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00143}00143\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00144}\doxymbox{\hyperlink{group__edma_gga782d9b24b127d98834cd7357fd775aa9a6d33d9a7019b18917669f16d51085b32}{00144}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga782d9b24b127d98834cd7357fd775aa9a6d33d9a7019b18917669f16d51085b32}{kStatus\_EDMA\_QueueFull}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a0ec7f0302a8f7eb082f449933880a1ad}{kStatusGroup\_EDMA}},\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00145}\doxymbox{\hyperlink{group__edma_gga782d9b24b127d98834cd7357fd775aa9a96aa3062c73a9f439f63c0ed24f09c07}{00145}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gga782d9b24b127d98834cd7357fd775aa9a96aa3062c73a9f439f63c0ed24f09c07}{kStatus\_EDMA\_Busy}}\ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a0ec7f0302a8f7eb082f449933880a1ad}{kStatusGroup\_EDMA}},\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00147}00147\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00150}\doxymbox{\hyperlink{struct__edma__config}{00150}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__config}{\_edma\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00151}00151\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00152}\doxymbox{\hyperlink{struct__edma__config_a2f5753be86f4c45b162a32ddd89c8fd1}{00152}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__config_a2f5753be86f4c45b162a32ddd89c8fd1}{enableContinuousLinkMode}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00155}\doxymbox{\hyperlink{struct__edma__config_a921adebbd4948fec2817459133f32b80}{00155}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__config_a921adebbd4948fec2817459133f32b80}{enableHaltOnError}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00157}\doxymbox{\hyperlink{struct__edma__config_ab556e6a55d0b93c23665f5958ad3a173}{00157}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__config_ab556e6a55d0b93c23665f5958ad3a173}{enableRoundRobinArbitration}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00159}\doxymbox{\hyperlink{struct__edma__config_a5a9f1a4e9f410a0f3271516584e61b88}{00159}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__config_a5a9f1a4e9f410a0f3271516584e61b88}{enableDebugMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00161}\doxymbox{\hyperlink{group__edma_ga88ed7d958816bd050ecd4c279edd2906}{00161}}\ \}\ \doxymbox{\hyperlink{group__edma_ga88ed7d958816bd050ecd4c279edd2906}{edma\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00168}\doxymbox{\hyperlink{struct__edma__transfer__config}{00168}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__transfer__config}{\_edma\_transfer\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00169}00169\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00170}\doxymbox{\hyperlink{struct__edma__transfer__config_ad18d4df5ad6fe40eafbe14247eaf5de1}{00170}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_ad18d4df5ad6fe40eafbe14247eaf5de1}{srcAddr}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00171}\doxymbox{\hyperlink{struct__edma__transfer__config_a7081ee578053abd938d22ba10ecd73f3}{00171}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_a7081ee578053abd938d22ba10ecd73f3}{destAddr}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00172}\doxymbox{\hyperlink{struct__edma__transfer__config_a82b15361a50d8dcbfc20d40fc9ba1bae}{00172}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga9cf5de93d1fe2ad5963b04d60a37c74a}{edma\_transfer\_size\_t}}\ \doxymbox{\hyperlink{struct__edma__transfer__config_a82b15361a50d8dcbfc20d40fc9ba1bae}{srcTransferSize}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00173}\doxymbox{\hyperlink{struct__edma__transfer__config_a124f88bd560bc1a3ef0418a0a30105f0}{00173}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga9cf5de93d1fe2ad5963b04d60a37c74a}{edma\_transfer\_size\_t}}\ \doxymbox{\hyperlink{struct__edma__transfer__config_a124f88bd560bc1a3ef0418a0a30105f0}{destTransferSize}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00174}\doxymbox{\hyperlink{struct__edma__transfer__config_a3641461b86e9027c5637020e9a288cbd}{00174}}\ \ \ \ \ int16\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_a3641461b86e9027c5637020e9a288cbd}{srcOffset}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00176}\doxymbox{\hyperlink{struct__edma__transfer__config_a189f5e87427eb8cf7e3990fde8179e55}{00176}}\ \ \ \ \ int16\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_a189f5e87427eb8cf7e3990fde8179e55}{destOffset}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00178}\doxymbox{\hyperlink{struct__edma__transfer__config_a9a0cb03809d9710d92eee8842254ad91}{00178}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_a9a0cb03809d9710d92eee8842254ad91}{minorLoopBytes}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00179}\doxymbox{\hyperlink{struct__edma__transfer__config_a3263406ba0ddf6b58d3c3e99d1aa1a72}{00179}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__edma__transfer__config_a3263406ba0ddf6b58d3c3e99d1aa1a72}{majorLoopCounts}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00180}\doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{00180}}\ \}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00183}\doxymbox{\hyperlink{struct__edma__channel__Preemption__config}{00183}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__channel__Preemption__config}{\_edma\_channel\_Preemption\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00184}00184\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00185}\doxymbox{\hyperlink{struct__edma__channel__Preemption__config_aa70af51bcec6f44932b76a492f98bf1a}{00185}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__channel__Preemption__config_aa70af51bcec6f44932b76a492f98bf1a}{enableChannelPreemption}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00186}\doxymbox{\hyperlink{struct__edma__channel__Preemption__config_a965df5c57cd4d2e3c61be4e02c1fb115}{00186}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__channel__Preemption__config_a965df5c57cd4d2e3c61be4e02c1fb115}{enablePreemptAbility}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00187}\doxymbox{\hyperlink{struct__edma__channel__Preemption__config_a15330f71acbe244f11d9bdae6aa8bbfa}{00187}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__edma__channel__Preemption__config_a15330f71acbe244f11d9bdae6aa8bbfa}{channelPriority}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00188}\doxymbox{\hyperlink{group__edma_gab5ac4e7e71a1aacc83dcbde589442f04}{00188}}\ \}\ \doxymbox{\hyperlink{group__edma_gab5ac4e7e71a1aacc83dcbde589442f04}{edma\_channel\_Preemption\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00191}\doxymbox{\hyperlink{struct__edma__minor__offset__config}{00191}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__minor__offset__config}{\_edma\_minor\_offset\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00192}00192\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00193}\doxymbox{\hyperlink{struct__edma__minor__offset__config_ad372a9eaf48876bd7ee01f0abff9fa8e}{00193}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__minor__offset__config_ad372a9eaf48876bd7ee01f0abff9fa8e}{enableSrcMinorOffset}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00194}\doxymbox{\hyperlink{struct__edma__minor__offset__config_abd3047acc6f7952f6428a8c6a47e4733}{00194}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__edma__minor__offset__config_abd3047acc6f7952f6428a8c6a47e4733}{enableDestMinorOffset}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00195}\doxymbox{\hyperlink{struct__edma__minor__offset__config_a69981f5e94bebb1a210273b9ae4b773d}{00195}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__edma__minor__offset__config_a69981f5e94bebb1a210273b9ae4b773d}{minorOffset}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00196}\doxymbox{\hyperlink{group__edma_ga87262f31b2e6724d6ee8ae61a043b275}{00196}}\ \}\ \doxymbox{\hyperlink{group__edma_ga87262f31b2e6724d6ee8ae61a043b275}{edma\_minor\_offset\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00204}\doxymbox{\hyperlink{struct__edma__tcd}{00204}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__tcd}{\_edma\_tcd}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00205}00205\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00206}\doxymbox{\hyperlink{struct__edma__tcd_aa5cfe412d48ae01ee972d177a918f2e7}{00206}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{struct__edma__tcd_aa5cfe412d48ae01ee972d177a918f2e7}{SADDR}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00207}\doxymbox{\hyperlink{struct__edma__tcd_ad09fe59dbe1d8b5219fa5ef039c822e7}{00207}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_ad09fe59dbe1d8b5219fa5ef039c822e7}{SOFF}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00208}\doxymbox{\hyperlink{struct__edma__tcd_adaf5bd1c5cd5530c283ea329531dd54b}{00208}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_adaf5bd1c5cd5530c283ea329531dd54b}{ATTR}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00209}\doxymbox{\hyperlink{struct__edma__tcd_ad18f3c5a19e9bb70c46541ce7caa537c}{00209}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{struct__edma__tcd_ad18f3c5a19e9bb70c46541ce7caa537c}{NBYTES}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00210}\doxymbox{\hyperlink{struct__edma__tcd_a7227caadb70fa2a46868f292c845afe9}{00210}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a7227caadb70fa2a46868f292c845afe9}{SLAST}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00211}\doxymbox{\hyperlink{struct__edma__tcd_a3926ac0ce1799d7318bcda727187356c}{00211}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a3926ac0ce1799d7318bcda727187356c}{DADDR}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00212}\doxymbox{\hyperlink{struct__edma__tcd_ab6ba8fab607c4d44e50ac420d457b653}{00212}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_ab6ba8fab607c4d44e50ac420d457b653}{DOFF}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00213}\doxymbox{\hyperlink{struct__edma__tcd_a8e3d47e76f36ce26cf8abece509d1300}{00213}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a8e3d47e76f36ce26cf8abece509d1300}{CITER}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00214}\doxymbox{\hyperlink{struct__edma__tcd_a7f04b495cedf5a2c9329eb6ead13950b}{00214}}\ \ \ \ \ \_\_IO\ uint32\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a7f04b495cedf5a2c9329eb6ead13950b}{DLAST\_SGA}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00215}\doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{00215}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{CSR}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00216}\doxymbox{\hyperlink{struct__edma__tcd_a61981659b3b26d3b2f04ad3ed0ec8b5d}{00216}}\ \ \ \ \ \_\_IO\ uint16\_t\ \doxymbox{\hyperlink{struct__edma__tcd_a61981659b3b26d3b2f04ad3ed0ec8b5d}{BITER}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00217}\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{00217}}\ \}\ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00220}00220\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__handle}{\_edma\_handle}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00240}\doxymbox{\hyperlink{group__edma_gade926ca96c4e5f04e6ce1e693ad3e150}{00240}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__edma_gade926ca96c4e5f04e6ce1e693ad3e150}{edma\_callback}})(\textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__handle}{\_edma\_handle}}\ *handle,\ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__edma__handle_ae7ae511b440ea695410a84a8c8510ada}{userData}},\ \textcolor{keywordtype}{bool}\ transferDone,\ uint32\_t\ tcds);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00243}\doxymbox{\hyperlink{struct__edma__handle}{00243}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__edma__handle}{\_edma\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00244}00244\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00245}\doxymbox{\hyperlink{struct__edma__handle_a477ceaab5626a5283c7f21bbf0365ba7}{00245}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_gade926ca96c4e5f04e6ce1e693ad3e150}{edma\_callback}}\ \doxymbox{\hyperlink{struct__edma__handle_a477ceaab5626a5283c7f21bbf0365ba7}{callback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00246}\doxymbox{\hyperlink{struct__edma__handle_ae7ae511b440ea695410a84a8c8510ada}{00246}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__edma__handle_ae7ae511b440ea695410a84a8c8510ada}{userData}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00247}\doxymbox{\hyperlink{struct__edma__handle_a224fed6f3c431fee4bef697e39d609fe}{00247}}\ \ \ \ \ \doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *\doxymbox{\hyperlink{struct__edma__handle_a224fed6f3c431fee4bef697e39d609fe}{base}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00248}\doxymbox{\hyperlink{struct__edma__handle_a764e6c2f7a4be497385b3be22c833cf0}{00248}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *\doxymbox{\hyperlink{struct__edma__handle_a764e6c2f7a4be497385b3be22c833cf0}{tcdPool}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00249}\doxymbox{\hyperlink{struct__edma__handle_ab685b8268377f03b6c660ceca8f119c3}{00249}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__edma__handle_ab685b8268377f03b6c660ceca8f119c3}{channel}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00250}\doxymbox{\hyperlink{struct__edma__handle_a23541d41c3b2d7c067d03882cf12afc9}{00250}}\ \ \ \ \ \textcolor{keyword}{volatile}\ int8\_t\ \doxymbox{\hyperlink{struct__edma__handle_a23541d41c3b2d7c067d03882cf12afc9}{header}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00251}\doxymbox{\hyperlink{struct__edma__handle_ad4166d825a2b7056e658c76eda4d8f1e}{00251}}\ \ \ \ \ \textcolor{keyword}{volatile}\ int8\_t\ \doxymbox{\hyperlink{struct__edma__handle_ad4166d825a2b7056e658c76eda4d8f1e}{tail}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00252}\doxymbox{\hyperlink{struct__edma__handle_a6803c59bbed8716fc173a729329e3b66}{00252}}\ \ \ \ \ \textcolor{keyword}{volatile}\ int8\_t\ \doxymbox{\hyperlink{struct__edma__handle_a6803c59bbed8716fc173a729329e3b66}{tcdUsed}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00254}\doxymbox{\hyperlink{struct__edma__handle_a73894bc1747b5419548e6a5b25f52c24}{00254}}\ \ \ \ \ \textcolor{keyword}{volatile}\ int8\_t\ \doxymbox{\hyperlink{struct__edma__handle_a73894bc1747b5419548e6a5b25f52c24}{tcdSize}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00255}\doxymbox{\hyperlink{struct__edma__handle_ad9a5cd410a273519eaa6d8c335272b40}{00255}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__edma__handle_ad9a5cd410a273519eaa6d8c335272b40}{flags}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00256}\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{00256}}\ \}\ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00258}00258\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00259}00259\ \textcolor{comment}{\ *\ APIs}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00260}00260\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00261}00261\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00262}00262\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00263}00263\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00280}00280\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaf7588eb4b54499f0f55c698bd98bc1bb}{EDMA\_Init}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga88ed7d958816bd050ecd4c279edd2906}{edma\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00289}00289\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga29aa2b1f72c154c12305d6615845618c}{EDMA\_Deinit}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00298}00298\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga23e063167a1b666dcdd5538407c5c948}{EDMA\_InstallTCD}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00314}00314\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga9851dc5addd6a1fc557bfdb625aa5c19}{EDMA\_GetDefaultConfig}}(\doxymbox{\hyperlink{group__edma_ga88ed7d958816bd050ecd4c279edd2906}{edma\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00327}\doxymbox{\hyperlink{group__edma_ga7957e210d6f4904d42df81508da25d56}{00327}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga7957e210d6f4904d42df81508da25d56}{EDMA\_EnableContinuousChannelLinkMode}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00328}00328\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00329}00329\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00330}00330\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00331}00331\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga664cf4b368fc388926bd0e6d6822248f}{CR}}\ |=\ DMA\_CR\_CLM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00332}00332\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00333}00333\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00334}00334\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00335}00335\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga664cf4b368fc388926bd0e6d6822248f}{CR}}\ \&=\ \string~DMA\_CR\_CLM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00336}00336\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00337}00337\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00348}\doxymbox{\hyperlink{group__edma_ga3b2e736c8b20f41b5df9932452fe9d3c}{00348}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga3b2e736c8b20f41b5df9932452fe9d3c}{EDMA\_EnableMinorLoopMapping}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00349}00349\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00350}00350\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00351}00351\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00352}00352\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga664cf4b368fc388926bd0e6d6822248f}{CR}}\ |=\ DMA\_CR\_EMLM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00354}00354\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00355}00355\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00356}00356\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga664cf4b368fc388926bd0e6d6822248f}{CR}}\ \&=\ \string~DMA\_CR\_EMLM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00357}00357\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00358}00358\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00377}00377\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaecea06e22455415332bbc342c309cb6b}{EDMA\_ResetChannel}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00404}00404\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaad0c5872dda63e558ee6c62f9bc5eaa8}{EDMA\_SetTransferConfig}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ channel,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *config,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *nextTcd);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00419}00419\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gae77bdff6263bed3a02291efb8f1146f0}{EDMA\_SetMinorOffsetConfig}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga87262f31b2e6724d6ee8ae61a043b275}{edma\_minor\_offset\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00430}00430\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga136076d50d98d4eadfaa9cd592b273e7}{EDMA\_SetChannelPreemptionConfig}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_gab5ac4e7e71a1aacc83dcbde589442f04}{edma\_channel\_Preemption\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00431}00431\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00448}00448\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga8cd3ca8512357b64af15846a2b87edd6}{EDMA\_SetChannelLink}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \doxymbox{\hyperlink{group__edma_gad5a727bf11f63448974a3ef250ddbb7b}{edma\_channel\_link\_type\_t}}\ linkType,\ uint32\_t\ linkedChannel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00464}00464\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaf2997a300751b52e3c2e699e3f2296f2}{EDMA\_SetBandWidth}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \doxymbox{\hyperlink{group__edma_gabf3ac5063a2c94a947b0f186d5342e42}{edma\_bandwidth\_t}}\ bandWidth);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00478}00478\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaa3f4855fe92ed80276487771b9bd2705}{EDMA\_SetModulo}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{edma\_modulo\_t}}\ srcModulo,\ \doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{edma\_modulo\_t}}\ destModulo);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00480}00480\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_EDMA\_ASYNCHRO\_REQUEST\_CHANNEL\_COUNT)\ \&\&\ FSL\_FEATURE\_EDMA\_ASYNCHRO\_REQUEST\_CHANNEL\_COUNT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00488}00488\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ EDMA\_EnableAsyncRequest(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00489}00489\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00490}00490\ \ \ \ \ assert(channel\ <\ (uint32\_t)FSL\_FEATURE\_DMAMUX\_MODULE\_CHANNEL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00492}00492\ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga92906d6a4ee86f48235df8730246ddd3}{EARS}}\ \&=\ \string~((uint32\_t)1U\ <<\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00493}00493\ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga92906d6a4ee86f48235df8730246ddd3}{EARS}}\ |=\ ((uint32\_t)(\textcolor{keyword}{true}\ ==\ enable\ ?\ 1U\ :\ 0U)\ <<\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00494}00494\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00495}00495\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_EDMA\_ASYNCHRO\_REQUEST\_CHANNEL\_COUNT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00506}\doxymbox{\hyperlink{group__edma_gac3ef15106efff13ea6a25441fc228349}{00506}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gac3ef15106efff13ea6a25441fc228349}{EDMA\_EnableAutoStopRequest}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00507}00507\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00508}00508\ \ \ \ \ assert(channel\ <\ (uint32\_t)FSL\_FEATURE\_DMAMUX\_MODULE\_CHANNEL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00510}00510\ \ \ \ \ base-\/>TCD[channel].\doxymbox{\hyperlink{group__Mapping__Information_ga60b7ef52775eb2e3a56852fdeacc0975}{CSR}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00511}00511\ \ \ \ \ \ \ \ \ (uint16\_t)((base-\/>TCD[channel].\doxymbox{\hyperlink{group__Mapping__Information_ga60b7ef52775eb2e3a56852fdeacc0975}{CSR}}\ \&\ (\string~DMA\_CSR\_DREQ\_MASK))\ |\ \doxymbox{\hyperlink{group__DMA__Register__Masks_gad12e18848970d071c8cf82ff61030f90}{DMA\_CSR\_DREQ}}((\textcolor{keyword}{true}\ ==\ enable\ ?\ 1U\ :\ 0U)));}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00512}00512\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00522}00522\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga15df898b3b420958f51c4df22dc85b98}{EDMA\_EnableChannelInterrupts}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00532}00532\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga251561e70531dfcea586b5f1fff9c916}{EDMA\_DisableChannelInterrupts}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00533}00533\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00544}00544\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga44f984a5522f544407e43b1147c40cb4}{EDMA\_SetMajorOffsetConfig}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ int32\_t\ sourceOffset,\ int32\_t\ destOffset);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00551}00551\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00560}00560\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga3c6239d1c1cd5483fa9b390f568e3066}{EDMA\_TcdReset}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00589}00589\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gad7efa07faa29e3acf456fc1cffb3f9d5}{EDMA\_TcdSetTransferConfig}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *config,\ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *nextTcd);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00600}00600\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga5409f4a24baec461a186df10fe1f8c52}{EDMA\_TcdSetMinorOffsetConfig}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga87262f31b2e6724d6ee8ae61a043b275}{edma\_minor\_offset\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00601}00601\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00617}00617\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga04ee251c7c7efd9ab4f5b2182ef8a626}{EDMA\_TcdSetChannelLink}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \doxymbox{\hyperlink{group__edma_gad5a727bf11f63448974a3ef250ddbb7b}{edma\_channel\_link\_type\_t}}\ linkType,\ uint32\_t\ linkedChannel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00631}\doxymbox{\hyperlink{group__edma_ga7357cc963fb15ce336ea8fb78f3475a7}{00631}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga7357cc963fb15ce336ea8fb78f3475a7}{EDMA\_TcdSetBandWidth}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \doxymbox{\hyperlink{group__edma_gabf3ac5063a2c94a947b0f186d5342e42}{edma\_bandwidth\_t}}\ bandWidth)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00632}00632\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00633}00633\ \ \ \ \ assert(tcd\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00634}00634\ \ \ \ \ assert(((uint32\_t)tcd\ \&\ 0x1FU)\ ==\ 0U);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00635}00635\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00636}00636\ \ \ \ \ tcd-\/>\doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{CSR}}\ =\ (uint16\_t)((tcd-\/>\doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{CSR}}\ \&\ (\string~DMA\_CSR\_BWC\_MASK))\ |\ \doxymbox{\hyperlink{group__DMA__Register__Masks_gabf096c1882a693d928756d1dbaba8ece}{DMA\_CSR\_BWC}}(bandWidth));}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00637}00637\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00638}00638\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00650}00650\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga998211b8fa494160251f2bdfae2d67b4}{EDMA\_TcdSetModulo}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{edma\_modulo\_t}}\ srcModulo,\ \doxymbox{\hyperlink{group__edma_ga6c55eb702201c8d429f5db513f684fd8}{edma\_modulo\_t}}\ destModulo);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00651}00651\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00660}\doxymbox{\hyperlink{group__edma_gabc58ab357e8425a3211048a77ca5ed82}{00660}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gabc58ab357e8425a3211048a77ca5ed82}{EDMA\_TcdEnableAutoStopRequest}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00661}00661\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00662}00662\ \ \ \ \ assert(tcd\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00663}00663\ \ \ \ \ assert(((uint32\_t)tcd\ \&\ 0x1FU)\ ==\ 0U);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00664}00664\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00665}00665\ \ \ \ \ tcd-\/>\doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{CSR}}\ =\ (uint16\_t)((tcd-\/>\doxymbox{\hyperlink{struct__edma__tcd_a6090b3e353ea079cd48f726e898cc98b}{CSR}}\ \&\ (\string~DMA\_CSR\_DREQ\_MASK))\ |\ \doxymbox{\hyperlink{group__DMA__Register__Masks_gad12e18848970d071c8cf82ff61030f90}{DMA\_CSR\_DREQ}}((\textcolor{keyword}{true}\ ==\ enable\ ?\ 1U\ :\ 0U)));}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00666}00666\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00667}00667\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00675}00675\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaff194ee32f2848aa721f8d65f4329fce}{EDMA\_TcdEnableInterrupts}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00676}00676\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00684}00684\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga1dad41c69a12e8abb772f60c66d9f162}{EDMA\_TcdDisableInterrupts}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00685}00685\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00695}00695\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga1de61e7f86f4f9f00f757dafe2dbc5d5}{EDMA\_TcdSetMajorOffsetConfig}}(\doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcd,\ int32\_t\ sourceOffset,\ int32\_t\ destOffset);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00696}00696\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00702}00702\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00711}\doxymbox{\hyperlink{group__edma_gaabbec6b59a4313df50af39872743deaf}{00711}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaabbec6b59a4313df50af39872743deaf}{EDMA\_EnableChannelRequest}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00712}00712\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00713}00713\ \ \ \ \ assert(channel\ <\ (uint32\_t)FSL\_FEATURE\_DMAMUX\_MODULE\_CHANNEL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00714}00714\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00715}00715\ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga68848a88d24a7562c950c893096f35cc}{SERQ}}\ =\ \doxymbox{\hyperlink{group__DMA__Register__Masks_ga0b5a7acb359bcc57dd725102edfd21f9}{DMA\_SERQ\_SERQ}}(channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00716}00716\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00717}00717\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00726}\doxymbox{\hyperlink{group__edma_ga44708108a447777f25e322063df70c95}{00726}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga44708108a447777f25e322063df70c95}{EDMA\_DisableChannelRequest}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00727}00727\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00728}00728\ \ \ \ \ assert(channel\ <\ (uint32\_t)FSL\_FEATURE\_DMAMUX\_MODULE\_CHANNEL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00729}00729\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00730}00730\ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_gab816def56f568e9b7ec5e3e3cd929cbd}{CERQ}}\ =\ \doxymbox{\hyperlink{group__DMA__Register__Masks_ga06bccf8bb52efa7918d7ba7648d30aa0}{DMA\_CERQ\_CERQ}}(channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00731}00731\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00732}00732\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00741}\doxymbox{\hyperlink{group__edma_ga38aa18611518af3211f23044527d6992}{00741}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga38aa18611518af3211f23044527d6992}{EDMA\_TriggerChannelStart}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00742}00742\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00743}00743\ \ \ \ \ assert(channel\ <\ (uint32\_t)FSL\_FEATURE\_DMAMUX\_MODULE\_CHANNEL);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00744}00744\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00745}00745\ \ \ \ \ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_ga173f6028b003a390812de8bd6b011a0c}{SSRT}}\ =\ \doxymbox{\hyperlink{group__DMA__Register__Masks_ga381ae16ec1d637479a855f345d3e160f}{DMA\_SSRT\_SSRT}}(channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00746}00746\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00747}00747\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00753}00753\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00775}00775\ uint32\_t\ \doxymbox{\hyperlink{group__edma_ga097a1bad709b591528fc967867e98d14}{EDMA\_GetRemainingMajorLoopCount}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00776}00776\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00784}\doxymbox{\hyperlink{group__edma_ga2416059ab1bd9c51df50bf78f0f98221}{00784}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__edma_ga2416059ab1bd9c51df50bf78f0f98221}{EDMA\_GetErrorStatusFlags}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00785}00785\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00786}00786\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{group__Mapping__Information_gabaffcb82be7f60e866d66565340dc515}{ES}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00787}00787\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00788}00788\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00797}00797\ uint32\_t\ \doxymbox{\hyperlink{group__edma_ga6e33fe1b55eb7296b1c2cb440c63bf0e}{EDMA\_GetChannelStatusFlags}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00807}00807\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga4575eda0bdf9bbec225cdb322bfadb97}{EDMA\_ClearChannelStatusFlags}}(\doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00813}00813\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00825}00825\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gae71842684e693908395784e8b7f7ef55}{EDMA\_CreateHandle}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \doxymbox{\hyperlink{structDMA__Type}{DMA\_Type}}\ *base,\ uint32\_t\ channel);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00826}00826\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00839}00839\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga61e4c8c8c4292918fe976a9071fa68e2}{EDMA\_InstallTCDMemory}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \doxymbox{\hyperlink{group__edma_ga1ac9961fa246cc5c53ec3e7a2ba1b1ca}{edma\_tcd\_t}}\ *tcdPool,\ uint32\_t\ tcdSize);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00840}00840\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00851}00851\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga945ae6f5db8b32c9b39ec0954073d65d}{EDMA\_SetCallback}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \doxymbox{\hyperlink{group__edma_gade926ca96c4e5f04e6ce1e693ad3e150}{edma\_callback}}\ callback,\ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00852}00852\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00871}00871\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga5d1bb30d93e3fd08656d77f0e3a9f75f}{EDMA\_PrepareTransferConfig}}(\doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *config,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *srcAddr,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ srcWidth,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00874}00874\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int16\_t\ srcOffset,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00875}00875\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *destAddr,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00876}00876\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ destWidth,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00877}00877\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int16\_t\ destOffset,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00878}00878\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ bytesEachRequest,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00879}00879\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ transferBytes);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00898}00898\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga7b9fea80d9316b081f4dfb33b393bbb0}{EDMA\_PrepareTransfer}}(\doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *config,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *srcAddr,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00900}00900\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ srcWidth,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00901}00901\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *destAddr,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00902}00902\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ destWidth,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00903}00903\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ bytesEachRequest,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00904}00904\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ transferBytes,}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_gae662655363f3c334558735103a95f661}{edma\_transfer\_type\_t}}\ transferType);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00906}00906\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00920}00920\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__edma_ga8a78ca4c4c941f0ba5fa60033b81b61b}{EDMA\_SubmitTransfer}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__edma_ga35ed507c768d57f7ff38a7322ea6af7f}{edma\_transfer\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00921}00921\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00930}00930\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gab4a5570a9a0936f6666ec3c6a619296f}{EDMA\_StartTransfer}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00931}00931\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00940}00940\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga253a133e7834d7cb958911a05acc16b8}{EDMA\_StopTransfer}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00941}00941\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00950}00950\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_ga2098cf6995bc79b25c5c9588f1c711e9}{EDMA\_AbortTransfer}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00951}00951\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00960}\doxymbox{\hyperlink{group__edma_ga491de73a29d57aca475bbfe70a7a628e}{00960}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__edma_ga491de73a29d57aca475bbfe70a7a628e}{EDMA\_GetUnusedTCDNumber}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00961}00961\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00962}00962\ \ \ \ \ int8\_t\ tmpTcdSize\ =\ handle-\/>\doxymbox{\hyperlink{struct__edma__handle_a73894bc1747b5419548e6a5b25f52c24}{tcdSize}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00963}00963\ \ \ \ \ int8\_t\ tmpTcdUsed\ =\ handle-\/>\doxymbox{\hyperlink{struct__edma__handle_a6803c59bbed8716fc173a729329e3b66}{tcdUsed}};}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00964}00964\ \ \ \ \ \textcolor{keywordflow}{return}\ ((uint32\_t)tmpTcdSize\ -\/\ (uint32\_t)tmpTcdUsed);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00965}00965\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00966}00966\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00975}\doxymbox{\hyperlink{group__edma_ga2b97ab97e7bc0b5f15d905bae8341950}{00975}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__edma_ga2b97ab97e7bc0b5f15d905bae8341950}{EDMA\_GetNextTCDAddress}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle)}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00976}00976\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00977}00977\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(handle-\/>\doxymbox{\hyperlink{struct__edma__handle_a224fed6f3c431fee4bef697e39d609fe}{base}}-\/>TCD[handle-\/>\doxymbox{\hyperlink{struct__edma__handle_ab685b8268377f03b6c660ceca8f119c3}{channel}}].\doxymbox{\hyperlink{group__Mapping__Information_ga316d782472fc182216c13471fab419e6}{DLAST\_SGA}});}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00978}00978\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l00979}00979\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01008}01008\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__edma_gaebf4a6a6000c296d3ab795aae77b65a0}{EDMA\_HandleIRQ}}(\doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01009}01009\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01011}01011\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01012}01012\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01013}01013\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01014}01014\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01015}01015\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01017}01017\ }
+\DoxyCodeLine{\Hypertarget{fsl__edma_8h_source_l01018}01018\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*FSL\_EDMA\_H\_*/}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

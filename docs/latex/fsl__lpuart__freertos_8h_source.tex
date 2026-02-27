@@ -1,0 +1,111 @@
+\doxysection{fsl\+\_\+lpuart\+\_\+freertos.\+h}
+\hypertarget{fsl__lpuart__freertos_8h_source}{}\label{fsl__lpuart__freertos_8h_source}\index{drivers/freertos/fsl\_lpuart\_freertos.h@{drivers/freertos/fsl\_lpuart\_freertos.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2020\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ \_\_FSL\_LPUART\_RTOS\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ \_\_FSL\_LPUART\_RTOS\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_lpuart.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <FreeRTOS.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <event\_groups.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <semphr.h>}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00021}00021\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00022}00022\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00023}00023\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00028}\doxymbox{\hyperlink{group__lpuart__freertos__driver_gae78d379ef6bde2ad08e1fe64f1f09bf5}{00028}}\ \textcolor{preprocessor}{\#define\ FSL\_LPUART\_FREERTOS\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 6,\ 0))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00032}\doxymbox{\hyperlink{struct__lpuart__rtos__config}{00032}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__rtos__config}{\_lpuart\_rtos\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00034}\doxymbox{\hyperlink{group__lpuart__freertos__driver_gaa4e6cddd1beadc52a71ac5933dd47afd}{00034}}\ \ \ \ \ \doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *\doxymbox{\hyperlink{group__lpuart__freertos__driver_gaa4e6cddd1beadc52a71ac5933dd47afd}{base}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00035}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga3ad0def261b033ab202cd29804387cad}{00035}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga3ad0def261b033ab202cd29804387cad}{srcclk}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00036}\doxymbox{\hyperlink{group__lpuart__freertos__driver_gae145aec6fcd6a1fd8811d47f1b3d69e7}{00036}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_gae145aec6fcd6a1fd8811d47f1b3d69e7}{baudrate}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00037}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga590d28ebbfe2cc5eae93559ebcd70aaa}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1}{lpuart\_parity\_mode\_t}}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga590d28ebbfe2cc5eae93559ebcd70aaa}{parity}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00038}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga3bad2260df1b2e44edba5bb1621e5c89}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac}{lpuart\_stop\_bit\_count\_t}}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga3bad2260df1b2e44edba5bb1621e5c89}{stopbits}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00039}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga421d97b8a3d56a3fbe80a439d6a12e8b}{00039}}\ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga421d97b8a3d56a3fbe80a439d6a12e8b}{buffer}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00040}\doxymbox{\hyperlink{group__lpuart__freertos__driver_gab01354efe7fe0281ec722857d6ff9370}{00040}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_gab01354efe7fe0281ec722857d6ff9370}{buffer\_size}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00041}00041\ \ \ \ \ \textcolor{comment}{/*\ Zero\ in\ constant\ and\ multiplier\ is\ interpreted\ as\ infinit\ timeout.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00042}\doxymbox{\hyperlink{group__lpuart__freertos__driver_gaf72c515a22bf7a4cd058fafd5ee192b2}{00042}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_gaf72c515a22bf7a4cd058fafd5ee192b2}{rx\_timeout\_constant\_ms}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00043}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga9459f1a39d576c85bb20cc8d00c641c3}{00043}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga9459f1a39d576c85bb20cc8d00c641c3}{rx\_timeout\_multiplier\_ms}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00044}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga321ae993de2ec70250dac9d19e2f3422}{00044}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga321ae993de2ec70250dac9d19e2f3422}{tx\_timeout\_constant\_ms}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00045}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga1716df2698e5e1c5df95530e90b1d0f6}{00045}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga1716df2698e5e1c5df95530e90b1d0f6}{tx\_timeout\_multiplier\_ms}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00046}00046\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableRxRTS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableTxCTS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00049}00049\ \ \ \ \ lpuart\_transmit\_cts\_source\_t\ txCtsSource;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00050}00050\ \ \ \ \ lpuart\_transmit\_cts\_config\_t\ txCtsConfig;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00051}00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00052}\doxymbox{\hyperlink{group__lpuart__freertos__driver_ga497821e755755c3fd323b17dadc2d25b}{00052}}\ \}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga497821e755755c3fd323b17dadc2d25b}{lpuart\_rtos\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00062}00062\ \textcolor{preprocessor}{\#define\ RTOS\_LPUART\_TX\_COMPLETE\ 0x1U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00064}00064\ \textcolor{preprocessor}{\#define\ RTOS\_LPUART\_RX\_COMPLETE\ 0x2U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00066}00066\ \textcolor{preprocessor}{\#define\ RTOS\_LPUART\_RING\_BUFFER\_OVERRUN\ 0x4U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00068}00068\ \textcolor{preprocessor}{\#define\ RTOS\_LPUART\_HARDWARE\_BUFFER\_OVERRUN\ 0x8U}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00072}00072\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_lpuart\_rtos\_handle}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00073}00073\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00074}00074\ \ \ \ \ LPUART\_Type\ *base;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00075}00075\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ txTransfer;\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00076}00076\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ rxTransfer;\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00077}00077\ \ \ \ \ SemaphoreHandle\_t\ rxSemaphore;\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00078}00078\ \ \ \ \ SemaphoreHandle\_t\ txSemaphore;\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00079}00079\ \ \ \ \ EventGroupHandle\_t\ rxEvent;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00080}00080\ \ \ \ \ EventGroupHandle\_t\ txEvent;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00081}00081\ \ \ \ \ uint32\_t\ rx\_timeout\_constant\_ms;\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00082}00082\ \ \ \ \ uint32\_t\ rx\_timeout\_multiplier\_ms;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00083}00083\ \ \ \ \ uint32\_t\ tx\_timeout\_constant\_ms;\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00084}00084\ \ \ \ \ uint32\_t\ tx\_timeout\_multiplier\_ms;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{void}\ *t\_state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00086}00086\ \textcolor{preprocessor}{\#if\ (configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00087}00087\ \ \ \ \ StaticSemaphore\_t\ txSemaphoreBuffer;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00088}00088\ \ \ \ \ StaticSemaphore\_t\ rxSemaphoreBuffer;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00089}00089\ \ \ \ \ StaticEventGroup\_t\ txEventBuffer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00090}00090\ \ \ \ \ StaticEventGroup\_t\ rxEventBuffer;\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00092}00092\ \}\ lpuart\_rtos\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00095}00095\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00096}00096\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00097}00097\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00099}00099\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00100}00100\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00101}00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00116}00116\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga5be9370b1fa0187c194475769e7138fc}{LPUART\_RTOS\_Init}}(lpuart\_rtos\_handle\_t\ *handle,\ lpuart\_handle\_t\ *t\_handle,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga497821e755755c3fd323b17dadc2d25b}{lpuart\_rtos\_config\_t}}\ *cfg);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00126}00126\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga057e59dcc578ef4b303850bcd90ca50e}{LPUART\_RTOS\_Deinit}}(lpuart\_rtos\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00143}00143\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga275e067e13ecc77dde83d2d7938c038e}{LPUART\_RTOS\_Send}}(lpuart\_rtos\_handle\_t\ *handle,\ uint8\_t\ *buffer,\ uint32\_t\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00156}00156\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga0561f87122863c6e9b20f8991a73a0fb}{LPUART\_RTOS\_Receive}}(lpuart\_rtos\_handle\_t\ *handle,\ uint8\_t\ *buffer,\ uint32\_t\ length,\ \textcolor{keywordtype}{size\_t}\ *received);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00167}00167\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_ga3e211e0c1a2c93d9bdd73d6ca4639a10}{LPUART\_RTOS\_SetRxTimeout}}(lpuart\_rtos\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ rx\_timeout\_constant\_ms,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ rx\_timeout\_multiplier\_ms);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00180}00180\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{group__lpuart__freertos__driver_gad2317ff04710f0f4a2dc7d219f850c85}{LPUART\_RTOS\_SetTxTimeout}}(lpuart\_rtos\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ tx\_timeout\_constant\_ms,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ tx\_timeout\_multiplier\_ms);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00184}00184\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00186}00186\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00187}00187\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00188}00188\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart__freertos_8h_source_l00192}00192\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FSL\_LPUART\_RTOS\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,452 @@
+\doxysection{fsl\+\_\+uart.\+h}
+\hypertarget{fsl__uart_8h_source}{}\label{fsl__uart_8h_source}\index{drivers/fsl\_uart.h@{drivers/fsl\_uart.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2021\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ FSL\_UART\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ FSL\_UART\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00018}00018\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00019}00019\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00020}00020\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00025}\doxymbox{\hyperlink{group__uart__driver_ga89f9649bfe350eb7b1e53146f35d3de5}{00025}}\ \textcolor{preprocessor}{\#define\ FSL\_UART\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 5,\ 1))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ UART\_RETRY\_TIMES}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00030}\doxymbox{\hyperlink{group__uart__driver_gac0f88b67f77fd05f186a5ec940c340bd}{00030}}\ \textcolor{preprocessor}{\#define\ UART\_RETRY\_TIMES\ 0U\ }\textcolor{comment}{/*\ Defining\ to\ zero\ means\ to\ keep\ waiting\ for\ the\ flag\ until\ it\ is\ assert/deassert.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00031}00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00034}00034\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00036}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7}{00036}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a19ddee4fe5963467600028b78fb468e7}{kStatus\_UART\_TxBusy}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00037}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a68cf23f981c4b85f82291163fbb2a5e6}{kStatus\_UART\_RxBusy}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00038}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4af36c829b1b889517bf775c0d7ce29fa6}{kStatus\_UART\_TxIdle}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00039}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae0877b14627ed2aa8ddb2bf5b033f407}{kStatus\_UART\_RxIdle}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00040}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a765913f003819ed87b861d187bf79ab8}{00040}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a765913f003819ed87b861d187bf79ab8}{kStatus\_UART\_TxWatermarkTooLarge}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00041}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a720cefde05389830f35f6e6df6f6ac67}{00041}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a720cefde05389830f35f6e6df6f6ac67}{kStatus\_UART\_RxWatermarkTooLarge}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00042}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54}{00042}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a5ee8e23fc9ab20cf366942751b895f54}{kStatus\_UART\_FlagCannotClearManually}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 6),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00044}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a950972a9e2ebbaa13c92e8f5a51f785d}{00044}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a950972a9e2ebbaa13c92e8f5a51f785d}{kStatus\_UART\_Error}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 7),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00045}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a2e5b644b1e10c426af818bc78657e992}{00045}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a2e5b644b1e10c426af818bc78657e992}{kStatus\_UART\_RxRingBufferOverrun}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 8),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00046}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26}{00046}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ab6b1fd6c2deec25992449f5b12303a26}{kStatus\_UART\_RxHardwareOverrun}}\ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 9),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00047}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae4ef4df9a5f756ccf1b4bf08292ec2fb}{kStatus\_UART\_NoiseError}}\ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 10),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00048}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aa7aa134f85df3d5863ca962ce1ea7ee0}{kStatus\_UART\_FramingError}}\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 11),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00049}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4aea20b2588c38f259f1412aa7132c9ef8}{kStatus\_UART\_ParityError}}\ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 12),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00050}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}{00050}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4ae6cdb41e1b49958f57727cd47afd69b2}{kStatus\_UART\_BaudrateNotSupport}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 13),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00052}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a3e5b488f7ed418cb08399a5db193103e}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a3e5b488f7ed418cb08399a5db193103e}{kStatus\_UART\_IdleLineDetected}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 14),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00053}\doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}{00053}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga99b83708c78ada9058dbd3bf4f7aeeb4a1fef1b2a4a60c45c7fc329bbe8c1e34d}{kStatus\_UART\_Timeout}}\ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29aeeb2ed6ef4ce59c7e1d416466f55bfb7}{kStatusGroup\_UART}},\ 15),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00054}00054\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00057}\doxymbox{\hyperlink{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}{00057}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__uart__driver_gadf9f66755acc340eab030e1a48e35e10}{\_uart\_parity\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00058}00058\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00059}\doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b}{00059}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a97e2feae6671a6de1126ebc2edf4606b}{kUART\_ParityDisabled}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00060}\doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a9e68fe3aba46e045bee5433ed098bff0}{00060}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10a9e68fe3aba46e045bee5433ed098bff0}{kUART\_ParityEven}}\ \ \ \ \ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00061}\doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10ae48c7fabc9babf1be626ebeb2627a54c}{00061}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggadf9f66755acc340eab030e1a48e35e10ae48c7fabc9babf1be626ebeb2627a54c}{kUART\_ParityOdd}}\ \ \ \ \ \ =\ 0x3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00062}\doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{00062}}\ \}\ \doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{uart\_parity\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00065}\doxymbox{\hyperlink{group__uart__driver_ga3c656a4365cab1185398ff953272091e}{00065}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__uart__driver_ga3c656a4365cab1185398ff953272091e}{\_uart\_stop\_bit\_count}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00067}\doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7}{00067}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea5a8829a108d8a46abb097a36cde051a7}{kUART\_OneStopBit}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00068}\doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea9704b3ae3ee851acf324eb357f75ab56}{00068}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga3c656a4365cab1185398ff953272091ea9704b3ae3ee851acf324eb357f75ab56}{kUART\_TwoStopBit}}\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00069}\doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{00069}}\ \}\ \doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{uart\_stop\_bit\_count\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00072}\doxymbox{\hyperlink{group__uart__driver_gae658ead369268edf18141e1903d426f1}{00072}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__uart__driver_gae658ead369268edf18141e1903d426f1}{\_uart\_idle\_type\_select}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00073}00073\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00074}\doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a5216f34232b8d01cdd8db1ca01072901}{00074}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a5216f34232b8d01cdd8db1ca01072901}{kUART\_IdleTypeStartBit}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00075}\doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a05771d6cd97e160c6a47d5871d2de013}{00075}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggae658ead369268edf18141e1903d426f1a05771d6cd97e160c6a47d5871d2de013}{kUART\_IdleTypeStopBit}}\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00076}\doxymbox{\hyperlink{group__uart__driver_ga6bde326a19495e3ff435c08c1da4edf7}{00076}}\ \}\ \doxymbox{\hyperlink{group__uart__driver_ga6bde326a19495e3ff435c08c1da4edf7}{uart\_idle\_type\_select\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00083}\doxymbox{\hyperlink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{00083}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__uart__driver_ga700f3cd8e3800273a1591307cab6311c}{\_uart\_interrupt\_enable}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00084}00084\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00085}00085\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00086}00086\ \ \ \ \ kUART\_LinBreakInterruptEnable\ =\ (UART\_BDH\_LBKDIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00087}00087\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00088}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64}{00088}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64}{kUART\_RxActiveEdgeInterruptEnable}}\ \ \ \ \ \ \ \ \ =\ (UART\_BDH\_RXEDGIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00089}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{00089}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{kUART\_TxDataRegEmptyInterruptEnable}}\ \ \ \ \ \ \ =\ (UART\_C2\_TIE\_MASK\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00090}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b}{00090}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b}{kUART\_TransmissionCompleteInterruptEnable}}\ =\ (UART\_C2\_TCIE\_MASK\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00091}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{00091}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{kUART\_RxDataRegFullInterruptEnable}}\ \ \ \ \ \ \ \ =\ (UART\_C2\_RIE\_MASK\ <<\ 8),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00092}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed}{00092}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed}{kUART\_IdleLineInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ \ \ =\ (UART\_C2\_ILIE\_MASK\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00093}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d}{00093}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d}{kUART\_RxOverrunInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ \ =\ (UART\_C3\_ORIE\_MASK\ <<\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00094}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3}{00094}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3}{kUART\_NoiseErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ =\ (UART\_C3\_NEIE\_MASK\ <<\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00095}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5}{00095}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5}{kUART\_FramingErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ =\ (UART\_C3\_FEIE\_MASK\ <<\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00096}\doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a}{00096}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a}{kUART\_ParityErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ \ =\ (UART\_C3\_PEIE\_MASK\ <<\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00097}00097\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00098}00098\ \ \ \ \ kUART\_RxFifoOverflowInterruptEnable\ \ =\ (UART\_CFIFO\_RXOFE\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00099}00099\ \ \ \ \ kUART\_TxFifoOverflowInterruptEnable\ \ =\ (UART\_CFIFO\_TXOFE\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00100}00100\ \ \ \ \ kUART\_RxFifoUnderflowInterruptEnable\ =\ (UART\_CFIFO\_RXUFE\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00101}00101\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00102}00102\ \ \ \ \ kUART\_AllInterruptsEnable\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00103}00103\ \#\textcolor{keywordflow}{if}\ defined(FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ kUART\_LinBreakInterruptEnable\ |}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00105}00105\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca71755319c216d0bdf79729c18c24cf64}{kUART\_RxActiveEdgeInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca5a0870233f2ffa8f5ca60d80f1e3ed14}{kUART\_TxDataRegEmptyInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cafd337213dae85b532dfaf9a90e2e5d7b}{kUART\_TransmissionCompleteInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cac8a751a334e172413ab833cb0ccb01c3}{kUART\_RxDataRegFullInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca078ea32d8587f92337a3dee495a1ceed}{kUART\_IdleLineInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca3e85b14c1b64dbfef1d0b4b7bc39c19d}{kUART\_RxOverrunInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca53d0fe2bb0cd90198c632f08488af4b3}{kUART\_NoiseErrorInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311ca00a387446d0ca7fd843968eca8af22a5}{kUART\_FramingErrorInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gga700f3cd8e3800273a1591307cab6311cadc2475fa65313c6f1d13b36f0443b20a}{kUART\_ParityErrorInterruptEnable}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00110}00110\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ |\ kUART\_RxFifoOverflowInterruptEnable\ |\ kUART\_TxFifoOverflowInterruptEnable\ |}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ kUART\_RxFifoUnderflowInterruptEnable}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00113}00113\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00114}00114\ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00115}00115\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00122}00122\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00124}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a}{00124}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da5209c671b2f2f064dc512655387e9e1a}{kUART\_TxDataRegEmptyFlag}}\ \ \ \ \ \ \ =\ (UART\_S1\_TDRE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00125}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da4468b60b2d78c34b93c9199df9e95d3a}{00125}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da4468b60b2d78c34b93c9199df9e95d3a}{kUART\_TransmissionCompleteFlag}}\ =\ (UART\_S1\_TC\_MASK),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00126}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daa86a34b2ea609eeeb63f98fea498e540}{00126}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daa86a34b2ea609eeeb63f98fea498e540}{kUART\_RxDataRegFullFlag}}\ \ \ \ \ \ \ \ =\ (UART\_S1\_RDRF\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00127}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dab2fc4e1b1164ed3e3fe7e19a39029b2c}{00127}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dab2fc4e1b1164ed3e3fe7e19a39029b2c}{kUART\_IdleLineFlag}}\ \ \ \ \ \ \ \ \ \ \ \ \ =\ (UART\_S1\_IDLE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00128}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da93d3c56466b4656dcce08d9323d7afd8}{00128}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da93d3c56466b4656dcce08d9323d7afd8}{kUART\_RxOverrunFlag}}\ \ \ \ \ \ \ \ \ \ \ \ =\ (UART\_S1\_OR\_MASK),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00129}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dabd56419f102fb01c7bbc2c38f81ab360}{00129}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dabd56419f102fb01c7bbc2c38f81ab360}{kUART\_NoiseErrorFlag}}\ \ \ \ \ \ \ \ \ \ \ =\ (UART\_S1\_NF\_MASK),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00131}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daade5071fa56646adcda3562051443868}{00131}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659daade5071fa56646adcda3562051443868}{kUART\_FramingErrorFlag}}\ =\ (UART\_S1\_FE\_MASK),\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00133}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da0c92973ab1d527115fa01934c62a053d}{00133}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da0c92973ab1d527115fa01934c62a053d}{kUART\_ParityErrorFlag}}\ =\ (UART\_S1\_PF\_MASK),\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00134}00134\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00135}00135\ \ \ \ \ kUART\_LinBreakFlag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00136}00136\ \ \ \ \ \ \ \ \ (UART\_S2\_LBKDIF\_MASK}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00137}00137\ \ \ \ \ \ \ \ \ \ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00138}00138\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00139}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dadcfe89feb164ff5b1720312922006a7a}{00139}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659dadcfe89feb164ff5b1720312922006a7a}{kUART\_RxActiveEdgeFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00140}00140\ \ \ \ \ \ \ \ \ (UART\_S2\_RXEDGIF\_MASK\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00141}\doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da7a4521cd44a3272a94784670d1bf5a0c}{00141}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ggaef21106da06a265bf5e5895346f7659da7a4521cd44a3272a94784670d1bf5a0c}{kUART\_RxActiveFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00142}00142\ \ \ \ \ \ \ \ \ (UART\_S2\_RAF\_MASK\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00143}00143\ \#\textcolor{keywordflow}{if}\ defined(FSL\_FEATURE\_UART\_HAS\_EXTENDED\_DATA\_REGISTER\_FLAGS)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_EXTENDED\_DATA\_REGISTER\_FLAGS}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00144}00144\ \ \ \ \ kUART\_NoiseErrorInRxDataRegFlag\ \ =\ (UART\_ED\_NOISY\_MASK\ <<\ 16),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00145}00145\ \ \ \ \ kUART\_ParityErrorInRxDataRegFlag\ =\ (UART\_ED\_PARITYE\_MASK\ <<\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00146}00146\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00147}00147\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00148}00148\ \ \ \ \ kUART\_TxFifoEmptyFlag\ \ \ \ \ =\ (int)(UART\_SFIFO\_TXEMPT\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00149}00149\ \ \ \ \ kUART\_RxFifoEmptyFlag\ \ \ \ \ =\ (UART\_SFIFO\_RXEMPT\_MASK\ <<\ 24),\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00150}00150\ \ \ \ \ kUART\_TxFifoOverflowFlag\ \ =\ (UART\_SFIFO\_TXOF\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00151}00151\ \ \ \ \ kUART\_RxFifoOverflowFlag\ \ =\ (UART\_SFIFO\_RXOF\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00152}00152\ \ \ \ \ kUART\_RxFifoUnderflowFlag\ =\ (UART\_SFIFO\_RXUF\_MASK\ <<\ 24),\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00153}00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00154}00154\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00157}\doxymbox{\hyperlink{struct__uart__config}{00157}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__config}{\_uart\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00158}00158\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00159}\doxymbox{\hyperlink{struct__uart__config_a7887988d467cbcb940bfb69e30f4b419}{00159}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__uart__config_a7887988d467cbcb940bfb69e30f4b419}{baudRate\_Bps}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00160}\doxymbox{\hyperlink{struct__uart__config_aedd929d32b06c4bc7418067c832ab28f}{00160}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gac38cf465d7ed6dfc6c95528837d68dd0}{uart\_parity\_mode\_t}}\ \doxymbox{\hyperlink{struct__uart__config_aedd929d32b06c4bc7418067c832ab28f}{parityMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00161}00161\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_STOP\_BIT\_CONFIG\_SUPPORT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_STOP\_BIT\_CONFIG\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00162}00162\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_gaeb6faf1854d5edbdbdfa12247ac939c6}{uart\_stop\_bit\_count\_t}}\ stopBitCount;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00163}00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00164}00164\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00165}00165\ \ \ \ \ uint8\_t\ txFifoWatermark;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00166}00166\ \ \ \ \ uint8\_t\ rxFifoWatermark;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00167}00167\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00168}00168\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_MODEM\_SUPPORT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_MODEM\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00169}00169\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableRxRTS;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00170}00170\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableTxCTS;\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00171}00171\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00172}\doxymbox{\hyperlink{struct__uart__config_a3a5511afafc022db422d5de9c6eeca7f}{00172}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga6bde326a19495e3ff435c08c1da4edf7}{uart\_idle\_type\_select\_t}}\ \doxymbox{\hyperlink{struct__uart__config_a3a5511afafc022db422d5de9c6eeca7f}{idleType}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00173}\doxymbox{\hyperlink{struct__uart__config_a2f651168ae7be081a29e8f1de5244540}{00173}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__uart__config_a2f651168ae7be081a29e8f1de5244540}{enableTx}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00174}\doxymbox{\hyperlink{struct__uart__config_aa854be533f7f43433572dbf1e4bebb03}{00174}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__uart__config_aa854be533f7f43433572dbf1e4bebb03}{enableRx}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00175}\doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{00175}}\ \}\ \doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00178}\doxymbox{\hyperlink{struct__uart__transfer}{00178}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__transfer}{\_uart\_transfer}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00179}00179\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00180}00180\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00181}00181\ \textcolor{comment}{\ \ \ \ \ *\ Use\ separate\ TX\ and\ RX\ data\ pointer,\ because\ TX\ data\ is\ const\ data.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00182}00182\ \textcolor{comment}{\ \ \ \ \ *\ The\ member\ data\ is\ kept\ for\ backward\ compatibility.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00183}00183\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00184}00184\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00185}00185\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00186}\doxymbox{\hyperlink{struct__uart__transfer_a539dba6b07c6b81b52f508ebf8a7d6c0}{00186}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__uart__transfer_a539dba6b07c6b81b52f508ebf8a7d6c0}{data}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00187}\doxymbox{\hyperlink{struct__uart__transfer_aed76abc37dea80849d9d0cc35a216e45}{00187}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__uart__transfer_aed76abc37dea80849d9d0cc35a216e45}{rxData}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00188}\doxymbox{\hyperlink{struct__uart__transfer_a6465f735a1152bcb8d731cc2d52dbc37}{00188}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\doxymbox{\hyperlink{struct__uart__transfer_a6465f735a1152bcb8d731cc2d52dbc37}{txData}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00189}00189\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00190}\doxymbox{\hyperlink{struct__uart__transfer_a47819d071bfe28c770850b7569fe3483}{00190}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__transfer_a47819d071bfe28c770850b7569fe3483}{dataSize}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00191}\doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{00191}}\ \}\ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00193}00193\ \textcolor{comment}{/*\ Forward\ declaration\ of\ the\ handle\ typedef.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00194}00194\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__handle}{\_uart\_handle}}\ uart\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00197}\doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{00197}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\_transfer\_callback\_t}})(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status,\ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__uart__handle_aa5813a8c6733b4ac0b4979c68c45168c}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00200}\doxymbox{\hyperlink{struct__uart__handle}{00200}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__handle}{\_uart\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00201}00201\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00202}\doxymbox{\hyperlink{struct__uart__handle_a2a21ca8d9b4fb65febc769c187abc0fe}{00202}}\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__uart__handle_a2a21ca8d9b4fb65febc769c187abc0fe}{txData}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00203}\doxymbox{\hyperlink{struct__uart__handle_ae58e8fca80610613930971c944c5a13f}{00203}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__handle_ae58e8fca80610613930971c944c5a13f}{txDataSize}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00204}\doxymbox{\hyperlink{struct__uart__handle_ab1681a0ef5772f10119be9f66efb0d77}{00204}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__handle_ab1681a0ef5772f10119be9f66efb0d77}{txDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00205}\doxymbox{\hyperlink{struct__uart__handle_aedb4263284f51ebecf7842dbc6a12958}{00205}}\ \ \ \ \ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__uart__handle_aedb4263284f51ebecf7842dbc6a12958}{rxData}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00206}\doxymbox{\hyperlink{struct__uart__handle_aa9575748a161e9b26616c07357b5ffbf}{00206}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__handle_aa9575748a161e9b26616c07357b5ffbf}{rxDataSize}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00207}\doxymbox{\hyperlink{struct__uart__handle_a6f67f7836c8e0575489ddb579be06ab2}{00207}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__handle_a6f67f7836c8e0575489ddb579be06ab2}{rxDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00209}\doxymbox{\hyperlink{struct__uart__handle_a0899932285fcefa9d2cb3a5528c5f1f2}{00209}}\ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__uart__handle_a0899932285fcefa9d2cb3a5528c5f1f2}{rxRingBuffer}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00210}\doxymbox{\hyperlink{struct__uart__handle_ab17ccbc11c8d2de94eb6105db53583c9}{00210}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__handle_ab17ccbc11c8d2de94eb6105db53583c9}{rxRingBufferSize}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00211}\doxymbox{\hyperlink{struct__uart__handle_a9d116920fe45bdbb0819841841fa3ea5}{00211}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint16\_t\ \doxymbox{\hyperlink{struct__uart__handle_a9d116920fe45bdbb0819841841fa3ea5}{rxRingBufferHead}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00212}\doxymbox{\hyperlink{struct__uart__handle_adb8a7d117c675e9164a480265aecae45}{00212}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint16\_t\ \doxymbox{\hyperlink{struct__uart__handle_adb8a7d117c675e9164a480265aecae45}{rxRingBufferTail}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00214}\doxymbox{\hyperlink{struct__uart__handle_a6aa04dcc733827d88d7ca589cad87008}{00214}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\_transfer\_callback\_t}}\ \doxymbox{\hyperlink{struct__uart__handle_a6aa04dcc733827d88d7ca589cad87008}{callback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00215}\doxymbox{\hyperlink{struct__uart__handle_aa5813a8c6733b4ac0b4979c68c45168c}{00215}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__uart__handle_aa5813a8c6733b4ac0b4979c68c45168c}{userData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00217}\doxymbox{\hyperlink{struct__uart__handle_a4dc421b251f4feb8a01258737294c5ab}{00217}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__uart__handle_a4dc421b251f4feb8a01258737294c5ab}{txState}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00218}\doxymbox{\hyperlink{struct__uart__handle_a627bed2cba21fd6ba785bc49e7d87c3d}{00218}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__uart__handle_a627bed2cba21fd6ba785bc49e7d87c3d}{rxState}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00219}00219\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00221}00221\ \textcolor{comment}{/*\ Typedef\ for\ interrupt\ handler.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00222}00222\ \textcolor{keyword}{typedef}\ void\ (*uart\_isr\_t)(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00224}00224\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00225}00225\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00226}00226\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00228}00228\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{group__uart__driver_ga5795f92ab50688d9700481929e79c014}{s\_uartHandle}}[];}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00230}00230\ \textcolor{comment}{/*\ Array\ of\ UART\ IRQs.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00231}00231\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ IRQn\_Type\ s\_uartIRQ[];}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00234}00234\ \textcolor{keyword}{extern}\ uart\_isr\_t\ \doxymbox{\hyperlink{group__uart__driver_ga2c70996f197c2a9112c6bebbd5d22c47}{s\_uartIsr}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00236}00236\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00237}00237\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00238}00238\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00240}00240\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00241}00241\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00242}00242\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00250}00250\ uint32\_t\ \doxymbox{\hyperlink{group__uart__driver_gadeeb40cdc314638d4355ef906f1c408d}{UART\_GetInstance}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00279}00279\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gab5965a8e11f7e1d4d531141291fd5288}{UART\_Init}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\_config\_t}}\ *config,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00288}00288\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga3ff48bc211831be33e6fe5c50eb671a0}{UART\_Deinit}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00307}00307\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga47c7c09e04a0497f4530d553e27d96c5}{UART\_GetDefaultConfig}}(\doxymbox{\hyperlink{group__uart__driver_gad4fbe3fec3cd4308aa3676f2c0af68f7}{uart\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00324}00324\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gab3ba5019c11f288cc4f545dd656b6284}{UART\_SetBaudRate}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint32\_t\ baudRate\_Bps,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00334}00334\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gafd3e76fdfe5edf2da4a87c9373ed9618}{UART\_Enable9bitMode}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00336}00336\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_ADDRESS\_MATCHING}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00354}00354\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_SetMatchAddress(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ address1,\ uint8\_t\ address2)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00355}00355\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00356}00356\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00357}00357\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a73acabe00975b26ce347736f07c80925}{MA1}}\ =\ address1;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00358}00358\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a32e576e5777a71fe5d082448e7a452ed}{MA2}}\ =\ address2;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00359}00359\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00368}00368\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_EnableMatchAddress(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ match1,\ \textcolor{keywordtype}{bool}\ match2)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00369}00369\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00370}00370\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address1\ enable\ bit.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00371}00371\ \ \ \ \ \textcolor{keywordflow}{if}\ (match1)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00372}00372\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00373}00373\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ |=\ (uint8\_t)UART\_C4\_MAEN1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00374}00374\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00375}00375\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00376}00376\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00377}00377\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ \&=\ \string~(uint8\_t)UART\_C4\_MAEN1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00378}00378\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00379}00379\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address2\ enable\ bit.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00380}00380\ \ \ \ \ \textcolor{keywordflow}{if}\ (match2)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00381}00381\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00382}00382\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ |=\ (uint8\_t)UART\_C4\_MAEN2\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00383}00383\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00384}00384\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00385}00385\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00386}00386\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ \&=\ \string~(uint8\_t)UART\_C4\_MAEN2\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00387}00387\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00388}00388\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00389}00389\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00396}\doxymbox{\hyperlink{group__uart__driver_ga52151603994f3ffc0a2edab7fcec57b6}{00396}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga52151603994f3ffc0a2edab7fcec57b6}{UART\_Set9thTransmitBit}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00397}00397\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00398}00398\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a23270f53f190afb3fe05203af6bc0059}{C3}}\ |=\ (uint8\_t)UART\_C3\_T8\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00399}00399\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00400}00400\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00406}\doxymbox{\hyperlink{group__uart__driver_gaf79c7b813eefe84353c31e2d88b3aa76}{00406}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gaf79c7b813eefe84353c31e2d88b3aa76}{UART\_Clear9thTransmitBit}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00407}00407\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00408}00408\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a23270f53f190afb3fe05203af6bc0059}{C3}}\ \&=\ \string~(uint8\_t)UART\_C3\_T8\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00409}00409\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00412}00412\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00435}00435\ uint32\_t\ \doxymbox{\hyperlink{group__uart__driver_ga28bf715678c0d3c8c3902e79455ee923}{UART\_GetStatusFlags}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00454}00454\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gacc4cb85534361f836edca9454a6426c6}{UART\_ClearStatusFlags}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00476}00476\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga49ecd761481a22956e3f46285038719c}{UART\_EnableInterrupts}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00491}00491\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga3f24b6b9b730046a9a81918f9abe7d99}{UART\_DisableInterrupts}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00492}00492\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00513}00513\ uint32\_t\ \doxymbox{\hyperlink{group__uart__driver_ga79bc0b880286ec0dc0543606fc772912}{UART\_GetEnabledInterrupts}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00517}00517\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_DMA\_SELECT)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_DMA\_SELECT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00531}00531\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ UART\_GetDataRegisterAddress(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00532}00532\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00533}00533\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)\ \&\ (base-\/>\doxymbox{\hyperlink{structUART__Type_af5e2df4671867807c472469a394c0619}{D}});}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00534}00534\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00535}00535\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00544}00544\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_EnableTxDMA(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00545}00545\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00546}00546\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00547}00547\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00548}00548\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_UART\_IS\_SCI)\ \&\&\ FSL\_FEATURE\_UART\_IS\_SCI)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00549}00549\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ |=\ (uint8\_t)UART\_C4\_TDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00550}00550\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00551}00551\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{C5}}\ |=\ (uint8\_t)UART\_C5\_TDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00552}00552\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00553}00553\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ |=\ (uint8\_t)UART\_C2\_TIE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00554}00554\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00555}00555\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00556}00556\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00557}00557\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_UART\_IS\_SCI)\ \&\&\ FSL\_FEATURE\_UART\_IS\_SCI)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00558}00558\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ \&=\ \string~(uint8\_t)UART\_C4\_TDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00559}00559\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00560}00560\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{C5}}\ \&=\ \string~(uint8\_t)UART\_C5\_TDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00561}00561\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00562}00562\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ \&=\ \string~(uint8\_t)UART\_C2\_TIE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00563}00563\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00564}00564\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00565}00565\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00574}00574\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_EnableRxDMA(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00575}00575\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00576}00576\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00577}00577\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00578}00578\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_UART\_IS\_SCI)\ \&\&\ FSL\_FEATURE\_UART\_IS\_SCI)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00579}00579\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ |=\ (uint8\_t)UART\_C4\_RDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00580}00580\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00581}00581\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{C5}}\ |=\ (uint8\_t)UART\_C5\_RDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00582}00582\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00583}00583\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ |=\ (uint8\_t)UART\_C2\_RIE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00584}00584\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00585}00585\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00586}00586\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00587}00587\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_UART\_IS\_SCI)\ \&\&\ FSL\_FEATURE\_UART\_IS\_SCI)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00588}00588\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_aaefdf66d5b1fa972353e74c01dbbfa95}{C4}}\ \&=\ \string~(uint8\_t)UART\_C4\_RDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00589}00589\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00590}00590\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_ad807dc965307ce5a463d79158802b3a3}{C5}}\ \&=\ \string~(uint8\_t)UART\_C5\_RDMAS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00591}00591\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00592}00592\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ \&=\ \string~(uint8\_t)UART\_C2\_RIE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00593}00593\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00594}00594\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00595}00595\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00597}00597\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_UART\_HAS\_DMA\_SELECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00598}00598\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00603}00603\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00612}\doxymbox{\hyperlink{group__uart__driver_gaf2ed68f3dd6ee8a272e9afd8ebd84f93}{00612}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gaf2ed68f3dd6ee8a272e9afd8ebd84f93}{UART\_EnableTx}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00613}00613\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00614}00614\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00615}00615\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00616}00616\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ |=\ (uint8\_t)UART\_C2\_TE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00617}00617\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00618}00618\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00619}00619\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00620}00620\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ \&=\ \string~(uint8\_t)UART\_C2\_TE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00621}00621\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00622}00622\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00623}00623\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00632}\doxymbox{\hyperlink{group__uart__driver_gaa503e36c8ce82f1042ce186b9863871f}{00632}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gaa503e36c8ce82f1042ce186b9863871f}{UART\_EnableRx}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00633}00633\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00634}00634\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00635}00635\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00636}00636\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ |=\ (uint8\_t)UART\_C2\_RE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00637}00637\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00638}00638\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00639}00639\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00640}00640\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a4050bfe335adcde0e5b87823ea26bc28}{C2}}\ \&=\ \string~(uint8\_t)UART\_C2\_RE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00641}00641\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00642}00642\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00653}\doxymbox{\hyperlink{group__uart__driver_ga371d2ceda535de3a74beba5a3465fab0}{00653}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga371d2ceda535de3a74beba5a3465fab0}{UART\_WriteByte}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ data)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00654}00654\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00655}00655\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_af5e2df4671867807c472469a394c0619}{D}}\ =\ data;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00656}00656\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00657}00657\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00667}\doxymbox{\hyperlink{group__uart__driver_ga3728011ac7906f3e03bb677b0f9cf7b4}{00667}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ \doxymbox{\hyperlink{group__uart__driver_ga3728011ac7906f3e03bb677b0f9cf7b4}{UART\_ReadByte}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00668}00668\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00669}00669\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{structUART__Type_af5e2df4671867807c472469a394c0619}{D}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00670}00670\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00672}00672\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00679}00679\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ UART\_GetRxFifoCount(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00680}00680\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00681}00681\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)base-\/>\doxymbox{\hyperlink{structUART__Type_ac56a9dbfe3a97f625a4cb0a787303c2d}{RCFIFO}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00682}00682\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00690}00690\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ UART\_GetTxFifoCount(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00691}00691\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00692}00692\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)base-\/>\doxymbox{\hyperlink{structUART__Type_a84b8e4511219e743ccd3308ac0290572}{TCFIFO}};}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00693}00693\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00694}00694\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_UART\_HAS\_FIFO\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00695}00695\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00696}00696\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_ADDRESS\_MATCHING}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00703}00703\ \textcolor{keywordtype}{void}\ UART\_SendAddress(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ address);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00704}00704\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00718}00718\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gabedf96691af44a8fafec58d5cf6e4dd2}{UART\_WriteBlocking}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keyword}{const}\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00719}00719\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00736}00736\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_ga39d59e8a94f1af451a0db81888596639}{UART\_ReadBlocking}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00737}00737\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00739}00739\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00744}00744\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00757}00757\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga63db308c32019b7dd6c0647d618e5247}{UART\_TransferCreateHandle}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00758}00758\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uart\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00759}00759\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga2868b6ea396ab212547f2157380429c5}{uart\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00760}00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00761}00761\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00779}00779\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga223fba584bfabd599629d5ce92f929ac}{UART\_TransferStartRingBuffer}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle,\ uint8\_t\ *ringBuffer,\ \textcolor{keywordtype}{size\_t}\ ringBufferSize);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00780}00780\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00789}00789\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga0c0bc73df49cb31dff0e903630314f5b}{UART\_TransferStopRingBuffer}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00797}00797\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{group__uart__driver_ga3921aa660977ca77dadf95fa35f1c3a9}{UART\_TransferGetRxRingBufferLength}}(uart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00818}00818\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gad89afd7db1656c5aef404bb285d0dc05}{UART\_TransferSendNonBlocking}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00819}00819\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00829}00829\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gaa64f9f89d8286fd3ef0736a8c40be2c2}{UART\_TransferAbortSend}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00843}00843\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_ga071727ba05b2937ef5ad641ca7faf9c7}{UART\_TransferGetSendCount}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00844}00844\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00871}00871\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_gaf804acde5d73ce0a5bf54b06195e1218}{UART\_TransferReceiveNonBlocking}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uart\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ *xfer,}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00874}00874\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ *receivedBytes);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00875}00875\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00885}00885\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gacc35671622b2401545cc55cc6ae572d4}{UART\_TransferAbortReceive}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00886}00886\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00899}00899\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__driver_ga05df10f570cdca4ac2dff63b069d254e}{UART\_TransferGetReceiveCount}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00900}00900\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00901}00901\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_UART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_UART\_HAS\_FIFO}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00912}00912\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ UART\_EnableTxFIFO(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00913}00913\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00924}00924\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ UART\_EnableRxFIFO(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00925}00925\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00932}00932\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_SetRxFifoWatermark(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ water)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00933}00933\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00934}00934\ \ \ \ \ assert((uint8\_t)FSL\_FEATURE\_UART\_FIFO\_SIZEn(base)\ >=\ water);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00935}00935\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a2d214e3cdbe0ac2d09bcf20ab132439e}{RWFIFO}}\ =\ water;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00936}00936\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00937}00937\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00944}00944\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ UART\_SetTxFifoWatermark(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uint8\_t\ water)}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00945}00945\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00946}00946\ \ \ \ \ assert((uint8\_t)FSL\_FEATURE\_UART\_FIFO\_SIZEn(base)\ >=\ water);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00947}00947\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structUART__Type_a7ab7656c715ebc0ab2632f35903f2a42}{TWFIFO}}\ =\ water;}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00948}00948\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00949}00949\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_UART\_HAS\_FIFO\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00950}00950\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00959}00959\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_ga9b9c99f73429317bfce6065c82b0db3c}{UART\_TransferHandleIRQ}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *irqHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00960}00960\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00969}00969\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__driver_gae3e5fd8a61eb04a96a9e41997845147e}{UART\_TransferHandleErrorIRQ}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *irqHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00970}00970\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00972}00972\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00973}00973\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00974}00974\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00975}00975\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00976}00976\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00978}00978\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart_8h_source_l00979}00979\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_UART\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

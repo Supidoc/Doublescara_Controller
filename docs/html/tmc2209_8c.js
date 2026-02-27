@@ -1,0 +1,35 @@
+var tmc2209_8c =
+[
+    [ "_TMC_CommandQueueItem", "struct__TMC__CommandQueueItem.html", "struct__TMC__CommandQueueItem" ],
+    [ "TMC_CHOPCONF_ADDR", "tmc2209_8c.html#a4882ec884821cfc943288f0a89c7b966", null ],
+    [ "TMC_GCONF_ADDR", "tmc2209_8c.html#a2dc3bd8477966c796448629c740eb740", null ],
+    [ "TMC_GSTAT_ADDR", "tmc2209_8c.html#af33a21c3a075ce4d06cc8f395ecf3f06", null ],
+    [ "TMC_IFCNT_ADDR", "tmc2209_8c.html#a48b1354844c9504660210a6201022a84", null ],
+    [ "TMC_READ_PACKAGE_SIZE", "tmc2209_8c.html#afaa2143bf8dba3429df46c0f202a34aa", null ],
+    [ "TMC_WRITE_PACKAGE_SIZE", "tmc2209_8c.html#aa5fbce7c8c72c01dade0c56084507141", null ],
+    [ "TMC_CommandQueueItem_t", "tmc2209_8c.html#a620acf3b0a063631292095c1f8fb463d", null ],
+    [ "TMC_CommandType_t", "tmc2209_8c.html#a4c4454ebe4670ded3d790d64a59a80b5", null ],
+    [ "_TMC_CommandType", "tmc2209_8c.html#aa0f6c8dafed536af99045734e71b0118", [
+      [ "TMC_CMD_DEFAULT_INIT", "tmc2209_8c.html#aa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede", null ]
+    ] ],
+    [ "build_read_package", "tmc2209_8c.html#a54c8247aecabe20ed92048315bd99a47", null ],
+    [ "build_write_package", "tmc2209_8c.html#a42789bba6d69096f4d0a8b35d7b6a796", null ],
+    [ "calc_CRC", "tmc2209_8c.html#aa2fbab212c5d11897ea0d23f41925b77", null ],
+    [ "create_read_datagram", "tmc2209_8c.html#a7cf5cc7270e2878d970954fe958c9db6", null ],
+    [ "create_write_datagram", "tmc2209_8c.html#a184ffe0db45c99d3a7f1f850c019c56c", null ],
+    [ "default_init", "tmc2209_8c.html#a5c177b73b46fd490190891e1e55203c7", null ],
+    [ "dump_rx_buffer", "tmc2209_8c.html#a727869d41bd7da2f6d837733c6eea248", null ],
+    [ "process", "tmc2209_8c.html#a6ef0387bd645347b1a61efc620315993", null ],
+    [ "read", "tmc2209_8c.html#a3256d0c7370540f7c95acebec968a0a2", null ],
+    [ "read_transmissioncount", "tmc2209_8c.html#a435f12be209d6d6dda5cf9b3ff873511", null ],
+    [ "set_double_edge_step_pulse", "tmc2209_8c.html#aac140220acf8fa4068581187372f41c2", null ],
+    [ "set_microstepping", "tmc2209_8c.html#a915d347e4e28c1e65ba735693e8448c8", null ],
+    [ "TMC_init", "group__TMC2209__Module.html#ga626120616f06e287f92803166d5b38f3", null ],
+    [ "TMC_init_default", "group__TMC2209__Module.html#gaaf91b00649cbf661bbbca5815673d734", null ],
+    [ "TMC_task", "group__TMC2209__Module.html#ga4d6999bb2640adbe2a2fce2c6ec570b2", null ],
+    [ "write", "tmc2209_8c.html#ac54bc90d515546eed37734917cf21845", null ],
+    [ "commandQueue", "tmc2209_8c.html#afae48cdab5a29c7739f148d0fe03232b", null ],
+    [ "transmit_read_package", "tmc2209_8c.html#a656a9fcfb90d26859cffc6a04dc311af", null ],
+    [ "transmit_response_package", "tmc2209_8c.html#a4eb8a305a974cec16a8d4de0595725ee", null ],
+    [ "transmit_write_package", "tmc2209_8c.html#ae345025d54190b5415d81a39dcc608df", null ]
+];

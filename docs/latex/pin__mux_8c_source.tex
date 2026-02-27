@@ -1,0 +1,226 @@
+\doxysection{pin\+\_\+mux.\+c}
+\hypertarget{pin__mux_8c_source}{}\label{pin__mux_8c_source}\index{board/pin\_mux.c@{board/pin\_mux.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00001}00001\ \textcolor{comment}{/***********************************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00002}00002\ \textcolor{comment}{\ *\ This\ file\ was\ generated\ by\ the\ MCUXpresso\ Config\ Tools.\ Any\ manual\ edits\ made\ to\ this\ file}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00003}00003\ \textcolor{comment}{\ *\ will\ be\ overwritten\ if\ the\ respective\ MCUXpresso\ Config\ Tools\ is\ used\ to\ update\ this\ file.}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00004}00004\ \textcolor{comment}{\ **********************************************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00006}00006\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00007}00007\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00008}00008\ \textcolor{comment}{\ *\ TEXT\ BELOW\ IS\ USED\ AS\ SETTING\ FOR\ TOOLS\ *************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00009}00009\ \textcolor{comment}{!!GlobalInfo}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00010}00010\ \textcolor{comment}{product:\ Pins\ v17.0}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00011}00011\ \textcolor{comment}{processor:\ MK22FN512xxx12}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00012}00012\ \textcolor{comment}{package\_id:\ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00013}00013\ \textcolor{comment}{mcu\_data:\ ksdk2\_0}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00014}00014\ \textcolor{comment}{processor\_version:\ 25.06.10}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00015}00015\ \textcolor{comment}{external\_user\_signals:\ \{\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00016}00016\ \textcolor{comment}{pin\_labels:}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00017}00017\ \textcolor{comment}{-\/\ \{pin\_num:\ '1',\ pin\_signal:\ ADC1\_SE4a/PTE0/CLKOUT32K/SPI1\_PCS1/UART1\_TX/I2C1\_SDA/RTC\_CLKOUT,\ label:\ UART1\_TX,\ identifier:\ UART1\_TX\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00018}00018\ \textcolor{comment}{-\/\ \{pin\_num:\ '2',\ pin\_signal:\ ADC1\_SE5a/PTE1/LLWU\_P0/SPI1\_SOUT/UART1\_RX/I2C1\_SCL/SPI1\_SIN,\ label:\ UART1\_RX,\ identifier:\ UART1\_RX\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00019}00019\ \textcolor{comment}{-\/\ \{pin\_num:\ '57',\ pin\_signal:\ PTD0/LLWU\_P12/SPI0\_PCS0/UART2\_RTS\_b/FTM3\_CH0/FB\_ALE/FB\_CS1\_b/FB\_TS\_b/LPUART0\_RTS\_b,\ label:\ PTD0,\ identifier:\ PTD0\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00020}00020\ \textcolor{comment}{-\/\ \{pin\_num:\ '42',\ pin\_signal:\ PTB19/FTM2\_CH1/I2S0\_TX\_FS/FB\_OE\_b/FTM2\_QD\_PHB,\ label:\ GPIOB19,\ identifier:\ GPIOB19\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00021}00021\ \textcolor{comment}{\ *\ BE\ CAREFUL\ MODIFYING\ THIS\ COMMENT\ -\/\ IT\ IS\ YAML\ SETTINGS\ FOR\ TOOLS\ ***********}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00022}00022\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00023}00023\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}fsl\_port.h"{}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}fsl\_gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}pin\_mux.h"{}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00030}00030\ \textcolor{comment}{/*\ FUNCTION\ ************************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00031}00031\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00032}00032\ \textcolor{comment}{\ *\ Function\ Name\ :\ BOARD\_InitBootPins}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00033}00033\ \textcolor{comment}{\ *\ Description\ \ \ :\ Calls\ initialization\ functions.}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00034}00034\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00035}00035\ \textcolor{comment}{\ *\ END\ ****************************************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00036}\doxymbox{\hyperlink{group__pin__mux_ga8652eb15efb9dfe7368dd7f292dab554}{00036}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__pin__mux_ga8652eb15efb9dfe7368dd7f292dab554}{BOARD\_InitBootPins}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00038}00038\ \ \ \ \ \doxymbox{\hyperlink{group__pin__mux_ga2c9fe54b6b84723fbaa590a6f4576966}{BOARD\_InitPins}}();}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00041}00041\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00042}00042\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00043}00043\ \textcolor{comment}{\ *\ TEXT\ BELOW\ IS\ USED\ AS\ SETTING\ FOR\ TOOLS\ *************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00044}00044\ \textcolor{comment}{BOARD\_InitPins:}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00045}00045\ \textcolor{comment}{-\/\ options:\ \{callFromInitBoot:\ 'true',\ coreID:\ core0,\ enableClock:\ 'true'\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00046}00046\ \textcolor{comment}{-\/\ pin\_list:}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00047}00047\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '1',\ peripheral:\ UART1,\ signal:\ TX,\ pin\_signal:\ ADC1\_SE4a/PTE0/CLKOUT32K/SPI1\_PCS1/UART1\_TX/I2C1\_SDA/RTC\_CLKOUT,\ direction:\ OUTPUT,\ open\_drain:\ enable,}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00048}00048\ \textcolor{comment}{\ \ \ \ pull\_select:\ up,\ pull\_enable:\ disable\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00049}00049\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '2',\ peripheral:\ UART1,\ signal:\ RX,\ pin\_signal:\ ADC1\_SE5a/PTE1/LLWU\_P0/SPI1\_SOUT/UART1\_RX/I2C1\_SCL/SPI1\_SIN,\ open\_drain:\ disable\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00050}00050\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '49',\ peripheral:\ LPUART0,\ signal:\ TX,\ pin\_signal:\ PTC4/LLWU\_P8/SPI0\_PCS0/UART1\_TX/FTM0\_CH3/FB\_AD11/CMP1\_OUT/LPUART0\_TX\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00051}00051\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '46',\ peripheral:\ LPUART0,\ signal:\ RX,\ pin\_signal:\ CMP1\_IN1/PTC3/LLWU\_P7/SPI0\_PCS1/UART1\_RX/FTM0\_CH2/CLKOUT/I2S0\_TX\_BCLK/LPUART0\_RX\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00052}00052\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '57',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 0',\ pin\_signal:\ PTD0/LLWU\_P12/SPI0\_PCS0/UART2\_RTS\_b/FTM3\_CH0/FB\_ALE/FB\_CS1\_b/FB\_TS\_b/LPUART0\_RTS\_b,\ direction:\ OUTPUT\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00053}00053\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '58',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 1',\ pin\_signal:\ ADC0\_SE5b/PTD1/SPI0\_SCK/UART2\_CTS\_b/FTM3\_CH1/FB\_CS0\_b/LPUART0\_CTS\_b\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00054}00054\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '53',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 4',\ pin\_signal:\ ADC1\_SE4b/CMP0\_IN2/PTC8/FTM3\_CH4/I2S0\_MCLK/FB\_AD7\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00055}00055\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '54',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 5',\ pin\_signal:\ ADC1\_SE5b/CMP0\_IN3/PTC9/FTM3\_CH5/I2S0\_RX\_BCLK/FB\_AD6/FTM2\_FLT0\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00056}00056\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '55',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 6',\ pin\_signal:\ ADC1\_SE6b/PTC10/I2C1\_SCL/FTM3\_CH6/I2S0\_RX\_FS/FB\_AD5\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00057}00057\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '56',\ peripheral:\ FTM3,\ signal:\ 'CH,\ 7',\ pin\_signal:\ ADC1\_SE7b/PTC11/LLWU\_P11/I2C1\_SDA/FTM3\_CH7/FB\_RW\_b\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00058}00058\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '63',\ peripheral:\ UART0,\ signal:\ RX,\ pin\_signal:\ ADC0\_SE7b/PTD6/LLWU\_P15/SPI0\_PCS3/UART0\_RX/FTM0\_CH6/FB\_AD0/FTM0\_FLT0/SPI1\_SOUT\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00059}00059\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '64',\ peripheral:\ UART0,\ signal:\ TX,\ pin\_signal:\ PTD7/UART0\_TX/FTM0\_CH7/FTM0\_FLT1/SPI1\_SIN\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00060}00060\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '59',\ peripheral:\ UART2,\ signal:\ RX,\ pin\_signal:\ PTD2/LLWU\_P13/SPI0\_SOUT/UART2\_RX/FTM3\_CH2/FB\_AD4/LPUART0\_RX/I2C0\_SCL\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00061}00061\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '60',\ peripheral:\ UART2,\ signal:\ TX,\ pin\_signal:\ PTD3/SPI0\_SIN/UART2\_TX/FTM3\_CH3/FB\_AD3/LPUART0\_TX/I2C0\_SDA\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00062}00062\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '35',\ peripheral:\ I2C0,\ signal:\ SCL,\ pin\_signal:\ ADC0\_SE8/ADC1\_SE8/PTB0/LLWU\_P5/I2C0\_SCL/FTM1\_CH0/FTM1\_QD\_PHA\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00063}00063\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '36',\ peripheral:\ I2C0,\ signal:\ SDA,\ pin\_signal:\ ADC0\_SE9/ADC1\_SE9/PTB1/I2C0\_SDA/FTM1\_CH1/FTM1\_QD\_PHB\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00064}00064\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '50',\ peripheral:\ SPI0,\ signal:\ SCK,\ pin\_signal:\ PTC5/LLWU\_P9/SPI0\_SCK/LPTMR0\_ALT2/I2S0\_RXD0/FB\_AD10/CMP0\_OUT/FTM0\_CH2\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00065}00065\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '52',\ peripheral:\ SPI0,\ signal:\ SIN,\ pin\_signal:\ CMP0\_IN1/PTC7/SPI0\_SIN/USB\_SOF\_OUT/I2S0\_RX\_FS/FB\_AD8\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00066}00066\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '51',\ peripheral:\ SPI0,\ signal:\ SOUT,\ pin\_signal:\ CMP0\_IN0/PTC6/LLWU\_P10/SPI0\_SOUT/PDB0\_EXTRG/I2S0\_RX\_BCLK/FB\_AD9/I2S0\_MCLK\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00067}00067\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '44',\ peripheral:\ SPI0,\ signal:\ PCS3,\ pin\_signal:\ ADC0\_SE15/PTC1/LLWU\_P6/SPI0\_PCS3/UART1\_RTS\_b/FTM0\_CH0/FB\_AD13/I2S0\_TXD0/LPUART0\_RTS\_b\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00068}00068\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '43',\ peripheral:\ GPIOC,\ signal:\ 'GPIO,\ 0',\ pin\_signal:\ ADC0\_SE14/PTC0/SPI0\_PCS4/PDB0\_EXTRG/USB\_SOF\_OUT/FB\_AD14\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00069}00069\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '22',\ peripheral:\ JTAG,\ signal:\ JTAG\_TCLK\_SWD\_CLK,\ pin\_signal:\ PTA0/UART0\_CTS\_b/FTM0\_CH5/JTAG\_TCLK/SWD\_CLK/EZP\_CLK\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00070}00070\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '25',\ peripheral:\ JTAG,\ signal:\ JTAG\_TMS\_SWD\_DIO,\ pin\_signal:\ PTA3/UART0\_RTS\_b/FTM0\_CH0/JTAG\_TMS/SWD\_DIO\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00071}00071\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '32',\ peripheral:\ OSC,\ signal:\ EXTAL0,\ pin\_signal:\ EXTAL0/PTA18/FTM0\_FLT2/FTM\_CLKIN0\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00072}00072\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '33',\ peripheral:\ OSC,\ signal:\ XTAL0,\ pin\_signal:\ XTAL0/PTA19/FTM1\_FLT0/FTM\_CLKIN1/LPTMR0\_ALT1\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00073}00073\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '45',\ peripheral:\ GPIOC,\ signal:\ 'GPIO,\ 2',\ pin\_signal:\ ADC0\_SE4b/CMP1\_IN0/PTC2/SPI0\_PCS2/UART1\_CTS\_b/FTM0\_CH1/FB\_AD12/I2S0\_TX\_FS/LPUART0\_CTS\_b\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00074}00074\ \textcolor{comment}{\ \ -\/\ \{pin\_num:\ '42',\ peripheral:\ GPIOB,\ signal:\ 'GPIO,\ 19',\ pin\_signal:\ PTB19/FTM2\_CH1/I2S0\_TX\_FS/FB\_OE\_b/FTM2\_QD\_PHB,\ direction:\ INPUT\}}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00075}00075\ \textcolor{comment}{\ *\ BE\ CAREFUL\ MODIFYING\ THIS\ COMMENT\ -\/\ IT\ IS\ YAML\ SETTINGS\ FOR\ TOOLS\ ***********}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00076}00076\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00077}00077\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00079}00079\ \textcolor{comment}{/*\ FUNCTION\ ************************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00080}00080\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00081}00081\ \textcolor{comment}{\ *\ Function\ Name\ :\ BOARD\_InitPins}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00082}00082\ \textcolor{comment}{\ *\ Description\ \ \ :\ Configures\ pin\ routing\ and\ optionally\ pin\ electrical\ features.}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00083}00083\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00084}00084\ \textcolor{comment}{\ *\ END\ ****************************************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00085}\doxymbox{\hyperlink{group__pin__mux_ga2c9fe54b6b84723fbaa590a6f4576966}{00085}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__pin__mux_ga2c9fe54b6b84723fbaa590a6f4576966}{BOARD\_InitPins}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00086}00086\ \{}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00087}00087\ \ \ \ \ \textcolor{comment}{/*\ Port\ A\ Clock\ Gate\ Control:\ Clock\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00088}00088\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(kCLOCK\_PortA);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00089}00089\ \ \ \ \ \textcolor{comment}{/*\ Port\ B\ Clock\ Gate\ Control:\ Clock\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00090}00090\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(kCLOCK\_PortB);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00091}00091\ \ \ \ \ \textcolor{comment}{/*\ Port\ C\ Clock\ Gate\ Control:\ Clock\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00092}00092\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(kCLOCK\_PortC);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00093}00093\ \ \ \ \ \textcolor{comment}{/*\ Port\ D\ Clock\ Gate\ Control:\ Clock\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00094}00094\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(kCLOCK\_PortD);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00095}00095\ \ \ \ \ \textcolor{comment}{/*\ Port\ E\ Clock\ Gate\ Control:\ Clock\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00096}00096\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(kCLOCK\_PortE);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00098}00098\ \ \ \ \ \doxymbox{\hyperlink{group__gpio_ga8cb502b66c7c730b3a0f9788b0a9a321}{gpio\_pin\_config\_t}}\ GPIOB19\_config\ =\ \{}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ .pinDirection\ =\ \doxymbox{\hyperlink{group__gpio_gga0df4be96fa56f3bdd7bfa048fdaacd6babacf19933be1940ab40c83535e6a46d4}{kGPIO\_DigitalInput}},}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ .outputLogic\ =\ 0U}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00101}00101\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00102}00102\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ GPIO\ functionality\ on\ pin\ PTB19\ (pin\ 42)\ \ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00103}00103\ \ \ \ \ \doxymbox{\hyperlink{group__gpio__driver_ga0793a4e8cb6e746485012da3e487db53}{GPIO\_PinInit}}(\doxymbox{\hyperlink{group__pin__mux_ga4dd74d29c483138604e6c36c26b05686}{BOARD\_INITPINS\_GPIOB19\_GPIO}},\ \doxymbox{\hyperlink{group__pin__mux_ga63a36d33e36b35548bb48e524a1c9185}{BOARD\_INITPINS\_GPIOB19\_PIN}},\ \&GPIOB19\_config);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00105}00105\ \ \ \ \ \textcolor{comment}{/*\ PORTA0\ (pin\ 22)\ is\ configured\ as\ JTAG\_TCLK\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00106}00106\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7c8a7f98a98d8cb125dd57a66720ab30}{PORTA}},\ 0U,\ kPORT\_MuxAlt7);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00108}00108\ \ \ \ \ \textcolor{comment}{/*\ PORTA18\ (pin\ 32)\ is\ configured\ as\ EXTAL0\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00109}00109\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7c8a7f98a98d8cb125dd57a66720ab30}{PORTA}},\ 18U,\ kPORT\_PinDisabledOrAnalog);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00111}00111\ \ \ \ \ \textcolor{comment}{/*\ PORTA19\ (pin\ 33)\ is\ configured\ as\ XTAL0\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00112}00112\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7c8a7f98a98d8cb125dd57a66720ab30}{PORTA}},\ 19U,\ kPORT\_PinDisabledOrAnalog);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00114}00114\ \ \ \ \ \textcolor{comment}{/*\ PORTA3\ (pin\ 25)\ is\ configured\ as\ JTAG\_TMS\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00115}00115\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7c8a7f98a98d8cb125dd57a66720ab30}{PORTA}},\ 3U,\ kPORT\_MuxAlt7);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00117}00117\ \ \ \ \ \textcolor{comment}{/*\ PORTB0\ (pin\ 35)\ is\ configured\ as\ I2C0\_SCL\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00118}00118\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a09a0c85cd3da09d9cdf63a5ac4c39f77}{PORTB}},\ 0U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00120}00120\ \ \ \ \ \textcolor{comment}{/*\ PORTB1\ (pin\ 36)\ is\ configured\ as\ I2C0\_SDA\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00121}00121\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a09a0c85cd3da09d9cdf63a5ac4c39f77}{PORTB}},\ 1U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00123}00123\ \ \ \ \ \textcolor{comment}{/*\ PORTB19\ (pin\ 42)\ is\ configured\ as\ PTB19\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00124}00124\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{group__pin__mux_ga9071dc1394cc9d144e8e51f162ca8f14}{BOARD\_INITPINS\_GPIOB19\_PORT}},\ \doxymbox{\hyperlink{group__pin__mux_ga63a36d33e36b35548bb48e524a1c9185}{BOARD\_INITPINS\_GPIOB19\_PIN}},\ kPORT\_MuxAsGpio);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00126}00126\ \ \ \ \ \textcolor{comment}{/*\ PORTC0\ (pin\ 43)\ is\ configured\ as\ PTC0\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00127}00127\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 0U,\ kPORT\_MuxAsGpio);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00129}00129\ \ \ \ \ \textcolor{comment}{/*\ PORTC1\ (pin\ 44)\ is\ configured\ as\ SPI0\_PCS3\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00130}00130\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 1U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00132}00132\ \ \ \ \ \textcolor{comment}{/*\ PORTC10\ (pin\ 55)\ is\ configured\ as\ FTM3\_CH6\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00133}00133\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 10U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00135}00135\ \ \ \ \ \textcolor{comment}{/*\ PORTC11\ (pin\ 56)\ is\ configured\ as\ FTM3\_CH7\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00136}00136\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 11U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00138}00138\ \ \ \ \ \textcolor{comment}{/*\ PORTC2\ (pin\ 45)\ is\ configured\ as\ PTC2\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00139}00139\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 2U,\ kPORT\_MuxAsGpio);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00141}00141\ \ \ \ \ \textcolor{comment}{/*\ PORTC3\ (pin\ 46)\ is\ configured\ as\ LPUART0\_RX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00142}00142\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 3U,\ kPORT\_MuxAlt7);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00144}00144\ \ \ \ \ \textcolor{comment}{/*\ PORTC4\ (pin\ 49)\ is\ configured\ as\ LPUART0\_TX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00145}00145\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 4U,\ kPORT\_MuxAlt7);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00147}00147\ \ \ \ \ \textcolor{comment}{/*\ PORTC5\ (pin\ 50)\ is\ configured\ as\ SPI0\_SCK\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00148}00148\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 5U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00150}00150\ \ \ \ \ \textcolor{comment}{/*\ PORTC6\ (pin\ 51)\ is\ configured\ as\ SPI0\_SOUT\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00151}00151\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 6U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{/*\ PORTC7\ (pin\ 52)\ is\ configured\ as\ SPI0\_SIN\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00154}00154\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 7U,\ kPORT\_MuxAlt2);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00156}00156\ \ \ \ \ \textcolor{comment}{/*\ PORTC8\ (pin\ 53)\ is\ configured\ as\ FTM3\_CH4\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00157}00157\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 8U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00159}00159\ \ \ \ \ \textcolor{comment}{/*\ PORTC9\ (pin\ 54)\ is\ configured\ as\ FTM3\_CH5\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00160}00160\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a68fea88642279a70246e026e7221b0a5}{PORTC}},\ 9U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00162}00162\ \ \ \ \ \textcolor{comment}{/*\ PORTD0\ (pin\ 57)\ is\ configured\ as\ FTM3\_CH0\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00163}00163\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{group__pin__mux_gabaa7b241ee80510dec1e1d60ed9b4956}{BOARD\_INITPINS\_PTD0\_PORT}},\ \doxymbox{\hyperlink{group__pin__mux_ga392621a4ca583e8232b424cff808b5ce}{BOARD\_INITPINS\_PTD0\_PIN}},\ kPORT\_MuxAlt4);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00165}00165\ \ \ \ \ \textcolor{comment}{/*\ PORTD1\ (pin\ 58)\ is\ configured\ as\ FTM3\_CH1\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00166}00166\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3e6a2517db4f9cb7c9037adf0aefe79b}{PORTD}},\ 1U,\ kPORT\_MuxAlt4);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00168}00168\ \ \ \ \ \textcolor{comment}{/*\ PORTD2\ (pin\ 59)\ is\ configured\ as\ UART2\_RX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00169}00169\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3e6a2517db4f9cb7c9037adf0aefe79b}{PORTD}},\ 2U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00171}00171\ \ \ \ \ \textcolor{comment}{/*\ PORTD3\ (pin\ 60)\ is\ configured\ as\ UART2\_TX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00172}00172\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3e6a2517db4f9cb7c9037adf0aefe79b}{PORTD}},\ 3U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00174}00174\ \ \ \ \ \textcolor{comment}{/*\ PORTD6\ (pin\ 63)\ is\ configured\ as\ UART0\_RX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00175}00175\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3e6a2517db4f9cb7c9037adf0aefe79b}{PORTD}},\ 6U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00177}00177\ \ \ \ \ \textcolor{comment}{/*\ PORTD7\ (pin\ 64)\ is\ configured\ as\ UART0\_TX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00178}00178\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3e6a2517db4f9cb7c9037adf0aefe79b}{PORTD}},\ 7U,\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00180}00180\ \ \ \ \ \textcolor{comment}{/*\ PORTE0\ (pin\ 1)\ is\ configured\ as\ UART1\_TX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00181}00181\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{group__pin__mux_gab35b619967d7b205f5b723a9cc2579e7}{BOARD\_INITPINS\_UART1\_TX\_PORT}},\ \doxymbox{\hyperlink{group__pin__mux_gaf67b83822d5a4060a36baa59044fe152}{BOARD\_INITPINS\_UART1\_TX\_PIN}},\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00183}00183\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7e2386d3b1084b5b875ae3696f550ba9}{PORTE}}-\/>PCR[0]\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7e2386d3b1084b5b875ae3696f550ba9}{PORTE}}-\/>PCR[0]\ \&}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mask\ bits\ to\ zero\ which\ are\ setting\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\string~(PORT\_PCR\_PS\_MASK\ |\ PORT\_PCR\_PE\_MASK\ |\ PORT\_PCR\_ODE\_MASK\ |\ PORT\_PCR\_ISF\_MASK)))}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Pull\ Select:\ Internal\ pullup\ resistor\ is\ enabled\ on\ the\ corresponding\ pin,\ if\ the}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00188}00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ corresponding\ PE\ field\ is\ set.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_gabc7a02f49894ead35ce5d435bd05fb47}{PORT\_PCR\_PS}}(kPORT\_PullUp)}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Pull\ Enable:\ Internal\ pullup\ or\ pulldown\ resistor\ is\ not\ enabled\ on\ the\ corresponding\ pin.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_gaa149bd9cd83aa17c213a827f9482a913}{PORT\_PCR\_PE}}(kPORT\_PullDisable)}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Open\ Drain\ Enable:\ Open\ drain\ output\ is\ enabled\ on\ the\ corresponding\ pin,\ if\ the\ pin\ is}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00195}00195\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ configured\ as\ a\ digital\ output.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga098fe406e2291f75306796cba6723c64}{PORT\_PCR\_ODE}}(kPORT\_OpenDrainEnable));}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00198}00198\ \ \ \ \ \textcolor{comment}{/*\ PORTE1\ (pin\ 2)\ is\ configured\ as\ UART1\_RX\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00199}00199\ \ \ \ \ PORT\_SetPinMux(\doxymbox{\hyperlink{group__pin__mux_gaee9b80238cc8e0ed129b38c6b1d5a4d7}{BOARD\_INITPINS\_UART1\_RX\_PORT}},\ \doxymbox{\hyperlink{group__pin__mux_gabebb4ed14f33c7f30c546e14557969eb}{BOARD\_INITPINS\_UART1\_RX\_PIN}},\ kPORT\_MuxAlt3);}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00201}00201\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7e2386d3b1084b5b875ae3696f550ba9}{PORTE}}-\/>PCR[1]\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a7e2386d3b1084b5b875ae3696f550ba9}{PORTE}}-\/>PCR[1]\ \&}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mask\ bits\ to\ zero\ which\ are\ setting\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\string~(PORT\_PCR\_ODE\_MASK\ |\ PORT\_PCR\_ISF\_MASK)))}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Open\ Drain\ Enable:\ Open\ drain\ output\ is\ disabled\ on\ the\ corresponding\ pin.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__PORT__Register__Masks_ga098fe406e2291f75306796cba6723c64}{PORT\_PCR\_ODE}}(kPORT\_OpenDrainDisable));}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00208}00208\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT5\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT5\ \&}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mask\ bits\ to\ zero\ which\ are\ setting\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\string~(SIM\_SOPT5\_UART0TXSRC\_MASK\ |\ SIM\_SOPT5\_UART1TXSRC\_MASK)))}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ UART\ 0\ transmit\ data\ source\ select:\ UART0\_TX\ pin.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga65e932e39703b2b18dea82ca440fc68f}{SIM\_SOPT5\_UART0TXSRC}}(\doxymbox{\hyperlink{group__pin__mux_gad5004e09f892dbdd28f437365b5af3d9}{SOPT5\_UART0TXSRC\_UART\_TX}})}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ UART\ 1\ transmit\ data\ source\ select:\ UART1\_TX\ pin.\ */}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga78611068b87a39563cd065ff840e3c68}{SIM\_SOPT5\_UART1TXSRC}}(\doxymbox{\hyperlink{group__pin__mux_ga8c52f4d5abe3261096f22951fa01e861}{SOPT5\_UART1TXSRC\_UART\_TX}}));}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00217}00217\ \}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00218}00218\ \textcolor{comment}{/***********************************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00219}00219\ \textcolor{comment}{\ *\ EOF}}
+\DoxyCodeLine{\Hypertarget{pin__mux_8c_source_l00220}00220\ \textcolor{comment}{\ **********************************************************************************************************************/}}
+
+\end{DoxyCode}

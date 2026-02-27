@@ -1,0 +1,563 @@
+\doxysection{fsl\+\_\+lpuart.\+h}
+\hypertarget{fsl__lpuart_8h_source}{}\label{fsl__lpuart_8h_source}\index{drivers/fsl\_lpuart.h@{drivers/fsl\_lpuart.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00006}00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00007}00007\ \textcolor{preprocessor}{\#ifndef\ FSL\_LPUART\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00008}00008\ \textcolor{preprocessor}{\#define\ FSL\_LPUART\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00017}00017\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00018}00018\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00019}00019\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00024}\doxymbox{\hyperlink{group__lpuart__driver_ga0870fb824ece32739bd35f819f8c408e}{00024}}\ \textcolor{preprocessor}{\#define\ FSL\_LPUART\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 9,\ 1))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00028}00028\ \textcolor{preprocessor}{\#ifndef\ UART\_RETRY\_TIMES}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00029}\doxymbox{\hyperlink{group__lpuart__driver_gac0f88b67f77fd05f186a5ec940c340bd}{00029}}\ \textcolor{preprocessor}{\#define\ UART\_RETRY\_TIMES\ 0U\ }\textcolor{comment}{/*\ Defining\ to\ zero\ means\ to\ keep\ waiting\ for\ the\ flag\ until\ it\ is\ assert/deassert.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00030}00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00033}00033\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00034}00034\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00035}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}{00035}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabddb317db7dfffa95856604bfac2a17f}{kStatus\_LPUART\_TxBusy}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00036}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}{00036}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba98dfeab0a23c81f6b7f2c18acff8cc30}{kStatus\_LPUART\_RxBusy}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00037}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba079c6d0957d121ce7cd95cf97487dfbb}{kStatus\_LPUART\_TxIdle}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00038}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba02b8fe84bbfd8c52856b5d48865f7088}{kStatus\_LPUART\_RxIdle}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00039}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabbee969cb0f7b4c49b44b10c4eb583cc}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbabbee969cb0f7b4c49b44b10c4eb583cc}{kStatus\_LPUART\_TxWatermarkTooLarge}}\ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00040}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaca81b4d6e2e792c6d841b95ec25daad9}{00040}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaca81b4d6e2e792c6d841b95ec25daad9}{kStatus\_LPUART\_RxWatermarkTooLarge}}\ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00041}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb}{00041}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba07d5a5092ded158fe53ea4df940f8bdb}{kStatus\_LPUART\_FlagCannotClearManually}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 6),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00042}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf069a1997c3d25588d834ccb33dd35f4}{00042}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf069a1997c3d25588d834ccb33dd35f4}{kStatus\_LPUART\_Error}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 7),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00043}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba45a7ed684f4c31aec8999b3da68d3b5e}{00043}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba45a7ed684f4c31aec8999b3da68d3b5e}{kStatus\_LPUART\_RxRingBufferOverrun}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00045}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}{00045}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaf8ada3eacff87751ec865b4fc584bac1}{kStatus\_LPUART\_RxHardwareOverrun}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 9),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00046}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}{00046}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba6ccebae2eb859fde044f15f1dd18cba1}{kStatus\_LPUART\_NoiseError}}\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 10),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00047}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba1528dc2aacb3a792a1ecbfbbc7941bc9}{kStatus\_LPUART\_FramingError}}\ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 11),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00048}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbad42bcd27cb6e04725768c6b98d4cbe0d}{kStatus\_LPUART\_ParityError}}\ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 12),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00049}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cbaaa020183f56b7d7f63e22fd5fd8d3df2}{kStatus\_LPUART\_BaudrateNotSupport}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 13),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00051}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba29540bf056281514eb42c8885f7e2e10}{00051}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba29540bf056281514eb42c8885f7e2e10}{kStatus\_LPUART\_IdleLineDetected}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 14),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00052}\doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga2b122bc0e07b67e1c9de094dd34ef6cba0a6368e75ae51755bbd3f451c276c822}{kStatus\_LPUART\_Timeout}}\ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a3bcb0be184f8d5bb76d4be8e99b4e45e}{kStatusGroup\_LPUART}},\ 15),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00053}00053\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00056}\doxymbox{\hyperlink{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}{00056}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga22a746cfd0fffff30eaf27f8795b2059}{\_lpuart\_parity\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00058}\doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a}{00058}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059a0e5bdb8fc4e1010930d05e1490a75b1a}{kLPUART\_ParityDisabled}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00059}\doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059ac92adb3fdf11240ca5dee6c6543b6ff7}{00059}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059ac92adb3fdf11240ca5dee6c6543b6ff7}{kLPUART\_ParityEven}}\ \ \ \ \ =\ 0x2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00060}\doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059adab63856e98e0715f4ab289ac0da3575}{00060}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga22a746cfd0fffff30eaf27f8795b2059adab63856e98e0715f4ab289ac0da3575}{kLPUART\_ParityOdd}}\ \ \ \ \ \ =\ 0x3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00061}\doxymbox{\hyperlink{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1}{00061}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1}{lpuart\_parity\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00064}\doxymbox{\hyperlink{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}{00064}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga565561e02414c90014f13391a1dd7dd5}{\_lpuart\_data\_bits}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00065}00065\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00066}\doxymbox{\hyperlink{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899}{00066}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga565561e02414c90014f13391a1dd7dd5aaa10fe51f0b83d5c0a2e060dab983899}{kLPUART\_EightDataBits}}\ =\ 0x0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00067}00067\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00068}00068\ \ \ \ \ kLPUART\_SevenDataBits\ =\ 0x1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00069}00069\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00070}\doxymbox{\hyperlink{group__lpuart__driver_ga6785b5dcafe473d18fd40d490251c5eb}{00070}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_ga6785b5dcafe473d18fd40d490251c5eb}{lpuart\_data\_bits\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00073}\doxymbox{\hyperlink{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}{00073}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_gad19fe7bcda436707337f6d529d5da155}{\_lpuart\_stop\_bit\_count}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00075}\doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901}{00075}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a4304f0ee73a5fabfadfc05ca1fbd3901}{kLPUART\_OneStopBit}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00076}\doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a6e049e0faaf89ed2dfe493ad8f6c93d4}{00076}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ggad19fe7bcda436707337f6d529d5da155a6e049e0faaf89ed2dfe493ad8f6c93d4}{kLPUART\_TwoStopBit}}\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00077}\doxymbox{\hyperlink{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac}{00077}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac}{lpuart\_stop\_bit\_count\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00079}00079\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00081}00081\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_lpuart\_transmit\_cts\_source}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00083}00083\ \ \ \ \ kLPUART\_CtsSourcePin\ \ \ \ \ \ \ \ \ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00084}00084\ \ \ \ \ kLPUART\_CtsSourceMatchResult\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00085}00085\ \}\ lpuart\_transmit\_cts\_source\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00088}00088\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_lpuart\_transmit\_cts\_config}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00089}00089\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00090}00090\ \ \ \ \ kLPUART\_CtsSampleAtStart\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00091}00091\ \ \ \ \ kLPUART\_CtsSampleAtIdle\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00092}00092\ \}\ lpuart\_transmit\_cts\_config\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00093}00093\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00096}\doxymbox{\hyperlink{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}{00096}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga5f767cb7f8458682f742f2e7d4bda63d}{\_lpuart\_idle\_type\_select}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00097}00097\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00098}\doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da0644f6b95813c520dede56ee3a944267}{00098}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da0644f6b95813c520dede56ee3a944267}{kLPUART\_IdleTypeStartBit}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00099}\doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da69545f21a3401c126bf295b5cf94225b}{00099}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga5f767cb7f8458682f742f2e7d4bda63da69545f21a3401c126bf295b5cf94225b}{kLPUART\_IdleTypeStopBit}}\ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00100}\doxymbox{\hyperlink{group__lpuart__driver_ga42eaf9d7f780b53a6e974743122eebb0}{00100}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_ga42eaf9d7f780b53a6e974743122eebb0}{lpuart\_idle\_type\_select\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00106}\doxymbox{\hyperlink{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}{00106}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga13c97cefe85629e606de5281d4eef25b}{\_lpuart\_idle\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00107}00107\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00108}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba955e0bb4d3e75e577eef544b440c24be}{00108}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba955e0bb4d3e75e577eef544b440c24be}{kLPUART\_IdleCharacter1}}\ \ \ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00109}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba270caa8e77b08697404771af82abd131}{00109}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba270caa8e77b08697404771af82abd131}{kLPUART\_IdleCharacter2}}\ \ \ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00110}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bacab443d3d053070635ea1f859b73f34c}{00110}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bacab443d3d053070635ea1f859b73f34c}{kLPUART\_IdleCharacter4}}\ \ \ =\ 2U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00111}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25baf125ff40887939add6dd0f42d4485bf3}{00111}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25baf125ff40887939add6dd0f42d4485bf3}{kLPUART\_IdleCharacter8}}\ \ \ =\ 3U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00112}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bace45d3af9a0c590f053df7bb00e6582a}{00112}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bace45d3af9a0c590f053df7bb00e6582a}{kLPUART\_IdleCharacter16}}\ \ =\ 4U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00113}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba1daee04c54b7e37ca5e7331a3e1e7374}{00113}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba1daee04c54b7e37ca5e7331a3e1e7374}{kLPUART\_IdleCharacter32}}\ \ =\ 5U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00114}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bac497a53ed2755d26961f3b72fbd180ed}{00114}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25bac497a53ed2755d26961f3b72fbd180ed}{kLPUART\_IdleCharacter64}}\ \ =\ 6U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00115}\doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba4e080722efa87475f1710f5524e50c67}{00115}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga13c97cefe85629e606de5281d4eef25ba4e080722efa87475f1710f5524e50c67}{kLPUART\_IdleCharacter128}}\ =\ 7U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00116}\doxymbox{\hyperlink{group__lpuart__driver_gaaf5c727d57d2e3dcf413d6dcdb3e74c1}{00116}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_gaaf5c727d57d2e3dcf413d6dcdb3e74c1}{lpuart\_idle\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00123}\doxymbox{\hyperlink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{00123}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga199a157d391291a9d003bf23954f9603}{\_lpuart\_interrupt\_enable}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00124}00124\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00125}00125\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00126}00126\ \ \ \ \ kLPUART\_LinBreakInterruptEnable\ =\ (LPUART\_BAUD\_LBKDIE\_MASK\ >>\ 8U),\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00127}00127\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00128}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a}{00128}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a}{kLPUART\_RxActiveEdgeInterruptEnable}}\ \ \ \ \ \ \ \ \ =\ (LPUART\_BAUD\_RXEDGIE\_MASK\ >>\ 8U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00129}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{00129}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{kLPUART\_TxDataRegEmptyInterruptEnable}}\ \ \ \ \ \ \ =\ (LPUART\_CTRL\_TIE\_MASK),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00130}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{00130}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{kLPUART\_TransmissionCompleteInterruptEnable}}\ =\ (LPUART\_CTRL\_TCIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00131}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{00131}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{kLPUART\_RxDataRegFullInterruptEnable}}\ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_RIE\_MASK),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00132}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d}{00132}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d}{kLPUART\_IdleLineInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_ILIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00133}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636}{00133}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636}{kLPUART\_RxOverrunInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_ORIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00134}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e}{00134}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e}{kLPUART\_NoiseErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_NEIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00135}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d}{00135}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d}{kLPUART\_FramingErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_FEIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00136}\doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466}{00136}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466}{kLPUART\_ParityErrorInterruptEnable}}\ \ \ \ \ \ \ \ \ \ =\ (LPUART\_CTRL\_PEIE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00137}00137\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00138}00138\ \ \ \ \ kLPUART\_Match1InterruptEnable\ =\ (LPUART\_CTRL\_MA1IE\_MASK),\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00139}00139\ \ \ \ \ kLPUART\_Match2InterruptEnable\ =\ (LPUART\_CTRL\_MA2IE\_MASK),\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00140}00140\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00141}00141\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00142}00142\ \ \ \ \ kLPUART\_TxFifoOverflowInterruptEnable\ \ =\ (LPUART\_FIFO\_TXOFE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00143}00143\ \ \ \ \ kLPUART\_RxFifoUnderflowInterruptEnable\ =\ (LPUART\_FIFO\_RXUFE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00144}00144\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00146}00146\ \ \ \ \ kLPUART\_AllInterruptEnable\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a43750aac20f72535350c1ab4a1862a3a}{kLPUART\_RxActiveEdgeInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0e8bf389f65e5f86a3063dc55b8aae1c}{kLPUART\_TxDataRegEmptyInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a0b7f783393a61cce88eab28307e9fe14}{kLPUART\_TransmissionCompleteInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a5b4a0893c98bf79d0dad88aeb7714d22}{kLPUART\_RxDataRegFullInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603af3f83c56032b14e50a682857dd7c152d}{kLPUART\_IdleLineInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a8a29c714eaa6acab06a87314f4f29636}{kLPUART\_RxOverrunInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603ad1a35bc7e89f170a5b82cb4801b73b5e}{kLPUART\_NoiseErrorInterruptEnable}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a1b43ca06e0af6b0fcf4b55612363a64d}{kLPUART\_FramingErrorInterruptEnable}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga199a157d391291a9d003bf23954f9603a13c12b816605deaabcbc3e6a6db82466}{kLPUART\_ParityErrorInterruptEnable}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00151}00151\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_LinBreakInterruptEnable}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00153}00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00154}00154\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_Match1InterruptEnable\ |\ kLPUART\_Match2InterruptEnable}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00156}00156\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00157}00157\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_TxFifoOverflowInterruptEnable\ |\ kLPUART\_RxFifoUnderflowInterruptEnable}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00159}00159\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00160}00160\ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00161}00161\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00168}\doxymbox{\hyperlink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{00168}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__lpuart__driver_ga24bb7ca3f894fe5ff55b9f38bec16c89}{\_lpuart\_flags}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00169}00169\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00170}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}{00170}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}{kLPUART\_TxDataRegEmptyFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00171}00171\ \ \ \ \ \ \ \ \ (LPUART\_STAT\_TDRE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00172}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}{00172}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}{kLPUART\_TransmissionCompleteFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ (LPUART\_STAT\_TC\_MASK),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00174}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f}{00174}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f}{kLPUART\_RxDataRegFullFlag}}\ =\ (LPUART\_STAT\_RDRF\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00176}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}{00176}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}{kLPUART\_IdleLineFlag}}\ \ =\ (LPUART\_STAT\_IDLE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00177}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}{00177}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}{kLPUART\_RxOverrunFlag}}\ =\ (LPUART\_STAT\_OR\_MASK),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00179}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}{00179}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}{kLPUART\_NoiseErrorFlag}}\ =\ (LPUART\_STAT\_NF\_MASK),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00181}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}{00181}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}{kLPUART\_FramingErrorFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ (LPUART\_STAT\_FE\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00183}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}{00183}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}{kLPUART\_ParityErrorFlag}}\ =\ (LPUART\_STAT\_PF\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00184}00184\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00185}00185\ \ \ \ \ kLPUART\_LinBreakFlag\ =\ (LPUART\_STAT\_LBKDIF\_MASK),\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00187}00187\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00188}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}{00188}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}{kLPUART\_RxActiveEdgeFlag}}\ =\ (LPUART\_STAT\_RXEDGIF\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00190}\doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799}{00190}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799}{kLPUART\_RxActiveFlag}}\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ (LPUART\_STAT\_RAF\_MASK),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00192}00192\ \#\textcolor{keywordflow}{if}\ defined(FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00193}00193\ \ \ \ \ kLPUART\_DataMatch1Flag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ LPUART\_STAT\_MA1F\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00195}00195\ \ \ \ \ kLPUART\_DataMatch2Flag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ LPUART\_STAT\_MA2F\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00197}00197\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00198}00198\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00199}00199\ \ \ \ \ kLPUART\_TxFifoEmptyFlag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ (LPUART\_FIFO\_TXEMPT\_MASK\ >>\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00201}00201\ \ \ \ \ kLPUART\_RxFifoEmptyFlag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ (LPUART\_FIFO\_RXEMPT\_MASK\ >>\ 16),\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00203}00203\ \ \ \ \ kLPUART\_TxFifoOverflowFlag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ (LPUART\_FIFO\_TXOF\_MASK\ >>\ 16),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00205}00205\ \ \ \ \ kLPUART\_RxFifoUnderflowFlag\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ (LPUART\_FIFO\_RXUF\_MASK\ >>\ 16),\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00207}00207\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00209}00209\ \ \ \ \ kLPUART\_AllClearFlags\ =\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}{kLPUART\_RxActiveEdgeFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}{kLPUART\_IdleLineFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}{kLPUART\_RxOverrunFlag}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}{kLPUART\_NoiseErrorFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}{kLPUART\_FramingErrorFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}{kLPUART\_ParityErrorFlag}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00211}00211\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_DataMatch1Flag\ |\ kLPUART\_DataMatch2Flag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00213}00213\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00214}00214\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_TxFifoOverflowFlag\ |\ kLPUART\_RxFifoUnderflowFlag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00216}00216\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00217}00217\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ kLPUART\_LinBreakFlag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00219}00219\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00220}00220\ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00222}00222\ \ \ \ \ kLPUART\_AllFlags\ =}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00223}00223\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae89f181d8dbbf5254d6fe843e4cac6d6}{kLPUART\_RxActiveEdgeFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89acf1a40aca38878bc395f9f0b10d8225e}{kLPUART\_IdleLineFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a994f5f484509133c632215a8b701f8d1}{kLPUART\_RxOverrunFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89aa765f8ddac00348328f64ad4222d057a}{kLPUART\_TxDataRegEmptyFlag}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00224}00224\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ae0539c4cf39d4d1e7839a4896fad2a85}{kLPUART\_TransmissionCompleteFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a9bc679bcc20b81768f84b04e499c5a2f}{kLPUART\_RxDataRegFullFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a1f14711a74db1cc141b5c2627ee4c799}{kLPUART\_RxActiveFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2198232cb9d239f937ab221bbf03259f}{kLPUART\_NoiseErrorFlag}}\ |}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00225}00225\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89ad1d40f89cb6aab9c12113586fda7f510}{kLPUART\_FramingErrorFlag}}\ |\ \doxymbox{\hyperlink{group__lpuart__driver_gga24bb7ca3f894fe5ff55b9f38bec16c89a2f8d4c03df61bc4678b2ccf1c69eedeb}{kLPUART\_ParityErrorFlag}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00226}00226\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_ADDRESS\_MATCHING}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00227}00227\ \ \ \ \ \ \ \ \ |\ kLPUART\_DataMatch1Flag\ |\ kLPUART\_DataMatch2Flag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00228}00228\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00229}00229\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00230}00230\ \ \ \ \ \ \ \ \ |\ kLPUART\_TxFifoOverflowFlag\ |\ kLPUART\_RxFifoUnderflowFlag\ |\ kLPUART\_TxFifoEmptyFlag\ |\ kLPUART\_RxFifoEmptyFlag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00231}00231\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00232}00232\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_LIN\_BREAK\_DETECT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00233}00233\ \ \ \ \ \ \ \ \ |\ kLPUART\_LinBreakFlag}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00234}00234\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00235}00235\ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00236}00236\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00239}\doxymbox{\hyperlink{struct__lpuart__config}{00239}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__config}{\_lpuart\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00240}00240\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00241}\doxymbox{\hyperlink{struct__lpuart__config_ae83107a96ce0e34e791aac795a4d04e4}{00241}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__lpuart__config_ae83107a96ce0e34e791aac795a4d04e4}{baudRate\_Bps}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00242}\doxymbox{\hyperlink{struct__lpuart__config_a4571e45bcd0dc5e23ef6c9491f415636}{00242}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gaade003e399c40357cf787b87e39083a1}{lpuart\_parity\_mode\_t}}\ \doxymbox{\hyperlink{struct__lpuart__config_a4571e45bcd0dc5e23ef6c9491f415636}{parityMode}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00243}\doxymbox{\hyperlink{struct__lpuart__config_af78b1ec3d4ad983717c0ddb6fc90a7c3}{00243}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga6785b5dcafe473d18fd40d490251c5eb}{lpuart\_data\_bits\_t}}\ \doxymbox{\hyperlink{struct__lpuart__config_af78b1ec3d4ad983717c0ddb6fc90a7c3}{dataBitsCount}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00244}\doxymbox{\hyperlink{struct__lpuart__config_a0b1bc6d9fd6be7a792e3f06ef9801ceb}{00244}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__lpuart__config_a0b1bc6d9fd6be7a792e3f06ef9801ceb}{isMsb}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00245}00245\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_STOP\_BIT\_CONFIG\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_STOP\_BIT\_CONFIG\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00246}00246\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gaa71791788f61f7823dbce863f45560ac}{lpuart\_stop\_bit\_count\_t}}\ stopBitCount;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00247}00247\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00248}00248\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00249}00249\ \ \ \ \ uint8\_t\ txFifoWatermark;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00250}00250\ \ \ \ \ uint8\_t\ rxFifoWatermark;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00251}00251\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00252}00252\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_MODEM\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00253}00253\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableRxRTS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00254}00254\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableTxCTS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00255}00255\ \ \ \ \ lpuart\_transmit\_cts\_source\_t\ txCtsSource;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00256}00256\ \ \ \ \ lpuart\_transmit\_cts\_config\_t\ txCtsConfig;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00257}00257\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00258}\doxymbox{\hyperlink{struct__lpuart__config_a45ac9d819675f5cae10bb7234a0f4342}{00258}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga42eaf9d7f780b53a6e974743122eebb0}{lpuart\_idle\_type\_select\_t}}\ \doxymbox{\hyperlink{struct__lpuart__config_a45ac9d819675f5cae10bb7234a0f4342}{rxIdleType}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00259}\doxymbox{\hyperlink{struct__lpuart__config_ab5389e158519dd57c804a10ef5dc3c00}{00259}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_gaaf5c727d57d2e3dcf413d6dcdb3e74c1}{lpuart\_idle\_config\_t}}\ \doxymbox{\hyperlink{struct__lpuart__config_ab5389e158519dd57c804a10ef5dc3c00}{rxIdleConfig}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00260}\doxymbox{\hyperlink{struct__lpuart__config_ab9558be2149e5a5730eff2d7bb1fdb28}{00260}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__lpuart__config_ab9558be2149e5a5730eff2d7bb1fdb28}{enableTx}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00261}\doxymbox{\hyperlink{struct__lpuart__config_ab5249f5987bbb04eb5ae5e9cfb6e5358}{00261}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__lpuart__config_ab5249f5987bbb04eb5ae5e9cfb6e5358}{enableRx}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00262}00262\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_CTRL\_SWAP)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_CTRL\_SWAP}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00263}00263\ \ \ \ \ \textcolor{keywordtype}{bool}\ swapTxdRxd;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00264}00264\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00265}\doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{00265}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00268}\doxymbox{\hyperlink{struct__lpuart__transfer}{00268}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__transfer}{\_lpuart\_transfer}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00269}00269\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00270}00270\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00271}00271\ \textcolor{comment}{\ \ \ \ \ *\ Use\ separate\ TX\ and\ RX\ data\ pointer,\ because\ TX\ data\ is\ const\ data.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00272}00272\ \textcolor{comment}{\ \ \ \ \ *\ The\ member\ data\ is\ kept\ for\ backward\ compatibility.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00273}00273\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00274}00274\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00275}00275\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00276}\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{00276}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__lpuart__transfer_a5f0e6f0be1311cf09de693c9a9ff9c70}{data}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00277}\doxymbox{\hyperlink{struct__lpuart__transfer_a5f2afdce66073c3fe87da416b90b1a81}{00277}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__lpuart__transfer_a5f2afdce66073c3fe87da416b90b1a81}{rxData}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00278}\doxymbox{\hyperlink{struct__lpuart__transfer_a20ed845fbe781fc1534f848c91192304}{00278}}\ \ \ \ \ \ \ \ \ uint16\_t\ *\doxymbox{\hyperlink{struct__lpuart__transfer_a20ed845fbe781fc1534f848c91192304}{rxData16}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00279}\doxymbox{\hyperlink{struct__lpuart__transfer_afcfd36888905a82337dde365b514e7a1}{00279}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\doxymbox{\hyperlink{struct__lpuart__transfer_afcfd36888905a82337dde365b514e7a1}{txData}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00280}\doxymbox{\hyperlink{struct__lpuart__transfer_a33d28291e76ae914567c545ac77c23f3}{00280}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\doxymbox{\hyperlink{struct__lpuart__transfer_a33d28291e76ae914567c545ac77c23f3}{txData16}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00281}00281\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00282}\doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{00282}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__transfer_aaa76dae4246c582cb20524f7c3b1be8b}{dataSize}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00283}\doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{00283}}\ \}\ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00285}00285\ \textcolor{comment}{/*\ Forward\ declaration\ of\ the\ handle\ typedef.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00286}00286\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__handle}{\_lpuart\_handle}}\ lpuart\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00289}\doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{00289}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\_transfer\_callback\_t}})(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status,\ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__lpuart__handle_ae2ac81d3089f6b9b2772708b49502441}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00292}\doxymbox{\hyperlink{struct__lpuart__handle}{00292}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__lpuart__handle}{\_lpuart\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00293}00293\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00294}00294\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00295}00295\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00296}\doxymbox{\hyperlink{struct__lpuart__handle_a4c35a7a6399c868ddb1def8743c146ea}{00296}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__lpuart__handle_a4c35a7a6399c868ddb1def8743c146ea}{txData}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00297}\doxymbox{\hyperlink{struct__lpuart__handle_a89cf8c1ae5c313e8c8ff0ad323455d1c}{00297}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__lpuart__handle_a89cf8c1ae5c313e8c8ff0ad323455d1c}{txData16}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00298}00298\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00299}\doxymbox{\hyperlink{struct__lpuart__handle_a9c7df82f52174be9a8d21f26eba8b63f}{00299}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__handle_a9c7df82f52174be9a8d21f26eba8b63f}{txDataSize}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00300}\doxymbox{\hyperlink{struct__lpuart__handle_a2535ea3d50a0e1ebc64ef678792ca143}{00300}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__handle_a2535ea3d50a0e1ebc64ef678792ca143}{txDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00301}00301\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00302}00302\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00303}\doxymbox{\hyperlink{struct__lpuart__handle_a22f222c17b99b9528dabcc7bc2b2a54b}{00303}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__lpuart__handle_a22f222c17b99b9528dabcc7bc2b2a54b}{rxData}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00304}\doxymbox{\hyperlink{struct__lpuart__handle_ac790d57d21b84433eff88de5974cc3c6}{00304}}\ \ \ \ \ \ \ \ \ uint16\_t\ *\textcolor{keyword}{volatile}\ \doxymbox{\hyperlink{struct__lpuart__handle_ac790d57d21b84433eff88de5974cc3c6}{rxData16}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00305}00305\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00306}\doxymbox{\hyperlink{struct__lpuart__handle_acc516aa43ddb7eeec9288820af1ecd89}{00306}}\ \ \ \ \ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__handle_acc516aa43ddb7eeec9288820af1ecd89}{rxDataSize}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00307}\doxymbox{\hyperlink{struct__lpuart__handle_ae577a09ca8d3b9eb73f90d308d842e79}{00307}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__handle_ae577a09ca8d3b9eb73f90d308d842e79}{rxDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00309}00309\ \ \ \ \ \textcolor{keyword}{union}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00310}00310\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00311}\doxymbox{\hyperlink{struct__lpuart__handle_a1100410b5924efeb1a55ec14e15d39f1}{00311}}\ \ \ \ \ \ \ \ \ uint8\_t\ *\doxymbox{\hyperlink{struct__lpuart__handle_a1100410b5924efeb1a55ec14e15d39f1}{rxRingBuffer}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00312}\doxymbox{\hyperlink{struct__lpuart__handle_a6030b1f3d6d1f9c5a5c2e79c1494ee2f}{00312}}\ \ \ \ \ \ \ \ \ uint16\_t\ *\doxymbox{\hyperlink{struct__lpuart__handle_a6030b1f3d6d1f9c5a5c2e79c1494ee2f}{rxRingBuffer16}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00313}00313\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00314}\doxymbox{\hyperlink{struct__lpuart__handle_a08db8e558ba77d8c5ece4f60822f60c3}{00314}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__lpuart__handle_a08db8e558ba77d8c5ece4f60822f60c3}{rxRingBufferSize}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00315}\doxymbox{\hyperlink{struct__lpuart__handle_a20aadb739214ab07e45cb9226132192e}{00315}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint16\_t\ \doxymbox{\hyperlink{struct__lpuart__handle_a20aadb739214ab07e45cb9226132192e}{rxRingBufferHead}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00316}\doxymbox{\hyperlink{struct__lpuart__handle_a2777d723511750a6b39f5169135a909f}{00316}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint16\_t\ \doxymbox{\hyperlink{struct__lpuart__handle_a2777d723511750a6b39f5169135a909f}{rxRingBufferTail}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00318}\doxymbox{\hyperlink{struct__lpuart__handle_ab50459b72a63e6b30c8ed3671a8af981}{00318}}\ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\_transfer\_callback\_t}}\ \doxymbox{\hyperlink{struct__lpuart__handle_ab50459b72a63e6b30c8ed3671a8af981}{callback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00319}\doxymbox{\hyperlink{struct__lpuart__handle_ae2ac81d3089f6b9b2772708b49502441}{00319}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__lpuart__handle_ae2ac81d3089f6b9b2772708b49502441}{userData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00321}\doxymbox{\hyperlink{struct__lpuart__handle_a15865b470edd53b37c580981c718f559}{00321}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__lpuart__handle_a15865b470edd53b37c580981c718f559}{txState}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00322}\doxymbox{\hyperlink{struct__lpuart__handle_ac113a769dffef4a25e7ecac12c412893}{00322}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__lpuart__handle_ac113a769dffef4a25e7ecac12c412893}{rxState}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00324}00324\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00325}00325\ \ \ \ \ \textcolor{keywordtype}{bool}\ isSevenDataBits;\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00326}00326\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00327}\doxymbox{\hyperlink{struct__lpuart__handle_a6c52aa7c1abec91ff258c258a8fdda17}{00327}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__lpuart__handle_a6c52aa7c1abec91ff258c258a8fdda17}{is16bitData}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00328}00328\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00330}00330\ \textcolor{comment}{/*\ Typedef\ for\ interrupt\ handler.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00331}00331\ \textcolor{keyword}{typedef}\ void\ (*lpuart\_isr\_t)(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00333}00333\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00334}00334\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00335}00335\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00336}00336\ \textcolor{comment}{/*\ Array\ of\ LPUART\ handle.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00337}00337\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *s\_lpuartHandle[];}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00339}00339\ \textcolor{comment}{/*\ Array\ of\ LPUART\ IRQ\ number.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00340}00340\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_SEPARATE\_RX\_TX\_IRQ)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_SEPARATE\_RX\_TX\_IRQ}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00341}00341\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ IRQn\_Type\ s\_lpuartTxIRQ[];}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00342}00342\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00343}00343\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ IRQn\_Type\ s\_lpuartIRQ[];}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00344}00344\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00346}00346\ \textcolor{comment}{/*\ LPUART\ ISR\ for\ transactional\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00347}00347\ \textcolor{keyword}{extern}\ lpuart\_isr\_t\ s\_lpuartIsr[];}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00349}00349\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00350}00350\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00351}00351\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00353}00353\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00354}00354\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00355}00355\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00357}00357\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_GLOBAL)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_GLOBAL}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00372}00372\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ LPUART\_SoftwareReset(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00373}00373\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00374}00374\ \ \ \ \ base-\/>GLOBAL\ |=\ LPUART\_GLOBAL\_RST\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00375}00375\ \ \ \ \ base-\/>GLOBAL\ \&=\ \string~LPUART\_GLOBAL\_RST\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00376}00376\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00378}00378\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*FSL\_FEATURE\_LPUART\_HAS\_GLOBAL*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00409}00409\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_ga26ce3e5d63d8dd5d317a83f22af9682c}{LPUART\_Init}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\_config\_t}}\ *config,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00418}00418\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga303ff3b77767bafa449d96f1e8c921e0}{LPUART\_Deinit}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00439}00439\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga95dfe3c3886692f1fe32023d59708440}{LPUART\_GetDefaultConfig}}(\doxymbox{\hyperlink{group__lpuart__driver_ga8386269b3452ae51c17c941d79ec7a39}{lpuart\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00461}00461\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gaf03d9292f8b4cb6e9748cb0bc1db7577}{LPUART\_SetBaudRate}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint32\_t\ baudRate\_Bps,\ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00471}00471\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gae7e13bb206bd78070737968610437fb1}{LPUART\_Enable9bitMode}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00472}00472\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00490}\doxymbox{\hyperlink{group__lpuart__driver_gae4987ccc6a25b2aa8a99a18868fda3eb}{00490}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gae4987ccc6a25b2aa8a99a18868fda3eb}{LPUART\_SetMatchAddress}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint16\_t\ address1,\ uint16\_t\ address2)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00491}00491\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00492}00492\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00493}00493\ \ \ \ \ uint32\_t\ address\ =\ ((uint32\_t)address2\ <<\ 16U)\ |\ (uint32\_t)address1\ |\ 0x1000100UL;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00494}00494\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a8714422270dccd821dc1240fb23ec530}{MATCH}}\ \ \ \ \ \ =\ address;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00495}00495\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00504}\doxymbox{\hyperlink{group__lpuart__driver_gaafe7ddb53960e2f4cd7ba2a01f00982e}{00504}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gaafe7ddb53960e2f4cd7ba2a01f00982e}{LPUART\_EnableMatchAddress}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ match1,\ \textcolor{keywordtype}{bool}\ match2)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00505}00505\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00506}00506\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address1\ enable\ bit.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00507}00507\ \ \ \ \ \textcolor{keywordflow}{if}\ (match1)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00508}00508\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00509}00509\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ |=\ (uint32\_t)LPUART\_BAUD\_MAEN1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00510}00510\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00511}00511\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00512}00512\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00513}00513\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ \&=\ \string~(uint32\_t)LPUART\_BAUD\_MAEN1\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00514}00514\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00515}00515\ \ \ \ \ \textcolor{comment}{/*\ Configure\ match\ address2\ enable\ bit.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00516}00516\ \ \ \ \ \textcolor{keywordflow}{if}\ (match2)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00517}00517\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00518}00518\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ |=\ (uint32\_t)LPUART\_BAUD\_MAEN2\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00519}00519\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00520}00520\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00521}00521\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00522}00522\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ \&=\ \string~(uint32\_t)LPUART\_BAUD\_MAEN2\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00523}00523\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00524}00524\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00525}00525\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00526}00526\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00533}00533\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ LPUART\_SetRxFifoWatermark(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint8\_t\ water)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00534}00534\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00535}00535\ \ \ \ \ assert(FSL\_FEATURE\_LPUART\_FIFO\_SIZEn(base)\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00536}00536\ \ \ \ \ assert((uint8\_t)FSL\_FEATURE\_LPUART\_FIFO\_SIZEn(base)\ >\ water);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00537}00537\ \ \ \ \ base-\/>WATER\ =\ (base-\/>WATER\ \&\ \string~LPUART\_WATER\_RXWATER\_MASK)\ |\ LPUART\_WATER\_RXWATER(water);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00538}00538\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00546}00546\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ LPUART\_SetTxFifoWatermark(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint8\_t\ water)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00547}00547\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00548}00548\ \ \ \ \ assert(FSL\_FEATURE\_LPUART\_FIFO\_SIZEn(base)\ >\ 0);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00549}00549\ \ \ \ \ assert((uint8\_t)FSL\_FEATURE\_LPUART\_FIFO\_SIZEn(base)\ >\ water);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00550}00550\ \ \ \ \ base-\/>WATER\ =\ (base-\/>WATER\ \&\ \string~LPUART\_WATER\_TXWATER\_MASK)\ |\ LPUART\_WATER\_TXWATER(water);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00551}00551\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00552}00552\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00562}\doxymbox{\hyperlink{group__lpuart__driver_ga97eaafd4eba9443bcc11212fee90705f}{00562}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga97eaafd4eba9443bcc11212fee90705f}{LPUART\_TransferEnable16Bit}}(lpuart\_handle\_t\ *handle,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00563}00563\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00564}00564\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__lpuart__handle_a6c52aa7c1abec91ff258c258a8fdda17}{is16bitData}}\ =\ enable;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00565}00565\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00567}00567\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00572}00572\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00590}00590\ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__driver_gab83db963591b116f90daf3e24118cb09}{LPUART\_GetStatusFlags}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00611}00611\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gac6bcdb29d31a2addb8d80d98855ba147}{LPUART\_ClearStatusFlags}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00613}00613\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00632}00632\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gab5998ebb0dc457f0864c84c16f83d745}{LPUART\_EnableInterrupts}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00633}00633\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00647}00647\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga2540406e4a338199acddaa828829cad8}{LPUART\_DisableInterrupts}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00648}00648\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00669}00669\ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__driver_ga172b524bae8bacc6dc95d9daf82c97b5}{LPUART\_GetEnabledInterrupts}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00672}00672\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_DMA\_ENABLE)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_DMA\_ENABLE}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00685}00685\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uintptr\_t\ LPUART\_GetDataRegisterAddress(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00686}00686\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00687}00687\ \ \ \ \ \textcolor{keywordflow}{return}\ (uintptr\_t)\ \&\ (base-\/>\doxymbox{\hyperlink{structLPUART__Type_a6885eb33ef67e1ffaa0e725fc1b71f82}{DATA}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00688}00688\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00689}00689\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00698}00698\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ LPUART\_EnableTxDMA(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00699}00699\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00700}00700\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00701}00701\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00702}00702\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ |=\ LPUART\_BAUD\_TDMAE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00703}00703\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00704}00704\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00705}00705\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00706}00706\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ \&=\ \string~LPUART\_BAUD\_TDMAE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00707}00707\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00708}00708\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00709}00709\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00718}00718\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ LPUART\_EnableRxDMA(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00719}00719\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00720}00720\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00721}00721\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00722}00722\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ |=\ LPUART\_BAUD\_RDMAE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00723}00723\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00724}00724\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00725}00725\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00726}00726\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_adadfa76ec04ec7148ca8ff116d07786b}{BAUD}}\ \&=\ \string~LPUART\_BAUD\_RDMAE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00727}00727\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00728}00728\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00730}00730\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_LPUART\_HAS\_DMA\_ENABLE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00731}00731\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00736}00736\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00743}00743\ uint32\_t\ \doxymbox{\hyperlink{group__lpuart__driver_gaaf4c8ce1f1730cdbf094931033d9b52c}{LPUART\_GetInstance}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00744}00744\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00753}\doxymbox{\hyperlink{group__lpuart__driver_ga49961d4e9043ff9bd10e477add9258d7}{00753}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga49961d4e9043ff9bd10e477add9258d7}{LPUART\_EnableTx}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00754}00754\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00755}00755\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00756}00756\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00757}00757\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a22381b26b9e213e96e7b05b74b78c12e}{CTRL}}\ |=\ LPUART\_CTRL\_TE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00758}00758\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00759}00759\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00760}00760\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00761}00761\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a22381b26b9e213e96e7b05b74b78c12e}{CTRL}}\ \&=\ \string~LPUART\_CTRL\_TE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00762}00762\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00763}00763\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00764}00764\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00773}\doxymbox{\hyperlink{group__lpuart__driver_gaadb8a7199526555e50e65e017da4eae2}{00773}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gaadb8a7199526555e50e65e017da4eae2}{LPUART\_EnableRx}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00774}00774\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00775}00775\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00776}00776\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00777}00777\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a22381b26b9e213e96e7b05b74b78c12e}{CTRL}}\ |=\ LPUART\_CTRL\_RE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00778}00778\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00779}00779\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00780}00780\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00781}00781\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a22381b26b9e213e96e7b05b74b78c12e}{CTRL}}\ \&=\ \string~LPUART\_CTRL\_RE\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00782}00782\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00783}00783\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00784}00784\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00794}\doxymbox{\hyperlink{group__lpuart__driver_ga9a9389e1c7bcce6c23e00eb77006a717}{00794}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga9a9389e1c7bcce6c23e00eb77006a717}{LPUART\_WriteByte}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint8\_t\ data)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00795}00795\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00796}00796\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a6885eb33ef67e1ffaa0e725fc1b71f82}{DATA}}\ =\ data;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00797}00797\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00808}\doxymbox{\hyperlink{group__lpuart__driver_ga02013105f0aacc7062eaae59d7401d29}{00808}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ \doxymbox{\hyperlink{group__lpuart__driver_ga02013105f0aacc7062eaae59d7401d29}{LPUART\_ReadByte}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00809}00809\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00810}00810\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_7BIT\_DATA\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00811}00811\ \ \ \ \ uint32\_t\ ctrl\ =\ base-\/>\doxymbox{\hyperlink{structLPUART__Type_a22381b26b9e213e96e7b05b74b78c12e}{CTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00812}00812\ \ \ \ \ uint8\_t\ result;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00813}00813\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00814}00814\ \textcolor{comment}{\ \ \ \ \ *\ \$Branch\ Coverage\ Justification\$}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00815}00815\ \textcolor{comment}{\ \ \ \ \ *\ (ctrl\ \&\ LPUART\_CTRL\_M7\_MASK)\ ==\ 0U)\ false\ is\ not\ covered.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00816}00816\ \textcolor{comment}{\ \ \ \ \ *\ If\ ctrl\ \&\ LPUART\_CTRL\_M7\_MASK\ is\ 0,\ it\ can't\ be\ !0\ in\ next\ judge.}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00817}00817\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00818}00818\ \ \ \ \ \textcolor{keywordtype}{bool}\ isSevenDataBits\ =\ (((ctrl\ \&\ LPUART\_CTRL\_M7\_MASK)\ !=\ 0U)\ ||}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((ctrl\ \&\ LPUART\_CTRL\_M7\_MASK)\ ==\ 0U)\ \&\&\ ((ctrl\ \&\ LPUART\_CTRL\_M\_MASK)\ ==\ 0U)\ \&\&}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((ctrl\ \&\ LPUART\_CTRL\_PE\_MASK)\ !=\ 0U)));}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00821}00821\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00822}00822\ \ \ \ \ \textcolor{keywordflow}{if}\ (isSevenDataBits)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00823}00823\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00824}00824\ \ \ \ \ \ \ \ \ result\ =\ (uint8\_t)(base-\/>\doxymbox{\hyperlink{structLPUART__Type_a6885eb33ef67e1ffaa0e725fc1b71f82}{DATA}}\ \&\ 0x7FU);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00825}00825\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00826}00826\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00827}00827\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00828}00828\ \ \ \ \ \ \ \ \ result\ =\ (uint8\_t)base-\/>\doxymbox{\hyperlink{structLPUART__Type_a6885eb33ef67e1ffaa0e725fc1b71f82}{DATA}};}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00829}00829\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00831}00831\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00832}00832\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00833}00833\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)(base-\/>\doxymbox{\hyperlink{structLPUART__Type_a6885eb33ef67e1ffaa0e725fc1b71f82}{DATA}});}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00834}00834\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00835}00835\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00836}00836\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00837}00837\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_LPUART\_HAS\_FIFO)\ \&\&\ FSL\_FEATURE\_LPUART\_HAS\_FIFO}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00844}00844\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ LPUART\_GetRxFifoCount(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00845}00845\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00846}00846\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)((base-\/>WATER\ \&\ LPUART\_WATER\_RXCOUNT\_MASK)\ >>\ LPUART\_WATER\_RXCOUNT\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00847}00847\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00848}00848\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00855}00855\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint8\_t\ LPUART\_GetTxFifoCount(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00856}00856\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00857}00857\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint8\_t)((base-\/>WATER\ \&\ LPUART\_WATER\_TXCOUNT\_MASK)\ >>\ LPUART\_WATER\_TXCOUNT\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00858}00858\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00859}00859\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00860}00860\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00867}00867\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga85a7dbe15a9f822847791cebe75d5394}{LPUART\_SendAddress}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint8\_t\ address);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00868}00868\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00881}00881\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_ga2699958de62ff4832f95bc2dd8c454a5}{LPUART\_WriteBlocking}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keyword}{const}\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00882}00882\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00895}00895\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_ga01d146f5e1b46526d460c5f7aae3891d}{LPUART\_WriteBlocking16bit}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keyword}{const}\ uint16\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00896}00896\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00913}00913\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gae76aba14dbfe94124082785e2c0ecd9d}{LPUART\_ReadBlocking}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint8\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00914}00914\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00930}00930\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_ga9c95aa20caeceb3d709dd7851ce84eb1}{LPUART\_ReadBlocking16bit}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ uint16\_t\ *data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00931}00931\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00933}00933\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00938}00938\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00957}00957\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga10eae12610523a624c1016882f8dba5f}{LPUART\_TransferCreateHandle}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00958}00958\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lpuart\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00959}00959\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga558e0c23c05831e446708a3935f36332}{lpuart\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00960}00960\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00980}00980\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gafba986c473e5935131e63cb882cf26ff}{LPUART\_TransferSendNonBlocking}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00981}00981\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l00999}00999\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga5257b77491042af5913a8d91c66318e1}{LPUART\_TransferStartRingBuffer}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01000}01000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lpuart\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01001}01001\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *ringBuffer,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01002}01002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ ringBufferSize);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01003}01003\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01012}01012\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gad6a230a664808592aab153ea20e3d60b}{LPUART\_TransferStopRingBuffer}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01013}01013\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01021}01021\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{group__lpuart__driver_ga550523d301acfa413919c2f979228bcc}{LPUART\_TransferGetRxRingBufferLength}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01022}01022\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01032}01032\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga6dfe9efe9656e126c70ee79fa03f2be3}{LPUART\_TransferAbortSend}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01033}01033\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01046}01046\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gad80d2469dce0de9361e731e4cefde9fd}{LPUART\_TransferGetSendCount}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01047}01047\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01074}01074\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_ga8bdb584704ce7955004751e32627f918}{LPUART\_TransferReceiveNonBlocking}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01075}01075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lpuart\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01076}01076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__lpuart__driver_ga3aa4668de3b88738217a6dad33354b37}{lpuart\_transfer\_t}}\ *xfer,}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01077}01077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ *receivedBytes);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01078}01078\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01088}01088\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga4950fa0f3835992251c109f655a3ca7d}{LPUART\_TransferAbortReceive}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01089}01089\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01102}01102\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__lpuart__driver_gabfcdc658c463e9e7523cc60c5e8f9672}{LPUART\_TransferGetReceiveCount}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ lpuart\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01103}01103\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01112}01112\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga6377050807e670565fe51b71c95a923c}{LPUART\_TransferHandleIRQ}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *irqHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01113}01113\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01122}01122\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_ga277f4cfc074cf67c2c27082df630f2da}{LPUART\_TransferHandleErrorIRQ}}(\doxymbox{\hyperlink{structLPUART__Type}{LPUART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *irqHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01123}01123\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01131}01131\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__lpuart__driver_gab091154d04cc437a7674ea488233298e}{LPUART\_DriverIRQHandler}}(uint32\_t\ instance);}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01132}01132\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01134}01134\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01135}01135\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01136}01136\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01137}01137\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01138}01138\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01140}01140\ }
+\DoxyCodeLine{\Hypertarget{fsl__lpuart_8h_source_l01141}01141\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_LPUART\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,8 @@
+var group__VREF__Peripheral__Access__Layer =
+[
+    [ "VREF Register Masks", "group__VREF__Register__Masks.html", "group__VREF__Register__Masks" ],
+    [ "VREF_Type", "structVREF__Type.html", [
+      [ "SC", "structVREF__Type.html#a93380066788c4a4c715990e2d34ec5b1", null ],
+      [ "TRM", "structVREF__Type.html#a374f2e0a8c240329890c6847d8560737", null ]
+    ] ]
+];

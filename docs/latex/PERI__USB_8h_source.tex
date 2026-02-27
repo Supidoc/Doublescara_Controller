@@ -1,0 +1,654 @@
+\doxysection{PERI\+\_\+\+USB.\+h}
+\hypertarget{PERI__USB_8h_source}{}\label{PERI__USB_8h_source}\index{device/periph20/PERI\_USB.h@{device/periph20/PERI\_USB.h}}
+\doxymbox{\hyperlink{PERI__USB_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00002}00002\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Processors:\ \ \ \ \ \ \ \ \ \ MK22FN512CAP12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VDC12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VFX12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLL12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VMP12}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Version:\ \ \ \ \ \ \ \ \ \ \ \ \ rev.\ 3.0,\ 2024-\/10-\/29}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ Build:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b250520}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00012}00012\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ Abstract:}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ CMSIS\ Peripheral\ Access\ Layer\ for\ USB}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 1997-\/2016\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00019}00019\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ http:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ www.nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ mail:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ support@nxp.com}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00022}00022\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ Revisions:}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00024}00024\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.0\ (2013-\/07-\/23)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Initial\ version.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.1\ (2013-\/09-\/17)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ RM\ rev.\ 0.4\ update.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00028}00028\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.0\ (2013-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Register\ accessor\ macros\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Symbols\ for\ Processor\ Expert\ memory\ map\ compatibility\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00031}00031\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Startup\ file\ for\ gcc\ has\ been\ updated\ according\ to\ CMSIS\ 3.2.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ System\ initialization\ updated.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.1\ (2013-\/10-\/30)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Definition\ of\ BITBAND\ macros\ updated\ to\ support\ peripherals\ with\ 32-\/bit\ acces\ disabled.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.2\ (2013-\/12-\/20)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.6,}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.3\ (2014-\/01-\/13)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.61,}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.4\ (2014-\/02-\/10)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ The\ declaration\ of\ clock\ configurations\ has\ been\ moved\ to\ separate\ header\ file\ system\_MK22F51212.h}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.5\ (2014-\/05-\/06)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 1.0,}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ and\ startup\ files.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Module\ access\ macro\ module\_BASES\ replaced\ by\ module\_BASE\_PTRS.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00045}00045\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.6\ (2014-\/08-\/28)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ files\ -\/\ default\ clock\ configuration\ changed.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00047}00047\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ startup\ files\ -\/\ possibility\ to\ override\ DefaultISR\ added.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.7\ (2014-\/10-\/14)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Interrupt\ INT\_LPTimer\ renamed\ to\ INT\_LPTMR0,\ interrupt\ INT\_Watchdog\ renamed\ to\ INT\_WDOG\_EWM.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00050}00050\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.8\ (2015-\/02-\/19)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Renamed\ interrupt\ vector\ LLW\ to\ LLWU.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.9\ (2016-\/03-\/21)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Added\ MK22FN512VFX12\ part.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00054}00054\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GPIO\ -\/\ renamed\ port\ instances:\ PTx\ -\/>\ GPIOx.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 3.0\ (2024-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Change\ the\ device\ header\ file\ from\ single\ flat\ file\ to\ multiple\ files\ based\ on\ peripherals,}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ each\ peripheral\ with\ dedicated\ header\ file\ located\ in\ periphN\ folder.}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00058}00058\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00059}00059\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00060}00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00071}00071\ \textcolor{preprocessor}{\#if\ !defined(PERI\_USB\_H\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00072}\doxymbox{\hyperlink{PERI__USB_8h_a372bbee887d43f47eaacfad0cca177a5}{00072}}\ \textcolor{preprocessor}{\#define\ PERI\_USB\_H\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00074}00074\ \textcolor{preprocessor}{\#if\ (defined(CPU\_MK22FN512CAP12)\ ||\ defined(CPU\_MK22FN512VDC12)\ ||\ defined(CPU\_MK22FN512VFX12)\ ||\ defined(CPU\_MK22FN512VLH12)\ ||\ defined(CPU\_MK22FN512VLL12)\ ||\ defined(CPU\_MK22FN512VMP12))}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00075}00075\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{MK22F51212__COMMON_8h}{MK22F51212\_COMMON.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00076}00076\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \#error\ "{}No\ valid\ CPU\ defined!"{}}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00078}00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00080}00080\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ -\/-\/\ Device\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00090}00090\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00091}00091\ \textcolor{comment}{**\ Start\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00092}00092\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00094}00094\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ anon\_unions}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00101}00101\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \#pragma\ push}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \#pragma\ cpp\_extensions\ on}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00104}00104\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00105}00105\ \ \ \textcolor{comment}{/*\ anonymous\ unions\ are\ enabled\ by\ default\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00106}00106\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \#pragma\ language=extended}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00108}00108\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00110}00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00112}00112\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ -\/-\/\ USB\ Peripheral\ Access\ Layer}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00122}\doxymbox{\hyperlink{group__USB__Peripheral__Access__Layer_gaf3d792252bf7d3b2a624614acbed197e}{00122}}\ \textcolor{preprocessor}{\#define\ USB\_ENDPOINT\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16u}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00125}\doxymbox{\hyperlink{structUSB__Type}{00125}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00126}\doxymbox{\hyperlink{structUSB__Type_a2e5e3896393e567c46fbcfe1ea92bade}{00126}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a2e5e3896393e567c46fbcfe1ea92bade}{PERID}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00127}00127\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_0[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00128}\doxymbox{\hyperlink{structUSB__Type_afff047b66a448cfa17baf6acf33fd58a}{00128}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_afff047b66a448cfa17baf6acf33fd58a}{IDCOMP}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00129}00129\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_1[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00130}\doxymbox{\hyperlink{structUSB__Type_aebfcc05a57aa51e7cdeb38d058ccd5f1}{00130}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_aebfcc05a57aa51e7cdeb38d058ccd5f1}{REV}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00131}00131\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_2[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00132}\doxymbox{\hyperlink{structUSB__Type_a7271c06f949d448fa10196e2bb10bd93}{00132}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a7271c06f949d448fa10196e2bb10bd93}{ADDINFO}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00133}00133\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_3[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00134}\doxymbox{\hyperlink{structUSB__Type_a33ddb4989093727ebbeaabdcbb30a9be}{00134}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a33ddb4989093727ebbeaabdcbb30a9be}{OTGISTAT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00135}00135\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_4[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00136}\doxymbox{\hyperlink{structUSB__Type_ac63531ec3a52f634997a5f27a938232e}{00136}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_ac63531ec3a52f634997a5f27a938232e}{OTGICR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00137}00137\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_5[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00138}\doxymbox{\hyperlink{structUSB__Type_adb73c0ed8ec05b05499d164fee6a6d9c}{00138}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_adb73c0ed8ec05b05499d164fee6a6d9c}{OTGSTAT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00139}00139\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_6[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00140}\doxymbox{\hyperlink{structUSB__Type_a29fdcad4635573158769b379244874c6}{00140}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a29fdcad4635573158769b379244874c6}{OTGCTL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00141}00141\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_7[99];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00142}\doxymbox{\hyperlink{structUSB__Type_aaea8dad14f2d470b66a880384aef09d8}{00142}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_aaea8dad14f2d470b66a880384aef09d8}{ISTAT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00143}00143\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_8[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00144}\doxymbox{\hyperlink{structUSB__Type_afbe12dd614f13edb2741464672b0d411}{00144}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_afbe12dd614f13edb2741464672b0d411}{INTEN}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00145}00145\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_9[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00146}\doxymbox{\hyperlink{structUSB__Type_af3e1c49392d797dfdc81155e0b37a80b}{00146}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_af3e1c49392d797dfdc81155e0b37a80b}{ERRSTAT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00147}00147\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_10[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00148}\doxymbox{\hyperlink{structUSB__Type_a29f6538d60be550166683242c93649a7}{00148}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a29f6538d60be550166683242c93649a7}{ERREN}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00149}00149\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_11[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00150}\doxymbox{\hyperlink{structUSB__Type_a54025377f3daec606230cd235bd81916}{00150}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a54025377f3daec606230cd235bd81916}{STAT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00151}00151\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_12[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00152}\doxymbox{\hyperlink{structUSB__Type_ad66155614624c6dbd95f696e1a9f0f35}{00152}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_ad66155614624c6dbd95f696e1a9f0f35}{CTL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00153}00153\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_13[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00154}\doxymbox{\hyperlink{structUSB__Type_a8705f1ca0cd919f17cdd610a401de206}{00154}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a8705f1ca0cd919f17cdd610a401de206}{ADDR}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00155}00155\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_14[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00156}\doxymbox{\hyperlink{structUSB__Type_ae38659ba2c226f6bbe8618f9a2437ba3}{00156}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_ae38659ba2c226f6bbe8618f9a2437ba3}{BDTPAGE1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00157}00157\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_15[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00158}\doxymbox{\hyperlink{structUSB__Type_af0454bfe2e97064f2b6bd616350ec802}{00158}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_af0454bfe2e97064f2b6bd616350ec802}{FRMNUML}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00159}00159\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_16[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00160}\doxymbox{\hyperlink{structUSB__Type_a5d81326ef75b015cfa68f73b9c8434bf}{00160}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a5d81326ef75b015cfa68f73b9c8434bf}{FRMNUMH}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00161}00161\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_17[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00162}\doxymbox{\hyperlink{structUSB__Type_a58b9187d7f4a00613210eae025612065}{00162}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a58b9187d7f4a00613210eae025612065}{TOKEN}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00163}00163\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_18[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00164}\doxymbox{\hyperlink{structUSB__Type_a5567027779ec927376c0d8a60d53fb24}{00164}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a5567027779ec927376c0d8a60d53fb24}{SOFTHLD}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00165}00165\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_19[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00166}\doxymbox{\hyperlink{structUSB__Type_af2c91cae21a7dc71675b828c242ff14a}{00166}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_af2c91cae21a7dc71675b828c242ff14a}{BDTPAGE2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00167}00167\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_20[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00168}\doxymbox{\hyperlink{structUSB__Type_a37e2eedfdddb0094778c619167cac252}{00168}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a37e2eedfdddb0094778c619167cac252}{BDTPAGE3}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00169}00169\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_21[11];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00170}00170\ \ \ \textcolor{keyword}{struct\ }\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ offset:\ 0xC0,\ array\ step:\ 0x4\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00171}\doxymbox{\hyperlink{structUSB__Type_ae31e5076afa4cee3a94c6b57b374426a}{00171}}\ \ \ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_ae31e5076afa4cee3a94c6b57b374426a}{ENDPT}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_0[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00173}00173\ \ \ \}\ ENDPOINT[\doxymbox{\hyperlink{group__USB__Peripheral__Access__Layer_gaf3d792252bf7d3b2a624614acbed197e}{USB\_ENDPOINT\_COUNT}}];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00174}\doxymbox{\hyperlink{structUSB__Type_a7d0fdec2bab11d450d49677fc0bf729c}{00174}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a7d0fdec2bab11d450d49677fc0bf729c}{USBCTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00175}00175\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_22[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00176}\doxymbox{\hyperlink{structUSB__Type_aa8cbc53b1ddc255d7be917ba3fc6b1f1}{00176}}\ \ \ \_\_I\ \ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_aa8cbc53b1ddc255d7be917ba3fc6b1f1}{OBSERVE}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00177}00177\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_23[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00178}\doxymbox{\hyperlink{structUSB__Type_a093d9b4052a399ff21b6694034333f08}{00178}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a093d9b4052a399ff21b6694034333f08}{CONTROL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00179}00179\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_24[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00180}\doxymbox{\hyperlink{structUSB__Type_a0381c5afae0f997f54326c00e494d71c}{00180}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a0381c5afae0f997f54326c00e494d71c}{USBTRC0}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00181}00181\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_25[7];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00182}\doxymbox{\hyperlink{structUSB__Type_a32e51e60eb32b6754162c3e4a9a054e1}{00182}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a32e51e60eb32b6754162c3e4a9a054e1}{USBFRMADJUST}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00183}00183\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_26[43];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00184}\doxymbox{\hyperlink{structUSB__Type_ae1fac00c5ed2a5d93d87ab429a2e7f4f}{00184}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_ae1fac00c5ed2a5d93d87ab429a2e7f4f}{CLK\_RECOVER\_CTRL}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00185}00185\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_27[3];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00186}\doxymbox{\hyperlink{structUSB__Type_a80fb0714f5079cacf75a9b8d1e8bd4ed}{00186}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a80fb0714f5079cacf75a9b8d1e8bd4ed}{CLK\_RECOVER\_IRC\_EN}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00187}00187\ \ \ \ \ \ \ \ uint8\_t\ RESERVED\_28[23];}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00188}\doxymbox{\hyperlink{structUSB__Type_a4029c33c535571c3fd55577bc1c37cc4}{00188}}\ \ \ \_\_IO\ uint8\_t\ \doxymbox{\hyperlink{structUSB__Type_a4029c33c535571c3fd55577bc1c37cc4}{CLK\_RECOVER\_INT\_STATUS}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00189}00189\ \}\ \doxymbox{\hyperlink{structUSB__Type}{USB\_Type}};}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00191}00191\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00192}00192\ \textcolor{comment}{\ \ \ -\/-\/\ USB\ Register\ Masks}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00193}00193\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00203}00203\ \textcolor{preprocessor}{\#define\ USB\_PERID\_ID\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00204}00204\ \textcolor{preprocessor}{\#define\ USB\_PERID\_ID\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00206}\doxymbox{\hyperlink{group__USB__Register__Masks_gad306299b648ed1827f0b4a6ad1c81c1d}{00206}}\ \textcolor{preprocessor}{\#define\ USB\_PERID\_ID(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_PERID\_ID\_SHIFT))\ \&\ USB\_PERID\_ID\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00212}00212\ \textcolor{preprocessor}{\#define\ USB\_IDCOMP\_NID\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x3FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00213}00213\ \textcolor{preprocessor}{\#define\ USB\_IDCOMP\_NID\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00214}00214\ \textcolor{preprocessor}{\#define\ USB\_IDCOMP\_NID(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_IDCOMP\_NID\_SHIFT))\ \&\ USB\_IDCOMP\_NID\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00220}00220\ \textcolor{preprocessor}{\#define\ USB\_REV\_REV\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00221}00221\ \textcolor{preprocessor}{\#define\ USB\_REV\_REV\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00223}\doxymbox{\hyperlink{group__USB__Register__Masks_ga30e7698a3bfac84ce89aee7d2d0498f4}{00223}}\ \textcolor{preprocessor}{\#define\ USB\_REV\_REV(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_REV\_REV\_SHIFT))\ \&\ USB\_REV\_REV\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00229}00229\ \textcolor{preprocessor}{\#define\ USB\_ADDINFO\_IEHOST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00230}00230\ \textcolor{preprocessor}{\#define\ USB\_ADDINFO\_IEHOST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00231}00231\ \textcolor{preprocessor}{\#define\ USB\_ADDINFO\_IEHOST(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ADDINFO\_IEHOST\_SHIFT))\ \&\ USB\_ADDINFO\_IEHOST\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00237}00237\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_AVBUSCHG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00238}00238\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_AVBUSCHG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00239}00239\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_AVBUSCHG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_AVBUSCHG\_SHIFT))\ \&\ USB\_OTGISTAT\_AVBUSCHG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00241}00241\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_B\_SESS\_CHG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00242}00242\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_B\_SESS\_CHG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00243}00243\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_B\_SESS\_CHG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_B\_SESS\_CHG\_SHIFT))\ \&\ USB\_OTGISTAT\_B\_SESS\_CHG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_SESSVLDCHG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00246}00246\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_SESSVLDCHG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ (3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00247}00247\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_SESSVLDCHG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_SESSVLDCHG\_SHIFT))\ \&\ USB\_OTGISTAT\_SESSVLDCHG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00249}00249\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_LINE\_STATE\_CHG\_MASK\ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00250}00250\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_LINE\_STATE\_CHG\_SHIFT\ \ \ \ \ \ \ \ (5U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_LINE\_STATE\_CHG(x)\ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_LINE\_STATE\_CHG\_SHIFT))\ \&\ USB\_OTGISTAT\_LINE\_STATE\_CHG\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00253}00253\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_ONEMSEC\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00254}00254\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_ONEMSEC\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00255}00255\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_ONEMSEC(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_ONEMSEC\_SHIFT))\ \&\ USB\_OTGISTAT\_ONEMSEC\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00257}00257\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_IDCHG\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00258}00258\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_IDCHG\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00259}00259\ \textcolor{preprocessor}{\#define\ USB\_OTGISTAT\_IDCHG(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGISTAT\_IDCHG\_SHIFT))\ \&\ USB\_OTGISTAT\_IDCHG\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00265}00265\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_AVBUSEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00266}00266\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_AVBUSEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00271}\doxymbox{\hyperlink{group__USB__Register__Masks_ga06f194e929b2900d37dc38947dad3494}{00271}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_AVBUSEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_AVBUSEN\_SHIFT))\ \&\ USB\_OTGICR\_AVBUSEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00273}00273\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_BSESSEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00274}00274\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_BSESSEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00279}\doxymbox{\hyperlink{group__USB__Register__Masks_ga71e9f843e6727f7f1e7692749d58710a}{00279}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_BSESSEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_BSESSEN\_SHIFT))\ \&\ USB\_OTGICR\_BSESSEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00281}00281\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_SESSVLDEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00282}00282\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_SESSVLDEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00287}\doxymbox{\hyperlink{group__USB__Register__Masks_gaefa67a953a6b7cc1ce8359265d288f3c}{00287}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_SESSVLDEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_SESSVLDEN\_SHIFT))\ \&\ USB\_OTGICR\_SESSVLDEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00289}00289\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_LINESTATEEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00290}00290\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_LINESTATEEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00295}\doxymbox{\hyperlink{group__USB__Register__Masks_gad0fdbf16d1db801b5c0d724fab29bdcf}{00295}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_LINESTATEEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_LINESTATEEN\_SHIFT))\ \&\ USB\_OTGICR\_LINESTATEEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00297}00297\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_ONEMSECEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00298}00298\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_ONEMSECEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00303}\doxymbox{\hyperlink{group__USB__Register__Masks_gaa9d4e3dff8875d4766dcc81e91d46491}{00303}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_ONEMSECEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_ONEMSECEN\_SHIFT))\ \&\ USB\_OTGICR\_ONEMSECEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00305}00305\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_IDEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00306}00306\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_IDEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00311}\doxymbox{\hyperlink{group__USB__Register__Masks_gad4246c9dd6d1025b242b2359507b9ac3}{00311}}\ \textcolor{preprocessor}{\#define\ USB\_OTGICR\_IDEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGICR\_IDEN\_SHIFT))\ \&\ USB\_OTGICR\_IDEN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00317}00317\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_AVBUSVLD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00318}00318\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_AVBUSVLD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00323}\doxymbox{\hyperlink{group__USB__Register__Masks_ga5a189909285a57f1076d9c2f860d7b71}{00323}}\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_AVBUSVLD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_AVBUSVLD\_SHIFT))\ \&\ USB\_OTGSTAT\_AVBUSVLD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00325}00325\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_BSESSEND\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00326}00326\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_BSESSEND\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00331}\doxymbox{\hyperlink{group__USB__Register__Masks_ga65d653ad5cca1c118a26385b74ab9c40}{00331}}\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_BSESSEND(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_BSESSEND\_SHIFT))\ \&\ USB\_OTGSTAT\_BSESSEND\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00333}00333\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_SESS\_VLD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00334}00334\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_SESS\_VLD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00339}\doxymbox{\hyperlink{group__USB__Register__Masks_gac1508d9a4ed066ec8eee7c680ae72a8f}{00339}}\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_SESS\_VLD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_SESS\_VLD\_SHIFT))\ \&\ USB\_OTGSTAT\_SESS\_VLD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00341}00341\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_LINESTATESTABLE\_MASK\ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00342}00342\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_LINESTATESTABLE\_SHIFT\ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00347}\doxymbox{\hyperlink{group__USB__Register__Masks_ga3276c4f80d5d106f48ef29d41a6df5a9}{00347}}\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_LINESTATESTABLE(x)\ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_LINESTATESTABLE\_SHIFT))\ \&\ USB\_OTGSTAT\_LINESTATESTABLE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00349}00349\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ONEMSECEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00350}00350\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ONEMSECEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00351}00351\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ONEMSECEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_ONEMSECEN\_SHIFT))\ \&\ USB\_OTGSTAT\_ONEMSECEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00353}00353\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ID\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00354}00354\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ID\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00359}\doxymbox{\hyperlink{group__USB__Register__Masks_gabf0eb7179db616c9d26b69efe70d2366}{00359}}\ \textcolor{preprocessor}{\#define\ USB\_OTGSTAT\_ID(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGSTAT\_ID\_SHIFT))\ \&\ USB\_OTGSTAT\_ID\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00365}00365\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_OTGEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00366}00366\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_OTGEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00372}\doxymbox{\hyperlink{group__USB__Register__Masks_ga5e783e811c3f041573490362baacb723}{00372}}\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_OTGEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGCTL\_OTGEN\_SHIFT))\ \&\ USB\_OTGCTL\_OTGEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00373}00373\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00374}00374\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DMLOW\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00375}00375\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DMLOW\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00380}\doxymbox{\hyperlink{group__USB__Register__Masks_ga6e3236832190e5a0774872244aab3223}{00380}}\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DMLOW(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGCTL\_DMLOW\_SHIFT))\ \&\ USB\_OTGCTL\_DMLOW\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00382}00382\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPLOW\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00383}00383\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPLOW\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00388}\doxymbox{\hyperlink{group__USB__Register__Masks_ga7620238bdd46f65a58ce5713a301bfc5}{00388}}\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPLOW(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGCTL\_DPLOW\_SHIFT))\ \&\ USB\_OTGCTL\_DPLOW\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00390}00390\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPHIGH\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00391}00391\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPHIGH\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00396}\doxymbox{\hyperlink{group__USB__Register__Masks_gaf606f58fa2872eb5ff39eb9ca5c740bd}{00396}}\ \textcolor{preprocessor}{\#define\ USB\_OTGCTL\_DPHIGH(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OTGCTL\_DPHIGH\_SHIFT))\ \&\ USB\_OTGCTL\_DPHIGH\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00402}00402\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_USBRST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00403}00403\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_USBRST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00404}00404\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_USBRST(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_USBRST\_SHIFT))\ \&\ USB\_ISTAT\_USBRST\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00406}00406\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ERROR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00407}00407\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ERROR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00408}00408\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ERROR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_ERROR\_SHIFT))\ \&\ USB\_ISTAT\_ERROR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00410}00410\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SOFTOK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00411}00411\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SOFTOK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00412}00412\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SOFTOK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_SOFTOK\_SHIFT))\ \&\ USB\_ISTAT\_SOFTOK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_TOKDNE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00415}00415\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_TOKDNE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00416}00416\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_TOKDNE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_TOKDNE\_SHIFT))\ \&\ USB\_ISTAT\_TOKDNE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00418}00418\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SLEEP\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00419}00419\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SLEEP\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00420}00420\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_SLEEP(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_SLEEP\_SHIFT))\ \&\ USB\_ISTAT\_SLEEP\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00422}00422\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_RESUME\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00423}00423\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_RESUME\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00424}00424\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_RESUME(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_RESUME\_SHIFT))\ \&\ USB\_ISTAT\_RESUME\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00426}00426\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ATTACH\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00427}00427\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ATTACH\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00429}\doxymbox{\hyperlink{group__USB__Register__Masks_ga0f7e6b80eaa37bc095e29020ed9479ef}{00429}}\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_ATTACH(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_ATTACH\_SHIFT))\ \&\ USB\_ISTAT\_ATTACH\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00431}00431\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_STALL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00432}00432\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_STALL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00434}\doxymbox{\hyperlink{group__USB__Register__Masks_gafd22a3ab3195553330b51721fa0ffbf3}{00434}}\ \textcolor{preprocessor}{\#define\ USB\_ISTAT\_STALL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ISTAT\_STALL\_SHIFT))\ \&\ USB\_ISTAT\_STALL\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00440}00440\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_USBRSTEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00441}00441\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_USBRSTEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00446}\doxymbox{\hyperlink{group__USB__Register__Masks_ga9adae8276677c093c8b86f2198ae27bb}{00446}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_USBRSTEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_USBRSTEN\_SHIFT))\ \&\ USB\_INTEN\_USBRSTEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00448}00448\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ERROREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00449}00449\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ERROREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00454}\doxymbox{\hyperlink{group__USB__Register__Masks_ga0d5944dbfdce653f192a20b6664ebcba}{00454}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ERROREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_ERROREN\_SHIFT))\ \&\ USB\_INTEN\_ERROREN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00456}00456\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SOFTOKEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00457}00457\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SOFTOKEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00462}\doxymbox{\hyperlink{group__USB__Register__Masks_ga18c02f9334adbb0d5221e89b7a38279d}{00462}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SOFTOKEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_SOFTOKEN\_SHIFT))\ \&\ USB\_INTEN\_SOFTOKEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00464}00464\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_TOKDNEEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00465}00465\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_TOKDNEEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00470}\doxymbox{\hyperlink{group__USB__Register__Masks_ga44ac403f2bcc92e328bbd667ecbc3cda}{00470}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_TOKDNEEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_TOKDNEEN\_SHIFT))\ \&\ USB\_INTEN\_TOKDNEEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00472}00472\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SLEEPEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00473}00473\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SLEEPEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00478}\doxymbox{\hyperlink{group__USB__Register__Masks_ga11c1e1ba0d238744202095c978088a8a}{00478}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_SLEEPEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_SLEEPEN\_SHIFT))\ \&\ USB\_INTEN\_SLEEPEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00480}00480\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_RESUMEEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00481}00481\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_RESUMEEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00486}\doxymbox{\hyperlink{group__USB__Register__Masks_ga515a55937012d62911eafcb3e22054eb}{00486}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_RESUMEEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_RESUMEEN\_SHIFT))\ \&\ USB\_INTEN\_RESUMEEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00488}00488\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ATTACHEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00489}00489\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ATTACHEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00494}\doxymbox{\hyperlink{group__USB__Register__Masks_gaeb9287a86a008c7741d66d16e49ecea9}{00494}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_ATTACHEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_ATTACHEN\_SHIFT))\ \&\ USB\_INTEN\_ATTACHEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00496}00496\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_STALLEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00497}00497\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_STALLEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00502}\doxymbox{\hyperlink{group__USB__Register__Masks_ga9add456c958e299d486f5ca45a2379af}{00502}}\ \textcolor{preprocessor}{\#define\ USB\_INTEN\_STALLEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_INTEN\_STALLEN\_SHIFT))\ \&\ USB\_INTEN\_STALLEN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00504}00504\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00508}00508\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_PIDERR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00509}00509\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_PIDERR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00510}00510\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_PIDERR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_PIDERR\_SHIFT))\ \&\ USB\_ERRSTAT\_PIDERR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00511}00511\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00512}00512\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC5EOF\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00513}00513\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC5EOF\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00514}00514\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC5EOF(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_CRC5EOF\_SHIFT))\ \&\ USB\_ERRSTAT\_CRC5EOF\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00516}00516\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC16\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00517}00517\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC16\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00518}00518\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_CRC16(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_CRC16\_SHIFT))\ \&\ USB\_ERRSTAT\_CRC16\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00520}00520\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DFN8\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00521}00521\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DFN8\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00522}00522\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DFN8(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_DFN8\_SHIFT))\ \&\ USB\_ERRSTAT\_DFN8\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00524}00524\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTOERR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00525}00525\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTOERR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00526}00526\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTOERR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_BTOERR\_SHIFT))\ \&\ USB\_ERRSTAT\_BTOERR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00528}00528\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DMAERR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00529}00529\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DMAERR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00530}00530\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_DMAERR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_DMAERR\_SHIFT))\ \&\ USB\_ERRSTAT\_DMAERR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00531}00531\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00532}00532\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTSERR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00533}00533\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTSERR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00534}00534\ \textcolor{preprocessor}{\#define\ USB\_ERRSTAT\_BTSERR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERRSTAT\_BTSERR\_SHIFT))\ \&\ USB\_ERRSTAT\_BTSERR\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00536}00536\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00540}00540\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_PIDERREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00541}00541\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_PIDERREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00546}\doxymbox{\hyperlink{group__USB__Register__Masks_gac8aff57d3636da4ea876d6b9666eb9c8}{00546}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_PIDERREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_PIDERREN\_SHIFT))\ \&\ USB\_ERREN\_PIDERREN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00547}00547\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00548}00548\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC5EOFEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00549}00549\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC5EOFEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00554}\doxymbox{\hyperlink{group__USB__Register__Masks_ga0fdb8376f0e47f96561ee2953e225ff6}{00554}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC5EOFEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_CRC5EOFEN\_SHIFT))\ \&\ USB\_ERREN\_CRC5EOFEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00555}00555\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00556}00556\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC16EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00557}00557\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC16EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00562}\doxymbox{\hyperlink{group__USB__Register__Masks_gab790bf2a5fa9f59ed6d50f0e1ea812f3}{00562}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_CRC16EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_CRC16EN\_SHIFT))\ \&\ USB\_ERREN\_CRC16EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00563}00563\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00564}00564\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DFN8EN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00565}00565\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DFN8EN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00570}\doxymbox{\hyperlink{group__USB__Register__Masks_ga7b04fb03c3c9e21455addc61a82203e2}{00570}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DFN8EN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_DFN8EN\_SHIFT))\ \&\ USB\_ERREN\_DFN8EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00572}00572\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTOERREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00573}00573\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTOERREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00578}\doxymbox{\hyperlink{group__USB__Register__Masks_gacd448b6d7c5031433ac1d25bfb7a5f0d}{00578}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTOERREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_BTOERREN\_SHIFT))\ \&\ USB\_ERREN\_BTOERREN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00579}00579\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00580}00580\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DMAERREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00581}00581\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DMAERREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00586}\doxymbox{\hyperlink{group__USB__Register__Masks_gae611010a73b86c738e27013a47be26e4}{00586}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_DMAERREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_DMAERREN\_SHIFT))\ \&\ USB\_ERREN\_DMAERREN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00588}00588\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTSERREN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00589}00589\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTSERREN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00594}\doxymbox{\hyperlink{group__USB__Register__Masks_gae03eeefc3a737fe0d1d31ae2305fe962}{00594}}\ \textcolor{preprocessor}{\#define\ USB\_ERREN\_BTSERREN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ERREN\_BTSERREN\_SHIFT))\ \&\ USB\_ERREN\_BTSERREN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00596}00596\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00600}00600\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ODD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00601}00601\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ODD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00602}00602\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ODD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_STAT\_ODD\_SHIFT))\ \&\ USB\_STAT\_ODD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00603}00603\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00604}00604\ \textcolor{preprocessor}{\#define\ USB\_STAT\_TX\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00605}00605\ \textcolor{preprocessor}{\#define\ USB\_STAT\_TX\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00610}\doxymbox{\hyperlink{group__USB__Register__Masks_ga879e6d045ec05d5edcad4e05e091c568}{00610}}\ \textcolor{preprocessor}{\#define\ USB\_STAT\_TX(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_STAT\_TX\_SHIFT))\ \&\ USB\_STAT\_TX\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00612}00612\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ENDP\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00613}00613\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ENDP\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00614}00614\ \textcolor{preprocessor}{\#define\ USB\_STAT\_ENDP(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_STAT\_ENDP\_SHIFT))\ \&\ USB\_STAT\_ENDP\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00620}00620\ \textcolor{preprocessor}{\#define\ USB\_CTL\_USBENSOFEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00621}00621\ \textcolor{preprocessor}{\#define\ USB\_CTL\_USBENSOFEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00626}\doxymbox{\hyperlink{group__USB__Register__Masks_gafcc995142941dbf5985fdd3b4c21ca81}{00626}}\ \textcolor{preprocessor}{\#define\ USB\_CTL\_USBENSOFEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_USBENSOFEN\_SHIFT))\ \&\ USB\_CTL\_USBENSOFEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00627}00627\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00628}00628\ \textcolor{preprocessor}{\#define\ USB\_CTL\_ODDRST\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00629}00629\ \textcolor{preprocessor}{\#define\ USB\_CTL\_ODDRST\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00630}00630\ \textcolor{preprocessor}{\#define\ USB\_CTL\_ODDRST(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_ODDRST\_SHIFT))\ \&\ USB\_CTL\_ODDRST\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00631}00631\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00632}00632\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESUME\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00633}00633\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESUME\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00634}00634\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESUME(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_RESUME\_SHIFT))\ \&\ USB\_CTL\_RESUME\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00635}00635\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00636}00636\ \textcolor{preprocessor}{\#define\ USB\_CTL\_HOSTMODEEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00637}00637\ \textcolor{preprocessor}{\#define\ USB\_CTL\_HOSTMODEEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00638}00638\ \textcolor{preprocessor}{\#define\ USB\_CTL\_HOSTMODEEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_HOSTMODEEN\_SHIFT))\ \&\ USB\_CTL\_HOSTMODEEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00639}00639\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00640}00640\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESET\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00641}00641\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESET\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00642}00642\ \textcolor{preprocessor}{\#define\ USB\_CTL\_RESET(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_RESET\_SHIFT))\ \&\ USB\_CTL\_RESET\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00644}00644\ \textcolor{preprocessor}{\#define\ USB\_CTL\_TXSUSPENDTOKENBUSY\_MASK\ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00645}00645\ \textcolor{preprocessor}{\#define\ USB\_CTL\_TXSUSPENDTOKENBUSY\_SHIFT\ \ \ \ \ \ \ \ \ (5U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00646}00646\ \textcolor{preprocessor}{\#define\ USB\_CTL\_TXSUSPENDTOKENBUSY(x)\ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_TXSUSPENDTOKENBUSY\_SHIFT))\ \&\ USB\_CTL\_TXSUSPENDTOKENBUSY\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00647}00647\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00648}00648\ \textcolor{preprocessor}{\#define\ USB\_CTL\_SE0\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00649}00649\ \textcolor{preprocessor}{\#define\ USB\_CTL\_SE0\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00651}\doxymbox{\hyperlink{group__USB__Register__Masks_ga438fbda9fa4299d7b9761ca3f63afa6d}{00651}}\ \textcolor{preprocessor}{\#define\ USB\_CTL\_SE0(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_SE0\_SHIFT))\ \&\ USB\_CTL\_SE0\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00652}00652\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00653}00653\ \textcolor{preprocessor}{\#define\ USB\_CTL\_JSTATE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00654}00654\ \textcolor{preprocessor}{\#define\ USB\_CTL\_JSTATE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00656}\doxymbox{\hyperlink{group__USB__Register__Masks_ga61736e62d6fdc40d1b100eadc0ab2be2}{00656}}\ \textcolor{preprocessor}{\#define\ USB\_CTL\_JSTATE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CTL\_JSTATE\_SHIFT))\ \&\ USB\_CTL\_JSTATE\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00661}00661\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00662}00662\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_ADDR\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x7FU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00663}00663\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_ADDR\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00665}\doxymbox{\hyperlink{group__USB__Register__Masks_gad42e50014eedee91315521b19199ef39}{00665}}\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_ADDR(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ADDR\_ADDR\_SHIFT))\ \&\ USB\_ADDR\_ADDR\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00666}00666\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00667}00667\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_LSEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00668}00668\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_LSEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00670}\doxymbox{\hyperlink{group__USB__Register__Masks_ga4e865cea820a5fafc3275610ccc2c0c4}{00670}}\ \textcolor{preprocessor}{\#define\ USB\_ADDR\_LSEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ADDR\_LSEN\_SHIFT))\ \&\ USB\_ADDR\_LSEN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00676}00676\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE1\_BDTBA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFEU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00677}00677\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE1\_BDTBA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00678}00678\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE1\_BDTBA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_BDTPAGE1\_BDTBA\_SHIFT))\ \&\ USB\_BDTPAGE1\_BDTBA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00680}00680\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00684}00684\ \textcolor{preprocessor}{\#define\ USB\_FRMNUML\_FRM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00685}00685\ \textcolor{preprocessor}{\#define\ USB\_FRMNUML\_FRM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00686}00686\ \textcolor{preprocessor}{\#define\ USB\_FRMNUML\_FRM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_FRMNUML\_FRM\_SHIFT))\ \&\ USB\_FRMNUML\_FRM\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00688}00688\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00691}00691\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00692}00692\ \textcolor{preprocessor}{\#define\ USB\_FRMNUMH\_FRM\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00693}00693\ \textcolor{preprocessor}{\#define\ USB\_FRMNUMH\_FRM\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00694}00694\ \textcolor{preprocessor}{\#define\ USB\_FRMNUMH\_FRM(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_FRMNUMH\_FRM\_SHIFT))\ \&\ USB\_FRMNUMH\_FRM\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00696}00696\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00699}00699\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00700}00700\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENENDPT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00701}00701\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENENDPT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00702}00702\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENENDPT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_TOKEN\_TOKENENDPT\_SHIFT))\ \&\ USB\_TOKEN\_TOKENENDPT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00703}00703\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00704}00704\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENPID\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xF0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00705}00705\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENPID\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00711}\doxymbox{\hyperlink{group__USB__Register__Masks_ga74fd206a0132343b30c41a2184f18ea0}{00711}}\ \textcolor{preprocessor}{\#define\ USB\_TOKEN\_TOKENPID(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_TOKEN\_TOKENPID\_SHIFT))\ \&\ USB\_TOKEN\_TOKENPID\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00713}00713\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00716}00716\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00717}00717\ \textcolor{preprocessor}{\#define\ USB\_SOFTHLD\_CNT\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00718}00718\ \textcolor{preprocessor}{\#define\ USB\_SOFTHLD\_CNT\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00719}00719\ \textcolor{preprocessor}{\#define\ USB\_SOFTHLD\_CNT(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_SOFTHLD\_CNT\_SHIFT))\ \&\ USB\_SOFTHLD\_CNT\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00724}00724\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00725}00725\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE2\_BDTBA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00726}00726\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE2\_BDTBA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00727}00727\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE2\_BDTBA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_BDTPAGE2\_BDTBA\_SHIFT))\ \&\ USB\_BDTPAGE2\_BDTBA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00729}00729\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00732}00732\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00733}00733\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE3\_BDTBA\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00734}00734\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE3\_BDTBA\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00735}00735\ \textcolor{preprocessor}{\#define\ USB\_BDTPAGE3\_BDTBA(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_BDTPAGE3\_BDTBA\_SHIFT))\ \&\ USB\_BDTPAGE3\_BDTBA\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00737}00737\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00740}00740\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00741}00741\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPHSHK\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00742}00742\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPHSHK\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00743}00743\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPHSHK(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_EPHSHK\_SHIFT))\ \&\ USB\_ENDPT\_EPHSHK\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00744}00744\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00745}00745\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPSTALL\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00746}00746\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPSTALL\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00747}00747\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPSTALL(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_EPSTALL\_SHIFT))\ \&\ USB\_ENDPT\_EPSTALL\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00748}00748\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00749}00749\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPTXEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00750}00750\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPTXEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00751}00751\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPTXEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_EPTXEN\_SHIFT))\ \&\ USB\_ENDPT\_EPTXEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00752}00752\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00753}00753\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPRXEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x8U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00754}00754\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPRXEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00755}00755\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPRXEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_EPRXEN\_SHIFT))\ \&\ USB\_ENDPT\_EPRXEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00756}00756\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00757}00757\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPCTLDIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00758}00758\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPCTLDIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00759}00759\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_EPCTLDIS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_EPCTLDIS\_SHIFT))\ \&\ USB\_ENDPT\_EPCTLDIS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00760}00760\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00761}00761\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_RETRYDIS\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00762}00762\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_RETRYDIS\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00763}00763\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_RETRYDIS(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_RETRYDIS\_SHIFT))\ \&\ USB\_ENDPT\_RETRYDIS\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00764}00764\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00765}00765\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_HOSTWOHUB\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00766}00766\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_HOSTWOHUB\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00767}00767\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_HOSTWOHUB(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_ENDPT\_HOSTWOHUB\_SHIFT))\ \&\ USB\_ENDPT\_HOSTWOHUB\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00769}00769\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00770}00770\ \textcolor{comment}{/*\ The\ count\ of\ USB\_ENDPT\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00771}00771\ \textcolor{preprocessor}{\#define\ USB\_ENDPT\_COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (16U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00772}00772\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00775}00775\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00776}00776\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_PDE\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00777}00777\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_PDE\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00782}\doxymbox{\hyperlink{group__USB__Register__Masks_ga6a35a726a9f00f3e8762aa76a95e4682}{00782}}\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_PDE(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBCTRL\_PDE\_SHIFT))\ \&\ USB\_USBCTRL\_PDE\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00783}00783\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00784}00784\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_SUSP\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00785}00785\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_SUSP\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00790}\doxymbox{\hyperlink{group__USB__Register__Masks_gacf465e2b204f5bb95e476574c35dd74a}{00790}}\ \textcolor{preprocessor}{\#define\ USB\_USBCTRL\_SUSP(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBCTRL\_SUSP\_SHIFT))\ \&\ USB\_USBCTRL\_SUSP\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00792}00792\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00796}00796\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DMPD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00797}00797\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DMPD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00802}\doxymbox{\hyperlink{group__USB__Register__Masks_gaa9e05cb77f4ac1c1dd88ba27574df3dc}{00802}}\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DMPD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OBSERVE\_DMPD\_SHIFT))\ \&\ USB\_OBSERVE\_DMPD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00803}00803\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00804}00804\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPD\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00805}00805\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPD\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00810}\doxymbox{\hyperlink{group__USB__Register__Masks_gab317284d7d9fc6132a9cd00293c69015}{00810}}\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPD(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OBSERVE\_DPPD\_SHIFT))\ \&\ USB\_OBSERVE\_DPPD\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00811}00811\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00812}00812\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPU\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00813}00813\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPU\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00818}\doxymbox{\hyperlink{group__USB__Register__Masks_gac95d445b08a1a0abb32095b3b6213f14}{00818}}\ \textcolor{preprocessor}{\#define\ USB\_OBSERVE\_DPPU(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_OBSERVE\_DPPU\_SHIFT))\ \&\ USB\_OBSERVE\_DPPU\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00820}00820\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00823}00823\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00824}00824\ \textcolor{preprocessor}{\#define\ USB\_CONTROL\_DPPULLUPNONOTG\_MASK\ \ \ \ \ \ \ \ \ \ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00825}00825\ \textcolor{preprocessor}{\#define\ USB\_CONTROL\_DPPULLUPNONOTG\_SHIFT\ \ \ \ \ \ \ \ \ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00830}\doxymbox{\hyperlink{group__USB__Register__Masks_gae22b0aee8222ab7dd6f06db5ab401558}{00830}}\ \textcolor{preprocessor}{\#define\ USB\_CONTROL\_DPPULLUPNONOTG(x)\ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CONTROL\_DPPULLUPNONOTG\_SHIFT))\ \&\ USB\_CONTROL\_DPPULLUPNONOTG\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00832}00832\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00835}00835\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00836}00836\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_RESUME\_INT\_MASK\ \ \ \ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00837}00837\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_RESUME\_INT\_SHIFT\ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00842}\doxymbox{\hyperlink{group__USB__Register__Masks_gaa9f049670f81705c2d16d233d26fcdef}{00842}}\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_RESUME\_INT(x)\ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBTRC0\_USB\_RESUME\_INT\_SHIFT))\ \&\ USB\_USBTRC0\_USB\_RESUME\_INT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00844}00844\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_SYNC\_DET\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00845}00845\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_SYNC\_DET\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00850}\doxymbox{\hyperlink{group__USB__Register__Masks_gaa41ec146d75f9df502036a725d938eb2}{00850}}\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_SYNC\_DET(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBTRC0\_SYNC\_DET\_SHIFT))\ \&\ USB\_USBTRC0\_SYNC\_DET\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00851}00851\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00852}00852\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_CLK\_RECOVERY\_INT\_MASK\ \ \ \ (0x4U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00853}00853\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_CLK\_RECOVERY\_INT\_SHIFT\ \ \ (2U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00855}\doxymbox{\hyperlink{group__USB__Register__Masks_ga894dfcada08a458b11641438d7ed4589}{00855}}\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USB\_CLK\_RECOVERY\_INT(x)\ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBTRC0\_USB\_CLK\_RECOVERY\_INT\_SHIFT))\ \&\ USB\_USBTRC0\_USB\_CLK\_RECOVERY\_INT\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00856}00856\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00857}00857\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESMEN\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00858}00858\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESMEN\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00865}\doxymbox{\hyperlink{group__USB__Register__Masks_ga8cfb473cdf63dce69fbae3b03e5fa0b9}{00865}}\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESMEN(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBTRC0\_USBRESMEN\_SHIFT))\ \&\ USB\_USBTRC0\_USBRESMEN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00866}00866\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00867}00867\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESET\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00868}00868\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESET\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00873}\doxymbox{\hyperlink{group__USB__Register__Masks_ga004b6aa65751423c60c2fecc27798d47}{00873}}\ \textcolor{preprocessor}{\#define\ USB\_USBTRC0\_USBRESET(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBTRC0\_USBRESET\_SHIFT))\ \&\ USB\_USBTRC0\_USBRESET\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00875}00875\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00878}00878\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00879}00879\ \textcolor{preprocessor}{\#define\ USB\_USBFRMADJUST\_ADJ\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0xFFU)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00880}00880\ \textcolor{preprocessor}{\#define\ USB\_USBFRMADJUST\_ADJ\_SHIFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00882}\doxymbox{\hyperlink{group__USB__Register__Masks_ga9425a289b2e719d6aad583a33ddf1e4b}{00882}}\ \textcolor{preprocessor}{\#define\ USB\_USBFRMADJUST\_ADJ(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_USBFRMADJUST\_ADJ\_SHIFT))\ \&\ USB\_USBFRMADJUST\_ADJ\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00884}00884\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00887}00887\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00888}00888\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESTART\_IFRTRIM\_EN\_MASK\ (0x20U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00889}00889\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESTART\_IFRTRIM\_EN\_SHIFT\ (5U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00894}\doxymbox{\hyperlink{group__USB__Register__Masks_gada4fdb1916b81069fbd064c0493cad58}{00894}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESTART\_IFRTRIM\_EN(x)\ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_CTRL\_RESTART\_IFRTRIM\_EN\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_CTRL\_RESTART\_IFRTRIM\_EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00895}00895\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00896}00896\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESET\_RESUME\_ROUGH\_EN\_MASK\ (0x40U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00897}00897\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESET\_RESUME\_ROUGH\_EN\_SHIFT\ (6U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00902}\doxymbox{\hyperlink{group__USB__Register__Masks_ga8d125bb7030c1076bfeee0699b4ef507}{00902}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_RESET\_RESUME\_ROUGH\_EN(x)\ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_CTRL\_RESET\_RESUME\_ROUGH\_EN\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_CTRL\_RESET\_RESUME\_ROUGH\_EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00903}00903\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00904}00904\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_CLOCK\_RECOVER\_EN\_MASK\ (0x80U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00905}00905\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_CLOCK\_RECOVER\_EN\_SHIFT\ (7U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00910}\doxymbox{\hyperlink{group__USB__Register__Masks_gab2e71afbcf36a633273539e09cac475e}{00910}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_CTRL\_CLOCK\_RECOVER\_EN(x)\ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_CTRL\_CLOCK\_RECOVER\_EN\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_CTRL\_CLOCK\_RECOVER\_EN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00912}00912\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00915}00915\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00916}00916\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_REG\_EN\_MASK\ \ \ \ \ \ \ (0x1U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00917}00917\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_REG\_EN\_SHIFT\ \ \ \ \ \ (0U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00922}\doxymbox{\hyperlink{group__USB__Register__Masks_gabe4ce60e9a611bbd29f16bc9a09781b6}{00922}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_REG\_EN(x)\ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_IRC\_EN\_REG\_EN\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_IRC\_EN\_REG\_EN\_MASK)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00923}00923\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00924}00924\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_IRC\_EN\_MASK\ \ \ \ \ \ \ (0x2U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00925}00925\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_IRC\_EN\_SHIFT\ \ \ \ \ \ (1U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00930}\doxymbox{\hyperlink{group__USB__Register__Masks_gac47a28e4b3e9a5ff688770af8f7d6fc1}{00930}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_IRC\_EN\_IRC\_EN(x)\ \ \ \ \ \ \ \ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_IRC\_EN\_IRC\_EN\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_IRC\_EN\_IRC\_EN\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00932}00932\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00935}00935\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00936}00936\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_INT\_STATUS\_OVF\_ERROR\_MASK\ (0x10U)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00937}00937\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_INT\_STATUS\_OVF\_ERROR\_SHIFT\ (4U)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00942}\doxymbox{\hyperlink{group__USB__Register__Masks_ga24f0317159c6d0686ee348c7579fbadf}{00942}}\ \textcolor{preprocessor}{\#define\ USB\_CLK\_RECOVER\_INT\_STATUS\_OVF\_ERROR(x)\ \ (((uint8\_t)(((uint8\_t)(x))\ <<\ USB\_CLK\_RECOVER\_INT\_STATUS\_OVF\_ERROR\_SHIFT))\ \&\ USB\_CLK\_RECOVER\_INT\_STATUS\_OVF\_ERROR\_MASK)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00944}00944\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00945}00945\ \ \textcolor{comment}{/*\ end\ of\ group\ USB\_Register\_Masks\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00949}00949\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00950}00950\ \ \textcolor{comment}{/*\ end\ of\ group\ USB\_Peripheral\_Access\_Layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00954}00954\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00955}00955\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00956}00956\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00957}00957\ \textcolor{comment}{**\ End\ of\ section\ using\ anonymous\ unions}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00958}00958\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00959}00959\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00960}00960\ \textcolor{preprocessor}{\#if\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00961}00961\ \textcolor{preprocessor}{\ \ \#if\ (\_\_ARMCC\_VERSION\ >=\ 6010050)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00962}00962\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00963}00963\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00964}00964\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00965}00965\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00966}00966\ \textcolor{preprocessor}{\#elif\ defined(\_\_CWCC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00967}00967\ \textcolor{preprocessor}{\ \ \#pragma\ pop}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00968}00968\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00969}00969\ \ \ \textcolor{comment}{/*\ leave\ anonymous\ unions\ enabled\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00970}00970\ \textcolor{preprocessor}{\#elif\ defined(\_\_IAR\_SYSTEMS\_ICC\_\_)}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00971}00971\ \textcolor{preprocessor}{\ \ \#pragma\ language=default}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00972}00972\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00973}00973\ \textcolor{preprocessor}{\ \ \#error\ Not\ supported\ compiler\ type}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00974}00974\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00975}00975\ \ \textcolor{comment}{/*\ end\ of\ group\ Peripheral\_access\_layer\ */}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00979}00979\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00980}00980\ }
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00981}00981\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ PERI\_USB\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{PERI__USB_8h_source_l00982}00982\ }
+
+\end{DoxyCode}

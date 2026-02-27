@@ -1,0 +1,71 @@
+\doxysection{Motor Test and Diagnostics }
+\hypertarget{group__MotorTest__Module}{}\label{group__MotorTest__Module}\index{Motor Test and Diagnostics@{Motor Test and Diagnostics}}
+
+
+Functions for testing stepper motors and motor drivers.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MotorTest__Module_ga11f9dad9e90b33ea5009a7fc316d3013}{MTT\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the motor test module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__MotorTest__Module_ga80fd5c109666d1e41f570606b48037c9}{MTT\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Free\+RTOS task for motor testing and diagnostics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for testing stepper motors and motor drivers. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__MotorTest__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__MotorTest__Module_ga11f9dad9e90b33ea5009a7fc316d3013}\index{Motor Test and Diagnostics@{Motor Test and Diagnostics}!MTT\_init@{MTT\_init}}
+\index{MTT\_init@{MTT\_init}!Motor Test and Diagnostics@{Motor Test and Diagnostics}}
+\doxysubsubsection{\texorpdfstring{MTT\_init()}{MTT\_init()}}
+{\footnotesize\ttfamily \label{group__MotorTest__Module_ga11f9dad9e90b33ea5009a7fc316d3013} 
+status\+\_\+t MTT\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the motor test module. 
+
+Sets up the motor test module for operation. This function should be called once during system initialization before using any other motor test functions.
+
+\begin{DoxyReturn}{Returns}
+Status code indicating success or failure
+\begin{DoxyItemize}
+\item k\+Status\+\_\+\+Success:\+ Module initialized successfully
+\item Other:\+ An error occurred during initialization 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor__test_8c_source_l00063}{63}} of file \doxymbox{\hyperlink{motor__test_8c_source}{motor\+\_\+test.\+c}}.
+
+\Hypertarget{group__MotorTest__Module_ga80fd5c109666d1e41f570606b48037c9}\index{Motor Test and Diagnostics@{Motor Test and Diagnostics}!MTT\_task@{MTT\_task}}
+\index{MTT\_task@{MTT\_task}!Motor Test and Diagnostics@{Motor Test and Diagnostics}}
+\doxysubsubsection{\texorpdfstring{MTT\_task()}{MTT\_task()}}
+{\footnotesize\ttfamily \label{group__MotorTest__Module_ga80fd5c109666d1e41f570606b48037c9} 
+void MTT\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Free\+RTOS task for motor testing and diagnostics. 
+
+This is the main task function for the motor test module. It initializes the stepper motor driver, configures the TMC2209 stepper motor driver, and registers CLI commands for motor control. This task runs indefinitely and should be created as a Free\+RTOS task.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (typically NULL for this task)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function should be registered as a Free\+RTOS task and will block indefinitely, yielding periodically. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{motor__test_8c_source_l00068}{68}} of file \doxymbox{\hyperlink{motor__test_8c_source}{motor\+\_\+test.\+c}}.
+

@@ -1,0 +1,339 @@
+\doxysection{fsl\+\_\+common\+\_\+arm.\+c}
+\hypertarget{fsl__common__arm_8c_source}{}\label{fsl__common__arm_8c_source}\index{drivers/fsl\_common\_arm.c@{drivers/fsl\_common\_arm.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2021,2023,2024\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00011}00011\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00012}00012\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00013}00013\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.common\_arm"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00016}00016\ \textcolor{preprocessor}{\#ifndef\ \_\_GIC\_PRIO\_BITS}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00017}00017\ \textcolor{preprocessor}{\#if\ defined(ENABLE\_RAM\_VECTOR\_TABLE)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00018}00018\ uint32\_t\ InstallIRQHandler(IRQn\_Type\ irq,\ uint32\_t\ irqHandler)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00019}00019\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00020}00020\ \textcolor{preprocessor}{\#ifdef\ \_\_VECTOR\_TABLE}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00021}00021\ \textcolor{preprocessor}{\#undef\ \_\_VECTOR\_TABLE}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00022}00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (((int32\_t)irq\ +\ 16)\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00025}00025\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gae7158c29694b27d9e4836aa8781ba85d}{MSDK\_INVALID\_IRQ\_HANDLER}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00029}00029\ \textcolor{comment}{/*\ Addresses\ for\ VECTOR\_TABLE\ and\ VECTOR\_RAM\ come\ from\ the\ linker\ file\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00030}00030\ \textcolor{preprocessor}{\#if\ defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ Image\$\$VECTOR\_ROM\$\$Base[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ Image\$\$VECTOR\_RAM\$\$Base[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ Image\$\$VECTOR\_RAM\$\$ZI\$\$Limit[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00035}00035\ \textcolor{preprocessor}{\#define\ \_\_VECTOR\_TABLE\ \ \ \ \ \ \ \ \ \ Image\$\$VECTOR\_ROM\$\$Base}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00036}00036\ \textcolor{preprocessor}{\#define\ \_\_VECTOR\_RAM\ \ \ \ \ \ \ \ \ \ \ \ Image\$\$VECTOR\_RAM\$\$Base}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00037}00037\ \textcolor{preprocessor}{\#define\ \_\_RAM\_VECTOR\_TABLE\_SIZE\ (((uint32\_t)Image\$\$VECTOR\_RAM\$\$ZI\$\$Limit\ -\/\ (uint32\_t)Image\$\$VECTOR\_RAM\$\$Base))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00038}00038\ \textcolor{preprocessor}{\#elif\ defined(\_\_ICCARM\_\_)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_RAM\_VECTOR\_TABLE\_SIZE[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_VECTOR\_TABLE[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_VECTOR\_RAM[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00042}00042\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_VECTOR\_TABLE[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_VECTOR\_RAM[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_\_RAM\_VECTOR\_TABLE\_SIZE\_BYTES[];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00046}00046\ \ \ \ \ uint32\_t\ \_\_RAM\_VECTOR\_TABLE\_SIZE\ =\ (uint32\_t)(\_\_RAM\_VECTOR\_TABLE\_SIZE\_BYTES);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00047}00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_\_CC\_ARM)\ ||\ defined(\_\_ARMCC\_VERSION)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00048}00048\ \ \ \ \ uint32\_t\ n;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00049}00049\ \ \ \ \ uint32\_t\ ret;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00050}00050\ \ \ \ \ uint32\_t\ irqMaskValue;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00052}00052\ \ \ \ \ irqMaskValue\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (SCB-\/>VTOR\ !=\ (uint32\_t)\_\_VECTOR\_RAM)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Copy\ the\ vector\ table\ from\ ROM\ to\ RAM\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (n\ =\ 0;\ n\ <\ ((uint32\_t)\_\_RAM\_VECTOR\_TABLE\_SIZE)\ /\ \textcolor{keyword}{sizeof}(uint32\_t);\ n++)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_VECTOR\_RAM[n]\ =\ \_\_VECTOR\_TABLE[n];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Point\ the\ VTOR\ to\ the\ position\ of\ vector\ table\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ SCB-\/>VTOR\ =\ (uint32\_t)\_\_VECTOR\_RAM;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00064}00064\ \ \ \ \ ret\ =\ \_\_VECTOR\_RAM[(int32\_t)irq\ +\ 16];}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00065}00065\ \ \ \ \ \textcolor{comment}{/*\ make\ sure\ the\ \_\_VECTOR\_RAM\ is\ noncachable\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00066}00066\ \ \ \ \ \_\_VECTOR\_RAM[(int32\_t)irq\ +\ 16]\ =\ irqHandler;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00068}00068\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(irqMaskValue);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00071}00071\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00072}00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ENABLE\_RAM\_VECTOR\_TABLE.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00073}00073\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_GIC\_PRIO\_BITS.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00075}00075\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SOC\_SYSCON\_COUNT)\ \&\&\ (FSL\_FEATURE\_SOC\_SYSCON\_COUNT\ >\ 0))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00077}00077\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00078}00078\ \textcolor{comment}{\ *\ When\ FSL\_FEATURE\_POWERLIB\_EXTEND\ is\ defined\ to\ non-\/zero\ value,}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00079}00079\ \textcolor{comment}{\ *\ powerlib\ should\ be\ used\ instead\ of\ these\ functions.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00080}00080\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00081}00081\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_POWERLIB\_EXTEND)\ \&\&\ (FSL\_FEATURE\_POWERLIB\_EXTEND\ !=\ 0))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00083}00083\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00084}00084\ \textcolor{comment}{\ *\ When\ the\ SYSCON\ STARTER\ registers\ are\ discontinuous,\ these\ functions\ are}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00085}00085\ \textcolor{comment}{\ *\ implemented\ in\ fsl\_power.c.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00086}00086\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00087}00087\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_SYSCON\_STARTER\_DISCONTINUOUS)\ \&\&\ FSL\_FEATURE\_SYSCON\_STARTER\_DISCONTINUOUS)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00089}00089\ \textcolor{keywordtype}{void}\ EnableDeepSleepIRQ(IRQn\_Type\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00090}00090\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00091}00091\ \ \ \ \ uint32\_t\ intNumber\ =\ (uint32\_t)interrupt;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00093}00093\ \ \ \ \ uint32\_t\ index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{while}\ (intNumber\ >=\ 32u)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ index++;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ intNumber\ -\/=\ 32u;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00101}00101\ \ \ \ \ SYSCON-\/>STARTERSET[index]\ =\ 1UL\ <<\ intNumber;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00102}00102\ \ \ \ \ (void)\doxymbox{\hyperlink{group__ksdk__common_ga2b92855a9ebf6eadeed1527b8339d50a}{EnableIRQ}}(interrupt);\ \textcolor{comment}{/*\ also\ enable\ interrupt\ at\ NVIC\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00103}00103\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00105}00105\ \textcolor{keywordtype}{void}\ DisableDeepSleepIRQ(IRQn\_Type\ interrupt)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00107}00107\ \ \ \ \ uint32\_t\ intNumber\ =\ (uint32\_t)interrupt;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00109}00109\ \ \ \ \ (void)\doxymbox{\hyperlink{group__ksdk__common_ga7f9bbd23e70eaf6670d3425683753961}{DisableIRQ}}(interrupt);\ \textcolor{comment}{/*\ also\ disable\ interrupt\ at\ NVIC\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00110}00110\ \ \ \ \ uint32\_t\ index\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{while}\ (intNumber\ >=\ 32u)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ index++;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ intNumber\ -\/=\ 32u;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00118}00118\ \ \ \ \ SYSCON-\/>STARTERCLR[index]\ =\ 1UL\ <<\ intNumber;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00120}00120\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SYSCON\_STARTER\_DISCONTINUOUS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00121}00121\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_POWERLIB\_EXTEND\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00122}00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SOC\_SYSCON\_COUNT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00124}00124\ \textcolor{preprocessor}{\#if\ defined(DWT)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00125}00125\ \textcolor{comment}{/*\ Use\ WDT.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00126}00126\ \textcolor{keywordtype}{void}\ MSDK\_EnableCpuCycleCounter(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00127}00127\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00128}00128\ \ \ \ \ \textcolor{comment}{/*\ Make\ sure\ the\ DWT\ trace\ fucntion\ is\ enabled.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (CoreDebug\_DEMCR\_TRCENA\_Msk\ !=\ (CoreDebug\_DEMCR\_TRCENA\_Msk\ \&\ CoreDebug-\/>DEMCR))}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ CoreDebug-\/>DEMCR\ |=\ CoreDebug\_DEMCR\_TRCENA\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00134}00134\ \ \ \ \ \textcolor{comment}{/*\ CYCCNT\ not\ supported\ on\ this\ device.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00135}00135\ \ \ \ \ assert(DWT\_CTRL\_NOCYCCNT\_Msk\ !=\ (DWT-\/>CTRL\ \&\ DWT\_CTRL\_NOCYCCNT\_Msk));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00137}00137\ \ \ \ \ \textcolor{comment}{/*\ Read\ CYCCNT\ directly\ if\ CYCCENT\ has\ already\ been\ enabled,\ otherwise\ enable\ CYCCENT\ first.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (DWT\_CTRL\_CYCCNTENA\_Msk\ !=\ (DWT\_CTRL\_CYCCNTENA\_Msk\ \&\ DWT-\/>CTRL))}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ DWT-\/>CTRL\ |=\ DWT\_CTRL\_CYCCNTENA\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00144}00144\ uint32\_t\ MSDK\_GetCpuCycleCount(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00145}00145\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{return}\ DWT-\/>CYCCNT;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00147}00147\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00148}00148\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(DWT)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00150}00150\ \textcolor{preprocessor}{\#if\ !(defined(SDK\_DELAY\_USE\_DWT)\ \&\&\ defined(DWT))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00151}00151\ \textcolor{comment}{/*\ Use\ software\ loop.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00152}00152\ \textcolor{preprocessor}{\#if\ defined(\_\_CC\_ARM)\ }\textcolor{comment}{/*\ This\ macro\ is\ arm\ v5\ specific\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00153}00153\ \textcolor{comment}{/*\ clang-\/format\ off\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00154}00154\ \_\_ASM\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DelayLoop(uint32\_t\ count)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00155}00155\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00156}00156\ loop}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00157}00157\ \ \ \ \ SUBS\ R0,\ R0,\ \#1}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00158}00158\ \ \ \ \ CMP\ \ R0,\ \#0}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00159}00159\ \ \ \ \ BNE\ \ loop}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00160}00160\ \ \ \ \ BX\ \ \ LR}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00161}00161\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00162}00162\ \textcolor{preprocessor}{\#elif\ defined(\_\_ARM\_ARCH\_8A\_\_)\ }\textcolor{comment}{/*\ This\ macro\ is\ ARMv8-\/A\ specific\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00163}00163\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DelayLoop(uint32\_t\ count)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00164}00164\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00165}00165\ \ \ \ \ \_\_ASM\ \textcolor{keyword}{volatile}(\textcolor{stringliteral}{"{}\ \ \ \ MOV\ \ \ \ X0,\ \%0"{}}\ :\ :\ \textcolor{stringliteral}{"{}r"{}}(count));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00166}00166\ \ \ \ \ \_\_ASM\ \textcolor{keyword}{volatile}(}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}loop\%=:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ SUB\ \ \ \ X0,\ X0,\ \#1\ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ CMP\ \ \ \ X0,\ \#0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ BNE\ \ \ \ loop\%=\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}r0"{}});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00175}00175\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00176}00176\ \textcolor{comment}{/*\ clang-\/format\ on\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00177}00177\ \textcolor{preprocessor}{\#elif\ defined(\_\_ARMCC\_VERSION)\ ||\ defined(\_\_ICCARM\_\_)\ ||\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00178}00178\ \textcolor{comment}{/*\ Cortex-\/M0\ has\ a\ smaller\ instruction\ set,\ SUBS\ isn't\ supported\ in\ thumb-\/16\ mode\ reported\ from\ \_\_GNUC\_\_\ compiler,}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00179}00179\ \textcolor{comment}{\ *\ use\ SUB\ and\ CMP\ here\ for\ compatibility\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00180}00180\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DelayLoop(uint32\_t\ count)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00181}00181\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00182}00182\ \ \ \ \ \_\_ASM\ \textcolor{keyword}{volatile}(\textcolor{stringliteral}{"{}\ \ \ \ MOV\ \ \ \ R0,\ \%0"{}}\ :\ :\ \textcolor{stringliteral}{"{}r"{}}(count));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00183}00183\ \ \ \ \ \_\_ASM\ \textcolor{keyword}{volatile}(}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}loop\%=:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00185}00185\ \textcolor{preprocessor}{\#if\ defined(\_\_GNUC\_\_)\ \&\&\ !defined(\_\_ARMCC\_VERSION)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ SUB\ \ \ \ R0,\ R0,\ \#1\ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00187}00187\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ SUBS\ \ \ R0,\ R0,\ \#1\ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00189}00189\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ CMP\ \ \ \ R0,\ \#0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ \ BNE\ \ \ \ loop\%=\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}r0"{}});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00196}00196\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00197}00197\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_\_CC\_ARM)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00198}00198\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(SDK\_DELAY\_USE\_DWT)\ \&\&\ defined(DWT)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00210}\doxymbox{\hyperlink{group__ksdk__common_ga4f9121590e5b8fe025d706ff2fe5da36}{00210}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ksdk__common_ga4f9121590e5b8fe025d706ff2fe5da36}{SDK\_DelayAtLeastUs}}(uint32\_t\ delayTime\_us,\ uint32\_t\ coreClock\_Hz)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00211}00211\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00212}00212\ \ \ \ \ uint64\_t\ count;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00214}00214\ \ \ \ \ \textcolor{keywordflow}{if}\ (delayTime\_us\ >\ 0U)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00215}00215\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ count\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad5639aadf668899775fc7506a5e19dc1}{USEC\_TO\_COUNT}}(delayTime\_us,\ coreClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ assert(count\ <=\ \doxymbox{\hyperlink{group__ksdk__common_gab5eb23180f7cc12b7d6c04a8ec067fdd}{UINT32\_MAX}});}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00220}00220\ \textcolor{preprocessor}{\#if\ defined(SDK\_DELAY\_USE\_DWT)\ \&\&\ defined(DWT)\ }\textcolor{comment}{/*\ Use\ DWT\ for\ better\ accuracy\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ MSDK\_EnableCpuCycleCounter();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ the\ count\ ticks.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ count\ +=\ MSDK\_GetCpuCycleCount();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ \doxymbox{\hyperlink{group__ksdk__common_gab5eb23180f7cc12b7d6c04a8ec067fdd}{UINT32\_MAX}})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ count\ -\/=\ \doxymbox{\hyperlink{group__ksdk__common_gab5eb23180f7cc12b7d6c04a8ec067fdd}{UINT32\_MAX}};}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ for\ cyccnt\ overflow.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (count\ <\ MSDK\_GetCpuCycleCount())}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ for\ cyccnt\ reach\ count\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (count\ >\ MSDK\_GetCpuCycleCount())}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00239}00239\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00240}00240\ \textcolor{preprocessor}{\#if\ defined(\_\_CORTEX\_Axx)\ \&\&\ ((\_\_CORTEX\_Axx\ ==\ 53)\ ||\ (\_\_CORTEX\_Axx\ ==\ 55))}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00242}00242\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Cortex-\/A53/A55\ execution\ throughput:}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00243}00243\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ -\/\ SUB/CMP:\ 2\ instructions\ per\ cycle}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00244}00244\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ -\/\ BNE:\ \ \ \ \ 1\ instruction\ per\ cycle}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00245}00245\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ So,\ each\ loop\ takes\ 2\ CPU\ cycles.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00246}00246\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ count\ =\ count\ /\ 2U;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00248}00248\ \textcolor{preprocessor}{\#elif\ (\_\_CORTEX\_M\ ==\ 7)}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Divide\ value\ may\ be\ different\ in\ various\ environment\ to\ ensure\ delay\ is\ precise.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00250}00250\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Every\ loop\ count\ includes\ three\ instructions,\ due\ to\ Cortex-\/M7\ sometimes\ executes}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00251}00251\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ two\ instructions\ in\ one\ period,\ through\ test\ here\ set\ divide\ 1.5.\ Other\ M\ cores\ use}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00252}00252\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ divide\ 4.\ By\ the\ way,\ divide\ 1.5\ or\ 4\ could\ let\ the\ count\ lose\ precision,\ but\ it\ does}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00253}00253\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ not\ matter\ because\ other\ instructions\ outside\ while\ loop\ is\ enough\ to\ fill\ the\ time.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00254}00254\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ count\ =\ count\ /\ 3U\ *\ 2U;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00256}00256\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ count\ =\ count\ /\ 4U;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00258}00258\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ DelayLoop((uint32\_t)count);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00260}00260\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(SDK\_DELAY\_USE\_DWT)\ \&\&\ defined(DWT)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00261}00261\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00262}00262\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00264}00264\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION)\ \&\&\ FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00265}00265\ \textcolor{comment}{/*\ Use\ shall\ define\ their\ own\ IDs,\ FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID\ and\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00266}00266\ \textcolor{comment}{\ \ \ for\ the\ critical\ sections\ if\ want\ to\ use\ the\ critical\ section\ measurement.}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00267}00267\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00268}00268\ \textcolor{preprocessor}{\#ifndef\ FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00269}00269\ \textcolor{preprocessor}{\#define\ FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID\ 0xFFU}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00270}00270\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00272}00272\ \textcolor{preprocessor}{\#ifndef\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00273}00273\ \textcolor{preprocessor}{\#define\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID\ 0U}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00274}00274\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00276}00276\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00277}00277\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00278}00278\ \ \ \ \ uint32\_t\ id;\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00279}00279\ \ \ \ \ uint32\_t\ startTime;\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00280}00280\ \ \ \ \ uint32\_t\ dur\_max[FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID];\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00281}00281\ \ \ \ \ uint32\_t\ execution\_times[FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID];\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00282}00282\ \ \ \ \ getTimestamp\_t\ getTimestamp;\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00283}00283\ \}\ critical\_section\_measurement\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00285}00285\ \textcolor{keyword}{static}\ critical\_section\_measurement\_t\ s\_critical\_section\_measurement\_context;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00293}00293\ \textcolor{keywordtype}{void}\ InitCriticalSectionMeasurementContext(getTimestamp\_t\ func)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00294}00294\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00295}00295\ \ \ \ \ assert(func\ !=\ NULL);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00297}00297\ \ \ \ \ (void)memset(\&s\_critical\_section\_measurement\_context,\ 0,\ \textcolor{keyword}{sizeof}(critical\_section\_measurement\_t));}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00299}00299\ \ \ \ \ s\_critical\_section\_measurement\_context.getTimestamp\ =\ func;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00300}00300\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00312}00312\ uint32\_t\ DisableGlobalIRQEx(uint32\_t\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00313}00313\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00314}00314\ \ \ \ \ uint32\_t\ primask\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{if}\ (primask\ !=\ 0U)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00316}00316\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00317}00317\ \textcolor{preprocessor}{\#ifdef\ FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ the\ critical\ section\ id.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ assert(\textcolor{keywordtype}{id}\ !=\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ assert(\textcolor{keywordtype}{id}\ <\ FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ assert(s\_critical\_section\_measurement\_context.id\ ==\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00322}00322\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_critical\_section\_measurement\_context.getTimestamp\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ s\_critical\_section\_measurement\_context.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ s\_critical\_section\_measurement\_context.startTime\ =\ s\_critical\_section\_measurement\_context.getTimestamp();}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00328}00328\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00329}00329\ \ \ \ \ \textcolor{keywordflow}{return}\ primask;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00330}00330\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00342}00342\ \textcolor{keywordtype}{void}\ EnableGlobalIRQEx(uint32\_t\ primask)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00343}00343\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00344}00344\ \ \ \ \ \textcolor{keywordflow}{if}\ (primask\ !=\ 0U)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00345}00345\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00346}00346\ \textcolor{preprocessor}{\#ifdef\ FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00347}00347\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ for\ the\ critical\ section\ id.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00348}00348\ \ \ \ \ \ \ \ \ assert(s\_critical\_section\_measurement\_context.id\ !=\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ assert(s\_critical\_section\_measurement\_context.id\ <\ FSL\_FEATURE\_CRITICAL\_SECTION\_MAX\_ID);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00350}00350\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_critical\_section\_measurement\_context.getTimestamp\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00352}00352\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ the\ critical\ section\ duration.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ dur\ =\ s\_critical\_section\_measurement\_context.getTimestamp()\ -\/\ s\_critical\_section\_measurement\_context.startTime;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dur\ >\ s\_critical\_section\_measurement\_context.dur\_max[s\_critical\_section\_measurement\_context.id])}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_critical\_section\_measurement\_context.dur\_max[s\_critical\_section\_measurement\_context.id]\ =\ dur;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ s\_critical\_section\_measurement\_context.execution\_times[s\_critical\_section\_measurement\_context.id]++;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00360}00360\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00361}00361\ \textcolor{preprocessor}{\#ifdef\ FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Exit\ the\ critical\ section,\ set\ the\ id\ to\ invalid.\ In\ this\ case\ when\ entering\ critical}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00363}00363\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ section\ again\ DisableGlobalIRQEx\ has\ to\ be\ called\ first\ to\ avoid\ assertion.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00364}00364\ \ \ \ \ \ \ \ \ s\_critical\_section\_measurement\_context.id\ =\ FSL\_FEATURE\_CRITICAL\_SECTION\_INVALID\_ID;}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00365}00365\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00366}00366\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00367}00367\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(primask);}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00368}00368\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__common__arm_8c_source_l00369}00369\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_MEASURE\_CRITICAL\_SECTION\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

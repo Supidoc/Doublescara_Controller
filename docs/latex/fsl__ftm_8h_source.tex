@@ -1,0 +1,809 @@
+\doxysection{fsl\+\_\+ftm.\+h}
+\hypertarget{fsl__ftm_8h_source}{}\label{fsl__ftm_8h_source}\index{drivers/fsl\_ftm.h@{drivers/fsl\_ftm.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2022,\ 2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00006}00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00007}00007\ \textcolor{preprocessor}{\#ifndef\ FSL\_FTM\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00008}00008\ \textcolor{preprocessor}{\#define\ FSL\_FTM\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00017}00017\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00018}00018\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00019}00019\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00024}\doxymbox{\hyperlink{group__ftm_ga58487504b46166180eb5d22b81317f0d}{00024}}\ \textcolor{preprocessor}{\#define\ FSL\_FTM\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 7,\ 1))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00031}\doxymbox{\hyperlink{group__ftm_ga7029cff77271f72dc2a04984b544bafb}{00031}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga7029cff77271f72dc2a04984b544bafb}{\_ftm\_chnl}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00033}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbad017e4e4d83363eff65b1c08f51703c9}{00033}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbad017e4e4d83363eff65b1c08f51703c9}{kFTM\_Chnl\_0}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00034}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba9d0a41381ae65ee84a77ab7320bc0b4f}{00034}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba9d0a41381ae65ee84a77ab7320bc0b4f}{kFTM\_Chnl\_1}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00035}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba84ec70a624b7a685d2866eb06dbef26d}{00035}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba84ec70a624b7a685d2866eb06dbef26d}{kFTM\_Chnl\_2}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00036}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba22435b6e0fb387aa3f185dd94f819a49}{00036}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba22435b6e0fb387aa3f185dd94f819a49}{kFTM\_Chnl\_3}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00037}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbad6cf739614032825d0b6f577772241ac}{00037}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbad6cf739614032825d0b6f577772241ac}{kFTM\_Chnl\_4}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00038}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba6004c0e8e4693f468547a144cd356e6b}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba6004c0e8e4693f468547a144cd356e6b}{kFTM\_Chnl\_5}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00039}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbac5ba7f97cc03f5bfa8c03a6b104271a7}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbac5ba7f97cc03f5bfa8c03a6b104271a7}{kFTM\_Chnl\_6}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00040}\doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbae9e495b53602c7797fb5b845893e66c8}{00040}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbae9e495b53602c7797fb5b845893e66c8}{kFTM\_Chnl\_7}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00041}\doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{00041}}\ \}\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00044}\doxymbox{\hyperlink{group__ftm_ga4eae9f4e30203e8bab6d7d2866fb6d83}{00044}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga4eae9f4e30203e8bab6d7d2866fb6d83}{\_ftm\_fault\_input}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00046}\doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83add5e78439bd22da038359efde8cfcf0c}{00046}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83add5e78439bd22da038359efde8cfcf0c}{kFTM\_Fault\_0}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00047}\doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83afb65620a6d4c46a984e9a6a9a7b64bfa}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83afb65620a6d4c46a984e9a6a9a7b64bfa}{kFTM\_Fault\_1}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00048}\doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83a6c79fcc4f26843386852e02e86dfce15}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83a6c79fcc4f26843386852e02e86dfce15}{kFTM\_Fault\_2}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00049}\doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83a57387ccec8c341b35f5ce5e211f2f7ee}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga4eae9f4e30203e8bab6d7d2866fb6d83a57387ccec8c341b35f5ce5e211f2f7ee}{kFTM\_Fault\_3}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00050}\doxymbox{\hyperlink{group__ftm_ga05bbc1c3385be450a63352dd941675f2}{00050}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga05bbc1c3385be450a63352dd941675f2}{ftm\_fault\_input\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00053}\doxymbox{\hyperlink{group__ftm_gaac5878cf21858df5f59c040326809140}{00053}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_gaac5878cf21858df5f59c040326809140}{\_ftm\_pwm\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00055}\doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a8c6e7848b12ca65b41ab17c67374676a}{00055}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a8c6e7848b12ca65b41ab17c67374676a}{kFTM\_EdgeAlignedPwm}}\ =\ 0U,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00056}\doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a4c16a734a6b3cc3a03b452fcc495a7bf}{00056}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a4c16a734a6b3cc3a03b452fcc495a7bf}{kFTM\_CenterAlignedPwm}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00057}\doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a542d924918988d825b4c0f863c8d1625}{00057}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a542d924918988d825b4c0f863c8d1625}{kFTM\_EdgeAlignedCombinedPwm}},\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00058}\doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a3e645b1a485139a83f2deaa46e9dfa4d}{00058}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a3e645b1a485139a83f2deaa46e9dfa4d}{kFTM\_CenterAlignedCombinedPwm}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00059}00059\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_MODIFIED\_COMBINE\_PWM)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_MODIFIED\_COMBINE\_PWM)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00060}00060\ \ \ \ \ kFTM\_ModifiedCombinedPwm,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00061}00061\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_MODIFIED\_COMBINE\_PWM\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00062}\doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a8d384ac80ec37a0f5f5b9c2a1abb8ddd}{00062}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggaac5878cf21858df5f59c040326809140a8d384ac80ec37a0f5f5b9c2a1abb8ddd}{kFTM\_AsymmetricalCombinedPwm}}\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00063}\doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{00063}}\ \}\ \doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{ftm\_pwm\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00080}\doxymbox{\hyperlink{group__ftm_ga594346b2e6688bee79e719c80290af1a}{00080}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga594346b2e6688bee79e719c80290af1a}{\_ftm\_pwm\_level\_select}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00081}00081\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00082}\doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aafffddbdea4f53e5b7d53b91d656e6198}{00082}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aafffddbdea4f53e5b7d53b91d656e6198}{kFTM\_NoPwmSignal}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00083}\doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aa515b42beaec6294dcb63444d543411d7}{00083}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aa515b42beaec6294dcb63444d543411d7}{kFTM\_LowTrue}},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00084}\doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aa3d5f7bd0bde7061b2f7711212208805d}{00084}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga594346b2e6688bee79e719c80290af1aa3d5f7bd0bde7061b2f7711212208805d}{kFTM\_HighTrue}}\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00085}\doxymbox{\hyperlink{group__ftm_ga0b521624365dbfa2b0e038347d3af5d6}{00085}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga0b521624365dbfa2b0e038347d3af5d6}{ftm\_pwm\_level\_select\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00088}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param}{00088}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param}{\_ftm\_chnl\_pwm\_signal\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00089}00089\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00090}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a96c99f5c011e5f34d42e690aca70c046}{00090}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a96c99f5c011e5f34d42e690aca70c046}{chnlNumber}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00092}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a9e86ada7f8fdcd1238cd1cb308641a17}{00092}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga0b521624365dbfa2b0e038347d3af5d6}{ftm\_pwm\_level\_select\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a9e86ada7f8fdcd1238cd1cb308641a17}{level}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00093}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_aea2ab2ee524f7f8e88db3b1c8251c3a1}{00093}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_aea2ab2ee524f7f8e88db3b1c8251c3a1}{dutyCyclePercent}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00096}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a0f07895c28e0e896d269b9f550896472}{00096}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a0f07895c28e0e896d269b9f550896472}{firstEdgeDelayPercent}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00100}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a0dbcd7108d9de1e640d6f61cd1241212}{00100}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_a0dbcd7108d9de1e640d6f61cd1241212}{enableComplementary}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00103}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_ae7629221b09a11e650e4dfb6700ddfd7}{00103}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__signal__param_ae7629221b09a11e650e4dfb6700ddfd7}{enableDeadtime}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00106}\doxymbox{\hyperlink{group__ftm_ga2a81caee2f3d12f54b13392cc4fa648b}{00106}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga2a81caee2f3d12f54b13392cc4fa648b}{ftm\_chnl\_pwm\_signal\_param\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00109}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param}{00109}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param}{\_ftm\_chnl\_pwm\_config\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00111}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a6b079402c7585011d1a694fa82d0203b}{00111}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a6b079402c7585011d1a694fa82d0203b}{chnlNumber}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00113}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a68ae2a706947ef6b5a88f16ef79f4bb4}{00113}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga0b521624365dbfa2b0e038347d3af5d6}{ftm\_pwm\_level\_select\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a68ae2a706947ef6b5a88f16ef79f4bb4}{level}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00114}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a7a0a9e87e4629b38b8f7081be8ecef99}{00114}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a7a0a9e87e4629b38b8f7081be8ecef99}{dutyValue}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00115}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a5a6d113bbd9906033300a3f7e5c582c3}{00115}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a5a6d113bbd9906033300a3f7e5c582c3}{firstEdgeValue}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00118}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a6afd36a1de1edf19f6b01e541ab9f855}{00118}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_a6afd36a1de1edf19f6b01e541ab9f855}{enableComplementary}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00121}\doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_ac7467d6635439f83ddfddb04bea124c6}{00121}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__pwm__config__param_ac7467d6635439f83ddfddb04bea124c6}{enableDeadtime}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00124}\doxymbox{\hyperlink{group__ftm_ga27351c684ba26110b9c768531fd82be3}{00124}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga27351c684ba26110b9c768531fd82be3}{ftm\_chnl\_pwm\_config\_param\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00127}\doxymbox{\hyperlink{struct__ftm__chnl__param}{00127}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__chnl__param}{\_ftm\_chnl\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00128}00128\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00129}\doxymbox{\hyperlink{struct__ftm__chnl__param_a06d459483cf3370485f93db50e44cef5}{00129}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{ftm\_pwm\_mode\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a06d459483cf3370485f93db50e44cef5}{mode}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00130}\doxymbox{\hyperlink{struct__ftm__chnl__param_a7a7bcea407117d8e6f2d222dfd9e4195}{00130}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga0b521624365dbfa2b0e038347d3af5d6}{ftm\_pwm\_level\_select\_t}}\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a7a7bcea407117d8e6f2d222dfd9e4195}{level}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00131}\doxymbox{\hyperlink{struct__ftm__chnl__param_a56d97133da0e4851874ef094fbefaf8c}{00131}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a56d97133da0e4851874ef094fbefaf8c}{initialValue}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00132}\doxymbox{\hyperlink{struct__ftm__chnl__param_a70c7ab51394dd2e1f3480a95df54a07f}{00132}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a70c7ab51394dd2e1f3480a95df54a07f}{moduloValue}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00133}\doxymbox{\hyperlink{struct__ftm__chnl__param_a0482e7f3c75242265ccbceab0ae07579}{00133}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a0482e7f3c75242265ccbceab0ae07579}{chnlValue}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00134}\doxymbox{\hyperlink{struct__ftm__chnl__param_a7062ee3d472b648e96210da52747b075}{00134}}\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a7062ee3d472b648e96210da52747b075}{combinedChnlValue}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00136}\doxymbox{\hyperlink{struct__ftm__chnl__param_afee349c355511b352f448269c60725c0}{00136}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__param_afee349c355511b352f448269c60725c0}{enableComplementary}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00139}\doxymbox{\hyperlink{struct__ftm__chnl__param_a5c5e0b70bab94e224fb67d762e9c3c29}{00139}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__chnl__param_a5c5e0b70bab94e224fb67d762e9c3c29}{enableDeadtime}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00142}00142\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_TRIGGER\_MODE)\ \&\&\ (FSL\_FEATURE\_FTM\_HAS\_TRIGGER\_MODE)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00143}00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ enablePulseOutput;\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00148}00148\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_TRIGGER\_MODE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00149}00149\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_DITHERING)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_DITHERING)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00150}00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ enableDithering;\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00153}00153\ \ \ \ \ uint8\_t\ moduloFracValue;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00154}00154\ \ \ \ \ uint8\_t\ chnlFracValue;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00155}00155\ \ \ \ \ uint8\_t\ combinedChnlFracValue;\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00158}00158\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_DITHERING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00159}\doxymbox{\hyperlink{group__ftm_ga594b8f4a8e8d3c44afb3233544e34515}{00159}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga594b8f4a8e8d3c44afb3233544e34515}{ftm\_chnl\_param\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00162}\doxymbox{\hyperlink{group__ftm_ga50f46e3336031929ba8e72e761c52be5}{00162}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga50f46e3336031929ba8e72e761c52be5}{\_ftm\_output\_compare\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00163}00163\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00164}\doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a3ef5654af6553dbf0fa49efd37eabc6c}{00164}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a3ef5654af6553dbf0fa49efd37eabc6c}{kFTM\_NoOutputSignal}}\ =\ (1U\ <<\ FTM\_CnSC\_MSA\_SHIFT),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00165}\doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a3e316a82cac176a1fd27d08af7349a91}{00165}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a3e316a82cac176a1fd27d08af7349a91}{kFTM\_ToggleOnMatch}}\ \ =\ ((1U\ <<\ FTM\_CnSC\_MSA\_SHIFT)\ |\ (1U\ <<\ FTM\_CnSC\_ELSA\_SHIFT)),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00166}\doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a19543ffb176f64bb7975b0e88dfb9a53}{00166}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a19543ffb176f64bb7975b0e88dfb9a53}{kFTM\_ClearOnMatch}}\ \ \ =\ ((1U\ <<\ FTM\_CnSC\_MSA\_SHIFT)\ |\ (2U\ <<\ FTM\_CnSC\_ELSA\_SHIFT)),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00167}\doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a426efa75755feb54f52912b4a2aea57a}{00167}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga50f46e3336031929ba8e72e761c52be5a426efa75755feb54f52912b4a2aea57a}{kFTM\_SetOnMatch}}\ \ \ \ \ =\ ((1U\ <<\ FTM\_CnSC\_MSA\_SHIFT)\ |\ (3U\ <<\ FTM\_CnSC\_ELSA\_SHIFT))\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00168}\doxymbox{\hyperlink{group__ftm_ga49a609cd98b6ac16b0b28d6ebd70bcb3}{00168}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga49a609cd98b6ac16b0b28d6ebd70bcb3}{ftm\_output\_compare\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00171}\doxymbox{\hyperlink{group__ftm_gad1aba3b9edf31a15ff0c8a5ed22ce2e5}{00171}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_gad1aba3b9edf31a15ff0c8a5ed22ce2e5}{\_ftm\_input\_capture\_edge}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00172}00172\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00173}\doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5ac3821aa7128c8f4701586e323aab5363}{00173}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5ac3821aa7128c8f4701586e323aab5363}{kFTM\_RisingEdge}}\ \ \ \ \ \ =\ (1U\ <<\ FTM\_CnSC\_ELSA\_SHIFT),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00174}\doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5a76df5b97314002699bab7ad05cb297a0}{00174}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5a76df5b97314002699bab7ad05cb297a0}{kFTM\_FallingEdge}}\ \ \ \ \ =\ (2U\ <<\ FTM\_CnSC\_ELSA\_SHIFT),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00175}\doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5ac4373f277672e48cd8858200f1835072}{00175}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggad1aba3b9edf31a15ff0c8a5ed22ce2e5ac4373f277672e48cd8858200f1835072}{kFTM\_RiseAndFallEdge}}\ =\ (3U\ <<\ FTM\_CnSC\_ELSA\_SHIFT)\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00176}\doxymbox{\hyperlink{group__ftm_ga305fc182d536972d80b65c8a9045e69c}{00176}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga305fc182d536972d80b65c8a9045e69c}{ftm\_input\_capture\_edge\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00179}\doxymbox{\hyperlink{group__ftm_ga3ac3742a71844e396ede2e99730eed74}{00179}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga3ac3742a71844e396ede2e99730eed74}{\_ftm\_dual\_edge\_capture\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00180}00180\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00181}\doxymbox{\hyperlink{group__ftm_gga3ac3742a71844e396ede2e99730eed74ad0e671f5b4c9f6bdaa2cb4e9a3dbba8c}{00181}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga3ac3742a71844e396ede2e99730eed74ad0e671f5b4c9f6bdaa2cb4e9a3dbba8c}{kFTM\_OneShot}}\ \ \ \ =\ 0U,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00182}\doxymbox{\hyperlink{group__ftm_gga3ac3742a71844e396ede2e99730eed74afca3f959390de7557a27a14d99e3111e}{00182}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga3ac3742a71844e396ede2e99730eed74afca3f959390de7557a27a14d99e3111e}{kFTM\_Continuous}}\ =\ (1U\ <<\ FTM\_CnSC\_MSA\_SHIFT)\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00183}\doxymbox{\hyperlink{group__ftm_gad5e099474164ee3d8baa828be5c09bb8}{00183}}\ \}\ \doxymbox{\hyperlink{group__ftm_gad5e099474164ee3d8baa828be5c09bb8}{ftm\_dual\_edge\_capture\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00186}\doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param}{00186}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param}{\_ftm\_dual\_edge\_capture\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00187}00187\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00188}\doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a55c0dec55cb875174427b49d887d3b39}{00188}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gad5e099474164ee3d8baa828be5c09bb8}{ftm\_dual\_edge\_capture\_mode\_t}}\ \doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a55c0dec55cb875174427b49d887d3b39}{mode}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00189}\doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a1962bf1191923be93baa4277504f1821}{00189}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga305fc182d536972d80b65c8a9045e69c}{ftm\_input\_capture\_edge\_t}}\ \doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a1962bf1191923be93baa4277504f1821}{currChanEdgeMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00190}\doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a2d1a8bfb54a411cfe07a8dfa2b6e41f2}{00190}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga305fc182d536972d80b65c8a9045e69c}{ftm\_input\_capture\_edge\_t}}\ \doxymbox{\hyperlink{struct__ftm__dual__edge__capture__param_a2d1a8bfb54a411cfe07a8dfa2b6e41f2}{nextChanEdgeMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00191}\doxymbox{\hyperlink{group__ftm_gacf708f6726df1fead6c26b521a882c4b}{00191}}\ \}\ \doxymbox{\hyperlink{group__ftm_gacf708f6726df1fead6c26b521a882c4b}{ftm\_dual\_edge\_capture\_param\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00194}\doxymbox{\hyperlink{group__ftm_ga6a3c47097ecfd27cd5ed532641abd37b}{00194}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga6a3c47097ecfd27cd5ed532641abd37b}{\_ftm\_quad\_decode\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00195}00195\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00196}\doxymbox{\hyperlink{group__ftm_gga6a3c47097ecfd27cd5ed532641abd37baec5e564f7d0324c1e3e88903a6f91bcb}{00196}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6a3c47097ecfd27cd5ed532641abd37baec5e564f7d0324c1e3e88903a6f91bcb}{kFTM\_QuadPhaseEncode}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00197}\doxymbox{\hyperlink{group__ftm_gga6a3c47097ecfd27cd5ed532641abd37badb4f26c69f60fd4a937734ea198a78f3}{00197}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6a3c47097ecfd27cd5ed532641abd37badb4f26c69f60fd4a937734ea198a78f3}{kFTM\_QuadCountAndDir}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00198}\doxymbox{\hyperlink{group__ftm_ga7d9e9412adb5c6dc5d6b169bfdd0376c}{00198}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga7d9e9412adb5c6dc5d6b169bfdd0376c}{ftm\_quad\_decode\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00201}\doxymbox{\hyperlink{group__ftm_ga47d019dd023f49f2dc675c9d432c1859}{00201}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga47d019dd023f49f2dc675c9d432c1859}{\_ftm\_phase\_polarity}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00202}00202\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00203}\doxymbox{\hyperlink{group__ftm_gga47d019dd023f49f2dc675c9d432c1859aad8a5310e66f7d4c975e3d5d934f5a32}{00203}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga47d019dd023f49f2dc675c9d432c1859aad8a5310e66f7d4c975e3d5d934f5a32}{kFTM\_QuadPhaseNormal}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00204}\doxymbox{\hyperlink{group__ftm_gga47d019dd023f49f2dc675c9d432c1859a80b1d6d2d4e85b16bdbde14d78bb5f10}{00204}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga47d019dd023f49f2dc675c9d432c1859a80b1d6d2d4e85b16bdbde14d78bb5f10}{kFTM\_QuadPhaseInvert}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00205}\doxymbox{\hyperlink{group__ftm_gaf85fd1b9e707f0440e346820fbfb766b}{00205}}\ \}\ \doxymbox{\hyperlink{group__ftm_gaf85fd1b9e707f0440e346820fbfb766b}{ftm\_phase\_polarity\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00208}\doxymbox{\hyperlink{struct__ftm__phase__param}{00208}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__phase__param}{\_ftm\_phase\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00209}00209\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00210}\doxymbox{\hyperlink{struct__ftm__phase__param_aee0dffe08e415ce7bf5bb010953e0c29}{00210}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__phase__param_aee0dffe08e415ce7bf5bb010953e0c29}{enablePhaseFilter}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00211}\doxymbox{\hyperlink{struct__ftm__phase__param_ad7470133ea85d2f7d06e3693e6e6a1c1}{00211}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__ftm__phase__param_ad7470133ea85d2f7d06e3693e6e6a1c1}{phaseFilterVal}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00212}\doxymbox{\hyperlink{struct__ftm__phase__param_aeeeda1bab8230468e52a5476b7e0278b}{00212}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gaf85fd1b9e707f0440e346820fbfb766b}{ftm\_phase\_polarity\_t}}\ \doxymbox{\hyperlink{struct__ftm__phase__param_aeeeda1bab8230468e52a5476b7e0278b}{phasePolarity}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00213}\doxymbox{\hyperlink{group__ftm_gaf06d3e905e0c2a0581c99d241b0c99bb}{00213}}\ \}\ \doxymbox{\hyperlink{group__ftm_gaf06d3e905e0c2a0581c99d241b0c99bb}{ftm\_phase\_params\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00216}\doxymbox{\hyperlink{struct__ftm__fault__param}{00216}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__fault__param}{\_ftm\_fault\_param}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00217}00217\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00218}\doxymbox{\hyperlink{struct__ftm__fault__param_a7b0b698a9ff01050bf3556dc4e81dd97}{00218}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__fault__param_a7b0b698a9ff01050bf3556dc4e81dd97}{enableFaultInput}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00219}\doxymbox{\hyperlink{struct__ftm__fault__param_a6ae53e9e2362e7060075b5642da1362a}{00219}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__fault__param_a6ae53e9e2362e7060075b5642da1362a}{faultLevel}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00221}\doxymbox{\hyperlink{struct__ftm__fault__param_a91943dbe1196bd170069bb0050d6e8df}{00221}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__fault__param_a91943dbe1196bd170069bb0050d6e8df}{useFaultFilter}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00223}\doxymbox{\hyperlink{group__ftm_ga9d8c62fcd9298cae31e1c7f7c93c9e11}{00223}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga9d8c62fcd9298cae31e1c7f7c93c9e11}{ftm\_fault\_param\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00225}00225\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00227}00227\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_ftm\_fault\_output\_state}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00228}00228\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00229}00229\ \ \ \ \ kFTM\_FaultOutput\_PreDefined\ =\ 0U,\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00231}00231\ \ \ \ \ kFTM\_FaultOutput\_TriStated\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00232}00232\ \}\ ftm\_fault\_output\_state\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00233}00233\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00236}\doxymbox{\hyperlink{group__ftm_ga67c7262b9f9b5f9015ec02919ca2557c}{00236}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga67c7262b9f9b5f9015ec02919ca2557c}{\_ftm\_deadtime\_prescale}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00237}00237\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00238}\doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557ca6a6bcb922bd9027642ae4eec3797d30f}{00238}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557ca6a6bcb922bd9027642ae4eec3797d30f}{kFTM\_Deadtime\_Prescale\_1}}\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00239}\doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557cac6e36792987b2a0d5c956cf405cba192}{00239}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557cac6e36792987b2a0d5c956cf405cba192}{kFTM\_Deadtime\_Prescale\_4}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00240}\doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557ca911efa5b30ae53934f16152a915803d7}{00240}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga67c7262b9f9b5f9015ec02919ca2557ca911efa5b30ae53934f16152a915803d7}{kFTM\_Deadtime\_Prescale\_16}}\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00241}\doxymbox{\hyperlink{group__ftm_ga15deed517bd5030ff5d81b6a8b5f1594}{00241}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga15deed517bd5030ff5d81b6a8b5f1594}{ftm\_deadtime\_prescale\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00243}00243\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00245}00245\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_ftm\_deadtime\_param}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00246}00246\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00247}00247\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga15deed517bd5030ff5d81b6a8b5f1594}{ftm\_deadtime\_prescale\_t}}\ deadTimePrescale;\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00248}00248\ \ \ \ \ uint32\_t\ deadTimeValue;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00251}00251\ \}\ ftm\_deadtime\_param\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00252}00252\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00255}\doxymbox{\hyperlink{group__ftm_ga1631aa75184432b61dce335e3ea19c82}{00255}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga1631aa75184432b61dce335e3ea19c82}{\_ftm\_clock\_source}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00257}\doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82a3747d73ce90b72c47ead3099a9f29966}{00257}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82a3747d73ce90b72c47ead3099a9f29966}{kFTM\_SystemClock}}\ =\ 1U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00258}\doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82aeb60561d8ae14e8c279ecb0f85af77d4}{00258}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82aeb60561d8ae14e8c279ecb0f85af77d4}{kFTM\_FixedClock}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00259}\doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82a7f28d96388739d0d8aeb543c3cb86e52}{00259}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga1631aa75184432b61dce335e3ea19c82a7f28d96388739d0d8aeb543c3cb86e52}{kFTM\_ExternalClock}}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00260}\doxymbox{\hyperlink{group__ftm_ga3b49a5fd637d7fcafa8141e143df4220}{00260}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga3b49a5fd637d7fcafa8141e143df4220}{ftm\_clock\_source\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00263}\doxymbox{\hyperlink{group__ftm_gab1cd3e0183323eacc95922bc8f02e9b4}{00263}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_gab1cd3e0183323eacc95922bc8f02e9b4}{\_ftm\_clock\_prescale}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00264}00264\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00265}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4a622e9d9311e379e6bb571819124537}{00265}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4a622e9d9311e379e6bb571819124537}{kFTM\_Prescale\_Divide\_1}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00266}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4baea2c0420d6fed52277e226e05bcaf}{00266}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4baea2c0420d6fed52277e226e05bcaf}{kFTM\_Prescale\_Divide\_2}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00267}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a15ebffa5386b2d41c50b2c96a649f503}{00267}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a15ebffa5386b2d41c50b2c96a649f503}{kFTM\_Prescale\_Divide\_4}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00268}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a9524185a0fbe8850a0c8390d0bef5585}{00268}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a9524185a0fbe8850a0c8390d0bef5585}{kFTM\_Prescale\_Divide\_8}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00269}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4ae0742bf46877b7159de995a7abcc77ae}{00269}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4ae0742bf46877b7159de995a7abcc77ae}{kFTM\_Prescale\_Divide\_16}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00270}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4c2570ac679836059aeac43282e0048a}{00270}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a4c2570ac679836059aeac43282e0048a}{kFTM\_Prescale\_Divide\_32}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00271}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a656cec7120ebc5d8c7696b86f871ebaf}{00271}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a656cec7120ebc5d8c7696b86f871ebaf}{kFTM\_Prescale\_Divide\_64}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00272}\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a81667502cf2b2b719c1bbadf58090339}{00272}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a81667502cf2b2b719c1bbadf58090339}{kFTM\_Prescale\_Divide\_128}}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00273}\doxymbox{\hyperlink{group__ftm_ga4932b1d8f973d389576bdbcd0f50026d}{00273}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga4932b1d8f973d389576bdbcd0f50026d}{ftm\_clock\_prescale\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00275}00275\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00277}00277\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \_ftm\_filter\_prescale}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00278}00278\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00279}00279\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_1\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00280}00280\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_2,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00281}00281\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_3,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00282}00282\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_4,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00283}00283\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_5,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00284}00284\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_6,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00285}00285\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_7,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00286}00286\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_8,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00287}00287\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_9,\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00288}00288\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_10,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00289}00289\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_11,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00290}00290\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_12,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00291}00291\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_13,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00292}00292\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_14,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00293}00293\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_15,\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00294}00294\ \ \ \ \ kFTM\_Filter\_Prescale\_Divide\_16\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00295}00295\ \}\ ftm\_filter\_prescale\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00296}00296\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00299}\doxymbox{\hyperlink{group__ftm_ga30ad77be89a59745d2f984b678da72f7}{00299}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga30ad77be89a59745d2f984b678da72f7}{\_ftm\_bdm\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00300}00300\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00301}\doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a67d084f32a6904e1aefd4898a24e3a0f}{00301}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a67d084f32a6904e1aefd4898a24e3a0f}{kFTM\_BdmMode\_0}}\ =\ 0U,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00304}\doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a2eb539a04ca0b6d349f746726aaa9085}{00304}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a2eb539a04ca0b6d349f746726aaa9085}{kFTM\_BdmMode\_1}},}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00307}\doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a8641c6d14ef5cab2d99b56725cb76a4f}{00307}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a8641c6d14ef5cab2d99b56725cb76a4f}{kFTM\_BdmMode\_2}},}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00310}\doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a2c4a8bb2f8cf73070c9ce594186d68bf}{00310}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga30ad77be89a59745d2f984b678da72f7a2c4a8bb2f8cf73070c9ce594186d68bf}{kFTM\_BdmMode\_3}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00313}\doxymbox{\hyperlink{group__ftm_ga904531b46419433a3cadbb1003151915}{00313}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga904531b46419433a3cadbb1003151915}{ftm\_bdm\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00316}\doxymbox{\hyperlink{group__ftm_ga9d690b14e6bc8c636c181bbbfc94efb1}{00316}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga9d690b14e6bc8c636c181bbbfc94efb1}{\_ftm\_fault\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00317}00317\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00318}\doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ada9dcfb3ff2a8b02923061b163466aee}{00318}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ada9dcfb3ff2a8b02923061b163466aee}{kFTM\_Fault\_Disable}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00319}\doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ab27b89d9b9885ccd688360825e419169}{00319}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ab27b89d9b9885ccd688360825e419169}{kFTM\_Fault\_EvenChnls}},\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00320}\doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1a42eb2b0ab73b7de578fe701699a0ed8a}{00320}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1a42eb2b0ab73b7de578fe701699a0ed8a}{kFTM\_Fault\_AllChnlsMan}},\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00321}\doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ab82f7e89281bcd550c36aae896ef1b68}{00321}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga9d690b14e6bc8c636c181bbbfc94efb1ab82f7e89281bcd550c36aae896ef1b68}{kFTM\_Fault\_AllChnlsAuto}}\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00322}\doxymbox{\hyperlink{group__ftm_ga821497721402cdaaf0a2bdc71625e5d9}{00322}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga821497721402cdaaf0a2bdc71625e5d9}{ftm\_fault\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00328}\doxymbox{\hyperlink{group__ftm_ga8208a0d8865a2bbd73cf3f8775649b8c}{00328}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga8208a0d8865a2bbd73cf3f8775649b8c}{\_ftm\_external\_trigger}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00329}00329\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00330}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca2a8cbab942a6bc1e9f8e770ddf2b0584}{00330}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca2a8cbab942a6bc1e9f8e770ddf2b0584}{kFTM\_Chnl0Trigger}}\ =\ (1U\ <<\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00331}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8cafccd83cd710b520a6b745d03b3e4934a}{00331}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8cafccd83cd710b520a6b745d03b3e4934a}{kFTM\_Chnl1Trigger}}\ =\ (1U\ <<\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00332}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caf4e1cb98bdfd2533e66ead33fc8cc9a8}{00332}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caf4e1cb98bdfd2533e66ead33fc8cc9a8}{kFTM\_Chnl2Trigger}}\ =\ (1U\ <<\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00333}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca7904c23d88e41c8410f908f1eb9581f9}{00333}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca7904c23d88e41c8410f908f1eb9581f9}{kFTM\_Chnl3Trigger}}\ =\ (1U\ <<\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00334}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caffa57d92e639a1ed91007ae1bd120cf7}{00334}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caffa57d92e639a1ed91007ae1bd120cf7}{kFTM\_Chnl4Trigger}}\ =\ (1U\ <<\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00335}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caf98753a4569878fda70dc74475d4912b}{00335}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8caf98753a4569878fda70dc74475d4912b}{kFTM\_Chnl5Trigger}}\ =\ (1U\ <<\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00336}00336\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_CHANNEL6\_TRIGGER)\ \&\&\ (FSL\_FEATURE\_FTM\_HAS\_CHANNEL6\_TRIGGER)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00337}00337\ \ \ \ \ kFTM\_Chnl6Trigger\ =}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00338}00338\ \ \ \ \ \ \ \ \ (1U\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00339}00339\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00340}00340\ \#\textcolor{keywordflow}{if}\ defined(FSL\_FEATURE\_FTM\_HAS\_CHANNEL7\_TRIGGER)\ \&\&\ (FSL\_FEATURE\_FTM\_HAS\_CHANNEL7\_TRIGGER)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00341}00341\ \ \ \ \ kFTM\_Chnl7Trigger\ =}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00342}00342\ \ \ \ \ \ \ \ \ (1U\ <<\ 9),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00343}00343\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00344}\doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca3790311923b02c9bba4bc8e5614614a5}{00344}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8208a0d8865a2bbd73cf3f8775649b8ca3790311923b02c9bba4bc8e5614614a5}{kFTM\_InitTrigger}}\ =\ (1U\ <<\ 6),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00345}00345\ \#\textcolor{keywordflow}{if}\ defined(FSL\_FEATURE\_FTM\_HAS\_RELOAD\_INITIALIZATION\_TRIGGER)\ \&\&\ (FSL\_FEATURE\_FTM\_HAS\_RELOAD\_INITIALIZATION\_TRIGGER)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00346}00346\ \ \ \ \ kFTM\_ReloadInitTrigger\ =\ (1U\ <<\ 7)\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00347}00347\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00348}\doxymbox{\hyperlink{group__ftm_ga9069d6d8d44c042fe1c31efe94a8596f}{00348}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga9069d6d8d44c042fe1c31efe94a8596f}{ftm\_external\_trigger\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00351}\doxymbox{\hyperlink{group__ftm_gadf1c70fba9c32f435e4f18137c93429e}{00351}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_gadf1c70fba9c32f435e4f18137c93429e}{\_ftm\_pwm\_sync\_method}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00352}00352\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00353}\doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429ea6000b0d4024926f58ebec76caf55bc7d}{00353}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429ea6000b0d4024926f58ebec76caf55bc7d}{kFTM\_SoftwareTrigger}}\ \ \ =\ FTM\_SYNC\_SWSYNC\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00354}\doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eae2e64ba2ea4926dc6e4246a5be223b95}{00354}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eae2e64ba2ea4926dc6e4246a5be223b95}{kFTM\_HardwareTrigger\_0}}\ =\ FTM\_SYNC\_TRIG0\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00355}\doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eae87ca6c2456c3e067a1f1f3facd9025b}{00355}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eae87ca6c2456c3e067a1f1f3facd9025b}{kFTM\_HardwareTrigger\_1}}\ =\ FTM\_SYNC\_TRIG1\_MASK,\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00356}\doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eaee453a6e0a54400171bcb11f31c2f874}{00356}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ggadf1c70fba9c32f435e4f18137c93429eaee453a6e0a54400171bcb11f31c2f874}{kFTM\_HardwareTrigger\_2}}\ =\ FTM\_SYNC\_TRIG2\_MASK\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00357}\doxymbox{\hyperlink{group__ftm_ga755ce8d06f42ec78390c5e8efbe52892}{00357}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga755ce8d06f42ec78390c5e8efbe52892}{ftm\_pwm\_sync\_method\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00363}\doxymbox{\hyperlink{group__ftm_ga8d86eefdcf22b90b1838c5870e8ecae8}{00363}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga8d86eefdcf22b90b1838c5870e8ecae8}{\_ftm\_reload\_point}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00364}00364\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00365}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a78b8b53d1bea347ec0bd2cc56e4eca4e}{00365}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a78b8b53d1bea347ec0bd2cc56e4eca4e}{kFTM\_Chnl0Match}}\ \ \ =\ (1U\ <<\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00366}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a4dc55477646ddc537844543e0e3f4644}{00366}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a4dc55477646ddc537844543e0e3f4644}{kFTM\_Chnl1Match}}\ \ \ =\ (1U\ <<\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00367}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a83dbe5cf69670d4cb94ed0bddeceae3c}{00367}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a83dbe5cf69670d4cb94ed0bddeceae3c}{kFTM\_Chnl2Match}}\ \ \ =\ (1U\ <<\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00368}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a21eb3ecaf7e2ad61255320e18156105a}{00368}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a21eb3ecaf7e2ad61255320e18156105a}{kFTM\_Chnl3Match}}\ \ \ =\ (1U\ <<\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00369}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8af33b40f1daa4c2435243ed7a57210111}{00369}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8af33b40f1daa4c2435243ed7a57210111}{kFTM\_Chnl4Match}}\ \ \ =\ (1U\ <<\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00370}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a2580d152e82a62e0c2f0012f39156563}{00370}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a2580d152e82a62e0c2f0012f39156563}{kFTM\_Chnl5Match}}\ \ \ =\ (1U\ <<\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00371}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8affeffe56d335638bbd3ce584e62165ad}{00371}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8affeffe56d335638bbd3ce584e62165ad}{kFTM\_Chnl6Match}}\ \ \ =\ (1U\ <<\ 6),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00372}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a148e22d57126da2fbab0e3871f77f105}{00372}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a148e22d57126da2fbab0e3871f77f105}{kFTM\_Chnl7Match}}\ \ \ =\ (1U\ <<\ 7),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00373}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a186a543b065a63a295122e7f7939d256}{00373}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8a186a543b065a63a295122e7f7939d256}{kFTM\_CntMax}}\ \ \ \ \ \ \ =\ (1U\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00374}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8adf114a11e0b56f093db0c035a5385372}{00374}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8adf114a11e0b56f093db0c035a5385372}{kFTM\_CntMin}}\ \ \ \ \ \ \ =\ (1U\ <<\ 9),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00375}\doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8aa59259dea22c23354ef460d13dac9831}{00375}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga8d86eefdcf22b90b1838c5870e8ecae8aa59259dea22c23354ef460d13dac9831}{kFTM\_HalfCycMatch}}\ =\ (1U\ <<\ 10)\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00376}\doxymbox{\hyperlink{group__ftm_gae6307434fd2db4d7fb0212cf19ebf759}{00376}}\ \}\ \doxymbox{\hyperlink{group__ftm_gae6307434fd2db4d7fb0212cf19ebf759}{ftm\_reload\_point\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00382}\doxymbox{\hyperlink{group__ftm_ga6db3a697f444b538c6d9eaf31e32f0dc}{00382}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga6db3a697f444b538c6d9eaf31e32f0dc}{\_ftm\_interrupt\_enable}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00383}00383\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00384}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca4f7f551d3a964dbb09d76aae34c37bb5}{00384}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca4f7f551d3a964dbb09d76aae34c37bb5}{kFTM\_Chnl0InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 0),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00385}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca5527155a4aaee68a98207f174311bc04}{00385}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca5527155a4aaee68a98207f174311bc04}{kFTM\_Chnl1InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 1),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00386}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca515285dfc3ee20932ab0a41bc989b88d}{00386}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca515285dfc3ee20932ab0a41bc989b88d}{kFTM\_Chnl2InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 2),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00387}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca6b78ae357002384ee83fb63dc348214d}{00387}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca6b78ae357002384ee83fb63dc348214d}{kFTM\_Chnl3InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 3),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00388}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca38ea016159023afbed10edf7581a91bb}{00388}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca38ea016159023afbed10edf7581a91bb}{kFTM\_Chnl4InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 4),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00389}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca814299f8d4f072db7462c6ae6ffba02b}{00389}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca814299f8d4f072db7462c6ae6ffba02b}{kFTM\_Chnl5InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 5),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00390}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca3dac0b50d121a6a1556417a27cf0f2a8}{00390}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca3dac0b50d121a6a1556417a27cf0f2a8}{kFTM\_Chnl6InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 6),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00391}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca102b979fc9a316fb5b15650348cbd6e2}{00391}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca102b979fc9a316fb5b15650348cbd6e2}{kFTM\_Chnl7InterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 7),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00392}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca93ecc166a96eb8cac331af0b568d7e12}{00392}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca93ecc166a96eb8cac331af0b568d7e12}{kFTM\_FaultInterruptEnable}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 8),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00393}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dcaa2eb546b6fc3a5ba04f085479c341608}{00393}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dcaa2eb546b6fc3a5ba04f085479c341608}{kFTM\_TimeOverflowInterruptEnable}}\ =\ (1U\ <<\ 9),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00394}\doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca09d73a19021ac04ff6924c6f17969447}{00394}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga6db3a697f444b538c6d9eaf31e32f0dca09d73a19021ac04ff6924c6f17969447}{kFTM\_ReloadInterruptEnable}}\ \ \ \ \ \ \ =\ (1U\ <<\ 10)\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00395}\doxymbox{\hyperlink{group__ftm_ga55bd3d0d9ada89e59a9e3eb9d7a6af36}{00395}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga55bd3d0d9ada89e59a9e3eb9d7a6af36}{ftm\_interrupt\_enable\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00401}\doxymbox{\hyperlink{group__ftm_ga823902307b6d0e323a8e466e48b5992e}{00401}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga823902307b6d0e323a8e466e48b5992e}{\_ftm\_status\_flags}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00402}00402\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00403}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea3d3277659b3ff6395deb2ffdeb4f586e}{00403}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea3d3277659b3ff6395deb2ffdeb4f586e}{kFTM\_Chnl0Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 0),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00404}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea80e3bd8644ded8eb70e1852f476f65b3}{00404}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea80e3bd8644ded8eb70e1852f476f65b3}{kFTM\_Chnl1Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 1),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00405}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea9a1442e845917c1697111a99dca65ff7}{00405}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea9a1442e845917c1697111a99dca65ff7}{kFTM\_Chnl2Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 2),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00406}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea414b20d371462af6ee415a212ca60efe}{00406}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea414b20d371462af6ee415a212ca60efe}{kFTM\_Chnl3Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 3),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00407}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992eae35f55787bd39310462aa4fc9cda4fd0}{00407}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992eae35f55787bd39310462aa4fc9cda4fd0}{kFTM\_Chnl4Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 4),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00408}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea26b891a5a66f9652a1bfbb461a83ed49}{00408}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea26b891a5a66f9652a1bfbb461a83ed49}{kFTM\_Chnl5Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 5),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00409}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea011362e2f5bee0f8fd6dc489c0ad7624}{00409}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea011362e2f5bee0f8fd6dc489c0ad7624}{kFTM\_Chnl6Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 6),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00410}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea87c73487a5aa9ecd3f7c33555a143a13}{00410}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea87c73487a5aa9ecd3f7c33555a143a13}{kFTM\_Chnl7Flag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 7),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00411}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea50222652e43edd140b0ba8a7934c7eef}{00411}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea50222652e43edd140b0ba8a7934c7eef}{kFTM\_FaultFlag}}\ \ \ \ \ \ \ \ =\ (1U\ <<\ 8),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00412}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ead27178c2079ee5a384152f5f05940c56}{00412}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ead27178c2079ee5a384152f5f05940c56}{kFTM\_TimeOverflowFlag}}\ =\ (1U\ <<\ 9),\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00413}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea26b7e0741bb3f14bd340f62486bbb13a}{00413}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992ea26b7e0741bb3f14bd340f62486bbb13a}{kFTM\_ChnlTriggerFlag}}\ \ =\ (1U\ <<\ 10),\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00414}\doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992eab1a44bd81a8b37590a52b2eebd08a26c}{00414}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga823902307b6d0e323a8e466e48b5992eab1a44bd81a8b37590a52b2eebd08a26c}{kFTM\_ReloadFlag}}\ \ \ \ \ \ \ =\ (1U\ <<\ 11)\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00415}\doxymbox{\hyperlink{group__ftm_ga35e578bd3e27400c449acf7567f56d79}{00415}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga35e578bd3e27400c449acf7567f56d79}{ftm\_status\_flags\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00416}00416\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00420}\doxymbox{\hyperlink{group__ftm_ga77ef88cd2fa1b0ab426ed855c3e3d2a0}{00420}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__ftm_ga77ef88cd2fa1b0ab426ed855c3e3d2a0}{\_ftm\_channel\_index}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00421}00421\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00422}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0affc0bb80c910b6d4dbba938dcd6d1c97}{00422}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0affc0bb80c910b6d4dbba938dcd6d1c97}{kFTM\_Chnl0\_Mask}}\ =\ (1U\ <<\ 0),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00423}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a18251ce8b742591f9a64324ff62384e8}{00423}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a18251ce8b742591f9a64324ff62384e8}{kFTM\_Chnl1\_Mask}}\ =\ (1U\ <<\ 1),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00424}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a44a772845ddf8ab7b6007aeb3203f1da}{00424}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a44a772845ddf8ab7b6007aeb3203f1da}{kFTM\_Chnl2\_Mask}}\ =\ (1U\ <<\ 2),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00425}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0af62484664e4b76627ef057aca5c325bc}{00425}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0af62484664e4b76627ef057aca5c325bc}{kFTM\_Chnl3\_Mask}}\ =\ (1U\ <<\ 3),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00426}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a7101bd00285ea2ccdf74ed2dfc68baa9}{00426}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a7101bd00285ea2ccdf74ed2dfc68baa9}{kFTM\_Chnl4\_Mask}}\ =\ (1U\ <<\ 4),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00427}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0ab5b98038b8bfd2330feb3bf8a3112c73}{00427}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0ab5b98038b8bfd2330feb3bf8a3112c73}{kFTM\_Chnl5\_Mask}}\ =\ (1U\ <<\ 5),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00428}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a4528943373130dcd97bb4141c0afeddb}{00428}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0a4528943373130dcd97bb4141c0afeddb}{kFTM\_Chnl6\_Mask}}\ =\ (1U\ <<\ 6),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00429}\doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0ae98f9892ce8577000e1872a08c6546f0}{00429}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga77ef88cd2fa1b0ab426ed855c3e3d2a0ae98f9892ce8577000e1872a08c6546f0}{kFTM\_Chnl7\_Mask}}\ =\ (1U\ <<\ 7),\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00430}\doxymbox{\hyperlink{group__ftm_gac08faddadb2f8df22092f885c2edca46}{00430}}\ \}\ \doxymbox{\hyperlink{group__ftm_gac08faddadb2f8df22092f885c2edca46}{ftm\_channel\_index\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00431}00431\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00432}00432\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_FTM\_HAS\_NO\_QDCTRL)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_NO\_QDCTRL)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00436}00436\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00437}00437\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00438}\doxymbox{\hyperlink{group__ftm_gga60b7d13df5ed64cfc3989510253b3d1ca1bbbe66bd715bfc727ea1ed374302946}{00438}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga60b7d13df5ed64cfc3989510253b3d1ca1bbbe66bd715bfc727ea1ed374302946}{kFTM\_QuadDecoderCountingIncreaseFlag}}\ =\ FTM\_QDCTRL\_QUADIR\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00440}\doxymbox{\hyperlink{group__ftm_gga60b7d13df5ed64cfc3989510253b3d1ca1f6ec93e7f6b13d0e201bab2b9a40b48}{00440}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gga60b7d13df5ed64cfc3989510253b3d1ca1f6ec93e7f6b13d0e201bab2b9a40b48}{kFTM\_QuadDecoderCountingOverflowOnTopFlag}}\ =\ FTM\_QDCTRL\_TOFDIR\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00442}00442\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00443}00443\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00454}\doxymbox{\hyperlink{struct__ftm__config}{00454}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__ftm__config}{\_ftm\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00455}00455\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00456}\doxymbox{\hyperlink{struct__ftm__config_aa9e572280869c067792c0a385b791480}{00456}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga4932b1d8f973d389576bdbcd0f50026d}{ftm\_clock\_prescale\_t}}\ \doxymbox{\hyperlink{struct__ftm__config_aa9e572280869c067792c0a385b791480}{prescale}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00457}00457\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00458}00458\ \ \ \ \ ftm\_filter\_prescale\_t\ filterPrescale;\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00459}00459\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_FILTER\_PRESCALER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00460}\doxymbox{\hyperlink{struct__ftm__config_a75d8873b9d224b6f7f622a8f82bcb53e}{00460}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga904531b46419433a3cadbb1003151915}{ftm\_bdm\_mode\_t}}\ \doxymbox{\hyperlink{struct__ftm__config_a75d8873b9d224b6f7f622a8f82bcb53e}{bdmMode}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00461}\doxymbox{\hyperlink{struct__ftm__config_ac4437ac0d7be2c6b67a788cac03c6dfd}{00461}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__ftm__config_ac4437ac0d7be2c6b67a788cac03c6dfd}{pwmSyncMode}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00464}\doxymbox{\hyperlink{struct__ftm__config_ace10c1146a0e63f126055354c61198c3}{00464}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__ftm__config_ace10c1146a0e63f126055354c61198c3}{reloadPoints}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00468}\doxymbox{\hyperlink{struct__ftm__config_afc1289d2ed0a4a34422ff088acd2b672}{00468}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga821497721402cdaaf0a2bdc71625e5d9}{ftm\_fault\_mode\_t}}\ \doxymbox{\hyperlink{struct__ftm__config_afc1289d2ed0a4a34422ff088acd2b672}{faultMode}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00469}\doxymbox{\hyperlink{struct__ftm__config_a01d71c0aa204e23cae59d0c7267c8e17}{00469}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__ftm__config_a01d71c0aa204e23cae59d0c7267c8e17}{faultFilterValue}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00470}00470\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00471}00471\ \ \ \ \ ftm\_fault\_output\_state\_t\ faultOutputState;\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00472}00472\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_FAULT\_OUTPUT\_STATE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00473}\doxymbox{\hyperlink{struct__ftm__config_a5abffc0e0a5bcc20cd18f7a904b7388c}{00473}}\ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga15deed517bd5030ff5d81b6a8b5f1594}{ftm\_deadtime\_prescale\_t}}\ \doxymbox{\hyperlink{struct__ftm__config_a5abffc0e0a5bcc20cd18f7a904b7388c}{deadTimePrescale}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00474}\doxymbox{\hyperlink{struct__ftm__config_a9bdb43a4a5cf567e2be2999d8b36ef1a}{00474}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__ftm__config_a9bdb43a4a5cf567e2be2999d8b36ef1a}{deadTimeValue}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00477}\doxymbox{\hyperlink{struct__ftm__config_aa941bed78e07293c2bbdf547fe5a45d1}{00477}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct__ftm__config_aa941bed78e07293c2bbdf547fe5a45d1}{extTriggers}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00480}\doxymbox{\hyperlink{struct__ftm__config_ac7df8a005a4148aed1a74403444fc857}{00480}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__ftm__config_ac7df8a005a4148aed1a74403444fc857}{chnlInitState}};\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00481}\doxymbox{\hyperlink{struct__ftm__config_a2e483d9ad64a8678f936a32112bb1284}{00481}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__ftm__config_a2e483d9ad64a8678f936a32112bb1284}{chnlPolarity}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00482}\doxymbox{\hyperlink{struct__ftm__config_a03233daf149c9a58927493e4837007c0}{00482}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__config_a03233daf149c9a58927493e4837007c0}{useGlobalTimeBase}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00484}\doxymbox{\hyperlink{struct__ftm__config_ae13fe32069d6c8374fe627efb3fd85ce}{00484}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__config_ae13fe32069d6c8374fe627efb3fd85ce}{swTriggerResetCount}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00486}\doxymbox{\hyperlink{struct__ftm__config_a5e6bdb31c5430a783fa22350f612b2fa}{00486}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct__ftm__config_a5e6bdb31c5430a783fa22350f612b2fa}{hwTriggerResetCount}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00488}\doxymbox{\hyperlink{group__ftm_ga4537e9f597f3da0bc350d7728d7d936f}{00488}}\ \}\ \doxymbox{\hyperlink{group__ftm_ga4537e9f597f3da0bc350d7728d7d936f}{ftm\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00490}00490\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00491}00491\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00492}00492\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00494}00494\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00495}00495\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00496}00496\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00514}00514\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ftm_ga8dbfe22a07cac494fa8a1d3d8c2c5d3c}{FTM\_Init}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga4537e9f597f3da0bc350d7728d7d936f}{ftm\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00521}00521\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga85f9f22c3d66c560126fb1120e3e3d57}{FTM\_Deinit}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00545}00545\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga165df1038850ac71e511b19fab3e5ab8}{FTM\_GetDefaultConfig}}(\doxymbox{\hyperlink{group__ftm_ga4537e9f597f3da0bc350d7728d7d936f}{ftm\_config\_t}}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00559}\doxymbox{\hyperlink{group__ftm_ga430a28a464af09a24b6164de895ad297}{00559}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{group__ftm_ga4932b1d8f973d389576bdbcd0f50026d}{ftm\_clock\_prescale\_t}}\ \doxymbox{\hyperlink{group__ftm_ga430a28a464af09a24b6164de895ad297}{FTM\_CalculateCounterClkDiv}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ counterPeriod\_Hz,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ srcClock\_Hz)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00562}00562\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00563}00563\ \ \ \ \ uint8\_t\ i;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00564}00564\ \ \ \ \ assert((srcClock\_Hz\ /\ 2U)\ >\ counterPeriod\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00565}00565\ \ \ \ \ assert((srcClock\_Hz\ /\ 128U\ /\ 0xFFFFU)\ <=\ counterPeriod\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00566}00566\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <\ (uint32\_t)\doxymbox{\hyperlink{group__ftm_ggab1cd3e0183323eacc95922bc8f02e9b4a81667502cf2b2b719c1bbadf58090339}{kFTM\_Prescale\_Divide\_128}};\ i++)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00567}00567\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00568}00568\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((srcClock\_Hz\ /\ (1UL\ <<\ i)\ /\ 0xFFFFU)\ <\ counterPeriod\_Hz)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00569}00569\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00570}00570\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00571}00571\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00572}00572\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00573}00573\ \ \ \ \ \textcolor{keywordflow}{return}\ (\doxymbox{\hyperlink{group__ftm_ga4932b1d8f973d389576bdbcd0f50026d}{ftm\_clock\_prescale\_t}})i;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00574}00574\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00575}00575\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00577}00577\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00599}00599\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ftm_gaf463841d4e86443526bf941d92dc21af}{FTM\_SetupPwm}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00600}00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga2a81caee2f3d12f54b13392cc4fa648b}{ftm\_chnl\_pwm\_signal\_param\_t}}\ *chnlParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ numOfChnls,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{ftm\_pwm\_mode\_t}}\ mode,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ pwmFreq\_Hz,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00605}00605\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00619}00619\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ftm_ga64fc46d5fbb9422cf15daaa689fb06bc}{FTM\_UpdatePwmDutycycle}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00620}00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00621}00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{ftm\_pwm\_mode\_t}}\ currentPwmMode,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ dutyCyclePercent);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00623}00623\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00632}00632\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gab8b971819592600205f9310267965853}{FTM\_UpdateChnlEdgeLevelSelect}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ uint8\_t\ level);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00633}00633\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00650}00650\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__ftm_gac0ce40a8c23003087d094a40fdfea66a}{FTM\_SetupPwmMode}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga27351c684ba26110b9c768531fd82be3}{ftm\_chnl\_pwm\_config\_param\_t}}\ *chnlParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ numOfChnls,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00653}00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gaa4a0086264de478eaabaceadbff3d49e}{ftm\_pwm\_mode\_t}}\ mode);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00654}00654\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00665}00665\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gab72994045b4e55506a2844b9590a10aa}{FTM\_ConfigSinglePWM}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga594b8f4a8e8d3c44afb3233544e34515}{ftm\_chnl\_param\_t}}\ *chnlParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00668}00668\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00679}00679\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga80e99beb7f014d3e75914b8330c2568c}{FTM\_ConfigCombinePWM}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga594b8f4a8e8d3c44afb3233544e34515}{ftm\_chnl\_param\_t}}\ *chnlParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00696}00696\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga10f6cc912dbcdeb1b7ce476bbb373cc7}{FTM\_SetupInputCapture}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00697}00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga305fc182d536972d80b65c8a9045e69c}{ftm\_input\_capture\_edge\_t}}\ captureMode,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ filterValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00700}00700\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00712}00712\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga5c3e95537bfb7e11faa3b308b0c29f99}{FTM\_SetupOutputCompare}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga49a609cd98b6ac16b0b28d6ebd70bcb3}{ftm\_output\_compare\_mode\_t}}\ compareMode,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ compareValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00716}00716\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00731}00731\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gabe0cc94b8555256c435751cce47e33de}{FTM\_SetupDualEdgeCapture}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00732}00732\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00733}00733\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_gacf708f6726df1fead6c26b521a882c4b}{ftm\_dual\_edge\_capture\_param\_t}}\ *edgeParam,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ filterValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00735}00735\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00737}00737\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00747}00747\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga8b3e73dba70412d668c8132e91db98a1}{FTM\_SetupFaultInput}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_ga05bbc1c3385be450a63352dd941675f2}{ftm\_fault\_input\_t}}\ faultNumber,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_ga9d8c62fcd9298cae31e1c7f7c93c9e11}{ftm\_fault\_param\_t}}\ *faultParams);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00748}00748\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00753}00753\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00761}00761\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gac3900f755074c0d36fa7f1b1ddf0aebd}{FTM\_EnableInterrupts}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00762}00762\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00770}00770\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gaf13dad25547f43602fbaf57f1899d37c}{FTM\_DisableInterrupts}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00780}00780\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga70c7410f643779ab8d7b9527b80e039a}{FTM\_GetEnabledInterrupts}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00781}00781\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00789}00789\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga9f363758eb7233e56bcb5bd50fa70d39}{FTM\_GetInstance}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00790}00790\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00792}00792\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00797}00797\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00806}00806\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga91be5dc3ef16762e8101436d9e9f6fd4}{FTM\_GetStatusFlags}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00807}00807\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00815}00815\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga2a64d6dc32c755dc984b8df98a3a3eb1}{FTM\_ClearStatusFlags}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00816}00816\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00818}00818\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00823}00823\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00838}\doxymbox{\hyperlink{group__ftm_gacc4f583ffdfbfd3b5d0020383cccc1b1}{00838}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gacc4f583ffdfbfd3b5d0020383cccc1b1}{FTM\_SetTimerPeriod}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ ticks)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00839}00839\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00840}00840\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{CNTIN}}\ =\ 0x0U;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00841}00841\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aeb4a6a58257ebece333d61778bde756c}{MOD}}\ \ \ =\ ticks;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00842}00842\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00851}\doxymbox{\hyperlink{group__ftm_ga28cb789d05b439ba19baa9ae866a1c82}{00851}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga28cb789d05b439ba19baa9ae866a1c82}{FTM\_SetInitialModuloValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint16\_t\ initialValue,\ uint16\_t\ moduloValue)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00852}00852\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00853}00853\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{CNTIN}}\ =\ initialValue;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00854}00854\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aeb4a6a58257ebece333d61778bde756c}{MOD}}\ \ \ =\ moduloValue;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00855}00855\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00856}00856\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00869}\doxymbox{\hyperlink{group__ftm_ga0139eef474256c0a389611f7147b7cd4}{00869}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga0139eef474256c0a389611f7147b7cd4}{FTM\_GetCurrentTimerCount}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00870}00870\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00871}00871\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)((base-\/>\doxymbox{\hyperlink{structFTM__Type_aafebc28d2a0aa309a2e6eb71cc646c1b}{CNT}}\ \&\ FTM\_CNT\_COUNT\_MASK)\ >>\ FTM\_CNT\_COUNT\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00872}00872\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00873}00873\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00881}\doxymbox{\hyperlink{group__ftm_gad0ff193eb878b2e01c49cc530aef3e6e}{00881}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gad0ff193eb878b2e01c49cc530aef3e6e}{FTM\_SetChannelMatchValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ uint16\_t\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00882}00882\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00883}00883\ \ \ \ \ base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a4a374e850fc48c7559277888b350539c}{CnV}}\ =\ value;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00884}00884\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00885}00885\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00898}\doxymbox{\hyperlink{group__ftm_ga74f7bd8c3816484df2a2fc10b39d97bb}{00898}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga74f7bd8c3816484df2a2fc10b39d97bb}{FTM\_GetInputCaptureValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00899}00899\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00900}00900\ \ \ \ \ \textcolor{keywordflow}{return}\ (base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a4a374e850fc48c7559277888b350539c}{CnV}}\ \&\ FTM\_CnV\_VAL\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00901}00901\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00902}00902\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00908}00908\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00915}\doxymbox{\hyperlink{group__ftm_gab53c3cf389f687cef2f00bd80f3fd311}{00915}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gab53c3cf389f687cef2f00bd80f3fd311}{FTM\_StartTimer}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_ga3b49a5fd637d7fcafa8141e143df4220}{ftm\_clock\_source\_t}}\ clockSource)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00916}00916\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00917}00917\ \ \ \ \ uint32\_t\ reg\ =\ base-\/>\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00918}00918\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00919}00919\ \ \ \ \ reg\ \&=\ \string~(FTM\_SC\_CLKS\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00920}00920\ \ \ \ \ reg\ |=\ \doxymbox{\hyperlink{group__FTM__Register__Masks_ga4c0b108bf05899c019de06f311cb5c89}{FTM\_SC\_CLKS}}(clockSource);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00921}00921\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00922}00922\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00923}00923\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00929}\doxymbox{\hyperlink{group__ftm_ga97935fcf96f138020ddad8c18f61d05f}{00929}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga97935fcf96f138020ddad8c18f61d05f}{FTM\_StopTimer}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00930}00930\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00931}00931\ \ \ \ \ \textcolor{comment}{/*\ Set\ clock\ source\ to\ none\ to\ disable\ counter\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00932}00932\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}}\ \&=\ \string~(FTM\_SC\_CLKS\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00933}00933\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00934}00934\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00936}00936\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00947}\doxymbox{\hyperlink{group__ftm_ga43426a4f5a4e2cddc2773e575c4b0084}{00947}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga43426a4f5a4e2cddc2773e575c4b0084}{FTM\_GetSoftwareOutputValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00948}00948\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00949}00949\ \ \ \ \ \textcolor{keywordflow}{return}\ (base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ \&\ 0xFF00U)\ >>\ FTM\_SWOCTRL\_CH0OCV\_SHIFT;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00950}00950\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00951}00951\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00958}\doxymbox{\hyperlink{group__ftm_ga9e17b07f73b55d8a445086d1e5f5a01b}{00958}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga9e17b07f73b55d8a445086d1e5f5a01b}{FTM\_GetSoftwareOutputEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00959}00959\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00960}00960\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ \&\ 0xFFU;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00961}00961\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00962}00962\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00971}\doxymbox{\hyperlink{group__ftm_gab35ae09dd71ed9f7e0a9b4bc37208831}{00971}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gab35ae09dd71ed9f7e0a9b4bc37208831}{FTM\_SetSoftwareOutputCtrl}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ chnlEnable,\ uint32\_t\ chnlValue)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00972}00972\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00973}00973\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ =\ (chnlEnable\ |\ (chnlValue\ <<\ FTM\_SWOCTRL\_CH0OCV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00974}00974\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00975}00975\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00984}\doxymbox{\hyperlink{group__ftm_ga04ddb95f340b1f97453111ede534c281}{00984}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga04ddb95f340b1f97453111ede534c281}{FTM\_SetSoftwareCtrlEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00985}00985\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00986}00986\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00987}00987\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00988}00988\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ |=\ (1UL\ <<\ (uint32\_t)chnlNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00989}00989\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00990}00990\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00991}00991\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00992}00992\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ \&=\ \string~(1UL\ <<\ (uint32\_t)chnlNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00993}00993\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00994}00994\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l00995}00995\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01003}\doxymbox{\hyperlink{group__ftm_ga2910aac730348d5fbe07336f4d790d8e}{01003}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga2910aac730348d5fbe07336f4d790d8e}{FTM\_SetSoftwareCtrlVal}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01004}01004\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01005}01005\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01006}01006\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01007}01007\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ |=\ (1UL\ <<\ ((uint32\_t)chnlNumber\ +\ FTM\_SWOCTRL\_CH0OCV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01008}01008\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01009}01009\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01010}01010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01011}01011\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ab45e3f92a7675c23c0ee9227f2a198af}{SWOCTRL}}\ \&=\ \string~(1UL\ <<\ ((uint32\_t)chnlNumber\ +\ FTM\_SWOCTRL\_CH0OCV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01012}01012\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01013}01013\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01014}01014\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01016}01016\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01023}\doxymbox{\hyperlink{group__ftm_gac63161d290bceab2fdcf317cc34fac26}{01023}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gac63161d290bceab2fdcf317cc34fac26}{FTM\_SetGlobalTimeBaseOutputEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01024}01024\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01025}01025\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01026}01026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01027}01027\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{CONF}}\ |=\ FTM\_CONF\_GTBEOUT\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01028}01028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01029}01029\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01030}01030\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01031}01031\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{CONF}}\ \&=\ \string~FTM\_CONF\_GTBEOUT\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01032}01032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01033}01033\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01034}01034\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01042}\doxymbox{\hyperlink{group__ftm_ga0b566a2724d8bedf2f73ac7b6211a092}{01042}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga0b566a2724d8bedf2f73ac7b6211a092}{FTM\_SetOutputMask}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ \textcolor{keywordtype}{bool}\ mask)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01043}01043\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01044}01044\ \ \ \ \ \textcolor{keywordflow}{if}\ (mask)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01045}01045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01046}01046\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a624050c92b74b9952d2cde560e5ee41c}{OUTMASK}}\ |=\ (1UL\ <<\ (uint32\_t)chnlNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01047}01047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01048}01048\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01049}01049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01050}01050\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a624050c92b74b9952d2cde560e5ee41c}{OUTMASK}}\ \&=\ \string~(1UL\ <<\ (uint32\_t)chnlNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01051}01051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01052}01052\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01053}01053\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01054}01054\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_ENABLE\_PWM\_OUTPUT)\ \&\&\ (FSL\_FEATURE\_FTM\_HAS\_ENABLE\_PWM\_OUTPUT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01065}01065\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetPwmOutputEnable(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01066}01066\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01067}01067\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01068}01068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01069}01069\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}}\ |=\ (1UL\ <<\ ((uint32\_t)chnlNumber\ +\ FTM\_SC\_PWMEN0\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01070}01070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01071}01071\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01072}01072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01073}01073\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a539e171615dd7eccfd0c9c4f78c895ab}{SC}}\ \&=\ \string~(1UL\ <<\ ((uint32\_t)chnlNumber\ +\ FTM\_SC\_PWMEN0\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01074}01074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01075}01075\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01076}01076\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01077}01077\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01082}01082\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01090}\doxymbox{\hyperlink{group__ftm_gac050fe194fe10adbdecb4b9f69f7205b}{01090}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gac050fe194fe10adbdecb4b9f69f7205b}{FTM\_SetFaultControlEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01091}01091\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01092}01092\ \ \ \ \ \textcolor{comment}{/*\ Fault\ input\ is\ not\ supported\ if\ the\ instance\ has\ only\ basic\ feature.*/}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01093}01093\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_BASIC\_FEATURE\_ONLY\_INSTANCE)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_BASIC\_FEATURE\_ONLY\_INSTANCE)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01094}01094\ \ \ \ \ assert(0\ ==\ FSL\_FEATURE\_FTM\_IS\_BASIC\_FEATURE\_ONLY\_INSTANCEn(base));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01095}01095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01096}01096\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01097}01097\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01098}01098\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ |=}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01099}01099\ \ \ \ \ \ \ \ \ \ \ \ \ (1UL\ <<\ (FTM\_COMBINE\_FAULTEN0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01100}01100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01101}01101\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01102}01102\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01103}01103\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ \&=}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01104}01104\ \ \ \ \ \ \ \ \ \ \ \ \ \string~(1UL\ <<\ (FTM\_COMBINE\_FAULTEN0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01105}01105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01106}01106\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01107}01107\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01115}\doxymbox{\hyperlink{group__ftm_ga6903f4c90cd2ce7b1f4e7bfee60cc25e}{01115}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga6903f4c90cd2ce7b1f4e7bfee60cc25e}{FTM\_SetDeadTimeEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01116}01116\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01117}01117\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01118}01118\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01119}01119\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ |=\ (1UL\ <<\ (FTM\_COMBINE\_DTEN0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01120}01120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01121}01121\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01122}01122\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01123}01123\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ \&=\ \string~(1UL\ <<\ (FTM\_COMBINE\_DTEN0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01124}01124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01125}01125\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01126}01126\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01134}\doxymbox{\hyperlink{group__ftm_ga9decfdc211ef615bc6f6f2766744ab2f}{01134}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga9decfdc211ef615bc6f6f2766744ab2f}{FTM\_SetComplementaryEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01135}01135\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01136}01136\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01137}01137\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01138}01138\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ |=\ (1UL\ <<\ (FTM\_COMBINE\_COMP0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01139}01139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01140}01140\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01141}01141\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01142}01142\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ac4684173f8183e0cf75d1ae384a9de62}{COMBINE}}\ \&=\ \string~(1UL\ <<\ (FTM\_COMBINE\_COMP0\_SHIFT\ +\ (FTM\_COMBINE\_COMBINE1\_SHIFT\ *\ (uint32\_t)chnlPairNumber)));}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01143}01143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01144}01144\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01145}01145\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01153}\doxymbox{\hyperlink{group__ftm_ga6c6b2c00858174ed1eae0ea690c4387b}{01153}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga6c6b2c00858174ed1eae0ea690c4387b}{FTM\_SetInvertEnable}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01154}01154\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01155}01155\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01156}01156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01157}01157\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5d7825cc57a84230359220fa95b990d0}{INVCTRL}}\ |=\ (1UL\ <<\ (uint32\_t)chnlPairNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01158}01158\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01159}01159\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01160}01160\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01161}01161\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5d7825cc57a84230359220fa95b990d0}{INVCTRL}}\ \&=\ \string~(1UL\ <<\ (uint32\_t)chnlPairNumber);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01162}01162\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01163}01163\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01164}01164\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01166}01166\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01171}01171\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01180}01180\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gaeb66293090fa2da33f73e0d585872c37}{FTM\_SetupQuadDecode}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01181}01181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_gaf06d3e905e0c2a0581c99d241b0c99bb}{ftm\_phase\_params\_t}}\ *phaseAParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01182}01182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__ftm_gaf06d3e905e0c2a0581c99d241b0c99bb}{ftm\_phase\_params\_t}}\ *phaseBParams,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01183}01183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_ga7d9e9412adb5c6dc5d6b169bfdd0376c}{ftm\_quad\_decode\_mode\_t}}\ quadMode);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01184}01184\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01185}01185\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_FEATURE\_FTM\_HAS\_NO\_QDCTRL)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_NO\_QDCTRL)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01192}\doxymbox{\hyperlink{group__ftm_ga79984ca57bba0bb923dc68884aa5c7d2}{01192}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_ga79984ca57bba0bb923dc68884aa5c7d2}{FTM\_GetQuadDecoderFlags}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01193}01193\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01194}01194\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_INSTANCE\_HAS\_QUAD\_DECODEn)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01195}01195\ \ \ \ \ assert(FSL\_FEATURE\_FTM\_INSTANCE\_HAS\_QUAD\_DECODEn(base)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01196}01196\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01197}01197\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{structFTM__Type_a0a07f1a16c3d7714947e8ad3fb070592}{QDCTRL}}\ \&\ (FTM\_QDCTRL\_QUADIR\_MASK\ |\ FTM\_QDCTRL\_TOFDIR\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01198}01198\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01199}01199\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01200}01200\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01211}\doxymbox{\hyperlink{group__ftm_gaef5c50e33f8ebb50c9d76bdc574d8df7}{01211}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gaef5c50e33f8ebb50c9d76bdc574d8df7}{FTM\_SetQuadDecoderModuloValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ startValue,\ uint32\_t\ overValue)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01212}01212\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01213}01213\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{CNTIN}}\ =\ startValue;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01214}01214\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aeb4a6a58257ebece333d61778bde756c}{MOD}}\ \ \ =\ overValue;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01215}01215\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01216}01216\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01223}\doxymbox{\hyperlink{group__ftm_gaf837dbb89e1ac9fdb4425313b18118a5}{01223}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ \doxymbox{\hyperlink{group__ftm_gaf837dbb89e1ac9fdb4425313b18118a5}{FTM\_GetQuadDecoderCounterValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01224}01224\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01225}01225\ \ \ \ \ \textcolor{keywordflow}{return}\ base-\/>\doxymbox{\hyperlink{structFTM__Type_aafebc28d2a0aa309a2e6eb71cc646c1b}{CNT}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01226}01226\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01227}01227\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01235}\doxymbox{\hyperlink{group__ftm_gade8fc5b91c2eac28eb521f614f5b1456}{01235}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gade8fc5b91c2eac28eb521f614f5b1456}{FTM\_ClearQuadDecoderCounterValue}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01236}01236\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01237}01237\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aafebc28d2a0aa309a2e6eb71cc646c1b}{CNT}}\ =\ base-\/>\doxymbox{\hyperlink{structFTM__Type_a5dde356f5ee4d309ea1d4380a9501eb9}{CNTIN}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01238}01238\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01239}01239\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01241}01241\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01248}\doxymbox{\hyperlink{group__ftm_ga08e1b1c36631d42a77a5e08d76884d8b}{01248}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga08e1b1c36631d42a77a5e08d76884d8b}{FTM\_SetSoftwareTrigger}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01249}01249\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01250}01250\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01251}01251\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01252}01252\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ad7f41548c14fec6c57dc5490b01c1b58}{SYNC}}\ |=\ FTM\_SYNC\_SWSYNC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01253}01253\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01254}01254\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01255}01255\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01256}01256\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_ad7f41548c14fec6c57dc5490b01c1b58}{SYNC}}\ \&=\ \string~FTM\_SYNC\_SWSYNC\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01257}01257\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01258}01258\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01259}01259\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01266}\doxymbox{\hyperlink{group__ftm_ga64b2c823a5fec450eb896c7049d11297}{01266}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_ga64b2c823a5fec450eb896c7049d11297}{FTM\_SetWriteProtection}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01267}01267\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01268}01268\ \ \ \ \ \textcolor{comment}{/*\ Configure\ write\ protection\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01269}01269\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01270}01270\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01271}01271\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_adba577540e3be5b0e96ba5bc7538eac2}{FMS}}\ |=\ FTM\_FMS\_WPEN\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01272}01272\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01273}01273\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01274}01274\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01275}01275\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a18f2ef364d8c9e9217b35054fc5726be}{MODE}}\ |=\ FTM\_MODE\_WPDIS\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01276}01276\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01277}01277\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01278}01278\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01279}01279\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_DMA\_SUPPORT)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_DMA\_SUPPORT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01291}01291\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_EnableDmaTransfer(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,\ \textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01292}01292\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01293}01293\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01294}01294\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01295}01295\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ DMA\ transfer\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01296}01296\ \ \ \ \ \ \ \ \ base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{CnSC}}\ |=\ FTM\_CnSC\_DMA\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01297}01297\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01298}01298\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01299}01299\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01300}01300\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ DMA\ transfer\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01301}01301\ \ \ \ \ \ \ \ \ base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{CnSC}}\ \&=\ \string~FTM\_CnSC\_DMA\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01302}01302\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01303}01303\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01304}01304\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_DMA\_SUPPORT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01305}01305\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01314}\doxymbox{\hyperlink{group__ftm_gaa4676eb8fc473adb79139a02549bce5a}{01314}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__ftm_gaa4676eb8fc473adb79139a02549bce5a}{FTM\_SetLdok}}(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01315}01315\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01316}01316\ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01317}01317\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01318}01318\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a28478e01da54c088007371f44451b2d7}{PWMLOAD}}\ |=\ FTM\_PWMLOAD\_LDOK\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01319}01319\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01320}01320\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01321}01321\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01322}01322\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_a28478e01da54c088007371f44451b2d7}{PWMLOAD}}\ \&=\ \string~FTM\_PWMLOAD\_LDOK\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01323}01323\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01324}01324\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01325}01325\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01326}01326\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_HALFCYCLE\_RELOAD)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_HALFCYCLE\_RELOAD}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01338}01338\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetHalfCycReloadMatchValue(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ ticks)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01339}01339\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01340}01340\ \ \ \ \ base-\/>HCR\ =\ ticks;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01341}01341\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01342}01342\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_HALFCYCLE\_RELOAD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01343}01343\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01344}01344\ \textcolor{preprocessor}{\#if\ defined(FSL\_FEATURE\_FTM\_HAS\_CONF\_LDFQ\_BIT)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_CONF\_LDFQ\_BIT}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01352}01352\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetLoadFreq(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ uint32\_t\ loadfreq)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01353}01353\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01354}01354\ \ \ \ \ uint32\_t\ reg\ =\ base-\/>\doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{CONF}};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01355}01355\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01356}01356\ \ \ \ \ reg\ \&=\ \string~(FTM\_CONF\_LDFQ\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01357}01357\ \ \ \ \ reg\ |=\ FTM\_CONF\_LDFQ(loadfreq);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01358}01358\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structFTM__Type_aefdaf80da88ac945ee6e55088e7e3587}{CONF}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01359}01359\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01360}01360\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_CONF\_LDFQ\_BIT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01361}01361\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01362}01362\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01370}01370\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetPairDeadTime(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01371}01371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ ftm\_deadtime\_param\_t\ *config,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01372}01372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlPairNumber)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01373}01373\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01374}01374\ \ \ \ \ \textcolor{keywordflow}{switch}\ (chnlPairNumber)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01375}01375\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01376}01376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafbad017e4e4d83363eff65b1c08f51703c9}{kFTM\_Chnl\_0}}:}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01377}01377\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>PAIR0DEADTIME\ =\ FTM\_PAIR0DEADTIME\_DTVALEX(config-\/>deadTimeValue\ >>\ 6U)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01378}01378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR0DEADTIME\_DTPS(config-\/>deadTimePrescale)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01379}01379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR0DEADTIME\_DTVAL(config-\/>deadTimeValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01380}01380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01381}01381\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba9d0a41381ae65ee84a77ab7320bc0b4f}{kFTM\_Chnl\_1}}:}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01382}01382\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>PAIR1DEADTIME\ =\ FTM\_PAIR1DEADTIME\_DTVALEX(config-\/>deadTimeValue\ >>\ 6U)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01383}01383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR1DEADTIME\_DTPS(config-\/>deadTimePrescale)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01384}01384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR1DEADTIME\_DTVAL(config-\/>deadTimeValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01385}01385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01386}01386\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba84ec70a624b7a685d2866eb06dbef26d}{kFTM\_Chnl\_2}}:}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01387}01387\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>PAIR2DEADTIME\ =\ FTM\_PAIR2DEADTIME\_DTVALEX(config-\/>deadTimeValue\ >>\ 6U)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01388}01388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR2DEADTIME\_DTPS(config-\/>deadTimePrescale)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01389}01389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR2DEADTIME\_DTVAL(config-\/>deadTimeValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01390}01390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01391}01391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__ftm_gga7029cff77271f72dc2a04984b544bafba22435b6e0fb387aa3f185dd94f819a49}{kFTM\_Chnl\_3}}:}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01392}01392\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>PAIR3DEADTIME\ =\ FTM\_PAIR3DEADTIME\_DTVALEX(config-\/>deadTimeValue\ >>\ 6U)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01393}01393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR3DEADTIME\_DTPS(config-\/>deadTimePrescale)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01394}01394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTM\_PAIR3DEADTIME\_DTVAL(config-\/>deadTimeValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01395}01395\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01396}01396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01397}01397\ \ \ \ \ \ \ \ \ \ \ \ \ assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01398}01398\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01399}01399\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01400}01400\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01401}01401\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_PAIRED\_DEADTIME\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01402}01402\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01403}01403\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_DITHERING)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_DITHERING)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01412}01412\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetPeriodDithering(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01413}01413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ moduloValue,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01414}01414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ fractionalValue)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01415}01415\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01416}01416\ \ \ \ \ assert(FSL\_FEATURE\_FTM\_INSTANCE\_HAS\_DITHERINGn(base)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01417}01417\ \ \ \ \ base-\/>MOD\_MIRROR\ =\ FTM\_MOD\_MIRROR\_MOD(moduloValue)\ |\ FTM\_MOD\_MIRROR\_FRACMOD(fractionalValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01418}01418\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01419}01419\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01429}01429\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ FTM\_SetEdgeDithering(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01430}01430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01431}01431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ matchValue,}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01432}01432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ fractionalValue)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01433}01433\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01434}01434\ \ \ \ \ assert(FSL\_FEATURE\_FTM\_INSTANCE\_HAS\_DITHERINGn(base)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01435}01435\ \ \ \ \ base-\/>CV\_MIRROR[chnlNumber]\ =\ FTM\_CV\_MIRROR\_VAL(matchValue)\ |\ FTM\_CV\_MIRROR\_FRACVAL(fractionalValue);}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01436}01436\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01437}01437\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_DITHERING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01438}01438\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01439}01439\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_CONF\_CHIS\_BIT)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_CONF\_CHIS\_BIT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01447}01447\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ FTM\_GetChannelInputState(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01448}01448\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01449}01449\ \ \ \ \ \textcolor{keywordflow}{return}\ (base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{CnSC}}\ \&\ FTM\_CnSC\_CHIS\_MASK)\ >>\ FTM\_CnSC\_CHIS\_SHIFT;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01450}01450\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01451}01451\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_CONF\_CHIS\_BIT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01452}01452\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01453}01453\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_FTM\_HAS\_CONF\_CHOV\_BIT)\ \&\&\ FSL\_FEATURE\_FTM\_HAS\_CONF\_CHOV\_BIT)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01461}01461\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ FTM\_GetChannelOutputState(\doxymbox{\hyperlink{structFTM__Type}{FTM\_Type}}\ *base,\ \doxymbox{\hyperlink{group__ftm_gabf8544fae778d373e3dc4131d3f94172}{ftm\_chnl\_t}}\ chnlNumber)}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01462}01462\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01463}01463\ \ \ \ \ \textcolor{keywordflow}{return}\ (base-\/>CONTROLS[chnlNumber].\doxymbox{\hyperlink{structFTM__Type_a1f30106e7fbc8f5a00b586ddfcfe113a}{CnSC}}\ \&\ FTM\_CnSC\_CHOV\_MASK)\ >>\ FTM\_CnSC\_CHOV\_SHIFT;}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01464}01464\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01465}01465\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ FSL\_FEATURE\_FTM\_HAS\_CONF\_CHOV\_BIT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01466}01466\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01467}01467\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01468}01468\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01469}01469\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01470}01470\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01472}01472\ }
+\DoxyCodeLine{\Hypertarget{fsl__ftm_8h_source_l01473}01473\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FTM\_H\_*/}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

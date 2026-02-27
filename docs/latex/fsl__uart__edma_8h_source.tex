@@ -1,0 +1,87 @@
+\doxysection{fsl\+\_\+uart\+\_\+edma.\+h}
+\hypertarget{fsl__uart__edma_8h_source}{}\label{fsl__uart__edma_8h_source}\index{drivers/fsl\_uart\_edma.h@{drivers/fsl\_uart\_edma.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2021\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ FSL\_UART\_EDMA\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ FSL\_UART\_EDMA\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}fsl\_uart.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}fsl\_edma.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00019}00019\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00020}00020\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00021}00021\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00026}\doxymbox{\hyperlink{group__uart__edma__driver_gaeaa7d605207eb7c532593f3b719078f1}{00026}}\ \textcolor{preprocessor}{\#define\ FSL\_UART\_EDMA\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 5,\ 2))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00029}00029\ \textcolor{comment}{/*\ Forward\ declaration\ of\ the\ handle\ typedef.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00030}00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__edma__handle}{\_uart\_edma\_handle}}\ uart\_edma\_handle\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00033}\doxymbox{\hyperlink{group__uart__edma__driver_ga3640b4c263ad4dfd023b2d59cf1a48c6}{00033}}\ \textcolor{keyword}{typedef}\ void\ (*\doxymbox{\hyperlink{group__uart__edma__driver_ga3640b4c263ad4dfd023b2d59cf1a48c6}{uart\_edma\_transfer\_callback\_t}})(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uart\_edma\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__uart__edma__handle_a669d47c13813d25213bd3f979f83bc04}{userData}});}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00041}\doxymbox{\hyperlink{struct__uart__edma__handle}{00041}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__uart__edma__handle}{\_uart\_edma\_handle}}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00043}\doxymbox{\hyperlink{struct__uart__edma__handle_a7a435397e6ebf1da2fc18863cc0f722e}{00043}}\ \ \ \ \ \doxymbox{\hyperlink{group__uart__edma__driver_ga3640b4c263ad4dfd023b2d59cf1a48c6}{uart\_edma\_transfer\_callback\_t}}\ \doxymbox{\hyperlink{struct__uart__edma__handle_a7a435397e6ebf1da2fc18863cc0f722e}{callback}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00044}\doxymbox{\hyperlink{struct__uart__edma__handle_a669d47c13813d25213bd3f979f83bc04}{00044}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\doxymbox{\hyperlink{struct__uart__edma__handle_a669d47c13813d25213bd3f979f83bc04}{userData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00045}\doxymbox{\hyperlink{struct__uart__edma__handle_a7d953773d68cdc5770d0d95c2af6a4a6}{00045}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__edma__handle_a7d953773d68cdc5770d0d95c2af6a4a6}{rxDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00046}\doxymbox{\hyperlink{struct__uart__edma__handle_a3e16876d45a907e4a12fdba056530783}{00046}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{struct__uart__edma__handle_a3e16876d45a907e4a12fdba056530783}{txDataSizeAll}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00048}\doxymbox{\hyperlink{struct__uart__edma__handle_aac3a2913ede97894d29618ade8a5b4cc}{00048}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *\doxymbox{\hyperlink{struct__uart__edma__handle_aac3a2913ede97894d29618ade8a5b4cc}{txEdmaHandle}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00049}\doxymbox{\hyperlink{struct__uart__edma__handle_a9511ab79c7eca233262f92b2b74b0602}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *\doxymbox{\hyperlink{struct__uart__edma__handle_a9511ab79c7eca233262f92b2b74b0602}{rxEdmaHandle}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00051}\doxymbox{\hyperlink{struct__uart__edma__handle_a247c8e462a01c88888805e592e6d4456}{00051}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct__uart__edma__handle_a247c8e462a01c88888805e592e6d4456}{nbytes}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00053}\doxymbox{\hyperlink{struct__uart__edma__handle_a924c74e55cc00b5f4a338c6d63e7eff4}{00053}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__uart__edma__handle_a924c74e55cc00b5f4a338c6d63e7eff4}{txState}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00054}\doxymbox{\hyperlink{struct__uart__edma__handle_a1ea669bc55170e4a6cebe9da94d49a70}{00054}}\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ \doxymbox{\hyperlink{struct__uart__edma__handle_a1ea669bc55170e4a6cebe9da94d49a70}{rxState}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00055}00055\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00057}00057\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00058}00058\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00059}00059\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00061}00061\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00062}00062\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00063}00063\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00079}00079\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__edma__driver_gaf0c9b2e173615b29024177d6b23eba13}{UART\_TransferCreateHandleEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uart\_edma\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__uart__edma__driver_ga3640b4c263ad4dfd023b2d59cf1a48c6}{uart\_edma\_transfer\_callback\_t}}\ callback,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *userData,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *txEdmaHandle,}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__edma_ga2d6acf2a07b74ec46b75c2341e1ef3f8}{edma\_handle\_t}}\ *rxEdmaHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00099}00099\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__edma__driver_ga93b7de7f76c97da666960d1edf426f8e}{UART\_SendEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00114}00114\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__edma__driver_ga45666dbc1751a6a5a764081c64adedcf}{UART\_ReceiveEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__uart__driver_ga350bfb8d2e42bcac895507a7e7732c50}{uart\_transfer\_t}}\ *xfer);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00124}00124\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__edma__driver_gaa408be3578de10ad1c282d5641d5ccbb}{UART\_TransferAbortSendEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00134}00134\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__edma__driver_ga4ad0f15f9fe7444f9c8b6d8e11ec1d09}{UART\_TransferAbortReceiveEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00149}00149\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__edma__driver_ga3bc277a61e91956d9f576b6bc2b4f229}{UART\_TransferGetSendCountEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00163}00163\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__uart__edma__driver_ga40cd67bb3e5c1ef21c5424cc8bef1d23}{UART\_TransferGetReceiveCountEDMA}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ uart\_edma\_handle\_t\ *handle,\ uint32\_t\ *count);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00173}00173\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__uart__edma__driver_gabceb3ca106622e9e8823d2758b00ea6d}{UART\_TransferEdmaHandleIRQ}}(\doxymbox{\hyperlink{structUART__Type}{UART\_Type}}\ *base,\ \textcolor{keywordtype}{void}\ *uartEdmaHandle);}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00177}00177\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00178}00178\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00179}00179\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{fsl__uart__edma_8h_source_l00183}00183\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_UART\_EDMA\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

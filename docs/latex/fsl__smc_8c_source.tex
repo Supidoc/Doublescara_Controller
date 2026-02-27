@@ -1,0 +1,437 @@
+\doxysection{fsl\+\_\+smc.\+c}
+\hypertarget{fsl__smc_8c_source}{}\label{fsl__smc_8c_source}\index{drivers/fsl\_smc.c@{drivers/fsl\_smc.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2020\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}fsl\_smc.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00012}00012\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00013}00013\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00014}00014\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00015}00015\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00016}00016\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00017}00017\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.smc"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00018}00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00020}00020\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_REG\_WIDTH)\ \&\&\ (FSL\_FEATURE\_SMC\_REG\_WIDTH\ ==\ 32U))}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00021}00021\ \textcolor{keyword}{typedef}\ uint32\_t\ smc\_reg\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00022}00022\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00023}00023\ \textcolor{keyword}{typedef}\ uint8\_t\ smc\_reg\_t;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00024}00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00026}00026\ \textcolor{keyword}{typedef}\ void\ (*smc\_stop\_ram\_func\_t)(void);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00028}00028\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00029}00029\ \textcolor{comment}{\ *\ Prototypes}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00030}00030\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00031}00031\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ SMC\_EnterStopRamFunc(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00033}00033\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00034}00034\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00035}00035\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00036}00036\ \textcolor{keyword}{static}\ uint32\_t\ g\_savedPrimask;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00038}00038\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00039}00039\ \textcolor{comment}{\ *\ The\ ram\ function\ code\ is:}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00040}00040\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00041}00041\ \textcolor{comment}{\ *\ \ uint32\_t\ i;}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00042}00042\ \textcolor{comment}{\ *\ \ for\ (i=0;\ i<0x8;\ i++)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00043}00043\ \textcolor{comment}{\ *\ \ \{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00044}00044\ \textcolor{comment}{\ *\ \ \ \ \ \ \_\_NOP();}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00045}00045\ \textcolor{comment}{\ *\ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00046}00046\ \textcolor{comment}{\ *\ \ \_\_DSB();}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00047}00047\ \textcolor{comment}{\ *\ \ \_\_WFI();}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00048}00048\ \textcolor{comment}{\ *\ \ \_\_ISB();}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00049}00049\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00050}00050\ \textcolor{comment}{\ *\ When\ entring\ the\ stop\ modes,\ the\ flash\ prefetch\ might\ be\ interrupted,\ thus}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00051}00051\ \textcolor{comment}{\ *\ the\ prefetched\ code\ or\ data\ might\ be\ broken.\ To\ make\ sure\ the\ flash\ is\ idle}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00052}00052\ \textcolor{comment}{\ *\ when\ entring\ the\ stop\ modes,\ the\ code\ is\ moved\ to\ ram.\ And\ delay\ for\ a\ while}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00053}00053\ \textcolor{comment}{\ *\ before\ WFI\ to\ make\ sure\ previous\ flash\ prefetch\ is\ finished.}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00054}00054\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00055}00055\ \textcolor{comment}{\ *\ Only\ need\ to\ do\ like\ this\ when\ code\ is\ in\ flash,\ if\ code\ is\ in\ rom\ or\ ram,}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00056}00056\ \textcolor{comment}{\ *\ this\ is\ not\ necessary.}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00057}00057\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00058}00058\ \textcolor{keyword}{static}\ uint16\_t\ s\_stopRamFuncArray[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00059}00059\ \ \ \ \ 0x2000,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ MOVS\ R0,\ \#0\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00060}00060\ \ \ \ \ 0x2808,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ CMP\ R0,\ \#8\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00061}00061\ \ \ \ \ 0xD202,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ BCS.N\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00062}00062\ \ \ \ \ 0xBF00,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NOP\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00063}00063\ \ \ \ \ 0x1C40,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ADDS\ R0,\ R0,\ \#1\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00064}00064\ \ \ \ \ 0xE7FA,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ B.N\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00065}00065\ \ \ \ \ 0xF3BF,\ 0x8F4F,\ \textcolor{comment}{/*\ DSB\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00066}00066\ \ \ \ \ 0xBF30,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ WFI\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00067}00067\ \ \ \ \ 0xF3BF,\ 0x8F6F,\ \textcolor{comment}{/*\ ISB\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00068}00068\ \ \ \ \ 0x4770,\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ BX\ LR\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00069}00069\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00071}00071\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00072}00072\ \textcolor{comment}{\ *\ Code}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00073}00073\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00074}00074\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ SMC\_EnterStopRamFunc(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00076}00076\ \ \ \ \ uint32\_t\ ramFuncEntry\ \ \ \ \ \ \ \ \ \ \ =\ ((uint32\_t)(s\_stopRamFuncArray))\ +\ 1U;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00077}00077\ \ \ \ \ smc\_stop\_ram\_func\_t\ stopRamFunc\ =\ (smc\_stop\_ram\_func\_t)ramFuncEntry;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00078}00078\ \ \ \ \ stopRamFunc();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00081}00081\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_PARAM)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_PARAM)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00090}00090\ \textcolor{keywordtype}{void}\ SMC\_GetParam(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base,\ smc\_param\_t\ *param)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00091}00091\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00092}00092\ \ \ \ \ uint32\_t\ reg\ \ \ \ \ \ \ =\ base-\/>PARAM;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00093}00093\ \ \ \ \ param-\/>hsrunEnable\ =\ (bool)(reg\ \&\ SMC\_PARAM\_EHSRUN\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00094}00094\ \ \ \ \ param-\/>llsEnable\ \ \ =\ (bool)(reg\ \&\ SMC\_PARAM\_ELLS\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00095}00095\ \ \ \ \ param-\/>lls2Enable\ \ =\ (bool)(reg\ \&\ SMC\_PARAM\_ELLS2\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00096}00096\ \ \ \ \ param-\/>vlls0Enable\ =\ (bool)(reg\ \&\ SMC\_PARAM\_EVLLS0\_MASK);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00098}00098\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_PARAM\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00105}\doxymbox{\hyperlink{group__smc_ga4e3f84838f007e3b5939838dafd0a7f9}{00105}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__smc_ga4e3f84838f007e3b5939838dafd0a7f9}{SMC\_PreEnterStopModes}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00107}00107\ \ \ \ \ g\_savedPrimask\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00108}00108\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00109}00109\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00117}\doxymbox{\hyperlink{group__smc_ga2ce7e977d78cbc1c355aea3b7acb1b4e}{00117}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__smc_ga2ce7e977d78cbc1c355aea3b7acb1b4e}{SMC\_PostExitStopModes}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00118}00118\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00119}00119\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(g\_savedPrimask);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00120}00120\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00128}\doxymbox{\hyperlink{group__smc_ga3e21b9caeb6f72076f1ba5fa839c4410}{00128}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__smc_ga3e21b9caeb6f72076f1ba5fa839c4410}{SMC\_PreEnterWaitModes}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00130}00130\ \ \ \ \ g\_savedPrimask\ =\ \doxymbox{\hyperlink{group__ksdk__common_ga4f63764780e8eae7726d7a7e10f4b2a1}{DisableGlobalIRQ}}();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00131}00131\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00140}\doxymbox{\hyperlink{group__smc_gad91c84fedf08f14580c4c86b52bc52d2}{00140}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__smc_gad91c84fedf08f14580c4c86b52bc52d2}{SMC\_PostExitWaitModes}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00141}00141\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00142}00142\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gacca38e4e11db8e795201c82f6ce4c9d5}{EnableGlobalIRQ}}(g\_savedPrimask);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00143}00143\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00144}00144\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00152}\doxymbox{\hyperlink{group__smc_ga8f141beaa4867a3d1606b714e63c30c3}{00152}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_ga8f141beaa4867a3d1606b714e63c30c3}{SMC\_SetPowerModeRun}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00153}00153\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00154}00154\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00156}00156\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00157}00157\ \ \ \ \ \textcolor{comment}{/*\ configure\ Normal\ RUN\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00158}00158\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_RUNM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00159}00159\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)\doxymbox{\hyperlink{group__smc_ggac2c182287ebbb6119d8bcbb6ead71e53abaeb1d66b5ab95289522985e831186de}{kSMC\_RunNormal}}\ <<\ SMC\_PMCTRL\_RUNM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00160}00160\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00162}00162\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00163}00163\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00165}00165\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_HIGH\_SPEED\_RUN\_MODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_HIGH\_SPEED\_RUN\_MODE)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00172}00172\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ SMC\_SetPowerModeHsrun(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00173}00173\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00174}00174\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00176}00176\ \ \ \ \ reg\ =\ (base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}});}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00177}00177\ \ \ \ \ \textcolor{comment}{/*\ configure\ High\ Speed\ RUN\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00178}00178\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_RUNM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00179}00179\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)kSMC\_Hsrun\ <<\ SMC\_PMCTRL\_RUNM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00180}00180\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00183}00183\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00184}00184\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_HIGH\_SPEED\_RUN\_MODE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00192}\doxymbox{\hyperlink{group__smc_gaaf1664f2d4a78b756e5e30f5433af975}{00192}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_gaaf1664f2d4a78b756e5e30f5433af975}{SMC\_SetPowerModeWait}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00193}00193\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00194}00194\ \ \ \ \ \textcolor{comment}{/*\ configure\ Normal\ Wait\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00195}00195\ \ \ \ \ SCB-\/>SCR\ \&=\ \string~SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00196}00196\ \ \ \ \ \_\_DSB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00197}00197\ \ \ \ \ \_\_WFI();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00198}00198\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00201}00201\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00210}\doxymbox{\hyperlink{group__smc_gaa1e2666198ce75322be3280472a224ee}{00210}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_gaa1e2666198ce75322be3280472a224ee}{SMC\_SetPowerModeStop}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base,\ \doxymbox{\hyperlink{group__smc_ga6c6111f3f66a7c49a28fd160057e2138}{smc\_partial\_stop\_option\_t}}\ option)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00211}00211\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00212}00212\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00214}00214\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_PSTOPO)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_PSTOPO)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00215}00215\ \ \ \ \ \textcolor{comment}{/*\ configure\ the\ Partial\ Stop\ mode\ in\ Normal\ Stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00216}00216\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00217}00217\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_PSTOPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00218}00218\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)option\ <<\ SMC\_STOPCTRL\_PSTOPO\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00219}00219\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00220}00220\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00222}00222\ \ \ \ \ \textcolor{comment}{/*\ configure\ Normal\ Stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00223}00223\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00224}00224\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_STOPM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00225}00225\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)\doxymbox{\hyperlink{group__smc_gga107d1c64902b4a1a0270a51008b854d5ac642d13640f334c1c509aa89568028dc}{kSMC\_StopNormal}}\ <<\ SMC\_PMCTRL\_STOPM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00226}00226\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00228}00228\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ SLEEPDEEP\ bit\ to\ enable\ deep\ sleep\ mode\ (stop\ mode)\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00229}00229\ \ \ \ \ SCB-\/>SCR\ |=\ SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00231}00231\ \ \ \ \ \textcolor{comment}{/*\ read\ back\ to\ make\ sure\ the\ configuration\ valid\ before\ enter\ stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00232}00232\ \ \ \ \ (void)base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00233}00233\ \ \ \ \ SMC\_EnterStopRamFunc();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00235}00235\ \ \ \ \ \textcolor{comment}{/*\ check\ whether\ the\ power\ mode\ enter\ Stop\ mode\ succeed\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ \&\ SMC\_PMCTRL\_STOPA\_MASK))}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00237}00237\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__smc_gga920e735f3f5148cdd3c3123ab9e15101ac8b70e0e27736678bcb91340b06c011e}{kStatus\_SMC\_StopAbort}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00241}00241\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00244}00244\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00252}\doxymbox{\hyperlink{group__smc_gaa1439e98fb0d82099217f822e3329b14}{00252}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_gaa1439e98fb0d82099217f822e3329b14}{SMC\_SetPowerModeVlpr}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00253}00253\ \#\textcolor{keywordflow}{if}\ (defined(FSL\_FEATURE\_SMC\_HAS\_LPWUI)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LPWUI)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ wakeupMode}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00256}00256\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00257}00257\ )}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00258}00258\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00259}00259\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00261}00261\ \ \ \ \ reg\ =\ (smc\_reg\_t)(base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}});}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00262}00262\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LPWUI)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LPWUI)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00263}00263\ \ \ \ \ \textcolor{comment}{/*\ configure\ whether\ the\ system\ remains\ in\ VLP\ mode\ on\ an\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (wakeupMode)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00265}00265\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ exits\ to\ RUN\ mode\ on\ an\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00267}00267\ \ \ \ \ \ \ \ \ reg\ |=\ SMC\_PMCTRL\_LPWUI\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00268}00268\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00270}00270\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ remains\ in\ VLP\ mode\ on\ an\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_LPWUI\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00273}00273\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00274}00274\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LPWUI\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00276}00276\ \ \ \ \ \textcolor{comment}{/*\ configure\ VLPR\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00277}00277\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_RUNM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00278}00278\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)\doxymbox{\hyperlink{group__smc_ggac2c182287ebbb6119d8bcbb6ead71e53ac1461903d002daab1af773d6d506fea3}{kSMC\_RunVlpr}}\ <<\ SMC\_PMCTRL\_RUNM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00279}00279\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00281}00281\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00282}00282\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00290}\doxymbox{\hyperlink{group__smc_ga69d0fb061423ef6ed718f3acee96ebf6}{00290}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_ga69d0fb061423ef6ed718f3acee96ebf6}{SMC\_SetPowerModeVlpw}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00291}00291\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00292}00292\ \ \ \ \ \textcolor{comment}{/*\ configure\ VLPW\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00293}00293\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ SLEEPDEEP\ bit\ to\ enable\ deep\ sleep\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00294}00294\ \ \ \ \ SCB-\/>SCR\ \&=\ \string~SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00295}00295\ \ \ \ \ \_\_DSB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00296}00296\ \ \ \ \ \_\_WFI();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00297}00297\ \ \ \ \ \_\_ISB();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00299}00299\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00300}00300\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00308}\doxymbox{\hyperlink{group__smc_ga7f7303f155f36716cc68672e0a4027cf}{00308}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__smc_ga7f7303f155f36716cc68672e0a4027cf}{SMC\_SetPowerModeVlps}}(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00309}00309\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00310}00310\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00312}00312\ \ \ \ \ \textcolor{comment}{/*\ configure\ VLPS\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00313}00313\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00314}00314\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_STOPM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00315}00315\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)\doxymbox{\hyperlink{group__smc_gga107d1c64902b4a1a0270a51008b854d5a0309375b2672e8c29eebd50bd80236c3}{kSMC\_StopVlps}}\ <<\ SMC\_PMCTRL\_STOPM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00316}00316\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00318}00318\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ SLEEPDEEP\ bit\ to\ enable\ deep\ sleep\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00319}00319\ \ \ \ \ SCB-\/>SCR\ |=\ SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00321}00321\ \ \ \ \ \textcolor{comment}{/*\ read\ back\ to\ make\ sure\ the\ configuration\ valid\ before\ enter\ stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00322}00322\ \ \ \ \ (void)base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00323}00323\ \ \ \ \ SMC\_EnterStopRamFunc();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00325}00325\ \ \ \ \ \textcolor{comment}{/*\ check\ whether\ the\ power\ mode\ enter\ VLPS\ mode\ succeed\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00326}00326\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ \&\ SMC\_PMCTRL\_STOPA\_MASK))}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00327}00327\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__smc_gga920e735f3f5148cdd3c3123ab9e15101ac8b70e0e27736678bcb91340b06c011e}{kStatus\_SMC\_StopAbort}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00329}00329\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00330}00330\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00331}00331\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00333}00333\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00334}00334\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00336}00336\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LOW\_LEAKAGE\_STOP\_MODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LOW\_LEAKAGE\_STOP\_MODE)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00343}00343\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ SMC\_SetPowerModeLls(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00344}00344\ \#\textcolor{keywordflow}{if}\ ((defined(FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)\ ||\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00345}00345\ \ \ \ \ \ (defined(FSL\_FEATURE\_SMC\_HAS\_LPOPO)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LPOPO))}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ smc\_power\_mode\_lls\_config\_t\ *config}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00348}00348\ \#endif}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00349}00349\ )}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00350}00350\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00351}00351\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00353}00353\ \ \ \ \ \textcolor{comment}{/*\ configure\ to\ LLS\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00354}00354\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00355}00355\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_STOPM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00356}00356\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)kSMC\_StopLls\ <<\ SMC\_PMCTRL\_STOPM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00357}00357\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00359}00359\ \textcolor{comment}{/*\ configure\ LLS\ sub-\/mode*/}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00360}00360\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00361}00361\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00362}00362\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_LLSM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00363}00363\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)config-\/>subMode\ <<\ SMC\_STOPCTRL\_LLSM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00364}00364\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00365}00365\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00367}00367\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LPOPO)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LPOPO)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00368}00368\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>enableLpoClock)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00369}00369\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00370}00370\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_LPOPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00371}00371\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00372}00372\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00373}00373\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ |=\ (smc\_reg\_t)SMC\_STOPCTRL\_LPOPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00375}00375\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00376}00376\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LPOPO\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00378}00378\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ SLEEPDEEP\ bit\ to\ enable\ deep\ sleep\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00379}00379\ \ \ \ \ SCB-\/>SCR\ |=\ SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00381}00381\ \ \ \ \ \textcolor{comment}{/*\ read\ back\ to\ make\ sure\ the\ configuration\ valid\ before\ enter\ stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00382}00382\ \ \ \ \ (void)base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00383}00383\ \ \ \ \ SMC\_EnterStopRamFunc();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00385}00385\ \ \ \ \ \textcolor{comment}{/*\ check\ whether\ the\ power\ mode\ enter\ LLS\ mode\ succeed\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00386}00386\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ \&\ SMC\_PMCTRL\_STOPA\_MASK))}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00387}00387\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__smc_gga920e735f3f5148cdd3c3123ab9e15101ac8b70e0e27736678bcb91340b06c011e}{kStatus\_SMC\_StopAbort}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00390}00390\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00391}00391\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00393}00393\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00394}00394\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00395}00395\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LOW\_LEAKAGE\_STOP\_MODE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00397}00397\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_VERY\_LOW\_LEAKAGE\_STOP\_MODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_VERY\_LOW\_LEAKAGE\_STOP\_MODE)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00405}00405\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ SMC\_SetPowerModeVlls(\doxymbox{\hyperlink{structSMC__Type}{SMC\_Type}}\ *base,\ \textcolor{keyword}{const}\ smc\_power\_mode\_vlls\_config\_t\ *config)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00406}00406\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00407}00407\ \ \ \ \ smc\_reg\_t\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00409}00409\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_PORPO)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_PORPO)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00410}00410\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ ||\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00411}00411\ \textcolor{preprocessor}{\ \ \ \ (defined(FSL\_FEATURE\_SMC\_USE\_STOPCTRL\_VLLSM)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_STOPCTRL\_VLLSM)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00412}00412\ \textcolor{preprocessor}{\ \ \ \ (defined(FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00413}00413\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>subMode\ ==\ kSMC\_StopSub0)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00414}00414\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00415}00415\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ configure\ whether\ the\ Por\ Detect\ work\ in\ Vlls0\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{true}\ ==\ config-\/>enablePorDetectInVlls0)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00419}00419\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>VLLSCTRL\ \&=\ \string~(smc\_reg\_t)SMC\_VLLSCTRL\_PORPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00421}00421\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_PORPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00423}00423\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00427}00427\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>VLLSCTRL\ |=\ SMC\_VLLSCTRL\_PORPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00429}00429\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ |=\ SMC\_STOPCTRL\_PORPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00431}00431\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00433}00433\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00434}00434\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_PORPO\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00436}00436\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_RAM2\_POWER\_OPTION)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_RAM2\_POWER\_OPTION)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00437}00437\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (config-\/>subMode\ ==\ kSMC\_StopSub2)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00438}00438\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ configure\ whether\ the\ Por\ Detect\ work\ in\ Vlls0\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{true}\ ==\ config-\/>enableRam2InVlls2)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00441}00441\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00442}00442\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>VLLSCTRL\ |=\ SMC\_VLLSCTRL\_RAM2PO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00444}00444\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ |=\ SMC\_STOPCTRL\_RAM2PO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00446}00446\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00447}00447\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00450}00450\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>VLLSCTRL\ \&=\ \string~SMC\_VLLSCTRL\_RAM2PO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00452}00452\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_RAM2PO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00454}00454\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00456}00456\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00457}00457\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00458}00458\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ this\ to\ fix\ MISRA\ C2012\ rule15.7\ issue:\ Empty\ else\ without\ comment.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00460}00460\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00461}00461\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_RAM2\_POWER\_OPTION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00463}00463\ \ \ \ \ \textcolor{comment}{/*\ configure\ to\ VLLS\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00464}00464\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00465}00465\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_PMCTRL\_STOPM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00466}00466\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)kSMC\_StopVlls\ <<\ SMC\_PMCTRL\_STOPM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00467}00467\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00469}00469\ \textcolor{comment}{/*\ configure\ the\ VLLS\ sub-\/mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00470}00470\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)\ \&\&\ FSL\_FEATURE\_SMC\_USE\_VLLSCTRL\_REG)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00471}00471\ \ \ \ \ reg\ =\ base-\/>VLLSCTRL;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00472}00472\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_VLLSCTRL\_VLLSM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00473}00473\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)config-\/>subMode\ <<\ SMC\_VLLSCTRL\_VLLSM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00474}00474\ \ \ \ \ base-\/>VLLSCTRL\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00475}00475\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00476}00476\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00477}00477\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00478}00478\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_LLSM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00479}00479\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)config-\/>subMode\ <<\ SMC\_STOPCTRL\_LLSM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00480}00480\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00481}00481\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00482}00482\ \ \ \ \ reg\ =\ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00483}00483\ \ \ \ \ reg\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_VLLSM\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00484}00484\ \ \ \ \ reg\ |=\ ((smc\_reg\_t)config-\/>subMode\ <<\ SMC\_STOPCTRL\_VLLSM\_SHIFT);}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00485}00485\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00486}00486\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LLS\_SUBMODE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00487}00487\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00489}00489\ \textcolor{preprocessor}{\#if\ (defined(FSL\_FEATURE\_SMC\_HAS\_LPOPO)\ \&\&\ FSL\_FEATURE\_SMC\_HAS\_LPOPO)}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00490}00490\ \ \ \ \ \textcolor{keywordflow}{if}\ (config-\/>enableLpoClock)}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00491}00491\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00492}00492\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ \&=\ \string~(smc\_reg\_t)SMC\_STOPCTRL\_LPOPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00493}00493\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00494}00494\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00495}00495\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00496}00496\ \ \ \ \ \ \ \ \ base-\/>\doxymbox{\hyperlink{structSMC__Type_aae7ce3860f0e8c664e2e345e8936dbdc}{STOPCTRL}}\ |=\ SMC\_STOPCTRL\_LPOPO\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00497}00497\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00498}00498\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_LPOPO\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00500}00500\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ SLEEPDEEP\ bit\ to\ enable\ deep\ sleep\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00501}00501\ \ \ \ \ SCB-\/>SCR\ |=\ SCB\_SCR\_SLEEPDEEP\_Msk;}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00503}00503\ \ \ \ \ \textcolor{comment}{/*\ read\ back\ to\ make\ sure\ the\ configuration\ valid\ before\ enter\ stop\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00504}00504\ \ \ \ \ (void)base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00505}00505\ \ \ \ \ SMC\_EnterStopRamFunc();}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00507}00507\ \ \ \ \ \textcolor{comment}{/*\ check\ whether\ the\ power\ mode\ enter\ LLS\ mode\ succeed\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00508}00508\ \ \ \ \ \textcolor{keywordflow}{if}\ (0U\ !=\ (base-\/>\doxymbox{\hyperlink{structSMC__Type_ab8623b594bbc8c61e5d223101fc90d97}{PMCTRL}}\ \&\ SMC\_PMCTRL\_STOPA\_MASK))}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00509}00509\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00510}00510\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__smc_gga920e735f3f5148cdd3c3123ab9e15101ac8b70e0e27736678bcb91340b06c011e}{kStatus\_SMC\_StopAbort}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00511}00511\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00512}00512\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00513}00513\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00514}00514\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00515}00515\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00516}00516\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__smc_8c_source_l00517}00517\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_FEATURE\_SMC\_HAS\_VERY\_LOW\_LEAKAGE\_STOP\_MODE\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

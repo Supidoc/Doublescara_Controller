@@ -1,0 +1,235 @@
+\doxysection{system\+\_\+\+MK22\+F51212.\+c}
+\hypertarget{system__MK22F51212_8c_source}{}\label{system__MK22F51212_8c_source}\index{device/system\_MK22F51212.c@{device/system\_MK22F51212.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00002}00002\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Processors:\ \ \ \ \ \ \ \ \ \ MK22FN512CAP12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VDC12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VFX12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLH12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VLL12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MK22FN512VMP12}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00009}00009\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Compilers:\ \ \ \ \ \ \ \ \ \ \ Freescale\ C/C++\ for\ Embedded\ ARM}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GNU\ C\ Compiler}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00012}00012\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IAR\ ANSI\ C/C++\ Compiler\ for\ ARM}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Keil\ ARM\ C/C++\ Compiler}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MCUXpresso\ Compiler}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00015}00015\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ Reference\ manual:\ \ \ \ K22P121M120SF7RM,\ Rev.\ 1,\ March\ 24,\ 2014}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ Version:\ \ \ \ \ \ \ \ \ \ \ \ \ rev.\ 3.0,\ 2024-\/10-\/29}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ Build:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b250520}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00019}00019\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ Abstract:}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Provides\ a\ system\ configuration\ function\ and\ a\ global\ variable\ that}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00022}00022\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ contains\ the\ system\ frequency.\ It\ configures\ the\ device\ and\ initializes}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ the\ oscillator\ (PLL)\ that\ is\ part\ of\ the\ microcontroller\ device.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00024}00024\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ Copyright\ 2016-\/2025\ NXP}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00028}00028\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ http:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ www.nxp.com}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ mail:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ support@nxp.com}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00031}00031\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ Revisions:}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.0\ (2013-\/07-\/23)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Initial\ version.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 1.1\ (2013-\/09-\/17)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ RM\ rev.\ 0.4\ update.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.0\ (2013-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Register\ accessor\ macros\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Symbols\ for\ Processor\ Expert\ memory\ map\ compatibility\ added\ to\ the\ memory\ map.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Startup\ file\ for\ gcc\ has\ been\ updated\ according\ to\ CMSIS\ 3.2.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ System\ initialization\ updated.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.1\ (2013-\/10-\/30)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Definition\ of\ BITBAND\ macros\ updated\ to\ support\ peripherals\ with\ 32-\/bit\ acces\ disabled.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.2\ (2013-\/12-\/20)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00045}00045\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.6,}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.3\ (2014-\/01-\/13)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00047}00047\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 0.61,}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.4\ (2014-\/02-\/10)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ The\ declaration\ of\ clock\ configurations\ has\ been\ moved\ to\ separate\ header\ file\ system\_MK22F51212.h}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00050}00050\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.5\ (2014-\/05-\/06)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ according\ to\ reference\ manual\ rev.\ 1.0,}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ and\ startup\ files.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Module\ access\ macro\ module\_BASES\ replaced\ by\ module\_BASE\_PTRS.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00054}00054\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.6\ (2014-\/08-\/28)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ system\ files\ -\/\ default\ clock\ configuration\ changed.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Update\ of\ startup\ files\ -\/\ possibility\ to\ override\ DefaultISR\ added.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.7\ (2014-\/10-\/14)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00058}00058\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Interrupt\ INT\_LPTimer\ renamed\ to\ INT\_LPTMR0,\ interrupt\ INT\_Watchdog\ renamed\ to\ INT\_WDOG\_EWM.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00059}00059\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.8\ (2015-\/02-\/19)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00060}00060\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Renamed\ interrupt\ vector\ LLW\ to\ LLWU.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00061}00061\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 2.9\ (2016-\/03-\/21)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00062}00062\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Added\ MK22FN512VFX12\ part.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00063}00063\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GPIO\ -\/\ renamed\ port\ instances:\ PTx\ -\/>\ GPIOx.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00064}00064\ \textcolor{comment}{**\ \ \ \ \ -\/\ rev.\ 3.0\ (2024-\/10-\/29)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00065}00065\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Change\ the\ device\ header\ file\ from\ single\ flat\ file\ to\ multiple\ files\ based\ on\ peripherals,}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00066}00066\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ each\ peripheral\ with\ dedicated\ header\ file\ located\ in\ periphN\ folder.}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00067}00067\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00068}00068\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00069}00069\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00082}00082\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00083}00083\ \textcolor{preprocessor}{\#include\ "{}fsl\_device\_registers.h"{}}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00087}00087\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00088}00088\ \textcolor{comment}{\ \ \ -\/-\/\ Core\ clock}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00089}00089\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00091}00091\ uint32\_t\ SystemCoreClock\ =\ DEFAULT\_SYSTEM\_CLOCK;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00093}00093\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00094}00094\ \textcolor{comment}{\ \ \ -\/-\/\ SystemInit()}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00095}00095\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00097}00097\ \textcolor{keywordtype}{void}\ SystemInit\ (\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00098}00098\ \textcolor{preprocessor}{\#if\ ((\_\_FPU\_PRESENT\ ==\ 1)\ \&\&\ (\_\_FPU\_USED\ ==\ 1))}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00099}00099\ \ \ SCB-\/>CPACR\ |=\ ((3UL\ <<\ 10*2)\ |\ (3UL\ <<\ 11*2));\ \ \ \ \textcolor{comment}{/*\ set\ CP10,\ CP11\ Full\ Access\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00100}00100\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ((\_\_FPU\_PRESENT\ ==\ 1)\ \&\&\ (\_\_FPU\_USED\ ==\ 1))\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00102}00102\ \textcolor{preprocessor}{\#if\ (DISABLE\_WDOG)}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00103}00103\ \ \ \textcolor{comment}{/*\ WDOG-\/>UNLOCK:\ WDOGUNLOCK=0xC520\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00104}00104\ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ab938901a5fa5443253fc293ebd0399e3}{WDOG}}-\/>UNLOCK\ =\ WDOG\_UNLOCK\_WDOGUNLOCK(0xC520);\ \textcolor{comment}{/*\ Key\ 1\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00105}00105\ \ \ \textcolor{comment}{/*\ WDOG-\/>UNLOCK:\ WDOGUNLOCK=0xD928\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00106}00106\ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ab938901a5fa5443253fc293ebd0399e3}{WDOG}}-\/>UNLOCK\ =\ WDOG\_UNLOCK\_WDOGUNLOCK(0xD928);\ \textcolor{comment}{/*\ Key\ 2\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00107}00107\ \ \ \textcolor{comment}{/*\ WDOG-\/>STCTRLH:\ ?=0,DISTESTWDOG=0,BYTESEL=0,TESTSEL=0,TESTWDOG=0,?=0,?=1,WAITEN=1,STOPEN=1,DBGEN=0,ALLOWUPDATE=1,WINEN=0,IRQRSTEN=0,CLKSRC=1,WDOGEN=0\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00108}00108\ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ab938901a5fa5443253fc293ebd0399e3}{WDOG}}-\/>STCTRLH\ =\ \doxymbox{\hyperlink{group__WDOG__Register__Masks_ga13958aa7d857b661998e304c5b3b4ea7}{WDOG\_STCTRLH\_BYTESEL}}(0x00)\ |}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WDOG\_STCTRLH\_WAITEN\_MASK\ |}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WDOG\_STCTRLH\_STOPEN\_MASK\ |}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WDOG\_STCTRLH\_ALLOWUPDATE\_MASK\ |}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WDOG\_STCTRLH\_CLKSRC\_MASK\ |}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0100U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00114}00114\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ (DISABLE\_WDOG)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00116}00116\ \ \ SystemInitHook();}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00117}00117\ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00119}00119\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00120}00120\ \textcolor{comment}{\ \ \ -\/-\/\ SystemCoreClockUpdate()}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00121}00121\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00123}00123\ \textcolor{keywordtype}{void}\ SystemCoreClockUpdate\ (\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00125}00125\ \ \ uint32\_t\ MCGOUTClock;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Variable\ to\ store\ output\ clock\ frequency\ of\ the\ MCG\ module\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00126}00126\ \ \ uint16\_t\ Divider;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00127}00127\ \ \ uint8\_t\ tmpC7\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00129}00129\ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_CLKS\_MASK)\ ==\ 0x00U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00130}00130\ \ \ \ \ \textcolor{comment}{/*\ Output\ of\ FLL\ or\ PLL\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C6\ \&\ MCG\_C6\_PLLS\_MASK)\ ==\ 0x00U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00132}00132\ \ \ \ \ \ \ \textcolor{comment}{/*\ FLL\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00133}00133\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_IREFS\_MASK)\ ==\ 0x00U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ External\ reference\ clock\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C7\ \&\ MCG\_C7\_OSCSEL\_MASK)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x00U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_XTAL\_CLK\_HZ;\ \textcolor{comment}{/*\ System\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x01U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_XTAL32k\_CLK\_HZ;\ \textcolor{comment}{/*\ RTC\ 32\ kHz\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x02U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_INT\_IRC\_CLK\_HZ;\ \textcolor{comment}{/*\ IRC\ 48MHz\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ tmpC7\ =\ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C7;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C2\ \&\ MCG\_C2\_RANGE\_MASK)\ !=\ 0x00U)\ \&\&\ ((tmpC7\ \&\ MCG\_C7\_OSCSEL\_MASK)\ !=\ 0x01U))\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_FRDIV\_MASK)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x38U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ Divider\ =\ 1536U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x30U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ Divider\ =\ 1280U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ Divider\ =\ (uint16\_t)(32LU\ <<\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_FRDIV\_MASK)\ >>\ MCG\_C1\_FRDIV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ Divider\ =\ (uint16\_t)(1LU\ <<\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_FRDIV\_MASK)\ >>\ MCG\_C1\_FRDIV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ MCGOUTClock\ =\ (MCGOUTClock\ /\ Divider);\ \textcolor{comment}{/*\ Calculate\ the\ divided\ FLL\ reference\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00164}00164\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_INT\_SLOW\_CLK\_HZ;\ \textcolor{comment}{/*\ The\ slow\ internal\ reference\ clock\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00166}00166\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00167}00167\ \ \ \ \ \ \ \textcolor{comment}{/*\ Select\ correct\ multiplier\ to\ calculate\ the\ MCG\ output\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00168}00168\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C4\ \&\ (MCG\_C4\_DMX32\_MASK\ |\ MCG\_C4\_DRST\_DRS\_MASK))\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x00U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 640U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x20U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 1280U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x40U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 1920U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x60U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 2560U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x80U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 732U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0xA0U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 1464U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0xC0U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 2197U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0xE0U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 2929U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ MCGOUTClock\ *=\ 640U;}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00196}00196\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00197}00197\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{/*\ (!((MCG-\/>C6\ \&\ MCG\_C6\_PLLS\_MASK)\ ==\ 0x00U))\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00198}00198\ \ \ \ \ \ \ \textcolor{comment}{/*\ PLL\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00199}00199\ \ \ \ \ \ \ Divider\ =\ (((uint16\_t)\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C5\ \&\ MCG\_C5\_PRDIV0\_MASK)\ +\ 0x01U);}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00200}00200\ \ \ \ \ \ \ MCGOUTClock\ =\ (uint32\_t)(CPU\_XTAL\_CLK\_HZ\ /\ Divider);\ \textcolor{comment}{/*\ Calculate\ the\ PLL\ reference\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00201}00201\ \ \ \ \ \ \ Divider\ =\ (((uint16\_t)\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C6\ \&\ MCG\_C6\_VDIV0\_MASK)\ +\ 24U);}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00202}00202\ \ \ \ \ \ \ MCGOUTClock\ *=\ Divider;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ the\ MCG\ output\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00203}00203\ \ \ \ \ \}\ \textcolor{comment}{/*\ (!((MCG-\/>C6\ \&\ MCG\_C6\_PLLS\_MASK)\ ==\ 0x00U))\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00204}00204\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_CLKS\_MASK)\ ==\ 0x40U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00205}00205\ \ \ \ \ \textcolor{comment}{/*\ Internal\ reference\ clock\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C2\ \&\ MCG\_C2\_IRCS\_MASK)\ ==\ 0x00U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00207}00207\ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_INT\_SLOW\_CLK\_HZ;\ \textcolor{comment}{/*\ Slow\ internal\ reference\ clock\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00208}00208\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \textcolor{comment}{/*\ Fast\ internal\ reference\ clock\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00209}00209\ \ \ \ \ \ \ Divider\ =\ (uint16\_t)(0x01LU\ <<\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>SC\ \&\ MCG\_SC\_FCRDIV\_MASK)\ >>\ MCG\_SC\_FCRDIV\_SHIFT));}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00210}00210\ \ \ \ \ \ \ MCGOUTClock\ =\ (uint32\_t)\ (CPU\_INT\_FAST\_CLK\_HZ\ /\ Divider);}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00212}00212\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ MCG\_C1\_CLKS\_MASK)\ ==\ 0x80U)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00213}00213\ \ \ \ \ \textcolor{comment}{/*\ External\ reference\ clock\ is\ selected\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00214}00214\ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C7\ \&\ MCG\_C7\_OSCSEL\_MASK)\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{case}\ 0x00U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00216}00216\ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_XTAL\_CLK\_HZ;\ \ \ \textcolor{comment}{/*\ System\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00217}00217\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00218}00218\ \ \ \ \ \textcolor{keywordflow}{case}\ 0x01U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00219}00219\ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_XTAL32k\_CLK\_HZ;\ \textcolor{comment}{/*\ RTC\ 32\ kHz\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00220}00220\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00221}00221\ \ \ \ \ \textcolor{keywordflow}{case}\ 0x02U:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00223}00223\ \ \ \ \ \ \ MCGOUTClock\ =\ CPU\_INT\_IRC\_CLK\_HZ;\ \textcolor{comment}{/*\ IRC\ 48MHz\ oscillator\ drives\ MCG\ clock\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00224}00224\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00225}00225\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00226}00226\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00227}00227\ \ \ \ \ \textcolor{comment}{/*\ Reserved\ value\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00229}00229\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00230}00230\ \ \ SystemCoreClock\ =\ (MCGOUTClock\ /\ (0x01U\ +\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>CLKDIV1\ \&\ SIM\_CLKDIV1\_OUTDIV1\_MASK)\ >>\ SIM\_CLKDIV1\_OUTDIV1\_SHIFT)));}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00231}00231\ \}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00233}00233\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00234}00234\ \textcolor{comment}{\ \ \ -\/-\/\ SystemInitHook()}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00235}00235\ \textcolor{comment}{\ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00237}00237\ \_\_attribute\_\_\ ((weak))\ \textcolor{keywordtype}{void}\ SystemInitHook\ (\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00238}00238\ \ \ \textcolor{comment}{/*\ Void\ implementation\ of\ the\ weak\ function.\ */}}
+\DoxyCodeLine{\Hypertarget{system__MK22F51212_8c_source_l00239}00239\ \}}
+
+\end{DoxyCode}

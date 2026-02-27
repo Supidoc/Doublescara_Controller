@@ -1,0 +1,25 @@
+var group__CMP__Register__Masks =
+[
+    [ "CMP_CR0_FILTER_CNT", "group__CMP__Register__Masks.html#ga1f6d81f303672acd661263de6da7ea13", null ],
+    [ "CMP_CR0_HYSTCTR", "group__CMP__Register__Masks.html#ga78eaf28aa2956818501310daaeffca74", null ],
+    [ "CMP_CR1_COS", "group__CMP__Register__Masks.html#ga7b21f24c4a39952ce03371054c09fd6e", null ],
+    [ "CMP_CR1_EN", "group__CMP__Register__Masks.html#ga1f0fd12e9a61eced3f9d44e58269539e", null ],
+    [ "CMP_CR1_INV", "group__CMP__Register__Masks.html#ga773bf2a2c66a8a3658045c17a09c6b25", null ],
+    [ "CMP_CR1_OPE", "group__CMP__Register__Masks.html#gac2c253d65771b16bf9124105672e5fbd", null ],
+    [ "CMP_CR1_PMODE", "group__CMP__Register__Masks.html#gab32908b6aa407efc6cf10f244832a078", null ],
+    [ "CMP_CR1_SE", "group__CMP__Register__Masks.html#gab96d1c95a5c8ef96cf9369822ac387f6", null ],
+    [ "CMP_CR1_TRIGM", "group__CMP__Register__Masks.html#ga61fda6b28c0a7402599a7cce546c3b56", null ],
+    [ "CMP_CR1_WE", "group__CMP__Register__Masks.html#ga2e5439a86a5b43d4216a4dbd4fa5536a", null ],
+    [ "CMP_DACCR_DACEN", "group__CMP__Register__Masks.html#ga4d4b6f6bdeaeed839b8f565113dd2717", null ],
+    [ "CMP_DACCR_VOSEL", "group__CMP__Register__Masks.html#gaac950bb0c2d158445dd28d3493708637", null ],
+    [ "CMP_DACCR_VRSEL", "group__CMP__Register__Masks.html#ga27c3cbdda69ab132f0a4ac2408221e37", null ],
+    [ "CMP_FPR_FILT_PER", "group__CMP__Register__Masks.html#ga006ee9cac0b4b9daa94e3b1d6a440627", null ],
+    [ "CMP_MUXCR_MSEL", "group__CMP__Register__Masks.html#ga31028e9db6d77502d4561380ce1b12fe", null ],
+    [ "CMP_MUXCR_PSEL", "group__CMP__Register__Masks.html#ga23ea598b890c708e1748b52475f92f50", null ],
+    [ "CMP_SCR_CFF", "group__CMP__Register__Masks.html#ga3cf21e20fb83bffcac05736f6f7c797d", null ],
+    [ "CMP_SCR_CFR", "group__CMP__Register__Masks.html#gae9adf37fae856f25e1caf7b4a48a7912", null ],
+    [ "CMP_SCR_COUT", "group__CMP__Register__Masks.html#gaff457b5ca15d0bc33dad1e49ac9793cf", null ],
+    [ "CMP_SCR_DMAEN", "group__CMP__Register__Masks.html#ga37fb4febf635332c87cd88361b4f8875", null ],
+    [ "CMP_SCR_IEF", "group__CMP__Register__Masks.html#ga4cedf2626e72a16419c72b4bc802063e", null ],
+    [ "CMP_SCR_IER", "group__CMP__Register__Masks.html#ga663074e77d49fc2f2a715957bbcb76c1", null ]
+];

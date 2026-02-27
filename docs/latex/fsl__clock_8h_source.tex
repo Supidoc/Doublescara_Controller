@@ -1,0 +1,727 @@
+\doxysection{fsl\+\_\+clock.\+h}
+\hypertarget{fsl__clock_8h_source}{}\label{fsl__clock_8h_source}\index{drivers/fsl\_clock.h@{drivers/fsl\_clock.h}}
+\doxymbox{\hyperlink{fsl__clock_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016\ -\/\ 2020,\ 2022\ -\/\ 2023\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00009}00009\ \textcolor{preprocessor}{\#ifndef\ \_FSL\_CLOCK\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00010}00010\ \textcolor{preprocessor}{\#define\ \_FSL\_CLOCK\_H\_}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00019}00019\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00020}00020\ \textcolor{comment}{\ *\ Configurations}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00021}00021\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00037}00037\ \textcolor{preprocessor}{\#ifndef\ MCG\_CONFIG\_CHECK\_PARAM}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00038}00038\ \textcolor{preprocessor}{\#define\ MCG\_CONFIG\_CHECK\_PARAM\ 0U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00039}00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00051}00051\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00052}00052\ \textcolor{preprocessor}{\#define\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL\ 0}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00053}00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00055}00055\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00056}00056\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00057}00057\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00062}\doxymbox{\hyperlink{group__clock_ga0c0cf401613f31feb4a9eb723ad51154}{00062}}\ \textcolor{preprocessor}{\#define\ FSL\_CLOCK\_DRIVER\_VERSION\ (MAKE\_VERSION(2,\ 5,\ 3))}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00081}00081\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga70a4a6ffb6c5a7a271aad89fe482bafc}{g\_xtal0Freq}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00092}00092\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga170d2fd7c6b439b72e0f73b4d73443af}{g\_xtal32Freq}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00095}\doxymbox{\hyperlink{group__clock_gaa49eb58e97493fdd29be931545ee96af}{00095}}\ \textcolor{preprocessor}{\#define\ MCG\_INTERNAL\_IRC\_48M\ 48000000U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00097}00097\ \textcolor{preprocessor}{\#if\ (defined(OSC)\ \&\&\ !(defined(OSC0)))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00098}00098\ \textcolor{preprocessor}{\#define\ OSC0\ OSC}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00099}00099\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00101}00101\ \textcolor{comment}{/*\ Definition\ for\ delay\ API\ in\ clock\ driver,\ users\ can\ redefine\ it\ to\ the\ real\ application.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00102}00102\ \textcolor{preprocessor}{\#ifndef\ SDK\_DEVICE\_MAXIMUM\_CPU\_CLOCK\_FREQUENCY}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00103}00103\ \textcolor{preprocessor}{\#define\ SDK\_DEVICE\_MAXIMUM\_CPU\_CLOCK\_FREQUENCY\ (120000000UL)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00104}00104\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00107}\doxymbox{\hyperlink{group__clock_ga28b35d2fe49bfffe6e5e41fbdadfc6ed}{00107}}\ \textcolor{preprocessor}{\#define\ DMAMUX\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00108}00108\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Dmamux0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00113}\doxymbox{\hyperlink{group__clock_ga426bb38a06d4765b5a11c5513a583481}{00113}}\ \textcolor{preprocessor}{\#define\ RTC\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00114}00114\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Rtc0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00116}00116\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00119}\doxymbox{\hyperlink{group__clock_gab3f24de813a146fd05809f0c969b1b16}{00119}}\ \textcolor{preprocessor}{\#define\ SAI\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00120}00120\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Sai0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00122}00122\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00125}\doxymbox{\hyperlink{group__clock_ga6365ac4acbb9de0497f74ca189595836}{00125}}\ \textcolor{preprocessor}{\#define\ PORT\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_PortA,\ kCLOCK\_PortB,\ kCLOCK\_PortC,\ kCLOCK\_PortD,\ kCLOCK\_PortE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00128}00128\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00131}\doxymbox{\hyperlink{group__clock_ga3a4bdd5db326d2e42028d167af5a1a3e}{00131}}\ \textcolor{preprocessor}{\#define\ FLEXBUS\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00132}00132\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Flexbus0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00137}\doxymbox{\hyperlink{group__clock_gaa899f3d1cbcac47509edca759ee73375}{00137}}\ \textcolor{preprocessor}{\#define\ EWM\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00138}00138\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00139}00139\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Ewm0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00140}00140\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00143}\doxymbox{\hyperlink{group__clock_ga59f69fda6fd2733de3bd37cb7c179129}{00143}}\ \textcolor{preprocessor}{\#define\ PIT\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00144}00144\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00145}00145\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Pit0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00146}00146\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00149}\doxymbox{\hyperlink{group__clock_gabb10e4cdaf9455f2272da2d506e4ffe2}{00149}}\ \textcolor{preprocessor}{\#define\ DSPI\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00150}00150\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00151}00151\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Spi0,\ kCLOCK\_Spi1\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00152}00152\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00155}\doxymbox{\hyperlink{group__clock_gab37faf7ae1a03862fd7e9b501e7e41ef}{00155}}\ \textcolor{preprocessor}{\#define\ LPTMR\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00156}00156\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00157}00157\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Lptmr0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00158}00158\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00161}\doxymbox{\hyperlink{group__clock_ga192e2d43173dc89acfe5df8503cf1e67}{00161}}\ \textcolor{preprocessor}{\#define\ FTM\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00163}00163\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Ftm0,\ kCLOCK\_Ftm1,\ kCLOCK\_Ftm2,\ kCLOCK\_Ftm3\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00164}00164\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00167}\doxymbox{\hyperlink{group__clock_ga54d5e993c7edae611cc232aaa8e61e27}{00167}}\ \textcolor{preprocessor}{\#define\ EDMA\_CLOCKS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00168}00168\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00169}00169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Dma0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00170}00170\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00173}\doxymbox{\hyperlink{group__clock_ga730b16f643093a12a48361fd00382eb0}{00173}}\ \textcolor{preprocessor}{\#define\ LPUART\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00174}00174\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00175}00175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Lpuart0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00176}00176\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00179}\doxymbox{\hyperlink{group__clock_gab3c8a974e25f615fe023579c847fae6c}{00179}}\ \textcolor{preprocessor}{\#define\ DAC\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00180}00180\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00181}00181\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Dac0,\ kCLOCK\_Dac1\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00182}00182\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00185}\doxymbox{\hyperlink{group__clock_ga222774f8b22a83bd1d4bde253be13eba}{00185}}\ \textcolor{preprocessor}{\#define\ ADC16\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00186}00186\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00187}00187\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Adc0,\ kCLOCK\_Adc1\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00188}00188\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00191}\doxymbox{\hyperlink{group__clock_gadada275d718274d382e3488eebb46d04}{00191}}\ \textcolor{preprocessor}{\#define\ VREF\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00192}00192\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00193}00193\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Vref0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00194}00194\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00197}\doxymbox{\hyperlink{group__clock_gae6c5e4d33e80e2bc367249c46377ee95}{00197}}\ \textcolor{preprocessor}{\#define\ UART\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00198}00198\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00199}00199\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Uart0,\ kCLOCK\_Uart1,\ kCLOCK\_Uart2\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00200}00200\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00203}\doxymbox{\hyperlink{group__clock_gae36e17d5e6c5a22ab7252bd987ac70ff}{00203}}\ \textcolor{preprocessor}{\#define\ RNGA\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00204}00204\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00205}00205\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Rnga0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00206}00206\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00209}\doxymbox{\hyperlink{group__clock_ga661e3aff590ce2f086ba06745317480b}{00209}}\ \textcolor{preprocessor}{\#define\ CRC\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00210}00210\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00211}00211\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Crc0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00212}00212\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00215}\doxymbox{\hyperlink{group__clock_gac0c74371f4f724c78ef233de79c3cf14}{00215}}\ \textcolor{preprocessor}{\#define\ I2C\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00216}00216\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00217}00217\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_I2c0,\ kCLOCK\_I2c1\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00218}00218\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00221}\doxymbox{\hyperlink{group__clock_ga7424481c4167462b8b5814485b967280}{00221}}\ \textcolor{preprocessor}{\#define\ FTF\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00222}00222\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00223}00223\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Ftf0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00224}00224\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00227}\doxymbox{\hyperlink{group__clock_ga75b9333c016a19a80d18c9cbef7e9f91}{00227}}\ \textcolor{preprocessor}{\#define\ PDB\_CLOCKS\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00228}00228\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00229}00229\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Pdb0\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00230}00230\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00233}\doxymbox{\hyperlink{group__clock_ga5f418050b0df19bdee898d90c504b8c7}{00233}}\ \textcolor{preprocessor}{\#define\ CMP\_CLOCKS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00234}00234\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00235}00235\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ kCLOCK\_Cmp0,\ kCLOCK\_Cmp1\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00236}00236\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00241}\doxymbox{\hyperlink{group__clock_ga8f4a4e93b0c473d5f1c6bc8dad73acab}{00241}}\ \textcolor{preprocessor}{\#define\ LPO\_CLK\_FREQ\ 1000U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00244}\doxymbox{\hyperlink{group__clock_gab3a7892b9f9fbb5c3fc2cbdbceb10017}{00244}}\ \textcolor{preprocessor}{\#define\ SYS\_CLK\ \ kCLOCK\_CoreSysClk}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ BUS\_CLK\ \ kCLOCK\_BusClk}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00246}00246\ \textcolor{preprocessor}{\#define\ FAST\_CLK\ kCLOCK\_FastPeriphClk}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00248}00248\ \textcolor{preprocessor}{\#define\ I2C0\_CLK\_SRC\ \ BUS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00249}00249\ \textcolor{preprocessor}{\#define\ I2C1\_CLK\_SRC\ \ BUS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00250}00250\ \textcolor{preprocessor}{\#define\ DSPI0\_CLK\_SRC\ BUS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ DSPI1\_CLK\_SRC\ BUS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00252}00252\ \textcolor{preprocessor}{\#define\ UART0\_CLK\_SRC\ SYS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00253}00253\ \textcolor{preprocessor}{\#define\ UART1\_CLK\_SRC\ SYS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00254}00254\ \textcolor{preprocessor}{\#define\ UART2\_CLK\_SRC\ BUS\_CLK}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00257}\doxymbox{\hyperlink{group__clock_ga10eb499a97d1bd20020841220bb5de74}{00257}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga10eb499a97d1bd20020841220bb5de74}{\_clock\_name}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00258}00258\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00260}00260\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ System\ layer\ clock\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00261}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a1de4a40f5399eb025d5faefda7491918}{00261}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a1de4a40f5399eb025d5faefda7491918}{kCLOCK\_CoreSysClk}},\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00262}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aec41b6f35c7b4b85043cb2c37e3ca448}{00262}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aec41b6f35c7b4b85043cb2c37e3ca448}{kCLOCK\_PlatClk}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00263}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a5d1ee238337b6aa2486a42feabdd5133}{00263}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a5d1ee238337b6aa2486a42feabdd5133}{kCLOCK\_BusClk}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00264}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a76c632e65460f08f3eaf913cf6e77d5b}{00264}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a76c632e65460f08f3eaf913cf6e77d5b}{kCLOCK\_FlexBusClk}},\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00265}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ab57d3685ed48c8edcccf30940bcd4221}{00265}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ab57d3685ed48c8edcccf30940bcd4221}{kCLOCK\_FlashClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00266}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a85555fc9f4154336af66111e7b0f5fae}{00266}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a85555fc9f4154336af66111e7b0f5fae}{kCLOCK\_FastPeriphClk}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00267}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74adaf2ccb0f121ff519833091139902c53}{00267}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74adaf2ccb0f121ff519833091139902c53}{kCLOCK\_PllFllSelClk}},\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00269}00269\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ OSC\ clock\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00270}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a94400aca9f0f0e9d3a43b906e3a17918}{00270}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a94400aca9f0f0e9d3a43b906e3a17918}{kCLOCK\_Er32kClk}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00271}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a8e2da5897653f8a36ecc88a122bef6ec}{00271}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a8e2da5897653f8a36ecc88a122bef6ec}{kCLOCK\_Osc0ErClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00272}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74afdb9e84512fe33b0f8199340a170abb8}{00272}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74afdb9e84512fe33b0f8199340a170abb8}{kCLOCK\_Osc1ErClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00273}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74adb36f3b651e2d40e9e034a5ff775bf9f}{00273}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74adb36f3b651e2d40e9e034a5ff775bf9f}{kCLOCK\_Osc0ErClkUndiv}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00275}00275\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ MCG\ and\ MCG-\/Lite\ clock\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00276}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a1e58f36569a0cc12ba13ddc105a69ad9}{00276}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a1e58f36569a0cc12ba13ddc105a69ad9}{kCLOCK\_McgFixedFreqClk}},\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00277}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aeceae12afcfc026d314e9af175a0ef31}{00277}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aeceae12afcfc026d314e9af175a0ef31}{kCLOCK\_McgInternalRefClk}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00278}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ad27cb3cdcf7cf3d1bfcd1580960ee9a4}{00278}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ad27cb3cdcf7cf3d1bfcd1580960ee9a4}{kCLOCK\_McgFllClk}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00279}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a8125faf928b40f13dee71966dd0a77c2}{00279}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a8125faf928b40f13dee71966dd0a77c2}{kCLOCK\_McgPll0Clk}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00280}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aea90da9bfe47b3f46aed5662e8f34e93}{00280}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aea90da9bfe47b3f46aed5662e8f34e93}{kCLOCK\_McgPll1Clk}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00281}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aff9fe6cca9e80cfdab21efda80da8e8b}{00281}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74aff9fe6cca9e80cfdab21efda80da8e8b}{kCLOCK\_McgExtPllClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00282}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ad94ea13d2b1d9036d7d9e6303fc89c3a}{00282}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74ad94ea13d2b1d9036d7d9e6303fc89c3a}{kCLOCK\_McgPeriphClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00283}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a50c90dfd05fba07cff701a11c095f02a}{00283}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a50c90dfd05fba07cff701a11c095f02a}{kCLOCK\_McgIrc48MClk}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00285}00285\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Other\ clock\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00286}\doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a6a5c0cc2424bbbf2b73d76f51c16d438}{00286}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga10eb499a97d1bd20020841220bb5de74a6a5c0cc2424bbbf2b73d76f51c16d438}{kCLOCK\_LpoClk}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00288}\doxymbox{\hyperlink{group__clock_ga24298d5cfc4913a8c6970632ef6bc19f}{00288}}\ \}\ \doxymbox{\hyperlink{group__clock_ga24298d5cfc4913a8c6970632ef6bc19f}{clock\_name\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00291}\doxymbox{\hyperlink{group__clock_ga9ebbef69e6c5fd52879fa79b3e607cf2}{00291}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga9ebbef69e6c5fd52879fa79b3e607cf2}{\_clock\_usb\_src}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00292}00292\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00293}\doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a03433ec67faabeb252b4de5f0dd79c2a}{00293}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a03433ec67faabeb252b4de5f0dd79c2a}{kCLOCK\_UsbSrcPll0}}\ \ \ =\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga78428c831f0263054ac91c55ed89c016}{SIM\_SOPT2\_USBSRC}}(1U)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga8d44d4d4557fe51bf7b212dd91af91ab}{SIM\_SOPT2\_PLLFLLSEL}}(1U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00294}\doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a042fc9c8cd8072258e23166ed0353ae9}{00294}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a042fc9c8cd8072258e23166ed0353ae9}{kCLOCK\_UsbSrcIrc48M}}\ =\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga78428c831f0263054ac91c55ed89c016}{SIM\_SOPT2\_USBSRC}}(1U)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga8d44d4d4557fe51bf7b212dd91af91ab}{SIM\_SOPT2\_PLLFLLSEL}}(3U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00295}\doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a4d65f0b3d0e477f16a84eecb6ad0d909}{00295}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga9ebbef69e6c5fd52879fa79b3e607cf2a4d65f0b3d0e477f16a84eecb6ad0d909}{kCLOCK\_UsbSrcExt}}\ \ \ \ =\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga78428c831f0263054ac91c55ed89c016}{SIM\_SOPT2\_USBSRC}}(0U)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00296}\doxymbox{\hyperlink{group__clock_ga35485750b42e56fde3a00fec6b18bba2}{00296}}\ \}\ \doxymbox{\hyperlink{group__clock_ga35485750b42e56fde3a00fec6b18bba2}{clock\_usb\_src\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00297}00297\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00298}00298\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00299}00299\ \textcolor{comment}{\ clock\_gate\_t\ definition:}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00300}00300\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00301}00301\ \textcolor{comment}{\ 31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00302}00302\ \textcolor{comment}{\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00303}00303\ \textcolor{comment}{\ |\ SIM\_SCGC\ register\ offset\ \ \ \ \ \ \ |\ \ \ control\ bit\ offset\ in\ SCGC\ |}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00304}00304\ \textcolor{comment}{\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00305}00305\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00306}00306\ \textcolor{comment}{\ For\ example,\ the\ SDHC\ clock\ gate\ is\ controlled\ by\ SIM\_SCGC3[17],\ the}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00307}00307\ \textcolor{comment}{\ SIM\_SCGC3\ offset\ in\ SIM\ is\ 0x1030,\ then\ kCLOCK\_GateSdhc0\ is\ defined\ as}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00308}00308\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00309}00309\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCLOCK\_GateSdhc0\ =\ (0x1030\ <<\ 16)\ |\ 17;}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00310}00310\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00311}00311\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00313}00313\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_REG\_OFFSET\_SHIFT\ 16U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00314}00314\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_REG\_OFFSET\_MASK\ \ 0xFFFF0000U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00315}00315\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_BIT\_SHIFT\_SHIFT\ \ 0U}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00316}00316\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_BIT\_SHIFT\_MASK\ \ \ 0x0000FFFFU}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00318}00318\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_DEFINE(reg\_offset,\ bit\_shift)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00319}00319\ \textcolor{preprocessor}{\ \ \ \ ((((reg\_offset)\ <<\ CLK\_GATE\_REG\_OFFSET\_SHIFT)\ \&\ CLK\_GATE\_REG\_OFFSET\_MASK)\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00320}00320\ \textcolor{preprocessor}{\ \ \ \ \ (((bit\_shift)\ <<\ CLK\_GATE\_BIT\_SHIFT\_SHIFT)\ \&\ CLK\_GATE\_BIT\_SHIFT\_MASK))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00322}00322\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_ABSTRACT\_REG\_OFFSET(x)\ (((x)\&CLK\_GATE\_REG\_OFFSET\_MASK)\ >>\ CLK\_GATE\_REG\_OFFSET\_SHIFT)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00323}00323\ \textcolor{preprocessor}{\#define\ CLK\_GATE\_ABSTRACT\_BITS\_SHIFT(x)\ (((x)\&CLK\_GATE\_BIT\_SHIFT\_MASK)\ >>\ CLK\_GATE\_BIT\_SHIFT\_SHIFT)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00326}\doxymbox{\hyperlink{group__clock_ga0d01cff2c331cdc2703b798930b1c9cd}{00326}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga0d01cff2c331cdc2703b798930b1c9cd}{\_clock\_ip\_name}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00327}00327\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00328}00328\ \ \ \ \ kCLOCK\_IpInvalid\ =\ 0U,}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00330}00330\ \ \ \ \ kCLOCK\_Ewm0\ \ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 1U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00331}00331\ \ \ \ \ kCLOCK\_I2c0\ \ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 6U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00332}00332\ \ \ \ \ kCLOCK\_I2c1\ \ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 7U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00333}00333\ \ \ \ \ kCLOCK\_Uart0\ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 10U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00334}00334\ \ \ \ \ kCLOCK\_Uart1\ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 11U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00335}00335\ \ \ \ \ kCLOCK\_Uart2\ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 12U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00336}00336\ \ \ \ \ kCLOCK\_Usbfs0\ =\ CLK\_GATE\_DEFINE(0x1034U,\ 18U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00337}00337\ \ \ \ \ kCLOCK\_Cmp0\ \ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 19U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00338}00338\ \ \ \ \ kCLOCK\_Cmp1\ \ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 19U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00339}00339\ \ \ \ \ kCLOCK\_Vref0\ \ =\ CLK\_GATE\_DEFINE(0x1034U,\ 20U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00341}00341\ \ \ \ \ kCLOCK\_Lptmr0\ =\ CLK\_GATE\_DEFINE(0x1038U,\ 0U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00342}00342\ \ \ \ \ kCLOCK\_PortA\ \ =\ CLK\_GATE\_DEFINE(0x1038U,\ 9U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00343}00343\ \ \ \ \ kCLOCK\_PortB\ \ =\ CLK\_GATE\_DEFINE(0x1038U,\ 10U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00344}00344\ \ \ \ \ kCLOCK\_PortC\ \ =\ CLK\_GATE\_DEFINE(0x1038U,\ 11U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00345}00345\ \ \ \ \ kCLOCK\_PortD\ \ =\ CLK\_GATE\_DEFINE(0x1038U,\ 12U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00346}00346\ \ \ \ \ kCLOCK\_PortE\ \ =\ CLK\_GATE\_DEFINE(0x1038U,\ 13U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00348}00348\ \ \ \ \ kCLOCK\_Ftf0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 0U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00349}00349\ \ \ \ \ kCLOCK\_Dmamux0\ =\ CLK\_GATE\_DEFINE(0x103CU,\ 1U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00350}00350\ \ \ \ \ kCLOCK\_Ftm3\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 6U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00351}00351\ \ \ \ \ kCLOCK\_Adc1\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 7U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00352}00352\ \ \ \ \ kCLOCK\_Dac1\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 8U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00353}00353\ \ \ \ \ kCLOCK\_Rnga0\ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 9U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00354}00354\ \ \ \ \ kCLOCK\_Lpuart0\ =\ CLK\_GATE\_DEFINE(0x103CU,\ 10U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00355}00355\ \ \ \ \ kCLOCK\_Spi0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 12U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00356}00356\ \ \ \ \ kCLOCK\_Spi1\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 13U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00357}00357\ \ \ \ \ kCLOCK\_Sai0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 15U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00358}00358\ \ \ \ \ kCLOCK\_Crc0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 18U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00359}00359\ \ \ \ \ kCLOCK\_Pdb0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 22U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00360}00360\ \ \ \ \ kCLOCK\_Pit0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 23U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00361}00361\ \ \ \ \ kCLOCK\_Ftm0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 24U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00362}00362\ \ \ \ \ kCLOCK\_Ftm1\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 25U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00363}00363\ \ \ \ \ kCLOCK\_Ftm2\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 26U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00364}00364\ \ \ \ \ kCLOCK\_Adc0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 27U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00365}00365\ \ \ \ \ kCLOCK\_Rtc0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 29U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00366}00366\ \ \ \ \ kCLOCK\_Dac0\ \ \ \ =\ CLK\_GATE\_DEFINE(0x103CU,\ 31U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00368}00368\ \ \ \ \ kCLOCK\_Flexbus0\ =\ CLK\_GATE\_DEFINE(0x1040U,\ 0U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00369}00369\ \ \ \ \ kCLOCK\_Dma0\ \ \ \ \ =\ CLK\_GATE\_DEFINE(0x1040U,\ 1U),}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00370}\doxymbox{\hyperlink{group__clock_ga0298ae8edb8bdcdec546fae6f4685fe3}{00370}}\ \}\ \doxymbox{\hyperlink{group__clock_ga0298ae8edb8bdcdec546fae6f4685fe3}{clock\_ip\_name\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00373}\doxymbox{\hyperlink{struct__sim__clock__config}{00373}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__sim__clock__config}{\_sim\_clock\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00374}00374\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00375}\doxymbox{\hyperlink{group__clock_gafa021ca3f206049993165eb223c592d5}{00375}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_gafa021ca3f206049993165eb223c592d5}{pllFllSel}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00376}\doxymbox{\hyperlink{group__clock_ga516cc40525550e97ccb0b2d90a0ffdbc}{00376}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga516cc40525550e97ccb0b2d90a0ffdbc}{er32kSrc}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00377}\doxymbox{\hyperlink{group__clock_ga64b473d9b49c3637dba4283a0cb7da27}{00377}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga64b473d9b49c3637dba4283a0cb7da27}{clkdiv1}};\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00378}\doxymbox{\hyperlink{group__clock_gaf295a6f1e5114d7a534d5773d2997ad8}{00378}}\ \}\ \doxymbox{\hyperlink{group__clock_gaf295a6f1e5114d7a534d5773d2997ad8}{sim\_clock\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00381}\doxymbox{\hyperlink{group__clock_ga12cda0e98e38fafaa3ebc980ce32605f}{00381}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga12cda0e98e38fafaa3ebc980ce32605f}{\_osc\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00382}00382\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00383}\doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa40da5141b08af28fd3ed71d0c061a664}{00383}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa40da5141b08af28fd3ed71d0c061a664}{kOSC\_ModeExt}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00384}00384\ \textcolor{preprocessor}{\#if\ (defined(MCG\_C2\_EREFS\_MASK)\ \&\&\ !(defined(MCG\_C2\_EREFS0\_MASK)))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00385}00385\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa4412c07d6d2fd83dfa4c788f5bd72f18}{kOSC\_ModeOscLowPower}}\ =\ MCG\_C2\_EREFS\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00386}00386\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00387}\doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa4412c07d6d2fd83dfa4c788f5bd72f18}{00387}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa4412c07d6d2fd83dfa4c788f5bd72f18}{kOSC\_ModeOscLowPower}}\ =\ MCG\_C2\_EREFS0\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00388}00388\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00389}\doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa44206e2acfed4fd6f9764047d9f469ae}{00389}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga12cda0e98e38fafaa3ebc980ce32605fa44206e2acfed4fd6f9764047d9f469ae}{kOSC\_ModeOscHighGain}}\ =\ 0U}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00390}00390\ \textcolor{preprocessor}{\#if\ (defined(MCG\_C2\_EREFS\_MASK)\ \&\&\ !(defined(MCG\_C2\_EREFS0\_MASK)))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ MCG\_C2\_EREFS\_MASK}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00392}00392\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ MCG\_C2\_EREFS0\_MASK}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00394}00394\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00395}00395\ \textcolor{preprocessor}{\#if\ (defined(MCG\_C2\_HGO\_MASK)\ \&\&\ !(defined(MCG\_C2\_HGO0\_MASK)))}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ MCG\_C2\_HGO\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00397}00397\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ MCG\_C2\_HGO0\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00399}00399\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00400}\doxymbox{\hyperlink{group__clock_ga38de3c23ba29ad85c1daa624e2d3b205}{00400}}\ \}\ \doxymbox{\hyperlink{group__clock_ga38de3c23ba29ad85c1daa624e2d3b205}{osc\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00403}\doxymbox{\hyperlink{group__clock_gac4d0d3c8c2e6469cde54645a5b66a5b8}{00403}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_gac4d0d3c8c2e6469cde54645a5b66a5b8}{\_osc\_cap\_load}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00404}00404\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00405}\doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8a77a5d0f7cafaccf2f40945bc0980780d}{00405}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8a77a5d0f7cafaccf2f40945bc0980780d}{kOSC\_Cap2P}}\ \ =\ OSC\_CR\_SC2P\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00406}\doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8a34f7cc6a958e0cd30cd2296393206e2e}{00406}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8a34f7cc6a958e0cd30cd2296393206e2e}{kOSC\_Cap4P}}\ \ =\ OSC\_CR\_SC4P\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00407}\doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8af2ef9a39bf5174098c60f141c7173d63}{00407}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8af2ef9a39bf5174098c60f141c7173d63}{kOSC\_Cap8P}}\ \ =\ OSC\_CR\_SC8P\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00408}\doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8adfec06bedd2598e3a2dcc5ba43ea23a9}{00408}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggac4d0d3c8c2e6469cde54645a5b66a5b8adfec06bedd2598e3a2dcc5ba43ea23a9}{kOSC\_Cap16P}}\ =\ OSC\_CR\_SC16P\_MASK\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00409}00409\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00412}\doxymbox{\hyperlink{group__clock_ga4d273c4ee3cf6ad651bc9aacc48bc87f}{00412}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga4d273c4ee3cf6ad651bc9aacc48bc87f}{\_oscer\_enable\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00413}00413\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00414}\doxymbox{\hyperlink{group__clock_gga4d273c4ee3cf6ad651bc9aacc48bc87fa3a8d4dec0d80100e2f69db38357970da}{00414}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga4d273c4ee3cf6ad651bc9aacc48bc87fa3a8d4dec0d80100e2f69db38357970da}{kOSC\_ErClkEnable}}\ \ \ \ \ \ \ =\ OSC\_CR\_ERCLKEN\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00415}\doxymbox{\hyperlink{group__clock_gga4d273c4ee3cf6ad651bc9aacc48bc87fabc175ffcf6cbcade0f10376b168d4fd9}{00415}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga4d273c4ee3cf6ad651bc9aacc48bc87fabc175ffcf6cbcade0f10376b168d4fd9}{kOSC\_ErClkEnableInStop}}\ =\ OSC\_CR\_EREFSTEN\_MASK\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00416}00416\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00419}\doxymbox{\hyperlink{struct__oscer__config}{00419}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__oscer__config}{\_oscer\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00420}00420\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00421}\doxymbox{\hyperlink{group__clock_ga84ff5cf6c1fcf468337d5e943db1dd35}{00421}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga84ff5cf6c1fcf468337d5e943db1dd35}{enableMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00423}\doxymbox{\hyperlink{group__clock_gaa78c8d8efef8d4ae97c396e50e8a1ff1}{00423}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_gaa78c8d8efef8d4ae97c396e50e8a1ff1}{erclkDiv}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00424}\doxymbox{\hyperlink{group__clock_gaa50f7235a9ef330e0ab37657c6fbd5f2}{00424}}\ \}\ \doxymbox{\hyperlink{group__clock_gaa50f7235a9ef330e0ab37657c6fbd5f2}{oscer\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00435}\doxymbox{\hyperlink{struct__osc__config}{00435}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__osc__config}{\_osc\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00436}00436\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00437}\doxymbox{\hyperlink{group__clock_ga2d4462c6417ee28fcf932a2e6fca0b56}{00437}}\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga2d4462c6417ee28fcf932a2e6fca0b56}{freq}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00438}\doxymbox{\hyperlink{group__clock_ga4e3fd1832d6d1e0eae45c09c4df39537}{00438}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga4e3fd1832d6d1e0eae45c09c4df39537}{capLoad}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00439}\doxymbox{\hyperlink{group__clock_ga3def07d1d0e2e70addd33ba77a8931a4}{00439}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga38de3c23ba29ad85c1daa624e2d3b205}{osc\_mode\_t}}\ \doxymbox{\hyperlink{group__clock_ga3def07d1d0e2e70addd33ba77a8931a4}{workMode}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00440}\doxymbox{\hyperlink{group__clock_gaae763fa91009c57d21b37cbf0a7d2d65}{00440}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gaa50f7235a9ef330e0ab37657c6fbd5f2}{oscer\_config\_t}}\ \doxymbox{\hyperlink{group__clock_gaae763fa91009c57d21b37cbf0a7d2d65}{oscerConfig}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00441}\doxymbox{\hyperlink{group__clock_ga5a46989b0f514536b1809c59a45d603f}{00441}}\ \}\ \doxymbox{\hyperlink{group__clock_ga5a46989b0f514536b1809c59a45d603f}{osc\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00444}\doxymbox{\hyperlink{group__clock_gaeff78f00fadc722afffe42fbd194c766}{00444}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_gaeff78f00fadc722afffe42fbd194c766}{\_mcg\_fll\_src}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00445}00445\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00446}\doxymbox{\hyperlink{group__clock_ggaeff78f00fadc722afffe42fbd194c766aeff7bea3278bec58c002d19f565e61f6}{00446}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggaeff78f00fadc722afffe42fbd194c766aeff7bea3278bec58c002d19f565e61f6}{kMCG\_FllSrcExternal}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00447}\doxymbox{\hyperlink{group__clock_ggaeff78f00fadc722afffe42fbd194c766a0976590d84b9624c671a944ae61d0f12}{00447}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggaeff78f00fadc722afffe42fbd194c766a0976590d84b9624c671a944ae61d0f12}{kMCG\_FllSrcInternal}}\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00448}\doxymbox{\hyperlink{group__clock_ga7ba1e2691d0e930d27b398b410db6137}{00448}}\ \}\ \doxymbox{\hyperlink{group__clock_ga7ba1e2691d0e930d27b398b410db6137}{mcg\_fll\_src\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00451}\doxymbox{\hyperlink{group__clock_gae418d7be28756b56c72b845724bb8825}{00451}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_gae418d7be28756b56c72b845724bb8825}{\_mcg\_irc\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00452}00452\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00453}\doxymbox{\hyperlink{group__clock_ggae418d7be28756b56c72b845724bb8825a8161f7b31734aca20a3df71d4cb6e33a}{00453}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggae418d7be28756b56c72b845724bb8825a8161f7b31734aca20a3df71d4cb6e33a}{kMCG\_IrcSlow}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00454}\doxymbox{\hyperlink{group__clock_ggae418d7be28756b56c72b845724bb8825aabdf1b8401f183ab6e6748abf3d59eee}{00454}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggae418d7be28756b56c72b845724bb8825aabdf1b8401f183ab6e6748abf3d59eee}{kMCG\_IrcFast}}\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00455}\doxymbox{\hyperlink{group__clock_ga693d5d4ff2635ec4e14f5f0f528ac5b8}{00455}}\ \}\ \doxymbox{\hyperlink{group__clock_ga693d5d4ff2635ec4e14f5f0f528ac5b8}{mcg\_irc\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00456}00456\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00458}\doxymbox{\hyperlink{group__clock_gae00bb0e95c525a5645b5639bf26a91fb}{00458}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_gae00bb0e95c525a5645b5639bf26a91fb}{\_mcg\_dmx32}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00459}00459\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00460}\doxymbox{\hyperlink{group__clock_ggae00bb0e95c525a5645b5639bf26a91fbaf530a87aefdc94b3645666fbca754699}{00460}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggae00bb0e95c525a5645b5639bf26a91fbaf530a87aefdc94b3645666fbca754699}{kMCG\_Dmx32Default}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00461}\doxymbox{\hyperlink{group__clock_ggae00bb0e95c525a5645b5639bf26a91fba1210930a4c423a30178ff8d98dde78cb}{00461}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggae00bb0e95c525a5645b5639bf26a91fba1210930a4c423a30178ff8d98dde78cb}{kMCG\_Dmx32Fine}}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00462}\doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{00462}}\ \}\ \doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00463}00463\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00465}\doxymbox{\hyperlink{group__clock_ga21a1ff7653e9d39e13255fad61b30ff9}{00465}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga21a1ff7653e9d39e13255fad61b30ff9}{\_mcg\_drs}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00466}00466\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00467}\doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a0c65c697608cf1e2aabd165d4ebfd4fa}{00467}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a0c65c697608cf1e2aabd165d4ebfd4fa}{kMCG\_DrsLow}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00468}\doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a11f6cd598e31cda5e4719003339f75cc}{00468}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a11f6cd598e31cda5e4719003339f75cc}{kMCG\_DrsMid}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00469}\doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9ad22b5e127c3a7220e31a73f73c688980}{00469}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9ad22b5e127c3a7220e31a73f73c688980}{kMCG\_DrsMidHigh}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00470}\doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a3dc3f5775a1456703d03e8698de954d6}{00470}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga21a1ff7653e9d39e13255fad61b30ff9a3dc3f5775a1456703d03e8698de954d6}{kMCG\_DrsHigh}}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00471}\doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{00471}}\ \}\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00472}00472\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00474}\doxymbox{\hyperlink{group__clock_ga1dce61a95c74568a4c21e93a66b2a0b3}{00474}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga1dce61a95c74568a4c21e93a66b2a0b3}{\_mcg\_pll\_ref\_src}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00475}00475\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00476}\doxymbox{\hyperlink{group__clock_gga1dce61a95c74568a4c21e93a66b2a0b3aafac6a309951bfa160a7e2514e027ffd}{00476}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga1dce61a95c74568a4c21e93a66b2a0b3aafac6a309951bfa160a7e2514e027ffd}{kMCG\_PllRefOsc0}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00477}\doxymbox{\hyperlink{group__clock_gga1dce61a95c74568a4c21e93a66b2a0b3af1d53706ee4a0fb16b039176540d3baf}{00477}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga1dce61a95c74568a4c21e93a66b2a0b3af1d53706ee4a0fb16b039176540d3baf}{kMCG\_PllRefOsc1}}\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00478}\doxymbox{\hyperlink{group__clock_ga673b37325cc885ba05c5f49ac2ec2c17}{00478}}\ \}\ \doxymbox{\hyperlink{group__clock_ga673b37325cc885ba05c5f49ac2ec2c17}{mcg\_pll\_ref\_src\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00481}\doxymbox{\hyperlink{group__clock_ga52ecab46082bc70b334273f8ee83ebd2}{00481}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga52ecab46082bc70b334273f8ee83ebd2}{\_mcg\_clkout\_src}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00482}00482\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00483}\doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2ae22bf7c4f9aabab1414b150aa97f2cd9}{00483}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2ae22bf7c4f9aabab1414b150aa97f2cd9}{kMCG\_ClkOutSrcOut}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00484}\doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2a1775c32965f28e3765596e99be1ba874}{00484}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2a1775c32965f28e3765596e99be1ba874}{kMCG\_ClkOutSrcInternal}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00485}\doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2a41e72550785e9349366c1cd7253af408}{00485}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga52ecab46082bc70b334273f8ee83ebd2a41e72550785e9349366c1cd7253af408}{kMCG\_ClkOutSrcExternal}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00486}\doxymbox{\hyperlink{group__clock_ga5f6a7a4936dd23c250256dd132c25d39}{00486}}\ \}\ \doxymbox{\hyperlink{group__clock_ga5f6a7a4936dd23c250256dd132c25d39}{mcg\_clkout\_src\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00489}\doxymbox{\hyperlink{group__clock_ga49cd9c130e348cd5ca8b9d7584c3987b}{00489}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga49cd9c130e348cd5ca8b9d7584c3987b}{\_mcg\_atm\_select}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00490}00490\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00491}\doxymbox{\hyperlink{group__clock_gga49cd9c130e348cd5ca8b9d7584c3987ba01ba4491e70b57f3ef2d0048d1128068}{00491}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga49cd9c130e348cd5ca8b9d7584c3987ba01ba4491e70b57f3ef2d0048d1128068}{kMCG\_AtmSel32k}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00492}\doxymbox{\hyperlink{group__clock_gga49cd9c130e348cd5ca8b9d7584c3987baf83e73f611b6fca7da3847269fc4baca}{00492}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga49cd9c130e348cd5ca8b9d7584c3987baf83e73f611b6fca7da3847269fc4baca}{kMCG\_AtmSel4m}}\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00493}\doxymbox{\hyperlink{group__clock_gae7437ec05ccdc9cf47d7130e26cd2f41}{00493}}\ \}\ \doxymbox{\hyperlink{group__clock_gae7437ec05ccdc9cf47d7130e26cd2f41}{mcg\_atm\_select\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00496}\doxymbox{\hyperlink{group__clock_gadf92bca14a106bc9552247b1bdb3461a}{00496}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_gadf92bca14a106bc9552247b1bdb3461a}{\_mcg\_oscsel}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00497}00497\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00498}\doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aaebadda41c33d5064e5466d35100f9181}{00498}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aaebadda41c33d5064e5466d35100f9181}{kMCG\_OscselOsc}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00499}\doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aaa66d3897cc6eaf235721408d13edc9d0}{00499}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aaa66d3897cc6eaf235721408d13edc9d0}{kMCG\_OscselRtc}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00500}\doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aa9e05440808e246230531475573c1adfd}{00500}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggadf92bca14a106bc9552247b1bdb3461aa9e05440808e246230531475573c1adfd}{kMCG\_OscselIrc}}\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00501}\doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{00501}}\ \}\ \doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00504}\doxymbox{\hyperlink{group__clock_ga34b64ff2e935b09b3f3ae070da66b7d8}{00504}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga34b64ff2e935b09b3f3ae070da66b7d8}{\_mcg\_pll\_clk\_select}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00505}00505\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00506}\doxymbox{\hyperlink{group__clock_gga34b64ff2e935b09b3f3ae070da66b7d8aec59a1d9072c2d2a939d03d51b1b2e57}{00506}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga34b64ff2e935b09b3f3ae070da66b7d8aec59a1d9072c2d2a939d03d51b1b2e57}{kMCG\_PllClkSelPll0}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00507}00507\ \ \ \ \ kMCG\_PllClkSelPll1\ \ \textcolor{comment}{/*\ PLL1\ output\ clock\ is\ selected\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00508}\doxymbox{\hyperlink{group__clock_ga1fc88117f948231ea3594bfd8ff41f61}{00508}}\ \}\ \doxymbox{\hyperlink{group__clock_ga1fc88117f948231ea3594bfd8ff41f61}{mcg\_pll\_clk\_select\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00511}\doxymbox{\hyperlink{group__clock_ga09e8bc906db58ec2c1f97b6eb8c7547e}{00511}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga09e8bc906db58ec2c1f97b6eb8c7547e}{\_mcg\_monitor\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00512}00512\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00513}\doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea954198a6cf612a7634b14d966193ee02}{00513}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea954198a6cf612a7634b14d966193ee02}{kMCG\_MonitorNone}},\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00514}\doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea232df478e15fbeabafa69c14e684f5a5}{00514}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea232df478e15fbeabafa69c14e684f5a5}{kMCG\_MonitorInt}},\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00515}\doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea1926199485f8c8672735de3b5417cb91}{00515}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga09e8bc906db58ec2c1f97b6eb8c7547ea1926199485f8c8672735de3b5417cb91}{kMCG\_MonitorReset}}\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00516}\doxymbox{\hyperlink{group__clock_ga148b2cf79d7f6cd18d0d855b330c5bf7}{00516}}\ \}\ \doxymbox{\hyperlink{group__clock_ga148b2cf79d7f6cd18d0d855b330c5bf7}{mcg\_monitor\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00519}00519\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00520}00520\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00521}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ad992385c89093ce4e1fc3630e3fb7659}{00521}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ad992385c89093ce4e1fc3630e3fb7659}{kStatus\_MCG\_ModeUnreachable}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 0U),\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00522}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3a0041b9349a72d85ca329d9c7da4543af}{00522}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3a0041b9349a72d85ca329d9c7da4543af}{kStatus\_MCG\_ModeInvalid}}\ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 1U),\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00524}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ab3046b9a3ac26a54a308b360ae1d6b6d}{00524}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ab3046b9a3ac26a54a308b360ae1d6b6d}{kStatus\_MCG\_AtmBusClockInvalid}}\ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 2U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00525}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3a8d7ed782356b7660c5282389ac1776e6}{00525}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3a8d7ed782356b7660c5282389ac1776e6}{kStatus\_MCG\_AtmDesiredFreqInvalid}}\ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 3U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00526}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3aac2665650bc7ab1d26e5ff32749f7139}{00526}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3aac2665650bc7ab1d26e5ff32749f7139}{kStatus\_MCG\_AtmIrcUsed}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 4U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00527}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3adb67d4ed488bd82a2096ad2f3b6a29d6}{00527}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3adb67d4ed488bd82a2096ad2f3b6a29d6}{kStatus\_MCG\_AtmHardwareFail}}\ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 5U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00528}\doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ae6a6ceb6edc94718fbcbb5436596ce22}{00528}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga284f80e967d9fe1f44b35a8f95fb4de3ae6a6ceb6edc94718fbcbb5436596ce22}{kStatus\_MCG\_SourceUsed}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__ksdk__common_gad76dfbb0423d0cd3a7b77cbcd9043146}{MAKE\_STATUS}}(\doxymbox{\hyperlink{group__ksdk__common_gga7ff0b98bb1341c07acefb1473b6eda29a8210c55fe061ff24e75a0f928dbfcb39}{kStatusGroup\_MCG}},\ 6U)\ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00530}00530\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00531}00531\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00533}00533\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00534}00534\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00535}\doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a3a8b628d4c7b3f71d60bb9d1cf7f217d}{00535}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a3a8b628d4c7b3f71d60bb9d1cf7f217d}{kMCG\_Osc0LostFlag}}\ \ \ =\ (1U\ <<\ 0U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00536}\doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a4595928092b42e0787be227719de6bc1}{00536}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a4595928092b42e0787be227719de6bc1}{kMCG\_Osc0InitFlag}}\ \ \ =\ (1U\ <<\ 1U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00537}\doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a776d67e50f7b1c3d1861ddad3d271f7c}{00537}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a776d67e50f7b1c3d1861ddad3d271f7c}{kMCG\_RtcOscLostFlag}}\ =\ (1U\ <<\ 4U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00538}\doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a3ff3eff8467f9d642827ef13e7590ea6}{00538}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a3ff3eff8467f9d642827ef13e7590ea6}{kMCG\_Pll0LostFlag}}\ \ \ =\ (1U\ <<\ 5U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00539}\doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a23a9cda41b3aeaf1b6efe47361186fb5}{00539}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga05f99024b2041a08f920d87f99890937a23a9cda41b3aeaf1b6efe47361186fb5}{kMCG\_Pll0LockFlag}}\ \ \ =\ (1U\ <<\ 6U),\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00540}00540\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00541}00541\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00543}00543\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00544}00544\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00545}\doxymbox{\hyperlink{group__clock_ggaf987f0b26fa368661c772c2906dfd043af97faf30a5f25b365eba69174f747ecc}{00545}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggaf987f0b26fa368661c772c2906dfd043af97faf30a5f25b365eba69174f747ecc}{kMCG\_IrclkEnable}}\ \ \ \ \ \ \ =\ MCG\_C1\_IRCLKEN\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00546}\doxymbox{\hyperlink{group__clock_ggaf987f0b26fa368661c772c2906dfd043a375d3a841aa003a5426f417149ad16a7}{00546}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ggaf987f0b26fa368661c772c2906dfd043a375d3a841aa003a5426f417149ad16a7}{kMCG\_IrclkEnableInStop}}\ =\ MCG\_C1\_IREFSTEN\_MASK\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00547}00547\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00550}00550\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00551}00551\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00552}\doxymbox{\hyperlink{group__clock_gga25bdf9bdc1201d558fa0c0df28afa8eda07370385fb540d7921f720c27fea03b2}{00552}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga25bdf9bdc1201d558fa0c0df28afa8eda07370385fb540d7921f720c27fea03b2}{kMCG\_PllEnableIndependent}}\ =\ MCG\_C5\_PLLCLKEN0\_MASK,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00558}\doxymbox{\hyperlink{group__clock_gga25bdf9bdc1201d558fa0c0df28afa8eda0cc756e800f9f42b6dd0e951882dc4fa}{00558}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga25bdf9bdc1201d558fa0c0df28afa8eda0cc756e800f9f42b6dd0e951882dc4fa}{kMCG\_PllEnableInStop}}\ =\ MCG\_C5\_PLLSTEN0\_MASK\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00559}00559\ \};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00562}\doxymbox{\hyperlink{group__clock_ga8c539517dd30d7dc40333252f2e3864a}{00562}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{group__clock_ga8c539517dd30d7dc40333252f2e3864a}{\_mcg\_mode}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00563}00563\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00564}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa8ee967eef469d6cc547704e4dc3f4369}{00564}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa8ee967eef469d6cc547704e4dc3f4369}{kMCG\_ModeFEI}}\ =\ 0U,\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00565}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa932ce3cfbf5686684cfdd69840352444}{00565}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa932ce3cfbf5686684cfdd69840352444}{kMCG\_ModeFBI}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00566}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa59f9c5fca4c72c8fac11466cec77de65}{00566}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa59f9c5fca4c72c8fac11466cec77de65}{kMCG\_ModeBLPI}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00567}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa59d00ab946f7ea8c2f89f3e739dd941f}{00567}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa59d00ab946f7ea8c2f89f3e739dd941f}{kMCG\_ModeFEE}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00568}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa95248a10f1b087e85c4cda3293d2cb6e}{00568}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa95248a10f1b087e85c4cda3293d2cb6e}{kMCG\_ModeFBE}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00569}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa7620b562cddab16cca7dab88353bcceb}{00569}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa7620b562cddab16cca7dab88353bcceb}{kMCG\_ModeBLPE}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00570}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aaf4510802c33eb22edcf5d0ce2e98bb7a}{00570}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aaf4510802c33eb22edcf5d0ce2e98bb7a}{kMCG\_ModePBE}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00571}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aad8390f279279d98dc10ddbffd2c679ad}{00571}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aad8390f279279d98dc10ddbffd2c679ad}{kMCG\_ModePEE}},\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00572}\doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa304b5f671c8e645cfc2dfd20ffb3867a}{00572}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gga8c539517dd30d7dc40333252f2e3864aa304b5f671c8e645cfc2dfd20ffb3867a}{kMCG\_ModeError}}\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00573}\doxymbox{\hyperlink{group__clock_ga4aa4056cec1895357fe7806324e2a2bb}{00573}}\ \}\ \doxymbox{\hyperlink{group__clock_ga4aa4056cec1895357fe7806324e2a2bb}{mcg\_mode\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00576}\doxymbox{\hyperlink{struct__mcg__pll__config}{00576}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__mcg__pll__config}{\_mcg\_pll\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00577}00577\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00578}\doxymbox{\hyperlink{group__clock_gae687b2dc9098aa332637c53b0743c251}{00578}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_gae687b2dc9098aa332637c53b0743c251}{enableMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00579}\doxymbox{\hyperlink{group__clock_ga44a4d5a8f442c90780c3994254a47376}{00579}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga44a4d5a8f442c90780c3994254a47376}{prdiv}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00580}\doxymbox{\hyperlink{group__clock_ga85ed4fffc21f56bfedd444512a956a77}{00580}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga85ed4fffc21f56bfedd444512a956a77}{vdiv}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00581}\doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{00581}}\ \}\ \doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{mcg\_pll\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00594}\doxymbox{\hyperlink{struct__mcg__config}{00594}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__mcg__config}{\_mcg\_config}}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00595}00595\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00596}\doxymbox{\hyperlink{group__clock_ga220ba3dc6a981fbf223307f7122eb445}{00596}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga4aa4056cec1895357fe7806324e2a2bb}{mcg\_mode\_t}}\ \doxymbox{\hyperlink{group__clock_ga220ba3dc6a981fbf223307f7122eb445}{mcgMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00597}00597\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00598}00598\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ MCGIRCCLK\ settings\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00599}\doxymbox{\hyperlink{group__clock_gad7d2fcb05fe17998b5e175f5ce79b948}{00599}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_gad7d2fcb05fe17998b5e175f5ce79b948}{irclkEnableMode}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00600}\doxymbox{\hyperlink{group__clock_ga9d8e5eb5badba20523f8b55206d57524}{00600}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga693d5d4ff2635ec4e14f5f0f528ac5b8}{mcg\_irc\_mode\_t}}\ \doxymbox{\hyperlink{group__clock_ga9d8e5eb5badba20523f8b55206d57524}{ircs}};\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00601}\doxymbox{\hyperlink{group__clock_ga550b70ae359281ad803d0b2ab5beda85}{00601}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga550b70ae359281ad803d0b2ab5beda85}{fcrdiv}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00603}00603\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ MCG\ FLL\ settings\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00604}\doxymbox{\hyperlink{group__clock_ga7867da05aed9dc4904bec9503bffda49}{00604}}\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{group__clock_ga7867da05aed9dc4904bec9503bffda49}{frdiv}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00605}\doxymbox{\hyperlink{group__clock_ga00aa4afa388b641107e3016991af807c}{00605}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ \doxymbox{\hyperlink{group__clock_ga00aa4afa388b641107e3016991af807c}{drs}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00606}\doxymbox{\hyperlink{group__clock_gab91fcac36e8952ed07e679e12c9719a9}{00606}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ \doxymbox{\hyperlink{group__clock_gab91fcac36e8952ed07e679e12c9719a9}{dmx32}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00607}\doxymbox{\hyperlink{group__clock_ga58e9af01aa579e43af4d9b98b09198a3}{00607}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}}\ \doxymbox{\hyperlink{group__clock_ga58e9af01aa579e43af4d9b98b09198a3}{oscsel}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00609}00609\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ MCG\ PLL\ settings\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00610}\doxymbox{\hyperlink{group__clock_ga15c0d8df2d57ebcf0df1dbef57fb9d79}{00610}}\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{mcg\_pll\_config\_t}}\ \doxymbox{\hyperlink{group__clock_ga15c0d8df2d57ebcf0df1dbef57fb9d79}{pll0Config}};\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00612}\doxymbox{\hyperlink{group__clock_ga08ae02d80a8028784fb267a3e4860ad7}{00612}}\ \}\ \doxymbox{\hyperlink{group__clock_ga08ae02d80a8028784fb267a3e4860ad7}{mcg\_config\_t}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00613}00613\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00614}00614\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00615}00615\ \textcolor{comment}{\ *\ API}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00616}00616\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00617}00617\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00618}00618\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00619}00619\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00620}00620\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00627}\doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{00627}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(\doxymbox{\hyperlink{group__clock_ga0298ae8edb8bdcdec546fae6f4685fe3}{clock\_ip\_name\_t}}\ name)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00628}00628\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00629}00629\ \ \ \ \ uint32\_t\ regAddr\ =\ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ace1d6947a3e5c9530f00f8c22adcd700}{SIM\_BASE}}\ +\ CLK\_GATE\_ABSTRACT\_REG\_OFFSET((uint32\_t)name);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00630}00630\ \ \ \ \ (*(\textcolor{keyword}{volatile}\ uint32\_t\ *)regAddr)\ |=\ (1UL\ <<\ CLK\_GATE\_ABSTRACT\_BITS\_SHIFT((uint32\_t)name));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00631}00631\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00638}\doxymbox{\hyperlink{group__clock_ga2e19ae1316f6be9ac9b883ad100f56d0}{00638}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga2e19ae1316f6be9ac9b883ad100f56d0}{CLOCK\_DisableClock}}(\doxymbox{\hyperlink{group__clock_ga0298ae8edb8bdcdec546fae6f4685fe3}{clock\_ip\_name\_t}}\ name)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00639}00639\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00640}00640\ \ \ \ \ uint32\_t\ regAddr\ =\ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ace1d6947a3e5c9530f00f8c22adcd700}{SIM\_BASE}}\ +\ CLK\_GATE\_ABSTRACT\_REG\_OFFSET((uint32\_t)name);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00641}00641\ \ \ \ \ (*(\textcolor{keyword}{volatile}\ uint32\_t\ *)regAddr)\ \&=\ \string~(1UL\ <<\ CLK\_GATE\_ABSTRACT\_BITS\_SHIFT((uint32\_t)name));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00642}00642\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00649}\doxymbox{\hyperlink{group__clock_ga074ebe969bc07dd936f0faf09102dae1}{00649}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga074ebe969bc07dd936f0faf09102dae1}{CLOCK\_SetLpuartClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00650}00650\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00651}00651\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ \&\ \string~SIM\_SOPT2\_LPUARTSRC\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga0210e7b2b57c2d32c6bd01a58937a5ac}{SIM\_SOPT2\_LPUARTSRC}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00652}00652\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00659}\doxymbox{\hyperlink{group__clock_ga3c2935f696683c258083576c3d0f2b33}{00659}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga3c2935f696683c258083576c3d0f2b33}{CLOCK\_SetEr32kClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00660}00660\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00661}00661\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT1\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT1\ \&\ \string~SIM\_SOPT1\_OSC32KSEL\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_gaf89520e7506a3dec707983ab729aef08}{SIM\_SOPT1\_OSC32KSEL}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00662}00662\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00663}00663\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00669}\doxymbox{\hyperlink{group__clock_gae39eaa1571f48441e52bdc1acea22233}{00669}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gae39eaa1571f48441e52bdc1acea22233}{CLOCK\_SetTraceClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00670}00670\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00671}00671\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ \&\ \string~SIM\_SOPT2\_TRACECLKSEL\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_gab41ae06e22c877ac157ce08f0afdf981}{SIM\_SOPT2\_TRACECLKSEL}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00672}00672\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00673}00673\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00679}\doxymbox{\hyperlink{group__clock_ga1e662f67045381c42dbc076fdb1b6be6}{00679}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga1e662f67045381c42dbc076fdb1b6be6}{CLOCK\_SetPllFllSelClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00680}00680\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00681}00681\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ \&\ \string~SIM\_SOPT2\_PLLFLLSEL\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga8d44d4d4557fe51bf7b212dd91af91ab}{SIM\_SOPT2\_PLLFLLSEL}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00682}00682\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00689}\doxymbox{\hyperlink{group__clock_ga63a914479847fec3004104f3b5efdc47}{00689}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga63a914479847fec3004104f3b5efdc47}{CLOCK\_SetClkOutClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00690}00690\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00691}00691\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ \&\ \string~SIM\_SOPT2\_CLKOUTSEL\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga34712f0ffce6dca092bd902ef7eb783f}{SIM\_SOPT2\_CLKOUTSEL}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00692}00692\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00693}00693\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00699}\doxymbox{\hyperlink{group__clock_ga3cfd5db08f5366a1b497f953bc8ecef7}{00699}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga3cfd5db08f5366a1b497f953bc8ecef7}{CLOCK\_SetRtcClkOutClock}}(uint32\_t\ src)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00700}00700\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00701}00701\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ =\ ((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>SOPT2\ \&\ \string~SIM\_SOPT2\_RTCCLKOUTSEL\_MASK)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_gad826a2d088a5cae1628582c992b0349e}{SIM\_SOPT2\_RTCCLKOUTSEL}}(src));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00702}00702\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00703}00703\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00711}00711\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{group__clock_ga2539fd76663a0ae15aec84b23489a070}{CLOCK\_EnableUsbfs0Clock}}(\doxymbox{\hyperlink{group__clock_ga35485750b42e56fde3a00fec6b18bba2}{clock\_usb\_src\_t}}\ src,\ uint32\_t\ freq);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00712}00712\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00717}\doxymbox{\hyperlink{group__clock_gacbfa7074773370330fb1734bbe9b9aa7}{00717}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gacbfa7074773370330fb1734bbe9b9aa7}{CLOCK\_DisableUsbfs0Clock}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00718}00718\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00719}00719\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga2e19ae1316f6be9ac9b883ad100f56d0}{CLOCK\_DisableClock}}(kCLOCK\_Usbfs0);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00720}00720\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00735}\doxymbox{\hyperlink{group__clock_ga48e9163264ab79ba4c34a1ea0cea9afa}{00735}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga48e9163264ab79ba4c34a1ea0cea9afa}{CLOCK\_SetOutDiv}}(uint32\_t\ outdiv1,\ uint32\_t\ outdiv2,\ uint32\_t\ outdiv3,\ uint32\_t\ outdiv4)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00736}00736\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00737}00737\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>CLKDIV1\ =\ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga288f4756a2240c6242f28335cc21a0a8}{SIM\_CLKDIV1\_OUTDIV1}}(outdiv1)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_gacf3906094a4539818d91cfda55ae2141}{SIM\_CLKDIV1\_OUTDIV2}}(outdiv2)\ |\ \doxymbox{\hyperlink{group__SIM__Register__Masks_gaeccf89240795d88d055b49719b820c14}{SIM\_CLKDIV1\_OUTDIV3}}(outdiv3)\ |}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__SIM__Register__Masks_ga4e380b274f15fdde19e4fbd5c341a728}{SIM\_CLKDIV1\_OUTDIV4}}(outdiv4);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00739}00739\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00740}00740\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00751}00751\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga53acae220d651789bb505c53c73ecf2b}{CLOCK\_GetFreq}}(\doxymbox{\hyperlink{group__clock_ga24298d5cfc4913a8c6970632ef6bc19f}{clock\_name\_t}}\ clockName);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00752}00752\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00758}00758\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga3360f4c91fde2fed784359caf34aefd2}{CLOCK\_GetCoreSysClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00759}00759\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00765}00765\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gad6813b4059e476de162947021939d8dc}{CLOCK\_GetPlatClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00772}00772\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga9da592c7723873abbfa51a62cbbff03d}{CLOCK\_GetBusClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00773}00773\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00779}00779\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gaae56235ff0edc6f9fb2f7046a949275f}{CLOCK\_GetFlexBusClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00780}00780\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00786}00786\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gaa64c5e2ea6e2be57582e9868b67ce7ee}{CLOCK\_GetFlashClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00787}00787\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00793}00793\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gaaf4f9f1402da431061acd99aad35bbf3}{CLOCK\_GetPllFllSelClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00794}00794\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00800}00800\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga37466efe335f7268cee76c7d01fd52f5}{CLOCK\_GetEr32kClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00807}00807\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga71ee322077be7f3c99dde5df9dfc8474}{CLOCK\_GetOsc0ErClkUndivFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00814}00814\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gaebc45953dc5ae83b02ced8a14e8857b9}{CLOCK\_GetOsc0ErClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00815}00815\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00821}00821\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga7022b7c56640e981b5159b50c51a7710}{CLOCK\_GetOsc0ErClkDivFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00822}00822\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00830}00830\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gaf72980630bd050338cffd07f7d3b4944}{CLOCK\_SetSimConfig}}(\doxymbox{\hyperlink{group__clock_gaf295a6f1e5114d7a534d5773d2997ad8}{sim\_clock\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00831}00831\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00842}\doxymbox{\hyperlink{group__clock_ga66760c2d7d5cff9225e57a30c3da1eb2}{00842}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga66760c2d7d5cff9225e57a30c3da1eb2}{CLOCK\_SetSimSafeDivs}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00843}00843\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00844}00844\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_a3dd2f4c4bfb41778902b4b5350143d9e}{SIM}}-\/>CLKDIV1\ =\ 0x01230000U;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00845}00845\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00846}00846\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00849}00849\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00858}00858\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gad9df7f4196258f0a9037088784a19380}{CLOCK\_GetOutClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00859}00859\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00869}00869\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga2485f04029528a6c2e886a84fe1f6d55}{CLOCK\_GetFllFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00870}00870\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00879}00879\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga352c4e1fcb54bc5656df3299e154a736}{CLOCK\_GetInternalRefClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00880}00880\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00889}00889\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gaf4eee5f97739d35cbc147911d1d0e603}{CLOCK\_GetFixedFreqClkFreq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00890}00890\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00899}00899\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga4aeadedc0ab54e6cae49bf9af925aacd}{CLOCK\_GetPll0Freq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00900}00900\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00902}00902\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00905}00905\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00916}\doxymbox{\hyperlink{group__clock_ga53df74476e923504d75c4ac878979492}{00916}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga53df74476e923504d75c4ac878979492}{CLOCK\_SetLowPowerEnable}}(\textcolor{keywordtype}{bool}\ enable)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00917}00917\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00918}00918\ \ \ \ \ \textcolor{keywordflow}{if}\ (enable)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00919}00919\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00920}00920\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C2\ |=\ MCG\_C2\_LP\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00921}00921\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00922}00922\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00923}00923\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00924}00924\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C2\ \&=\ \string~(uint8\_t)MCG\_C2\_LP\_MASK;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00925}00925\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00926}00926\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00927}00927\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00944}00944\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gad9ad302c9dd07e99396916073a4a5b65}{CLOCK\_SetInternalRefClkConfig}}(uint8\_t\ enableMode,\ \doxymbox{\hyperlink{group__clock_ga693d5d4ff2635ec4e14f5f0f528ac5b8}{mcg\_irc\_mode\_t}}\ ircs,\ uint8\_t\ fcrdiv);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00945}00945\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00958}00958\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gaee21d3843fbef183136690d8a5cd1c67}{CLOCK\_SetExternalRefClkConfig}}(\doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}}\ oscsel);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00959}00959\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00967}\doxymbox{\hyperlink{group__clock_gaa11392f9d8857432f18c586bb23ed2a5}{00967}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gaa11392f9d8857432f18c586bb23ed2a5}{CLOCK\_SetFllExtRefDiv}}(uint8\_t\ frdiv)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00968}00968\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00969}00969\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ =\ (uint8\_t)((\doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C1\ \&\ \string~MCG\_C1\_FRDIV\_MASK)\ |\ \doxymbox{\hyperlink{group__MCG__Register__Masks_ga39519f6e6a3b433988eca107d0e7d460}{MCG\_C1\_FRDIV}}(frdiv));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00970}00970\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00971}00971\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00983}00983\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga4e9576040785a78e76d58ee18bfd086d}{CLOCK\_EnablePll0}}(\doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{mcg\_pll\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00984}00984\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00991}\doxymbox{\hyperlink{group__clock_ga6a7580570c2db5ca90920128b001453c}{00991}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga6a7580570c2db5ca90920128b001453c}{CLOCK\_DisablePll0}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00992}00992\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00993}00993\ \ \ \ \ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_ad7ea2d93cafdbe9298ef1dd52be44f88}{MCG}}-\/>C5\ \&=\ (uint8\_t)(\string~(MCG\_C5\_PLLCLKEN0\_MASK\ |\ MCG\_C5\_PLLSTEN0\_MASK));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00994}00994\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l00995}00995\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01011}01011\ uint32\_t\ \doxymbox{\hyperlink{group__clock_ga5d00aed41e6ca9b0c49e69afbdd2ee1b}{CLOCK\_CalcPllDiv}}(uint32\_t\ refFreq,\ uint32\_t\ desireFreq,\ uint8\_t\ *prdiv,\ uint8\_t\ *vdiv);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01012}01012\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01014}01014\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01017}01017\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01025}01025\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga6112421df45c661b70d94cdbb50b0834}{CLOCK\_SetOsc0MonitorMode}}(\doxymbox{\hyperlink{group__clock_ga148b2cf79d7f6cd18d0d855b330c5bf7}{mcg\_monitor\_mode\_t}}\ mode);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01026}01026\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01034}01034\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga34a0e56b998a1feb320c9533e611a78c}{CLOCK\_SetRtcOscMonitorMode}}(\doxymbox{\hyperlink{group__clock_ga148b2cf79d7f6cd18d0d855b330c5bf7}{mcg\_monitor\_mode\_t}}\ mode);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01035}01035\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01043}01043\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga81189394ad3ecb4be5d3287ba8e9528a}{CLOCK\_SetPll0MonitorMode}}(\doxymbox{\hyperlink{group__clock_ga148b2cf79d7f6cd18d0d855b330c5bf7}{mcg\_monitor\_mode\_t}}\ mode);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01044}01044\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01071}01071\ uint32\_t\ \doxymbox{\hyperlink{group__clock_gac5611aaf0204e4964fe94eab38da77b0}{CLOCK\_GetStatusFlags}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01072}01072\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01089}01089\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gaecfc4f9575c9ee2938a1de89cac71b37}{CLOCK\_ClearStatusFlags}}(uint32\_t\ mask);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01090}01090\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01092}01092\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01097}01097\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01118}\doxymbox{\hyperlink{group__clock_ga49bf2e509c691697a70f57580d5705c1}{01118}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga49bf2e509c691697a70f57580d5705c1}{OSC\_SetExtRefClkConfig}}(\doxymbox{\hyperlink{structOSC__Type}{OSC\_Type}}\ *base,\ \doxymbox{\hyperlink{group__clock_gaa50f7235a9ef330e0ab37657c6fbd5f2}{oscer\_config\_t}}\ \textcolor{keyword}{const}\ *config)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01119}01119\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01120}01120\ \ \ \ \ uint8\_t\ reg\ =\ base-\/>\doxymbox{\hyperlink{structOSC__Type_afb099b77ea7a74fe342d9bf1335b86a6}{CR}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01121}01121\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01122}01122\ \ \ \ \ reg\ \&=\ (uint8\_t)(\string~(OSC\_CR\_ERCLKEN\_MASK\ |\ OSC\_CR\_EREFSTEN\_MASK));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01123}01123\ \ \ \ \ reg\ |=\ config-\/>\doxymbox{\hyperlink{group__clock_ga84ff5cf6c1fcf468337d5e943db1dd35}{enableMode}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01124}01124\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01125}01125\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structOSC__Type_afb099b77ea7a74fe342d9bf1335b86a6}{CR}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01126}01126\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01127}01127\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structOSC__Type_a7529bd99fdbe5280dbca2d2100f90e03}{DIV}}\ =\ \doxymbox{\hyperlink{group__OSC__Register__Masks_ga0625f5c6dbb166a7d6ef9f475efbe3d7}{OSC\_DIV\_ERPS}}(config-\/>\doxymbox{\hyperlink{group__clock_gaa78c8d8efef8d4ae97c396e50e8a1ff1}{erclkDiv}});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01128}01128\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01129}01129\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01146}\doxymbox{\hyperlink{group__clock_ga54df59d291f2c23beae934a8fb8d9867}{01146}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga54df59d291f2c23beae934a8fb8d9867}{OSC\_SetCapLoad}}(\doxymbox{\hyperlink{structOSC__Type}{OSC\_Type}}\ *base,\ uint8\_t\ capLoad)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01147}01147\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01148}01148\ \ \ \ \ uint8\_t\ reg\ =\ base-\/>\doxymbox{\hyperlink{structOSC__Type_afb099b77ea7a74fe342d9bf1335b86a6}{CR}};}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01149}01149\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01150}01150\ \ \ \ \ reg\ \&=\ (uint8\_t)(\string~(OSC\_CR\_SC2P\_MASK\ |\ OSC\_CR\_SC4P\_MASK\ |\ OSC\_CR\_SC8P\_MASK\ |\ OSC\_CR\_SC16P\_MASK));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01151}01151\ \ \ \ \ reg\ |=\ capLoad;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01152}01152\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01153}01153\ \ \ \ \ base-\/>\doxymbox{\hyperlink{structOSC__Type_afb099b77ea7a74fe342d9bf1335b86a6}{CR}}\ =\ reg;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01154}01154\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01155}01155\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01163}01163\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga7fd566b301526150b4e2be076006029f}{CLOCK\_InitOsc0}}(\doxymbox{\hyperlink{group__clock_ga5a46989b0f514536b1809c59a45d603f}{osc\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01164}01164\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01170}01170\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga559f868eef1e9d1e37450a57ce4902af}{CLOCK\_DeinitOsc0}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01171}01171\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01172}01172\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01173}01173\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01178}01178\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01184}\doxymbox{\hyperlink{group__clock_ga4e6eaa25aab1a10fbf0486551457eb5e}{01184}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga4e6eaa25aab1a10fbf0486551457eb5e}{CLOCK\_SetXtal0Freq}}(uint32\_t\ freq)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01185}01185\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01186}01186\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga70a4a6ffb6c5a7a271aad89fe482bafc}{g\_xtal0Freq}}\ =\ freq;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01187}01187\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01188}01188\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01194}\doxymbox{\hyperlink{group__clock_gaa61c8a2004f261f638a90767ee5e5764}{01194}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_gaa61c8a2004f261f638a90767ee5e5764}{CLOCK\_SetXtal32Freq}}(uint32\_t\ freq)}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01195}01195\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01196}01196\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga170d2fd7c6b439b72e0f73b4d73443af}{g\_xtal32Freq}}\ =\ freq;}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01197}01197\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01198}01198\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01199}01199\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01204}01204\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01210}01210\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga212278275a330fe9a8566e5e567d3544}{CLOCK\_SetSlowIrcFreq}}(uint32\_t\ freq);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01211}01211\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01217}01217\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__clock_ga23036d44f1c39fe7ee11b8b5c4f3aa65}{CLOCK\_SetFastIrcFreq}}(uint32\_t\ freq);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01218}01218\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01219}01219\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01224}01224\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01243}01243\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga512af39376d209b5536b522ca5c57e7b}{CLOCK\_TrimInternalRefClk}}(uint32\_t\ extFreq,\ uint32\_t\ desireFreq,\ uint32\_t\ *actualFreq,\ \doxymbox{\hyperlink{group__clock_gae7437ec05ccdc9cf47d7130e26cd2f41}{mcg\_atm\_select\_t}}\ atms);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01244}01244\ \textcolor{comment}{/*\ @\}\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01245}01245\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01248}01248\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01256}01256\ \doxymbox{\hyperlink{group__clock_ga4aa4056cec1895357fe7806324e2a2bb}{mcg\_mode\_t}}\ \doxymbox{\hyperlink{group__clock_ga04a16db417d544e1fe49bf2ba58f9ec4}{CLOCK\_GetMode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01257}01257\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01273}01273\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gab822037c5956542631165b6d1d1f6095}{CLOCK\_SetFeiMode}}(\doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01274}01274\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01290}01290\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gaf1c10796ccee24f273e8cc709e87cc66}{CLOCK\_SetFeeMode}}(uint8\_t\ frdiv,\ \doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01291}01291\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01308}01308\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga1894a8ac117794047c960f6e96d7ab81}{CLOCK\_SetFbiMode}}(\doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01309}01309\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01325}01325\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gaa6ad7428feba9f22a7cbb13b627211f9}{CLOCK\_SetFbeMode}}(uint8\_t\ frdiv,\ \doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01326}01326\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01336}01336\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gafc01b779c26bdfb8cd7c2a59e9bc2989}{CLOCK\_SetBlpiMode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01337}01337\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01347}01347\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gabb234c77b966702cb632862b25012890}{CLOCK\_SetBlpeMode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01348}01348\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01368}01368\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga8d28d98aa496285b9b941056a4d3c537}{CLOCK\_SetPbeMode}}(\doxymbox{\hyperlink{group__clock_ga1fc88117f948231ea3594bfd8ff41f61}{mcg\_pll\_clk\_select\_t}}\ pllcs,\ \doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{mcg\_pll\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01369}01369\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01382}01382\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gaef140d2b73e486d8362569cde52caaab}{CLOCK\_SetPeeMode}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01383}01383\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01400}01400\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga2608ce13724a29d6de5c78779f042c05}{CLOCK\_ExternalModeToFbeModeQuick}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01401}01401\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01418}01418\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gad60a82bdcf832b1e7aee25ef98c5d8eb}{CLOCK\_InternalModeToFbiModeQuick}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01419}01419\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01435}01435\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gafc7d39cd43f75b8db61c9f6d49954b65}{CLOCK\_BootToFeiMode}}(\doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01436}01436\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01452}01452\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gaee05a60dfa040a2fdab5069b4bd4d1de}{CLOCK\_BootToFeeMode}}(}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01453}01453\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}}\ oscsel,\ uint8\_t\ frdiv,\ \doxymbox{\hyperlink{group__clock_ga45c260abf072faa56c5827a02467e2bd}{mcg\_dmx32\_t}}\ dmx32,\ \doxymbox{\hyperlink{group__clock_gaf2e11bee80b5f36afb339a3972574e98}{mcg\_drs\_t}}\ drs,\ \textcolor{keywordtype}{void}\ (*fllStableDelay)(\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01454}01454\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01468}01468\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga4df5cc7036a2e12f51687d9e0977b6b1}{CLOCK\_BootToBlpiMode}}(uint8\_t\ fcrdiv,\ \doxymbox{\hyperlink{group__clock_ga693d5d4ff2635ec4e14f5f0f528ac5b8}{mcg\_irc\_mode\_t}}\ ircs,\ uint8\_t\ ircEnableMode);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01469}01469\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01481}01481\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga0d9ef795128d82293d12827b7aa29ec0}{CLOCK\_BootToBlpeMode}}(\doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}}\ oscsel);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01482}01482\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01496}01496\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_gae574e8251548228209ccdc9b37d8198f}{CLOCK\_BootToPeeMode}}(\doxymbox{\hyperlink{group__clock_gab6d0b226b0a262b3e48c6173e8e90210}{mcg\_oscsel\_t}}\ oscsel,\ \doxymbox{\hyperlink{group__clock_ga1fc88117f948231ea3594bfd8ff41f61}{mcg\_pll\_clk\_select\_t}}\ pllcs,\ \doxymbox{\hyperlink{group__clock_ga06c8c72409b5034724e0819642531531}{mcg\_pll\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01497}01497\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01512}01512\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__clock_ga7d23067cf550727e61cf9939879b7e82}{CLOCK\_SetMcgConfig}}(\doxymbox{\hyperlink{group__clock_ga08ae02d80a8028784fb267a3e4860ad7}{mcg\_config\_t}}\ \textcolor{keyword}{const}\ *config);}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01513}01513\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01515}01515\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01516}01516\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01517}01517\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01518}01518\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01519}01519\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01521}01521\ }
+\DoxyCodeLine{\Hypertarget{fsl__clock_8h_source_l01522}01522\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_FSL\_CLOCK\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

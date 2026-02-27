@@ -46,6 +46,28 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_UART1_RX_PIN_MASK (1U << 1U)      /*!<@brief PORT pin mask */
                                                          /* @} */
 
+/*! @name PORTD0 (number 57), PTD0
+  @{ */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_PTD0_PORT PORTD               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_PTD0_PIN 0U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_PTD0_PIN_MASK (1U << 0U)      /*!<@brief PORT pin mask */
+                                                     /* @} */
+
+/*! @name PORTB19 (number 42), GPIOB19
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_GPIOB19_GPIO GPIOB                /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_GPIOB19_GPIO_PIN_MASK (1U << 19U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_GPIOB19_PORT PORTB                /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_GPIOB19_PIN 19U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_GPIOB19_PIN_MASK (1U << 19U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
  *

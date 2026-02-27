@@ -1,0 +1,75 @@
+\doxysection{fsl\+\_\+dmamux.\+c}
+\hypertarget{fsl__dmamux_8c_source}{}\label{fsl__dmamux_8c_source}\index{drivers/fsl\_dmamux.c@{drivers/fsl\_dmamux.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2017\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}fsl\_dmamux.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00011}00011\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00012}00012\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00013}00013\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00015}00015\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00016}00016\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00017}00017\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.dmamux"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00018}00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00020}00020\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00021}00021\ \textcolor{comment}{\ *\ Prototypes}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00022}00022\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00029}00029\ \textcolor{keyword}{static}\ uint32\_t\ DMAMUX\_GetInstance(\doxymbox{\hyperlink{structDMAMUX__Type}{DMAMUX\_Type}}\ *base);}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00031}00031\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00032}00032\ \textcolor{comment}{\ *\ Variables}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00033}00033\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00036}00036\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{structDMAMUX__Type}{DMAMUX\_Type}}\ *\textcolor{keyword}{const}\ s\_dmamuxBases[]\ =\ \doxymbox{\hyperlink{MK22F51212__COMMON_8h_aad218c12978071501dc2899f0624de4b}{DMAMUX\_BASE\_PTRS}};}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00038}00038\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)\ \&\&\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00040}00040\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__clock_ga0298ae8edb8bdcdec546fae6f4685fe3}{clock\_ip\_name\_t}}\ s\_dmamuxClockName[]\ =\ \doxymbox{\hyperlink{group__clock_ga28b35d2fe49bfffe6e5e41fbdadfc6ed}{DMAMUX\_CLOCKS}};}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00041}00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00043}00043\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00044}00044\ \textcolor{comment}{\ *\ Code}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00045}00045\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00046}00046\ \textcolor{keyword}{static}\ uint32\_t\ DMAMUX\_GetInstance(\doxymbox{\hyperlink{structDMAMUX__Type}{DMAMUX\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00048}00048\ \ \ \ \ uint32\_t\ instance;}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00050}00050\ \ \ \ \ \textcolor{comment}{/*\ Find\ the\ instance\ index\ from\ base\ address\ mappings.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{for}\ (instance\ =\ 0;\ instance\ <\ \doxymbox{\hyperlink{group__ksdk__common_ga6242a25f9d996f0cc4f4cdb911218b75}{ARRAY\_SIZE}}(s\_dmamuxBases);\ instance++)}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__ksdk__common_ga48714099c4ca9d174b706011312dab72}{MSDK\_REG\_SECURE\_ADDR}}(s\_dmamuxBases[instance])\ ==\ \doxymbox{\hyperlink{group__ksdk__common_ga48714099c4ca9d174b706011312dab72}{MSDK\_REG\_SECURE\_ADDR}}(base))}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00059}00059\ \ \ \ \ assert(instance\ <\ \doxymbox{\hyperlink{group__ksdk__common_ga6242a25f9d996f0cc4f4cdb911218b75}{ARRAY\_SIZE}}(s\_dmamuxBases));}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00072}\doxymbox{\hyperlink{group__dmamux_ga850545ac61a004df8ca312db2ca9db73}{00072}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__dmamux_ga850545ac61a004df8ca312db2ca9db73}{DMAMUX\_Init}}(\doxymbox{\hyperlink{structDMAMUX__Type}{DMAMUX\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00073}00073\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00074}00074\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)\ \&\&\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00075}00075\ \ \ \ \ \doxymbox{\hyperlink{group__clock_gae9cd93c6513a127de94f7568721c7de6}{CLOCK\_EnableClock}}(s\_dmamuxClockName[DMAMUX\_GetInstance(base)]);}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00076}00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00086}\doxymbox{\hyperlink{group__dmamux_gab663257d094b9b7b6fa1b894fbf8000b}{00086}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__dmamux_gab663257d094b9b7b6fa1b894fbf8000b}{DMAMUX\_Deinit}}(\doxymbox{\hyperlink{structDMAMUX__Type}{DMAMUX\_Type}}\ *base)}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00087}00087\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00088}00088\ \textcolor{preprocessor}{\#if\ !(defined(FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)\ \&\&\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL)}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00089}00089\ \ \ \ \ \doxymbox{\hyperlink{group__clock_ga2e19ae1316f6be9ac9b883ad100f56d0}{CLOCK\_DisableClock}}(s\_dmamuxClockName[DMAMUX\_GetInstance(base)]);}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00090}00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FSL\_SDK\_DISABLE\_DRIVER\_CLOCK\_CONTROL\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsl__dmamux_8c_source_l00091}00091\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,57 @@
+\doxysection{CLI Utilities Module }
+\hypertarget{group__CLI__Utilities__Module}{}\label{group__CLI__Utilities__Module}\index{CLI Utilities Module@{CLI Utilities Module}}
+
+
+Utility functions to support the Command Line Interface.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\+\_\+get\+\_\+parameter\+\_\+value\+\_\+string}} (char \texorpdfstring{$\ast$}{*}parameter\+Identifier, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String, uint8\+\_\+t \texorpdfstring{$\ast$}{*}parameter\+Found, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}pc\+Parameter, Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}parameter\+String\+Length)
+\begin{DoxyCompactList}\small\item\em Retrieves the value of a specified parameter from a command string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility functions to support the Command Line Interface. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__CLI__Utilities__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}\index{CLI Utilities Module@{CLI Utilities Module}!CLU\_get\_parameter\_value\_string@{CLU\_get\_parameter\_value\_string}}
+\index{CLU\_get\_parameter\_value\_string@{CLU\_get\_parameter\_value\_string}!CLI Utilities Module@{CLI Utilities Module}}
+\doxysubsubsection{\texorpdfstring{CLU\_get\_parameter\_value\_string()}{CLU\_get\_parameter\_value\_string()}}
+{\footnotesize\ttfamily \label{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f} 
+status\+\_\+t CLU\+\_\+get\+\_\+parameter\+\_\+value\+\_\+string (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{parameter\+Identifier}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{parameter\+Found}{, }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{pc\+Parameter}{, }\item[{Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}}]{parameter\+String\+Length}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the value of a specified parameter from a command string. 
+
+This function searches for a parameter in the given command string that matches the specified parameter identifier. If the parameter is found, its value is returned. If the parameter is not found, the function indicates this and returns a success status.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em parameter\+Identifier} & The identifier of the parameter to search for. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em pc\+Command\+String} & The command string containing the parameters. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em parameter\+Found} & Pointer to a variable that will be set to 1 if the parameter is found, or 0 otherwise. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pc\+Parameter} & Pointer to a variable that will point to the first char of the parameter if found. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em parameter\+String\+Length} & Pointer to a variable that will hold the length of the parameter value string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the operation completes successfully, even if the parameter is not found. k\+Status\+\_\+\+Fail if an error occurs during the operation.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The function uses Free\+RTOS\+\_\+\+CLIGet\+Parameter to parse the command string. If a parameter is found without a value, the parameter\+Found can be treated as a boolean flag indicating the presence of the parameter. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{cli__utilities_8c_source_l00039}{39}} of file \doxymbox{\hyperlink{cli__utilities_8c_source}{cli\+\_\+utilities.\+c}}.
+

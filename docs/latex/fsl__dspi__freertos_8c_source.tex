@@ -1,0 +1,113 @@
+\doxysection{fsl\+\_\+dspi\+\_\+freertos.\+c}
+\hypertarget{fsl__dspi__freertos_8c_source}{}\label{fsl__dspi__freertos_8c_source}\index{drivers/freertos/fsl\_dspi\_freertos.c@{drivers/freertos/fsl\_dspi\_freertos.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015,\ Freescale\ Semiconductor,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ 2016-\/2017\ NXP}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00004}00004\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}fsl\_dspi\_freertos.h"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00011}00011\ \textcolor{comment}{/*\ Component\ ID\ definition,\ used\ by\ tools.\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00012}00012\ \textcolor{preprocessor}{\#ifndef\ FSL\_COMPONENT\_ID}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00013}00013\ \textcolor{preprocessor}{\#define\ FSL\_COMPONENT\_ID\ "{}platform.drivers.dspi\_freertos"{}}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00016}00016\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DSPI\_RTOS\_Callback(\doxymbox{\hyperlink{structSPI__Type}{SPI\_Type}}\ *base,\ \doxymbox{\hyperlink{group__dspi__driver_gaf099ad07783e86fb0f7806c4e7d62a92}{dspi\_master\_handle\_t}}\ *drv\_handle,\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status,\ \textcolor{keywordtype}{void}\ *userData)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00018}00018\ \ \ \ \ dspi\_rtos\_handle\_t\ *handle\ =\ (dspi\_rtos\_handle\_t\ *)userData;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00019}00019\ \ \ \ \ BaseType\_t\ reschedule\ =\ pdFALSE;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00020}00020\ \ \ \ \ handle-\/>async\_status\ =\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00021}00021\ \ \ \ \ (void)xSemaphoreGiveFromISR(handle-\/>event,\ \&reschedule);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00022}00022\ \ \ \ \ portYIELD\_FROM\_ISR(reschedule);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00036}\doxymbox{\hyperlink{group__dspi__freertos__driver_ga991f39c326c4343df80ec09d759cb28c}{00036}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__dspi__freertos__driver_ga991f39c326c4343df80ec09d759cb28c}{DSPI\_RTOS\_Init}}(dspi\_rtos\_handle\_t\ *handle,}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structSPI__Type}{SPI\_Type}}\ *base,}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__dspi__driver_gae28f1221ec3ce6efd7054c1e0b63b272}{dspi\_master\_config\_t}}\ *masterConfig,}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ srcClock\_Hz)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{kStatus\_InvalidArgument}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (base\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a9743ab3bec5065667c0b12510317e76c}{kStatus\_InvalidArgument}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00051}00051\ \ \ \ \ (void)memset(handle,\ 0,\ \textcolor{keyword}{sizeof}(dspi\_rtos\_handle\_t));}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00053}00053\ \textcolor{preprocessor}{\#if\ (configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00054}00054\ \ \ \ \ handle-\/>mutex\ =\ xSemaphoreCreateMutexStatic(\&handle-\/>mutexBuffer);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00055}00055\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00056}00056\ \ \ \ \ handle-\/>mutex\ =\ xSemaphoreCreateMutex();}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00057}00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>mutex\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00062}00062\ \textcolor{preprocessor}{\#if\ (configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1)}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00063}00063\ \ \ \ \ handle-\/>event\ =\ xSemaphoreCreateBinaryStatic(\&handle-\/>semaphoreBuffer);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00064}00064\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00065}00065\ \ \ \ \ handle-\/>event\ =\ xSemaphoreCreateBinary();}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00066}00066\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>event\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00068}00068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ vSemaphoreDelete(handle-\/>mutex);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a8692e71089c7e81bd5f4503ff55035db}{kStatus\_Fail}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00073}00073\ \ \ \ \ handle-\/>base\ =\ base;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00075}00075\ \ \ \ \ \doxymbox{\hyperlink{group__dspi__driver_gaadf23f732f4c1b61d6634bd17b1a36d7}{DSPI\_MasterInit}}(handle-\/>base,\ masterConfig,\ srcClock\_Hz);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00076}00076\ \ \ \ \ \doxymbox{\hyperlink{group__dspi__driver_ga63e04b92d99d795cf84df62379765a91}{DSPI\_MasterTransferCreateHandle}}(handle-\/>base,\ \&handle-\/>drv\_handle,\ DSPI\_RTOS\_Callback,\ (\textcolor{keywordtype}{void}\ *)handle);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00088}\doxymbox{\hyperlink{group__dspi__freertos__driver_gaad03d7e97b27114bde3b5fa74c5caf2d}{00088}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__dspi__freertos__driver_gaad03d7e97b27114bde3b5fa74c5caf2d}{DSPI\_RTOS\_Deinit}}(dspi\_rtos\_handle\_t\ *handle)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00089}00089\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00090}00090\ \ \ \ \ \doxymbox{\hyperlink{group__dspi__driver_gaa669bb8f6438b1d4f7ec38ba180653fa}{DSPI\_Deinit}}(handle-\/>base);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00091}00091\ \ \ \ \ vSemaphoreDelete(handle-\/>event);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00092}00092\ \ \ \ \ vSemaphoreDelete(handle-\/>mutex);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00095}00095\ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00106}\doxymbox{\hyperlink{group__dspi__freertos__driver_ga0cde6422d3e35956a6ee0505783d357b}{00106}}\ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ \doxymbox{\hyperlink{group__dspi__freertos__driver_ga0cde6422d3e35956a6ee0505783d357b}{DSPI\_RTOS\_Transfer}}(dspi\_rtos\_handle\_t\ *handle,\ \doxymbox{\hyperlink{group__dspi__driver_gabf2f85110e09409e49b42d122f94e592}{dspi\_transfer\_t}}\ *transfer)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00107}00107\ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00108}00108\ \ \ \ \ \doxymbox{\hyperlink{group__ksdk__common_gaaabdaf7ee58ca7269bd4bf24efcde092}{status\_t}}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00110}00110\ \ \ \ \ \textcolor{comment}{/*\ Lock\ resource\ mutex\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(handle-\/>mutex,\ portMAX\_DELAY)\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00112}00112\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__dspi__driver_gga186fcac0c06a158b9d0166ea0f2a6b62ad5ecc8346da4119b8609c6bcb4c57e40}{kStatus\_DSPI\_Busy}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00116}00116\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__dspi__driver_gad3dc7b85b448ce6e16e227d7bf3769d6}{DSPI\_MasterTransferNonBlocking}}(handle-\/>base,\ \&handle-\/>drv\_handle,\ transfer);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__ksdk__common_gga2de26871206ca53c1e0de28629a20f02a829bee76c6b02225d9c891ae8ef70881}{kStatus\_Success}})}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00118}00118\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ (void)xSemaphoreGive(handle-\/>mutex);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00123}00123\ \ \ \ \ \textcolor{comment}{/*\ Wait\ for\ transfer\ to\ finish\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(handle-\/>event,\ portMAX\_DELAY)\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00125}00125\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__dspi__driver_gga186fcac0c06a158b9d0166ea0f2a6b62aaae2ba17a6a622142816b0ffec7b9f7a}{kStatus\_DSPI\_Error}};}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00129}00129\ \ \ \ \ \textcolor{comment}{/*\ Unlock\ resource\ mutex\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00130}00130\ \ \ \ \ (void)xSemaphoreGive(handle-\/>mutex);}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00132}00132\ \ \ \ \ \textcolor{comment}{/*\ Return\ status\ captured\ by\ callback\ function\ */}}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00133}00133\ \ \ \ \ \textcolor{keywordflow}{return}\ handle-\/>async\_status;}
+\DoxyCodeLine{\Hypertarget{fsl__dspi__freertos_8c_source_l00134}00134\ \}}
+
+\end{DoxyCode}
