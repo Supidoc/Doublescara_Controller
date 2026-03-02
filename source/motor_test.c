@@ -76,13 +76,12 @@ void MTT_task(void* pvParameters)
 
     config.acceleration = 4000.0;
     config.dirGPIO      = GPIOB;
-    config.dirPin       = 19;
+    config.dirPin       = 2;
     config.dirPort      = PORTB;
     config.endVelocity  = 360.0;
     config.ftmBase      = FTM3;
     config.ftmChannel   = kFTM_Chnl_0;
     config.label        = "motor0";
-    config.stepAngle    = 1.8;
     config.stepGPIO     = GPIOD;
     config.stepPin      = 0;
     config.stepPort     = PORTD;

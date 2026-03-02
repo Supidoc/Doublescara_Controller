@@ -158,10 +158,8 @@ typedef struct _STP_StepperHandle
     uint8_t    dirPin;             /**< Direction output pin number */
     port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
-    double  acceleration;          /**< Acceleration in degrees/s² */
-    double  stepAngle;             /**< Step angle in degrees */
-    double  microstepping;         /**< Number of microsteps per full step */
-    double  endVelocity;           /**< Final velocity in degrees/s */
+    double  acceleration;          /**< Acceleration in steps/s² */
+    double  endVelocity;           /**< Final velocity in steps/s */
     const char*                 label; /**< Identifier label for logging (e.g., "Motor_X") */
     STP_StepperMovementHandle_t movementHandle; /**< Current movement state and parameters */
 } STP_StepperHandle_t;
@@ -186,9 +184,8 @@ typedef struct _STP_StepperConfig
     uint8_t    dirPin;             /**< Direction output pin number */
     port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
-    double  acceleration;          /**< Acceleration in degrees/s² */
-    double  stepAngle;             /**< Step angle in degrees */
-    double  endVelocity;           /**< Final velocity in degrees/s */
+    double  acceleration;          /**< Acceleration in steps/s² */
+    double  endVelocity;           /**< Final velocity in steps/s */
     const char* label;             /**< Identifier label for logging (e.g., "Motor_X") */
 } STP_StepperConfig_t;
 

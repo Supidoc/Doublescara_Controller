@@ -126,6 +126,11 @@ QueueHandle_t configQueue = NULL;
 
 STP_StepperHandle_t* FTM3_ISR_handle_cache[8];
 
+static uint8_t isrDebugPin = 1;
+static GPIO_Type* isrDebugGPIO = GPIOA;
+static PORT_Type* isrDebugPort = PORTA;
+
+
 /**
  * @brief Static pool of acceleration lookup tables.
  * Shared by all stepper motor instances to avoid dynamic allocation.
@@ -163,6 +168,15 @@ status_t STP_init()
 
     FTM3->MOD = 0xFFFF;
     FTM3->SC  = FTM_SC_CLKS(2) | FTM_SC_PS(0);
+
+    gpio_pin_config_t config;
+    config.pinDirection = kGPIO_DigitalOutput;
+
+    GPIO_PinInit(isrDebugGPIO, isrDebugPin, &config);
+
+    PORT_SetPinMux(isrDebugPort, isrDebugPin, kPORT_MuxAlt1);
+    GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
+
     return kStatus_Success;
 }
 
@@ -253,6 +267,7 @@ void FTM3_IRQHandler(void)
     /* Reading all interrupt flags of status register */
     intStatus = FTM_GetStatusFlags(FTM3);
     FTM_ClearStatusFlags(FTM3, intStatus);
+    GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 1);
 
     /* Place your code here */
     for (uint8_t i = 0; i < 8; i++)
@@ -377,6 +392,9 @@ void FTM3_IRQHandler(void)
         }
     }
 
+    GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
+
+
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
    Store immediate overlapping exception return operation might vector to incorrect interrupt. */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
@@ -437,12 +455,10 @@ static status_t init_handle(const STP_StepperConfig_t* config)
     handle->dirLogicHighClockwise = config->dirLogicHighClockwise;
 
     handle->acceleration = config->acceleration;
-    handle->stepAngle    = config->stepAngle;
     handle->endVelocity  = config->endVelocity;
     handle->label        = config->label;
     handle->dirMux       = config->dirMux;
 
-    handle->microstepping = 4;
 
     if (reset_movement_handle(&handle->movementHandle) != kStatus_Success)
         return kStatus_Fail;
@@ -581,8 +597,8 @@ static status_t plan_motion_profile(STP_StepperHandle_t* handle)
 static inline void calculate_step_profile(STP_StepperHandle_t* handle)
 {
     uint32_t accelSteps =
-        (uint32_t)((handle->endVelocity * handle->endVelocity * handle->microstepping) /
-                   (2 * handle->acceleration * handle->stepAngle));
+        (uint32_t)((handle->endVelocity * handle->endVelocity) /
+                   (2 * handle->acceleration));
 
     if (accelSteps * 2 >= handle->movementHandle.totalSteps)
     {
@@ -614,10 +630,10 @@ static inline void calculate_delays(STP_StepperHandle_t* handle, uint16_t* stepZ
 {
     *stepZeroDelay =
         (uint16_t)(0.676 * STP_TIMER_FREQ_HZ *
-                   sqrt(2.0 * handle->stepAngle / (handle->acceleration * handle->microstepping)));
+                   sqrt(2.0 / (handle->acceleration)));
 
-    *endVelocityDelay = (uint16_t)(handle->stepAngle * STP_TIMER_FREQ_HZ /
-                                   (handle->endVelocity * handle->microstepping));
+    *endVelocityDelay = (uint16_t)(STP_TIMER_FREQ_HZ /
+                                   (handle->endVelocity));
 
     handle->movementHandle.endVelocityDelay = *endVelocityDelay;
 }
