@@ -27,6 +27,7 @@
 #include "motor_test.h"
 #include "step.h"
 #include "tmc2209.h"
+#include "motor.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -56,12 +57,41 @@ static status_t create_task(TaskFunction_t taskFunction, const char* taskName, u
  *******************************************/
 void APP_init(void)
 {
-    DISK_init();
-    CLI_init();
-    LOG_init();
-    STP_init();
-    TMC_init();
-    MTT_init();
+    if (DISK_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (CLI_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (LOG_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (STP_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (TMC_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (MTT_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (MTR_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
 }
 
 void APP_run(void)
@@ -92,6 +122,12 @@ void APP_run(void)
             ;
     }
     if (create_task(MTT_task, "MTT_Task", configMINIMAL_STACK_SIZE + 200,
+                    configMAX_PRIORITIES - 5) != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 200,
                     configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)

@@ -78,7 +78,7 @@
  * Each stepper movement requires one table from the pool.
  * If all tables are in use, new movement commands will fail until a table is freed.
  */
-#define STP_ACCEL_TABLE_POOL_SIZE 4
+#define STP_ACCEL_TABLE_POOL_SIZE 8
 
 /***************************
  *     Public Typedefs	   *
@@ -136,6 +136,7 @@ typedef struct _STP_StepperMovementHandle
     uint16_t accelInterpFactor;           /**< Number of steps to repeat each table entry */
     uint16_t accelInterpCounter; /**< Counter for interpolation factor (0 to interpFactor-1) */
     uint32_t accelTableIndex;    /**< Current index into acceleration table */
+    uint8_t  waitForStart; /**< Flag: 1 if movement is planned but awaiting sync start trigger */
 } STP_StepperMovementHandle_t;
 
 /**
@@ -158,9 +159,11 @@ typedef struct _STP_StepperHandle
     uint8_t    dirPin;             /**< Direction output pin number */
     port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
-    double  acceleration;          /**< Acceleration in steps/s² */
-    double  endVelocity;           /**< Final velocity in steps/s */
-    const char*                 label; /**< Identifier label for logging (e.g., "Motor_X") */
+    int32_t absolutePosition;      /**< The absolute Position of the StepperMotor in steps. Positive
+                                      Values are counterclockwise*/
+    double                      acceleration; /**< Acceleration in steps/s² */
+    double                      endVelocity;  /**< Final velocity in steps/s */
+    const char*                 label;        /**< Identifier label for logging (e.g., "Motor_X") */
     STP_StepperMovementHandle_t movementHandle; /**< Current movement state and parameters */
 } STP_StepperHandle_t;
 
@@ -237,10 +240,11 @@ void STP_task(void* pvParameters);
  *
  * This function adds a movement command to the queue for the specified stepper.
  * The movement will be executed asynchronously by the STP_task function.
+ * The direction is encoded in the sign of the steps parameter:
+ * positive values move counter-clockwise (CCW), negative values move clockwise (CW).
  *
  * @param[in] handle Pointer to the stepper motor handle.
- * @param[in] stepCount Number of steps to move.
- * @param[in] direction Direction of movement (clockwise or counterclockwise).
+ * @param[in] steps Number of steps to move (positive=CCW, negative=CW).
  *
  * @note This function is TASK-SAFE and can be called from any task context.
  * @note The actual movement occurs in the STP_task() and is non-blocking.
@@ -251,8 +255,7 @@ void STP_task(void* pvParameters);
  *
  * @see STP_Direction_t
  */
-status_t STP_move_relative(STP_StepperHandle_t* handle, uint32_t stepCount,
-                           STP_Direction_t direction);
+status_t STP_move_relative(STP_StepperHandle_t* handle, int32_t steps);
 
 /**
  * @brief Initializes a stepper motor with the provided configuration.
@@ -292,7 +295,7 @@ status_t STP_init_stepper(STP_StepperConfig_t config);
  * @see STP_init_stepper()
  * @see STP_StepperHandle_t
  */
-status_t STP_get_handle_by_id(const char* label, STP_StepperHandle_t** handle);
+status_t STP_get_handle_by_label(const char* label, STP_StepperHandle_t** handle);
 
 /**
  * @brief Stops a stepper motor movement.
@@ -314,6 +317,12 @@ status_t STP_get_handle_by_id(const char* label, STP_StepperHandle_t** handle);
  * @see STP_move_relative()
  */
 status_t STP_stop(STP_StepperHandle_t* handle, uint8_t doDeceleration);
+
+status_t STP_reset_absolute_position(STP_StepperHandle_t* handle);
+
+status_t STP_move_relative_prepare(STP_StepperHandle_t* handle, int32_t steps);
+
+status_t STP_trigger_prepared_moves(void);
 
 /** @} */ // End of STEP_Module
 

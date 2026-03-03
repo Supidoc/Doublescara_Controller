@@ -100,7 +100,7 @@ void MTT_task(void* pvParameters)
     tmcHandle.uartHandle        = &UART1_uart_handle;
     tmcHandle.uartRTOSHandle    = &UART1_rtos_handle;
 
-    if (TMC_init_default(&tmcHandle) == kStatus_Success)
+    if (TMC_init_default(&tmcHandle, NULL) == kStatus_Success)
         LOG_DEBUG("Configured TMC2209 driver: tmc0");
 
     for (;;)
@@ -116,8 +116,6 @@ void MTT_task(void* pvParameters)
 BaseType_t motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
 {
     STP_StepperHandle_t* handle;
-    uint32_t             stepCount;
-    STP_Direction_t      direction;
     char                 logMsg[80];
 
     uint8_t     parameterFound;
@@ -135,7 +133,7 @@ BaseType_t motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen, const char* p
     }
     else
     {
-        if (STP_get_handle_by_id(pcParameter, &handle) != kStatus_Success)
+        if (STP_get_handle_by_label(pcParameter, &handle) != kStatus_Success)
         {
             snprintf(logMsg, sizeof(logMsg), "Invalid motor ID requested: %.*s",
                      (int)parameterStringLength, pcParameter);
@@ -163,7 +161,6 @@ BaseType_t motor_move_command(char* pcWriteBuffer, size_t xWriteBufferLen,
     STP_StepperHandle_t* handle;
     uint32_t             stepCount;
     STP_Direction_t      direction;
-    char                 logMsg[80];
 
     uint8_t     parameterFound;
     const char* pcParameter = NULL;
@@ -178,7 +175,7 @@ BaseType_t motor_move_command(char* pcWriteBuffer, size_t xWriteBufferLen,
     }
     else
     {
-        if (STP_get_handle_by_id(pcParameter, &handle) != kStatus_Success)
+        if (STP_get_handle_by_label(pcParameter, &handle) != kStatus_Success)
         {
             strncpy(pcWriteBuffer, "Invalid motorId", strlen("Invalid motorId") + 1);
             return pdFALSE;
@@ -223,6 +220,7 @@ BaseType_t motor_move_command(char* pcWriteBuffer, size_t xWriteBufferLen,
         }
     }
 
-    STP_move_relative(handle, stepCount, direction);
+    int32_t stepsSigned = (direction == STP_COUNTERCLOCKWISE) ? stepCount : -stepCount;
+    STP_move_relative(handle, stepsSigned);
     return pdFALSE;
 }

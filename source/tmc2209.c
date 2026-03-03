@@ -31,16 +31,22 @@
 
 typedef enum _TMC_CommandType
 {
-    TMC_CMD_DEFAULT_INIT
+    TMC_CMD_DEFAULT_INIT,
+    TMC_CMD_SET_MICROSTEPPING
 } TMC_CommandType_t;
 
 typedef struct _TMC_CommandQueueItem
 {
     TMC_CommandType_t commandType;
     TMC_Handle_t*     handle;
+    TaskHandle_t      taskHandle; /**< Task to notify when command completes */
     union
     {
         uint8_t placeholder;
+        struct
+        {
+            TMC_MICROSTEPPING_t microstepping;
+        } setMicrostepping;
     } data;
 } TMC_CommandQueueItem_t;
 
@@ -57,7 +63,9 @@ static inline void build_write_package(TMC_Write_Datagram_t* datagram, uint8_t* 
 static inline void calc_CRC(uint8_t* datagram, size_t datagramLength);
 static uint8_t     dump_rx_buffer(TMC_Handle_t* handle, uint8_t dumpCount);
 static status_t    read_transmissioncount(TMC_Handle_t* handle);
-static status_t    default_init(TMC_Handle_t* handle);
+static status_t    default_init(TMC_Handle_t* handle, TaskHandle_t taskHandle);
+static status_t    set_microstepping(TMC_Handle_t* handle, TMC_MICROSTEPPING_t microstepping,
+                                     TaskHandle_t taskHandle);
 static status_t    read(TMC_Handle_t* handle, uint8_t regAddr, uint32_t* data);
 static status_t    write(TMC_Handle_t* handle, uint8_t regAddr, uint32_t* data);
 static void        process(void);
@@ -101,11 +109,13 @@ void TMC_task(void* pvParameters)
     }
 }
 
-status_t TMC_init_default(TMC_Handle_t* handle)
+status_t TMC_init_default(TMC_Handle_t* handle, TaskHandle_t taskHandle)
 {
+    char                   logMsg[60];
     TMC_CommandQueueItem_t queueItem;
     queueItem.handle      = handle;
     queueItem.commandType = TMC_CMD_DEFAULT_INIT;
+    queueItem.taskHandle  = taskHandle;
 
     if (xQueueSend(commandQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
     {
@@ -113,10 +123,72 @@ status_t TMC_init_default(TMC_Handle_t* handle)
         return kStatus_Fail;
     }
 
-    char logMsg[60];
     snprintf(logMsg, sizeof(logMsg), "[%s] Default init command queued", handle->label);
     LOG_DEBUG(logMsg);
+
     return kStatus_Success;
+}
+
+status_t TMC_set_microstepping(TMC_Handle_t* handle, TMC_MICROSTEPPING_t microstepping,
+                               TaskHandle_t taskHandle)
+{
+    TMC_CommandQueueItem_t queueItem;
+    queueItem.handle                              = handle;
+    queueItem.commandType                         = TMC_CMD_SET_MICROSTEPPING;
+    queueItem.taskHandle                          = taskHandle;
+    queueItem.data.setMicrostepping.microstepping = microstepping;
+
+    if (xQueueSend(commandQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
+    {
+        LOG_ERROR("Failed to queue set microstepping command");
+        return kStatus_Fail;
+    }
+
+    char logMsg[60];
+    snprintf(logMsg, sizeof(logMsg), "[%s] Set microstepping command queued", handle->label);
+    LOG_DEBUG(logMsg);
+    return kStatus_Success;
+}
+
+status_t TMC_microstepping_value_to_enum(uint8_t value, TMC_MICROSTEPPING_t* microstepping)
+{
+    if (microstepping == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    switch (value)
+    {
+        case 0b0000:
+            *microstepping = TMC_MS_256;
+            return kStatus_Success;
+        case 0b0001:
+            *microstepping = TMC_MS_128;
+            return kStatus_Success;
+        case 0b0010:
+            *microstepping = TMC_MS_64;
+            return kStatus_Success;
+        case 0b0011:
+            *microstepping = TMC_MS_32;
+            return kStatus_Success;
+        case 0b0100:
+            *microstepping = TMC_MS_16;
+            return kStatus_Success;
+        case 0b0101:
+            *microstepping = TMC_MS_8;
+            return kStatus_Success;
+        case 0b0110:
+            *microstepping = TMC_MS_4;
+            return kStatus_Success;
+        case 0b0111:
+            *microstepping = TMC_MS_2;
+            return kStatus_Success;
+        case 0b1000:
+            *microstepping = TMC_MS_FULL;
+            return kStatus_Success;
+        default:
+            return kStatus_Fail;
+    }
 }
 
 /********************************************
@@ -136,28 +208,49 @@ static void process(void)
     switch (queueItem.commandType)
     {
         case TMC_CMD_DEFAULT_INIT:
-            default_init(queueItem.handle);
+            default_init(queueItem.handle, queueItem.taskHandle);
+            break;
+        case TMC_CMD_SET_MICROSTEPPING:
+            set_microstepping(queueItem.handle, queueItem.data.setMicrostepping.microstepping,
+                              queueItem.taskHandle);
             break;
         default:
             break;
     }
 }
 
-static status_t set_microstepping(TMC_Handle_t* handle, TMC_MICROSTEPPING_t microstepping)
+static status_t set_microstepping(TMC_Handle_t* handle, TMC_MICROSTEPPING_t microstepping,
+                                  TaskHandle_t taskHandle)
 {
+    static char logMsg[60];
+    status_t    result = kStatus_Fail;
+
     uint32_t chopConf;
     read(handle, TMC_CHOPCONF_ADDR, &chopConf);
     chopConf &= ~(0b1111 << 24);
     chopConf |= microstepping << 24;
-    char logMsg[60];
 
     if (kStatus_Success != write(handle, TMC_CHOPCONF_ADDR, &chopConf))
     {
         snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write Microstepping to CHOPCONF register",
                  handle->label);
         LOG_ERROR(logMsg);
+
+        if (taskHandle != NULL)
+        {
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
         return kStatus_Fail;
     }
+
+    snprintf(logMsg, sizeof(logMsg), "[%s] Microstepping set", handle->label);
+    LOG_INFO(logMsg);
+
+    if (taskHandle != NULL)
+    {
+        xTaskNotify(taskHandle, 1, eSetValueWithOverwrite);
+    }
+
     return kStatus_Success;
 }
 
@@ -179,7 +272,7 @@ static status_t set_double_edge_step_pulse(TMC_Handle_t* handle, uint8_t enabled
     return kStatus_Success;
 }
 
-static status_t default_init(TMC_Handle_t* handle)
+static status_t default_init(TMC_Handle_t* handle, TaskHandle_t taskHandle)
 {
     static char logMsg[60];
     snprintf(logMsg, sizeof(logMsg), "[%s] Initializing with default config", handle->label);
@@ -189,6 +282,10 @@ static status_t default_init(TMC_Handle_t* handle)
     {
         snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read transmission count", handle->label);
         LOG_ERROR(logMsg);
+        if (taskHandle != NULL)
+        {
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
         return kStatus_Fail;
     }
 
@@ -208,6 +305,11 @@ static status_t default_init(TMC_Handle_t* handle)
     {
         snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GCONF register", handle->label);
         LOG_ERROR(logMsg);
+        if (taskHandle != NULL)
+        {
+            uint32_t notifyValue = 0;
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
         return kStatus_Fail;
     }
 
@@ -218,14 +320,44 @@ static status_t default_init(TMC_Handle_t* handle)
     {
         snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GSTAT register", handle->label);
         LOG_ERROR(logMsg);
+        if (taskHandle != NULL)
+        {
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
         return kStatus_Fail;
     }
 
-    set_microstepping(handle, TMC_MS_4);
-    set_double_edge_step_pulse(handle, 1);
+    if (set_microstepping(handle, TMC_MS_FULL, NULL) != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set microstepping", handle->label);
+        LOG_ERROR(logMsg);
+        if (taskHandle != NULL)
+        {
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
+        return kStatus_Fail;
+    }
+
+    if (set_double_edge_step_pulse(handle, 1) != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set double edge step pulse",
+                 handle->label);
+        LOG_ERROR(logMsg);
+        if (taskHandle != NULL)
+        {
+            xTaskNotify(taskHandle, 0, eSetValueWithOverwrite);
+        }
+        return kStatus_Fail;
+    }
 
     snprintf(logMsg, sizeof(logMsg), "[%s] Default init completed successfully", handle->label);
     LOG_INFO(logMsg);
+    // Signal the waiting task with the result (0=fail, 1=success)
+    if (taskHandle != NULL)
+    {
+        xTaskNotify(taskHandle, 1, eSetValueWithOverwrite);
+    }
+
     return kStatus_Success;
 }
 

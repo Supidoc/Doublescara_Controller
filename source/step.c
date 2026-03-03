@@ -36,13 +36,14 @@
 typedef enum _STP_CmdType
 {
     STP_CMD_MOVE,
-    STP_CMD_STOP
+    STP_CMD_STOP,
+    STP_CMD_MOVE_PREPARE,
+    STP_CMD_TRIGGER_START
 } STP_CmdType_t;
 
 typedef struct _STP_MoveCmdData
 {
-    uint32_t        stepCount; /**< Number of steps to execute */
-    STP_Direction_t direction; /**< Direction of movement */
+    int32_t steps; /**< Number of steps to execute (positive=CCW, negative=CW) */
 } STP_MoveCmdData_t;
 
 typedef struct _STP_StopCmdData
@@ -67,9 +68,6 @@ typedef struct _STP_HandlesArrayItem
     uint8_t             used;   /**< Flag: 1 if handle is allocated, 0 if free */
 } STP_HandlesArrayItem_t;
 
-/**
- * @brief Pool item for static acceleration lookup tables.
- */
 typedef struct _STP_AccelTablePoolItem
 {
     uint16_t table[STP_MAX_ACCEL_TABLE_SIZE]; /**< Pre-calculated delay values */
@@ -109,33 +107,29 @@ static status_t    create_accel_table(STP_StepperHandle_t* handle, uint32_t tabl
                                       int8_t* poolIndex);
 static inline void update_isr_handle_cache(void);
 
+static status_t reset_absolute_position(STP_StepperHandle_t* handle);
+
 /****************************
  *     Public Variables     *
  ****************************/
-
-STP_HandlesArrayItem_t handles[STP_MAX_HANDLE_COUNT];
 
 /*****************************
  *     Private Variables     *
  *****************************/
 
-STP_StepperHandle_t testHandler;
+static STP_HandlesArrayItem_t handles[STP_MAX_HANDLE_COUNT];
 
-QueueHandle_t cmdQueue    = NULL;
-QueueHandle_t configQueue = NULL;
+static QueueHandle_t cmdQueue    = NULL;
+static QueueHandle_t configQueue = NULL;
 
 STP_StepperHandle_t* FTM3_ISR_handle_cache[8];
 
-static uint8_t isrDebugPin = 1;
+static uint8_t    isrDebugPin  = 1;
 static GPIO_Type* isrDebugGPIO = GPIOA;
 static PORT_Type* isrDebugPort = PORTA;
 
-
-/**
- * @brief Static pool of acceleration lookup tables.
- * Shared by all stepper motor instances to avoid dynamic allocation.
- */
-static STP_AccelTablePoolItem_t accelTablePool[STP_ACCEL_TABLE_POOL_SIZE];
+__attribute__((section(
+    ".accelTables"))) static STP_AccelTablePoolItem_t accelTablePool[STP_ACCEL_TABLE_POOL_SIZE];
 
 /*******************************************
  *     Public Function Implementations     *
@@ -206,14 +200,12 @@ status_t STP_stop(STP_StepperHandle_t* handle, uint8_t doDeceleration)
     return kStatus_Success;
 }
 
-status_t STP_move_relative(STP_StepperHandle_t* handle, uint32_t stepCount,
-                           STP_Direction_t direction)
+status_t STP_move_relative(STP_StepperHandle_t* handle, int32_t steps)
 {
     STP_CmdQueueItem_t queueItem;
-    queueItem.handle              = handle;
-    queueItem.type                = STP_CMD_MOVE;
-    queueItem.data.move.stepCount = stepCount;
-    queueItem.data.move.direction = direction;
+    queueItem.handle          = handle;
+    queueItem.type            = STP_CMD_MOVE;
+    queueItem.data.move.steps = steps;
 
     if (xQueueSend(cmdQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
     {
@@ -236,7 +228,7 @@ status_t STP_init_stepper(STP_StepperConfig_t config)
     return kStatus_Success;
 }
 
-status_t STP_get_handle_by_id(const char* label, STP_StepperHandle_t** handle)
+status_t STP_get_handle_by_label(const char* label, STP_StepperHandle_t** handle)
 {
     if (label == NULL)
         return kStatus_Fail;
@@ -254,6 +246,40 @@ status_t STP_get_handle_by_id(const char* label, STP_StepperHandle_t** handle)
         }
     }
     return kStatus_Fail;
+}
+
+status_t STP_reset_absolute_position(STP_StepperHandle_t* handle)
+{
+    return reset_absolute_position(handle);
+}
+
+status_t STP_move_relative_prepare(STP_StepperHandle_t* handle, int32_t steps)
+{
+    STP_CmdQueueItem_t queueItem;
+    queueItem.handle          = handle;
+    queueItem.type            = STP_CMD_MOVE_PREPARE;
+    queueItem.data.move.steps = steps;
+
+    if (xQueueSend(cmdQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
+    {
+        LOG_ERROR("Failed to queue prepare movement command");
+        return kStatus_Fail;
+    }
+    return kStatus_Success;
+}
+
+status_t STP_trigger_prepared_moves(void)
+{
+    STP_CmdQueueItem_t queueItem;
+    queueItem.handle = NULL;
+    queueItem.type   = STP_CMD_TRIGGER_START;
+
+    if (xQueueSend(cmdQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
+    {
+        LOG_ERROR("Failed to queue trigger start command");
+        return kStatus_Fail;
+    }
+    return kStatus_Success;
 }
 
 /********************************************
@@ -279,6 +305,8 @@ void FTM3_IRQHandler(void)
             stepperHandle = FTM3_ISR_handle_cache[i];
 
             stepperHandle->movementHandle.currStepCount++;
+            stepperHandle->absolutePosition +=
+                (stepperHandle->movementHandle.direction == STP_COUNTERCLOCKWISE) ? 1 : -1;
             uint32_t currentStepCount   = stepperHandle->movementHandle.currStepCount;
             uint32_t totalSteps         = stepperHandle->movementHandle.totalSteps;
             uint32_t accelSteps         = stepperHandle->movementHandle.accelSteps;
@@ -394,7 +422,6 @@ void FTM3_IRQHandler(void)
 
     GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
 
-
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
    Store immediate overlapping exception return operation might vector to incorrect interrupt. */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
@@ -454,11 +481,11 @@ static status_t init_handle(const STP_StepperConfig_t* config)
     handle->dirPin                = config->dirPin;
     handle->dirLogicHighClockwise = config->dirLogicHighClockwise;
 
-    handle->acceleration = config->acceleration;
-    handle->endVelocity  = config->endVelocity;
-    handle->label        = config->label;
-    handle->dirMux       = config->dirMux;
-
+    handle->acceleration     = config->acceleration;
+    handle->endVelocity      = config->endVelocity;
+    handle->label            = config->label;
+    handle->dirMux           = config->dirMux;
+    handle->absolutePosition = 0;
 
     if (reset_movement_handle(&handle->movementHandle) != kStatus_Success)
         return kStatus_Fail;
@@ -476,6 +503,12 @@ static status_t init_handle(const STP_StepperConfig_t* config)
     snprintf(logMsg, sizeof(logMsg), "[%s] stepper handle initialized: accel=%.1f, endVel=%.1f",
              handle->label, handle->acceleration, handle->endVelocity);
     LOG_INFO(logMsg);
+    return kStatus_Success;
+}
+
+static status_t reset_absolute_position(STP_StepperHandle_t* handle)
+{
+    handle->absolutePosition = 0;
     return kStatus_Success;
 }
 
@@ -597,8 +630,7 @@ static status_t plan_motion_profile(STP_StepperHandle_t* handle)
 static inline void calculate_step_profile(STP_StepperHandle_t* handle)
 {
     uint32_t accelSteps =
-        (uint32_t)((handle->endVelocity * handle->endVelocity) /
-                   (2 * handle->acceleration));
+        (uint32_t)((handle->endVelocity * handle->endVelocity) / (2 * handle->acceleration));
 
     if (accelSteps * 2 >= handle->movementHandle.totalSteps)
     {
@@ -628,12 +660,9 @@ static inline void calculate_step_profile(STP_StepperHandle_t* handle)
 static inline void calculate_delays(STP_StepperHandle_t* handle, uint16_t* stepZeroDelay,
                                     uint16_t* endVelocityDelay)
 {
-    *stepZeroDelay =
-        (uint16_t)(0.676 * STP_TIMER_FREQ_HZ *
-                   sqrt(2.0 / (handle->acceleration)));
+    *stepZeroDelay = (uint16_t)(0.676 * STP_TIMER_FREQ_HZ * sqrt(2.0 / (handle->acceleration)));
 
-    *endVelocityDelay = (uint16_t)(STP_TIMER_FREQ_HZ /
-                                   (handle->endVelocity));
+    *endVelocityDelay = (uint16_t)(STP_TIMER_FREQ_HZ / (handle->endVelocity));
 
     handle->movementHandle.endVelocityDelay = *endVelocityDelay;
 }
@@ -847,7 +876,7 @@ static status_t reset_movement_handle(STP_StepperMovementHandle_t* handle)
     handle->accelInterpFactor  = 1;
     handle->accelInterpCounter = 0;
     handle->accelTableIndex    = 0;
-
+    handle->waitForStart       = 0;
     return kStatus_Success;
 }
 
@@ -946,11 +975,40 @@ static void process_movement(void)
         case STP_CMD_MOVE:
         {
             LOG_DEBUG("Processing movement command");
-            queueItem.handle->movementHandle.totalSteps = queueItem.data.move.stepCount;
-            queueItem.handle->movementHandle.direction  = queueItem.data.move.direction;
+            int32_t steps                               = queueItem.data.move.steps;
+            queueItem.handle->movementHandle.totalSteps = (steps >= 0) ? steps : -steps;
+            queueItem.handle->movementHandle.direction =
+                (steps >= 0) ? STP_COUNTERCLOCKWISE : STP_CLOCKWISE;
+            queueItem.handle->movementHandle.waitForStart = 0;
             if (plan_motion_profile(queueItem.handle) == kStatus_Success)
             {
                 start_steps(queueItem.handle);
+            }
+            break;
+        }
+        case STP_CMD_MOVE_PREPARE:
+        {
+            LOG_DEBUG("Processing prepare movement command");
+            int32_t steps                               = queueItem.data.move.steps;
+            queueItem.handle->movementHandle.totalSteps = (steps >= 0) ? steps : -steps;
+            queueItem.handle->movementHandle.direction =
+                (steps >= 0) ? STP_COUNTERCLOCKWISE : STP_CLOCKWISE;
+            queueItem.handle->movementHandle.waitForStart = 1;
+            plan_motion_profile(queueItem.handle);
+            break;
+        }
+        case STP_CMD_TRIGGER_START:
+        {
+            LOG_DEBUG("Triggering synchronized start");
+            for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
+            {
+                if (handles[i].used == 1 &&
+                    handles[i].handle.movementHandle.state == STP_MOVEMENT_PLANNED &&
+                    handles[i].handle.movementHandle.waitForStart == 1)
+                {
+                    handles[i].handle.movementHandle.waitForStart = 0;
+                    start_steps(&handles[i].handle);
+                }
             }
             break;
         }

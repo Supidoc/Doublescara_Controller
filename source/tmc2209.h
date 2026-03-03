@@ -186,15 +186,65 @@ void TMC_task(void* pvParameters);
 /**
  * @brief Initializes a TMC2209 handle with default configuration.
  *
- * This function configures a TMC2209 driver handle with default settings
- * for communication and operation.
+ * This function queues a default initialization command for a TMC2209 driver handle.
+ * The initialization is performed asynchronously by the TMC_task.
+ * The calling task can wait for completion using the returned taskHandle parameter.
  *
  * @param[in] handle Pointer to the TMC handle structure to initialize.
+ * @param[in] taskHandle Task handle to notify when initialization completes. Can be NULL to skip
+ * notification.
  *
- * @return kStatus_Success if the initialization is successful.
- *         kStatus_Fail if the initialization fails.
+ * @note This function queues the command and returns immediately.
+ * @note The calling task should use ulTaskNotifyTake() to wait for completion.
+ * @note If taskHandle is NULL, no notification will be sent.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full or an error occurs.
+ *
+ * @see ulTaskNotifyTake()
  */
-status_t TMC_init_default(TMC_Handle_t* handle);
+status_t TMC_init_default(TMC_Handle_t* handle, TaskHandle_t taskHandle);
+
+/**
+ * @brief Sets the microstepping resolution for a TMC2209 driver.
+ *
+ * This function queues a microstepping configuration command for a TMC2209 driver handle.
+ * The microstepping is performed asynchronously by the TMC_task.
+ * The calling task can wait for completion using the returned taskHandle parameter.
+ *
+ * @param[in] handle Pointer to the TMC handle structure.
+ * @param[in] microstepping The microstepping resolution to set (TMC_MICROSTEPPING_t).
+ * @param[in] taskHandle Task handle to notify when microstepping set completes. Can be NULL to skip
+ * notification.
+ *
+ * @note This function queues the command and returns immediately.
+ * @note The calling task should use ulTaskNotifyTake() to wait for completion.
+ * @note If taskHandle is NULL, no notification will be sent.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full or an error occurs.
+ *
+ * @see ulTaskNotifyTake()
+ * @see TMC_MICROSTEPPING_t
+ */
+status_t TMC_set_microstepping(TMC_Handle_t* handle, TMC_MICROSTEPPING_t microstepping,
+                               TaskHandle_t taskHandle);
+
+/**
+ * @brief Converts a uint8_t microstepping value to the corresponding enum member.
+ *
+ * This function converts a raw uint8_t microstepping value to the corresponding
+ * TMC_MICROSTEPPING_t enum value.
+ *
+ * @param[in] value The uint8_t microstepping value to convert (0-8).
+ * @param[out] microstepping Pointer to store the converted enum value. Must not be NULL.
+ *
+ * @return kStatus_Success if the value matches a valid enum member.
+ *         kStatus_Fail if the value does not correspond to any enum member.
+ *
+ * @see TMC_MICROSTEPPING_t
+ */
+status_t TMC_microstepping_value_to_enum(uint8_t value, TMC_MICROSTEPPING_t* microstepping);
 
 /** @} */ // End of TMC2209_Module
 

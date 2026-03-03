@@ -153,6 +153,8 @@ static void process(void)
 
         LPUART_RTOS_Send(&LPUART0_rtos_handle, (unsigned char*)"\r\n", strlen("\r\n"));
 
+        if(strncmp((char*)pcInputString, "log", strlen("log")) == 0)
+        {        
         snprintf((char*)pcOutputString, sizeof(pcOutputString), "USER: %s", pcInputString);
 #if CLI_SHOW_COMMAND_INPUT
         LOG_INFO((char*)pcOutputString);
@@ -160,7 +162,7 @@ static void process(void)
         LOG_INFO_SILENT((char*)pcOutputString);
 #endif
         memset(pcOutputString, 0x00, CLI_MAX_OUTPUT_LENGTH);
-
+        }
         /* The command interpreter is called repeatedly until it returns
          pdFALSE. See the "Implementing a command" documentation for an
          exaplanation of why this is. */
