@@ -1,14 +1,16 @@
 \doxysection{source/\+step.h File Reference}
 \hypertarget{step_8h}{}\label{step_8h}\index{source/step.h@{source/step.h}}
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}task.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+ftm.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+gpio.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+port.\+h"{}}\newline
-Include dependency graph for step.\+h:\+
-\nopagebreak
+Include dependency graph for step.\+h:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=300pt]{step_8h__incl}
+\includegraphics[width=350pt]{step_8h__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file:\+\nopagebreak
@@ -21,10 +23,6 @@ This graph shows which files directly or indirectly include this file:\+\nopageb
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Movement\+Handle}}
-\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
-struct \doxymbox{\hyperlink{struct__STP__StepperHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Handle}}
-\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}}
 \begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
@@ -32,19 +30,17 @@ struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepp
 \item 
 \+\#define \doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}~6
 \begin{DoxyCompactList}\small\item\em Maximum number of stepper motor handles that can be created. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb}{STP\+\_\+\+MIN\+\_\+\+STEP\+\_\+\+ACCELERATION}}~10
-\begin{DoxyCompactList}\small\item\em Minimum acceleration for stepper motors (in degrees/\+s²). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga10acf42d321499d4823ba3e60f59afeb}{STP\+\_\+\+MIN\+\_\+\+STEP\+\_\+\+ACCELERATION}}~10.\+0
+\begin{DoxyCompactList}\small\item\em Minimum step acceleration for stepper motors (in steps/\+s²). \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{group__STEP__Module_gafede3ab78553a37273452e08d610c880}{STP\+\_\+\+MAX\+\_\+\+STEP\+\_\+\+FREQUENCY}}~100
 \begin{DoxyCompactList}\small\item\em Maximum step frequency for stepper motors (in steps/\+s). \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga9be997eb3beb5449a8f3967c3e9050d9}{STP\+\_\+\+MOVEMENT\+\_\+\+QUEUE\+\_\+\+SIZE}}~10
-\begin{DoxyCompactList}\small\item\em Size of the movement command queue. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga40840a26152b33c7da5dd5b776950645}{STP\+\_\+\+CONFIG\+\_\+\+QUEUE\+\_\+\+SIZE}}~3
-\begin{DoxyCompactList}\small\item\em Size of the stepper configuration queue. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825}{STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE}}~3000
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga3a6692a2c857999da7316ed7e2df506a}{STP\+\_\+\+CMD\+\_\+\+QUEUE\+\_\+\+SIZE}}~30
+\begin{DoxyCompactList}\small\item\em Size of the command queue. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga96f4722e4d8b689802ad458a51537825}{STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE}}~1000
 \begin{DoxyCompactList}\small\item\em Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~1
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_ga133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~4
 \begin{DoxyCompactList}\small\item\em Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}~4
+\+\#define \doxymbox{\hyperlink{group__STEP__Module_gaebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}~8
 \begin{DoxyCompactList}\small\item\em Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -53,10 +49,8 @@ typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga30dcedd34d1af2a987341d39
 \begin{DoxyCompactList}\small\item\em Enumeration of stepper motor movement states. \end{DoxyCompactList}\item 
 typedef enum \doxymbox{\hyperlink{group__STEP__Module_ga7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Enumeration of stepper motor rotation directions. \end{DoxyCompactList}\item 
-typedef struct \doxymbox{\hyperlink{struct__STP__StepperMovementHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Movement\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga627ee69989e6ea7ba5765c7d0b276f51}{STP\+\_\+\+Stepper\+Movement\+Handle\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
-typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandle}{\+\_\+\+STP\+\_\+\+Stepper\+Handle}} \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Opaque handle type for stepper motor control instances. \end{DoxyCompactList}\item 
 typedef struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}} \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
@@ -89,11 +83,31 @@ status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga40d24dc2b8326fda6b24d31
 \begin{DoxyCompactList}\small\item\em Initializes the stepper motor control module. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
 \begin{DoxyCompactList}\small\item\em Task function for processing stepper motor commands. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gab22f5bf7ff96b5519cfe0d93791201b8}{STP\+\_\+move\+\_\+relative}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint32\+\_\+t step\+Count, \doxymbox{\hyperlink{group__STEP__Module_gaf161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}} direction)
-\begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gada538bfbae08221ae79de50df018f65a}{STP\+\_\+init\+\_\+stepper}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga718622f8935169a07606900d30e35dc3}{STP\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Retrieves the default configuration for a stepper motor handle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gad4d5e25d0042f1075181945caae24470}{STP\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
 \begin{DoxyCompactList}\small\item\em Initializes a stepper motor with the provided configuration. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga68bc94d45c9b49a8a4bda20d4f48250f}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+id}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}handle)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \begin{DoxyCompactList}\small\item\em Retrieves the stepper motor handle by its label identifier. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga184e4d206bdddc25f02e73fb2e180da6}{STP\+\_\+stop}} (\doxymbox{\hyperlink{group__STEP__Module_ga3817330c14f0263c962cf19180e4632c}{STP\+\_\+\+Stepper\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle, uint8\+\_\+t do\+Deceleration)
-\begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga622248fdfc5a6e2d70efa01bb46fcfbf}{STP\+\_\+move\+\_\+relative}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga567fb9fcd9b23f6926e1973174c4e144}{STP\+\_\+stop}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga0b5737fd19148e1b0afd9b4f3b170951}{STP\+\_\+reset\+\_\+absolute\+\_\+position}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Resets the tracked absolute position of a stepper motor to zero. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga7786c06c4687c5cbe8c2f4b4e41d99cf}{STP\+\_\+move\+\_\+relative\+\_\+prepare}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Prepares a relative movement command without starting motion immediately. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga4ff6679a699002150aa8390ad6168055}{STP\+\_\+trigger\+\_\+prepared\+\_\+moves}} (Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Starts all previously prepared movements. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga7da3362dfab0b9c43e86c3cffad6d900}{STP\+\_\+get\+\_\+absolute\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t \texorpdfstring{$\ast$}{*}absolute\+Steps, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Reads the current absolute step position of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gac9b96637fd5b28920bb9451771805a38}{STP\+\_\+get\+\_\+acceleration}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}acceleration, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Gets the configured acceleration of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga19a71e4aad9942e06973e93df7c03dcf}{STP\+\_\+get\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}end\+Velocity, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Gets the configured target end velocity of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga22f8e0321009758b160999236054a71e}{STP\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Retrieves the current movement state of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga4afa9904f1d7f5eed5cd42d542e4dae2}{STP\+\_\+set\+\_\+acceleration}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double acceleration, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets the acceleration parameter for a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga855d48f5ef928db6135bbbce2883ead6}{STP\+\_\+set\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double end\+Velocity, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets the target end velocity parameter for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}

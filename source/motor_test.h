@@ -27,6 +27,10 @@
  *     Public Macros / Defines     *
  ***********************************/
 
+#define MTT_MOTOR_STEPPER_TYPE_NORMAL (0)
+#define MTT_MOTOR_STEPPER_TYPE_LINEAR_BIG (1)
+#define MTT_MOTOR_STEPPER_TYPE_LINEAR_SMALL (0)
+
 /***************************
  *     Public Typedefs     *
  ***************************/

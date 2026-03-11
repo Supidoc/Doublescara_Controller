@@ -1,0 +1,225 @@
+\doxysection{Task Helpers }
+\hypertarget{group__TaskHelpers__Module}{}\label{group__TaskHelpers__Module}\index{Task Helpers@{Task Helpers}}
+
+
+Helper macros and functions for task-\/safe operations.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+BEGIN}}()
+\begin{DoxyCompactList}\small\item\em Begin a task-\/safe operation by capturing the caller\textquotesingle{}s task handle. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+WAIT}}(deadline)
+\begin{DoxyCompactList}\small\item\em Wait for notification from async operation with a deadline. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+COMPLETE}}(deadline)
+\begin{DoxyCompactList}\small\item\em Complete task-\/safe operation pattern:\+ wait and return. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{THE\+\_\+notify\+\_\+task\+\_\+result}} (Task\+Handle\+\_\+t task\+Handle, status\+\_\+t result)
+\begin{DoxyCompactList}\small\item\em Notify a task with operation result. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{THE\+\_\+notify\+\_\+task\+\_\+success}} (Task\+Handle\+\_\+t task\+Handle)
+\begin{DoxyCompactList}\small\item\em Notify task on success, don\textquotesingle{}t notify on failure. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{THE\+\_\+notify\+\_\+task\+\_\+failure}} (Task\+Handle\+\_\+t task\+Handle)
+\begin{DoxyCompactList}\small\item\em Notify task of failure. \end{DoxyCompactList}\item 
+static Tick\+Type\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\+\_\+deadline\+\_\+from\+\_\+timeout\+\_\+ms}} (uint32\+\_\+t timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Convert timeout in milliseconds to a deadline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper macros and functions for task-\/safe operations. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__TaskHelpers__Module_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_BEGIN@{THE\_TASK\_SAFE\_BEGIN}}
+\index{THE\_TASK\_SAFE\_BEGIN@{THE\_TASK\_SAFE\_BEGIN}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_BEGIN}{THE\_TASK\_SAFE\_BEGIN}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745} 
+\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+BEGIN(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TaskHandle\_t\ callerTaskHandle\ =\ xTaskGetCurrentTaskHandle();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{if\ (callerTaskHandle\ ==\ NULL)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ LOG\_WARN(\textcolor{stringliteral}{"{}Failed\ to\ get\ current\ task\ handle"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Begin a task-\/safe operation by capturing the caller\textquotesingle{}s task handle. 
+
+Usage:\+ Place at the beginning of a public task-\/safe function after parameter validation. Creates a local variable \textquotesingle{}caller\+Task\+Handle\textquotesingle{} that can be used in queue items. 
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_COMPLETE@{THE\_TASK\_SAFE\_COMPLETE}}
+\index{THE\_TASK\_SAFE\_COMPLETE@{THE\_TASK\_SAFE\_COMPLETE}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_COMPLETE}{THE\_TASK\_SAFE\_COMPLETE}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24} 
+\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+COMPLETE(\begin{DoxyParamCaption}\item[{}]{deadline}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{THE\_TASK\_SAFE\_WAIT}}(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordflow}{return}\ kStatus\_Success;}
+
+\end{DoxyCode}
+
+
+Complete task-\/safe operation pattern:\+ wait and return. 
+
+Combines notification wait with success return. 
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00084}{84}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_WAIT@{THE\_TASK\_SAFE\_WAIT}}
+\index{THE\_TASK\_SAFE\_WAIT@{THE\_TASK\_SAFE\_WAIT}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_WAIT}{THE\_TASK\_SAFE\_WAIT}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c} 
+\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+WAIT(\begin{DoxyParamCaption}\item[{}]{deadline}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ if\ (deadline\ !=\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ TickType\_t\ currentTick\ =\ xTaskGetTickCount();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (deadline\ <=\ currentTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Deadline\ for\ task\ notification\ has\ already\ passed"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ TickType\_t\ ticksUntilDeadline\ =\ deadline\ -\/\ currentTick;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (ulTaskNotifyTake(pdTRUE,\ ticksUntilDeadline)\ ==\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}Timeout\ waiting\ for\ notification\ after\ \%u\ ms"{}},\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})(pdTICKS\_TO\_MS(ticksUntilDeadline)));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+
+
+Wait for notification from async operation with a deadline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deadline} & Deadline for the operation\\
+\hline
+\end{DoxyParams}
+Usage:\+ Place after queueing the command. Waits for notification and returns k\+Status\+\_\+\+Fail after deadline passed without receving notifications.
+
+\begin{DoxyNote}{Note}
+If deadline is 0, the function will not wait for completion and will return immediately. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__TaskHelpers__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}\index{Task Helpers@{Task Helpers}!THE\_deadline\_from\_timeout\_ms@{THE\_deadline\_from\_timeout\_ms}}
+\index{THE\_deadline\_from\_timeout\_ms@{THE\_deadline\_from\_timeout\_ms}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_deadline\_from\_timeout\_ms()}{THE\_deadline\_from\_timeout\_ms()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce} 
+Tick\+Type\+\_\+t THE\+\_\+deadline\+\_\+from\+\_\+timeout\+\_\+ms (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert timeout in milliseconds to a deadline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+ms} & Timeout in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Deadline in ticks 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00154}{154}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_failure@{THE\_notify\_task\_failure}}
+\index{THE\_notify\_task\_failure@{THE\_notify\_task\_failure}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_notify\_task\_failure()}{THE\_notify\_task\_failure()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5} 
+void THE\+\_\+notify\+\_\+task\+\_\+failure (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Notify task of failure. 
+
+Helper function to notify a task handle with failure. Safe to call with NULL task handle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Handle} & Task to notify (NULL safe) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00141}{141}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_result@{THE\_notify\_task\_result}}
+\index{THE\_notify\_task\_result@{THE\_notify\_task\_result}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_notify\_task\_result()}{THE\_notify\_task\_result()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8} 
+void THE\+\_\+notify\+\_\+task\+\_\+result (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{, }\item[{status\+\_\+t}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Notify a task with operation result. 
+
+Helper function to notify a task handle with success (1) or failure (0). Safe to call with NULL task handle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Handle} & Task to notify (NULL safe) \\
+\hline
+{\em result} & Operation result (k\+Status\+\_\+\+Success or k\+Status\+\_\+\+Fail) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00109}{109}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_success@{THE\_notify\_task\_success}}
+\index{THE\_notify\_task\_success@{THE\_notify\_task\_success}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_notify\_task\_success()}{THE\_notify\_task\_success()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d} 
+void THE\+\_\+notify\+\_\+task\+\_\+success (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Notify task on success, don\textquotesingle{}t notify on failure. 
+
+Helper function to notify a task handle with success. Safe to call with NULL task handle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Handle} & Task to notify (NULL safe) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00125}{125}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+

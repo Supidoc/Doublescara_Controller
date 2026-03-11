@@ -11,6 +11,7 @@
 
 #include "cli_utilities.h"
 #include "string.h"
+#include "stdlib.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -62,9 +63,13 @@ status_t CLU_get_parameter_value_string(char* parameterIdentifier, const char* p
             }
             else if (**pcParameter == '-')
             {
-                *parameterStringLength = 0;
-                *pcParameter           = NULL;
-                *parameterFound        = 1;
+                double parsedDouble = strtod(*pcParameter, NULL);
+                if (parsedDouble >= -0.01 && parsedDouble <= 0.01)
+                {
+                    *parameterStringLength = 0;
+                    *pcParameter           = NULL;
+                }
+                *parameterFound = 1;
                 return kStatus_Success;
             }
             else

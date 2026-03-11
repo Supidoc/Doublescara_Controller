@@ -15,7 +15,14 @@
 
 /**
  * @defgroup STEP_Module Stepper Motor Control Module
- * @brief   Functions for controlling stepper motors using FTM with acceleration/deceleration
+ * @brief   Functions for controlling stepper motors using FTM with constant
+ * acceleration/deceleration
+ *
+ * This module provides an interface for initializing stepper motor control instances, configuring
+ * movement parameters, and executing stepper movements with acceleration and deceleration profiles.
+ * It uses FreeRTOS queues to allow for task-safe command submission and asynchronous execution in a
+ * dedicated stepper control task.
+ *
  * @{
  */
 
@@ -25,7 +32,9 @@
 /********************
  *     Includes		*
  ********************/
-
+#include "FreeRTOS.h"
+#include "task.h"
+#include "fsl_common.h"
 #include "fsl_ftm.h"
 #include "fsl_gpio.h"
 #include "fsl_port.h"
@@ -40,9 +49,10 @@
 #define STP_MAX_HANDLE_COUNT 6
 
 /**
- * @brief Minimum acceleration for stepper motors (in degrees/s²).
+ * @brief Minimum step acceleration for stepper motors (in steps/s²).
+ *
  */
-#define STP_MIN_STEP_ACCELERATION 10
+#define STP_MIN_STEP_ACCELERATION 10.0
 
 /**
  * @brief Maximum step frequency for stepper motors (in steps/s).
@@ -50,28 +60,23 @@
 #define STP_MAX_STEP_FREQUENCY 100
 
 /**
- * @brief Size of the movement command queue.
+ * @brief Size of the command queue.
  */
-#define STP_MOVEMENT_QUEUE_SIZE 10
-
-/**
- * @brief Size of the stepper configuration queue.
- */
-#define STP_CONFIG_QUEUE_SIZE 3
+#define STP_CMD_QUEUE_SIZE 30
 
 /**
  * @brief Maximum number of steps in the acceleration/deceleration lookup table.
  * This limits the size of pre-calculated delay profiles to conserve memory.
  * Movements with more acceleration steps will be clamped to this value.
  */
-#define STP_MAX_ACCEL_TABLE_SIZE 3000
+#define STP_MAX_ACCEL_TABLE_SIZE 1000
 
 /**
  * @brief Interpolation factor between lookup table entries.
  * Each table entry spans this many acceleration steps.
  * A value of 1 means no interpolation.
  */
-#define STP_ACCEL_TABLE_INTERP_FACTOR 1
+#define STP_ACCEL_TABLE_INTERP_FACTOR 4
 
 /**
  * @brief Number of acceleration lookup tables in the static pool.
@@ -91,17 +96,28 @@
  */
 typedef enum _STP_MovementState
 {
-    STP_MOVEMENT_IDLE,           /**< Stepper motor is idling */
-    STP_MOVEMENT_CALLED,         /**< Movement command received */
-    STP_MOVEMENT_PLANNED,        /**< Movement profile calculated */
-    STP_MOVEMENT_STARTED,        /**< Movement started */
-    STP_MOVEMENT_ACCELERATING,   /**< Motor is currently accelerating */
-    STP_MOVEMENT_CONST_VELOCITY, /**< Motor is currently running with constant velocity */
-    STP_MOVEMENT_DECELRATING,    /**< Motor is currently decelerating */
-    STP_MOVEMENT_STOPPED,        /**< Movement stopped before completion */
-    STP_MOVEMENT_FINISHED,       /**< Movement completed */
-    STP_MOVEMENT_SUCCESSFUL,     /**< Movement completed successfully */
-    STP_MOVEMENT_FAILED          /**< Movement failed */
+    /** @brief Motor is idling */
+    STP_MOVEMENT_IDLE,
+    /** @brief Movement command received, but profile not yet calculated */
+    STP_MOVEMENT_CALLED,
+    /** @brief Movement profile calculated and ready to start */
+    STP_MOVEMENT_PLANNED,
+    /** @brief Movement is waiting for synchronized start trigger */
+    STP_MOVEMENT_STARTED,
+    /** @brief Motor is currently accelerating */
+    STP_MOVEMENT_ACCELERATING,
+    /** @brief Motor is currently running with constant velocity */
+    STP_MOVEMENT_CONST_VELOCITY,
+    /** @brief Motor is currently decelerating */
+    STP_MOVEMENT_DECELRATING,
+    /** @brief Movement stopped before completion */
+    STP_MOVEMENT_STOPPED,
+    /** @brief Movement completed */
+    STP_MOVEMENT_FINISHED,
+    /** @brief Movement completed successfully */
+    STP_MOVEMENT_SUCCESSFUL,
+    /** @brief Movement failed due to an error */
+    STP_MOVEMENT_FAILED
 } STP_MovementState_t;
 
 /**
@@ -109,63 +125,17 @@ typedef enum _STP_MovementState
  */
 typedef enum _STP_Direction
 {
-    STP_CLOCKWISE,       /**< Rotate clockwise */
-    STP_COUNTERCLOCKWISE /**< Rotate counterclockwise */
+    /** @brief Rotate clockwise */
+    STP_CLOCKWISE,
+    /** @brief Rotate counterclockwise */
+    STP_COUNTERCLOCKWISE
 } STP_Direction_t;
 
 /**
- * @brief Structure for tracking stepper motor movement state and parameters.
+ * @brief Opaque handle type for stepper motor control instances.
  *
- * Contains all necessary information for executing a stepper motor movement,
- * including acceleration/deceleration profile, current step count, and motor state.
  */
-typedef struct _STP_StepperMovementHandle
-{
-    STP_MovementState_t state;            /**< Current movement state */
-    uint32_t            totalSteps;       /**< Total steps to execute */
-    uint32_t            accelSteps;       /**< Steps during acceleration phase */
-    uint32_t            endVelocitySteps; /**< Steps at constant velocity */
-    uint32_t            decelSteps;       /**< Steps during deceleration phase */
-    STP_Direction_t     direction;        /**< Movement direction */
-    uint8_t             isTrapezoidal;    /**< Flag: 1 if trapezoidal profile, 0 if triangular */
-    uint32_t            currStepCount;    /**< Current step count during movement */
-    uint32_t            phaseStepCount;   /**< Step count within current phase (for accel/decel) */
-    uint16_t            endVelocityDelay; /**< Delay for constant velocity phase */
-    int8_t   accelTablePoolIndex;         /**< Index into static pool (-1 if no table allocated) */
-    uint32_t accelTableSize;              /**< Actual number of entries used in the table */
-    uint16_t accelInterpFactor;           /**< Number of steps to repeat each table entry */
-    uint16_t accelInterpCounter; /**< Counter for interpolation factor (0 to interpFactor-1) */
-    uint32_t accelTableIndex;    /**< Current index into acceleration table */
-    uint8_t  waitForStart; /**< Flag: 1 if movement is planned but awaiting sync start trigger */
-} STP_StepperMovementHandle_t;
-
-/**
- * @brief Handle structure for a stepper motor instance.
- *
- * Contains hardware configuration and control parameters for a single stepper motor,
- * including FTM timer settings, GPIO pins, and movement parameters.
- */
-typedef struct _STP_StepperHandle
-{
-    FTM_Type*  ftmBase;            /**< Pointer to FTM module base address */
-    ftm_chnl_t ftmChannel;         /**< FTM channel used for step output */
-    PORT_Type* stepPort;           /**< PORT module for step pin mux control */
-    GPIO_Type* stepGPIO;           /**< GPIO module for step pin */
-    uint8_t    stepPin;            /**< Step output pin number */
-    port_mux_t stepMuxFTM;         /**< Pin mux value for FTM mode */
-    port_mux_t stepMuxGPIO;        /**< Pin mux value for GPIO mode */
-    PORT_Type* dirPort;            /**< PORT module for direction pin mux control */
-    GPIO_Type* dirGPIO;            /**< GPIO module for direction pin */
-    uint8_t    dirPin;             /**< Direction output pin number */
-    port_mux_t dirMux;             /**< Pin mux value for dir pin */
-    uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
-    int32_t absolutePosition;      /**< The absolute Position of the StepperMotor in steps. Positive
-                                      Values are counterclockwise*/
-    double                      acceleration; /**< Acceleration in steps/s² */
-    double                      endVelocity;  /**< Final velocity in steps/s */
-    const char*                 label;        /**< Identifier label for logging (e.g., "Motor_X") */
-    STP_StepperMovementHandle_t movementHandle; /**< Current movement state and parameters */
-} STP_StepperHandle_t;
+typedef struct _STP_StepperHandleImpl* STP_Handle_t;
 
 /**
  * @brief Configuration structure for initializing a stepper motor.
@@ -204,12 +174,11 @@ typedef struct _STP_StepperConfig
  * @brief Initializes the stepper motor control module.
  *
  * This function initializes the movement and configuration queues used for
- * task-safe communication. It must be called before using any other functions
- * in this module.
+ * task-safe communication. It also initialzes the timer and gpio peripheral for step generation.
+ * It must be called before using any other functions in this module.
  *
  * @note This function is NOT task-safe and must be called during system initialization.
  * @note The STP_task() should be started after this function completes successfully.
- * @note Ensure FTM timer and GPIO peripherals are initialized before calling this.
  *
  * @return kStatus_Success if initialization is successful.
  *         kStatus_Fail if queue creation fails.
@@ -236,26 +205,19 @@ status_t STP_init(void);
 void STP_task(void* pvParameters);
 
 /**
- * @brief Sends a relative movement command to a stepper motor.
+ * @brief Retrieves the default configuration for a stepper motor handle.
  *
- * This function adds a movement command to the queue for the specified stepper.
- * The movement will be executed asynchronously by the STP_task function.
- * The direction is encoded in the sign of the steps parameter:
- * positive values move counter-clockwise (CCW), negative values move clockwise (CW).
+ * This function populates a STP_StepperConfig_t structure with default values for initializing a
+ * stepper motor control instance.
  *
- * @param[in] handle Pointer to the stepper motor handle.
- * @param[in] steps Number of steps to move (positive=CCW, negative=CW).
+ * @param[out] config Pointer to a STP_StepperConfig_t structure to be filled with default
+ * configuration values. Must not be NULL.
  *
- * @note This function is TASK-SAFE and can be called from any task context.
- * @note The actual movement occurs in the STP_task() and is non-blocking.
- * @warning Multiple calls will queue movements to execute sequentially.
+ * @return kStatus_Success if the default configuration is successfully retrieved.
+ *         kStatus_Fail if the config pointer is NULL.
  *
- * @return kStatus_Success if the command is successfully queued.
- *         kStatus_Fail if the queue is full or an error occurs.
- *
- * @see STP_Direction_t
  */
-status_t STP_move_relative(STP_StepperHandle_t* handle, int32_t steps);
+status_t STP_get_default_config(STP_StepperConfig_t* config);
 
 /**
  * @brief Initializes a stepper motor with the provided configuration.
@@ -264,10 +226,10 @@ status_t STP_move_relative(STP_StepperHandle_t* handle, int32_t steps);
  * The stepper motor will be configured according to the provided parameters.
  *
  * @param[in] config Configuration structure containing stepper parameters.
+ * @param[in] deadline Deadline for the initialization process.
  *
  * @note This function is TASK-SAFE and can be called after STP_init().
  * @note Configuration is applied asynchronously by the STP_task().
- * @warning Do not modify the config structure after calling this function.
  *
  * @return kStatus_Success if the configuration is successfully queued.
  *         kStatus_Fail if the queue is full or an error occurs.
@@ -275,7 +237,7 @@ status_t STP_move_relative(STP_StepperHandle_t* handle, int32_t steps);
  * @see STP_StepperConfig_t
  * @see STP_task()
  */
-status_t STP_init_stepper(STP_StepperConfig_t config);
+status_t STP_init_handle(STP_StepperConfig_t config, TickType_t deadline);
 
 /**
  * @brief Retrieves the stepper motor handle by its label identifier.
@@ -295,7 +257,29 @@ status_t STP_init_stepper(STP_StepperConfig_t config);
  * @see STP_init_stepper()
  * @see STP_StepperHandle_t
  */
-status_t STP_get_handle_by_label(const char* label, STP_StepperHandle_t** handle);
+status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle);
+
+/**
+ * @brief Sends a relative movement command to a stepper motor.
+ *
+ * This function adds a movement command to the queue for the specified stepper.
+ * The movement will be executed asynchronously by the STP_task function.
+ * The direction is encoded in the sign of the steps parameter:
+ * positive values move counter-clockwise (CCW), negative values move clockwise (CW).
+ *
+ * @param[in] handle Stepper motor handle to move
+ * @param[in] steps Number of steps to move (positive=CCW, negative=CW).
+ *
+ * @note This function is TASK-SAFE and can be called from any task context.
+ * @note The actual movement occurs in the STP_task() and is non-blocking.
+ * @warning Multiple calls will queue movements to execute sequentially.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full or an error occurs.
+ *
+ * @see STP_Direction_t
+ */
+status_t STP_move_relative(STP_Handle_t handle, int32_t steps, TickType_t deadline);
 
 /**
  * @brief Stops a stepper motor movement.
@@ -304,7 +288,7 @@ status_t STP_get_handle_by_label(const char* label, STP_StepperHandle_t** handle
  * can be stopped immediately or with a deceleration phase to smoothly bring
  * it to rest, depending on the doDeceleration parameter.
  *
- * @param[in] handle Pointer to the stepper motor handle.
+ * @param[in] handle Stepper motor handle to stop
  * @param[in] doDeceleration If 1, the motor will decelerate to a stop. If 0, the motor
  *                           will stop immediately.
  *
@@ -316,13 +300,124 @@ status_t STP_get_handle_by_label(const char* label, STP_StepperHandle_t** handle
  *
  * @see STP_move_relative()
  */
-status_t STP_stop(STP_StepperHandle_t* handle, uint8_t doDeceleration);
+status_t STP_stop(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadline);
 
-status_t STP_reset_absolute_position(STP_StepperHandle_t* handle);
+/**
+ * @brief Resets the tracked absolute position of a stepper motor to zero.
+ *
+ * This function queues a command that clears the software-maintained
+ * absolute step counter for the selected motor handle.
+ *
+ * @param[in] handle Stepper motor handle whose absolute position is reset.
+ * @param[in] deadline Maximum time to wait for command completion.
+ *
+ * @return kStatus_Success if the command is accepted and completed.
+ *         kStatus_Fail if the command cannot be queued or does not complete before deadline.
+ */
+status_t STP_reset_absolute_position(STP_Handle_t handle, TickType_t deadline);
 
-status_t STP_move_relative_prepare(STP_StepperHandle_t* handle, int32_t steps);
+/**
+ * @brief Prepares a relative movement command without starting motion immediately.
+ *
+ * This function stores a movement command in the prepared state so multiple
+ * motors can be started in a synchronized way with STP_trigger_prepared_moves().
+ *
+ * @param[in] handle Stepper motor handle to prepare.
+ * @param[in] steps Relative step count to prepare (positive=CCW, negative=CW).
+ * @param[in] deadline Maximum time to wait for command completion.
+ *
+ * @return kStatus_Success if the prepare command is accepted.
+ *         kStatus_Fail if the command cannot be queued or completed before deadline.
+ *
+ * @see STP_trigger_prepared_moves()
+ */
+status_t STP_move_relative_prepare(STP_Handle_t handle, int32_t steps, TickType_t deadline);
 
-status_t STP_trigger_prepared_moves(void);
+/**
+ * @brief Starts all previously prepared movements.
+ *
+ * This function triggers queued prepared movement commands, allowing
+ * synchronized motion start across multiple stepper handles.
+ *
+ * @param[in] deadline Maximum time to wait for trigger command completion.
+ *
+ * @return kStatus_Success if prepared movements are triggered successfully.
+ *         kStatus_Fail if the trigger command fails or the deadline is exceeded.
+ */
+status_t STP_trigger_prepared_moves(TickType_t deadline);
+
+/**
+ * @brief Reads the current absolute step position of a motor.
+ *
+ * @param[in] handle Stepper motor handle to query.
+ * @param[out] absoluteSteps Pointer receiving the absolute position in steps.
+ * @param[in] deadline Maximum time to wait for the response.
+ *
+ * @return kStatus_Success if the value is returned successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps, TickType_t deadline);
+
+/**
+ * @brief Gets the configured acceleration of a motor.
+ *
+ * @param[in] handle Stepper motor handle to query.
+ * @param[out] acceleration Pointer receiving acceleration in steps/s^2.
+ * @param[in] deadline Maximum time to wait for the response.
+ *
+ * @return kStatus_Success if the acceleration is returned successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration, TickType_t deadline);
+
+/**
+ * @brief Gets the configured target end velocity of a motor.
+ *
+ * @param[in] handle Stepper motor handle to query.
+ * @param[out] endVelocity Pointer receiving end velocity in steps/s.
+ * @param[in] deadline Maximum time to wait for the response.
+ *
+ * @return kStatus_Success if the end velocity is returned successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_get_end_velocity(STP_Handle_t handle, double* endVelocity, TickType_t deadline);
+
+/**
+ * @brief Retrieves the current movement state of a motor.
+ *
+ * @param[in] handle Stepper motor handle to query.
+ * @param[out] state Pointer receiving the current state.
+ * @param[in] deadline Maximum time to wait for the response.
+ *
+ * @return kStatus_Success if the state is returned successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state,
+                                TickType_t deadline);
+
+/**
+ * @brief Sets the acceleration parameter for a motor.
+ *
+ * @param[in] handle Stepper motor handle to configure.
+ * @param[in] acceleration New acceleration in steps/s^2.
+ * @param[in] deadline Maximum time to wait for command completion.
+ *
+ * @return kStatus_Success if the acceleration is updated successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_set_acceleration(STP_Handle_t handle, double acceleration, TickType_t deadline);
+
+/**
+ * @brief Sets the target end velocity parameter for a motor.
+ *
+ * @param[in] handle Stepper motor handle to configure.
+ * @param[in] endVelocity New end velocity in steps/s.
+ * @param[in] deadline Maximum time to wait for command completion.
+ *
+ * @return kStatus_Success if the end velocity is updated successfully.
+ *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ */
+status_t STP_set_end_velocity(STP_Handle_t handle, double endVelocity, TickType_t deadline);
 
 /** @} */ // End of STEP_Module
 

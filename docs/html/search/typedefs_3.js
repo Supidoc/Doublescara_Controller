@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['edma_5fbandwidth_5ft_0',['edma_bandwidth_t',['../group__edma.html#gabf3ac5063a2c94a947b0f186d5342e42',1,'fsl_edma.h']]],
-  ['edma_5fcallback_1',['edma_callback',['../group__edma.html#gade926ca96c4e5f04e6ce1e693ad3e150',1,'fsl_edma.h']]],
-  ['edma_5fchannel_5flink_5ftype_5ft_2',['edma_channel_link_type_t',['../group__edma.html#gad5a727bf11f63448974a3ef250ddbb7b',1,'fsl_edma.h']]],
-  ['edma_5fchannel_5fpreemption_5fconfig_5ft_3',['edma_channel_Preemption_config_t',['../group__edma.html#gab5ac4e7e71a1aacc83dcbde589442f04',1,'fsl_edma.h']]],
-  ['edma_5fconfig_5ft_4',['edma_config_t',['../group__edma.html#ga88ed7d958816bd050ecd4c279edd2906',1,'fsl_edma.h']]],
-  ['edma_5fhandle_5ft_5',['edma_handle_t',['../group__edma.html#ga2d6acf2a07b74ec46b75c2341e1ef3f8',1,'fsl_edma.h']]],
-  ['edma_5finterrupt_5fenable_5ft_6',['edma_interrupt_enable_t',['../group__edma.html#ga4195139973289fdaa72651fa3e82df3b',1,'fsl_edma.h']]],
-  ['edma_5fminor_5foffset_5fconfig_5ft_7',['edma_minor_offset_config_t',['../group__edma.html#ga87262f31b2e6724d6ee8ae61a043b275',1,'fsl_edma.h']]],
-  ['edma_5fmodulo_5ft_8',['edma_modulo_t',['../group__edma.html#ga6c55eb702201c8d429f5db513f684fd8',1,'fsl_edma.h']]],
-  ['edma_5ftcd_5ft_9',['edma_tcd_t',['../group__edma.html#ga1ac9961fa246cc5c53ec3e7a2ba1b1ca',1,'fsl_edma.h']]],
-  ['edma_5ftransfer_5fconfig_5ft_10',['edma_transfer_config_t',['../group__edma.html#ga35ed507c768d57f7ff38a7322ea6af7f',1,'fsl_edma.h']]],
-  ['edma_5ftransfer_5fsize_5ft_11',['edma_transfer_size_t',['../group__edma.html#ga9cf5de93d1fe2ad5963b04d60a37c74a',1,'fsl_edma.h']]],
-  ['edma_5ftransfer_5ftype_5ft_12',['edma_transfer_type_t',['../group__edma.html#gae662655363f3c334558735103a95f661',1,'fsl_edma.h']]]
+  ['tmc_5fcommandqueueitem_5ft_0',['TMC_CommandQueueItem_t',['../tmc2209_8c.html#a620acf3b0a063631292095c1f8fb463d',1,'tmc2209.c']]],
+  ['tmc_5fcommandtype_5ft_1',['TMC_CommandType_t',['../tmc2209_8c.html#a4c4454ebe4670ded3d790d64a59a80b5',1,'tmc2209.c']]],
+  ['tmc_5fconfig_5ft_2',['TMC_Config_t',['../group__TMC2209__Module.html#ga2c9718556ec3eb0096214699414f8291',1,'tmc2209.h']]],
+  ['tmc_5fhandle_5ft_3',['TMC_Handle_t',['../group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8',1,'tmc2209.h']]],
+  ['tmc_5fhandlearrayitem_5ft_4',['TMC_HandleArrayItem_t',['../tmc2209_8c.html#a9d48c2e045a2e58098dcfa32c46d3a04',1,'tmc2209.c']]],
+  ['tmc_5fhandleimpl_5ft_5',['TMC_HandleImpl_t',['../tmc2209_8c.html#a3608b0fe58ca9c2f3f5ae244efe4e242',1,'tmc2209.c']]],
+  ['tmc_5fmicrostepping_5ft_6',['TMC_MICROSTEPPING_t',['../group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8',1,'tmc2209.h']]],
+  ['tmc_5fread_5fdatagram_5ft_7',['TMC_Read_Datagram_t',['../group__TMC2209__Module.html#gab739de4f2b9cd56f073a922d4a43b518',1,'tmc2209.h']]],
+  ['tmc_5froundingmode_5ft_8',['TMC_RoundingMode_t',['../group__TMC2209__Module.html#ga81726756d4e5751b52c7841141c8e8b1',1,'tmc2209.h']]],
+  ['tmc_5fserialaddress_5ft_9',['TMC_SerialAddress_t',['../group__TMC2209__Module.html#ga6b7bb1e8df5bd1b778b2123d163814ae',1,'tmc2209.h']]],
+  ['tmc_5fwrite_5fdatagram_5ft_10',['TMC_Write_Datagram_t',['../group__TMC2209__Module.html#gae631c2e78c61df94499ae5181e07dc94',1,'tmc2209.h']]]
 ];

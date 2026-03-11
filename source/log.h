@@ -54,7 +54,6 @@
 /**
  * @brief Macros for sending log messages at different log levels without outputting to console.
  */
-
 #define LOG_DEBUG_SILENT(message) LOG_send_log_message(LOG_LEVEL_DEBUG, message, 1)
 #define LOG_INFO_SILENT(message) LOG_send_log_message(LOG_LEVEL_INFO, message, 1)
 #define LOG_WARN_SILENT(message) LOG_send_log_message(LOG_LEVEL_WARN, message, 1)

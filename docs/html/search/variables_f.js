@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['xlog2clicommanddefinition_0',['xLog2CLICommandDefinition',['../log_8c.html#a09545fadddb32b210456f5f309a469db',1,'log.c']]],
-  ['xlogcommanddefinition_1',['xLogCommandDefinition',['../log_8c.html#af5c21309de04a8c4ab6feb925ef9d189',1,'log.c']]],
-  ['xmotormovecommanddefinition_2',['xMotorMoveCommandDefinition',['../motor__test_8c.html#a4b3005edb0f39203d473c92201f59bde',1,'motor_test.c']]],
-  ['xmotorstopcommanddefinition_3',['xMotorStopCommandDefinition',['../motor__test_8c.html#ac0eeea915a1175f15f43f6ac75d8d036',1,'motor_test.c']]],
-  ['xpingcommanddefinition_4',['xPingCommandDefinition',['../cli_8c.html#acb3d9627c2b46551ae41d72b00527bed',1,'cli.c']]]
+  ['velocity_5fdeg_5fper_5fsec_0',['velocity_deg_per_sec',['../struct__MTR__SetVelocityCmdData.html#a8c77c490b0a9c4e46fefb2f7b6c1218f',1,'_MTR_SetVelocityCmdData']]],
+  ['version_1',['version',['../struct__LOG__LogHeaderPrefix.html#ac1221cd14fc1ed3356257690f5eadbfc',1,'_LOG_LogHeaderPrefix::version'],['../struct__LOG__LogHeader.html#a53435b2ea687e8c0654c848aca41c87e',1,'_LOG_LogHeader::version']]]
 ];

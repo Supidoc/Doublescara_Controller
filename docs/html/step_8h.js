@@ -2,17 +2,15 @@ var step_8h =
 [
     [ "STP_ACCEL_TABLE_INTERP_FACTOR", "group__STEP__Module.html#ga133eba57e315066431ed1579c9689ea0", null ],
     [ "STP_ACCEL_TABLE_POOL_SIZE", "group__STEP__Module.html#gaebcc5dd103361004d6a31c3ac589478d", null ],
-    [ "STP_CONFIG_QUEUE_SIZE", "group__STEP__Module.html#ga40840a26152b33c7da5dd5b776950645", null ],
+    [ "STP_CMD_QUEUE_SIZE", "group__STEP__Module.html#ga3a6692a2c857999da7316ed7e2df506a", null ],
     [ "STP_MAX_ACCEL_TABLE_SIZE", "group__STEP__Module.html#ga96f4722e4d8b689802ad458a51537825", null ],
     [ "STP_MAX_HANDLE_COUNT", "group__STEP__Module.html#ga1f9080302b6bc4ca17404d4485c41b67", null ],
     [ "STP_MAX_STEP_FREQUENCY", "group__STEP__Module.html#gafede3ab78553a37273452e08d610c880", null ],
     [ "STP_MIN_STEP_ACCELERATION", "group__STEP__Module.html#ga10acf42d321499d4823ba3e60f59afeb", null ],
-    [ "STP_MOVEMENT_QUEUE_SIZE", "group__STEP__Module.html#ga9be997eb3beb5449a8f3967c3e9050d9", null ],
     [ "STP_Direction_t", "group__STEP__Module.html#gaf161b3a933f177a9faa9ee2d2cadf820", null ],
+    [ "STP_Handle_t", "group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba", null ],
     [ "STP_MovementState_t", "group__STEP__Module.html#ga7ee0dad77eb682a2ea7cdb8f97d02827", null ],
     [ "STP_StepperConfig_t", "group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b", null ],
-    [ "STP_StepperHandle_t", "group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c", null ],
-    [ "STP_StepperMovementHandle_t", "group__STEP__Module.html#ga627ee69989e6ea7ba5765c7d0b276f51", null ],
     [ "_STP_Direction", "group__STEP__Module.html#ga7b8721abdbeb4762357244e1e173f1c6", [
       [ "STP_CLOCKWISE", "group__STEP__Module.html#gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812", null ],
       [ "STP_COUNTERCLOCKWISE", "group__STEP__Module.html#gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54", null ]
@@ -30,10 +28,20 @@ var step_8h =
       [ "STP_MOVEMENT_SUCCESSFUL", "group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f", null ],
       [ "STP_MOVEMENT_FAILED", "group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff", null ]
     ] ],
-    [ "STP_get_handle_by_id", "group__STEP__Module.html#ga68bc94d45c9b49a8a4bda20d4f48250f", null ],
+    [ "STP_get_absolute_steps", "group__STEP__Module.html#ga7da3362dfab0b9c43e86c3cffad6d900", null ],
+    [ "STP_get_acceleration", "group__STEP__Module.html#gac9b96637fd5b28920bb9451771805a38", null ],
+    [ "STP_get_default_config", "group__STEP__Module.html#ga718622f8935169a07606900d30e35dc3", null ],
+    [ "STP_get_end_velocity", "group__STEP__Module.html#ga19a71e4aad9942e06973e93df7c03dcf", null ],
+    [ "STP_get_handle_by_label", "group__STEP__Module.html#ga6c7c41036ed5ec5ca7226a2ca23fbc7d", null ],
+    [ "STP_get_movement_state", "group__STEP__Module.html#ga22f8e0321009758b160999236054a71e", null ],
     [ "STP_init", "group__STEP__Module.html#ga40d24dc2b8326fda6b24d319269ece4d", null ],
-    [ "STP_init_stepper", "group__STEP__Module.html#gada538bfbae08221ae79de50df018f65a", null ],
-    [ "STP_move_relative", "group__STEP__Module.html#gab22f5bf7ff96b5519cfe0d93791201b8", null ],
-    [ "STP_stop", "group__STEP__Module.html#ga184e4d206bdddc25f02e73fb2e180da6", null ],
-    [ "STP_task", "group__STEP__Module.html#gae3c0fdafdd95ef3f90018154fff01e67", null ]
+    [ "STP_init_handle", "group__STEP__Module.html#gad4d5e25d0042f1075181945caae24470", null ],
+    [ "STP_move_relative", "group__STEP__Module.html#ga622248fdfc5a6e2d70efa01bb46fcfbf", null ],
+    [ "STP_move_relative_prepare", "group__STEP__Module.html#ga7786c06c4687c5cbe8c2f4b4e41d99cf", null ],
+    [ "STP_reset_absolute_position", "group__STEP__Module.html#ga0b5737fd19148e1b0afd9b4f3b170951", null ],
+    [ "STP_set_acceleration", "group__STEP__Module.html#ga4afa9904f1d7f5eed5cd42d542e4dae2", null ],
+    [ "STP_set_end_velocity", "group__STEP__Module.html#ga855d48f5ef928db6135bbbce2883ead6", null ],
+    [ "STP_stop", "group__STEP__Module.html#ga567fb9fcd9b23f6926e1973174c4e144", null ],
+    [ "STP_task", "group__STEP__Module.html#gae3c0fdafdd95ef3f90018154fff01e67", null ],
+    [ "STP_trigger_prepared_moves", "group__STEP__Module.html#ga4ff6679a699002150aa8390ad6168055", null ]
 ];

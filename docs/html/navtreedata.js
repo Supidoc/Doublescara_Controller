@@ -38,7 +38,7 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+        [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
@@ -51,8 +51,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"TMC2209__Driver_8c.html",
-"index.html"
+"annotated.html",
+"group__STEP__Module.html#ga7786c06c4687c5cbe8c2f4b4e41d99cf",
+"step_8c.html#ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f",
+"tmc2209_8c.html#a42789bba6d69096f4d0a8b35d7b6a796"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

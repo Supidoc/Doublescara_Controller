@@ -1,0 +1,27 @@
+var motor_8h =
+[
+    [ "MTR_MotorConfig_t", "group__MOTOR__Module.html#gab7b8f555379b16be12ecb2e6ad2da56b", null ],
+    [ "MTR_MotorHandle_t", "group__MOTOR__Module.html#ga80cb43273307560ca13a8df4797c8f54", null ],
+    [ "MTR_MotorStepperConfig_t", "group__MOTOR__Module.html#ga8a4765221bb1f9d6957ab996f3058368", null ],
+    [ "MTR_MotorTmcConfig_t", "group__MOTOR__Module.html#ga8e5d65aeb018ac2da54d039d54cdd31a", null ],
+    [ "MTR_clear_emergency_stop", "group__MOTOR__Module.html#ga838ccbc335d1e72d3499bd5c11de244b", null ],
+    [ "MTR_emergency_stop", "group__MOTOR__Module.html#gaa51d8115cce00df1b0ec80007caaa73b", null ],
+    [ "MTR_get_current_angle", "group__MOTOR__Module.html#gaec2fc35006e4449e96d11e663002d6a4", null ],
+    [ "MTR_get_motor_by_label", "group__MOTOR__Module.html#gac4e0046683c4e47f0ce912ba0e161c5c", null ],
+    [ "MTR_get_movement_state", "group__MOTOR__Module.html#ga9c788c1e551e9e5e14dfb9be9e95f484", null ],
+    [ "MTR_init", "group__MOTOR__Module.html#ga78bd18ddbc517b9abafa26907d7024b7", null ],
+    [ "MTR_init_handle", "group__MOTOR__Module.html#gabf251484d458e43c16a4227c9543cd3b", null ],
+    [ "MTR_is_emergency_stop_active", "group__MOTOR__Module.html#ga9b08e661f73cbeb7f005f6c7e7803adb", null ],
+    [ "MTR_move_absolute_angle", "group__MOTOR__Module.html#ga302f010ac6e1765a66e1cae99e9e9b90", null ],
+    [ "MTR_move_angle", "group__MOTOR__Module.html#gae68f48d296a50522530e07b59b297d50", null ],
+    [ "MTR_move_revolutions", "group__MOTOR__Module.html#ga56fc79dd3588de5e1bf2c4f692729726", null ],
+    [ "MTR_set_acceleration", "group__MOTOR__Module.html#ga896850ef24808712726a0d9b8d8747c1", null ],
+    [ "MTR_set_hold_current", "group__MOTOR__Module.html#gab0e61e1f0e79b5357260bb7a9bf935a2", null ],
+    [ "MTR_set_home_position", "group__MOTOR__Module.html#gaa69b5146e0656c2f170ff33a68c7d104", null ],
+    [ "MTR_set_run_current", "group__MOTOR__Module.html#ga37093ece16c8b809c20dcecabaf97fe4", null ],
+    [ "MTR_set_velocity", "group__MOTOR__Module.html#ga8cbbba9920235dca255b9b4f87b76a5f", null ],
+    [ "MTR_stop", "group__MOTOR__Module.html#ga7884f102317dd28048723fee04ec6975", null ],
+    [ "MTR_synchronized_move", "group__MOTOR__Module.html#ga2cfb0296ca1aed7a4800e3dcf5f99407", null ],
+    [ "MTR_task", "group__MOTOR__Module.html#ga494ccfe2699411bf54f0724b59a6f7bc", null ],
+    [ "MTR_wait_until_stopped", "group__MOTOR__Module.html#ga13335428d208db0545c7dafcbbf57b34", null ]
+];

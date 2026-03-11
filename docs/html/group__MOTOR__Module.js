@@ -1,0 +1,58 @@
+var group__MOTOR__Module =
+[
+    [ "_MTR_MotorTmcConfig", "struct__MTR__MotorTmcConfig.html", [
+      [ "iHoldCurrentA", "struct__MTR__MotorTmcConfig.html#a3fd6aaa3303ac70d2af089bc6e9a4ba1", null ],
+      [ "iRunCurrentA", "struct__MTR__MotorTmcConfig.html#af89f5f4c774ef1e32f517a65837e1dfd", null ],
+      [ "serialAdress", "struct__MTR__MotorTmcConfig.html#a394fd561405ef1c95dbfc3b5beb29b84", null ],
+      [ "uartHandle", "struct__MTR__MotorTmcConfig.html#a194ad126d208ab31730ab1b4a17f8b9d", null ],
+      [ "uartRTOSHandle", "struct__MTR__MotorTmcConfig.html#a7680fa97cd2d2cbde413d15a1233def0", null ]
+    ] ],
+    [ "_MTR_MotorStepperConfig", "struct__MTR__MotorStepperConfig.html", [
+      [ "dirGPIO", "struct__MTR__MotorStepperConfig.html#a1085db1d566a7321c92e6593952a6bcc", null ],
+      [ "dirLogicHighClockwise", "struct__MTR__MotorStepperConfig.html#a430318c6a4dbc577b0f62c00690307d3", null ],
+      [ "dirMux", "struct__MTR__MotorStepperConfig.html#ae4712fc8ef17cbea90657e8285dd4ce7", null ],
+      [ "dirPin", "struct__MTR__MotorStepperConfig.html#a6c453d22b715485a83ff3395c6e6bb31", null ],
+      [ "dirPort", "struct__MTR__MotorStepperConfig.html#af49c608492bcbb7efa526db102fb92c3", null ],
+      [ "ftmBase", "struct__MTR__MotorStepperConfig.html#a1df0d9b2b63574642c188865e8afd344", null ],
+      [ "ftmChannel", "struct__MTR__MotorStepperConfig.html#a97f54898230db144e5cbe48d570925ee", null ],
+      [ "stepGPIO", "struct__MTR__MotorStepperConfig.html#ad1ad58713661e819714d2b97a7349bf8", null ],
+      [ "stepMuxFTM", "struct__MTR__MotorStepperConfig.html#a192bc01c2ab5aae65463bffa84414ae5", null ],
+      [ "stepMuxGPIO", "struct__MTR__MotorStepperConfig.html#a4a5d7d229b60fa8931618db13b133470", null ],
+      [ "stepPin", "struct__MTR__MotorStepperConfig.html#ada4577201d599814dad748b4ca928ee7", null ],
+      [ "stepPort", "struct__MTR__MotorStepperConfig.html#a40a0f220c6927c6d14f80e25f5e5ba01", null ]
+    ] ],
+    [ "_MTR_MotorConfig", "struct__MTR__MotorConfig.html", [
+      [ "acceleration", "struct__MTR__MotorConfig.html#ae02e34ffa7a31107a22360d58e99f8da", null ],
+      [ "endVelocity", "struct__MTR__MotorConfig.html#af880f443b638357fa3b05aa01cee50ab", null ],
+      [ "label", "struct__MTR__MotorConfig.html#a056555d270ae3eeba6df3c64f56715e9", null ],
+      [ "microstep", "struct__MTR__MotorConfig.html#a33a1999cae89abb7f352f30d1358d1b6", null ],
+      [ "reductionFactor", "struct__MTR__MotorConfig.html#a709d3bcd730c3e06ef9653b4499557f8", null ],
+      [ "stepAngle", "struct__MTR__MotorConfig.html#a424bbb11a5c2ee1830605ed4f926400a", null ],
+      [ "stepperConfig", "struct__MTR__MotorConfig.html#ac300a364bd4cf4d6d6260f97e76a4b51", null ],
+      [ "tmcConfig", "struct__MTR__MotorConfig.html#a298e27bddb385046d861b572b888f301", null ]
+    ] ],
+    [ "MTR_MotorConfig_t", "group__MOTOR__Module.html#gab7b8f555379b16be12ecb2e6ad2da56b", null ],
+    [ "MTR_MotorHandle_t", "group__MOTOR__Module.html#ga80cb43273307560ca13a8df4797c8f54", null ],
+    [ "MTR_MotorStepperConfig_t", "group__MOTOR__Module.html#ga8a4765221bb1f9d6957ab996f3058368", null ],
+    [ "MTR_MotorTmcConfig_t", "group__MOTOR__Module.html#ga8e5d65aeb018ac2da54d039d54cdd31a", null ],
+    [ "MTR_clear_emergency_stop", "group__MOTOR__Module.html#ga838ccbc335d1e72d3499bd5c11de244b", null ],
+    [ "MTR_emergency_stop", "group__MOTOR__Module.html#gaa51d8115cce00df1b0ec80007caaa73b", null ],
+    [ "MTR_get_current_angle", "group__MOTOR__Module.html#gaec2fc35006e4449e96d11e663002d6a4", null ],
+    [ "MTR_get_motor_by_label", "group__MOTOR__Module.html#gac4e0046683c4e47f0ce912ba0e161c5c", null ],
+    [ "MTR_get_movement_state", "group__MOTOR__Module.html#ga9c788c1e551e9e5e14dfb9be9e95f484", null ],
+    [ "MTR_init", "group__MOTOR__Module.html#ga78bd18ddbc517b9abafa26907d7024b7", null ],
+    [ "MTR_init_handle", "group__MOTOR__Module.html#gabf251484d458e43c16a4227c9543cd3b", null ],
+    [ "MTR_is_emergency_stop_active", "group__MOTOR__Module.html#ga9b08e661f73cbeb7f005f6c7e7803adb", null ],
+    [ "MTR_move_absolute_angle", "group__MOTOR__Module.html#ga302f010ac6e1765a66e1cae99e9e9b90", null ],
+    [ "MTR_move_angle", "group__MOTOR__Module.html#gae68f48d296a50522530e07b59b297d50", null ],
+    [ "MTR_move_revolutions", "group__MOTOR__Module.html#ga56fc79dd3588de5e1bf2c4f692729726", null ],
+    [ "MTR_set_acceleration", "group__MOTOR__Module.html#ga896850ef24808712726a0d9b8d8747c1", null ],
+    [ "MTR_set_hold_current", "group__MOTOR__Module.html#gab0e61e1f0e79b5357260bb7a9bf935a2", null ],
+    [ "MTR_set_home_position", "group__MOTOR__Module.html#gaa69b5146e0656c2f170ff33a68c7d104", null ],
+    [ "MTR_set_run_current", "group__MOTOR__Module.html#ga37093ece16c8b809c20dcecabaf97fe4", null ],
+    [ "MTR_set_velocity", "group__MOTOR__Module.html#ga8cbbba9920235dca255b9b4f87b76a5f", null ],
+    [ "MTR_stop", "group__MOTOR__Module.html#ga7884f102317dd28048723fee04ec6975", null ],
+    [ "MTR_synchronized_move", "group__MOTOR__Module.html#ga2cfb0296ca1aed7a4800e3dcf5f99407", null ],
+    [ "MTR_task", "group__MOTOR__Module.html#ga494ccfe2699411bf54f0724b59a6f7bc", null ],
+    [ "MTR_wait_until_stopped", "group__MOTOR__Module.html#ga13335428d208db0545c7dafcbbf57b34", null ]
+];

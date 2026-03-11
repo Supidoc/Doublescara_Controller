@@ -98,10 +98,11 @@ $(function(){initNavTree('step_8c.html','',''); });
 <code>#include &quot;peripherals.h&quot;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
 <code>#include &quot;string.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="task__helpers_8h_source.html">task_helpers.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for step.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="step_8c__incl.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="step_8c__incl.svg" width="100%" height="499"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="step_8c_source.html">Go to the source code of this file.</a></p>
@@ -110,10 +111,16 @@ Include dependency graph for step.c:</div>
 Classes</h2></td></tr>
 <tr class="memitem:_5FSTP_5FMoveCmdData" id="r__5FSTP_5FMoveCmdData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__MoveCmdData.html">_STP_MoveCmdData</a></td></tr>
 <tr class="memitem:_5FSTP_5FStopCmdData" id="r__5FSTP_5FStopCmdData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__StopCmdData.html">_STP_StopCmdData</a></td></tr>
+<tr class="memitem:_5FSTP_5FInitHandleCmdData" id="r__5FSTP_5FInitHandleCmdData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__InitHandleCmdData.html">_STP_InitHandleCmdData</a></td></tr>
+<tr class="memitem:_5FSTP_5FSetAccelerationCmdData" id="r__5FSTP_5FSetAccelerationCmdData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__SetAccelerationCmdData.html">_STP_SetAccelerationCmdData</a></td></tr>
+<tr class="memitem:_5FSTP_5FSetEndVelocityCmdData" id="r__5FSTP_5FSetEndVelocityCmdData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__SetEndVelocityCmdData.html">_STP_SetEndVelocityCmdData</a></td></tr>
 <tr class="memitem:_5FSTP_5FCmdQueueItem" id="r__5FSTP_5FCmdQueueItem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__CmdQueueItem.html">_STP_CmdQueueItem</a></td></tr>
-<tr class="memitem:_5FSTP_5FHandlesArrayItem" id="r__5FSTP_5FHandlesArrayItem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__HandlesArrayItem.html">_STP_HandlesArrayItem</a></td></tr>
 <tr class="memitem:_5FSTP_5FAccelTablePoolItem" id="r__5FSTP_5FAccelTablePoolItem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__AccelTablePoolItem.html">_STP_AccelTablePoolItem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pool item for static acceleration lookup tables.  <a href="struct__STP__AccelTablePoolItem.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSTP_5FStepperMovement" id="r__5FSTP_5FStepperMovement"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__StepperMovement.html">_STP_StepperMovement</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for tracking stepper motor movement state and parameters.  <a href="struct__STP__StepperMovement.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSTP_5FStepperHandleImpl" id="r__5FSTP_5FStepperHandleImpl"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__StepperHandleImpl.html">_STP_StepperHandleImpl</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle structure for a stepper motor instance.  <a href="struct__STP__StepperHandleImpl.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSTP_5FHandlesArrayItem" id="r__5FSTP_5FHandlesArrayItem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__STP__HandlesArrayItem.html">_STP_HandlesArrayItem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -127,63 +134,95 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a28d0770a77db2b2d164e65ea4f7fb48b" id="r_a28d0770a77db2b2d164e65ea4f7fb48b"><td class="memItemLeft">typedef enum <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7">_STP_CmdType</a>&#160;</td><td class="memItemRight"><a class="el" href="#a28d0770a77db2b2d164e65ea4f7fb48b">STP_CmdType_t</a></td></tr>
 <tr class="memitem:a3c649ff9eed2e379f833048cb9c33e13" id="r_a3c649ff9eed2e379f833048cb9c33e13"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__MoveCmdData.html">_STP_MoveCmdData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3c649ff9eed2e379f833048cb9c33e13">STP_MoveCmdData_t</a></td></tr>
 <tr class="memitem:a95360ef9659b5071971a756f1aeedbc3" id="r_a95360ef9659b5071971a756f1aeedbc3"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__StopCmdData.html">_STP_StopCmdData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a95360ef9659b5071971a756f1aeedbc3">STP_StopCmdData_t</a></td></tr>
+<tr class="memitem:ab0cd7ff00602609459729d1224927c14" id="r_ab0cd7ff00602609459729d1224927c14"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__InitHandleCmdData.html">_STP_InitHandleCmdData</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab0cd7ff00602609459729d1224927c14">STP_InitHandleCmdData_t</a></td></tr>
+<tr class="memitem:a87d238ac84a7b2846610d2c9962ae104" id="r_a87d238ac84a7b2846610d2c9962ae104"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__SetAccelerationCmdData.html">_STP_SetAccelerationCmdData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a87d238ac84a7b2846610d2c9962ae104">STP_SetAccelerationCmdData_t</a></td></tr>
+<tr class="memitem:a4330914c2b22fa38b0ef1c7c1a224b6c" id="r_a4330914c2b22fa38b0ef1c7c1a224b6c"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__SetEndVelocityCmdData.html">_STP_SetEndVelocityCmdData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4330914c2b22fa38b0ef1c7c1a224b6c">STP_SetEndVelocityCmdData_t</a></td></tr>
 <tr class="memitem:a4a1e878ffc17b5c90cdd0964d1a843f8" id="r_a4a1e878ffc17b5c90cdd0964d1a843f8"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__CmdQueueItem.html">_STP_CmdQueueItem</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4a1e878ffc17b5c90cdd0964d1a843f8">STP_CmdQueueItem_t</a></td></tr>
-<tr class="memitem:accb1eaaa512044d26829364f7c039b76" id="r_accb1eaaa512044d26829364f7c039b76"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__HandlesArrayItem.html">_STP_HandlesArrayItem</a>&#160;</td><td class="memItemRight"><a class="el" href="#accb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a></td></tr>
 <tr class="memitem:aa30dbdeec091aaf82af82e7410e3bf2c" id="r_aa30dbdeec091aaf82af82e7410e3bf2c"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__AccelTablePoolItem.html">_STP_AccelTablePoolItem</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa30dbdeec091aaf82af82e7410e3bf2c">STP_AccelTablePoolItem_t</a></td></tr>
-<tr class="memdesc:aa30dbdeec091aaf82af82e7410e3bf2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pool item for static acceleration lookup tables.  <br /></td></tr>
+<tr class="memitem:ac52d87d35d26abf504574cc9206ecead" id="r_ac52d87d35d26abf504574cc9206ecead"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__StepperMovement.html">_STP_StepperMovement</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac52d87d35d26abf504574cc9206ecead">STP_StepperMovement_t</a></td></tr>
+<tr class="memdesc:ac52d87d35d26abf504574cc9206ecead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for tracking stepper motor movement state and parameters.  <br /></td></tr>
+<tr class="memitem:a442713085b833b1faae8f6b0f1269522" id="r_a442713085b833b1faae8f6b0f1269522"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__StepperHandleImpl.html">_STP_StepperHandleImpl</a>&#160;</td><td class="memItemRight"><a class="el" href="#a442713085b833b1faae8f6b0f1269522">STP_StepperHandleImpl_t</a></td></tr>
+<tr class="memdesc:a442713085b833b1faae8f6b0f1269522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle structure for a stepper motor instance.  <br /></td></tr>
+<tr class="memitem:accb1eaaa512044d26829364f7c039b76" id="r_accb1eaaa512044d26829364f7c039b76"><td class="memItemLeft">typedef struct <a class="el" href="struct__STP__HandlesArrayItem.html">_STP_HandlesArrayItem</a>&#160;</td><td class="memItemRight"><a class="el" href="#accb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ac619e3142c0e69b20136d0794b134aa7" id="r_ac619e3142c0e69b20136d0794b134aa7"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ac619e3142c0e69b20136d0794b134aa7">_STP_CmdType</a> { <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5">STP_CMD_MOVE</a>
+<tr class="memitem:ac619e3142c0e69b20136d0794b134aa7" id="r_ac619e3142c0e69b20136d0794b134aa7"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ac619e3142c0e69b20136d0794b134aa7">_STP_CmdType</a> { <br />
+&#160;&#160;<a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5">STP_CMD_MOVE</a>
 , <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f">STP_CMD_STOP</a>
+, <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9">STP_CMD_MOVE_PREPARE</a>
+, <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d">STP_CMD_TRIGGER_START</a>
+, <br />
+&#160;&#160;<a class="el" href="#ac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24">STP_CMD_INIT_HANDLE</a>
+, <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686">STP_CMD_SET_ACCELERATION</a>
+, <a class="el" href="#ac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98">STP_CMD_SET_END_VELOCITY</a>
+<br />
  }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1b68168e888209a026ad88634f11eafb" id="r_a1b68168e888209a026ad88634f11eafb"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a1b68168e888209a026ad88634f11eafb">init_handle</a> (const <a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> *config)</td></tr>
-<tr class="memitem:aaa8f060483887cc3169699d2381a581f" id="r_aaa8f060483887cc3169699d2381a581f"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aaa8f060483887cc3169699d2381a581f">step_pin_mux_gpio</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:ad6fecfbfb17b4c527362a2df1a36f826" id="r_ad6fecfbfb17b4c527362a2df1a36f826"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#ad6fecfbfb17b4c527362a2df1a36f826">step_pin_mux_ftm</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a64a54f3a596d785588cd1ed8c66a6f9e" id="r_a64a54f3a596d785588cd1ed8c66a6f9e"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a64a54f3a596d785588cd1ed8c66a6f9e">plan_motion_profile</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
+<tr class="memitem:a331ab04c818f0194c1eaa24d977843fb" id="r_a331ab04c818f0194c1eaa24d977843fb"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a331ab04c818f0194c1eaa24d977843fb">init_handle</a> (const <a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> config, TickType_t deadline)</td></tr>
+<tr class="memitem:ae1f6a35fc922b343703a0f3843cf757b" id="r_ae1f6a35fc922b343703a0f3843cf757b"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#ae1f6a35fc922b343703a0f3843cf757b">step_pin_mux_gpio</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:a1e9734fa87cb7c5209baef5add2d254d" id="r_a1e9734fa87cb7c5209baef5add2d254d"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a1e9734fa87cb7c5209baef5add2d254d">step_pin_mux_ftm</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:acfb245efbd9bf8ea73ec96baa3db4f3a" id="r_acfb245efbd9bf8ea73ec96baa3db4f3a"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#acfb245efbd9bf8ea73ec96baa3db4f3a">plan_motion_profile</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
 <tr class="memitem:a2d08a460c866d6442e4a3d5a57cd97a5" id="r_a2d08a460c866d6442e4a3d5a57cd97a5"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a2d08a460c866d6442e4a3d5a57cd97a5">calculate_acceleration_profile</a> (uint16_t *lookupTable, uint32_t numSteps, uint16_t stepZeroDelay, uint16_t endVelocityDelay)</td></tr>
 <tr class="memitem:a47a18d328f3e0085135f6b5a74bc7255" id="r_a47a18d328f3e0085135f6b5a74bc7255"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a47a18d328f3e0085135f6b5a74bc7255">allocate_accel_table</a> (uint32_t tableSize, int8_t *poolIndex)</td></tr>
 <tr class="memitem:ae09089881e135a335d2f5b9a30ce381f" id="r_ae09089881e135a335d2f5b9a30ce381f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ae09089881e135a335d2f5b9a30ce381f">free_accel_table</a> (int8_t poolIndex)</td></tr>
-<tr class="memitem:ab9ba4bc5d5a24905d852fc70efc02d3e" id="r_ab9ba4bc5d5a24905d852fc70efc02d3e"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#ab9ba4bc5d5a24905d852fc70efc02d3e">start_steps</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a66296a7c6754045a6501b7a26eedb4de" id="r_a66296a7c6754045a6501b7a26eedb4de"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a66296a7c6754045a6501b7a26eedb4de">get_handle_from_timer</a> (FTM_Type *ftmBase, ftm_chnl_t ftmChannel, <a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> **handle)</td></tr>
-<tr class="memitem:a4aa1d8727e141ede64c144f9c697539b" id="r_a4aa1d8727e141ede64c144f9c697539b"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a4aa1d8727e141ede64c144f9c697539b">reset_movement_handle</a> (<a class="el" href="group__STEP__Module.html#ga627ee69989e6ea7ba5765c7d0b276f51">STP_StepperMovementHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a5c15b423b38f5097a4790c35c1161231" id="r_a5c15b423b38f5097a4790c35c1161231"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a5c15b423b38f5097a4790c35c1161231">process_movement</a> (void)</td></tr>
-<tr class="memitem:a29357584de349bef8e194e9c7f2d2a44" id="r_a29357584de349bef8e194e9c7f2d2a44"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a29357584de349bef8e194e9c7f2d2a44">process_config</a> (void)</td></tr>
-<tr class="memitem:afee64a5b2eb78cc1bd1cf1031fd142d9" id="r_afee64a5b2eb78cc1bd1cf1031fd142d9"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#afee64a5b2eb78cc1bd1cf1031fd142d9">init_dir_pin</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:aae856c682c28f7bc05fd0e302201c591" id="r_aae856c682c28f7bc05fd0e302201c591"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aae856c682c28f7bc05fd0e302201c591">set_direction_pin</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a1644230654a6269c7ed2b9b44b6c95da" id="r_a1644230654a6269c7ed2b9b44b6c95da"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a1644230654a6269c7ed2b9b44b6c95da">init_step_pin</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a535044583cadc710fea45666c94131d4" id="r_a535044583cadc710fea45666c94131d4"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a535044583cadc710fea45666c94131d4">calculate_step_profile</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle)</td></tr>
-<tr class="memitem:a443991e39293f31b6839d480960d7a7c" id="r_a443991e39293f31b6839d480960d7a7c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a443991e39293f31b6839d480960d7a7c">calculate_delays</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint16_t *stepZeroDelay, uint16_t *endVelocityDelay)</td></tr>
-<tr class="memitem:a50c6f6b369b9b4e89e68be623193fef3" id="r_a50c6f6b369b9b4e89e68be623193fef3"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a50c6f6b369b9b4e89e68be623193fef3">calculate_acceleration_table_parameters</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint32_t *interpFactor, uint32_t *tableSize)</td></tr>
-<tr class="memitem:a090575ff77c299042d8fc6399fd64695" id="r_a090575ff77c299042d8fc6399fd64695"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a090575ff77c299042d8fc6399fd64695">create_accel_table</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint32_t tableSize, uint16_t stepZeroDelay, uint16_t endVelocityDelay, int8_t *poolIndex)</td></tr>
+<tr class="memitem:aa9ae1d4d2005d2e3e2dc01792c68c83f" id="r_aa9ae1d4d2005d2e3e2dc01792c68c83f"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aa9ae1d4d2005d2e3e2dc01792c68c83f">start_steps</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:a4addfaa1cd32089f48149435915badab" id="r_a4addfaa1cd32089f48149435915badab"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a4addfaa1cd32089f48149435915badab">get_handle_from_timer</a> (FTM_Type *ftmBase, ftm_chnl_t ftmChannel, <a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> *handle)</td></tr>
+<tr class="memitem:a21aaa63877a5905ca82f28a059d53bbd" id="r_a21aaa63877a5905ca82f28a059d53bbd"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a21aaa63877a5905ca82f28a059d53bbd">reset_movement_handle</a> (<a class="el" href="#ac52d87d35d26abf504574cc9206ecead">STP_StepperMovement_t</a> *handle)</td></tr>
+<tr class="memitem:a6ef0387bd645347b1a61efc620315993" id="r_a6ef0387bd645347b1a61efc620315993"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a6ef0387bd645347b1a61efc620315993">process</a> (void)</td></tr>
+<tr class="memitem:adba1d68dbe985d96ff4d586237e05600" id="r_adba1d68dbe985d96ff4d586237e05600"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#adba1d68dbe985d96ff4d586237e05600">init_dir_pin</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:aa903c1cb5703b8d75214d06d4b3573d4" id="r_aa903c1cb5703b8d75214d06d4b3573d4"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aa903c1cb5703b8d75214d06d4b3573d4">set_direction_pin</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:a6277757e5ae26d0cbba3d4d62dc45912" id="r_a6277757e5ae26d0cbba3d4d62dc45912"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a6277757e5ae26d0cbba3d4d62dc45912">init_step_pin</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:a23936a7816b4f883b70bf25212345ec3" id="r_a23936a7816b4f883b70bf25212345ec3"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a23936a7816b4f883b70bf25212345ec3">calculate_step_profile</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:a012866f418e6967b0eaa5034181b7b55" id="r_a012866f418e6967b0eaa5034181b7b55"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a012866f418e6967b0eaa5034181b7b55">calculate_delays</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, uint16_t *stepZeroDelay, uint16_t *endVelocityDelay)</td></tr>
+<tr class="memitem:a5348de51178f0f8ebf2b46b808d8be8a" id="r_a5348de51178f0f8ebf2b46b808d8be8a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a5348de51178f0f8ebf2b46b808d8be8a">calculate_acceleration_table_parameters</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, uint32_t *interpFactor, uint32_t *tableSize)</td></tr>
+<tr class="memitem:aef71ea66299390c4c59ba15393955dba" id="r_aef71ea66299390c4c59ba15393955dba"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aef71ea66299390c4c59ba15393955dba">create_accel_table</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, uint32_t tableSize, uint16_t stepZeroDelay, uint16_t endVelocityDelay, int8_t *poolIndex)</td></tr>
 <tr class="memitem:aec411a881b3aaf231cabef1dbbfcf89f" id="r_aec411a881b3aaf231cabef1dbbfcf89f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#aec411a881b3aaf231cabef1dbbfcf89f">update_isr_handle_cache</a> (void)</td></tr>
-<tr class="memitem:ga40d24dc2b8326fda6b24d319269ece4d" id="r_ga40d24dc2b8326fda6b24d319269ece4d"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga40d24dc2b8326fda6b24d319269ece4d">STP_init</a> ()</td></tr>
-<tr class="memdesc:ga40d24dc2b8326fda6b24d319269ece4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the stepper motor control module.  <br /></td></tr>
+<tr class="memitem:a3fb95aaa3f8cecda9ad30ea62a4757e5" id="r_a3fb95aaa3f8cecda9ad30ea62a4757e5"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a3fb95aaa3f8cecda9ad30ea62a4757e5">reset_absolute_position</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle)</td></tr>
+<tr class="memitem:ad680f5e53fc79d312053b987c7c8c4a7" id="r_ad680f5e53fc79d312053b987c7c8c4a7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad680f5e53fc79d312053b987c7c8c4a7">__attribute__</a> ((section(&quot;.accelTables&quot;)))</td></tr>
 <tr class="memitem:gae3c0fdafdd95ef3f90018154fff01e67" id="r_gae3c0fdafdd95ef3f90018154fff01e67"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#gae3c0fdafdd95ef3f90018154fff01e67">STP_task</a> (void *pvParameters)</td></tr>
 <tr class="memdesc:gae3c0fdafdd95ef3f90018154fff01e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function for processing stepper motor commands.  <br /></td></tr>
-<tr class="memitem:ga184e4d206bdddc25f02e73fb2e180da6" id="r_ga184e4d206bdddc25f02e73fb2e180da6"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga184e4d206bdddc25f02e73fb2e180da6">STP_stop</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint8_t doDeceleration)</td></tr>
-<tr class="memdesc:ga184e4d206bdddc25f02e73fb2e180da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops a stepper motor movement.  <br /></td></tr>
-<tr class="memitem:gab22f5bf7ff96b5519cfe0d93791201b8" id="r_gab22f5bf7ff96b5519cfe0d93791201b8"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#gab22f5bf7ff96b5519cfe0d93791201b8">STP_move_relative</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint32_t stepCount, <a class="el" href="group__STEP__Module.html#gaf161b3a933f177a9faa9ee2d2cadf820">STP_Direction_t</a> direction)</td></tr>
-<tr class="memdesc:gab22f5bf7ff96b5519cfe0d93791201b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a relative movement command to a stepper motor.  <br /></td></tr>
-<tr class="memitem:gada538bfbae08221ae79de50df018f65a" id="r_gada538bfbae08221ae79de50df018f65a"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#gada538bfbae08221ae79de50df018f65a">STP_init_stepper</a> (<a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> config)</td></tr>
-<tr class="memdesc:gada538bfbae08221ae79de50df018f65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a stepper motor with the provided configuration.  <br /></td></tr>
-<tr class="memitem:ga68bc94d45c9b49a8a4bda20d4f48250f" id="r_ga68bc94d45c9b49a8a4bda20d4f48250f"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga68bc94d45c9b49a8a4bda20d4f48250f">STP_get_handle_by_id</a> (const char *label, <a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> **handle)</td></tr>
-<tr class="memdesc:ga68bc94d45c9b49a8a4bda20d4f48250f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the stepper motor handle by its label identifier.  <br /></td></tr>
+<tr class="memitem:ga567fb9fcd9b23f6926e1973174c4e144" id="r_ga567fb9fcd9b23f6926e1973174c4e144"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga567fb9fcd9b23f6926e1973174c4e144">STP_stop</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, uint8_t doDeceleration, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga567fb9fcd9b23f6926e1973174c4e144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops a stepper motor movement.  <br /></td></tr>
+<tr class="memitem:ga622248fdfc5a6e2d70efa01bb46fcfbf" id="r_ga622248fdfc5a6e2d70efa01bb46fcfbf"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga622248fdfc5a6e2d70efa01bb46fcfbf">STP_move_relative</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, int32_t steps, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga622248fdfc5a6e2d70efa01bb46fcfbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a relative movement command to a stepper motor.  <br /></td></tr>
+<tr class="memitem:gad4d5e25d0042f1075181945caae24470" id="r_gad4d5e25d0042f1075181945caae24470"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#gad4d5e25d0042f1075181945caae24470">STP_init_handle</a> (<a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> config, TickType_t deadline)</td></tr>
+<tr class="memdesc:gad4d5e25d0042f1075181945caae24470"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a stepper motor with the provided configuration.  <br /></td></tr>
+<tr class="memitem:ga6c7c41036ed5ec5ca7226a2ca23fbc7d" id="r_ga6c7c41036ed5ec5ca7226a2ca23fbc7d"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga6c7c41036ed5ec5ca7226a2ca23fbc7d">STP_get_handle_by_label</a> (const char *label, <a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> *handle)</td></tr>
+<tr class="memdesc:ga6c7c41036ed5ec5ca7226a2ca23fbc7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the stepper motor handle by its label identifier.  <br /></td></tr>
+<tr class="memitem:ga0b5737fd19148e1b0afd9b4f3b170951" id="r_ga0b5737fd19148e1b0afd9b4f3b170951"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga0b5737fd19148e1b0afd9b4f3b170951">STP_reset_absolute_position</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga0b5737fd19148e1b0afd9b4f3b170951"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the tracked absolute position of a stepper motor to zero.  <br /></td></tr>
+<tr class="memitem:ga7786c06c4687c5cbe8c2f4b4e41d99cf" id="r_ga7786c06c4687c5cbe8c2f4b4e41d99cf"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga7786c06c4687c5cbe8c2f4b4e41d99cf">STP_move_relative_prepare</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, int32_t steps, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga7786c06c4687c5cbe8c2f4b4e41d99cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares a relative movement command without starting motion immediately.  <br /></td></tr>
+<tr class="memitem:ga4ff6679a699002150aa8390ad6168055" id="r_ga4ff6679a699002150aa8390ad6168055"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga4ff6679a699002150aa8390ad6168055">STP_trigger_prepared_moves</a> (TickType_t deadline)</td></tr>
+<tr class="memdesc:ga4ff6679a699002150aa8390ad6168055"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts all previously prepared movements.  <br /></td></tr>
+<tr class="memitem:ga7da3362dfab0b9c43e86c3cffad6d900" id="r_ga7da3362dfab0b9c43e86c3cffad6d900"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga7da3362dfab0b9c43e86c3cffad6d900">STP_get_absolute_steps</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, int32_t *absoluteSteps, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga7da3362dfab0b9c43e86c3cffad6d900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the current absolute step position of a motor.  <br /></td></tr>
+<tr class="memitem:gac9b96637fd5b28920bb9451771805a38" id="r_gac9b96637fd5b28920bb9451771805a38"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#gac9b96637fd5b28920bb9451771805a38">STP_get_acceleration</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, double *acceleration, TickType_t deadline)</td></tr>
+<tr class="memdesc:gac9b96637fd5b28920bb9451771805a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the configured acceleration of a motor.  <br /></td></tr>
+<tr class="memitem:ga19a71e4aad9942e06973e93df7c03dcf" id="r_ga19a71e4aad9942e06973e93df7c03dcf"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga19a71e4aad9942e06973e93df7c03dcf">STP_get_end_velocity</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, double *endVelocity, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga19a71e4aad9942e06973e93df7c03dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the configured target end velocity of a motor.  <br /></td></tr>
+<tr class="memitem:ga22f8e0321009758b160999236054a71e" id="r_ga22f8e0321009758b160999236054a71e"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga22f8e0321009758b160999236054a71e">STP_get_movement_state</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, <a class="el" href="group__STEP__Module.html#ga7ee0dad77eb682a2ea7cdb8f97d02827">STP_MovementState_t</a> *state, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga22f8e0321009758b160999236054a71e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current movement state of a motor.  <br /></td></tr>
+<tr class="memitem:ga4afa9904f1d7f5eed5cd42d542e4dae2" id="r_ga4afa9904f1d7f5eed5cd42d542e4dae2"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga4afa9904f1d7f5eed5cd42d542e4dae2">STP_set_acceleration</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, double acceleration, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga4afa9904f1d7f5eed5cd42d542e4dae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the acceleration parameter for a motor.  <br /></td></tr>
+<tr class="memitem:ga855d48f5ef928db6135bbbce2883ead6" id="r_ga855d48f5ef928db6135bbbce2883ead6"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga855d48f5ef928db6135bbbce2883ead6">STP_set_end_velocity</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, double endVelocity, TickType_t deadline)</td></tr>
+<tr class="memdesc:ga855d48f5ef928db6135bbbce2883ead6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the target end velocity parameter for a motor.  <br /></td></tr>
+<tr class="memitem:ga718622f8935169a07606900d30e35dc3" id="r_ga718622f8935169a07606900d30e35dc3"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__STEP__Module.html#ga718622f8935169a07606900d30e35dc3">STP_get_default_config</a> (<a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> *config)</td></tr>
+<tr class="memdesc:ga718622f8935169a07606900d30e35dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the default configuration for a stepper motor handle.  <br /></td></tr>
 <tr class="memitem:a889cb58d52a26f7eaa5ea6319c9e0f29" id="r_a889cb58d52a26f7eaa5ea6319c9e0f29"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a889cb58d52a26f7eaa5ea6319c9e0f29">FTM3_IRQHandler</a> (void)</td></tr>
-<tr class="memitem:a071a60c29b068bf21f820a13eaf47e6b" id="r_a071a60c29b068bf21f820a13eaf47e6b"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a071a60c29b068bf21f820a13eaf47e6b">stop_steps</a> (<a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *handle, uint8_t doDeceleration)</td></tr>
+<tr class="memitem:a61964b6e0df06d18ef1522c5eef09cfb" id="r_a61964b6e0df06d18ef1522c5eef09cfb"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a61964b6e0df06d18ef1522c5eef09cfb">stop_steps</a> (<a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> handle, uint8_t doDeceleration)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a53e76081d475aef890072a6c88aa3c64" id="r_a53e76081d475aef890072a6c88aa3c64"><td class="memItemLeft"><a class="el" href="#accb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a53e76081d475aef890072a6c88aa3c64">handles</a> [<a class="el" href="group__STEP__Module.html#ga1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td></tr>
-<tr class="memitem:a138cc0dfc0b56f7f1fa610e8275f7e06" id="r_a138cc0dfc0b56f7f1fa610e8275f7e06"><td class="memItemLeft"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a138cc0dfc0b56f7f1fa610e8275f7e06">testHandler</a></td></tr>
-<tr class="memitem:aeb86091cfe0c5168e3dc293683af1f6b" id="r_aeb86091cfe0c5168e3dc293683af1f6b"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeb86091cfe0c5168e3dc293683af1f6b">cmdQueue</a> = NULL</td></tr>
-<tr class="memitem:aa56fb4fc84752e009a44d92ab5746b6a" id="r_aa56fb4fc84752e009a44d92ab5746b6a"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aa56fb4fc84752e009a44d92ab5746b6a">configQueue</a> = NULL</td></tr>
-<tr class="memitem:abdfcd72eae8af0e607208d5f76c75be0" id="r_abdfcd72eae8af0e607208d5f76c75be0"><td class="memItemLeft"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *&#160;</td><td class="memItemRight"><a class="el" href="#abdfcd72eae8af0e607208d5f76c75be0">FTM3_ISR_handle_cache</a> [8]</td></tr>
-<tr class="memitem:a1d158ecf1936b775fdaf7688f2135161" id="r_a1d158ecf1936b775fdaf7688f2135161"><td class="memItemLeft">static <a class="el" href="#aa30dbdeec091aaf82af82e7410e3bf2c">STP_AccelTablePoolItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1d158ecf1936b775fdaf7688f2135161">accelTablePool</a> [<a class="el" href="group__STEP__Module.html#gaebcc5dd103361004d6a31c3ac589478d">STP_ACCEL_TABLE_POOL_SIZE</a>]</td></tr>
-<tr class="memdesc:a1d158ecf1936b775fdaf7688f2135161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static pool of acceleration lookup tables. Shared by all stepper motor instances to avoid dynamic allocation.  <br /></td></tr>
+<tr class="memitem:a53e76081d475aef890072a6c88aa3c64" id="r_a53e76081d475aef890072a6c88aa3c64"><td class="memItemLeft">static <a class="el" href="#accb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a53e76081d475aef890072a6c88aa3c64">handles</a> [<a class="el" href="group__STEP__Module.html#ga1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td></tr>
+<tr class="memitem:aeb86091cfe0c5168e3dc293683af1f6b" id="r_aeb86091cfe0c5168e3dc293683af1f6b"><td class="memItemLeft">static QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeb86091cfe0c5168e3dc293683af1f6b">cmdQueue</a> = NULL</td></tr>
+<tr class="memitem:a785756bcb96f3c5e34dc48382bfcb804" id="r_a785756bcb96f3c5e34dc48382bfcb804"><td class="memItemLeft"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a785756bcb96f3c5e34dc48382bfcb804">FTM3_ISR_handle_cache</a> [8]</td></tr>
+<tr class="memitem:a543c0fb112c6a654b9fe80a4059d91f8" id="r_a543c0fb112c6a654b9fe80a4059d91f8"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a543c0fb112c6a654b9fe80a4059d91f8">isrDebugPin</a> = 1</td></tr>
+<tr class="memitem:a54bc743837568e2385688c9da1b3007e" id="r_a54bc743837568e2385688c9da1b3007e"><td class="memItemLeft">static GPIO_Type *&#160;</td><td class="memItemRight"><a class="el" href="#a54bc743837568e2385688c9da1b3007e">isrDebugGPIO</a> = GPIOA</td></tr>
+<tr class="memitem:ac7bcec15e1dc139e61d56887499ee228" id="r_ac7bcec15e1dc139e61d56887499ee228"><td class="memItemLeft">static PORT_Type *&#160;</td><td class="memItemRight"><a class="el" href="#ac7bcec15e1dc139e61d56887499ee228">isrDebugPort</a> = PORTA</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a0151e2810a372d204ed775d1ab17453a" name="a0151e2810a372d204ed775d1ab17453a"></a>
@@ -198,7 +237,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00031">31</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00032">32</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -216,7 +255,7 @@ Variables</h2></td></tr>
 
 <p>Fixed-point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-speed applications Based on principles from "Generate stepper-motor speed profiles in real time" by David Austin. </p>
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00030">30</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00031">31</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -232,7 +271,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00022">22</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00023">23</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -248,8 +287,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Pool item for static acceleration lookup tables. </p>
 
 </div>
 </div>
@@ -295,6 +332,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ab0cd7ff00602609459729d1224927c14" name="ab0cd7ff00602609459729d1224927c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0cd7ff00602609459729d1224927c14">&#9670;&#160;</a></span>STP_InitHandleCmdData_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__STP__InitHandleCmdData.html">_STP_InitHandleCmdData</a> <a class="el" href="#ab0cd7ff00602609459729d1224927c14">STP_InitHandleCmdData_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3c649ff9eed2e379f833048cb9c33e13" name="a3c649ff9eed2e379f833048cb9c33e13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c649ff9eed2e379f833048cb9c33e13">&#9670;&#160;</a></span>STP_MoveCmdData_t</h2>
 
@@ -306,6 +357,68 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87d238ac84a7b2846610d2c9962ae104" name="a87d238ac84a7b2846610d2c9962ae104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d238ac84a7b2846610d2c9962ae104">&#9670;&#160;</a></span>STP_SetAccelerationCmdData_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__STP__SetAccelerationCmdData.html">_STP_SetAccelerationCmdData</a> <a class="el" href="#a87d238ac84a7b2846610d2c9962ae104">STP_SetAccelerationCmdData_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4330914c2b22fa38b0ef1c7c1a224b6c" name="a4330914c2b22fa38b0ef1c7c1a224b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4330914c2b22fa38b0ef1c7c1a224b6c">&#9670;&#160;</a></span>STP_SetEndVelocityCmdData_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__STP__SetEndVelocityCmdData.html">_STP_SetEndVelocityCmdData</a> <a class="el" href="#a4330914c2b22fa38b0ef1c7c1a224b6c">STP_SetEndVelocityCmdData_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a442713085b833b1faae8f6b0f1269522" name="a442713085b833b1faae8f6b0f1269522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a442713085b833b1faae8f6b0f1269522">&#9670;&#160;</a></span>STP_StepperHandleImpl_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__STP__StepperHandleImpl.html">_STP_StepperHandleImpl</a> <a class="el" href="#a442713085b833b1faae8f6b0f1269522">STP_StepperHandleImpl_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle structure for a stepper motor instance. </p>
+<p>Contains hardware configuration and control parameters for a single stepper motor, including FTM timer settings, GPIO pins, and movement parameters. </p>
+
+</div>
+</div>
+<a id="ac52d87d35d26abf504574cc9206ecead" name="ac52d87d35d26abf504574cc9206ecead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac52d87d35d26abf504574cc9206ecead">&#9670;&#160;</a></span>STP_StepperMovement_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__STP__StepperMovement.html">_STP_StepperMovement</a> <a class="el" href="#ac52d87d35d26abf504574cc9206ecead">STP_StepperMovement_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Structure for tracking stepper motor movement state and parameters. </p>
+<p>Contains all necessary information for executing a stepper motor movement, including acceleration/deceleration profile, current step count, and motor state. </p>
 
 </div>
 </div>
@@ -338,13 +451,37 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5" name="ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5"></a>STP_CMD_MOVE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f" name="ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f"></a>STP_CMD_STOP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9" name="ac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9"></a>STP_CMD_MOVE_PREPARE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d" name="ac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d"></a>STP_CMD_TRIGGER_START&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24" name="ac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24"></a>STP_CMD_INIT_HANDLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686" name="ac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686"></a>STP_CMD_SET_ACCELERATION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98" name="ac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98"></a>STP_CMD_SET_END_VELOCITY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00036">36</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00037">37</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ad680f5e53fc79d312053b987c7c8c4a7" name="ad680f5e53fc79d312053b987c7c8c4a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad680f5e53fc79d312053b987c7c8c4a7">&#9670;&#160;</a></span>__attribute__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">__attribute__ </td>
+          <td>(</td>
+          <td class="paramtype">(section( &quot;.accelTables&quot;))</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00207">207</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+
+</div>
+</div>
 <a id="a47a18d328f3e0085135f6b5a74bc7255" name="a47a18d328f3e0085135f6b5a74bc7255"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47a18d328f3e0085135f6b5a74bc7255">&#9670;&#160;</a></span>allocate_accel_table()</h2>
 
@@ -372,7 +509,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00686">686</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00980">980</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -413,12 +550,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00716">716</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01010">1010</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a50c6f6b369b9b4e89e68be623193fef3" name="a50c6f6b369b9b4e89e68be623193fef3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50c6f6b369b9b4e89e68be623193fef3">&#9670;&#160;</a></span>calculate_acceleration_table_parameters()</h2>
+<a id="a5348de51178f0f8ebf2b46b808d8be8a" name="a5348de51178f0f8ebf2b46b808d8be8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5348de51178f0f8ebf2b46b808d8be8a">&#9670;&#160;</a></span>calculate_acceleration_table_parameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +566,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void calculate_acceleration_table_parameters </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -449,12 +586,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00625">625</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00920">920</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a443991e39293f31b6839d480960d7a7c" name="a443991e39293f31b6839d480960d7a7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a443991e39293f31b6839d480960d7a7c">&#9670;&#160;</a></span>calculate_delays()</h2>
+<a id="a012866f418e6967b0eaa5034181b7b55" name="a012866f418e6967b0eaa5034181b7b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a012866f418e6967b0eaa5034181b7b55">&#9670;&#160;</a></span>calculate_delays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -465,7 +602,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void calculate_delays </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -485,12 +622,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00612">612</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00910">910</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a535044583cadc710fea45666c94131d4" name="a535044583cadc710fea45666c94131d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a535044583cadc710fea45666c94131d4">&#9670;&#160;</a></span>calculate_step_profile()</h2>
+<a id="a23936a7816b4f883b70bf25212345ec3" name="a23936a7816b4f883b70bf25212345ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23936a7816b4f883b70bf25212345ec3">&#9670;&#160;</a></span>calculate_step_profile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -501,7 +638,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void calculate_step_profile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -512,12 +649,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00581">581</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00880">880</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a090575ff77c299042d8fc6399fd64695" name="a090575ff77c299042d8fc6399fd64695"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a090575ff77c299042d8fc6399fd64695">&#9670;&#160;</a></span>create_accel_table()</h2>
+<a id="aef71ea66299390c4c59ba15393955dba" name="aef71ea66299390c4c59ba15393955dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef71ea66299390c4c59ba15393955dba">&#9670;&#160;</a></span>create_accel_table()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -528,7 +665,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t create_accel_table </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -558,7 +695,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00646">646</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00941">941</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -585,7 +722,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00707">707</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01001">1001</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -604,12 +741,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00250">250</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00551">551</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a66296a7c6754045a6501b7a26eedb4de" name="a66296a7c6754045a6501b7a26eedb4de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66296a7c6754045a6501b7a26eedb4de">&#9670;&#160;</a></span>get_handle_from_timer()</h2>
+<a id="a4addfaa1cd32089f48149435915badab" name="a4addfaa1cd32089f48149435915badab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4addfaa1cd32089f48149435915badab">&#9670;&#160;</a></span>get_handle_from_timer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -630,7 +767,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> **</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -640,12 +777,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00791">791</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01085">1085</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="afee64a5b2eb78cc1bd1cf1031fd142d9" name="afee64a5b2eb78cc1bd1cf1031fd142d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afee64a5b2eb78cc1bd1cf1031fd142d9">&#9670;&#160;</a></span>init_dir_pin()</h2>
+<a id="adba1d68dbe985d96ff4d586237e05600" name="adba1d68dbe985d96ff4d586237e05600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba1d68dbe985d96ff4d586237e05600">&#9670;&#160;</a></span>init_dir_pin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,7 +793,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t init_dir_pin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -667,12 +804,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00482">482</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00781">781</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a1b68168e888209a026ad88634f11eafb" name="a1b68168e888209a026ad88634f11eafb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b68168e888209a026ad88634f11eafb">&#9670;&#160;</a></span>init_handle()</h2>
+<a id="a331ab04c818f0194c1eaa24d977843fb" name="a331ab04c818f0194c1eaa24d977843fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331ab04c818f0194c1eaa24d977843fb">&#9670;&#160;</a></span>init_handle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,8 +820,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t init_handle </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a> *</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="group__STEP__Module.html#ga535eb32d7f105664817feda22180e59b">STP_StepperConfig_t</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -694,12 +835,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00401">401</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00693">693</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a1644230654a6269c7ed2b9b44b6c95da" name="a1644230654a6269c7ed2b9b44b6c95da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1644230654a6269c7ed2b9b44b6c95da">&#9670;&#160;</a></span>init_step_pin()</h2>
+<a id="a6277757e5ae26d0cbba3d4d62dc45912" name="a6277757e5ae26d0cbba3d4d62dc45912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6277757e5ae26d0cbba3d4d62dc45912">&#9670;&#160;</a></span>init_step_pin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,7 +851,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t init_step_pin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -721,12 +862,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00466">466</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00765">765</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a64a54f3a596d785588cd1ed8c66a6f9e" name="a64a54f3a596d785588cd1ed8c66a6f9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64a54f3a596d785588cd1ed8c66a6f9e">&#9670;&#160;</a></span>plan_motion_profile()</h2>
+<a id="acfb245efbd9bf8ea73ec96baa3db4f3a" name="acfb245efbd9bf8ea73ec96baa3db4f3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb245efbd9bf8ea73ec96baa3db4f3a">&#9670;&#160;</a></span>plan_motion_profile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -737,7 +878,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t plan_motion_profile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -748,12 +889,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00533">533</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00832">832</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a29357584de349bef8e194e9c7f2d2a44" name="a29357584de349bef8e194e9c7f2d2a44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29357584de349bef8e194e9c7f2d2a44">&#9670;&#160;</a></span>process_config()</h2>
+<a id="a6ef0387bd645347b1a61efc620315993" name="a6ef0387bd645347b1a61efc620315993"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ef0387bd645347b1a61efc620315993">&#9670;&#160;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -762,7 +903,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void process_config </td>
+          <td class="memname">void process </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -775,12 +916,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00387">387</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01193">1193</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a5c15b423b38f5097a4790c35c1161231" name="a5c15b423b38f5097a4790c35c1161231"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c15b423b38f5097a4790c35c1161231">&#9670;&#160;</a></span>process_movement()</h2>
+<a id="a3fb95aaa3f8cecda9ad30ea62a4757e5" name="a3fb95aaa3f8cecda9ad30ea62a4757e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fb95aaa3f8cecda9ad30ea62a4757e5">&#9670;&#160;</a></span>reset_absolute_position()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -789,9 +930,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void process_movement </td>
+          <td class="memname">status_t reset_absolute_position </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -802,12 +943,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00898">898</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00759">759</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a4aa1d8727e141ede64c144f9c697539b" name="a4aa1d8727e141ede64c144f9c697539b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4aa1d8727e141ede64c144f9c697539b">&#9670;&#160;</a></span>reset_movement_handle()</h2>
+<a id="a21aaa63877a5905ca82f28a059d53bbd" name="a21aaa63877a5905ca82f28a059d53bbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21aaa63877a5905ca82f28a059d53bbd">&#9670;&#160;</a></span>reset_movement_handle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -818,7 +959,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t reset_movement_handle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga627ee69989e6ea7ba5765c7d0b276f51">STP_StepperMovementHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ac52d87d35d26abf504574cc9206ecead">STP_StepperMovement_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -829,12 +970,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00806">806</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01100">1100</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="aae856c682c28f7bc05fd0e302201c591" name="aae856c682c28f7bc05fd0e302201c591"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae856c682c28f7bc05fd0e302201c591">&#9670;&#160;</a></span>set_direction_pin()</h2>
+<a id="aa903c1cb5703b8d75214d06d4b3573d4" name="aa903c1cb5703b8d75214d06d4b3573d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa903c1cb5703b8d75214d06d4b3573d4">&#9670;&#160;</a></span>set_direction_pin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -845,7 +986,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t set_direction_pin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -856,12 +997,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00881">881</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01176">1176</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="ab9ba4bc5d5a24905d852fc70efc02d3e" name="ab9ba4bc5d5a24905d852fc70efc02d3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9ba4bc5d5a24905d852fc70efc02d3e">&#9670;&#160;</a></span>start_steps()</h2>
+<a id="aa9ae1d4d2005d2e3e2dc01792c68c83f" name="aa9ae1d4d2005d2e3e2dc01792c68c83f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ae1d4d2005d2e3e2dc01792c68c83f">&#9670;&#160;</a></span>start_steps()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -872,7 +1013,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t start_steps </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -883,12 +1024,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00749">749</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01043">1043</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="ad6fecfbfb17b4c527362a2df1a36f826" name="ad6fecfbfb17b4c527362a2df1a36f826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6fecfbfb17b4c527362a2df1a36f826">&#9670;&#160;</a></span>step_pin_mux_ftm()</h2>
+<a id="a1e9734fa87cb7c5209baef5add2d254d" name="a1e9734fa87cb7c5209baef5add2d254d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e9734fa87cb7c5209baef5add2d254d">&#9670;&#160;</a></span>step_pin_mux_ftm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -899,7 +1040,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t step_pin_mux_ftm </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -910,12 +1051,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00517">517</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00816">816</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="aaa8f060483887cc3169699d2381a581f" name="aaa8f060483887cc3169699d2381a581f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa8f060483887cc3169699d2381a581f">&#9670;&#160;</a></span>step_pin_mux_gpio()</h2>
+<a id="ae1f6a35fc922b343703a0f3843cf757b" name="ae1f6a35fc922b343703a0f3843cf757b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f6a35fc922b343703a0f3843cf757b">&#9670;&#160;</a></span>step_pin_mux_gpio()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -926,7 +1067,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t step_pin_mux_gpio </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -937,12 +1078,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00500">500</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00799">799</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a071a60c29b068bf21f820a13eaf47e6b" name="a071a60c29b068bf21f820a13eaf47e6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a071a60c29b068bf21f820a13eaf47e6b">&#9670;&#160;</a></span>stop_steps()</h2>
+<a id="a61964b6e0df06d18ef1522c5eef09cfb" name="a61964b6e0df06d18ef1522c5eef09cfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61964b6e0df06d18ef1522c5eef09cfb">&#9670;&#160;</a></span>stop_steps()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -953,7 +1094,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t stop_steps </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -968,7 +1109,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00838">838</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l01133">1133</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -995,13 +1136,13 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00676">676</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00970">970</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a1d158ecf1936b775fdaf7688f2135161" name="a1d158ecf1936b775fdaf7688f2135161"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d158ecf1936b775fdaf7688f2135161">&#9670;&#160;</a></span>accelTablePool</h2>
+<a id="aeb86091cfe0c5168e3dc293683af1f6b" name="aeb86091cfe0c5168e3dc293683af1f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb86091cfe0c5168e3dc293683af1f6b">&#9670;&#160;</a></span>cmdQueue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1010,7 +1151,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aa30dbdeec091aaf82af82e7410e3bf2c">STP_AccelTablePoolItem_t</a> accelTablePool[<a class="el" href="group__STEP__Module.html#gaebcc5dd103361004d6a31c3ac589478d">STP_ACCEL_TABLE_POOL_SIZE</a>]</td>
+          <td class="memname">QueueHandle_t cmdQueue = NULL</td>
         </tr>
       </table>
   </td>
@@ -1020,57 +1161,23 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Static pool of acceleration lookup tables. Shared by all stepper motor instances to avoid dynamic allocation. </p>
-
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00133">133</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00199">199</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="aeb86091cfe0c5168e3dc293683af1f6b" name="aeb86091cfe0c5168e3dc293683af1f6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb86091cfe0c5168e3dc293683af1f6b">&#9670;&#160;</a></span>cmdQueue</h2>
+<a id="a785756bcb96f3c5e34dc48382bfcb804" name="a785756bcb96f3c5e34dc48382bfcb804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a785756bcb96f3c5e34dc48382bfcb804">&#9670;&#160;</a></span>FTM3_ISR_handle_cache</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QueueHandle_t cmdQueue = NULL</td>
+          <td class="memname"><a class="el" href="group__STEP__Module.html#gab298b84346872720a60ab557d80f47ba">STP_Handle_t</a> FTM3_ISR_handle_cache[8]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00124">124</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
-
-</div>
-</div>
-<a id="aa56fb4fc84752e009a44d92ab5746b6a" name="aa56fb4fc84752e009a44d92ab5746b6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa56fb4fc84752e009a44d92ab5746b6a">&#9670;&#160;</a></span>configQueue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QueueHandle_t configQueue = NULL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00125">125</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
-
-</div>
-</div>
-<a id="abdfcd72eae8af0e607208d5f76c75be0" name="abdfcd72eae8af0e607208d5f76c75be0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdfcd72eae8af0e607208d5f76c75be0">&#9670;&#160;</a></span>FTM3_ISR_handle_cache</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a>* FTM3_ISR_handle_cache[8]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00127">127</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00201">201</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
@@ -1079,30 +1186,94 @@ Variables</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="#accb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a> handles[<a class="el" href="group__STEP__Module.html#ga1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00116">116</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00197">197</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>
-<a id="a138cc0dfc0b56f7f1fa610e8275f7e06" name="a138cc0dfc0b56f7f1fa610e8275f7e06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a138cc0dfc0b56f7f1fa610e8275f7e06">&#9670;&#160;</a></span>testHandler</h2>
+<a id="a54bc743837568e2385688c9da1b3007e" name="a54bc743837568e2385688c9da1b3007e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54bc743837568e2385688c9da1b3007e">&#9670;&#160;</a></span>isrDebugGPIO</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__STEP__Module.html#ga3817330c14f0263c962cf19180e4632c">STP_StepperHandle_t</a> testHandler</td>
+          <td class="memname">GPIO_Type* isrDebugGPIO = GPIOA</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00122">122</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00204">204</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+
+</div>
+</div>
+<a id="a543c0fb112c6a654b9fe80a4059d91f8" name="a543c0fb112c6a654b9fe80a4059d91f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a543c0fb112c6a654b9fe80a4059d91f8">&#9670;&#160;</a></span>isrDebugPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t isrDebugPin = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00203">203</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
+
+</div>
+</div>
+<a id="ac7bcec15e1dc139e61d56887499ee228" name="ac7bcec15e1dc139e61d56887499ee228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7bcec15e1dc139e61d56887499ee228">&#9670;&#160;</a></span>isrDebugPort</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PORT_Type* isrDebugPort = PORTA</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="step_8c_source.html#l00205">205</a> of file <a class="el" href="step_8c_source.html">step.c</a>.</p>
 
 </div>
 </div>

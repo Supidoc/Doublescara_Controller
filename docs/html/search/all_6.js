@@ -43,9 +43,10 @@ var searchData=
   ['ffconf_5fdef_40',['FFCONF_DEF',['../ffconf_8h.html#a275a34cd0d8f3b9b04ee91df269136e3',1,'FFCONF_DEF:&#160;ffconf.h'],['../ffconf__gen_8h.html#a275a34cd0d8f3b9b04ee91df269136e3',1,'FFCONF_DEF:&#160;ffconf_gen.h']]],
   ['ffconf_5fgen_2eh_41',['ffconf_gen.h',['../ffconf__gen_8h.html',1,'']]],
   ['free_5faccel_5ftable_42',['free_accel_table',['../step_8c.html#ae09089881e135a335d2f5b9a30ce381f',1,'step.c']]],
-  ['fs_43',['fs',['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c'],['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c']]],
-  ['ftm3_5firqhandler_44',['FTM3_IRQHandler',['../step_8c.html#a889cb58d52a26f7eaa5ea6319c9e0f29',1,'step.c']]],
-  ['ftm3_5fisr_5fhandle_5fcache_45',['FTM3_ISR_handle_cache',['../step_8c.html#abdfcd72eae8af0e607208d5f76c75be0',1,'step.c']]],
-  ['ftmbase_46',['ftmBase',['../struct__STP__StepperHandle.html#aef843c72a9b99822e2fbc34d8cedc48d',1,'_STP_StepperHandle::ftmBase'],['../struct__STP__StepperConfig.html#a09b01227df8e70a4ffaa73c5042b88cc',1,'_STP_StepperConfig::ftmBase']]],
-  ['ftmchannel_47',['ftmChannel',['../struct__STP__StepperHandle.html#ab05862c9d0945e5e8ee476a40eca4b24',1,'_STP_StepperHandle::ftmChannel'],['../struct__STP__StepperConfig.html#a2b002997b9b0252cff1ceca529c1b6f4',1,'_STP_StepperConfig::ftmChannel']]]
+  ['free_5fhandle_43',['free_handle',['../tmc2209_8c.html#abe68bf18e690ee0a0e9badfa372bb2fb',1,'tmc2209.c']]],
+  ['fs_44',['fs',['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c'],['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c']]],
+  ['ftm3_5firqhandler_45',['FTM3_IRQHandler',['../step_8c.html#a889cb58d52a26f7eaa5ea6319c9e0f29',1,'step.c']]],
+  ['ftm3_5fisr_5fhandle_5fcache_46',['FTM3_ISR_handle_cache',['../step_8c.html#a785756bcb96f3c5e34dc48382bfcb804',1,'step.c']]],
+  ['ftmbase_47',['ftmBase',['../struct__MTR__MotorStepperConfig.html#a1df0d9b2b63574642c188865e8afd344',1,'_MTR_MotorStepperConfig::ftmBase'],['../struct__STP__StepperHandleImpl.html#abf51308469b28908cc08363ac3f116ec',1,'_STP_StepperHandleImpl::ftmBase'],['../struct__STP__StepperConfig.html#a09b01227df8e70a4ffaa73c5042b88cc',1,'_STP_StepperConfig::ftmBase']]],
+  ['ftmchannel_48',['ftmChannel',['../struct__MTR__MotorStepperConfig.html#a97f54898230db144e5cbe48d570925ee',1,'_MTR_MotorStepperConfig::ftmChannel'],['../struct__STP__StepperHandleImpl.html#a56eba4619db111cc3159ceeddf485ebb',1,'_STP_StepperHandleImpl::ftmChannel'],['../struct__STP__StepperConfig.html#a2b002997b9b0252cff1ceca529c1b6f4',1,'_STP_StepperConfig::ftmChannel']]]
 ];

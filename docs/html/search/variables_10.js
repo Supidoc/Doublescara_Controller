@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['xlogcommanddefinition_0',['xLogCommandDefinition',['../log_8c.html#af5c21309de04a8c4ab6feb925ef9d189',1,'log.c']]],
-  ['xmotortestcommanddefinition_1',['xMotorTestCommandDefinition',['../motor__test_8c.html#a01c16f927074fe2b841bb0d00be3efe3',1,'motor_test.c']]],
-  ['xpingcommanddefinition_2',['xPingCommandDefinition',['../cli_8c.html#acb3d9627c2b46551ae41d72b00527bed',1,'cli.c']]]
+  ['waitforstart_0',['waitForStart',['../struct__STP__StepperMovement.html#a680f84a40f0962a20f3ac2fa649a5678',1,'_STP_StepperMovement']]],
+  ['waituntilstopped_1',['waitUntilStopped',['../struct__MTR__CmdQueueItem.html#ac7bf5468da77427a0ddebecfbc0fddf2',1,'_MTR_CmdQueueItem']]]
 ];

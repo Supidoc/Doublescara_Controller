@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['test_20and_20diagnostics_0',['Motor Test and Diagnostics',['../group__MotorTest__Module.html',1,'']]],
-  ['tmc2209_20stepper_20motor_20driver_1',['TMC2209 Stepper Motor Driver',['../group__TMC2209__Module.html',1,'']]]
+  ['sd_20card_20disk_20module_0',['SD Card Disk Module',['../group__DISK__Module.html',1,'']]],
+  ['stepper_20motor_20control_20module_1',['Stepper Motor Control Module',['../group__STEP__Module.html',1,'']]],
+  ['stepper_20motor_20driver_2',['TMC2209 Stepper Motor Driver',['../group__TMC2209__Module.html',1,'']]]
 ];

@@ -1,0 +1,81 @@
+\doxysection{source/\+motor.h File Reference}
+\hypertarget{motor_8h}{}\label{motor_8h}\index{source/motor.h@{source/motor.h}}
+{\ttfamily \+\#include "{}step.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209.\+h"{}}\newline
+Include dependency graph for motor.\+h:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motor_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motor_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__MTR__MotorTmcConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Tmc\+Config}}
+\begin{DoxyCompactList}\small\item\em TMC2209-\/related configuration values for one motor. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__MTR__MotorStepperConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Stepper\+Config}}
+\begin{DoxyCompactList}\small\item\em Step generation hardware configuration for one motor. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__MTR__MotorConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing one motor instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__MTR__MotorTmcConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Tmc\+Config}} \doxymbox{\hyperlink{group__MOTOR__Module_ga8e5d65aeb018ac2da54d039d54cdd31a}{MTR\+\_\+\+Motor\+Tmc\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em TMC2209-\/related configuration values for one motor. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__MTR__MotorStepperConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Stepper\+Config}} \doxymbox{\hyperlink{group__MOTOR__Module_ga8a4765221bb1f9d6957ab996f3058368}{MTR\+\_\+\+Motor\+Stepper\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Step generation hardware configuration for one motor. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__MTR__MotorConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Config}} \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing one motor instance. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__MTR__MotorHandleImpl}{\+\_\+\+MTR\+\_\+\+Motor\+Handle\+Impl}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Opaque handle type for motor control instances. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__MOTOR__Module_ga494ccfe2699411bf54f0724b59a6f7bc}{MTR\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Free\+RTOS task entry for the motor control module. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga78bd18ddbc517b9abafa26907d7024b7}{MTR\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the motor module infrastructure. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gabf251484d458e43c16a4227c9543cd3b}{MTR\+\_\+init\+\_\+handle}} (const \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a motor handle from configuration. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\+\_\+get\+\_\+motor\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Retrieves a motor handle by its label. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gae68f48d296a50522530e07b59b297d50}{MTR\+\_\+move\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Commands a relative angular movement. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga302f010ac6e1765a66e1cae99e9e9b90}{MTR\+\_\+move\+\_\+absolute\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Commands movement to an absolute output angle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga56fc79dd3588de5e1bf2c4f692729726}{MTR\+\_\+move\+\_\+revolutions}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double revolutions, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Commands a relative movement in revolutions. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga8cbbba9920235dca255b9b4f87b76a5f}{MTR\+\_\+set\+\_\+velocity}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double velocity\+\_\+deg\+\_\+per\+\_\+sec, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets motor target velocity. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga896850ef24808712726a0d9b8d8747c1}{MTR\+\_\+set\+\_\+acceleration}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double acceleration\+\_\+deg\+\_\+per\+\_\+sec2, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets motor acceleration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga7884f102317dd28048723fee04ec6975}{MTR\+\_\+stop}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, bool decelerate, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Stops ongoing motion. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaa51d8115cce00df1b0ec80007caaa73b}{MTR\+\_\+emergency\+\_\+stop}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Triggers emergency stop for the motor subsystem. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga838ccbc335d1e72d3499bd5c11de244b}{MTR\+\_\+clear\+\_\+emergency\+\_\+stop}} (void)
+\begin{DoxyCompactList}\small\item\em Clears the global emergency-\/stop latch. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\+\_\+is\+\_\+emergency\+\_\+stop\+\_\+active}} (void)
+\begin{DoxyCompactList}\small\item\em Indicates whether emergency stop is currently active. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaec2fc35006e4449e96d11e663002d6a4}{MTR\+\_\+get\+\_\+current\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}angle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Reads the current mechanical output angle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga9c788c1e551e9e5e14dfb9be9e95f484}{MTR\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Gets the current low-\/level movement state. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga13335428d208db0545c7dafcbbf57b34}{MTR\+\_\+wait\+\_\+until\+\_\+stopped}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Blocks until the motor is stopped or timeout expires. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaa69b5146e0656c2f170ff33a68c7d104}{MTR\+\_\+set\+\_\+home\+\_\+position}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets current position as home reference. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga2cfb0296ca1aed7a4800e3dcf5f99407}{MTR\+\_\+synchronized\+\_\+move}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}, double \texorpdfstring{$\ast$}{*}angles, uint8\+\_\+t count, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Executes a synchronized multi-\/motor move. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga37093ece16c8b809c20dcecabaf97fe4}{MTR\+\_\+set\+\_\+run\+\_\+current}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets TMC2209 run current for a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gab0e61e1f0e79b5357260bb7a9bf935a2}{MTR\+\_\+set\+\_\+hold\+\_\+current}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Sets TMC2209 hold current for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}

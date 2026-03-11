@@ -63,6 +63,8 @@
 #define configCOMMAND_INT_MAX_OUTPUT_SIZE 128
 #endif
 
+#define configRECORD_STACK_HIGH_ADDRESS (1)
+
 #if !defined(configUSE_16_BIT_TICKS)
 #define configUSE_16_BIT_TICKS  0
 #endif

@@ -10,7 +10,6 @@ var struct__STP__StepperConfig =
     [ "ftmBase", "struct__STP__StepperConfig.html#a09b01227df8e70a4ffaa73c5042b88cc", null ],
     [ "ftmChannel", "struct__STP__StepperConfig.html#a2b002997b9b0252cff1ceca529c1b6f4", null ],
     [ "label", "struct__STP__StepperConfig.html#acd7c7bb05491b0c6e76d9376a57406d3", null ],
-    [ "stepAngle", "struct__STP__StepperConfig.html#a4bb3b71164dafe76123c273a7be8922b", null ],
     [ "stepGPIO", "struct__STP__StepperConfig.html#a972eecf1cbdb97bf9e3c3c51968bc361", null ],
     [ "stepMuxFTM", "struct__STP__StepperConfig.html#a48f4b6a8eb83efe3d119a7a725738ae8", null ],
     [ "stepMuxGPIO", "struct__STP__StepperConfig.html#a678bf3e812c48186b8999b2d31de8abf", null ],

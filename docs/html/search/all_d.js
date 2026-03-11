@@ -1,8 +1,16 @@
 var searchData=
 [
-  ['read_0',['read',['../tmc2209_8c.html#a3256d0c7370540f7c95acebec968a0a2',1,'tmc2209.c']]],
-  ['read_5ftransmissioncount_1',['read_transmissioncount',['../tmc2209_8c.html#a435f12be209d6d6dda5cf9b3ff873511',1,'tmc2209.c']]],
-  ['reg_5faddr_2',['reg_addr',['../struct__TMC__Write__Datagram.html#a2bd5bcb4f35c7f1c5c03f00b0f7e9622',1,'_TMC_Write_Datagram::reg_addr'],['../struct__TMC__Read__Datagram.html#a63bf2bc0062d3a53d28bac7f6f049bee',1,'_TMC_Read_Datagram::reg_addr']]],
-  ['reserved_3',['reserved',['../struct__TMC__Write__Datagram.html#a09ddc2854e31e9da2f15eb71527f588b',1,'_TMC_Write_Datagram::reserved'],['../struct__TMC__Read__Datagram.html#a829402b66a89ae63b5a7df508aead65e',1,'_TMC_Read_Datagram::reserved']]],
-  ['reset_5fmovement_5fhandle_4',['reset_movement_handle',['../step_8c.html#a4aa1d8727e141ede64c144f9c697539b',1,'step.c']]]
+  ['read_0',['read',['../tmc2209_8c.html#a7f71b39eae5e44cb6054416cd643f686',1,'tmc2209.c']]],
+  ['read_5ftransmissioncount_1',['read_transmissioncount',['../tmc2209_8c.html#a396a5d31e19de4ffccb46a1d7a8b7746',1,'tmc2209.c']]],
+  ['reductionfactor_2',['reductionFactor',['../struct__MTR__MotorHandleImpl.html#a068b88abfa0f8d3412005f860a64932a',1,'_MTR_MotorHandleImpl::reductionFactor'],['../struct__MTR__MotorConfig.html#a709d3bcd730c3e06ef9653b4499557f8',1,'_MTR_MotorConfig::reductionFactor']]],
+  ['reg_5faddr_3',['reg_addr',['../struct__TMC__Write__Datagram.html#a2bd5bcb4f35c7f1c5c03f00b0f7e9622',1,'_TMC_Write_Datagram::reg_addr'],['../struct__TMC__Read__Datagram.html#a63bf2bc0062d3a53d28bac7f6f049bee',1,'_TMC_Read_Datagram::reg_addr']]],
+  ['reserved_4',['reserved',['../struct__TMC__Write__Datagram.html#a09ddc2854e31e9da2f15eb71527f588b',1,'_TMC_Write_Datagram::reserved'],['../struct__TMC__Read__Datagram.html#a829402b66a89ae63b5a7df508aead65e',1,'_TMC_Read_Datagram::reserved']]],
+  ['reset_5fabsolute_5fposition_5',['reset_absolute_position',['../step_8c.html#a3fb95aaa3f8cecda9ad30ea62a4757e5',1,'step.c']]],
+  ['reset_5fmovement_5fhandle_6',['reset_movement_handle',['../step_8c.html#a21aaa63877a5905ca82f28a059d53bbd',1,'step.c']]],
+  ['restore_5foriginal_5fvelocities_7',['restore_original_velocities',['../motor_8c.html#af524473f8ab6e4774dad277e38086a2e',1,'motor.c']]],
+  ['revolutions_8',['revolutions',['../struct__MTR__MoveRevolutionsCmdData.html#a5a758474a2036011e5568d27e5d15a1f',1,'_MTR_MoveRevolutionsCmdData']]],
+  ['round_5fdown_9',['ROUND_DOWN',['../motor_8c.html#af4facec642a7b9305ad648d658dd8774a2aecd63c23c754e375bd53b4493dd488',1,'motor.c']]],
+  ['round_5fnearest_10',['ROUND_NEAREST',['../motor_8c.html#af4facec642a7b9305ad648d658dd8774a37c79418cb6371cec5ecc3331fae2aff',1,'motor.c']]],
+  ['round_5fup_11',['ROUND_UP',['../motor_8c.html#af4facec642a7b9305ad648d658dd8774a05bcede4e1be4c915d6ee55ac114b086',1,'motor.c']]],
+  ['rounding_5fmethod_12',['rounding_method',['../motor_8c.html#af4facec642a7b9305ad648d658dd8774',1,'motor.c']]]
 ];

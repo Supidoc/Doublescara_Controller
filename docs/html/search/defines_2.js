@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sdspi_5fdisk_5fenable_0',['SDSPI_DISK_ENABLE',['../ffconf_8h.html#aba5ba16bc9f4de5079e31d3f3f2bd471',1,'ffconf.h']]],
-  ['stp_5fdelay_5fscale_1',['STP_DELAY_SCALE',['../step_8c.html#a0151e2810a372d204ed775d1ab17453a',1,'step.c']]],
-  ['stp_5fdelay_5fscale_5fbits_2',['STP_DELAY_SCALE_BITS',['../step_8c.html#a68309b58dfcf99bdff3b4c5f1f5dc794',1,'step.c']]],
-  ['stp_5ftimer_5ffreq_5fhz_3',['STP_TIMER_FREQ_HZ',['../step_8c.html#a742a42dd11153d9548874c6a2aa654a0',1,'step.c']]]
+  ['log_5fmagic_0',['LOG_MAGIC',['../log_8c.html#a59a4d3c0b2cc8938975eff89e7f3d682',1,'log.c']]],
+  ['log_5fmax_5flevel_5fstring_5fsize_1',['LOG_MAX_LEVEL_STRING_SIZE',['../log_8c.html#a8bd2c3efeca31c2a8a212c1c85b49a1f',1,'log.c']]],
+  ['log_5fmax_5flog_5fline_5fsize_2',['LOG_MAX_LOG_LINE_SIZE',['../log_8c.html#a132efd65168a21fefcc218034a37d825',1,'log.c']]]
 ];

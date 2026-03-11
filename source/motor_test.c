@@ -14,8 +14,8 @@
 #include "cli_utilities.h"
 #include "log.h"
 #include "stdio.h"
-#include "step.h"
-#include "tmc2209.h"
+#include "motor.h"
+#include "motor_test.h"
 /************************************
  *     Private Macros / Defines    *
  ************************************/
@@ -27,10 +27,6 @@
 /*****************************************
  *     Private Function Declarations     *
  *****************************************/
-BaseType_t motor_move_command(char* pcWriteBuffer, size_t xWriteBufferLen,
-                              const char* pcCommandString);
-
-BaseType_t motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
 
 /****************************
  *     Public Variables     *
@@ -39,22 +35,6 @@ BaseType_t motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen, const char* p
 /*****************************
  *     Private Variables     *
  *****************************/
-
-static const CLI_Command_Definition_t xMotorMoveCommandDefinition = {
-    .pcCommand    = "mmove",
-    .pcHelpString = "mmove [OPTIONS]: moves the specified motor \r\n \t -m [MOTOR_ID] string "
-                    "identifier of the motor \r\n \t -s [STEP_COUNT] Number of steps to move \r\n "
-                    "\t -d [DIRECTION] direction specified with cw or ccw \r\n",
-    .pxCommandInterpreter        = motor_move_command,
-    .cExpectedNumberOfParameters = -1};
-
-static const CLI_Command_Definition_t xMotorStopCommandDefinition = {
-    .pcCommand = "mstop",
-    .pcHelpString =
-        "mstop [OPTIONS]: stops the specified motor \r\n \t -m [MOTOR_ID] string identifier of the "
-        "motor \r\n\t -d decelerate the motor with constant deceleration \r\n ",
-    .pxCommandInterpreter        = motor_stop,
-    .cExpectedNumberOfParameters = -1};
 
 /*******************************************
  *     Public Function Implementations     *
@@ -69,158 +49,72 @@ void MTT_task(void* pvParameters)
 {
     LOG_INFO("Started MTT Task");
 
-    CLI_register_command(&xMotorMoveCommandDefinition);
-    CLI_register_command(&xMotorStopCommandDefinition);
+    MTR_MotorConfig_t motorConfig;
 
-    STP_StepperConfig_t config;
+#if MTT_MOTOR_STEPPER_TYPE_NORMAL
+    motorConfig.acceleration = 400;
+    motorConfig.endVelocity  = 720;
+    motorConfig.stepAngle    = 1.8 // Typical NEMA stepper: 1.8 degrees per step
+                            motorConfig.microstep = 64;  // 8x microstepping
+    motorConfig.reductionFactor                   = 1.0; // No gearbox
+#elif MTT_MOTOR_STEPPER_TYPE_LINEAR_BIG
+    motorConfig.acceleration    = 200;
+    motorConfig.endVelocity     = 360;
+    motorConfig.stepAngle       = 1.8; // Typical NEMA stepper: 1.8 degrees per step
+    motorConfig.microstep       = 16;  // 8x microstepping
+    motorConfig.reductionFactor = 1.0; // No gearbox
+#elif MTT_MOTOR_STEPPER_TYPE_LINEAR_SMALL
+    motorConfig.acceleration    = 200 * 8;
+    motorConfig.endVelocity     = 360 * 8;
+    motorConfig.stepAngle       = 7.5; // Typical NEMA stepper: 1.8 degrees per step
+    motorConfig.microstep       = 128; // 8x microstepping
+    motorConfig.reductionFactor = 1.0; // No gearbox
+#endif
+    motorConfig.label = "motor0";
 
-    config.acceleration = 4000.0;
-    config.dirGPIO      = GPIOB;
-    config.dirPin       = 2;
-    config.dirPort      = PORTB;
-    config.endVelocity  = 360.0;
-    config.ftmBase      = FTM3;
-    config.ftmChannel   = kFTM_Chnl_0;
-    config.label        = "motor0";
-    config.stepGPIO     = GPIOD;
-    config.stepPin      = 0;
-    config.stepPort     = PORTD;
-    config.stepMuxFTM   = kPORT_MuxAlt4;
-    config.stepMuxGPIO  = kPORT_MuxAlt1;
-    config.dirMux       = kPORT_MuxAlt1;
+    // Configure stepper parameters
+    motorConfig.stepperConfig.dirGPIO               = GPIOB;
+    motorConfig.stepperConfig.dirPin                = 2;
+    motorConfig.stepperConfig.dirPort               = PORTB;
+    motorConfig.stepperConfig.ftmBase               = FTM3;
+    motorConfig.stepperConfig.ftmChannel            = kFTM_Chnl_0;
+    motorConfig.stepperConfig.stepGPIO              = GPIOD;
+    motorConfig.stepperConfig.stepPin               = 0;
+    motorConfig.stepperConfig.stepPort              = PORTD;
+    motorConfig.stepperConfig.stepMuxFTM            = kPORT_MuxAlt4;
+    motorConfig.stepperConfig.stepMuxGPIO           = kPORT_MuxAlt1;
+    motorConfig.stepperConfig.dirMux                = kPORT_MuxAlt1;
+    motorConfig.stepperConfig.dirLogicHighClockwise = 1;
 
-    STP_init_stepper(config);
+    // Configure TMC driver
+    motorConfig.tmcConfig.serialAdress   = TMC_SERIAL_ADDRESS_0;
+    motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
+    motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-    LOG_DEBUG("Configured stepper motor: motor0");
+#if MTT_MOTOR_STEPPER_TYPE_LINEAR_BIG || MTT_MOTOR_STEPPER_TYPE_LINEAR_SMALL
+    motorConfig.tmcConfig.iHoldCurrentA = 0.1;
+    motorConfig.tmcConfig.iRunCurrentA  = 0.1;
+#elif MTT_MOTOR_STEPPER_TYPE_NORMAL
+    motorConfig.tmcConfig.iHoldCurrentA = 0.2;
+    motorConfig.tmcConfig.iRunCurrentA  = 0.4;
+#endif
+    if (MTR_init_handle(motorConfig, 3000) == kStatus_Success)
+    {
+        LOG_INFO("Motor initialized successfully: motor0");
+    }
+    else
+    {
+        LOG_ERROR("Failed to initialize motor: motor0");
+    }
 
-    TMC_Handle_t tmcHandle;
-    tmcHandle.label             = "tmc0";
-    tmcHandle.serialAdress      = TMC_SERIAL_ADDRESS_0;
-    tmcHandle.transmissionCount = 0;
-    tmcHandle.uartHandle        = &UART1_uart_handle;
-    tmcHandle.uartRTOSHandle    = &UART1_rtos_handle;
-
-    if (TMC_init_default(&tmcHandle, NULL) == kStatus_Success)
-        LOG_DEBUG("Configured TMC2209 driver: tmc0");
+    MTR_MotorHandle_t handle = NULL;
 
     for (;;)
     {
-        vTaskDelay(1);
+        vTaskDelay(100);
     }
 }
 
 /********************************************
  *     Private Function Implementations     *
  ********************************************/
-
-BaseType_t motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
-{
-    STP_StepperHandle_t* handle;
-    char                 logMsg[80];
-
-    uint8_t     parameterFound;
-    const char* pcParameter = NULL;
-    BaseType_t  parameterStringLength;
-    uint8_t     doDeceleration = 0;
-
-    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (parameterFound == 0 || parameterStringLength == 0)
-    {
-        LOG_WARN("Motor command received without motor ID");
-        strncpy(pcWriteBuffer, "Please specify a motorId", strlen("Please specify a motorId") + 1);
-        return pdFALSE;
-    }
-    else
-    {
-        if (STP_get_handle_by_label(pcParameter, &handle) != kStatus_Success)
-        {
-            snprintf(logMsg, sizeof(logMsg), "Invalid motor ID requested: %.*s",
-                     (int)parameterStringLength, pcParameter);
-            LOG_WARN(logMsg);
-            strncpy(pcWriteBuffer, "Invalid motorId", strlen("Invalid motorId") + 1);
-            return pdFALSE;
-        }
-    }
-
-    CLU_get_parameter_value_string("-d", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (parameterFound == 1)
-    {
-        doDeceleration = 1;
-    }
-
-    STP_stop(handle, doDeceleration);
-    return pdFALSE;
-}
-
-BaseType_t motor_move_command(char* pcWriteBuffer, size_t xWriteBufferLen,
-                              const char* pcCommandString)
-{
-
-    STP_StepperHandle_t* handle;
-    uint32_t             stepCount;
-    STP_Direction_t      direction;
-
-    uint8_t     parameterFound;
-    const char* pcParameter = NULL;
-    BaseType_t  parameterStringLength;
-
-    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (parameterFound == 0 || parameterStringLength == 0)
-    {
-        strncpy(pcWriteBuffer, "Please specify a motorId", strlen("Please specify a motorId") + 1);
-        return pdFALSE;
-    }
-    else
-    {
-        if (STP_get_handle_by_label(pcParameter, &handle) != kStatus_Success)
-        {
-            strncpy(pcWriteBuffer, "Invalid motorId", strlen("Invalid motorId") + 1);
-            return pdFALSE;
-        }
-    }
-
-    CLU_get_parameter_value_string("-s", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (parameterFound == 0 || parameterStringLength == 0)
-    {
-        strncpy(pcWriteBuffer, "Please specify a step count",
-                strlen("Please specify a step count") + 1);
-        return pdFALSE;
-    }
-    else
-    {
-        stepCount = strtoul(pcParameter, NULL, 0);
-    }
-
-    CLU_get_parameter_value_string("-d", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (parameterFound == 0 || parameterStringLength == 0)
-    {
-        strncpy(pcWriteBuffer, "Please specify a direction",
-                strlen("Please specify a direction") + 1);
-        return pdFALSE;
-    }
-    else
-    {
-        if (strncmp("cw", pcParameter, 2) == 0)
-        {
-            direction = STP_CLOCKWISE;
-        }
-        else if (strncmp("ccw", pcParameter, 3) == 0)
-        {
-            direction = STP_COUNTERCLOCKWISE;
-        }
-        else
-        {
-            strncpy(pcWriteBuffer, "Invalid direction", strlen("Invalid direction") + 1);
-            return pdFALSE;
-        }
-    }
-
-    int32_t stepsSigned = (direction == STP_COUNTERCLOCKWISE) ? stepCount : -stepCount;
-    STP_move_relative(handle, stepsSigned);
-    return pdFALSE;
-}

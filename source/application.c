@@ -28,6 +28,7 @@
 #include "step.h"
 #include "tmc2209.h"
 #include "motor.h"
+#include "motorCmd.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -92,19 +93,24 @@ void APP_init(void)
         while (1)
             ;
     }
+    if (MCMD_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
 }
 
 void APP_run(void)
 {
     if (create_task(LOG_task, "LOG_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
+                    configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
     }
 
     if (create_task(CLI_task, "CLI_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
+                    configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
@@ -127,13 +133,27 @@ void APP_run(void)
         while (1)
             ;
     }
-    if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 400,
+                    configMAX_PRIORITIES - 5) != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (create_task(MCMD_task, "MCMD_Task", configMINIMAL_STACK_SIZE + 200,
                     configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
     vTaskStartScheduler();
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName)
+{
+    for (;;)
+    {
+        asm("nop");
+    }
 }
 
 /********************************************

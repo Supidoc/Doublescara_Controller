@@ -12,12 +12,17 @@ var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
     [ "ffconf.h", "ffconf_8h.html", "ffconf_8h" ],
     [ "log.c", "log_8c.html", "log_8c" ],
     [ "log.h", "log_8h.html", "log_8h" ],
+    [ "main.c", "main_8c.html", "main_8c" ],
+    [ "motor.c", "motor_8c.html", "motor_8c" ],
+    [ "motor.h", "motor_8h.html", "motor_8h" ],
     [ "motor_test.c", "motor__test_8c.html", "motor__test_8c" ],
     [ "motor_test.h", "motor__test_8h.html", "motor__test_8h" ],
+    [ "motorCmd.c", "motorCmd_8c.html", "motorCmd_8c" ],
+    [ "motorCmd.h", "motorCmd_8h.html", "motorCmd_8h" ],
     [ "semihost_hardfault.c", "semihost__hardfault_8c.html", "semihost__hardfault_8c" ],
     [ "step.c", "step_8c.html", "step_8c" ],
     [ "step.h", "step_8h.html", "step_8h" ],
+    [ "task_helpers.h", "task__helpers_8h.html", "task__helpers_8h" ],
     [ "tmc2209.c", "tmc2209_8c.html", "tmc2209_8c" ],
-    [ "tmc2209.h", "tmc2209_8h.html", "tmc2209_8h" ],
-    [ "TMC2209_Driver.c", "TMC2209__Driver_8c.html", "TMC2209__Driver_8c" ]
+    [ "tmc2209.h", "tmc2209_8h.html", "tmc2209_8h" ]
 ];

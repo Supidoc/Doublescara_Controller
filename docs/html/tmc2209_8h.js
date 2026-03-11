@@ -2,10 +2,12 @@ var tmc2209_8h =
 [
     [ "TMC_COMMAND_QUEUE_LENGTH", "group__TMC2209__Module.html#ga6a1b5e4db27fe14a15171351e35c3493", null ],
     [ "TMC_CONFIRM_WRITES", "group__TMC2209__Module.html#ga01c24c42cd5b0d09e5cb3e89083f97b3", null ],
-    [ "TMC_TIMEOUT_MS", "group__TMC2209__Module.html#gacad9194082837d7e3913dd6d99415170", null ],
-    [ "TMC_Handle_t", "group__TMC2209__Module.html#ga1c2066e4823ec40ba0d6f967b690daab", null ],
+    [ "TMC_MAX_HANDLE_COUNT", "group__TMC2209__Module.html#ga4e94e6caf9a3151acb26285bb3319b31", null ],
+    [ "TMC_Config_t", "group__TMC2209__Module.html#ga2c9718556ec3eb0096214699414f8291", null ],
+    [ "TMC_Handle_t", "group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8", null ],
     [ "TMC_MICROSTEPPING_t", "group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8", null ],
     [ "TMC_Read_Datagram_t", "group__TMC2209__Module.html#gab739de4f2b9cd56f073a922d4a43b518", null ],
+    [ "TMC_RoundingMode_t", "group__TMC2209__Module.html#ga81726756d4e5751b52c7841141c8e8b1", null ],
     [ "TMC_SerialAddress_t", "group__TMC2209__Module.html#ga6b7bb1e8df5bd1b778b2123d163814ae", null ],
     [ "TMC_Write_Datagram_t", "group__TMC2209__Module.html#gae631c2e78c61df94499ae5181e07dc94", null ],
     [ "_TMC_MICROSTEPPING", "group__TMC2209__Module.html#ga883f81305a19337cfeb70a2ed2c59a90", [
@@ -19,13 +21,25 @@ var tmc2209_8h =
       [ "TMC_MS_2", "group__TMC2209__Module.html#gga883f81305a19337cfeb70a2ed2c59a90a1245bd027049b4219d7fd57c8b70b9ab", null ],
       [ "TMC_MS_FULL", "group__TMC2209__Module.html#gga883f81305a19337cfeb70a2ed2c59a90a7a9a7afa0de063234de1d6ef64e1cd2d", null ]
     ] ],
+    [ "_TMC_RoundingMode", "group__TMC2209__Module.html#ga041954e578c45fc0f4ccb00b80014d8f", [
+      [ "TMC_ROUND_FLOOR", "group__TMC2209__Module.html#gga041954e578c45fc0f4ccb00b80014d8fa206ab2875482d055ad6475aaa035c0fd", null ],
+      [ "TMC_ROUND_CEIL", "group__TMC2209__Module.html#gga041954e578c45fc0f4ccb00b80014d8fa7b67f405b5f0d93da77f1b9eeddae97a", null ],
+      [ "TMC_ROUND_NEAREST", "group__TMC2209__Module.html#gga041954e578c45fc0f4ccb00b80014d8fac6c88709c63f3e8cabb0fa056b6f2574", null ]
+    ] ],
     [ "_TMC_SerialAddress", "group__TMC2209__Module.html#gad84e465cc543696ae6618635f2dc17c4", [
       [ "TMC_SERIAL_ADDRESS_0", "group__TMC2209__Module.html#ggad84e465cc543696ae6618635f2dc17c4a4804f7154d3b0c13e3923bd12502b772", null ],
       [ "TMC_SERIAL_ADDRESS_1", "group__TMC2209__Module.html#ggad84e465cc543696ae6618635f2dc17c4a9d034e2935ff10c640bd55673e66dc15", null ],
       [ "TMC_SERIAL_ADDRESS_2", "group__TMC2209__Module.html#ggad84e465cc543696ae6618635f2dc17c4ac6dbd5b07c1a22c5da11d7b8af8f040b", null ],
       [ "TMC_SERIAL_ADDRESS_3", "group__TMC2209__Module.html#ggad84e465cc543696ae6618635f2dc17c4ac785d8e83fa46e4b170af24caa87156b", null ]
     ] ],
+    [ "TMC_current_to_divider", "group__TMC2209__Module.html#ga78b08cc2828dcca1085ed6205332ea08", null ],
+    [ "TMC_get_default_config", "group__TMC2209__Module.html#ga64a53e85523cba9e1abb7f7a29baafa4", null ],
+    [ "TMC_get_handle_by_label", "group__TMC2209__Module.html#ga9c9c009ee4ec2f83359b0bac747d3a02", null ],
     [ "TMC_init", "group__TMC2209__Module.html#ga626120616f06e287f92803166d5b38f3", null ],
-    [ "TMC_init_default", "group__TMC2209__Module.html#gaaf91b00649cbf661bbbca5815673d734", null ],
+    [ "TMC_init_handle", "group__TMC2209__Module.html#ga8af8a4f06ac58d61065c3558c2d6b80c", null ],
+    [ "TMC_microstepping_uint_to_enum", "group__TMC2209__Module.html#gac5f5a7c8a0624a8224f80955f53a69a7", null ],
+    [ "TMC_set_ihold_divider", "group__TMC2209__Module.html#gab4c0c981a12a0bb3ae5218fab23f4064", null ],
+    [ "TMC_set_irun_divider", "group__TMC2209__Module.html#ga45ffe3a8f5ff405c641670dfd6ae1cce", null ],
+    [ "TMC_set_microstepping", "group__TMC2209__Module.html#gaee4ca72fd373cde77461813cd2aa69fc", null ],
     [ "TMC_task", "group__TMC2209__Module.html#ga4d6999bb2640adbe2a2fce2c6ec570b2", null ]
 ];

@@ -1,0 +1,112 @@
+\doxysection{task\+\_\+helpers.\+h}
+\hypertarget{task__helpers_8h_source}{}\label{task__helpers_8h_source}\index{source/task\_helpers.h@{source/task\_helpers.h}}
+\doxymbox{\hyperlink{task__helpers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ task\_helpers.h}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Helper\ macros\ and\ functions\ for\ task-\/safe\ operations}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 9\ Mar\ 2026}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ TASK\_HELPERS\_H\_}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ TASK\_HELPERS\_H\_}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00016}00016\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00017}00017\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00018}00018\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}task.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}string.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00025}00025\ \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00026}00026\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00027}00027\ \textcolor{comment}{\ ***********************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00035}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}{00035}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_BEGIN()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00036}00036\ \textcolor{preprocessor}{\ \ \ \ TaskHandle\_t\ callerTaskHandle\ =\ xTaskGetCurrentTaskHandle();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ if\ (callerTaskHandle\ ==\ NULL)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ LOG\_WARN("{}Failed\ to\ get\ current\ task\ handle"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00053}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{00053}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_WAIT(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (deadline\ !=\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00057}00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ currentTick\ =\ xTaskGetTickCount();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (deadline\ <=\ currentTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ char\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ sizeof(logMsg),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Deadline\ for\ task\ notification\ has\ already\ passed"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ ticksUntilDeadline\ =\ deadline\ -\/\ currentTick;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (ulTaskNotifyTake(pdTRUE,\ ticksUntilDeadline)\ ==\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ char\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ sizeof(logMsg),\ "{}Timeout\ waiting\ for\ notification\ after\ \%u\ ms"{},\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (unsigned\ int)(pdTICKS\_TO\_MS(ticksUntilDeadline)));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00084}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}{00084}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_COMPLETE(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ THE\_TASK\_SAFE\_WAIT(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \ \ return\ kStatus\_Success;}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00088}00088\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00089}00089\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00090}00090\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00092}00092\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00093}00093\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00094}00094\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00096}00096\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00097}00097\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00098}00098\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00109}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{00109}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{THE\_notify\_task\_result}}(TaskHandle\_t\ taskHandle,\ status\_t\ result)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00112}00112\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ result\ ==\ kStatus\_Success\ ?\ 1\ :\ 0,\ eSetValueWithOverwrite);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00125}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{00125}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{THE\_notify\_task\_success}}(TaskHandle\_t\ taskHandle)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00126}00126\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00127}00127\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00128}00128\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ 1,\ eSetValueWithOverwrite);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00130}00130\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00131}00131\ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00141}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{00141}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{THE\_notify\_task\_failure}}(TaskHandle\_t\ taskHandle)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00142}00142\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00144}00144\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ 0,\ eSetValueWithOverwrite);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00147}00147\ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00154}\doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{00154}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ TickType\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(uint32\_t\ timeout\_ms)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00155}00155\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{return}\ xTaskGetTickCount()\ +\ pdMS\_TO\_TICKS(timeout\_ms);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00158}00158\ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00159}00159\ \ \textcolor{comment}{//\ End\ of\ TaskHelpers\_Module}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00162}00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TASK\_HELPERS\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
