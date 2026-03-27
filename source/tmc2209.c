@@ -56,8 +56,8 @@ typedef struct _TMC_CommandQueueItem
 {
     TMC_CommandType_t commandType;
     TMC_Handle_t      handle;
-    TaskHandle_t      taskHandle;
     TickType_t        deadline;
+    THE_CmdHandle_t   cmdHandle; // NEW: async completion handle
     union
     {
         struct
@@ -109,6 +109,8 @@ static status_t    write(TMC_Handle_t handle, uint8_t regAddr, uint32_t* data, T
 static status_t    set_double_edge_step_pulse(TMC_Handle_t handle, uint8_t enabled,
                                               TickType_t deadline);
 static status_t    free_handle(TMC_Handle_t handle);
+static status_t    send_async_cmd(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
+                                  THE_CmdHandle_t* cmdHandle);
 
 /****************************
  *     Public Variables     *
@@ -126,6 +128,8 @@ static TMC_HandleArrayItem_t tmcHandleArray[TMC_MAX_HANDLE_COUNT];
 
 QueueHandle_t commandQueue = NULL;
 
+static THE_CmdHandleImpl_t tmcCmdHandles[TMC_MAX_CMD_HANDLE_COUNT];
+
 /*******************************************
  *     Public Function Implementations     *
  *******************************************/
@@ -137,6 +141,8 @@ status_t TMC_init(void)
     {
         return kStatus_Fail;
     }
+
+    THE_init_cmd_handles(tmcCmdHandles, TMC_MAX_CMD_HANDLE_COUNT); // NEW
     return kStatus_Success;
 }
 
@@ -149,73 +155,37 @@ void TMC_task(void* pvParameters)
     }
 }
 
-status_t TMC_init_handle(TMC_Config_t config, TickType_t deadline)
+status_t TMC_init_handle_async(TMC_Config_t config, TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
+    if (cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-    THE_TASK_SAFE_BEGIN();
-
-    char                   logMsg[60];
-    TMC_CommandQueueItem_t queueItem;
+    TMC_CommandQueueItem_t queueItem = {0};
     queueItem.handle                 = NULL;
     queueItem.commandType            = TMC_CMD_DEFAULT_INIT;
-    queueItem.taskHandle             = callerTaskHandle;
+    queueItem.deadline               = deadline;
     queueItem.data.initHandle.config = config;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Deadline for init command has already passed",
-                 config.label);
-        LOG_ERROR(logMsg);
-        return kStatus_Fail;
-    }
-    TickType_t timeUntilDeadline = deadline - currentTick;
-    if (xQueueSend(commandQueue, (void*)&queueItem, timeUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue init default command");
-        return kStatus_Fail;
-    }
-
-    snprintf(logMsg, sizeof(logMsg), "[%s] Default init command queued", config.label);
-    LOG_DEBUG(logMsg);
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_async_cmd(&queueItem, deadline, cmdHandle);
 }
 
-status_t TMC_set_microstepping(TMC_Handle_t handle, TMC_MICROSTEPPING_t microstepping,
-                               TickType_t deadline)
+status_t TMC_set_microstepping_async(TMC_Handle_t handle, TMC_MICROSTEPPING_t microstepping,
+                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-    TMC_CommandQueueItem_t queueItem;
+    TMC_CommandQueueItem_t queueItem              = {0};
     queueItem.handle                              = handle;
     queueItem.commandType                         = TMC_CMD_SET_MICROSTEPPING;
-    queueItem.taskHandle                          = callerTaskHandle;
     queueItem.data.setMicrostepping.microstepping = microstepping;
     queueItem.deadline                            = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for set microstepping command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t timeUntilDeadline = deadline - currentTick;
-    if (xQueueSend(commandQueue, (void*)&queueItem, timeUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue set microstepping command");
-        return kStatus_Fail;
-    }
-
-    char logMsg[60];
-    snprintf(logMsg, sizeof(logMsg), "[%s] Set microstepping command queued", handle->label);
-    LOG_DEBUG(logMsg);
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_async_cmd(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_microstepping_value_to_enum(uint8_t value, TMC_MICROSTEPPING_t* microstepping)
@@ -300,70 +270,38 @@ status_t TMC_microstepping_uint_to_enum(uint16_t value, TMC_MICROSTEPPING_t* mic
     }
 }
 
-status_t TMC_set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t deadline)
+status_t TMC_set_ihold_divider_async(TMC_Handle_t handle, uint8_t ihold, TickType_t deadline,
+                                     THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-    TMC_CommandQueueItem_t queueItem;
+    TMC_CommandQueueItem_t queueItem     = {0};
     queueItem.handle                     = handle;
     queueItem.commandType                = TMC_CMD_SET_IHOLD_DIVIDER;
-    queueItem.taskHandle                 = callerTaskHandle;
     queueItem.data.setIholdDivider.ihold = ihold;
     queueItem.deadline                   = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for set ihold divider command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t timeUntilDeadline = deadline - currentTick;
-    if (xQueueSend(commandQueue, (void*)&queueItem, timeUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue set ihold divider command");
-        return kStatus_Fail;
-    }
-
-    char logMsg[60];
-    snprintf(logMsg, sizeof(logMsg), "[%s] Set ihold divider command queued", handle->label);
-    LOG_DEBUG(logMsg);
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_async_cmd(&queueItem, deadline, cmdHandle);
 }
 
-status_t TMC_set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t deadline)
+status_t TMC_set_irun_divider_async(TMC_Handle_t handle, uint8_t irun, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-    TMC_CommandQueueItem_t queueItem;
+    TMC_CommandQueueItem_t queueItem   = {0};
     queueItem.handle                   = handle;
     queueItem.commandType              = TMC_CMD_SET_IRUN_DIVIDER;
-    queueItem.taskHandle               = callerTaskHandle;
     queueItem.data.setIrunDivider.irun = irun;
     queueItem.deadline                 = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for set irun divider command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t timeUntilDeadline = deadline - currentTick;
-    if (xQueueSend(commandQueue, (void*)&queueItem, timeUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue set irun divider command");
-        return kStatus_Fail;
-    }
-
-    char logMsg[60];
-    snprintf(logMsg, sizeof(logMsg), "[%s] Set irun divider command queued", handle->label);
-    LOG_DEBUG(logMsg);
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_async_cmd(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_current_to_divider(float desired_current, TMC_RoundingMode_t rounding,
@@ -414,7 +352,9 @@ status_t TMC_current_to_divider(float desired_current, TMC_RoundingMode_t roundi
         return kStatus_Fail;
     }
     if (rounded_divider < 0)
+    {
         rounded_divider = 0;
+    }
 
     *divider = rounded_divider;
     return kStatus_Success;
@@ -463,7 +403,7 @@ status_t TMC_get_handle_by_label(const char* label, TMC_Handle_t* handle)
 
 static void process(void)
 {
-    TMC_CommandQueueItem_t queueItem;
+    TMC_CommandQueueItem_t queueItem = {0};
     BaseType_t             status;
     status = xQueueReceive(commandQueue, &queueItem, pdMS_TO_TICKS(10));
     if (status != pdPASS)
@@ -490,19 +430,51 @@ static void process(void)
                                          queueItem.deadline);
             break;
         default:
+            cmdStatus = kStatus_Fail;
             break;
     }
-    if (queueItem.deadline > xTaskGetTickCount() && cmdStatus == kStatus_Success)
+
+    if (queueItem.cmdHandle != NULL)
     {
-        if (cmdStatus == kStatus_Success)
+        if (queueItem.deadline <= xTaskGetTickCount())
         {
-            THE_notify_task_success(queueItem.taskHandle);
+            THE_notify_task_timeout(queueItem.cmdHandle);
+        }
+        else if (cmdStatus == kStatus_Success)
+        {
+            THE_notify_task_success(queueItem.cmdHandle);
         }
         else
         {
-            THE_notify_task_failure(queueItem.taskHandle);
+            THE_notify_task_failure(queueItem.cmdHandle);
         }
+
+        THE_remove_cmd_handle_ref(queueItem.cmdHandle);
     }
+}
+
+static status_t send_async_cmd(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle)
+{
+    if (queueItem == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    if (THE_get_cmd_handle(cmdHandle, tmcCmdHandles, TMC_MAX_CMD_HANDLE_COUNT) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    queueItem->cmdHandle = *cmdHandle;
+
+    if (THE_send_cmd(commandQueue, (void*)queueItem, deadline, *cmdHandle) != kStatus_Success)
+    {
+        THE_remove_cmd_handle_ref(*cmdHandle);
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
 }
 
 static status_t set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t deadline)

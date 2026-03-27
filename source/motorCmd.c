@@ -59,6 +59,7 @@ static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBu
                                             const char* pcCommandString);
 static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteBufferLen,
                                              const char* pcCommandString);
+static status_t   wait_for_mtr_cmd(THE_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
  *     Public Variables     *
@@ -188,6 +189,18 @@ void MCMD_task(void* pvParameters)
  *     Private Function Implementations     *
  ********************************************/
 
+static status_t wait_for_mtr_cmd(THE_CmdHandle_t cmdHandle, TickType_t deadline)
+{
+    if (cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    status_t status = THE_cmd_wait_result(cmdHandle, deadline, NULL);
+    THE_remove_cmd_handle_ref(cmdHandle);
+    return status;
+}
+
 static BaseType_t cmd_motor_move_angle(char* pcWriteBuffer, size_t xWriteBufferLen,
                                        const char* pcCommandString)
 {
@@ -225,7 +238,9 @@ static BaseType_t cmd_motor_move_angle(char* pcWriteBuffer, size_t xWriteBufferL
     }
     angle = strtod(pcParameter, NULL);
 
-    if (MTR_move_angle(handle, angle, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_move_angle_async(handle, angle, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f degrees\r\n", angle);
     }
@@ -274,7 +289,9 @@ static BaseType_t cmd_motor_move_absolute(char* pcWriteBuffer, size_t xWriteBuff
     }
     angle = strtod(pcParameter, NULL);
 
-    if (MTR_move_absolute_angle(handle, angle, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_move_absolute_angle_async(handle, angle, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving to absolute angle %.2f degrees\r\n",
                  angle);
@@ -324,7 +341,9 @@ static BaseType_t cmd_motor_move_revolutions(char* pcWriteBuffer, size_t xWriteB
     }
     revolutions = strtod(pcParameter, NULL);
 
-    if (MTR_move_revolutions(handle, revolutions, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_move_revolutions_async(handle, revolutions, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f revolutions\r\n", revolutions);
     }
@@ -373,7 +392,9 @@ static BaseType_t cmd_motor_set_velocity(char* pcWriteBuffer, size_t xWriteBuffe
     }
     velocity = strtod(pcParameter, NULL);
 
-    if (MTR_set_velocity(handle, velocity, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_set_velocity_async(handle, velocity, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Velocity set to %.2f deg/s\r\n", velocity);
     }
@@ -422,7 +443,9 @@ static BaseType_t cmd_motor_set_acceleration(char* pcWriteBuffer, size_t xWriteB
     }
     acceleration = strtod(pcParameter, NULL);
 
-    if (MTR_set_acceleration(handle, acceleration, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_set_acceleration_async(handle, acceleration, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Acceleration set to %.2f deg/s²\r\n",
                  acceleration);
@@ -470,7 +493,9 @@ static BaseType_t cmd_motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen,
         decelerate = true;
     }
 
-    if (MTR_stop(handle, decelerate, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_stop_async(handle, decelerate, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Motor stopped%s\r\n",
                  decelerate ? " with deceleration" : "");
@@ -565,7 +590,9 @@ static BaseType_t cmd_motor_get_angle(char* pcWriteBuffer, size_t xWriteBufferLe
         return pdFALSE;
     }
 
-    if (MTR_get_current_angle(handle, &angle, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_get_current_angle_async(handle, &angle, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Current angle: %.2f degrees\r\n", angle);
     }
@@ -604,7 +631,9 @@ static BaseType_t cmd_motor_get_state(char* pcWriteBuffer, size_t xWriteBufferLe
         return pdFALSE;
     }
 
-    if (MTR_get_movement_state(handle, &state, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_get_movement_state_async(handle, &state, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         const char* stateStr;
         switch (state)
@@ -670,7 +699,9 @@ static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen
         return pdFALSE;
     }
 
-    if (MTR_set_home_position(handle, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_set_home_position_async(handle, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Home position set\r\n");
     }
@@ -719,7 +750,9 @@ static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBu
     }
     current = strtod(pcParameter, NULL);
 
-    if (MTR_set_run_current(handle, current, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_set_run_current_async(handle, current, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Run current set to %.3f A\r\n", current);
     }
@@ -768,7 +801,9 @@ static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteB
     }
     current = strtod(pcParameter, NULL);
 
-    if (MTR_set_hold_current(handle, current, deadline) == kStatus_Success)
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_set_hold_current_async(handle, current, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Hold current set to %.3f A\r\n", current);
     }

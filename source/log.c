@@ -17,6 +17,7 @@
 #include "queue.h"
 #include "stdio.h"
 #include <log.h>
+#include "SEGGER_RTT.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -116,10 +117,14 @@ status_t LOG_init(void)
 {
     logQueue = xQueueCreate(LOG_QUEUE_SIZE, sizeof(LOG_QueueItem_t));
     if (logQueue == NULL)
+    {
         return kStatus_Fail;
+    }
 
     if (set_session_id() != kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     // set set file path and name
     sprintf(LogFilePath, DISK_SD_PATH "%lu", sessionId);
@@ -128,7 +133,9 @@ status_t LOG_init(void)
     FRESULT res;
     res = f_open(&logFile, LogFilePath, FA_WRITE | FA_OPEN_ALWAYS);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     f_close(&logFile);
 
@@ -140,7 +147,9 @@ status_t LOG_init(void)
     logHeader.tickFreqHz = configTICK_RATE_HZ;
 
     if (append_to_file((uint8_t*)&logHeader, sizeof(LOG_LogHeader_t)) != kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     return kStatus_Success;
 }
@@ -148,7 +157,9 @@ status_t LOG_init(void)
 status_t LOG_send_log_message(LOG_Level_t level, char* message, uint8_t silent)
 {
     if (message == NULL)
+    {
         return kStatus_Fail;
+    }
     LOG_QueueItem_t queueItem;
 
     queueItem.level  = level;
@@ -159,7 +170,9 @@ status_t LOG_send_log_message(LOG_Level_t level, char* message, uint8_t silent)
     queueItem.msg[LOG_MAX_MESSAGE_SIZE - 1] = '\0';
 
     if (xQueueSend(logQueue, (void*)&queueItem, portMAX_DELAY) != pdTRUE)
+    {
         return kStatus_Fail;
+    }
     return kStatus_Success;
 }
 
@@ -211,7 +224,9 @@ static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
 
         res = f_open(&localLogFile, localLogFilePath, FA_READ | FA_OPEN_ALWAYS);
         if (res != FR_OK)
+        {
             return kStatus_Fail;
+        }
 
         res = f_read(&localLogFile, &prefix, sizeof(prefix), &br);
         if (res != FR_OK || br != sizeof(prefix))
@@ -384,24 +399,34 @@ static status_t append_to_file(uint8_t* buffer, size_t bufferLength)
     FRESULT res;
     res = f_open(&logFile, LogFilePath, FA_WRITE | FA_OPEN_ALWAYS);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     res = f_lseek(&logFile, f_size(&logFile));
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     UINT bw;
     res = f_write(&logFile, buffer, bufferLength, &bw);
     if (res != FR_OK || bw != bufferLength)
+    {
         return kStatus_Fail;
+    }
 
     res = f_sync(&logFile);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     res = f_close(&logFile);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     return kStatus_Success;
 }
@@ -412,13 +437,19 @@ static void process(void)
     BaseType_t      status;
     status = xQueueReceive(logQueue, &queueItem, portMAX_DELAY);
     if (status != pdPASS)
+    {
         return;
+    }
 
     if (enableLogToConsole && queueItem.level > consoleLogLevel && queueItem.silent == 0)
     {
         assemble_log_string(consoleOutputString, queueItem);
         size_t len = strlen((char*)consoleOutputString);
+#if CLI_USE_RTT
+        SEGGER_RTT_Write(0, consoleOutputString, len);
+#else
         LPUART_RTOS_Send(&LPUART0_rtos_handle, (uint8_t*)consoleOutputString, len);
+#endif
     }
     append_to_file((uint8_t*)&queueItem, sizeof(queueItem));
 }
@@ -429,8 +460,10 @@ static status_t set_session_id(void)
     FIL     file;
     res = f_open(&file, DISK_SD_PATH "session.id", FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
     if (res != FR_OK)
+    {
 
         return kStatus_Fail;
+    }
 
     UINT br;
     f_read(&file, &sessionId, sizeof(sessionId), &br);
@@ -446,7 +479,9 @@ static status_t set_session_id(void)
     UINT bw;
     res = f_write(&file, &sessionId, sizeof(sessionId), &bw);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
     f_sync(&file);
 
     f_close(&file);

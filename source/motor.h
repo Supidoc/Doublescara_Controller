@@ -30,10 +30,15 @@
  ********************/
 #include "step.h"
 #include "tmc2209.h"
+#include "fsl_ftm.h"
+#include "fsl_gpio.h"
+#include "fsl_port.h"
 
 /***********************************
  *     Public Macros / Defines     *
  ***********************************/
+
+#define MTR_MAX_CMD_HANDLE_COUNT 20
 
 /***************************
  *     Public Typedefs     *
@@ -128,11 +133,13 @@ status_t MTR_init(void);
  *
  * @param[in] config Complete motor configuration.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if the handle was created successfully.
  *         kStatus_Fail on invalid parameters, timeout, or initialization failure.
  */
-status_t MTR_init_handle(const MTR_MotorConfig_t config, TickType_t deadline);
+status_t MTR_init_handle_async(const MTR_MotorConfig_t config, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Retrieves a motor handle by its label.
@@ -148,11 +155,13 @@ void MTR_get_motor_by_label(const char* label, MTR_MotorHandle_t* handle);
  * @param[in] handle Target motor handle.
  * @param[in] angle Relative angle in degree (signed).
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if the command is accepted.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline);
+status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                              THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Commands movement to an absolute output angle.
@@ -160,11 +169,13 @@ status_t MTR_move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadl
  * @param[in] handle Target motor handle.
  * @param[in] angle Absolute destination angle in degree.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if the command is accepted.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline);
+status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                                       THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Commands a relative movement in revolutions.
@@ -172,11 +183,13 @@ status_t MTR_move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickTyp
  * @param[in] handle Target motor handle.
  * @param[in] revolutions Relative number of revolutions (signed).
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if the command is accepted.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_move_revolutions(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline);
+status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions,
+                                    TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets motor target velocity.
@@ -184,12 +197,13 @@ status_t MTR_move_revolutions(MTR_MotorHandle_t handle, double revolutions, Tick
  * @param[in] handle Target motor handle.
  * @param[in] velocity_deg_per_sec Target velocity in degree/s.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if velocity was applied.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
-                          TickType_t deadline);
+status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
+                                TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets motor acceleration.
@@ -197,12 +211,13 @@ status_t MTR_set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
  * @param[in] handle Target motor handle.
  * @param[in] acceleration_deg_per_sec2 Target acceleration in degree/s^2.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if acceleration was applied.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_acceleration(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
-                              TickType_t deadline);
+status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
+                                    TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Stops ongoing motion.
@@ -210,11 +225,13 @@ status_t MTR_set_acceleration(MTR_MotorHandle_t handle, double acceleration_deg_
  * @param[in] handle Target motor handle.
  * @param[in] decelerate If true, perform controlled deceleration; otherwise stop immediately.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if stop command was accepted.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_stop(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline);
+status_t MTR_stop_async(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
+                        THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Triggers emergency stop for the motor subsystem.
@@ -247,46 +264,50 @@ uint8_t MTR_is_emergency_stop_active(void);
  * @param[in] handle Target motor handle.
  * @param[out] angle Pointer receiving the current angle in degree.
  * @param[in] deadline Maximum time to wait for query completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if angle was read successfully.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_get_current_angle(MTR_MotorHandle_t handle, double* angle, TickType_t deadline);
+status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, TickType_t deadline,
+                                     THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Gets the current low-level movement state.
  *
  * @param[in] handle Target motor handle.
  * @param[out] state Pointer receiving current movement state.
- * @param[in] deadline Maximum time to wait for query completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if state was read successfully.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_get_movement_state(MTR_MotorHandle_t handle, STP_MovementState_t* state,
-                                TickType_t deadline);
+status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
+                                      THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Blocks until the motor is stopped or timeout expires.
  *
  * @param[in] handle Target motor handle.
  * @param[in] deadline Maximum wait time.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if the motor reached a stopped/idle state.
  *         kStatus_Fail if timeout occurs or an error is detected.
  */
-status_t MTR_wait_until_stopped(MTR_MotorHandle_t handle, TickType_t deadline);
+status_t MTR_wait_until_stopped_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                      THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets current position as home reference.
  *
  * @param[in] handle Target motor handle.
- * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if home position is set.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_home_position(MTR_MotorHandle_t handle, TickType_t deadline);
+status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Executes a synchronized multi-motor move.
@@ -295,12 +316,13 @@ status_t MTR_set_home_position(MTR_MotorHandle_t handle, TickType_t deadline);
  * @param[in] angles Array of relative target angles in degree.
  * @param[in] count Number of elements in handles/angles.
  * @param[in] deadline Maximum time to wait for synchronization trigger.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if all moves are prepared and triggered successfully.
  *         kStatus_Fail if any preparation/trigger step fails or deadline expires.
  */
-status_t MTR_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
-                               TickType_t deadline);
+status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
+                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets TMC2209 run current for a motor.
@@ -308,11 +330,13 @@ status_t MTR_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint8
  * @param[in] handle Target motor handle.
  * @param[in] current_a Run current in ampere.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if current was updated successfully.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_run_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline);
+status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
+                                   THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets TMC2209 hold current for a motor.
@@ -320,11 +344,13 @@ status_t MTR_set_run_current(MTR_MotorHandle_t handle, double current_a, TickTyp
  * @param[in] handle Target motor handle.
  * @param[in] current_a Hold current in ampere.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if current was updated successfully.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_hold_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline);
+status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle);
 
 /** @} */ /* End of MOTOR_Module */
 

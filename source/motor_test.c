@@ -16,6 +16,7 @@
 #include "stdio.h"
 #include "motor.h"
 #include "motor_test.h"
+#include "task_helpers.h"
 /************************************
  *     Private Macros / Defines    *
  ************************************/
@@ -98,12 +99,20 @@ void MTT_task(void* pvParameters)
     motorConfig.tmcConfig.iHoldCurrentA = 0.2;
     motorConfig.tmcConfig.iRunCurrentA  = 0.4;
 #endif
-    if (MTR_init_handle(motorConfig, 3000) == kStatus_Success)
+    TickType_t      deadline  = THE_deadline_from_timeout_ms(3000);
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_init_handle_async(motorConfig, deadline, &cmdHandle) == kStatus_Success &&
+        THE_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)
     {
+        THE_remove_cmd_handle_ref(cmdHandle);
         LOG_INFO("Motor initialized successfully: motor0");
     }
     else
     {
+        if (cmdHandle != NULL)
+        {
+            THE_remove_cmd_handle_ref(cmdHandle);
+        }
         LOG_ERROR("Failed to initialize motor: motor0");
     }
 

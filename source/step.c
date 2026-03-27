@@ -73,10 +73,10 @@ typedef struct _STP_SetEndVelocityCmdData
 typedef struct _STP_CmdQueueItem
 {
     STP_CmdType_t type;
-    STP_Handle_t  handle; /**< Pointer to target stepper handle */
-    TaskHandle_t
-        taskHandle;      /**< Task to notify when command is processed (NULL for no notification) */
-    TickType_t deadline; /**< Deadline for command completion (0 for no deadline) */
+    STP_Handle_t  handle;   /**< Pointer to target stepper handle */
+    TickType_t    deadline; /**< Deadline for command completion (0 for no deadline) */
+    THE_CmdHandle_t
+        cmdHandle; /**< Command handle for task synchronization (NULL for no synchronization) */
     union
     {
         STP_MoveCmdData_t            move;
@@ -118,6 +118,8 @@ typedef struct _STP_StepperMovement
     uint16_t accelInterpCounter; /**< Counter for interpolation factor (0 to interpFactor-1) */
     uint32_t accelTableIndex;    /**< Current index into acceleration table */
     uint8_t  waitForStart; /**< Flag: 1 if movement is planned but awaiting sync start trigger */
+    THE_CmdHandle_t
+        cmdHandle; /**< Command handle for synchronizing movement start (NULL if no sync) */
 } STP_StepperMovement_t;
 
 /**
@@ -166,7 +168,6 @@ static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t n
                                                uint16_t stepZeroDelay, uint16_t endVelocityDelay);
 static status_t allocate_accel_table(uint32_t tableSize, int8_t* poolIndex);
 static void     free_accel_table(int8_t poolIndex);
-static status_t start_steps(STP_Handle_t handle);
 static inline void get_handle_from_timer(FTM_Type* ftmBase, ftm_chnl_t ftmChannel,
                                          STP_Handle_t* handle);
 static status_t    reset_movement_handle(STP_StepperMovement_t* handle);
@@ -185,6 +186,11 @@ static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint
 static inline void update_isr_handle_cache(void);
 
 static status_t reset_absolute_position(STP_Handle_t handle);
+static void     check_movement_completion(void);
+static void     process_cmd(STP_CmdQueueItem_t queueItem);
+static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle);
+static status_t send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle);
 
 /****************************
  *     Public Variables     *
@@ -196,9 +202,11 @@ static status_t reset_absolute_position(STP_Handle_t handle);
 
 static STP_HandlesArrayItem_t handles[STP_MAX_HANDLE_COUNT];
 
+static THE_CmdHandleImpl_t cmdHandles[STP_MAX_CMD_HANDLE_COUNT];
+
 static QueueHandle_t cmdQueue = NULL;
 
-STP_Handle_t FTM3_ISR_handle_cache[8];
+STP_Handle_t FTM3_ISR_handle_cache[8] = {NULL};
 
 static uint8_t    isrDebugPin  = 1;
 static GPIO_Type* isrDebugGPIO = GPIOA;
@@ -242,6 +250,8 @@ status_t STP_init()
     PORT_SetPinMux(isrDebugPort, isrDebugPin, kPORT_MuxAlt1);
     GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
 
+    THE_init_cmd_handles(cmdHandles, STP_MAX_CMD_HANDLE_COUNT);
+
     return kStatus_Success;
 }
 
@@ -254,102 +264,62 @@ void STP_task(void* pvParameters)
     }
 }
 
-status_t STP_stop(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadline)
+status_t STP_stop_async(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadline,
+                        THE_CmdHandle_t* cmdHandle)
 {
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
 
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
+    STP_CmdQueueItem_t queueItem       = {0};
     queueItem.handle                   = handle;
     queueItem.data.stop.doDeceleration = doDeceleration;
     queueItem.type                     = STP_CMD_STOP;
-    queueItem.taskHandle               = callerTaskHandle;
     queueItem.deadline                 = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for stop command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_WARN("Failed to queue stop command");
-        return kStatus_Fail;
-    }
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t STP_move_relative(STP_Handle_t handle, int32_t steps, TickType_t deadline)
+status_t STP_move_relative_async(STP_Handle_t handle, int32_t steps, TickType_t deadline,
+                                 THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
-    queueItem.handle          = handle;
-    queueItem.type            = STP_CMD_MOVE;
-    queueItem.data.move.steps = steps;
-    queueItem.taskHandle      = callerTaskHandle;
-    queueItem.deadline        = deadline;
-
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
+    if (handle == NULL || cmdHandle == NULL)
     {
-        LOG_ERROR("Deadline for move command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue movement command");
         return kStatus_Fail;
     }
 
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
-}
-
-status_t STP_init_handle(STP_StepperConfig_t config, TickType_t deadline)
-{
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
-    queueItem.data.config.config = config;
-    queueItem.handle             = NULL;
-    queueItem.type               = STP_CMD_INIT_HANDLE;
-    queueItem.taskHandle         = callerTaskHandle;
+    STP_CmdQueueItem_t queueItem = {0};
+    queueItem.handle             = handle;
+    queueItem.data.move.steps    = steps;
+    queueItem.type               = STP_CMD_MOVE;
     queueItem.deadline           = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
+}
+
+status_t STP_init_handle_async(STP_StepperConfig_t config, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle)
+{
+    if (cmdHandle == NULL)
     {
-        LOG_ERROR("Deadline for stepper initialization has already passed");
         return kStatus_Fail;
     }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue stepper config command");
-        return kStatus_Fail;
-    }
 
-    char logMsg[60];
-    snprintf(logMsg, sizeof(logMsg), "[%s] Stepper config queued", config.label);
-    LOG_DEBUG(logMsg);
+    STP_CmdQueueItem_t queueItem = {0};
+    queueItem.data.config.config = config;
+    queueItem.type               = STP_CMD_INIT_HANDLE;
+    queueItem.deadline           = deadline;
 
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle)
 {
-    if (label == NULL)
+    if (label == NULL || handle == NULL)
+    {
         return kStatus_Fail;
+    }
     for (uint8_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
         if (handles[i].used)
@@ -366,165 +336,133 @@ status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle)
     return kStatus_Fail;
 }
 
-status_t STP_reset_absolute_position(STP_Handle_t handle, TickType_t deadline)
+status_t STP_reset_absolute_position(STP_Handle_t handle)
 {
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
     return reset_absolute_position(handle);
 }
 
-status_t STP_move_relative_prepare(STP_Handle_t handle, int32_t steps, TickType_t deadline)
+status_t STP_move_relative_prepare_async(STP_Handle_t handle, int32_t steps, TickType_t deadline,
+                                         THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
-    queueItem.handle          = handle;
-    queueItem.type            = STP_CMD_MOVE_PREPARE;
-    queueItem.data.move.steps = steps;
-    queueItem.taskHandle      = callerTaskHandle;
-    queueItem.deadline        = deadline;
-
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
+    if (handle == NULL || cmdHandle == NULL)
     {
-        LOG_ERROR("Deadline for prepare movement command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue prepare movement command");
         return kStatus_Fail;
     }
 
-    THE_TASK_SAFE_WAIT(deadline);
+    STP_CmdQueueItem_t queueItem = {0};
+    queueItem.handle             = handle;
+    queueItem.type               = STP_CMD_MOVE_PREPARE;
+    queueItem.data.move.steps    = steps;
+    queueItem.deadline           = deadline;
 
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t STP_trigger_prepared_moves(TickType_t deadline)
+status_t STP_trigger_prepared_moves_async(TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
-    queueItem.handle     = NULL;
-    queueItem.type       = STP_CMD_TRIGGER_START;
-    queueItem.taskHandle = callerTaskHandle;
-    queueItem.deadline   = deadline;
-
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
+    if (cmdHandle == NULL)
     {
-        LOG_ERROR("Deadline for trigger start command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue trigger start command");
         return kStatus_Fail;
     }
 
-    THE_TASK_SAFE_WAIT(deadline);
+    STP_CmdQueueItem_t queueItem = {0};
+    queueItem.type               = STP_CMD_TRIGGER_START;
+    queueItem.deadline           = deadline;
 
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps, TickType_t deadline)
+status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps)
 {
+    if (handle == NULL || absoluteSteps == NULL)
+    {
+        return kStatus_Fail;
+    }
     *absoluteSteps = handle->absolutePosition;
     return kStatus_Success;
 }
 
-status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration, TickType_t deadline)
+status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration)
 {
     if (handle == NULL || acceleration == NULL)
+    {
         return kStatus_Fail;
+    }
     *acceleration = handle->acceleration;
     return kStatus_Success;
 }
 
-status_t STP_get_end_velocity(STP_Handle_t handle, double* endVelocity, TickType_t deadline)
+status_t STP_get_end_velocity(STP_Handle_t handle, double* endVelocity)
 {
     if (handle == NULL || endVelocity == NULL)
+    {
         return kStatus_Fail;
+    }
     *endVelocity = handle->endVelocity;
     return kStatus_Success;
 }
 
-status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state,
-                                TickType_t deadline)
+status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state)
 {
     if (handle == NULL || state == NULL)
+    {
         return kStatus_Fail;
+    }
     *state = handle->movementHandle.state;
     return kStatus_Success;
 }
 
-status_t STP_set_acceleration(STP_Handle_t handle, double acceleration, TickType_t deadline)
+status_t STP_set_acceleration_async(STP_Handle_t handle, double acceleration, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || acceleration < STP_MIN_STEP_ACCELERATION)
+    if (handle == NULL || cmdHandle == NULL)
+    {
         return kStatus_Fail;
+    }
 
-    THE_TASK_SAFE_BEGIN();
-
-    STP_CmdQueueItem_t queueItem;
+    STP_CmdQueueItem_t queueItem                = {0};
     queueItem.handle                            = handle;
     queueItem.type                              = STP_CMD_SET_ACCELERATION;
     queueItem.data.setAcceleration.acceleration = acceleration;
-    queueItem.taskHandle                        = callerTaskHandle;
     queueItem.deadline                          = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for set acceleration command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue set acceleration command");
-        return kStatus_Fail;
-    }
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t STP_set_end_velocity(STP_Handle_t handle, double endVelocity, TickType_t deadline)
+status_t STP_set_end_velocity_async(STP_Handle_t handle, double endVelocity, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || endVelocity <= 0.0 || endVelocity > STP_MAX_STEP_FREQUENCY)
+    if (handle == NULL || cmdHandle == NULL)
+    {
         return kStatus_Fail;
+    }
 
-    THE_TASK_SAFE_BEGIN();
+    if (endVelocity <= 0.0 || endVelocity > STP_MAX_STEP_FREQUENCY)
+    {
+        return kStatus_Fail;
+    }
 
-    STP_CmdQueueItem_t queueItem;
+    STP_CmdQueueItem_t queueItem              = {0};
     queueItem.handle                          = handle;
     queueItem.type                            = STP_CMD_SET_END_VELOCITY;
     queueItem.data.setEndVelocity.endVelocity = endVelocity;
-    queueItem.taskHandle                      = callerTaskHandle;
     queueItem.deadline                        = deadline;
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        LOG_ERROR("Deadline for set end velocity command has already passed");
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
-    if (xQueueSend(cmdQueue, (void*)&queueItem, ticksUntilDeadline) != pdTRUE)
-    {
-        LOG_ERROR("Failed to queue set end velocity command");
-        return kStatus_Fail;
-    }
-
-    THE_TASK_SAFE_WAIT(deadline);
-
-    return kStatus_Success;
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t STP_get_default_config(STP_StepperConfig_t* config)
 {
+    if (config == NULL)
+    {
+        return kStatus_Fail;
+    }
+
     config->acceleration          = 200;
     config->endVelocity           = 360;
     config->dirGPIO               = GPIOA;
@@ -547,6 +485,30 @@ status_t STP_get_default_config(STP_StepperConfig_t* config)
  *     Private Function Implementations	   *
  ********************************************/
 
+static status_t send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle)
+{
+    if (queueItem == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    if (THE_get_cmd_handle(cmdHandle, cmdHandles, STP_MAX_CMD_HANDLE_COUNT) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    queueItem->cmdHandle = *cmdHandle;
+
+    if (THE_send_cmd(cmdQueue, (void*)queueItem, deadline, *cmdHandle) != kStatus_Success)
+    {
+        THE_remove_cmd_handle_ref(*cmdHandle);
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
+}
+
 // TODO check for correct step count
 void FTM3_IRQHandler(void)
 {
@@ -563,6 +525,10 @@ void FTM3_IRQHandler(void)
 
         if (intStatus & (0b1 << i))
         {
+            if (FTM3_ISR_handle_cache[i] == NULL)
+            {
+                continue;
+            }
             stepperHandle = FTM3_ISR_handle_cache[i];
 
             stepperHandle->movementHandle.currStepCount++;
@@ -573,7 +539,7 @@ void FTM3_IRQHandler(void)
             uint32_t accelSteps         = stepperHandle->movementHandle.accelSteps;
             uint32_t constVelocitySteps = stepperHandle->movementHandle.endVelocitySteps;
 
-            if (currentStepCount > totalSteps)
+            if (currentStepCount >= totalSteps)
             {
                 stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnSC &=
                     ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
@@ -758,7 +724,9 @@ static status_t init_handle(const STP_StepperConfig_t config, TickType_t deadlin
 
 static status_t reset_absolute_position(STP_Handle_t handle)
 {
+    taskENTER_CRITICAL();
     handle->absolutePosition = 0;
+    taskEXIT_CRITICAL();
     return kStatus_Success;
 }
 
@@ -849,7 +817,9 @@ static status_t plan_motion_profile(STP_Handle_t handle)
     int8_t poolIndex;
     if (create_accel_table(handle, tableSize, stepZeroDelay, endVelocityDelay, &poolIndex) !=
         kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     // Store table information in movement handle
     handle->movementHandle.accelTablePoolIndex = poolIndex;
@@ -924,7 +894,9 @@ static inline void calculate_acceleration_table_parameters(STP_Handle_t handle,
     *interpFactor = STP_ACCEL_TABLE_INTERP_FACTOR;
 
     if (*interpFactor < 1)
+    {
         *interpFactor = 1;
+    }
 
     if (handle->movementHandle.accelSteps > STP_MAX_ACCEL_TABLE_SIZE * (*interpFactor))
     {
@@ -935,7 +907,9 @@ static inline void calculate_acceleration_table_parameters(STP_Handle_t handle,
     *tableSize = (handle->movementHandle.accelSteps + *interpFactor - 1) / *interpFactor;
 
     if (*tableSize > STP_MAX_ACCEL_TABLE_SIZE)
+    {
         *tableSize = STP_MAX_ACCEL_TABLE_SIZE;
+    }
 }
 
 static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint16_t stepZeroDelay,
@@ -943,14 +917,18 @@ static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint
 {
 
     if (handle == NULL || poolIndex == NULL)
+    {
         return kStatus_Fail;
+    }
 
     status_t status;
 
     status = allocate_accel_table(tableSize, poolIndex);
 
     if (status != kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     if (tableSize > 0)
     {
@@ -1040,16 +1018,30 @@ static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t n
     return kStatus_Success;
 }
 
-static status_t start_steps(STP_Handle_t handle)
+static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
 {
-
     static char logMsg[100];
 
-    if (step_pin_mux_ftm(handle) != kStatus_Success)
+    if (handle == NULL)
+    {
         return kStatus_Fail;
+    }
+
+    if (handle->movementHandle.state != STP_MOVEMENT_PLANNED)
+    {
+        LOG_ERROR("Cannot start movement that is not in PLANNED state");
+        return kStatus_Fail;
+    }
+
+    if (step_pin_mux_ftm(handle) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
 
     if (set_direction_pin(handle) != kStatus_Success)
+    {
         return kStatus_Fail;
+    }
 
     handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &= ~FTM_CnSC_CHF_MASK;
 
@@ -1074,7 +1066,8 @@ static status_t start_steps(STP_Handle_t handle)
     handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC |=
         FTM_CnSC_MSA_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_CHIE_MASK;
 
-    handle->movementHandle.state = STP_MOVEMENT_STARTED;
+    handle->movementHandle.state     = STP_MOVEMENT_STARTED;
+    handle->movementHandle.cmdHandle = cmdHandle;
 
     snprintf(logMsg, sizeof(logMsg), "[%s] Movement started: %lu steps", handle->label,
              handle->movementHandle.totalSteps);
@@ -1087,7 +1080,8 @@ static inline void get_handle_from_timer(FTM_Type* ftmBase, ftm_chnl_t ftmChanne
 {
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
-        if (handles[i].handle.ftmBase == ftmBase && handles[i].handle.ftmChannel == ftmChannel)
+        if (handles[i].handle.ftmBase == ftmBase && handles[i].handle.ftmChannel == ftmChannel &&
+            handles[i].used == 1)
         {
             *handle = &handles[i].handle;
             return;
@@ -1126,32 +1120,45 @@ static status_t reset_movement_handle(STP_StepperMovement_t* handle)
     handle->accelInterpCounter = 0;
     handle->accelTableIndex    = 0;
     handle->waitForStart       = 0;
+    handle->cmdHandle          = NULL;
     return kStatus_Success;
 }
 
-// TODO Callback for decelerating movement
-static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration)
+static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration, THE_CmdHandle_t cmdHandle)
 {
     if (handle == NULL)
     {
         return kStatus_Fail;
     }
 
+    THE_CmdHandle_t oldCmdHandle = NULL;
+
+    taskENTER_CRITICAL();
+
+    STP_MovementState_t st = handle->movementHandle.state;
+    if (st == STP_MOVEMENT_IDLE || st == STP_MOVEMENT_FINISHED || st == STP_MOVEMENT_STOPPED)
+    {
+        taskEXIT_CRITICAL();
+        return kStatus_Fail;
+    }
+
+    oldCmdHandle = handle->movementHandle.cmdHandle;
+
     if (doDeceleration == 0)
     {
-        NVIC_DisableIRQ(FTM3_IRQn);
         handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &=
             ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
         handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &= ~(FTM_CnSC_CHF_MASK);
         handle->movementHandle.state = STP_MOVEMENT_STOPPED;
-        if (step_pin_mux_gpio(handle) != kStatus_Success)
-            return kStatus_Fail;
-        NVIC_EnableIRQ(FTM3_IRQn);
     }
     else
     {
-        NVIC_DisableIRQ(FTM3_IRQn);
-        if (handle->movementHandle.state == STP_MOVEMENT_ACCELERATING)
+        if (st == STP_MOVEMENT_PLANNED)
+        {
+            // nothing running yet -> stop immediately
+            handle->movementHandle.state = STP_MOVEMENT_STOPPED;
+        }
+        else if (st == STP_MOVEMENT_ACCELERATING)
         {
             handle->movementHandle.isTrapezoidal    = 0;
             handle->movementHandle.endVelocitySteps = 0;
@@ -1159,7 +1166,7 @@ static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration)
             handle->movementHandle.decelSteps       = handle->movementHandle.currStepCount;
             handle->movementHandle.totalSteps       = handle->movementHandle.currStepCount * 2;
         }
-        else if (handle->movementHandle.state == STP_MOVEMENT_CONST_VELOCITY)
+        else if (st == STP_MOVEMENT_CONST_VELOCITY)
         {
             handle->movementHandle.endVelocitySteps =
                 handle->movementHandle.currStepCount - handle->movementHandle.accelSteps;
@@ -1167,7 +1174,16 @@ static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration)
                                                 handle->movementHandle.endVelocitySteps +
                                                 handle->movementHandle.decelSteps;
         }
-        NVIC_EnableIRQ(FTM3_IRQn);
+        // if already decelerating: keep as-is
+    }
+
+    handle->movementHandle.cmdHandle = cmdHandle;
+    taskEXIT_CRITICAL();
+
+    if (oldCmdHandle != NULL && oldCmdHandle != cmdHandle)
+    {
+        THE_notify_task_failure(oldCmdHandle);
+        THE_remove_cmd_handle_ref(oldCmdHandle);
     }
 
     return kStatus_Success;
@@ -1182,19 +1198,22 @@ static status_t set_direction_pin(STP_Handle_t handle)
 
     uint8_t pinValue;
     if (handle->dirLogicHighClockwise)
+    {
         pinValue = handle->movementHandle.direction == STP_CLOCKWISE;
+    }
     else
+    {
         pinValue = handle->movementHandle.direction == STP_COUNTERCLOCKWISE;
+    }
     GPIO_PinWrite(handle->dirGPIO, handle->dirPin, pinValue);
 
     return kStatus_Success;
 }
 
-static void process(void)
+static void check_movement_completion(void)
 {
     static char logMsg[80];
 
-    // Check all handles for finished movements
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
         if (handles[i].used == 1 &&
@@ -1204,23 +1223,29 @@ static void process(void)
 
             step_pin_mux_gpio(&handles[i].handle);
 
+            if (handles[i].handle.movementHandle.cmdHandle != NULL)
+            {
+                THE_notify_task_success(handles[i].handle.movementHandle.cmdHandle);
+                THE_remove_cmd_handle_ref(handles[i].handle.movementHandle.cmdHandle);
+            }
+
             if (handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED)
+            {
                 snprintf(logMsg, sizeof(logMsg), "[%s] Movement finished", handles[i].handle.label);
+            }
             else if (handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
+            {
                 snprintf(logMsg, sizeof(logMsg), "[%s] Movement stopped", handles[i].handle.label);
+            }
             LOG_DEBUG(logMsg);
+
             reset_movement_handle(&handles[i].handle.movementHandle);
         }
     }
+}
 
-    STP_CmdQueueItem_t queueItem;
-    BaseType_t         status;
-    status = xQueueReceive(cmdQueue, &queueItem, pdMS_TO_TICKS(10));
-    if (status != pdPASS)
-    {
-        return;
-    }
-    status_t cmdStatus = kStatus_Success;
+static void process_cmd(STP_CmdQueueItem_t queueItem)
+{
     switch (queueItem.type)
     {
         case STP_CMD_MOVE:
@@ -1233,8 +1258,20 @@ static void process(void)
             queueItem.handle->movementHandle.waitForStart = 0;
             if (plan_motion_profile(queueItem.handle) == kStatus_Success)
             {
-                cmdStatus = start_steps(queueItem.handle);
+                if (start_steps(queueItem.handle, queueItem.cmdHandle) != kStatus_Success)
+                {
+                    THE_notify_task_failure(queueItem.cmdHandle);
+                    THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+                    LOG_ERROR("Failed to start steps");
+                }
             }
+            else
+            {
+                THE_notify_task_failure(queueItem.cmdHandle);
+                THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+                LOG_ERROR("Failed to plan motion profile");
+            }
+
             break;
         }
         case STP_CMD_MOVE_PREPARE:
@@ -1245,12 +1282,24 @@ static void process(void)
             queueItem.handle->movementHandle.direction =
                 (steps >= 0) ? STP_COUNTERCLOCKWISE : STP_CLOCKWISE;
             queueItem.handle->movementHandle.waitForStart = 1;
-            cmdStatus                                     = plan_motion_profile(queueItem.handle);
+            if (plan_motion_profile(queueItem.handle) == kStatus_Success)
+            {
+                THE_notify_task_success(queueItem.cmdHandle);
+            }
+            else
+            {
+                THE_notify_task_failure(queueItem.cmdHandle);
+            }
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             break;
         }
         case STP_CMD_TRIGGER_START:
         {
             LOG_DEBUG("Triggering synchronized start");
+
+            uint8_t anyStarted = 0;
+            uint8_t ownerSet   = 0;
+
             for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
             {
                 if (handles[i].used == 1 &&
@@ -1258,48 +1307,89 @@ static void process(void)
                     handles[i].handle.movementHandle.waitForStart == 1)
                 {
                     handles[i].handle.movementHandle.waitForStart = 0;
-                    cmdStatus                                     = start_steps(&handles[i].handle);
+
+                    THE_CmdHandle_t h = ownerSet ? NULL : queueItem.cmdHandle;
+                    if (start_steps(&handles[i].handle, h) == kStatus_Success)
+                    {
+                        anyStarted = 1;
+                        if (!ownerSet)
+                        {
+                            ownerSet =
+                                1; // only first successfully started motor owns trigger handle
+                        }
+                    }
                 }
+            }
+
+            if (!anyStarted)
+            {
+                THE_notify_task_failure(queueItem.cmdHandle);
+                THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             }
             break;
         }
         case STP_CMD_STOP:
         {
             LOG_DEBUG("Processing stop command");
-            cmdStatus = stop_steps(queueItem.handle, queueItem.data.stop.doDeceleration);
+            if (stop_steps(queueItem.handle, queueItem.data.stop.doDeceleration,
+                           queueItem.cmdHandle) != kStatus_Success)
+            {
+                THE_notify_task_failure(queueItem.cmdHandle);
+                THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+                LOG_ERROR("Failed to stop steps");
+            }
             break;
         }
         case STP_CMD_INIT_HANDLE:
         {
             LOG_DEBUG("Processing init handle command");
-            cmdStatus = init_handle(queueItem.data.config.config, queueItem.deadline);
+            if (init_handle(queueItem.data.config.config, queueItem.deadline) == kStatus_Success)
+            {
+                THE_notify_task_success(queueItem.cmdHandle);
+            }
+            else
+            {
+                THE_notify_task_failure(queueItem.cmdHandle);
+            }
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             break;
         }
         case STP_CMD_SET_ACCELERATION:
         {
             LOG_DEBUG("Processing set acceleration command");
             queueItem.handle->acceleration = queueItem.data.setAcceleration.acceleration;
+            THE_notify_task_success(queueItem.cmdHandle);
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             break;
         }
         case STP_CMD_SET_END_VELOCITY:
         {
             LOG_DEBUG("Processing set end velocity command");
             queueItem.handle->endVelocity = queueItem.data.setEndVelocity.endVelocity;
+            THE_notify_task_success(queueItem.cmdHandle);
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             break;
         }
         default:
+        {
+            THE_notify_task_failure(queueItem.cmdHandle);
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
             LOG_WARN("Received unknown command type");
             break;
+        }
     }
-    if (queueItem.type != STP_CMD_STOP)
+}
+
+static void process(void)
+{
+    check_movement_completion();
+
+    STP_CmdQueueItem_t queueItem = {0};
+    BaseType_t         status;
+    status = xQueueReceive(cmdQueue, &queueItem, pdMS_TO_TICKS(1));
+    if (status != pdPASS)
     {
-        if (queueItem.deadline > xTaskGetTickCount() && cmdStatus == kStatus_Success)
-        {
-            THE_notify_task_success(queueItem.taskHandle);
-        }
-        else
-        {
-            THE_notify_task_failure(queueItem.taskHandle);
-        }
+        return;
     }
+    process_cmd(queueItem);
 }

@@ -32,6 +32,7 @@
 #include "fsl_common.h"
 #include "peripherals.h"
 #include "stdint.h"
+#include "task_helpers.h"
 
 /***********************************
  *     Public Macros / Defines     *
@@ -51,6 +52,8 @@
  * @brief Maximum number of TMC2209 handles that can be created.
  */
 #define TMC_MAX_HANDLE_COUNT 5
+
+#define TMC_MAX_CMD_HANDLE_COUNT 20
 
 /***************************
  *     Public Typedefs     *
@@ -240,23 +243,23 @@ void TMC_task(void* pvParameters);
 status_t TMC_get_default_config(TMC_Config_t* config);
 
 /**
- * @brief Initializes a TMC2209 handle with default configuration.
+ * @brief Initializes a TMC2209 handle with default configuration asynchronously.
  *
  * This function queues a default initialization command for a TMC2209 driver handle.
  * The initialization is performed asynchronously by the TMC_task.
- * The calling task will wait for the completion until the deadline parameter.
+ * The caller can await completion using the returned command handle.
  *
  * @param[in] config  TMC config structure to initialize the handle with.
  * @param[in] deadline Deadline for the initialization command.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
  *
- * @note If deadline is 0, the function will not wait for completion.
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full, cmdHandle is NULL, or an error occurs.
  *
- * @return kStatus_Success if the command is successfully queued and completed.
- *         kStatus_Fail if the queue is full, the deadline is reached or an error occurs.
- *
- * @see ulTaskNotifyTake()
+ * @see THE_cmd_wait_result()
  */
-status_t TMC_init_handle(TMC_Config_t config, TickType_t deadline);
+status_t TMC_init_handle_async(TMC_Config_t config, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Retrieves a TMC2209 handle by its label.
@@ -274,25 +277,24 @@ status_t TMC_init_handle(TMC_Config_t config, TickType_t deadline);
 status_t TMC_get_handle_by_label(const char* label, TMC_Handle_t* handle);
 
 /**
- * @brief Sets the microstepping resolution for a TMC2209 driver.
+ * @brief Sets the microstepping resolution for a TMC2209 driver asynchronously.
  *
  * This function queues a microstepping configuration command for a TMC2209 driver handle.
- * Setting the microstepping is performed asynchronously by the TMC_task.
- * The calling task will wait for the completion until the deadline parameter.
+ * The operation is performed asynchronously by the TMC_task.
+ * The caller can await completion using the returned command handle.
  *
  * @param[in] handle Handle for the TMC2209 driver to configure.
  * @param[in] microstepping The microstepping resolution to set (TMC_MICROSTEPPING_t).
  * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
  *
- * @note If deadline is 0, the function will not wait for completion.
- *
- * @return kStatus_Success if the command is successfully queued and completed.
- *         kStatus_Fail if the queue is full, the deadline is reached or an error occurs.
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs.
  *
  * @see TMC_MICROSTEPPING_t
  */
-status_t TMC_set_microstepping(TMC_Handle_t handle, TMC_MICROSTEPPING_t microstepping,
-                               TickType_t deadline);
+status_t TMC_set_microstepping_async(TMC_Handle_t handle, TMC_MICROSTEPPING_t microstepping,
+                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Converts a uint8_t microstepping value to the corresponding enum member.
@@ -311,36 +313,40 @@ status_t TMC_set_microstepping(TMC_Handle_t handle, TMC_MICROSTEPPING_t microste
 status_t TMC_microstepping_uint_to_enum(uint16_t value, TMC_MICROSTEPPING_t* microstepping);
 
 /**
- * @brief Sets the IHOLD current divider asynchronously via task queue.
+ * @brief Sets the IHOLD current divider asynchronously.
  *
  * Queues a command to set the hold current divider value.
  * The operation is executed in the TMC task context.
- * The calling task will wait for the completion until the deadline parameter.
+ * The caller can await completion using the returned command handle.
  *
  * @param[in] handle Handle for the TMC2209 driver to configure.
  * @param[in] ihold The hold current divider value (0-31).
  * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
  *
- * @return kStatus_Success if command was successfully queued and completed.
- *         kStatus_Fail if queue operation failed or deadline is reached.
+ * @return kStatus_Success if command was successfully queued.
+ *         kStatus_Fail if queue operation failed, handle is NULL, or cmdHandle is NULL.
  */
-status_t TMC_set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t deadline);
+status_t TMC_set_ihold_divider_async(TMC_Handle_t handle, uint8_t ihold, TickType_t deadline,
+                                     THE_CmdHandle_t* cmdHandle);
 
 /**
- * @brief Sets the IRUN current divider asynchronously via task queue.
+ * @brief Sets the IRUN current divider asynchronously.
  *
- * Queues a command to set the run current divider value and returns immediately.
+ * Queues a command to set the run current divider value.
  * The operation is executed in the TMC task context.
- * The calling task will wait for the completion until the deadline parameter.
+ * The caller can await completion using the returned command handle.
  *
  * @param[in] handle Handle for the TMC2209 driver to configure.
  * @param[in] irun The run current divider value (0-31).
  * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
  *
- * @return kStatus_Success if command was successfully queued and completed.
- *         kStatus_Fail if queue operation failed or deadline is reached.
+ * @return kStatus_Success if command was successfully queued.
+ *         kStatus_Fail if queue operation failed, handle is NULL, or cmdHandle is NULL.
  */
-status_t TMC_set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t deadline);
+status_t TMC_set_irun_divider_async(TMC_Handle_t handle, uint8_t irun, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Converts a desired current to a TMC2209 current divider value.

@@ -9,6 +9,7 @@
  *     Includes		*
  ********************/
 #include "disk.h"
+#include "SEGGER_RTT.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -44,7 +45,9 @@ status_t DISK_init(void)
     /* Mount filesystem */
     res = f_mount(&fs, DISK_SD_PATH, 1);
     if (res != FR_OK)
+    {
         return kStatus_Fail;
+    }
 
     return kStatus_Success;
 }

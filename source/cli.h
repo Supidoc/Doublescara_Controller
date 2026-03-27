@@ -44,6 +44,8 @@
 
 #define CLI_SHOW_COMMAND_INPUT 1
 
+#define CLI_USE_RTT 1
+
 /***************************
  *     Public Typedefs	   *
  ***************************/

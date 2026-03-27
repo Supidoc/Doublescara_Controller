@@ -38,6 +38,7 @@
 #include "fsl_ftm.h"
 #include "fsl_gpio.h"
 #include "fsl_port.h"
+#include "task_helpers.h"
 
 /***********************************
  *     Public Macros / Defines	   *
@@ -63,6 +64,8 @@
  * @brief Size of the command queue.
  */
 #define STP_CMD_QUEUE_SIZE 30
+
+#define STP_MAX_CMD_HANDLE_COUNT 30
 
 /**
  * @brief Maximum number of steps in the acceleration/deceleration lookup table.
@@ -227,6 +230,7 @@ status_t STP_get_default_config(STP_StepperConfig_t* config);
  *
  * @param[in] config Configuration structure containing stepper parameters.
  * @param[in] deadline Deadline for the initialization process.
+ * @param[out] Command Handle to await for completion
  *
  * @note This function is TASK-SAFE and can be called after STP_init().
  * @note Configuration is applied asynchronously by the STP_task().
@@ -237,7 +241,8 @@ status_t STP_get_default_config(STP_StepperConfig_t* config);
  * @see STP_StepperConfig_t
  * @see STP_task()
  */
-status_t STP_init_handle(STP_StepperConfig_t config, TickType_t deadline);
+status_t STP_init_handle_async(STP_StepperConfig_t config, TickType_t deadline,
+                               THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Retrieves the stepper motor handle by its label identifier.
@@ -269,6 +274,7 @@ status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle);
  *
  * @param[in] handle Stepper motor handle to move
  * @param[in] steps Number of steps to move (positive=CCW, negative=CW).
+ * @param[out] Command Handle to await for completion
  *
  * @note This function is TASK-SAFE and can be called from any task context.
  * @note The actual movement occurs in the STP_task() and is non-blocking.
@@ -279,7 +285,8 @@ status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle);
  *
  * @see STP_Direction_t
  */
-status_t STP_move_relative(STP_Handle_t handle, int32_t steps, TickType_t deadline);
+status_t STP_move_relative_async(STP_Handle_t handle, int32_t steps, TickType_t deadline,
+                                 THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Stops a stepper motor movement.
@@ -291,6 +298,7 @@ status_t STP_move_relative(STP_Handle_t handle, int32_t steps, TickType_t deadli
  * @param[in] handle Stepper motor handle to stop
  * @param[in] doDeceleration If 1, the motor will decelerate to a stop. If 0, the motor
  *                           will stop immediately.
+ * @param[out] Command Handle to await for completion
  *
  * @note This function is TASK-SAFE and can be called from any task context.
  * @note The stop command is queued and executed by the STP_task().
@@ -300,7 +308,8 @@ status_t STP_move_relative(STP_Handle_t handle, int32_t steps, TickType_t deadli
  *
  * @see STP_move_relative()
  */
-status_t STP_stop(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadline);
+status_t STP_stop_async(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadline,
+                        THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Resets the tracked absolute position of a stepper motor to zero.
@@ -309,12 +318,11 @@ status_t STP_stop(STP_Handle_t handle, uint8_t doDeceleration, TickType_t deadli
  * absolute step counter for the selected motor handle.
  *
  * @param[in] handle Stepper motor handle whose absolute position is reset.
- * @param[in] deadline Maximum time to wait for command completion.
  *
  * @return kStatus_Success if the command is accepted and completed.
- *         kStatus_Fail if the command cannot be queued or does not complete before deadline.
+ *         kStatus_Fail if the command cannot be queued.
  */
-status_t STP_reset_absolute_position(STP_Handle_t handle, TickType_t deadline);
+status_t STP_reset_absolute_position(STP_Handle_t handle);
 
 /**
  * @brief Prepares a relative movement command without starting motion immediately.
@@ -325,13 +333,15 @@ status_t STP_reset_absolute_position(STP_Handle_t handle, TickType_t deadline);
  * @param[in] handle Stepper motor handle to prepare.
  * @param[in] steps Relative step count to prepare (positive=CCW, negative=CW).
  * @param[in] deadline Maximum time to wait for command completion.
+ * * @param[out] Command Handle to await for completion
  *
  * @return kStatus_Success if the prepare command is accepted.
  *         kStatus_Fail if the command cannot be queued or completed before deadline.
  *
  * @see STP_trigger_prepared_moves()
  */
-status_t STP_move_relative_prepare(STP_Handle_t handle, int32_t steps, TickType_t deadline);
+status_t STP_move_relative_prepare_async(STP_Handle_t handle, int32_t steps, TickType_t deadline,
+                                         THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Starts all previously prepared movements.
@@ -344,56 +354,51 @@ status_t STP_move_relative_prepare(STP_Handle_t handle, int32_t steps, TickType_
  * @return kStatus_Success if prepared movements are triggered successfully.
  *         kStatus_Fail if the trigger command fails or the deadline is exceeded.
  */
-status_t STP_trigger_prepared_moves(TickType_t deadline);
+status_t STP_trigger_prepared_moves_async(TickType_t deadline, THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Reads the current absolute step position of a motor.
  *
  * @param[in] handle Stepper motor handle to query.
  * @param[out] absoluteSteps Pointer receiving the absolute position in steps.
- * @param[in] deadline Maximum time to wait for the response.
  *
  * @return kStatus_Success if the value is returned successfully.
- *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ *         kStatus_Fail if parameters are invalid, queueing fails..
  */
-status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps, TickType_t deadline);
+status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps);
 
 /**
  * @brief Gets the configured acceleration of a motor.
  *
  * @param[in] handle Stepper motor handle to query.
  * @param[out] acceleration Pointer receiving acceleration in steps/s^2.
- * @param[in] deadline Maximum time to wait for the response.
  *
  * @return kStatus_Success if the acceleration is returned successfully.
- *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ *         kStatus_Fail if parameters are invalid, queueing fails.
  */
-status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration, TickType_t deadline);
+status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration);
 
 /**
  * @brief Gets the configured target end velocity of a motor.
  *
  * @param[in] handle Stepper motor handle to query.
  * @param[out] endVelocity Pointer receiving end velocity in steps/s.
- * @param[in] deadline Maximum time to wait for the response.
  *
  * @return kStatus_Success if the end velocity is returned successfully.
- *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ *         kStatus_Fail if parameters are invalid, queueing fails.
  */
-status_t STP_get_end_velocity(STP_Handle_t handle, double* endVelocity, TickType_t deadline);
+status_t STP_get_end_velocity(STP_Handle_t handle, double* endVelocity);
 
 /**
  * @brief Retrieves the current movement state of a motor.
  *
  * @param[in] handle Stepper motor handle to query.
  * @param[out] state Pointer receiving the current state.
- * @param[in] deadline Maximum time to wait for the response.
  *
  * @return kStatus_Success if the state is returned successfully.
- *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
+ *         kStatus_Fail if parameters are invalid, queueing fails.
  */
-status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state,
-                                TickType_t deadline);
+status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state);
 
 /**
  * @brief Sets the acceleration parameter for a motor.
@@ -401,11 +406,13 @@ status_t STP_get_movement_state(STP_Handle_t handle, STP_MovementState_t* state,
  * @param[in] handle Stepper motor handle to configure.
  * @param[in] acceleration New acceleration in steps/s^2.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] Command Handle to await for completion
  *
  * @return kStatus_Success if the acceleration is updated successfully.
  *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
  */
-status_t STP_set_acceleration(STP_Handle_t handle, double acceleration, TickType_t deadline);
+status_t STP_set_acceleration_async(STP_Handle_t handle, double acceleration, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets the target end velocity parameter for a motor.
@@ -413,11 +420,13 @@ status_t STP_set_acceleration(STP_Handle_t handle, double acceleration, TickType
  * @param[in] handle Stepper motor handle to configure.
  * @param[in] endVelocity New end velocity in steps/s.
  * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] Command Handle to await for completion
  *
  * @return kStatus_Success if the end velocity is updated successfully.
  *         kStatus_Fail if parameters are invalid, queueing fails, or deadline expires.
  */
-status_t STP_set_end_velocity(STP_Handle_t handle, double endVelocity, TickType_t deadline);
+status_t STP_set_end_velocity_async(STP_Handle_t handle, double endVelocity, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle);
 
 /** @} */ // End of STEP_Module
 
