@@ -97,7 +97,7 @@ instance:
     - uart_rtos_configuration:
       - clockSource: 'BusInterfaceClock'
       - clockSourceFreq: 'GetFreq'
-      - baudrate: '115200'
+      - baudrate: '300000'
       - parity: 'kUART_ParityDisabled'
       - stopbits: 'kUART_OneStopBit'
       - buffer_size: '32'
@@ -116,7 +116,7 @@ uart_handle_t UART1_uart_handle;
 uint8_t UART1_background_buffer[UART1_BACKGROUND_BUFFER_SIZE];
 uart_rtos_config_t UART1_rtos_config = {
   .base = UART1_PERIPHERAL,
-  .baudrate = 115200UL,
+  .baudrate = 300000UL,
   .parity = kUART_ParityDisabled,
   .stopbits = kUART_OneStopBit,
   .buffer = UART1_background_buffer,

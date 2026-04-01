@@ -210,8 +210,6 @@ static BaseType_t cmd_motor_move_angle(char* pcWriteBuffer, size_t xWriteBufferL
     BaseType_t        parameterStringLength;
     double            angle;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
-
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
                                    &parameterStringLength);
@@ -238,11 +236,11 @@ static BaseType_t cmd_motor_move_angle(char* pcWriteBuffer, size_t xWriteBufferL
     }
     angle = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
-    if (MTR_move_angle_async(handle, angle, deadline, &cmdHandle) == kStatus_Success &&
-        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    if (MTR_move_angle_async(handle, angle, portMAX_DELAY, NULL) == kStatus_Success)
     {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f degrees\r\n", angle);
+        int32_t stepCount = MTR_angle_to_steps(handle, angle, ROUND_NEAREST);
+        double  realAngle = MTR_steps_to_angle(handle, stepCount);
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f degrees\r\n", realAngle);
     }
     else
     {
@@ -261,8 +259,6 @@ static BaseType_t cmd_motor_move_absolute(char* pcWriteBuffer, size_t xWriteBuff
     BaseType_t        parameterStringLength;
     double            angle;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
-
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
                                    &parameterStringLength);
@@ -289,10 +285,10 @@ static BaseType_t cmd_motor_move_absolute(char* pcWriteBuffer, size_t xWriteBuff
     }
     angle = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
-    if (MTR_move_absolute_angle_async(handle, angle, deadline, &cmdHandle) == kStatus_Success &&
-        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    if (MTR_move_absolute_angle_async(handle, angle, portMAX_DELAY, NULL) == kStatus_Success)
     {
+        int32_t stepCount = MTR_angle_to_steps(handle, angle, ROUND_NEAREST);
+        double  realAngle = MTR_steps_to_angle(handle, stepCount);
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving to absolute angle %.2f degrees\r\n",
                  angle);
     }
@@ -312,8 +308,6 @@ static BaseType_t cmd_motor_move_revolutions(char* pcWriteBuffer, size_t xWriteB
     const char*       pcParameter;
     BaseType_t        parameterStringLength;
     double            revolutions;
-
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -342,8 +336,7 @@ static BaseType_t cmd_motor_move_revolutions(char* pcWriteBuffer, size_t xWriteB
     revolutions = strtod(pcParameter, NULL);
 
     THE_CmdHandle_t cmdHandle = NULL;
-    if (MTR_move_revolutions_async(handle, revolutions, deadline, &cmdHandle) == kStatus_Success &&
-        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    if (MTR_move_revolutions_async(handle, revolutions, portMAX_DELAY, NULL) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f revolutions\r\n", revolutions);
     }

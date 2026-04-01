@@ -40,7 +40,7 @@
 /**
  * @brief Size of the log message queue.
  */
-#define LOG_QUEUE_SIZE 10
+#define LOG_QUEUE_SIZE 50
 
 /**
  * @brief Macros for sending log messages at different log levels.

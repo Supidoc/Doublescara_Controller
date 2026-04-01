@@ -47,7 +47,7 @@ status_t THE_send_cmd(QueueHandle_t xQueue, const void* const pvItemToQueue, Tic
 
     if (deadline <= currentTick)
     {
-        LOG_ERROR("Deadline for command has already passed");
+        LOG_WARN("Command deadline has already passed");
         THE_notify_task_timeout(cmdHandle);
         THE_remove_cmd_handle_ref(cmdHandle);
         return kStatus_Fail;
@@ -57,7 +57,7 @@ status_t THE_send_cmd(QueueHandle_t xQueue, const void* const pvItemToQueue, Tic
 
     if (xQueueSend(xQueue, pvItemToQueue, ticksUntilDeadline) != pdTRUE)
     {
-        LOG_ERROR("Failed to queue command");
+        LOG_ERROR("Failed to queue command - queue may be full");
         THE_notify_task_timeout(cmdHandle);
         THE_remove_cmd_handle_ref(cmdHandle);
         return kStatus_Fail;
@@ -68,21 +68,28 @@ status_t THE_send_cmd(QueueHandle_t xQueue, const void* const pvItemToQueue, Tic
 status_t THE_get_cmd_handle(THE_CmdHandle_t* cmdHandle, THE_CmdHandleImpl_t* cmdHandles,
                             size_t maxHandles)
 {
+    if (cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
     taskENTER_CRITICAL();
     for (size_t i = 0; i < maxHandles; i++)
     {
         if (!cmdHandles[i].used)
         {
             cmdHandles[i].used      = 1;
-            cmdHandles[i].ref_count = 1;
+            cmdHandles[i].ref_count = 0;
             xEventGroupClearBits(cmdHandles[i].eventGroup, 0b111); // Clear all event bits
-            *cmdHandle = &cmdHandles[i];
+            if (cmdHandle != NULL)
+            {
+                *cmdHandle = &cmdHandles[i];
+            }
             taskEXIT_CRITICAL();
             return kStatus_Success;
         }
     }
     *cmdHandle = NULL; // No available command handle
-    taskEXIT_CRITICAL();
     return kStatus_Fail;
 }
 
@@ -90,14 +97,13 @@ void THE_add_cmd_handle_ref(THE_CmdHandle_t cmdHandle)
 {
     if (cmdHandle != NULL)
     {
-        taskENTER_CRITICAL();
         cmdHandle->ref_count++;
-        taskEXIT_CRITICAL();
     }
 }
 
 void THE_remove_cmd_handle_ref(THE_CmdHandle_t cmdHandle)
 {
+
     if (cmdHandle != NULL)
     {
         taskENTER_CRITICAL();
@@ -110,6 +116,10 @@ void THE_remove_cmd_handle_ref(THE_CmdHandle_t cmdHandle)
             cmdHandle->used = 0;
         }
         taskEXIT_CRITICAL();
+    }
+    else
+    {
+        LOG_DEBUG("Attempted to remove reference from NULL cmd handle");
     }
 }
 
@@ -208,7 +218,12 @@ status_t THE_cmd_check_result(THE_CmdHandle_t cmdHandle, EventBits_t* outBits)
         return kStatus_Fail;
     }
 
-    return kStatus_Timeout;
+    if ((bits & (0b1 << 2)) != 0u)
+    {
+        return kStatus_Timeout;
+    }
+
+    return kStatus_Busy;
 }
 
 status_t THE_cmd_wait_any(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t deadline,
@@ -317,11 +332,14 @@ status_t THE_cmd_check_any(THE_CmdHandle_t* cmdHandles, size_t count, size_t* ou
             {
                 return kStatus_Fail;
             }
-            return kStatus_Timeout;
+            if (bits & (0b1 << 2))
+            {
+                return kStatus_Timeout;
+            }
         }
     }
 
-    return kStatus_Timeout;
+    return kStatus_Busy;
 }
 
 status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t deadline,
@@ -344,6 +362,7 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
     {
         uint8_t allCompleted = 1;
         uint8_t anyFailed    = 0;
+        uint8_t anyTimeout   = 0;
 
         for (size_t i = 0; i < count; i++)
         {
@@ -365,22 +384,27 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
             {
                 allCompleted = 0; // Not yet completed
             }
-            else if ((bits & (0b1 << 0)) == 0u)
+            else if ((bits & (0b1 << 1)) != 0u)
             {
                 anyFailed = 1;
             }
+            else if ((bits & (0b1 << 2)) != 0u)
+            {
+                anyTimeout = 1;
+            }
         }
 
-        if (allCompleted)
+        if (anyTimeout)
         {
-            if (anyFailed)
-            {
-                return kStatus_Fail;
-            }
-            else
-            {
-                return kStatus_Success;
-            }
+            return kStatus_Timeout;
+        }
+        else if (anyFailed)
+        {
+            return kStatus_Fail;
+        }
+        else if (allCompleted)
+        {
+            return kStatus_Success;
         }
 
         currentTick    = xTaskGetTickCount();
@@ -394,7 +418,7 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
         }
     }
 
-    return kStatus_Timeout;
+    return kStatus_Busy;
 }
 
 status_t THE_cmd_check_all(THE_CmdHandle_t* cmdHandles, size_t count, EventBits_t* outResults)
@@ -406,6 +430,7 @@ status_t THE_cmd_check_all(THE_CmdHandle_t* cmdHandles, size_t count, EventBits_
 
     uint8_t allCompleted = 1;
     uint8_t anyFailed    = 0;
+    uint8_t anyTimeout   = 0;
 
     for (size_t i = 0; i < count; i++)
     {
@@ -422,45 +447,34 @@ status_t THE_cmd_check_all(THE_CmdHandle_t* cmdHandles, size_t count, EventBits_
             outResults[i] = bits;
         }
 
-        if (bits == 0u)
+        if ((bits & (0b1 << 0)) == 0u)
         {
             allCompleted = 0;
         }
-        else if ((bits & (0b1 << 1)) != 0u)
+        if ((bits & (0b1 << 1)) != 0u)
         {
             anyFailed = 1;
         }
-    }
-
-    if (!allCompleted)
-    {
-        return kStatus_Timeout;
+        if ((bits & (0b1 << 2)) != 0u)
+        {
+            anyTimeout = 1;
+        }
     }
 
     if (anyFailed)
     {
         return kStatus_Fail;
     }
-
-    for (size_t i = 0; i < count; i++)
+    if (anyTimeout)
     {
-        if (cmdHandles[i] == NULL)
-        {
-            continue;
-        }
-
-        EventBits_t bits =
-            (outResults != NULL)
-                ? outResults[i]
-                : xEventGroupWaitBits(cmdHandles[i]->eventGroup,
-                                      (0b1 << 0) | (0b1 << 1) | (0b1 << 2), pdFALSE, pdFALSE, 0);
-        if ((bits & (0b1 << 0)) == 0u)
-        {
-            return kStatus_Timeout;
-        }
+        return kStatus_Timeout;
+    }
+    if (allCompleted)
+    {
+        return kStatus_Success;
     }
 
-    return kStatus_Success;
+    return kStatus_Busy;
 }
 
 /********************************************

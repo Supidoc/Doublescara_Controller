@@ -120,6 +120,7 @@ status_t LOG_init(void)
     {
         return kStatus_Fail;
     }
+    vQueueAddToRegistry(logQueue, "LOG Queue");
 
     if (set_session_id() != kStatus_Success)
     {
@@ -185,7 +186,6 @@ void LOG_task(void* pvParameters)
     for (;;)
     {
         process();
-        vTaskDelay(1);
     }
 }
 

@@ -161,8 +161,6 @@ typedef struct _STP_HandlesArrayItem
  *****************************************/
 
 static status_t init_handle(const STP_StepperConfig_t config, TickType_t deadline);
-static status_t step_pin_mux_gpio(STP_Handle_t handle);
-static status_t step_pin_mux_ftm(STP_Handle_t handle);
 static status_t plan_motion_profile(STP_Handle_t handle);
 static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t numSteps,
                                                uint16_t stepZeroDelay, uint16_t endVelocityDelay);
@@ -186,7 +184,7 @@ static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint
 static inline void update_isr_handle_cache(void);
 
 static status_t reset_absolute_position(STP_Handle_t handle);
-static void     check_movement_completion(void);
+static uint8_t  check_movement_completion(void);
 static void     process_cmd(STP_CmdQueueItem_t queueItem);
 static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle);
 static status_t send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
@@ -234,6 +232,8 @@ status_t STP_init()
         return kStatus_Fail;
     }
 
+    vQueueAddToRegistry(cmdQueue, "STP Command Queue");
+
     SIM->SCGC6 |= SIM_SCGC6_FTM3_MASK;
 
     NVIC_SetPriority(FTM3_IRQn, 8);
@@ -242,10 +242,10 @@ status_t STP_init()
     FTM3->MOD = 0xFFFF;
     FTM3->SC  = FTM_SC_CLKS(2) | FTM_SC_PS(0);
 
-    gpio_pin_config_t config;
-    config.pinDirection = kGPIO_DigitalOutput;
+    gpio_pin_config_t debugPinConfig;
+    debugPinConfig.pinDirection = kGPIO_DigitalOutput;
 
-    GPIO_PinInit(isrDebugGPIO, isrDebugPin, &config);
+    GPIO_PinInit(isrDebugGPIO, isrDebugPin, &debugPinConfig);
 
     PORT_SetPinMux(isrDebugPort, isrDebugPin, kPORT_MuxAlt1);
     GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
@@ -488,24 +488,37 @@ status_t STP_get_default_config(STP_StepperConfig_t* config)
 static status_t send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
                                THE_CmdHandle_t* cmdHandle)
 {
-    if (queueItem == NULL || cmdHandle == NULL)
+    if (queueItem == NULL)
     {
         return kStatus_Fail;
     }
+    THE_CmdHandle_t internaleCmdHandle = NULL;
 
-    if (THE_get_cmd_handle(cmdHandle, cmdHandles, STP_MAX_CMD_HANDLE_COUNT) != kStatus_Success)
+    status_t allocStatus =
+        THE_get_cmd_handle(&internaleCmdHandle, cmdHandles, STP_MAX_CMD_HANDLE_COUNT);
+    if (allocStatus != kStatus_Success)
     {
         return kStatus_Fail;
     }
-
-    queueItem->cmdHandle = *cmdHandle;
-
-    if (THE_send_cmd(cmdQueue, (void*)queueItem, deadline, *cmdHandle) != kStatus_Success)
+    if (cmdHandle != NULL)
     {
-        THE_remove_cmd_handle_ref(*cmdHandle);
-        return kStatus_Fail;
+        THE_add_cmd_handle_ref(internaleCmdHandle);
     }
 
+    queueItem->cmdHandle = internaleCmdHandle;
+
+    status_t sendStatus = THE_send_cmd(cmdQueue, queueItem, deadline, internaleCmdHandle);
+    if (sendStatus != kStatus_Success)
+    {
+    	if(cmdHandle != NULL){
+            THE_remove_cmd_handle_ref(*cmdHandle);
+            *cmdHandle = NULL;
+    	}
+        return kStatus_Fail;
+    }
+    if(cmdHandle != NULL){
+    *cmdHandle = internaleCmdHandle;
+    }
     return kStatus_Success;
 }
 
@@ -516,6 +529,8 @@ void FTM3_IRQHandler(void)
     /* Reading all interrupt flags of status register */
     intStatus = FTM_GetStatusFlags(FTM3);
     FTM_ClearStatusFlags(FTM3, intStatus);
+
+    traceISR_ENTER();
     GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 1);
 
     /* Place your code here */
@@ -532,17 +547,24 @@ void FTM3_IRQHandler(void)
             stepperHandle = FTM3_ISR_handle_cache[i];
 
             stepperHandle->movementHandle.currStepCount++;
+
             stepperHandle->absolutePosition +=
                 (stepperHandle->movementHandle.direction == STP_COUNTERCLOCKWISE) ? 1 : -1;
+
             uint32_t currentStepCount   = stepperHandle->movementHandle.currStepCount;
             uint32_t totalSteps         = stepperHandle->movementHandle.totalSteps;
             uint32_t accelSteps         = stepperHandle->movementHandle.accelSteps;
             uint32_t constVelocitySteps = stepperHandle->movementHandle.endVelocitySteps;
 
+            // Toggle Pin because letting the time do it leads to inconsistencies in stepcount
+            // because the start level for the timer output can't be defined
+            GPIO_PortToggle(stepperHandle->stepGPIO, 0b1 << stepperHandle->stepPin);
+
             if (currentStepCount >= totalSteps)
             {
                 stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnSC &=
                     ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
+
                 stepperHandle->movementHandle.state = STP_MOVEMENT_FINISHED;
                 continue;
             }
@@ -648,6 +670,7 @@ void FTM3_IRQHandler(void)
     }
 
     GPIO_PinWrite(isrDebugGPIO, isrDebugPin, 0);
+    traceISR_EXIT();
 
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
    Store immediate overlapping exception return operation might vector to incorrect interrupt. */
@@ -715,7 +738,7 @@ static status_t init_handle(const STP_StepperConfig_t config, TickType_t deadlin
 
     update_isr_handle_cache();
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] stepper handle initialized: accel=%.1f, endVel=%.1f",
+    snprintf(logMsg, sizeof(logMsg), "[%s] Stepper initialized successfully (accel=%.1f step/s², vel=%.1f step/s)",
              handle->label, handle->acceleration, handle->endVelocity);
     LOG_INFO(logMsg);
 
@@ -742,6 +765,7 @@ static status_t init_step_pin(STP_Handle_t handle)
     gpioConfig.outputLogic  = GPIO_PinRead(handle->stepGPIO, handle->stepPin);
 
     GPIO_PinInit(handle->stepGPIO, handle->stepPin, &gpioConfig);
+    PORT_SetPinMux(handle->stepPort, handle->stepPin, handle->stepMuxGPIO);
 
     return kStatus_Success;
 }
@@ -757,43 +781,11 @@ static status_t init_dir_pin(STP_Handle_t handle)
     config.pinDirection = kGPIO_DigitalOutput;
 
     GPIO_PinInit(handle->dirGPIO, handle->dirPin, &config);
+    PORT_SetPinInterruptConfig(handle->stepPort, handle->stepPin, kPORT_InterruptEitherEdge);
 
     PORT_SetPinMux(handle->dirPort, handle->dirPin, handle->dirMux);
     GPIO_PinWrite(handle->dirGPIO, handle->dirPin, 1);
 
-    return kStatus_Success;
-}
-
-static status_t step_pin_mux_gpio(STP_Handle_t handle)
-{
-    if (handle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    gpio_pin_config_t config;
-    config.pinDirection = kGPIO_DigitalOutput;
-    config.outputLogic  = GPIO_PinRead(handle->stepGPIO, handle->stepPin);
-
-    GPIO_PinInit(handle->stepGPIO, handle->stepPin, &config);
-
-    PORT_SetPinMux(handle->stepPort, handle->stepPin, handle->stepMuxGPIO);
-    return kStatus_Success;
-}
-
-static status_t step_pin_mux_ftm(STP_Handle_t handle)
-{
-    if (handle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    gpio_pin_config_t config;
-    config.pinDirection = kGPIO_DigitalInput;
-
-    GPIO_PinInit(handle->stepGPIO, handle->stepPin, &config);
-
-    PORT_SetPinMux(handle->stepPort, handle->stepPin, handle->stepMuxFTM);
     return kStatus_Success;
 }
 
@@ -1029,12 +1021,9 @@ static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
 
     if (handle->movementHandle.state != STP_MOVEMENT_PLANNED)
     {
-        LOG_ERROR("Cannot start movement that is not in PLANNED state");
-        return kStatus_Fail;
-    }
-
-    if (step_pin_mux_ftm(handle) != kStatus_Success)
-    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Cannot start movement - not in PLANNED state (current: %d)", 
+                 handle->label, handle->movementHandle.state);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
@@ -1056,10 +1045,9 @@ static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
     }
     else
     {
-        snprintf(logMsg, sizeof(logMsg),
-                 "[%s] Failed to retrieve initial delay from lookup table for %lu steps",
-                 handle->label, handle->movementHandle.totalSteps);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Lookup table retrieve failed for %lu steps at index %d (pool %d)",
+                 handle->label, handle->movementHandle.totalSteps, 0, poolIndex);
+        LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
     handle->ftmBase->CONTROLS[handle->ftmChannel].CnV = handle->ftmBase->CNT + initialDelay;
@@ -1210,42 +1198,48 @@ static status_t set_direction_pin(STP_Handle_t handle)
     return kStatus_Success;
 }
 
-static void check_movement_completion(void)
+static uint8_t check_movement_completion(void)
 {
     static char logMsg[80];
+    uint8_t     nonIdleCount = 0;
 
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
-        if (handles[i].used == 1 &&
-            (handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
-             handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED))
+        if (handles[i].used == 1 && handles[i].handle.movementHandle.state != STP_MOVEMENT_IDLE)
         {
-
-            step_pin_mux_gpio(&handles[i].handle);
-
-            if (handles[i].handle.movementHandle.cmdHandle != NULL)
+            nonIdleCount++;
+            if ((handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
+                 handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED))
             {
-                THE_notify_task_success(handles[i].handle.movementHandle.cmdHandle);
-                THE_remove_cmd_handle_ref(handles[i].handle.movementHandle.cmdHandle);
-            }
 
-            if (handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED)
-            {
-                snprintf(logMsg, sizeof(logMsg), "[%s] Movement finished", handles[i].handle.label);
-            }
-            else if (handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
-            {
-                snprintf(logMsg, sizeof(logMsg), "[%s] Movement stopped", handles[i].handle.label);
-            }
-            LOG_DEBUG(logMsg);
+                if (handles[i].handle.movementHandle.cmdHandle != NULL)
+                {
+                    THE_notify_task_success(handles[i].handle.movementHandle.cmdHandle);
+                    THE_remove_cmd_handle_ref(handles[i].handle.movementHandle.cmdHandle);
+                }
 
-            reset_movement_handle(&handles[i].handle.movementHandle);
+                if (handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED)
+                {
+                    snprintf(logMsg, sizeof(logMsg), "[%s] Movement finished",
+                             handles[i].handle.label);
+                }
+                else if (handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
+                {
+                    snprintf(logMsg, sizeof(logMsg), "[%s] Movement stopped",
+                             handles[i].handle.label);
+                }
+                LOG_DEBUG(logMsg);
+
+                reset_movement_handle(&handles[i].handle.movementHandle);
+            }
         }
     }
+    return nonIdleCount;
 }
 
 static void process_cmd(STP_CmdQueueItem_t queueItem)
 {
+	static char logMsg[100];
     switch (queueItem.type)
     {
         case STP_CMD_MOVE:
@@ -1262,14 +1256,17 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
                 {
                     THE_notify_task_failure(queueItem.cmdHandle);
                     THE_remove_cmd_handle_ref(queueItem.cmdHandle);
-                    LOG_ERROR("Failed to start steps");
+                    snprintf(logMsg, sizeof(logMsg), "[%s] Failed to start stepper execution", queueItem.handle->label);
+                    LOG_ERROR(logMsg);
                 }
             }
             else
             {
                 THE_notify_task_failure(queueItem.cmdHandle);
                 THE_remove_cmd_handle_ref(queueItem.cmdHandle);
-                LOG_ERROR("Failed to plan motion profile");
+                snprintf(logMsg, sizeof(logMsg), "[%s] Failed to plan motion profile for %lu steps", 
+                         queueItem.handle->label, queueItem.handle->movementHandle.totalSteps);
+                LOG_ERROR(logMsg);
             }
 
             break;
@@ -1382,11 +1379,12 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
 
 static void process(void)
 {
-    check_movement_completion();
+    uint8_t nonIdleMotors = check_movement_completion();
 
     STP_CmdQueueItem_t queueItem = {0};
     BaseType_t         status;
-    status = xQueueReceive(cmdQueue, &queueItem, pdMS_TO_TICKS(1));
+    TickType_t         delay = nonIdleMotors ? pdMS_TO_TICKS(2) : portMAX_DELAY;
+    status                   = xQueueReceive(cmdQueue, &queueItem, delay);
     if (status != pdPASS)
     {
         return;

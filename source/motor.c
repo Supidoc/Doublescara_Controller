@@ -23,17 +23,12 @@
 
 #define MAX_MOTORS 5
 #define CMD_QUEUE_SIZE 20
+#define MAX_NEEDED_CMD_HANDLES 5
+#define MAX_PARALLEL_TASKS 20
 
 /***************************
  *     Private Typedefs     *
  ***************************/
-
-typedef enum rounding_method
-{
-    ROUND_DOWN,
-    ROUND_UP,
-    ROUND_NEAREST
-} MTR_roundingMethod_t;
 
 typedef enum _MTR_CmdType
 {
@@ -153,6 +148,14 @@ typedef struct _MTR_HandlesArrayItem
     uint8_t               used;
 } MTR_HandlesArrayItem_t;
 
+typedef struct _MTR_ParallelTaskItem
+{
+    THE_CmdHandle_t cmdHandles[MAX_NEEDED_CMD_HANDLES];
+    THE_CmdHandle_t returnHandle;
+    uint8_t         count;
+    uint8_t         used;
+} MTR_ParallelTaskItem;
+
 /*****************************************
  *     Private Function Declarations     *
  *****************************************/
@@ -160,20 +163,23 @@ typedef struct _MTR_HandlesArrayItem
 static double   steps_to_angle(MTR_MotorHandle_t handle, int32_t steps);
 static int32_t  angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method);
 static status_t wait_for_cmd_handle(THE_CmdHandle_t cmdHandle, TickType_t deadline);
-static status_t send_cmd_async(const MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
+static status_t send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
                                THE_CmdHandle_t* cmdHandle);
 
-static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline);
-static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline);
-static status_t move_revolutions(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline);
+static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                           MTR_ParallelTaskItem* taskItem);
+static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                                    MTR_ParallelTaskItem* taskItem);
+static status_t move_revolutions(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline,
+                                 MTR_ParallelTaskItem* taskItem);
 static status_t set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
-                             TickType_t deadline);
+                             TickType_t deadline, MTR_ParallelTaskItem* taskItem);
 static status_t set_acceleration(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
-                                 TickType_t deadline);
-static status_t stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline);
+                                 TickType_t deadline, MTR_ParallelTaskItem* taskItem);
+static status_t stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
+                           MTR_ParallelTaskItem* taskItem);
 static status_t get_current_angle(MTR_MotorHandle_t handle, double* angle, TickType_t deadline);
 static status_t get_movement_state(MTR_MotorHandle_t handle, STP_MovementState_t* state);
-static status_t wait_until_stopped(MTR_MotorHandle_t handle, TickType_t deadline);
 static status_t set_home_position(MTR_MotorHandle_t handle);
 static status_t synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
                                   TickType_t deadline);
@@ -205,13 +211,15 @@ static void            process(void);
  *     Private Variables     *
  *****************************/
 
-static MTR_HandlesArrayItem_t motorHandles[MAX_MOTORS];
+static MTR_HandlesArrayItem_t motorHandles[MAX_MOTORS] = {0};
 static QueueHandle_t          cmdQueue = NULL;
-static THE_CmdHandleImpl_t    motorCmdHandles[MTR_MAX_CMD_HANDLE_COUNT];
+static THE_CmdHandleImpl_t    cmdHandles[MTR_MAX_CMD_HANDLE_COUNT] = {0};
 
 static volatile uint8_t emergencyStopFlag = 0;
 
 TaskHandle_t mtrTaskHandle = NULL;
+
+MTR_ParallelTaskItem parallelTasks[MAX_PARALLEL_TASKS] = {0};
 
 /*******************************************
  *     Public Function Implementations     *
@@ -241,8 +249,9 @@ status_t MTR_init(void)
     {
         return kStatus_Fail;
     }
+    vQueueAddToRegistry(cmdQueue, "MTR Command Queue");
 
-    THE_init_cmd_handles(motorCmdHandles, MTR_MAX_CMD_HANDLE_COUNT);
+    THE_init_cmd_handles(cmdHandles, MTR_MAX_CMD_HANDLE_COUNT);
 
     emergencyStopFlag = 0;
     return kStatus_Success;
@@ -291,7 +300,7 @@ void MTR_get_motor_by_label(const char* label, MTR_MotorHandle_t* handle)
 status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
                               THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -308,7 +317,7 @@ status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t
 status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
                                        THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -325,7 +334,7 @@ status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, T
 status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions,
                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -342,7 +351,7 @@ status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions
 status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
                                 TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -359,7 +368,7 @@ status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_pe
 status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -376,7 +385,7 @@ status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleratio
 status_t MTR_stop_async(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
                         THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -401,8 +410,8 @@ status_t MTR_emergency_stop(MTR_MotorHandle_t handle)
     // Set emergency stop flag directly (no queue)
     emergencyStopFlag = 1;
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Emergency stop triggered", handle->label);
-    LOG_ERROR(logMsg);
+    snprintf(logMsg, sizeof(logMsg), "[%s] Emergency stop triggered - all motors will stop immediately", handle->label);
+    LOG_WARN(logMsg);
 
     return kStatus_Success;
 }
@@ -422,7 +431,7 @@ uint8_t MTR_is_emergency_stop_active(void)
 status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, TickType_t deadline,
                                      THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || angle == NULL || cmdHandle == NULL)
+    if (handle == NULL || angle == NULL)
     {
         return kStatus_Fail;
     }
@@ -439,7 +448,7 @@ status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, Ti
 status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
                                       THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || state == NULL || cmdHandle == NULL)
+    if (handle == NULL || state == NULL)
     {
         return kStatus_Fail;
     }
@@ -455,25 +464,9 @@ status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementStat
     return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t MTR_wait_until_stopped_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                      THE_CmdHandle_t* cmdHandle)
-{
-    if (handle == NULL || cmdHandle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    MTR_CmdQueueItem_t queueItem;
-    queueItem.type     = MTR_CMD_WAIT_UNTIL_STOPPED;
-    queueItem.handle   = handle;
-    queueItem.deadline = deadline;
-
-    return send_cmd_async(&queueItem, deadline, cmdHandle);
-}
-
 status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -491,7 +484,7 @@ status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* 
 status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
                                      TickType_t deadline, THE_CmdHandle_t* cmdHandle)
 {
-    if (handles == NULL || angles == NULL || count == 0 || cmdHandle == NULL)
+    if (handles == NULL || angles == NULL || count == 0)
     {
         return kStatus_Fail;
     }
@@ -510,7 +503,7 @@ status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles,
 status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
                                    THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -527,7 +520,7 @@ status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, T
 status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
                                     THE_CmdHandle_t* cmdHandle)
 {
-    if (handle == NULL || cmdHandle == NULL)
+    if (handle == NULL)
     {
         return kStatus_Fail;
     }
@@ -541,6 +534,16 @@ status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, 
     return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
+int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method)
+{
+    return angle_to_steps(handle, angle, method);
+}
+
+double MTR_steps_to_angle(MTR_MotorHandle_t handle, int32_t steps)
+{
+    return steps_to_angle(handle, steps);
+}
+
 /********************************************
  *     Private Function Implementations     *
  ********************************************/
@@ -548,10 +551,42 @@ status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, 
 static void process(void)
 {
     MTR_CmdQueueItem_t queueItem;
-    BaseType_t         status;
+    BaseType_t         queueStatus;
+    uint8_t            activeTaskCount = 0;
 
-    status = xQueueReceive(cmdQueue, &queueItem, pdMS_TO_TICKS(10));
-    if (status != pdPASS)
+    status_t taskStatus = kStatus_Fail;
+    for (uint8_t i = 0; i < MAX_PARALLEL_TASKS; i++)
+    {
+        if (parallelTasks[i].used)
+        {
+            activeTaskCount++;
+            taskStatus =
+            THE_cmd_check_all(parallelTasks[i].cmdHandles, parallelTasks[i].count, NULL);
+            if (taskStatus == kStatus_Busy)
+            {
+                continue;
+            }
+            else if (taskStatus == kStatus_Success)
+            {
+                THE_notify_task_success(parallelTasks[i].returnHandle);
+            }
+            else if (taskStatus == kStatus_Timeout)
+            {
+                THE_notify_task_timeout(parallelTasks[i].returnHandle);
+            }
+            else
+            {
+                THE_notify_task_failure(parallelTasks[i].returnHandle);
+            }
+            THE_remove_cmd_handle_ref(parallelTasks[i].returnHandle);
+            parallelTasks[i].used = 0;
+        }
+    }
+
+    TickType_t delay = activeTaskCount ? pdMS_TO_TICKS(2) : portMAX_DELAY;
+
+    queueStatus = xQueueReceive(cmdQueue, &queueItem, delay);
+    if (queueStatus != pdPASS)
     {
         return;
     }
@@ -559,100 +594,124 @@ static void process(void)
     // Check emergency stop flag - if set, don't execute any commands
     if (emergencyStopFlag)
     {
-        LOG_WARN("Command ignored due to emergency stop");
+        LOG_DEBUG("Command ignored due to active emergency stop");
         THE_notify_task_failure(queueItem.cmdHandle);
         THE_remove_cmd_handle_ref(queueItem.cmdHandle);
         return;
     }
-    status_t cmdStatus = kStatus_Fail;
-    // Execute command based on type
-    switch (queueItem.type)
+
+    status_t              cmdStatus = kStatus_Fail;
+    MTR_ParallelTaskItem* taskItem  = NULL;
+    for (uint8_t i = 0; i < MAX_PARALLEL_TASKS; i++)
     {
-        case MTR_CMD_MOVE_ANGLE:
-            cmdStatus =
-                move_angle(queueItem.handle, queueItem.data.moveAngle.angle, queueItem.deadline);
+        if (parallelTasks[i].used == 0)
+        {
+            parallelTasks[i].used = 1;
+            taskItem              = &parallelTasks[i];
             break;
-
-        case MTR_CMD_MOVE_ABSOLUTE_ANGLE:
-            cmdStatus = move_absolute_angle(queueItem.handle, queueItem.data.moveAngle.angle,
-                                            queueItem.deadline);
-            break;
-
-        case MTR_CMD_MOVE_REVOLUTIONS:
-            cmdStatus = move_revolutions(
-                queueItem.handle, queueItem.data.moveRevolutions.revolutions, queueItem.deadline);
-            break;
-
-        case MTR_CMD_SET_VELOCITY:
-            cmdStatus =
-                set_velocity(queueItem.handle, queueItem.data.setVelocity.velocity_deg_per_sec,
-                             queueItem.deadline);
-            break;
-
-        case MTR_CMD_SET_ACCELERATION:
-            cmdStatus = set_acceleration(queueItem.handle,
-                                         queueItem.data.setAcceleration.acceleration_deg_per_sec2,
-                                         queueItem.deadline);
-            break;
-
-        case MTR_CMD_STOP:
-            cmdStatus =
-                stop_motor(queueItem.handle, queueItem.data.stop.decelerate, queueItem.deadline);
-            break;
-
-        case MTR_CMD_GET_CURRENT_ANGLE:
-            cmdStatus = get_current_angle(queueItem.handle, queueItem.data.getCurrentAngle.angle,
-                                          queueItem.deadline);
-            break;
-
-        case MTR_CMD_GET_MOVEMENT_STATE:
-            cmdStatus = get_movement_state(queueItem.handle, queueItem.data.getMovementState.state);
-            break;
-
-        case MTR_CMD_WAIT_UNTIL_STOPPED:
-            cmdStatus = wait_until_stopped(queueItem.handle, queueItem.deadline);
-            break;
-
-        case MTR_CMD_SET_HOME_POSITION:
-            cmdStatus = set_home_position(queueItem.handle);
-            break;
-
-        case MTR_CMD_SYNCHRONIZED_MOVE:
-            cmdStatus = synchronized_move(
-                queueItem.data.synchronizedMove.handles, queueItem.data.synchronizedMove.angles,
-                queueItem.data.synchronizedMove.count, queueItem.deadline);
-            break;
-
-        case MTR_CMD_SET_RUN_CURRENT:
-            cmdStatus = set_run_current(queueItem.handle, queueItem.data.setRunCurrent.current_a,
-                                        queueItem.deadline);
-            break;
-
-        case MTR_CMD_SET_HOLD_CURRENT:
-            cmdStatus = set_hold_current(queueItem.handle, queueItem.data.setHoldCurrent.current_a,
-                                         queueItem.deadline);
-            break;
-        case MTR_CMD_INIT_MOTOR:
-            cmdStatus = init_motor(queueItem.data.initMotor.config, queueItem.deadline);
-            break;
-        default:
-            LOG_WARN("Unknown motor command type");
-            break;
+        }
     }
-    if (cmdStatus == kStatus_Success)
+    if (taskItem != NULL)
     {
-        THE_notify_task_success(queueItem.cmdHandle);
-    }
-    else if (cmdStatus == kStatus_Timeout || queueItem.deadline <= xTaskGetTickCount())
-    {
-        THE_notify_task_timeout(queueItem.cmdHandle);
-    }
-    else
-    {
-        THE_notify_task_failure(queueItem.cmdHandle);
-    }
+        taskItem->count        = 0;
+        taskItem->returnHandle = queueItem.cmdHandle;
 
-    THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+        // Execute command based on type
+        switch (queueItem.type)
+        {
+            case MTR_CMD_MOVE_ANGLE:
+                cmdStatus = move_angle(queueItem.handle, queueItem.data.moveAngle.angle,
+                                       queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_MOVE_ABSOLUTE_ANGLE:
+                cmdStatus = move_absolute_angle(queueItem.handle, queueItem.data.moveAngle.angle,
+                                                queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_MOVE_REVOLUTIONS:
+                cmdStatus =
+                    move_revolutions(queueItem.handle, queueItem.data.moveRevolutions.revolutions,
+                                     queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_SET_VELOCITY:
+                cmdStatus =
+                    set_velocity(queueItem.handle, queueItem.data.setVelocity.velocity_deg_per_sec,
+                                 queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_SET_ACCELERATION:
+                cmdStatus = set_acceleration(
+                    queueItem.handle, queueItem.data.setAcceleration.acceleration_deg_per_sec2,
+                    queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_STOP:
+                cmdStatus = stop_motor(queueItem.handle, queueItem.data.stop.decelerate,
+                                       queueItem.deadline, taskItem);
+                break;
+
+            case MTR_CMD_GET_CURRENT_ANGLE:
+                cmdStatus = get_current_angle(
+                    queueItem.handle, queueItem.data.getCurrentAngle.angle, queueItem.deadline);
+                break;
+
+            case MTR_CMD_GET_MOVEMENT_STATE:
+                cmdStatus =
+                    get_movement_state(queueItem.handle, queueItem.data.getMovementState.state);
+                break;
+
+            case MTR_CMD_SET_HOME_POSITION:
+                cmdStatus = set_home_position(queueItem.handle);
+                break;
+
+            case MTR_CMD_SYNCHRONIZED_MOVE:
+                cmdStatus = synchronized_move(
+                    queueItem.data.synchronizedMove.handles, queueItem.data.synchronizedMove.angles,
+                    queueItem.data.synchronizedMove.count, queueItem.deadline);
+                break;
+
+            case MTR_CMD_SET_RUN_CURRENT:
+                cmdStatus = set_run_current(
+                    queueItem.handle, queueItem.data.setRunCurrent.current_a, queueItem.deadline);
+                break;
+
+            case MTR_CMD_SET_HOLD_CURRENT:
+                cmdStatus = set_hold_current(
+                    queueItem.handle, queueItem.data.setHoldCurrent.current_a, queueItem.deadline);
+                break;
+            case MTR_CMD_INIT_MOTOR:
+                cmdStatus = init_motor(queueItem.data.initMotor.config, queueItem.deadline);
+                break;
+            default:
+            {
+                static char errMsg[100];
+                snprintf(errMsg, sizeof(errMsg), "Unknown motor command type: %d", queueItem.type);
+                LOG_ERROR(errMsg);
+                break;
+            }
+        }
+
+        if (cmdStatus == kStatus_Success && taskItem->count == 0)
+        {
+            THE_notify_task_success(queueItem.cmdHandle);
+            taskItem->used = 0;
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+        }
+        if (cmdStatus == kStatus_Timeout)
+        {
+            THE_notify_task_timeout(queueItem.cmdHandle);
+            taskItem->used = 0;
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+        }
+        else if (cmdStatus == kStatus_Fail)
+        {
+            THE_notify_task_failure(queueItem.cmdHandle);
+            taskItem->used = 0;
+            THE_remove_cmd_handle_ref(queueItem.cmdHandle);
+        }
+    }
 }
 
 static status_t wait_for_cmd_handle(THE_CmdHandle_t cmdHandle, TickType_t deadline)
@@ -667,31 +726,40 @@ static status_t wait_for_cmd_handle(THE_CmdHandle_t cmdHandle, TickType_t deadli
     return status;
 }
 
-static status_t send_cmd_async(const MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
+static status_t send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
                                THE_CmdHandle_t* cmdHandle)
 {
-    if (queueItem == NULL || cmdHandle == NULL)
+    if (queueItem == NULL)
     {
         return kStatus_Fail;
     }
+    THE_CmdHandle_t internaleCmdHandle = NULL;
 
-    status_t allocStatus = THE_get_cmd_handle(cmdHandle, motorCmdHandles, MTR_MAX_CMD_HANDLE_COUNT);
+    status_t allocStatus =
+        THE_get_cmd_handle(&internaleCmdHandle, cmdHandles, MTR_MAX_CMD_HANDLE_COUNT);
     if (allocStatus != kStatus_Success)
     {
         return kStatus_Fail;
     }
-
-    MTR_CmdQueueItem_t item = *queueItem;
-    item.cmdHandle          = *cmdHandle;
-
-    status_t sendStatus = THE_send_cmd(cmdQueue, &item, deadline, *cmdHandle);
-    if (sendStatus != kStatus_Success)
+    if (cmdHandle != NULL)
     {
-        THE_remove_cmd_handle_ref(*cmdHandle);
-        *cmdHandle = NULL;
-        return kStatus_Fail;
+        THE_add_cmd_handle_ref(internaleCmdHandle);
     }
 
+    queueItem->cmdHandle = internaleCmdHandle;
+
+    status_t sendStatus = THE_send_cmd(cmdQueue, queueItem, deadline, internaleCmdHandle);
+    if (sendStatus != kStatus_Success)
+    {
+    	if(cmdHandle != NULL){
+            THE_remove_cmd_handle_ref(*cmdHandle);
+            *cmdHandle = NULL;
+    	}
+        return kStatus_Fail;
+    }
+    if(cmdHandle != NULL){
+    *cmdHandle = internaleCmdHandle;
+    }
     return kStatus_Success;
 }
 
@@ -701,8 +769,9 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
 
     if (config.stepAngle <= 0.0 || config.microstep == 0 || config.reductionFactor <= 0.0)
     {
-        LOG_ERROR(
-            "Invalid motor configuration: stepAngle, microstep, or reductionFactor out of range");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Invalid motor configuration: stepAngle=%.4f, microstep=%d, reductionFactor=%.4f",
+                 config.label, config.stepAngle, config.microstep, config.reductionFactor);
+        LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
 
@@ -731,19 +800,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     THE_CmdHandle_t stepCmdHandle = NULL;
     if (STP_init_handle_async(stepperConfig, deadline, &stepCmdHandle) != kStatus_Success)
     {
-        return kStatus_Fail;
-    }
-    if (wait_for_cmd_handle(stepCmdHandle, deadline) != kStatus_Success)
-    {
-        return kStatus_Fail;
-    }
-
-    // Get the stepper handle that was just created
-    STP_Handle_t stepperHandle = NULL;
-    if (STP_get_handle_by_label(config.label, &stepperHandle) != kStatus_Success ||
-        stepperHandle == NULL)
-    {
-        LOG_ERROR("Failed to get stepper handle after initialization");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize stepper motor handle", config.label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
@@ -763,17 +821,40 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     THE_CmdHandle_t tmcCmdHandle = NULL;
     if (TMC_init_handle_async(tmcConfig, deadline, &tmcCmdHandle) != kStatus_Success)
     {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize TMC driver handle", config.label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
+
+    if (wait_for_cmd_handle(stepCmdHandle, deadline) != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Stepper initialization timed out or failed", config.label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
+    }
+
+    // Get the stepper handle that was just created
+    STP_Handle_t stepperHandle = NULL;
+    if (STP_get_handle_by_label(config.label, &stepperHandle) != kStatus_Success ||
+        stepperHandle == NULL)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to retrieve stepper handle after initialization", config.label);
+        LOG_FATAL(logMsg);
+        return kStatus_Fail;
+    }
+
     if (wait_for_cmd_handle(tmcCmdHandle, deadline) != kStatus_Success)
     {
+        snprintf(logMsg, sizeof(logMsg), "[%s] TMC initialization timed out or failed", config.label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
     TMC_Handle_t tmcHandle = NULL;
     if (TMC_get_handle_by_label(config.label, &tmcHandle) != kStatus_Success || tmcHandle == NULL)
     {
-        LOG_ERROR("Failed to get tmc handle after initialization");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to retrieve TMC handle after initialization", config.label);
+        LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
 
@@ -791,7 +872,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
 
     if (handleIndex == MAX_MOTORS)
     {
-        LOG_ERROR("No free motor handle slots available");
+        snprintf(logMsg, sizeof(logMsg), "[%s] No free motor handle slots available (max %d motors)", config.label, MAX_MOTORS);
+        LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
 
@@ -803,7 +885,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     newHandle->reductionFactor  = config.reductionFactor;
     newHandle->label            = config.label;
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Motor handle initialized", config.label);
+    snprintf(logMsg, sizeof(logMsg), "[%s] Motor initialized successfully (step=%.2f°, microstep=%d, reduction=%.2f)",
+             config.label, config.stepAngle, config.microstep, config.reductionFactor);
     LOG_INFO(logMsg);
 
     return kStatus_Success;
@@ -872,7 +955,8 @@ static int32_t angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundi
     return result;
 }
 
-static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline)
+static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                           MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -893,14 +977,17 @@ static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t de
     if (STP_move_relative_async(handle->stepperHandle, steps, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        LOG_ERROR("Failed to move stepper motor");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue relative move command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
-
-    return wait_for_cmd_handle(cmdHandle, deadline);
+    taskItem->cmdHandles[0] = cmdHandle;
+    taskItem->count         = 1;
+    return kStatus_Success;
 }
 
-static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline)
+static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                                    MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -919,6 +1006,8 @@ static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, Tick
     int32_t currentSteps;
     if (STP_get_absolute_steps(handle->stepperHandle, &currentSteps) != kStatus_Success)
     {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read current position", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
     int32_t targetSteps = angle_to_steps(handle, angle, ROUND_NEAREST);
@@ -928,14 +1017,18 @@ static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, Tick
     if (STP_move_relative_async(handle->stepperHandle, stepsToMove, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        LOG_ERROR("Failed to move stepper motor");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue absolute move command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
-    return wait_for_cmd_handle(cmdHandle, deadline);
+    taskItem->cmdHandles[0] = cmdHandle;
+    taskItem->count         = 1;
+    return kStatus_Success;
 }
 
-static status_t move_revolutions(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline)
+static status_t move_revolutions(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline,
+                                 MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -951,11 +1044,11 @@ static status_t move_revolutions(MTR_MotorHandle_t handle, double revolutions, T
              revolutions, angle);
     LOG_DEBUG(logMsg);
 
-    return move_angle(handle, angle, deadline);
+    return move_angle(handle, angle, deadline, taskItem);
 }
 
 static status_t set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
-                             TickType_t deadline)
+                             TickType_t deadline, MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -976,14 +1069,18 @@ static status_t set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_s
             angle_to_steps(handle, fabs(velocity_deg_per_sec), ROUND_NEAREST), deadline,
             &cmdHandle) != kStatus_Success)
     {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue velocity change command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
-    return wait_for_cmd_handle(cmdHandle, deadline);
+    taskItem->cmdHandles[0] = cmdHandle;
+    taskItem->count         = 1;
+    return kStatus_Success;
 }
 
 static status_t set_acceleration(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
-                                 TickType_t deadline)
+                                 TickType_t deadline, MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -1004,13 +1101,18 @@ static status_t set_acceleration(MTR_MotorHandle_t handle, double acceleration_d
             angle_to_steps(handle, fabs(acceleration_deg_per_sec2), ROUND_NEAREST), deadline,
             &cmdHandle) != kStatus_Success)
     {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue acceleration change command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
-    return wait_for_cmd_handle(cmdHandle, deadline);
+    taskItem->cmdHandles[0] = cmdHandle;
+    taskItem->count         = 1;
+    return kStatus_Success;
 }
 
-static status_t stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline)
+static status_t stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
+                           MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
     if (emergencyStopFlag)
@@ -1028,11 +1130,14 @@ static status_t stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t
     THE_CmdHandle_t cmdHandle = NULL;
     if (STP_stop_async(handle->stepperHandle, decelerate, deadline, &cmdHandle) != kStatus_Success)
     {
-        LOG_ERROR("Failed to stop stepper motor");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue stop command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
-    return wait_for_cmd_handle(cmdHandle, deadline);
+    taskItem->cmdHandles[0] = cmdHandle;
+    taskItem->count         = 1;
+    return kStatus_Success;
 }
 
 static status_t get_current_angle(MTR_MotorHandle_t handle, double* angle, TickType_t deadline)
@@ -1068,40 +1173,6 @@ static status_t get_movement_state(MTR_MotorHandle_t handle, STP_MovementState_t
     }
 
     return STP_get_movement_state(handle->stepperHandle, state);
-}
-
-static status_t wait_until_stopped(MTR_MotorHandle_t handle, TickType_t deadline)
-{
-    if (emergencyStopFlag)
-    {
-        return kStatus_Fail;
-    }
-    if (handle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    // TODO: Implement wait until stopped
-
-    while (deadline > xTaskGetTickCount())
-    {
-        STP_MovementState_t state;
-        if (get_movement_state(handle, &state) != kStatus_Success)
-        {
-            LOG_ERROR("Failed to get movement state");
-            return kStatus_Fail;
-        }
-
-        if (state == STP_MOVEMENT_IDLE || state == STP_MOVEMENT_STOPPED ||
-            state == STP_MOVEMENT_FINISHED)
-        {
-            return kStatus_Success;
-        }
-        vTaskDelay(pdMS_TO_TICKS(1));
-    }
-
-    LOG_ERROR("Timeout waiting for motor to stop");
-    return kStatus_Fail;
 }
 
 static status_t set_home_position(MTR_MotorHandle_t handle)
@@ -1286,9 +1357,9 @@ static status_t synchronized_move(MTR_MotorHandle_t* handles, double* angles, ui
     scale_velocities_for_synchronization(handles, count, stepCounts, originalVelocities,
                                          maxDuration, deadline);
 
-    snprintf(logMsg, sizeof(logMsg), "Synchronized move: %d motors, duration=%.3fs", count,
+    snprintf(logMsg, sizeof(logMsg), "Starting synchronized move: %d motors, duration=%.3fs", count,
              maxDuration);
-    LOG_DEBUG(logMsg);
+    LOG_INFO(logMsg);
 
     if (prepare_synchronized_movements(handles, angles, count, stepCounts, originalVelocities,
                                        deadline) != kStatus_Success)
@@ -1329,7 +1400,8 @@ static status_t set_run_current(MTR_MotorHandle_t handle, double current_a, Tick
     uint8_t divider = 0;
     if (TMC_current_to_divider((float)current_a, TMC_ROUND_NEAREST, &divider) != kStatus_Success)
     {
-        LOG_ERROR("Failed to convert run current to TMC divider");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Requested run current %.3f A is out of valid range", handle->label, current_a);
+        LOG_WARN(logMsg);
         return kStatus_Fail;
     }
 
@@ -1337,7 +1409,8 @@ static status_t set_run_current(MTR_MotorHandle_t handle, double current_a, Tick
     if (TMC_set_irun_divider_async(handle->tmcHandle, divider, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        LOG_ERROR("Failed to queue TMC set irun divider command");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue run current command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
@@ -1368,7 +1441,8 @@ static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, Tic
     uint8_t divider = 0;
     if (TMC_current_to_divider((float)current_a, TMC_ROUND_NEAREST, &divider) != kStatus_Success)
     {
-        LOG_ERROR("Failed to convert hold current to TMC divider");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Requested hold current %.3f A is out of valid range", handle->label, current_a);
+        LOG_WARN(logMsg);
         return kStatus_Fail;
     }
 
@@ -1376,7 +1450,8 @@ static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, Tic
     if (TMC_set_ihold_divider_async(handle->tmcHandle, divider, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        LOG_ERROR("Failed to queue TMC set ihold divider command");
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue hold current command", handle->label);
+        LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 

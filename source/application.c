@@ -102,27 +102,28 @@ void APP_init(void)
 
 void APP_run(void)
 {
+    traceSTART();
     if (create_task(LOG_task, "LOG_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 4) != kStatus_Success)
+                    configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
 
     if (create_task(CLI_task, "CLI_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 4) != kStatus_Success)
+                    configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
     if (create_task(STP_task, "STP_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
+                    configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
     }
     if (create_task(TMC_task, "TMC_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
+                    configMAX_PRIORITIES - 3) != kStatus_Success)
     {
         while (1)
             ;
@@ -134,7 +135,7 @@ void APP_run(void)
             ;
     }
     if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 400,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
+                    configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;

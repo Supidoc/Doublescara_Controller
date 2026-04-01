@@ -63,7 +63,7 @@
 /**
  * @brief Size of the command queue.
  */
-#define STP_CMD_QUEUE_SIZE 30
+#define STP_CMD_QUEUE_SIZE 20
 
 #define STP_MAX_CMD_HANDLE_COUNT 30
 

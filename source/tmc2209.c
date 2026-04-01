@@ -109,7 +109,7 @@ static status_t    write(TMC_Handle_t handle, uint8_t regAddr, uint32_t* data, T
 static status_t    set_double_edge_step_pulse(TMC_Handle_t handle, uint8_t enabled,
                                               TickType_t deadline);
 static status_t    free_handle(TMC_Handle_t handle);
-static status_t    send_async_cmd(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
+static status_t    send_cmd_async(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
                                   THE_CmdHandle_t* cmdHandle);
 
 /****************************
@@ -126,9 +126,9 @@ static uint8_t transmit_write_package[TMC_WRITE_PACKAGE_SIZE];
 
 static TMC_HandleArrayItem_t tmcHandleArray[TMC_MAX_HANDLE_COUNT];
 
-QueueHandle_t commandQueue = NULL;
+QueueHandle_t cmdQueue = NULL;
 
-static THE_CmdHandleImpl_t tmcCmdHandles[TMC_MAX_CMD_HANDLE_COUNT];
+static THE_CmdHandleImpl_t cmdHandles[TMC_MAX_CMD_HANDLE_COUNT];
 
 /*******************************************
  *     Public Function Implementations     *
@@ -136,13 +136,14 @@ static THE_CmdHandleImpl_t tmcCmdHandles[TMC_MAX_CMD_HANDLE_COUNT];
 
 status_t TMC_init(void)
 {
-    commandQueue = xQueueCreate(TMC_COMMAND_QUEUE_LENGTH, sizeof(TMC_CommandQueueItem_t));
-    if (commandQueue == NULL)
+    cmdQueue = xQueueCreate(TMC_COMMAND_QUEUE_LENGTH, sizeof(TMC_CommandQueueItem_t));
+    if (cmdQueue == NULL)
     {
         return kStatus_Fail;
     }
+    vQueueAddToRegistry(cmdQueue, "TMC Command Queue");
 
-    THE_init_cmd_handles(tmcCmdHandles, TMC_MAX_CMD_HANDLE_COUNT); // NEW
+    THE_init_cmd_handles(cmdHandles, TMC_MAX_CMD_HANDLE_COUNT); // NEW
     return kStatus_Success;
 }
 
@@ -168,7 +169,7 @@ status_t TMC_init_handle_async(TMC_Config_t config, TickType_t deadline, THE_Cmd
     queueItem.deadline               = deadline;
     queueItem.data.initHandle.config = config;
 
-    return send_async_cmd(&queueItem, deadline, cmdHandle);
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_set_microstepping_async(TMC_Handle_t handle, TMC_MICROSTEPPING_t microstepping,
@@ -185,7 +186,7 @@ status_t TMC_set_microstepping_async(TMC_Handle_t handle, TMC_MICROSTEPPING_t mi
     queueItem.data.setMicrostepping.microstepping = microstepping;
     queueItem.deadline                            = deadline;
 
-    return send_async_cmd(&queueItem, deadline, cmdHandle);
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_microstepping_value_to_enum(uint8_t value, TMC_MICROSTEPPING_t* microstepping)
@@ -284,7 +285,7 @@ status_t TMC_set_ihold_divider_async(TMC_Handle_t handle, uint8_t ihold, TickTyp
     queueItem.data.setIholdDivider.ihold = ihold;
     queueItem.deadline                   = deadline;
 
-    return send_async_cmd(&queueItem, deadline, cmdHandle);
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_set_irun_divider_async(TMC_Handle_t handle, uint8_t irun, TickType_t deadline,
@@ -301,7 +302,7 @@ status_t TMC_set_irun_divider_async(TMC_Handle_t handle, uint8_t irun, TickType_
     queueItem.data.setIrunDivider.irun = irun;
     queueItem.deadline                 = deadline;
 
-    return send_async_cmd(&queueItem, deadline, cmdHandle);
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
 status_t TMC_current_to_divider(float desired_current, TMC_RoundingMode_t rounding,
@@ -405,7 +406,7 @@ static void process(void)
 {
     TMC_CommandQueueItem_t queueItem = {0};
     BaseType_t             status;
-    status = xQueueReceive(commandQueue, &queueItem, pdMS_TO_TICKS(10));
+    status = xQueueReceive(cmdQueue, &queueItem, pdMS_TO_TICKS(10));
     if (status != pdPASS)
     {
         return;
@@ -453,27 +454,40 @@ static void process(void)
     }
 }
 
-static status_t send_async_cmd(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
+static status_t send_cmd_async(TMC_CommandQueueItem_t* queueItem, TickType_t deadline,
                                THE_CmdHandle_t* cmdHandle)
 {
-    if (queueItem == NULL || cmdHandle == NULL)
+    if (queueItem == NULL)
     {
         return kStatus_Fail;
     }
+    THE_CmdHandle_t internaleCmdHandle = NULL;
 
-    if (THE_get_cmd_handle(cmdHandle, tmcCmdHandles, TMC_MAX_CMD_HANDLE_COUNT) != kStatus_Success)
+    status_t allocStatus =
+        THE_get_cmd_handle(&internaleCmdHandle, cmdHandles, TMC_MAX_CMD_HANDLE_COUNT);
+    if (allocStatus != kStatus_Success)
     {
         return kStatus_Fail;
     }
-
-    queueItem->cmdHandle = *cmdHandle;
-
-    if (THE_send_cmd(commandQueue, (void*)queueItem, deadline, *cmdHandle) != kStatus_Success)
+    if (cmdHandle != NULL)
     {
-        THE_remove_cmd_handle_ref(*cmdHandle);
-        return kStatus_Fail;
+        THE_add_cmd_handle_ref(internaleCmdHandle);
     }
 
+    queueItem->cmdHandle = internaleCmdHandle;
+
+    status_t sendStatus = THE_send_cmd(cmdQueue, queueItem, deadline, internaleCmdHandle);
+    if (sendStatus != kStatus_Success)
+    {
+    	if(cmdHandle != NULL){
+            THE_remove_cmd_handle_ref(*cmdHandle);
+            *cmdHandle = NULL;
+    	}
+        return kStatus_Fail;
+    }
+    if(cmdHandle != NULL){
+    *cmdHandle = internaleCmdHandle;
+    }
     return kStatus_Success;
 }
 
@@ -490,7 +504,7 @@ static status_t set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t
 
     if (read(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read IHOLD_IRUN register", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read IHOLD register - driver communication error", handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -500,12 +514,12 @@ static status_t set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t
 
     if (write(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write IHOLD_IRUN register", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write IHOLD register - driver communication error", handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Current divider set to %d", handle->label, ihold);
+    snprintf(logMsg, sizeof(logMsg), "[%s] Hold current divider set to %d", handle->label, ihold);
     LOG_INFO(logMsg);
 
     return kStatus_Success;
@@ -523,7 +537,7 @@ static status_t set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t d
 
     if (read(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read IHOLD_IRUN register", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read IRUN register - driver communication error", handle->label);
         LOG_ERROR(logMsg);
 
         return kStatus_Fail;
@@ -534,13 +548,13 @@ static status_t set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t d
 
     if (write(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write IHOLD_IRUN register", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write IRUN register - driver communication error", handle->label);
         LOG_ERROR(logMsg);
 
         return kStatus_Fail;
     }
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Current divider set to %d", handle->label, irun);
+    snprintf(logMsg, sizeof(logMsg), "[%s] Run current divider set to %d", handle->label, irun);
     LOG_INFO(logMsg);
 
     return kStatus_Success;
@@ -600,7 +614,6 @@ static status_t set_double_edge_step_pulse(TMC_Handle_t handle, uint8_t enabled,
     return kStatus_Success;
 }
 
-// TODO implement setting currents
 static status_t init_handle(TMC_Config_t config, TickType_t deadline)
 {
     TMC_Handle_t handle = NULL;
@@ -636,8 +649,8 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read transmission count", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read transmission count - cannot communicate with driver", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -658,8 +671,8 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GCONF register", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GCONF register - initialization failure", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -671,8 +684,8 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GSTAT register", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to write GSTAT register - initialization failure", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -680,8 +693,8 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set microstepping", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set microstepping - initialization failure", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -690,9 +703,9 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set double edge step pulse",
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set double edge step pulse - initialization failure",
                  handle->label);
-        LOG_ERROR(logMsg);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -701,8 +714,8 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set irun current divider", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set run current divider - initialization failure", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
@@ -711,13 +724,13 @@ static status_t init_handle(TMC_Config_t config, TickType_t deadline)
     {
         free_handle(handle);
 
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set ihold current divider", handle->label);
-        LOG_ERROR(logMsg);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set hold current divider - initialization failure", handle->label);
+        LOG_FATAL(logMsg);
 
         return kStatus_Fail;
     }
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Default init completed successfully", handle->label);
+    snprintf(logMsg, sizeof(logMsg), "[%s] TMC2209 initialized successfully", handle->label);
     LOG_INFO(logMsg);
 
     return kStatus_Success;
@@ -755,7 +768,15 @@ static status_t read(TMC_Handle_t handle, uint8_t regAddr, uint32_t* data, TickT
 
     create_read_datagram(handle, regAddr, &readDatagram);
     build_read_package(&readDatagram, transmit_read_package);
-
+    TickType_t currentTick = xTaskGetTickCount();
+    if (deadline <= currentTick)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Deadline for UART receive has already passed",
+                 handle->label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
+    }
+    TickType_t ticksUntilDeadline = deadline - currentTick;
     status = UART_RTOS_Send(handle->uartRTOSHandle, transmit_read_package, TMC_READ_PACKAGE_SIZE);
     dump_rx_buffer(handle, TMC_READ_PACKAGE_SIZE, deadline);
     if (status != kStatus_Success)
@@ -766,15 +787,6 @@ static status_t read(TMC_Handle_t handle, uint8_t regAddr, uint32_t* data, TickT
         return status;
     }
 
-    TickType_t currentTick = xTaskGetTickCount();
-    if (deadline <= currentTick)
-    {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Deadline for UART receive has already passed",
-                 handle->label);
-        LOG_ERROR(logMsg);
-        return kStatus_Fail;
-    }
-    TickType_t ticksUntilDeadline = deadline - currentTick;
     status = UART_RTOS_Receive(handle->uartRTOSHandle, transmit_response_package,
                                TMC_WRITE_PACKAGE_SIZE, NULL, ticksUntilDeadline);
     if (status != kStatus_Success)
@@ -984,7 +996,8 @@ static uint8_t dump_rx_buffer(TMC_Handle_t handle, uint8_t dumpCount, TickType_t
             return kStatus_Fail;
         }
         TickType_t ticksUntilDeadline = deadline - currentTick;
-        status_t   status =
+
+        status_t status =
             UART_RTOS_Receive(handle->uartRTOSHandle, &dump, 1, &n, ticksUntilDeadline);
         // size_t   currentLength = UART_TransferGetRxRingBufferLength(handle->uartHandle);
         if (status == kStatus_Success && n > 0)

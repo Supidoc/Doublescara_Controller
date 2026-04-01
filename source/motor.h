@@ -95,6 +95,13 @@ typedef struct _MTR_MotorConfig
     char* label; /**< Human-readable motor identifier, must be unique. */
 } MTR_MotorConfig_t;
 
+typedef enum _MTR_roundingMethod
+{
+    ROUND_DOWN,
+    ROUND_UP,
+    ROUND_NEAREST
+} MTR_roundingMethod_t;
+
 /**
  * @brief Opaque handle type for motor control instances.
  */
@@ -286,19 +293,6 @@ status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementStat
                                       THE_CmdHandle_t* cmdHandle);
 
 /**
- * @brief Blocks until the motor is stopped or timeout expires.
- *
- * @param[in] handle Target motor handle.
- * @param[in] deadline Maximum wait time.
- * @param[out] cmdHandle Command handle for waiting/checking command completion.
- *
- * @return kStatus_Success if the motor reached a stopped/idle state.
- *         kStatus_Fail if timeout occurs or an error is detected.
- */
-status_t MTR_wait_until_stopped_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                      THE_CmdHandle_t* cmdHandle);
-
-/**
  * @brief Sets current position as home reference.
  *
  * @param[in] handle Target motor handle.
@@ -315,7 +309,12 @@ status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* 
  * @param[in] handles Array of motor handles.
  * @param[in] angles Array of relative target angles in degree.
  * @param[in] count Number of elements in handles/angles.
- * @param[in] deadline Maximum time to wait for synchronization trigger.
+ * @param[in] deadline Matypedef enum rounding_method
+{
+    ROUND_DOWN,
+    ROUND_UP,
+    ROUND_NEAREST
+} MTR_roundingMethod_t;ximum time to wait for synchronization trigger.
  * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if all moves are prepared and triggered successfully.
@@ -351,6 +350,10 @@ status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, T
  */
 status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
                                     THE_CmdHandle_t* cmdHandle);
+
+double MTR_steps_to_angle(MTR_MotorHandle_t handle, int32_t steps);
+
+int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method);
 
 /** @} */ /* End of MOTOR_Module */
 

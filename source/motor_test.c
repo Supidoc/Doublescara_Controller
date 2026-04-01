@@ -53,11 +53,11 @@ void MTT_task(void* pvParameters)
     MTR_MotorConfig_t motorConfig;
 
 #if MTT_MOTOR_STEPPER_TYPE_NORMAL
-    motorConfig.acceleration = 400;
-    motorConfig.endVelocity  = 720;
-    motorConfig.stepAngle    = 1.8 // Typical NEMA stepper: 1.8 degrees per step
-                            motorConfig.microstep = 64;  // 8x microstepping
-    motorConfig.reductionFactor                   = 1.0; // No gearbox
+    motorConfig.acceleration    = 1300;
+    motorConfig.endVelocity     = 720;
+    motorConfig.stepAngle       = 1.8; // Typical NEMA stepper: 1.8 degrees per step
+    motorConfig.microstep       = 1;   // 8x microstepping
+    motorConfig.reductionFactor = 1.0; // No gearbox
 #elif MTT_MOTOR_STEPPER_TYPE_LINEAR_BIG
     motorConfig.acceleration    = 200;
     motorConfig.endVelocity     = 360;
@@ -99,7 +99,7 @@ void MTT_task(void* pvParameters)
     motorConfig.tmcConfig.iHoldCurrentA = 0.2;
     motorConfig.tmcConfig.iRunCurrentA  = 0.4;
 #endif
-    TickType_t      deadline  = THE_deadline_from_timeout_ms(3000);
+    TickType_t      deadline  = THE_deadline_from_timeout_ms(30000);
     THE_CmdHandle_t cmdHandle = NULL;
     if (MTR_init_handle_async(motorConfig, deadline, &cmdHandle) == kStatus_Success &&
         THE_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)
@@ -109,10 +109,8 @@ void MTT_task(void* pvParameters)
     }
     else
     {
-        if (cmdHandle != NULL)
-        {
-            THE_remove_cmd_handle_ref(cmdHandle);
-        }
+
+        THE_remove_cmd_handle_ref(cmdHandle);
         LOG_ERROR("Failed to initialize motor: motor0");
     }
 
