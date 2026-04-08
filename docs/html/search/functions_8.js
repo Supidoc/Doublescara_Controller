@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['log_5f2_5fcli_5fcommand_0',['log_2_cli_command',['../log_8c.html#a76d185eeacc3d1437e0ccb5fea47460f',1,'log.c']]],
-  ['log_5fcommand_1',['log_command',['../log_8c.html#ac60dcc4a36c6bade741be7462470351e',1,'log.c']]],
-  ['log_5finit_2',['LOG_init',['../group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1',1,'LOG_init(void):&#160;log.c'],['../group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1',1,'LOG_init(void):&#160;log.c']]],
-  ['log_5fsend_5flog_5fmessage_3',['LOG_send_log_message',['../group__LOG__Module.html#ga534b19869c7498164597bf36b47ccea6',1,'LOG_send_log_message(LOG_Level_t level, char *message, uint8_t silent):&#160;log.c'],['../group__LOG__Module.html#ga534b19869c7498164597bf36b47ccea6',1,'LOG_send_log_message(LOG_Level_t level, char *message, uint8_t silent):&#160;log.c']]],
-  ['log_5ftask_4',['LOG_task',['../group__LOG__Module.html#gaf4aa1ff2f9562bf7fce62e14f5c8df9b',1,'LOG_task(void *pvParameters):&#160;log.c'],['../group__LOG__Module.html#gaf4aa1ff2f9562bf7fce62e14f5c8df9b',1,'LOG_task(void *pvParameters):&#160;log.c']]]
+  ['init_5fdir_5fpin_0',['init_dir_pin',['../step_8c.html#adba1d68dbe985d96ff4d586237e05600',1,'step.c']]],
+  ['init_5fhandle_1',['init_handle',['../step_8c.html#a331ab04c818f0194c1eaa24d977843fb',1,'init_handle(const STP_StepperConfig_t config, TickType_t deadline):&#160;step.c'],['../tmc2209_8c.html#a50368b2e0c419ead8aad31313f87ad17',1,'init_handle(TMC_Config_t config, TickType_t deadline):&#160;tmc2209.c']]],
+  ['init_5fmotor_2',['init_motor',['../motor_8c.html#a9c3f7e4d5d925e03f7d4ecf8efab716b',1,'init_motor(MTR_MotorConfig_t config, TickType_t deadline):&#160;motor.c'],['../motor__test_8c.html#a50efeba9028961c6e5447005c23ba4a4',1,'init_motor(MTR_MotorConfig_t config):&#160;motor_test.c']]],
+  ['init_5fstep_5fpin_3',['init_step_pin',['../step_8c.html#a6277757e5ae26d0cbba3d4d62dc45912',1,'step.c']]]
 ];

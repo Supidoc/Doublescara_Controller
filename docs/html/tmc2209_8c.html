@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: source/tmc2209.c File Reference</title>
+<title>Double Scara: source/tmc2209.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -97,10 +97,14 @@ $(function(){initNavTree('tmc2209_8c.html','',''); });
 <code>#include &quot;stdio.h&quot;</code><br />
 <code>#include &quot;math.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="task__helpers_8h_source.html">task_helpers.h</a>&quot;</code><br />
+<code>#include &quot;fsl_common.h&quot;</code><br />
+<code>#include &quot;fsl_ftm.h&quot;</code><br />
+<code>#include &quot;fsl_gpio.h&quot;</code><br />
+<code>#include &quot;fsl_port.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for tmc2209.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="tmc2209_8c__incl.svg" width="619" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="tmc2209_8c__incl.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="tmc2209_8c_source.html">Go to the source code of this file.</a></p>
@@ -120,6 +124,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a48b1354844c9504660210a6201022a84" id="r_a48b1354844c9504660210a6201022a84"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a48b1354844c9504660210a6201022a84">TMC_IFCNT_ADDR</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="memitem:a4882ec884821cfc943288f0a89c7b966" id="r_a4882ec884821cfc943288f0a89c7b966"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4882ec884821cfc943288f0a89c7b966">TMC_CHOPCONF_ADDR</a>&#160;&#160;&#160;0x6c</td></tr>
 <tr class="memitem:ac09b5c77478480426679a83e24155821" id="r_ac09b5c77478480426679a83e24155821"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac09b5c77478480426679a83e24155821">TMC_IHOLD_IRUN_ADDR</a>&#160;&#160;&#160;0x10</td></tr>
+<tr class="memitem:af729e817251389added7c43069c20dad" id="r_af729e817251389added7c43069c20dad"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af729e817251389added7c43069c20dad">TMC_PWMCONF_ADDR</a>&#160;&#160;&#160;0x70</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -130,10 +135,15 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa0f6c8dafed536af99045734e71b0118" id="r_aa0f6c8dafed536af99045734e71b0118"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aa0f6c8dafed536af99045734e71b0118">_TMC_CommandType</a> { <a class="el" href="#aa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede">TMC_CMD_DEFAULT_INIT</a>
+<tr class="memitem:aa0f6c8dafed536af99045734e71b0118" id="r_aa0f6c8dafed536af99045734e71b0118"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aa0f6c8dafed536af99045734e71b0118">_TMC_CommandType</a> { <br />
+&#160;&#160;<a class="el" href="#aa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede">TMC_CMD_DEFAULT_INIT</a>
 , <a class="el" href="#aa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28">TMC_CMD_SET_MICROSTEPPING</a>
 , <a class="el" href="#aa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa">TMC_CMD_SET_IHOLD_DIVIDER</a>
 , <a class="el" href="#aa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3">TMC_CMD_SET_IRUN_DIVIDER</a>
+, <br />
+&#160;&#160;<a class="el" href="#aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498">TMC_CMD_ENABLE_FREEWHEELING</a>
+, <a class="el" href="#aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753">TMC_CMD_DISABLE_FREEWHEELING</a>
+<br />
  }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
@@ -154,21 +164,30 @@ Functions</h2></td></tr>
 <tr class="memitem:ad2b296addfa224a3fef137c3fc1ab831" id="r_ad2b296addfa224a3fef137c3fc1ab831"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#ad2b296addfa224a3fef137c3fc1ab831">write</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t regAddr, uint32_t *data, TickType_t deadline)</td></tr>
 <tr class="memitem:a94695ed0efbe527cc9dd513c27163072" id="r_a94695ed0efbe527cc9dd513c27163072"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a94695ed0efbe527cc9dd513c27163072">set_double_edge_step_pulse</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t enabled, TickType_t deadline)</td></tr>
 <tr class="memitem:abe68bf18e690ee0a0e9badfa372bb2fb" id="r_abe68bf18e690ee0a0e9badfa372bb2fb"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#abe68bf18e690ee0a0e9badfa372bb2fb">free_handle</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle)</td></tr>
+<tr class="memitem:af583af27df4f7497ba624330ac4f5534" id="r_af583af27df4f7497ba624330ac4f5534"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#af583af27df4f7497ba624330ac4f5534">send_cmd_async</a> (<a class="el" href="#a620acf3b0a063631292095c1f8fb463d">TMC_CommandQueueItem_t</a> *queueItem, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memitem:aa3a5282a21ae983493ec1f2b99aa0298" id="r_aa3a5282a21ae983493ec1f2b99aa0298"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#aa3a5282a21ae983493ec1f2b99aa0298">set_freewheeling</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t enabled, TickType_t deadline)</td></tr>
 <tr class="memitem:ga626120616f06e287f92803166d5b38f3" id="r_ga626120616f06e287f92803166d5b38f3"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga626120616f06e287f92803166d5b38f3">TMC_init</a> (void)</td></tr>
 <tr class="memdesc:ga626120616f06e287f92803166d5b38f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the TMC2209 module.  <br /></td></tr>
 <tr class="memitem:ga4d6999bb2640adbe2a2fce2c6ec570b2" id="r_ga4d6999bb2640adbe2a2fce2c6ec570b2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga4d6999bb2640adbe2a2fce2c6ec570b2">TMC_task</a> (void *pvParameters)</td></tr>
 <tr class="memdesc:ga4d6999bb2640adbe2a2fce2c6ec570b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function for processing TMC2209 commands.  <br /></td></tr>
-<tr class="memitem:ga8af8a4f06ac58d61065c3558c2d6b80c" id="r_ga8af8a4f06ac58d61065c3558c2d6b80c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga8af8a4f06ac58d61065c3558c2d6b80c">TMC_init_handle</a> (<a class="el" href="group__TMC2209__Module.html#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> config, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga8af8a4f06ac58d61065c3558c2d6b80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a TMC2209 handle with default configuration.  <br /></td></tr>
-<tr class="memitem:gaee4ca72fd373cde77461813cd2aa69fc" id="r_gaee4ca72fd373cde77461813cd2aa69fc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gaee4ca72fd373cde77461813cd2aa69fc">TMC_set_microstepping</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, <a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> microstepping, TickType_t deadline)</td></tr>
-<tr class="memdesc:gaee4ca72fd373cde77461813cd2aa69fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the microstepping resolution for a TMC2209 driver.  <br /></td></tr>
+<tr class="memitem:gafe1ec1a11587ddb0b181d1d7b85353dc" id="r_gafe1ec1a11587ddb0b181d1d7b85353dc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gafe1ec1a11587ddb0b181d1d7b85353dc">TMC_init_handle_async</a> (<a class="el" href="group__TMC2209__Module.html#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> config, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gafe1ec1a11587ddb0b181d1d7b85353dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a TMC2209 handle with default configuration asynchronously.  <br /></td></tr>
+<tr class="memitem:gaae7d0a36006ff54ead11d8fc09ac3a9b" id="r_gaae7d0a36006ff54ead11d8fc09ac3a9b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gaae7d0a36006ff54ead11d8fc09ac3a9b">TMC_set_microstepping_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, <a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> microstepping, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gaae7d0a36006ff54ead11d8fc09ac3a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the microstepping resolution for a TMC2209 driver asynchronously.  <br /></td></tr>
 <tr class="memitem:a450878b308f057bd837991f8d9aef045" id="r_a450878b308f057bd837991f8d9aef045"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a450878b308f057bd837991f8d9aef045">TMC_microstepping_value_to_enum</a> (uint8_t value, <a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> *microstepping)</td></tr>
-<tr class="memitem:gac5f5a7c8a0624a8224f80955f53a69a7" id="r_gac5f5a7c8a0624a8224f80955f53a69a7"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gac5f5a7c8a0624a8224f80955f53a69a7">TMC_microstepping_uint_to_enum</a> (uint8_t value, <a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> *microstepping)</td></tr>
-<tr class="memdesc:gac5f5a7c8a0624a8224f80955f53a69a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a uint8_t microstepping value to the corresponding enum member.  <br /></td></tr>
-<tr class="memitem:gab4c0c981a12a0bb3ae5218fab23f4064" id="r_gab4c0c981a12a0bb3ae5218fab23f4064"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gab4c0c981a12a0bb3ae5218fab23f4064">TMC_set_ihold_divider</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t ihold, TickType_t deadline)</td></tr>
-<tr class="memdesc:gab4c0c981a12a0bb3ae5218fab23f4064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IHOLD current divider asynchronously via task queue.  <br /></td></tr>
-<tr class="memitem:ga45ffe3a8f5ff405c641670dfd6ae1cce" id="r_ga45ffe3a8f5ff405c641670dfd6ae1cce"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga45ffe3a8f5ff405c641670dfd6ae1cce">TMC_set_irun_divider</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t irun, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga45ffe3a8f5ff405c641670dfd6ae1cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IRUN current divider asynchronously via task queue.  <br /></td></tr>
+<tr class="memitem:ga9b6a1c1f195a63a7e399801731e14b7b" id="r_ga9b6a1c1f195a63a7e399801731e14b7b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga9b6a1c1f195a63a7e399801731e14b7b">TMC_microstepping_uint_to_enum</a> (uint16_t in, <a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> *out)</td></tr>
+<tr class="memdesc:ga9b6a1c1f195a63a7e399801731e14b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a uint8_t microstepping value to the corresponding enum member.  <br /></td></tr>
+<tr class="memitem:ga72ae6a8522043103e2878716769f3fd5" id="r_ga72ae6a8522043103e2878716769f3fd5"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga72ae6a8522043103e2878716769f3fd5">TMC_microstepping_enum_to_uint</a> (<a class="el" href="group__TMC2209__Module.html#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> in, uint16_t *out)</td></tr>
+<tr class="memitem:ga6d1b55916cc95a8af771c80c836ff7bc" id="r_ga6d1b55916cc95a8af771c80c836ff7bc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga6d1b55916cc95a8af771c80c836ff7bc">TMC_set_ihold_divider_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t ihold, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga6d1b55916cc95a8af771c80c836ff7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IHOLD current divider asynchronously.  <br /></td></tr>
+<tr class="memitem:ga747d58dccb7f2e8d339f8e646b6e56d3" id="r_ga747d58dccb7f2e8d339f8e646b6e56d3"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga747d58dccb7f2e8d339f8e646b6e56d3">TMC_set_irun_divider_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t irun, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga747d58dccb7f2e8d339f8e646b6e56d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IRUN current divider asynchronously.  <br /></td></tr>
+<tr class="memitem:gacd6d97b09da63b808b34df37ad1ad69d" id="r_gacd6d97b09da63b808b34df37ad1ad69d"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gacd6d97b09da63b808b34df37ad1ad69d">TMC_enable_freewheeling_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gacd6d97b09da63b808b34df37ad1ad69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
+<tr class="memitem:ga99cab501c7202f88a4f3a12520ecb04e" id="r_ga99cab501c7202f88a4f3a12520ecb04e"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga99cab501c7202f88a4f3a12520ecb04e">TMC_disable_freewheeling_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga99cab501c7202f88a4f3a12520ecb04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
+<tr class="memitem:gacd60da6e8f316771a0f91f4edb92b586" id="r_gacd60da6e8f316771a0f91f4edb92b586"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#gacd60da6e8f316771a0f91f4edb92b586">TMC_set_freewheeling_async</a> (<a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t enabled, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gacd60da6e8f316771a0f91f4edb92b586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
 <tr class="memitem:ga78b08cc2828dcca1085ed6205332ea08" id="r_ga78b08cc2828dcca1085ed6205332ea08"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga78b08cc2828dcca1085ed6205332ea08">TMC_current_to_divider</a> (float desired_current, <a class="el" href="group__TMC2209__Module.html#ga81726756d4e5751b52c7841141c8e8b1">TMC_RoundingMode_t</a> rounding, uint8_t *divider)</td></tr>
 <tr class="memdesc:ga78b08cc2828dcca1085ed6205332ea08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a desired current to a TMC2209 current divider value.  <br /></td></tr>
 <tr class="memitem:ga64a53e85523cba9e1abb7f7a29baafa4" id="r_ga64a53e85523cba9e1abb7f7a29baafa4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__TMC2209__Module.html#ga64a53e85523cba9e1abb7f7a29baafa4">TMC_get_default_config</a> (<a class="el" href="group__TMC2209__Module.html#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> *config)</td></tr>
@@ -182,7 +201,8 @@ Variables</h2></td></tr>
 <tr class="memitem:a4eb8a305a974cec16a8d4de0595725ee" id="r_a4eb8a305a974cec16a8d4de0595725ee"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a4eb8a305a974cec16a8d4de0595725ee">transmit_response_package</a> [<a class="el" href="#aa5fbce7c8c72c01dade0c56084507141">TMC_WRITE_PACKAGE_SIZE</a>]</td></tr>
 <tr class="memitem:ae345025d54190b5415d81a39dcc608df" id="r_ae345025d54190b5415d81a39dcc608df"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ae345025d54190b5415d81a39dcc608df">transmit_write_package</a> [<a class="el" href="#aa5fbce7c8c72c01dade0c56084507141">TMC_WRITE_PACKAGE_SIZE</a>]</td></tr>
 <tr class="memitem:af8b4b6ed3183d6ec3ef726fc684837b8" id="r_af8b4b6ed3183d6ec3ef726fc684837b8"><td class="memItemLeft">static <a class="el" href="#a9d48c2e045a2e58098dcfa32c46d3a04">TMC_HandleArrayItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#af8b4b6ed3183d6ec3ef726fc684837b8">tmcHandleArray</a> [<a class="el" href="group__TMC2209__Module.html#ga4e94e6caf9a3151acb26285bb3319b31">TMC_MAX_HANDLE_COUNT</a>]</td></tr>
-<tr class="memitem:afae48cdab5a29c7739f148d0fe03232b" id="r_afae48cdab5a29c7739f148d0fe03232b"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#afae48cdab5a29c7739f148d0fe03232b">commandQueue</a> = NULL</td></tr>
+<tr class="memitem:aeb86091cfe0c5168e3dc293683af1f6b" id="r_aeb86091cfe0c5168e3dc293683af1f6b"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeb86091cfe0c5168e3dc293683af1f6b">cmdQueue</a> = NULL</td></tr>
+<tr class="memitem:a42a282fc4308bc5820113b922ec63387" id="r_a42a282fc4308bc5820113b922ec63387"><td class="memItemLeft">static <a class="el" href="group__TaskHelpers__Module.html#gab336f36f41499b7390e6cc98cbaaef98">THE_CmdHandleImpl_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a42a282fc4308bc5820113b922ec63387">cmdHandles</a> [<a class="el" href="group__TMC2209__Module.html#ga95780650db7177c914d239b38e96281c">TMC_MAX_CMD_HANDLE_COUNT</a>]</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a4882ec884821cfc943288f0a89c7b966" name="a4882ec884821cfc943288f0a89c7b966"></a>
@@ -197,7 +217,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00028">28</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00032">32</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -213,7 +233,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00025">25</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00029">29</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -229,7 +249,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00026">26</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00030">30</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -245,7 +265,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00027">27</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00031">31</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -261,7 +281,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00029">29</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00033">33</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="af729e817251389added7c43069c20dad" name="af729e817251389added7c43069c20dad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af729e817251389added7c43069c20dad">&#9670;&#160;</a></span>TMC_PWMCONF_ADDR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TMC_PWMCONF_ADDR&#160;&#160;&#160;0x70</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00034">34</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -277,7 +313,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00022">22</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00026">26</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -293,7 +329,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00023">23</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00027">27</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -371,9 +407,11 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="aa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28" name="aa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28"></a>TMC_CMD_SET_MICROSTEPPING&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa" name="aa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa"></a>TMC_CMD_SET_IHOLD_DIVIDER&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3" name="aa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3"></a>TMC_CMD_SET_IRUN_DIVIDER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498" name="aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498"></a>TMC_CMD_ENABLE_FREEWHEELING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753" name="aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753"></a>TMC_CMD_DISABLE_FREEWHEELING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00035">35</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00040">40</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -405,7 +443,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00962">962</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01094">1094</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -436,7 +474,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00976">976</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01108">1108</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -467,7 +505,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00932">932</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01064">1064</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -503,7 +541,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00918">918</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01050">1050</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -544,7 +582,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00903">903</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01035">1035</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -580,7 +618,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00994">994</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01126">1126</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -607,7 +645,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00757">757</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00887">887</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -638,7 +676,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00632">632</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00756">756</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -665,7 +703,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00464">464</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00514">514</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -706,7 +744,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00776">776</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00906">906</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -737,7 +775,43 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00883">883</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01015">1015</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="af583af27df4f7497ba624330ac4f5534" name="af583af27df4f7497ba624330ac4f5534"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af583af27df4f7497ba624330ac4f5534">&#9670;&#160;</a></span>send_cmd_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t send_cmd_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a620acf3b0a063631292095c1f8fb463d">TMC_CommandQueueItem_t</a> *</td>          <td class="paramname"><span class="paramname"><em>queueItem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00588">588</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -773,7 +847,43 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00607">607</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00732">732</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="aa3a5282a21ae983493ec1f2b99aa0298" name="aa3a5282a21ae983493ec1f2b99aa0298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3a5282a21ae983493ec1f2b99aa0298">&#9670;&#160;</a></span>set_freewheeling()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t set_freewheeling </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__TMC2209__Module.html#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l01167">1167</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -809,7 +919,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00508">508</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00627">627</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -845,7 +955,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00542">542</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00663">663</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -881,7 +991,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00577">577</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00700">700</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -904,7 +1014,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00221">221</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00212">212</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -945,24 +1055,48 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00832">832</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00963">963</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="afae48cdab5a29c7739f148d0fe03232b" name="afae48cdab5a29c7739f148d0fe03232b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afae48cdab5a29c7739f148d0fe03232b">&#9670;&#160;</a></span>commandQueue</h2>
+<a id="a42a282fc4308bc5820113b922ec63387" name="a42a282fc4308bc5820113b922ec63387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a282fc4308bc5820113b922ec63387">&#9670;&#160;</a></span>cmdHandles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__TaskHelpers__Module.html#gab336f36f41499b7390e6cc98cbaaef98">THE_CmdHandleImpl_t</a> cmdHandles[<a class="el" href="group__TMC2209__Module.html#ga95780650db7177c914d239b38e96281c">TMC_MAX_CMD_HANDLE_COUNT</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00144">144</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="aeb86091cfe0c5168e3dc293683af1f6b" name="aeb86091cfe0c5168e3dc293683af1f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb86091cfe0c5168e3dc293683af1f6b">&#9670;&#160;</a></span>cmdQueue</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QueueHandle_t commandQueue = NULL</td>
+          <td class="memname">QueueHandle_t cmdQueue = NULL</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00127">127</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00142">142</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -986,7 +1120,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00125">125</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00140">140</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -1010,7 +1144,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00121">121</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00136">136</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -1034,7 +1168,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00122">122</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00137">137</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1192,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00123">123</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00138">138</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>

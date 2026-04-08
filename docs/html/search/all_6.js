@@ -44,9 +44,10 @@ var searchData=
   ['ffconf_5fgen_2eh_41',['ffconf_gen.h',['../ffconf__gen_8h.html',1,'']]],
   ['free_5faccel_5ftable_42',['free_accel_table',['../step_8c.html#ae09089881e135a335d2f5b9a30ce381f',1,'step.c']]],
   ['free_5fhandle_43',['free_handle',['../tmc2209_8c.html#abe68bf18e690ee0a0e9badfa372bb2fb',1,'tmc2209.c']]],
-  ['fs_44',['fs',['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c'],['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c']]],
-  ['ftm3_5firqhandler_45',['FTM3_IRQHandler',['../step_8c.html#a889cb58d52a26f7eaa5ea6319c9e0f29',1,'step.c']]],
-  ['ftm3_5fisr_5fhandle_5fcache_46',['FTM3_ISR_handle_cache',['../step_8c.html#a785756bcb96f3c5e34dc48382bfcb804',1,'step.c']]],
-  ['ftmbase_47',['ftmBase',['../struct__MTR__MotorStepperConfig.html#a1df0d9b2b63574642c188865e8afd344',1,'_MTR_MotorStepperConfig::ftmBase'],['../struct__STP__StepperHandleImpl.html#abf51308469b28908cc08363ac3f116ec',1,'_STP_StepperHandleImpl::ftmBase'],['../struct__STP__StepperConfig.html#a09b01227df8e70a4ffaa73c5042b88cc',1,'_STP_StepperConfig::ftmBase']]],
-  ['ftmchannel_48',['ftmChannel',['../struct__MTR__MotorStepperConfig.html#a97f54898230db144e5cbe48d570925ee',1,'_MTR_MotorStepperConfig::ftmChannel'],['../struct__STP__StepperHandleImpl.html#a56eba4619db111cc3159ceeddf485ebb',1,'_STP_StepperHandleImpl::ftmChannel'],['../struct__STP__StepperConfig.html#a2b002997b9b0252cff1ceca529c1b6f4',1,'_STP_StepperConfig::ftmChannel']]]
+  ['freewheeling_44',['freewheeling',['../struct__MTR__MotorHandleImpl.html#a28cd45c78c5e295687a491838744b053',1,'_MTR_MotorHandleImpl::freewheeling'],['../struct__TMC__HandleImpl.html#a869a2c610826285e931dcd032ff6e8c9',1,'_TMC_HandleImpl::freewheeling']]],
+  ['fs_45',['fs',['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c'],['../group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f',1,'fs:&#160;disk.c']]],
+  ['ftm3_5firqhandler_46',['FTM3_IRQHandler',['../step_8c.html#a889cb58d52a26f7eaa5ea6319c9e0f29',1,'step.c']]],
+  ['ftm3_5fisr_5fhandle_5fcache_47',['FTM3_ISR_handle_cache',['../step_8c.html#a785756bcb96f3c5e34dc48382bfcb804',1,'step.c']]],
+  ['ftmbase_48',['ftmBase',['../struct__MTR__MotorStepperConfig.html#a1df0d9b2b63574642c188865e8afd344',1,'_MTR_MotorStepperConfig::ftmBase'],['../struct__STP__StepperHandleImpl.html#abf51308469b28908cc08363ac3f116ec',1,'_STP_StepperHandleImpl::ftmBase'],['../struct__STP__StepperConfig.html#a09b01227df8e70a4ffaa73c5042b88cc',1,'_STP_StepperConfig::ftmBase']]],
+  ['ftmchannel_49',['ftmChannel',['../struct__MTR__MotorStepperConfig.html#a97f54898230db144e5cbe48d570925ee',1,'_MTR_MotorStepperConfig::ftmChannel'],['../struct__STP__StepperHandleImpl.html#a56eba4619db111cc3159ceeddf485ebb',1,'_STP_StepperHandleImpl::ftmChannel'],['../struct__STP__StepperConfig.html#a2b002997b9b0252cff1ceca529c1b6f4',1,'_STP_StepperConfig::ftmChannel']]]
 ];

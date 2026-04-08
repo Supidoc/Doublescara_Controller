@@ -18,232 +18,261 @@
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{log.h}}>}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00017}00017\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00018}00018\ \textcolor{comment}{/************************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00020}00020\ \textcolor{comment}{\ ************************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00022}00022\ \textcolor{comment}{/***************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00024}00024\ \textcolor{comment}{\ ***************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00026}00026\ \textcolor{comment}{/*****************************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00028}00028\ \textcolor{comment}{\ *****************************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00029}00029\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00030}00030\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00031}00031\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00034}00034\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00035}00035\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00036}00036\ \textcolor{comment}{\ ****************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00037}00037\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00038}00038\ \textcolor{comment}{/*****************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00039}00039\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00040}00040\ \textcolor{comment}{\ *****************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00041}00041\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00042}\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{00042}}\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00044}\doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{00044}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CLI\_Command\_Definition\_t\ \doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{xPingCommandDefinition}}\ =\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00045}00045\ \ \ \ \ .pcCommand\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}ping"{}},}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00046}00046\ \ \ \ \ .pcHelpString\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}ping:\ Returns\ Pong\(\backslash\)r\(\backslash\)n"{}},}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00047}00047\ \ \ \ \ .pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}},}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00048}00048\ \ \ \ \ .cExpectedNumberOfParameters\ =\ 0\};}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00049}00049\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00050}00050\ \textcolor{comment}{/*******************************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00051}00051\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00052}00052\ \textcolor{comment}{\ *******************************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00053}00053\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00054}\doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{00054}}\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{CLI\_init}}(\textcolor{keywordtype}{void})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00055}00055\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00056}00056\ \ \ \ \ BaseType\_t\ status;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00058}00058\ \ \ \ \ \doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ =\ xSemaphoreCreateMutex();}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00060}00060\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00062}00062\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00063}00063\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00064}00064\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\&\doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{xPingCommandDefinition}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00066}00066\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00068}00068\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00069}00069\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00071}00071\ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00072}00072\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00073}\doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{00073}}\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\textcolor{keyword}{const}\ CLI\_Command\_Definition\_t*\ \textcolor{keyword}{const}\ pxCommandToRegister)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00074}00074\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00075}00075\ \ \ \ \ BaseType\_t\ status;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00076}00076\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00078}00078\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}},\ portMAX\_DELAY)\ !=\ pdTRUE)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ acquire\ CLI\ mutex\ for\ command\ registration"{}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00084}00084\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00085}00085\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00086}00086\ \ \ \ \ status\ =\ FreeRTOS\_CLIRegisterCommand(pxCommandToRegister);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ pdTRUE)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00088}00088\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ register\ CLI\ command"{}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00095}00095\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00096}00096\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00098}00098\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}Registered\ CLI\ command:\ \%s"{}},}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxCommandToRegister-\/>pcCommand);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00104}00104\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00105}00105\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00107}00107\ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00109}\doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{00109}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{CLI\_task}}(\textcolor{keywordtype}{void}*\ pvParameters)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00110}00110\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00111}00111\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}(\textcolor{stringliteral}{"{}Started\ CLI\ Task"{}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00113}00113\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}();}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ vTaskDelay(1);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00116}00116\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00117}00117\ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00118}00118\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00119}00119\ \textcolor{comment}{/********************************************}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00120}00120\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00121}00121\ \textcolor{comment}{\ ********************************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00122}00122\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00123}\doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{00123}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}(\textcolor{keywordtype}{void})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00124}00124\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00125}00125\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00126}00126\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ cRxedChar;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00127}00127\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ cInputIndex\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ rxReceivedCount;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00129}00129\ \ \ \ \ BaseType\_t\ \ \ \ \ xMoreDataToFollow;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00130}00130\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00131}00131\ \ \ \ \ \textcolor{comment}{/*\ The\ input\ and\ output\ buffers\ are\ declared\ static\ to\ keep\ them\ off\ the\ stack.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00132}00132\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ pcOutputString[\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}}];}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00133}00133\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ pcInputString[\doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}}];}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00134}00134\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00135}00135\ \ \ \ \ \textcolor{comment}{/*\ This\ implementation\ reads\ a\ single\ character\ at\ a\ time.\ Wait\ in\ the}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00136}00136\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00137}00137\ \textcolor{comment}{\ \ \ \ \ Blocked\ state\ until\ a\ character\ is\ received.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00138}00138\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00139}00139\ \ \ \ \ LPUART\_RTOS\_Receive(\&LPUART0\_rtos\_handle,\ \&cRxedChar,\ 1,\ \&rxReceivedCount);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00140}00140\ \ \ \ \ \textcolor{keywordflow}{if}\ (rxReceivedCount\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)n'})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00143}00143\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00144}00144\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}},\ portMAX\_DELAY)\ !=\ pdTRUE)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ acquire\ CLI\ mutex\ for\ command\ processing"{}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ A\ newline\ character\ was\ received,\ so\ the\ input\ command\ string\ is}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00151}00151\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ complete\ and\ can\ be\ processed.\ Transmit\ a\ line\ separator,\ just\ to}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00152}00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ make\ the\ output\ easier\ to\ read.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00153}00153\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ LPUART\_RTOS\_Send(\&LPUART0\_rtos\_handle,\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}},\ strlen(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}SEGGER\_RTT.h"{}}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00019}00019\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00020}00020\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00021}00021\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00023}00023\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00024}00024\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00025}00025\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00027}00027\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00028}00028\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00029}00029\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00031}00031\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00032}00032\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00035}00035\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00036}00036\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00037}00037\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00039}00039\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00040}00040\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00041}00041\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00043}\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{00043}}\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00045}\doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{00045}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ CLI\_Command\_Definition\_t\ \doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{xPingCommandDefinition}}\ =\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00046}00046\ \ \ \ \ .pcCommand\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}ping"{}},}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00047}00047\ \ \ \ \ .pcHelpString\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}ping:\ Returns\ Pong\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00048}00048\ \ \ \ \ .pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}},}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00049}00049\ \ \ \ \ .cExpectedNumberOfParameters\ =\ 0\};}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00051}00051\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00052}00052\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00053}00053\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00055}\doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{00055}}\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{CLI\_init}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00057}00057\ \ \ \ \ BaseType\_t\ status;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00059}00059\ \ \ \ \ \doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ =\ xSemaphoreCreateMutex();}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00061}00061\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00065}00065\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\&\doxymbox{\hyperlink{cli_8c_acb3d9627c2b46551ae41d72b00527bed}{xPingCommandDefinition}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00070}00070\ \ \ \ \ SEGGER\_RTT\_ConfigUpBuffer(0,\ NULL,\ NULL,\ 0,\ SEGGER\_RTT\_MODE\_NO\_BLOCK\_TRIM);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00071}00071\ \ \ \ \ SEGGER\_RTT\_WriteString(0,\ RTT\_CTRL\_CLEAR);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00075}\doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{00075}}\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\textcolor{keyword}{const}\ CLI\_Command\_Definition\_t*\ \textcolor{keyword}{const}\ pxCommandToRegister)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00076}00076\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00077}00077\ \ \ \ \ BaseType\_t\ status;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00080}00080\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}},\ portMAX\_DELAY)\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ acquire\ CLI\ mutex\ for\ command\ registration"{}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00088}00088\ \ \ \ \ status\ =\ FreeRTOS\_CLIRegisterCommand(pxCommandToRegister);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00090}00090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ register\ CLI\ command"{}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (xTaskGetSchedulerState()\ !=\ taskSCHEDULER\_NOT\_STARTED)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}Registered\ CLI\ command:\ \%s"{}},}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxCommandToRegister-\/>pcCommand);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00109}00109\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00111}\doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{00111}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{CLI\_task}}(\textcolor{keywordtype}{void}*\ pvParameters)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00112}00112\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00113}00113\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}(\textcolor{stringliteral}{"{}Started\ CLI\ Task"{}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}();}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ vTaskDelay(1);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00121}00121\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00122}00122\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00123}00123\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00125}\doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{00125}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cli_8c_a6ef0387bd645347b1a61efc620315993}{process}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00126}00126\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00128}00128\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ cRxedChar;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00129}00129\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ cInputIndex\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00130}00130\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ rxReceivedCount;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00131}00131\ \ \ \ \ BaseType\_t\ \ \ \ \ xMoreDataToFollow;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00133}00133\ \ \ \ \ \textcolor{comment}{/*\ The\ input\ and\ output\ buffers\ are\ declared\ static\ to\ keep\ them\ off\ the\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00134}00134\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ pcOutputString[\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}}];}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00135}00135\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ pcInputString[\doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}}];}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00137}00137\ \ \ \ \ \textcolor{comment}{/*\ This\ implementation\ reads\ a\ single\ character\ at\ a\ time.\ Wait\ in\ the}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00138}00138\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00139}00139\ \textcolor{comment}{\ \ \ \ \ Blocked\ state\ until\ a\ character\ is\ received.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00140}00140\ \textcolor{preprocessor}{\#if\ CLI\_USE\_RTT}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (SEGGER\_RTT\_HasKey()\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00142}00142\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00145}00145\ \ \ \ \ cRxedChar\ =\ SEGGER\_RTT\_GetKey();}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00146}00146\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00147}00147\ \ \ \ \ LPUART\_RTOS\_Receive(\&LPUART0\_rtos\_handle,\ \&cRxedChar,\ 1,\ \&rxReceivedCount);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00149}00149\ \ \ \ \ \textcolor{keywordflow}{if}\ (rxReceivedCount\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00150}00150\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00152}00152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00153}00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)n'})}
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00155}00155\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp((\textcolor{keywordtype}{char}*)pcInputString,\ \textcolor{stringliteral}{"{}log"{}},\ strlen(\textcolor{stringliteral}{"{}log"{}}))\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ snprintf((\textcolor{keywordtype}{char}*)pcOutputString,\ \textcolor{keyword}{sizeof}(pcOutputString),\ \textcolor{stringliteral}{"{}USER:\ \%s"{}},\ pcInputString);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00159}00159\ \textcolor{preprocessor}{\#if\ CLI\_SHOW\_COMMAND\_INPUT}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}((\textcolor{keywordtype}{char}*)pcOutputString);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00161}00161\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_gaa55dad394419490fbe636529eae7d440}{LOG\_INFO\_SILENT}}((\textcolor{keywordtype}{char}*)pcOutputString);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00163}00163\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ memset(pcOutputString,\ 0x00,\ \doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ command\ interpreter\ is\ called\ repeatedly\ until\ it\ returns}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00167}00167\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ pdFALSE.\ See\ the\ "{}Implementing\ a\ command"{}\ documentation\ for\ an}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ exaplanation\ of\ why\ this\ is.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00156}00156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xSemaphoreTake(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}},\ portMAX\_DELAY)\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ acquire\ CLI\ mutex\ for\ command\ processing"{}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ A\ newline\ character\ was\ received,\ so\ the\ input\ command\ string\ is}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00163}00163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ complete\ and\ can\ be\ processed.\ Transmit\ a\ line\ separator,\ just\ to}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00164}00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ make\ the\ output\ easier\ to\ read.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00165}00165\ \textcolor{preprocessor}{\#if\ CLI\_USE\_RTT}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ SEGGER\_RTT\_Write(0,\ \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}},\ strlen(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00167}00167\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ LPUART\_RTOS\_Send(\&LPUART0\_rtos\_handle,\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}},\ strlen(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}));}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00169}00169\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp((\textcolor{keywordtype}{char}*)pcInputString,\ \textcolor{stringliteral}{"{}log"{}},\ strlen(\textcolor{stringliteral}{"{}log"{}}))\ !=\ 0)}
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00172}00172\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Send\ the\ command\ string\ to\ the\ command\ interpreter.\ Any}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00174}00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ output\ generated\ by\ the\ command\ interpreter\ will\ be\ placed\ in\ the}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00175}00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ pcOutputString\ buffer.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ snprintf((\textcolor{keywordtype}{char}*)pcOutputString,\ \textcolor{keyword}{sizeof}(pcOutputString),\ \textcolor{stringliteral}{"{}USER:\ \%s"{}},\ pcInputString);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00173}00173\ \textcolor{preprocessor}{\#if\ CLI\_SHOW\_COMMAND\_INPUT}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}((\textcolor{keywordtype}{char}*)pcOutputString);}
 \DoxyCodeLine{\Hypertarget{cli_8c_source_l00176}00176\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ xMoreDataToFollow\ =\ FreeRTOS\_CLIProcessCommand(}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{char}*)pcInputString,\ \ \textcolor{comment}{/*\ The\ command\ string.*/}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{char}*)pcOutputString,\ \textcolor{comment}{/*\ The\ output\ buffer.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}}\ \ \textcolor{comment}{/*\ The\ size\ of\ the\ output\ buffer.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00182}00182\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Write\ the\ output\ generated\ by\ the\ command\ interpreter\ to\ the}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00184}00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ console.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ LPUART\_RTOS\_Send(\&LPUART0\_rtos\_handle,\ pcOutputString,\ strlen((\textcolor{keywordtype}{char}*)pcOutputString));}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (xMoreDataToFollow\ !=\ pdFALSE);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00187}00187\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ All\ the\ strings\ generated\ by\ the\ input\ command\ have\ been\ sent.}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00189}00189\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ Processing\ of\ the\ command\ is\ complete.\ Clear\ the\ input\ string\ ready}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ to\ receive\ the\ next\ command.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00191}00191\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ cInputIndex\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ memset(pcInputString,\ 0x00,\ \doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00194}00194\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00196}00196\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00197}00197\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00198}00198\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ if()\ clause\ performs\ the\ processing\ after\ a\ newline\ character}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00200}00200\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ is\ received.\ This\ else\ clause\ performs\ the\ processing\ if\ any\ other}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00201}00201\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ character\ is\ received.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00202}00202\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)r'})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00204}00204\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ignore\ carriage\ returns.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)0'})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00209}00209\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ignore\ null\ termination.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)b'})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Backspace\ was\ pressed.\ Erase\ the\ last\ character\ in\ the\ input}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00216}00216\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ -\/\ if\ there\ are\ any.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cInputIndex\ >\ 0)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cInputIndex-\/-\/;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcInputString[cInputIndex]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ A\ character\ was\ entered.\ It\ was\ not\ a\ new\ line,\ backspace}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00226}00226\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ or\ carriage\ return,\ so\ it\ is\ accepted\ as\ part\ of\ the\ input\ and}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00227}00227\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ placed\ into\ the\ input\ buffer.\ When\ a\ n\ is\ entered\ the\ complete}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00228}00228\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ string\ will\ be\ passed\ to\ the\ command\ interpreter.\ */}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cInputIndex\ <\ \doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}})}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcInputString[cInputIndex]\ =\ cRxedChar;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cInputIndex++;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00235}00235\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00236}00236\ \}}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00237}00237\ }
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00238}\doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{00238}}\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString)}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00240}00240\ \{}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00241}00241\ \ \ \ \ strncpy(pcWriteBuffer,\ \textcolor{stringliteral}{"{}Pong"{}},\ strlen(\textcolor{stringliteral}{"{}Pong"{}})\ +\ 1);}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
-\DoxyCodeLine{\Hypertarget{cli_8c_source_l00243}00243\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00177}00177\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_gaa55dad394419490fbe636529eae7d440}{LOG\_INFO\_SILENT}}((\textcolor{keywordtype}{char}*)pcOutputString);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00179}00179\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ memset(pcOutputString,\ 0x00,\ \doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ command\ interpreter\ is\ called\ repeatedly\ until\ it\ returns}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00183}00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ pdFALSE.\ See\ the\ "{}Implementing\ a\ command"{}\ documentation\ for\ an}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00184}00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ exaplanation\ of\ why\ this\ is.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Send\ the\ command\ string\ to\ the\ command\ interpreter.\ Any}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ output\ generated\ by\ the\ command\ interpreter\ will\ be\ placed\ in\ the}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00191}00191\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ pcOutputString\ buffer.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ xMoreDataToFollow\ =\ FreeRTOS\_CLIProcessCommand(}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{char}*)pcInputString,\ \ \textcolor{comment}{/*\ The\ command\ string.*/}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{char}*)pcOutputString,\ \textcolor{comment}{/*\ The\ output\ buffer.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{CLI\_MAX\_OUTPUT\_LENGTH}}\ \ \textcolor{comment}{/*\ The\ size\ of\ the\ output\ buffer.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Write\ the\ output\ generated\ by\ the\ command\ interpreter\ to\ the}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00200}00200\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ console.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00201}00201\ \textcolor{preprocessor}{\#if\ CLI\_USE\_RTT}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Exclude\ log\ and\ help\ command\ from\ printing\ info\ prefix}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strncmp((\textcolor{keywordtype}{char}*)pcInputString,\ \textcolor{stringliteral}{"{}help"{}},\ strlen(\textcolor{stringliteral}{"{}help"{}}))\ ==\ 0\ ||}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strncmp((\textcolor{keywordtype}{char}*)pcInputString,\ \textcolor{stringliteral}{"{}log"{}},\ strlen(\textcolor{stringliteral}{"{}log"{}}))\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SEGGER\_RTT\_Write(0,\ pcOutputString,\ strlen(pcOutputString));}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}(pcOutputString);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00212}00212\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ LPUART\_RTOS\_Send(\&LPUART0\_rtos\_handle,\ pcOutputString,\ strlen((\textcolor{keywordtype}{char}*)pcOutputString));}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00214}00214\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (xMoreDataToFollow\ !=\ pdFALSE);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ All\ the\ strings\ generated\ by\ the\ input\ command\ have\ been\ sent.}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00218}00218\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ Processing\ of\ the\ command\ is\ complete.\ Clear\ the\ input\ string\ ready}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00219}00219\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ to\ receive\ the\ next\ command.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ cInputIndex\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ memset(pcInputString,\ 0x00,\ \doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ xSemaphoreGive(\doxymbox{\hyperlink{cli_8c_add8d1de930cb2d3ef3f3b049ddf0089a}{cliMutex}});}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00225}00225\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00227}00227\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ if()\ clause\ performs\ the\ processing\ after\ a\ newline\ character}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00229}00229\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ is\ received.\ This\ else\ clause\ performs\ the\ processing\ if\ any\ other}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00230}00230\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ character\ is\ received.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)r'})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ignore\ carriage\ returns.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)0'})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ignore\ null\ termination.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cRxedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)b'})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Backspace\ was\ pressed.\ Erase\ the\ last\ character\ in\ the\ input}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00245}00245\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ buffer\ -\/\ if\ there\ are\ any.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cInputIndex\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cInputIndex-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcInputString[cInputIndex]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00253}00253\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ A\ character\ was\ entered.\ It\ was\ not\ a\ new\ line,\ backspace}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00255}00255\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ or\ carriage\ return,\ so\ it\ is\ accepted\ as\ part\ of\ the\ input\ and}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00256}00256\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ placed\ into\ the\ input\ buffer.\ When\ a\ n\ is\ entered\ the\ complete}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00257}00257\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ string\ will\ be\ passed\ to\ the\ command\ interpreter.\ */}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cInputIndex\ <\ \doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{CLI\_MAX\_INPUT\_LENGTH}})}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcInputString[cInputIndex]\ =\ cRxedChar;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cInputIndex++;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00264}00264\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00265}00265\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00267}\doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{00267}}\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{cli_8c_accbe28978ecaf120de26941862df1424}{x\_ping\_command}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString)}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00269}00269\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00270}00270\ \ \ \ \ strncpy(pcWriteBuffer,\ \textcolor{stringliteral}{"{}Pong"{}},\ strlen(\textcolor{stringliteral}{"{}Pong"{}})\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
+\DoxyCodeLine{\Hypertarget{cli_8c_source_l00272}00272\ \}}
 
 \end{DoxyCode}

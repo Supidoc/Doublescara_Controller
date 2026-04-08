@@ -5,6 +5,10 @@
 {\ttfamily \+\#include "{}stdio.\+h"{}}\newline
 {\ttfamily \+\#include "{}math.\+h"{}}\newline
 {\ttfamily \+\#include "{}task\+\_\+helpers.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+ftm.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+gpio.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+port.\+h"{}}\newline
 Include dependency graph for tmc2209.\+c:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -37,6 +41,8 @@ struct \doxymbox{\hyperlink{struct__TMC__HandleArrayItem}{\+\_\+\+TMC\+\_\+\+Han
 \+\#define \doxymbox{\hyperlink{tmc2209_8c_a4882ec884821cfc943288f0a89c7b966}{TMC\+\_\+\+CHOPCONF\+\_\+\+ADDR}}~0x6c
 \item 
 \+\#define \doxymbox{\hyperlink{tmc2209_8c_ac09b5c77478480426679a83e24155821}{TMC\+\_\+\+IHOLD\+\_\+\+IRUN\+\_\+\+ADDR}}~0x10
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209_8c_af729e817251389added7c43069c20dad}{TMC\+\_\+\+PWMCONF\+\_\+\+ADDR}}~0x70
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -52,10 +58,14 @@ typedef struct \doxymbox{\hyperlink{struct__TMC__HandleArrayItem}{\+\_\+\+TMC\+\
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118}{\+\_\+\+TMC\+\_\+\+Command\+Type}} \{ \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede}{TMC\+\_\+\+CMD\+\_\+\+DEFAULT\+\_\+\+INIT}}
+enum \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118}{\+\_\+\+TMC\+\_\+\+Command\+Type}} \{ \newline
+\doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede}{TMC\+\_\+\+CMD\+\_\+\+DEFAULT\+\_\+\+INIT}}
 , \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28}{TMC\+\_\+\+CMD\+\_\+\+SET\+\_\+\+MICROSTEPPING}}
 , \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa}{TMC\+\_\+\+CMD\+\_\+\+SET\+\_\+\+IHOLD\+\_\+\+DIVIDER}}
 , \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3}{TMC\+\_\+\+CMD\+\_\+\+SET\+\_\+\+IRUN\+\_\+\+DIVIDER}}
+, \newline
+\doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498}{TMC\+\_\+\+CMD\+\_\+\+ENABLE\+\_\+\+FREEWHEELING}}
+, \doxymbox{\hyperlink{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753}{TMC\+\_\+\+CMD\+\_\+\+DISABLE\+\_\+\+FREEWHEELING}}
  \}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
@@ -93,22 +103,34 @@ static status\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_a94695ed0efbe527cc9dd513c27
 \item 
 static status\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_abe68bf18e690ee0a0e9badfa372bb2fb}{free\+\_\+handle}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle)
 \item 
+static status\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_af583af27df4f7497ba624330ac4f5534}{send\+\_\+cmd\+\_\+async}} (\doxymbox{\hyperlink{tmc2209_8c_a620acf3b0a063631292095c1f8fb463d}{TMC\+\_\+\+Command\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}queue\+Item, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_aa3a5282a21ae983493ec1f2b99aa0298}{set\+\_\+freewheeling}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline)
+\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga626120616f06e287f92803166d5b38f3}{TMC\+\_\+init}} (void)
 \begin{DoxyCompactList}\small\item\em Initializes the TMC2209 module. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{group__TMC2209__Module_ga4d6999bb2640adbe2a2fce2c6ec570b2}{TMC\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
 \begin{DoxyCompactList}\small\item\em Task function for processing TMC2209 commands. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga8af8a4f06ac58d61065c3558c2d6b80c}{TMC\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaee4ca72fd373cde77461813cd2aa69fc}{TMC\+\_\+set\+\_\+microstepping}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gafe1ec1a11587ddb0b181d1d7b85353dc}{TMC\+\_\+init\+\_\+handle\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaae7d0a36006ff54ead11d8fc09ac3a9b}{TMC\+\_\+set\+\_\+microstepping\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_a450878b308f057bd837991f8d9aef045}{TMC\+\_\+microstepping\+\_\+value\+\_\+to\+\_\+enum}} (uint8\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
 \item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gac5f5a7c8a0624a8224f80955f53a69a7}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint8\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga9b6a1c1f195a63a7e399801731e14b7b}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint16\+\_\+t in, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}out)
 \begin{DoxyCompactList}\small\item\em Converts a uint8\+\_\+t microstepping value to the corresponding enum member. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064}{TMC\+\_\+set\+\_\+ihold\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously via task queue. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce}{TMC\+\_\+set\+\_\+irun\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously via task queue. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga72ae6a8522043103e2878716769f3fd5}{TMC\+\_\+microstepping\+\_\+enum\+\_\+to\+\_\+uint}} (\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} in, uint16\+\_\+t \texorpdfstring{$\ast$}{*}out)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga6d1b55916cc95a8af771c80c836ff7bc}{TMC\+\_\+set\+\_\+ihold\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga747d58dccb7f2e8d339f8e646b6e56d3}{TMC\+\_\+set\+\_\+irun\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd6d97b09da63b808b34df37ad1ad69d}{TMC\+\_\+enable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga99cab501c7202f88a4f3a12520ecb04e}{TMC\+\_\+disable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Disables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd60da6e8f316771a0f91f4edb92b586}{TMC\+\_\+set\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga78b08cc2828dcca1085ed6205332ea08}{TMC\+\_\+current\+\_\+to\+\_\+divider}} (float desired\+\_\+current, \doxymbox{\hyperlink{group__TMC2209__Module_ga81726756d4e5751b52c7841141c8e8b1}{TMC\+\_\+\+Rounding\+Mode\+\_\+t}} rounding, uint8\+\_\+t \texorpdfstring{$\ast$}{*}divider)
 \begin{DoxyCompactList}\small\item\em Converts a desired current to a TMC2209 current divider value. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga64a53e85523cba9e1abb7f7a29baafa4}{TMC\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
@@ -126,7 +148,9 @@ static uint8\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_ae345025d54190b5415d81a39dcc
 \item 
 static \doxymbox{\hyperlink{tmc2209_8c_a9d48c2e045a2e58098dcfa32c46d3a04}{TMC\+\_\+\+Handle\+Array\+Item\+\_\+t}} \doxymbox{\hyperlink{tmc2209_8c_af8b4b6ed3183d6ec3ef726fc684837b8}{tmc\+Handle\+Array}} \+[\doxymbox{\hyperlink{group__TMC2209__Module_ga4e94e6caf9a3151acb26285bb3319b31}{TMC\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
 \item 
-Queue\+Handle\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_afae48cdab5a29c7739f148d0fe03232b}{command\+Queue}} = NULL
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_aeb86091cfe0c5168e3dc293683af1f6b}{cmd\+Queue}} = NULL
+\item 
+static \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \doxymbox{\hyperlink{tmc2209_8c_a42a282fc4308bc5820113b922ec63387}{cmd\+Handles}} \+[\doxymbox{\hyperlink{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c}{TMC\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
 \end{DoxyCompactItemize}
 
 
@@ -141,7 +165,7 @@ Queue\+Handle\+\_\+t \doxymbox{\hyperlink{tmc2209_8c_afae48cdab5a29c7739f148d0fe
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00028}{28}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00032}{32}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a2dc3bd8477966c796448629c740eb740}\index{tmc2209.c@{tmc2209.c}!TMC\_GCONF\_ADDR@{TMC\_GCONF\_ADDR}}
 \index{TMC\_GCONF\_ADDR@{TMC\_GCONF\_ADDR}!tmc2209.c@{tmc2209.c}}
@@ -151,7 +175,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00028}{28}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00025}{25}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00029}{29}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_af33a21c3a075ce4d06cc8f395ecf3f06}\index{tmc2209.c@{tmc2209.c}!TMC\_GSTAT\_ADDR@{TMC\_GSTAT\_ADDR}}
 \index{TMC\_GSTAT\_ADDR@{TMC\_GSTAT\_ADDR}!tmc2209.c@{tmc2209.c}}
@@ -161,7 +185,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00025}{25}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00026}{26}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00030}{30}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a48b1354844c9504660210a6201022a84}\index{tmc2209.c@{tmc2209.c}!TMC\_IFCNT\_ADDR@{TMC\_IFCNT\_ADDR}}
 \index{TMC\_IFCNT\_ADDR@{TMC\_IFCNT\_ADDR}!tmc2209.c@{tmc2209.c}}
@@ -171,7 +195,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00026}{26}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00027}{27}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00031}{31}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_ac09b5c77478480426679a83e24155821}\index{tmc2209.c@{tmc2209.c}!TMC\_IHOLD\_IRUN\_ADDR@{TMC\_IHOLD\_IRUN\_ADDR}}
 \index{TMC\_IHOLD\_IRUN\_ADDR@{TMC\_IHOLD\_IRUN\_ADDR}!tmc2209.c@{tmc2209.c}}
@@ -181,7 +205,17 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00027}{27}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00029}{29}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00033}{33}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{tmc2209_8c_af729e817251389added7c43069c20dad}\index{tmc2209.c@{tmc2209.c}!TMC\_PWMCONF\_ADDR@{TMC\_PWMCONF\_ADDR}}
+\index{TMC\_PWMCONF\_ADDR@{TMC\_PWMCONF\_ADDR}!tmc2209.c@{tmc2209.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_PWMCONF\_ADDR}{TMC\_PWMCONF\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209_8c_af729e817251389added7c43069c20dad} 
+\+\#define TMC\+\_\+\+PWMCONF\+\_\+\+ADDR~0x70}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00034}{34}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_afaa2143bf8dba3429df46c0f202a34aa}\index{tmc2209.c@{tmc2209.c}!TMC\_READ\_PACKAGE\_SIZE@{TMC\_READ\_PACKAGE\_SIZE}}
 \index{TMC\_READ\_PACKAGE\_SIZE@{TMC\_READ\_PACKAGE\_SIZE}!tmc2209.c@{tmc2209.c}}
@@ -191,7 +225,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00029}{29}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00022}{22}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00026}{26}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_aa5fbce7c8c72c01dade0c56084507141}\index{tmc2209.c@{tmc2209.c}!TMC\_WRITE\_PACKAGE\_SIZE@{TMC\_WRITE\_PACKAGE\_SIZE}}
 \index{TMC\_WRITE\_PACKAGE\_SIZE@{TMC\_WRITE\_PACKAGE\_SIZE}!tmc2209.c@{tmc2209.c}}
@@ -201,7 +235,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00022}{22}} of file \
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00023}{23}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00027}{27}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 
 
@@ -268,10 +302,22 @@ TMC\+\_\+\+CMD\+\_\+\+SET\+\_\+\+IHOLD\+\_\+\+DIVIDER&\\
 TMC\+\_\+\+CMD\+\_\+\+SET\+\_\+\+IRUN\+\_\+\+DIVIDER&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TMC\_CMD\_ENABLE\_FREEWHEELING@{TMC\_CMD\_ENABLE\_FREEWHEELING}!tmc2209.c@{tmc2209.c}}
+\index{tmc2209.c@{tmc2209.c}!TMC\_CMD\_ENABLE\_FREEWHEELING@{TMC\_CMD\_ENABLE\_FREEWHEELING}}
+}\Hypertarget{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498}\label{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498} 
+TMC\+\_\+\+CMD\+\_\+\+ENABLE\+\_\+\+FREEWHEELING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TMC\_CMD\_DISABLE\_FREEWHEELING@{TMC\_CMD\_DISABLE\_FREEWHEELING}!tmc2209.c@{tmc2209.c}}
+\index{tmc2209.c@{tmc2209.c}!TMC\_CMD\_DISABLE\_FREEWHEELING@{TMC\_CMD\_DISABLE\_FREEWHEELING}}
+}\Hypertarget{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753}\label{tmc2209_8c_aa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753} 
+TMC\+\_\+\+CMD\+\_\+\+DISABLE\+\_\+\+FREEWHEELING&\\
+\hline
+
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00035}{35}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00040}{40}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 
 
@@ -286,7 +332,7 @@ void build\+\_\+read\+\_\+package (\begin{DoxyParamCaption}\item[{\doxymbox{\hyp
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00962}{962}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01094}{1094}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a42789bba6d69096f4d0a8b35d7b6a796}\index{tmc2209.c@{tmc2209.c}!build\_write\_package@{build\_write\_package}}
 \index{build\_write\_package@{build\_write\_package}!tmc2209.c@{tmc2209.c}}
@@ -296,7 +342,7 @@ void build\+\_\+write\+\_\+package (\begin{DoxyParamCaption}\item[{\doxymbox{\hy
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00976}{976}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01108}{1108}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_aa2fbab212c5d11897ea0d23f41925b77}\index{tmc2209.c@{tmc2209.c}!calc\_CRC@{calc\_CRC}}
 \index{calc\_CRC@{calc\_CRC}!tmc2209.c@{tmc2209.c}}
@@ -306,7 +352,7 @@ void calc\+\_\+\+CRC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstrin
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00932}{932}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01064}{1064}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a45c54b1933b0b8aaa2fdfd63f96a577a}\index{tmc2209.c@{tmc2209.c}!create\_read\_datagram@{create\_read\_datagram}}
 \index{create\_read\_datagram@{create\_read\_datagram}!tmc2209.c@{tmc2209.c}}
@@ -316,7 +362,7 @@ void create\+\_\+read\+\_\+datagram (\begin{DoxyParamCaption}\item[{\doxymbox{\h
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00918}{918}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01050}{1050}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a1ade88d2acb08b0c6c1d1395160ccc79}\index{tmc2209.c@{tmc2209.c}!create\_write\_datagram@{create\_write\_datagram}}
 \index{create\_write\_datagram@{create\_write\_datagram}!tmc2209.c@{tmc2209.c}}
@@ -326,7 +372,7 @@ void create\+\_\+write\+\_\+datagram (\begin{DoxyParamCaption}\item[{\doxymbox{\
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00903}{903}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01035}{1035}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a8574ba0ace7a2ce6bf3f42d112b19e12}\index{tmc2209.c@{tmc2209.c}!dump\_rx\_buffer@{dump\_rx\_buffer}}
 \index{dump\_rx\_buffer@{dump\_rx\_buffer}!tmc2209.c@{tmc2209.c}}
@@ -336,7 +382,7 @@ uint8\+\_\+t dump\+\_\+rx\+\_\+buffer (\begin{DoxyParamCaption}\item[{\doxymbox{
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00994}{994}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01126}{1126}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_abe68bf18e690ee0a0e9badfa372bb2fb}\index{tmc2209.c@{tmc2209.c}!free\_handle@{free\_handle}}
 \index{free\_handle@{free\_handle}!tmc2209.c@{tmc2209.c}}
@@ -346,7 +392,7 @@ status\+\_\+t free\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperl
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00757}{757}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00887}{887}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a50368b2e0c419ead8aad31313f87ad17}\index{tmc2209.c@{tmc2209.c}!init\_handle@{init\_handle}}
 \index{init\_handle@{init\_handle}!tmc2209.c@{tmc2209.c}}
@@ -356,7 +402,7 @@ status\+\_\+t init\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperl
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00632}{632}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00756}{756}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a6ef0387bd645347b1a61efc620315993}\index{tmc2209.c@{tmc2209.c}!process@{process}}
 \index{process@{process}!tmc2209.c@{tmc2209.c}}
@@ -366,7 +412,7 @@ void process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\h
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00464}{464}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00514}{514}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a7f71b39eae5e44cb6054416cd643f686}\index{tmc2209.c@{tmc2209.c}!read@{read}}
 \index{read@{read}!tmc2209.c@{tmc2209.c}}
@@ -376,7 +422,7 @@ status\+\_\+t read (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__T
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00776}{776}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00906}{906}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a396a5d31e19de4ffccb46a1d7a8b7746}\index{tmc2209.c@{tmc2209.c}!read\_transmissioncount@{read\_transmissioncount}}
 \index{read\_transmissioncount@{read\_transmissioncount}!tmc2209.c@{tmc2209.c}}
@@ -386,7 +432,17 @@ status\+\_\+t read\+\_\+transmissioncount (\begin{DoxyParamCaption}\item[{\doxym
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00883}{883}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01015}{1015}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{tmc2209_8c_af583af27df4f7497ba624330ac4f5534}\index{tmc2209.c@{tmc2209.c}!send\_cmd\_async@{send\_cmd\_async}}
+\index{send\_cmd\_async@{send\_cmd\_async}!tmc2209.c@{tmc2209.c}}
+\doxysubsubsection{\texorpdfstring{send\_cmd\_async()}{send\_cmd\_async()}}
+{\footnotesize\ttfamily \label{tmc2209_8c_af583af27df4f7497ba624330ac4f5534} 
+status\+\_\+t send\+\_\+cmd\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{tmc2209_8c_a620acf3b0a063631292095c1f8fb463d}{TMC\+\_\+\+Command\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue\+Item}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00588}{588}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a94695ed0efbe527cc9dd513c27163072}\index{tmc2209.c@{tmc2209.c}!set\_double\_edge\_step\_pulse@{set\_double\_edge\_step\_pulse}}
 \index{set\_double\_edge\_step\_pulse@{set\_double\_edge\_step\_pulse}!tmc2209.c@{tmc2209.c}}
@@ -396,7 +452,17 @@ status\+\_\+t set\+\_\+double\+\_\+edge\+\_\+step\+\_\+pulse (\begin{DoxyParamCa
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00607}{607}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00732}{732}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{tmc2209_8c_aa3a5282a21ae983493ec1f2b99aa0298}\index{tmc2209.c@{tmc2209.c}!set\_freewheeling@{set\_freewheeling}}
+\index{set\_freewheeling@{set\_freewheeling}!tmc2209.c@{tmc2209.c}}
+\doxysubsubsection{\texorpdfstring{set\_freewheeling()}{set\_freewheeling()}}
+{\footnotesize\ttfamily \label{tmc2209_8c_aa3a5282a21ae983493ec1f2b99aa0298} 
+status\+\_\+t set\+\_\+freewheeling (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{enabled}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l01167}{1167}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a25c1b51bcbbea3a851ebffb00ba91821}\index{tmc2209.c@{tmc2209.c}!set\_ihold\_divider@{set\_ihold\_divider}}
 \index{set\_ihold\_divider@{set\_ihold\_divider}!tmc2209.c@{tmc2209.c}}
@@ -406,7 +472,7 @@ status\+\_\+t set\+\_\+ihold\+\_\+divider (\begin{DoxyParamCaption}\item[{\doxym
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00508}{508}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00627}{627}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_ad0c72286ed6e5290a2c6c1bbcfcfbf23}\index{tmc2209.c@{tmc2209.c}!set\_irun\_divider@{set\_irun\_divider}}
 \index{set\_irun\_divider@{set\_irun\_divider}!tmc2209.c@{tmc2209.c}}
@@ -416,7 +482,7 @@ status\+\_\+t set\+\_\+irun\+\_\+divider (\begin{DoxyParamCaption}\item[{\doxymb
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00542}{542}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00663}{663}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_acab94a2889fce90cbbcc4c2a7fcbf7a9}\index{tmc2209.c@{tmc2209.c}!set\_microstepping@{set\_microstepping}}
 \index{set\_microstepping@{set\_microstepping}!tmc2209.c@{tmc2209.c}}
@@ -426,7 +492,7 @@ status\+\_\+t set\+\_\+microstepping (\begin{DoxyParamCaption}\item[{\doxymbox{\
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00577}{577}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00700}{700}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a450878b308f057bd837991f8d9aef045}\index{tmc2209.c@{tmc2209.c}!TMC\_microstepping\_value\_to\_enum@{TMC\_microstepping\_value\_to\_enum}}
 \index{TMC\_microstepping\_value\_to\_enum@{TMC\_microstepping\_value\_to\_enum}!tmc2209.c@{tmc2209.c}}
@@ -436,7 +502,7 @@ status\+\_\+t TMC\+\_\+microstepping\+\_\+value\+\_\+to\+\_\+enum (\begin{DoxyPa
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00221}{221}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00212}{212}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_ad2b296addfa224a3fef137c3fc1ab831}\index{tmc2209.c@{tmc2209.c}!write@{write}}
 \index{write@{write}!tmc2209.c@{tmc2209.c}}
@@ -446,22 +512,32 @@ status\+\_\+t write (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00832}{832}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00963}{963}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 
 
 \label{doc-var-members}
 \Hypertarget{tmc2209_8c_doc-var-members}
 \doxysubsection{Variable Documentation}
-\Hypertarget{tmc2209_8c_afae48cdab5a29c7739f148d0fe03232b}\index{tmc2209.c@{tmc2209.c}!commandQueue@{commandQueue}}
-\index{commandQueue@{commandQueue}!tmc2209.c@{tmc2209.c}}
-\doxysubsubsection{\texorpdfstring{commandQueue}{commandQueue}}
-{\footnotesize\ttfamily \label{tmc2209_8c_afae48cdab5a29c7739f148d0fe03232b} 
-Queue\+Handle\+\_\+t command\+Queue = NULL}
+\Hypertarget{tmc2209_8c_a42a282fc4308bc5820113b922ec63387}\index{tmc2209.c@{tmc2209.c}!cmdHandles@{cmdHandles}}
+\index{cmdHandles@{cmdHandles}!tmc2209.c@{tmc2209.c}}
+\doxysubsubsection{\texorpdfstring{cmdHandles}{cmdHandles}}
+{\footnotesize\ttfamily \label{tmc2209_8c_a42a282fc4308bc5820113b922ec63387} 
+\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} cmd\+Handles\+[\doxymbox{\hyperlink{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c}{TMC\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00127}{127}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00144}{144}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{tmc2209_8c_aeb86091cfe0c5168e3dc293683af1f6b}\index{tmc2209.c@{tmc2209.c}!cmdQueue@{cmdQueue}}
+\index{cmdQueue@{cmdQueue}!tmc2209.c@{tmc2209.c}}
+\doxysubsubsection{\texorpdfstring{cmdQueue}{cmdQueue}}
+{\footnotesize\ttfamily \label{tmc2209_8c_aeb86091cfe0c5168e3dc293683af1f6b} 
+Queue\+Handle\+\_\+t cmd\+Queue = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00142}{142}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_af8b4b6ed3183d6ec3ef726fc684837b8}\index{tmc2209.c@{tmc2209.c}!tmcHandleArray@{tmcHandleArray}}
 \index{tmcHandleArray@{tmcHandleArray}!tmc2209.c@{tmc2209.c}}
@@ -471,7 +547,7 @@ Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00127}{127}} of file 
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00125}{125}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00140}{140}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a656a9fcfb90d26859cffc6a04dc311af}\index{tmc2209.c@{tmc2209.c}!transmit\_read\_package@{transmit\_read\_package}}
 \index{transmit\_read\_package@{transmit\_read\_package}!tmc2209.c@{tmc2209.c}}
@@ -481,7 +557,7 @@ uint8\+\_\+t transmit\+\_\+read\+\_\+package\+[\doxymbox{\hyperlink{tmc2209_8c_a
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00121}{121}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00136}{136}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_a4eb8a305a974cec16a8d4de0595725ee}\index{tmc2209.c@{tmc2209.c}!transmit\_response\_package@{transmit\_response\_package}}
 \index{transmit\_response\_package@{transmit\_response\_package}!tmc2209.c@{tmc2209.c}}
@@ -491,7 +567,7 @@ uint8\+\_\+t transmit\+\_\+response\+\_\+package\+[\doxymbox{\hyperlink{tmc2209_
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00122}{122}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00137}{137}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{tmc2209_8c_ae345025d54190b5415d81a39dcc608df}\index{tmc2209.c@{tmc2209.c}!transmit\_write\_package@{transmit\_write\_package}}
 \index{transmit\_write\_package@{transmit\_write\_package}!tmc2209.c@{tmc2209.c}}
@@ -501,5 +577,5 @@ uint8\+\_\+t transmit\+\_\+write\+\_\+package\+[\doxymbox{\hyperlink{tmc2209_8c_
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00123}{123}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00138}{138}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 

@@ -29,6 +29,7 @@
 #include "tmc2209.h"
 #include "motor.h"
 #include "motorCmd.h"
+#include "pca9555a.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -94,6 +95,11 @@ void APP_init(void)
             ;
     }
     if (MCMD_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (PCA_init() != kStatus_Success)
     {
         while (1)
             ;

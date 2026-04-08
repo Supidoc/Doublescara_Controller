@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: Motor Control Module</title>
+<title>Double Scara: Motor Control Module</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -93,7 +93,7 @@ $(function(){initNavTree('group__MOTOR__Module.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>High-level API for angle-based motor control and safety handling.  
+<p>High-level API for angle-based motor control with emergency stop and freewheeling.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -105,6 +105,10 @@ Classes</h2></td></tr>
 <tr class="memitem:_5FMTR_5FMotorConfig" id="r__5FMTR_5FMotorConfig"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__MTR__MotorConfig.html">_MTR_MotorConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration structure for initializing one motor instance.  <a href="struct__MTR__MotorConfig.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga8e9e66465a230b2f6f9534e94a0f1023" id="r_ga8e9e66465a230b2f6f9534e94a0f1023"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga8e9e66465a230b2f6f9534e94a0f1023">MTR_MAX_CMD_HANDLE_COUNT</a>&#160;&#160;&#160;20</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga8e5d65aeb018ac2da54d039d54cdd31a" id="r_ga8e5d65aeb018ac2da54d039d54cdd31a"><td class="memItemLeft">typedef struct <a class="el" href="struct__MTR__MotorTmcConfig.html">_MTR_MotorTmcConfig</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga8e5d65aeb018ac2da54d039d54cdd31a">MTR_MotorTmcConfig_t</a></td></tr>
@@ -113,8 +117,16 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:ga8a4765221bb1f9d6957ab996f3058368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step generation hardware configuration for one motor.  <br /></td></tr>
 <tr class="memitem:gab7b8f555379b16be12ecb2e6ad2da56b" id="r_gab7b8f555379b16be12ecb2e6ad2da56b"><td class="memItemLeft">typedef struct <a class="el" href="struct__MTR__MotorConfig.html">_MTR_MotorConfig</a>&#160;</td><td class="memItemRight"><a class="el" href="#gab7b8f555379b16be12ecb2e6ad2da56b">MTR_MotorConfig_t</a></td></tr>
 <tr class="memdesc:gab7b8f555379b16be12ecb2e6ad2da56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration structure for initializing one motor instance.  <br /></td></tr>
+<tr class="memitem:ga5142605594253bb6c632b95c962216ea" id="r_ga5142605594253bb6c632b95c962216ea"><td class="memItemLeft">typedef enum <a class="el" href="#ga7bf26db923eb70b2a9ef666ee947cd4c">_MTR_roundingMethod</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga5142605594253bb6c632b95c962216ea">MTR_roundingMethod_t</a></td></tr>
 <tr class="memitem:ga80cb43273307560ca13a8df4797c8f54" id="r_ga80cb43273307560ca13a8df4797c8f54"><td class="memItemLeft">typedef struct <a class="el" href="struct__MTR__MotorHandleImpl.html">_MTR_MotorHandleImpl</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td></tr>
 <tr class="memdesc:ga80cb43273307560ca13a8df4797c8f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque handle type for motor control instances.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga7bf26db923eb70b2a9ef666ee947cd4c" id="r_ga7bf26db923eb70b2a9ef666ee947cd4c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ga7bf26db923eb70b2a9ef666ee947cd4c">_MTR_roundingMethod</a> { <a class="el" href="#gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488">ROUND_DOWN</a>
+, <a class="el" href="#gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086">ROUND_UP</a>
+, <a class="el" href="#gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff">ROUND_NEAREST</a>
+ }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -122,47 +134,70 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga494ccfe2699411bf54f0724b59a6f7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">FreeRTOS task entry for the motor control module.  <br /></td></tr>
 <tr class="memitem:ga78bd18ddbc517b9abafa26907d7024b7" id="r_ga78bd18ddbc517b9abafa26907d7024b7"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga78bd18ddbc517b9abafa26907d7024b7">MTR_init</a> (void)</td></tr>
 <tr class="memdesc:ga78bd18ddbc517b9abafa26907d7024b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the motor module infrastructure.  <br /></td></tr>
-<tr class="memitem:gabf251484d458e43c16a4227c9543cd3b" id="r_gabf251484d458e43c16a4227c9543cd3b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gabf251484d458e43c16a4227c9543cd3b">MTR_init_handle</a> (const <a class="el" href="#gab7b8f555379b16be12ecb2e6ad2da56b">MTR_MotorConfig_t</a> config, TickType_t deadline)</td></tr>
-<tr class="memdesc:gabf251484d458e43c16a4227c9543cd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and initializes a motor handle from configuration.  <br /></td></tr>
+<tr class="memitem:ga7009cc4a4c8e9292f0d9b72c0ed96f59" id="r_ga7009cc4a4c8e9292f0d9b72c0ed96f59"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga7009cc4a4c8e9292f0d9b72c0ed96f59">MTR_init_handle_async</a> (const <a class="el" href="#gab7b8f555379b16be12ecb2e6ad2da56b">MTR_MotorConfig_t</a> config, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga7009cc4a4c8e9292f0d9b72c0ed96f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and initializes a motor handle from configuration.  <br /></td></tr>
 <tr class="memitem:gac4e0046683c4e47f0ce912ba0e161c5c" id="r_gac4e0046683c4e47f0ce912ba0e161c5c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gac4e0046683c4e47f0ce912ba0e161c5c">MTR_get_motor_by_label</a> (const char *label, <a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *handle)</td></tr>
 <tr class="memdesc:gac4e0046683c4e47f0ce912ba0e161c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a motor handle by its label.  <br /></td></tr>
-<tr class="memitem:gae68f48d296a50522530e07b59b297d50" id="r_gae68f48d296a50522530e07b59b297d50"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gae68f48d296a50522530e07b59b297d50">MTR_move_angle</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle, TickType_t deadline)</td></tr>
-<tr class="memdesc:gae68f48d296a50522530e07b59b297d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands a relative angular movement.  <br /></td></tr>
-<tr class="memitem:ga302f010ac6e1765a66e1cae99e9e9b90" id="r_ga302f010ac6e1765a66e1cae99e9e9b90"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga302f010ac6e1765a66e1cae99e9e9b90">MTR_move_absolute_angle</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga302f010ac6e1765a66e1cae99e9e9b90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands movement to an absolute output angle.  <br /></td></tr>
-<tr class="memitem:ga56fc79dd3588de5e1bf2c4f692729726" id="r_ga56fc79dd3588de5e1bf2c4f692729726"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga56fc79dd3588de5e1bf2c4f692729726">MTR_move_revolutions</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double revolutions, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga56fc79dd3588de5e1bf2c4f692729726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands a relative movement in revolutions.  <br /></td></tr>
-<tr class="memitem:ga8cbbba9920235dca255b9b4f87b76a5f" id="r_ga8cbbba9920235dca255b9b4f87b76a5f"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga8cbbba9920235dca255b9b4f87b76a5f">MTR_set_velocity</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double velocity_deg_per_sec, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga8cbbba9920235dca255b9b4f87b76a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets motor target velocity.  <br /></td></tr>
-<tr class="memitem:ga896850ef24808712726a0d9b8d8747c1" id="r_ga896850ef24808712726a0d9b8d8747c1"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga896850ef24808712726a0d9b8d8747c1">MTR_set_acceleration</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double acceleration_deg_per_sec2, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga896850ef24808712726a0d9b8d8747c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets motor acceleration.  <br /></td></tr>
-<tr class="memitem:ga7884f102317dd28048723fee04ec6975" id="r_ga7884f102317dd28048723fee04ec6975"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga7884f102317dd28048723fee04ec6975">MTR_stop</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, bool decelerate, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga7884f102317dd28048723fee04ec6975"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops ongoing motion.  <br /></td></tr>
+<tr class="memitem:gae07d0c0a3f59090e8ae923b2bdcc903d" id="r_gae07d0c0a3f59090e8ae923b2bdcc903d"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gae07d0c0a3f59090e8ae923b2bdcc903d">MTR_move_angle_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gae07d0c0a3f59090e8ae923b2bdcc903d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands a relative angular movement.  <br /></td></tr>
+<tr class="memitem:gaeb9d12348ad1da49d32b93f34b91c043" id="r_gaeb9d12348ad1da49d32b93f34b91c043"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaeb9d12348ad1da49d32b93f34b91c043">MTR_move_absolute_angle_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gaeb9d12348ad1da49d32b93f34b91c043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands movement to an absolute output angle.  <br /></td></tr>
+<tr class="memitem:ga3870ad87b3c15583d72b8e189f325c1a" id="r_ga3870ad87b3c15583d72b8e189f325c1a"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga3870ad87b3c15583d72b8e189f325c1a">MTR_move_revolutions_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double revolutions, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga3870ad87b3c15583d72b8e189f325c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commands a relative movement in revolutions.  <br /></td></tr>
+<tr class="memitem:ga6a0e41d4cad8560a57e9cfa4df237fa0" id="r_ga6a0e41d4cad8560a57e9cfa4df237fa0"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga6a0e41d4cad8560a57e9cfa4df237fa0">MTR_set_velocity_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double velocity_deg_per_sec, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga6a0e41d4cad8560a57e9cfa4df237fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets motor target velocity.  <br /></td></tr>
+<tr class="memitem:gaf0f0ade5dd355458856a96f350015c29" id="r_gaf0f0ade5dd355458856a96f350015c29"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaf0f0ade5dd355458856a96f350015c29">MTR_set_acceleration_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double acceleration_deg_per_sec2, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gaf0f0ade5dd355458856a96f350015c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets motor acceleration.  <br /></td></tr>
+<tr class="memitem:gac8522b73d36c87529869867a00ce156b" id="r_gac8522b73d36c87529869867a00ce156b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gac8522b73d36c87529869867a00ce156b">MTR_stop_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, bool decelerate, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gac8522b73d36c87529869867a00ce156b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops ongoing motion.  <br /></td></tr>
 <tr class="memitem:gaa51d8115cce00df1b0ec80007caaa73b" id="r_gaa51d8115cce00df1b0ec80007caaa73b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa51d8115cce00df1b0ec80007caaa73b">MTR_emergency_stop</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle)</td></tr>
 <tr class="memdesc:gaa51d8115cce00df1b0ec80007caaa73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers emergency stop for the motor subsystem.  <br /></td></tr>
 <tr class="memitem:ga838ccbc335d1e72d3499bd5c11de244b" id="r_ga838ccbc335d1e72d3499bd5c11de244b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga838ccbc335d1e72d3499bd5c11de244b">MTR_clear_emergency_stop</a> (void)</td></tr>
 <tr class="memdesc:ga838ccbc335d1e72d3499bd5c11de244b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the global emergency-stop latch.  <br /></td></tr>
 <tr class="memitem:ga9b08e661f73cbeb7f005f6c7e7803adb" id="r_ga9b08e661f73cbeb7f005f6c7e7803adb"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9b08e661f73cbeb7f005f6c7e7803adb">MTR_is_emergency_stop_active</a> (void)</td></tr>
 <tr class="memdesc:ga9b08e661f73cbeb7f005f6c7e7803adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether emergency stop is currently active.  <br /></td></tr>
-<tr class="memitem:gaec2fc35006e4449e96d11e663002d6a4" id="r_gaec2fc35006e4449e96d11e663002d6a4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaec2fc35006e4449e96d11e663002d6a4">MTR_get_current_angle</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double *angle, TickType_t deadline)</td></tr>
-<tr class="memdesc:gaec2fc35006e4449e96d11e663002d6a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the current mechanical output angle.  <br /></td></tr>
-<tr class="memitem:ga9c788c1e551e9e5e14dfb9be9e95f484" id="r_ga9c788c1e551e9e5e14dfb9be9e95f484"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9c788c1e551e9e5e14dfb9be9e95f484">MTR_get_movement_state</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, <a class="el" href="group__STEP__Module.html#ga7ee0dad77eb682a2ea7cdb8f97d02827">STP_MovementState_t</a> *state, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga9c788c1e551e9e5e14dfb9be9e95f484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current low-level movement state.  <br /></td></tr>
-<tr class="memitem:ga13335428d208db0545c7dafcbbf57b34" id="r_ga13335428d208db0545c7dafcbbf57b34"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga13335428d208db0545c7dafcbbf57b34">MTR_wait_until_stopped</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga13335428d208db0545c7dafcbbf57b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until the motor is stopped or timeout expires.  <br /></td></tr>
-<tr class="memitem:gaa69b5146e0656c2f170ff33a68c7d104" id="r_gaa69b5146e0656c2f170ff33a68c7d104"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa69b5146e0656c2f170ff33a68c7d104">MTR_set_home_position</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, TickType_t deadline)</td></tr>
-<tr class="memdesc:gaa69b5146e0656c2f170ff33a68c7d104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets current position as home reference.  <br /></td></tr>
-<tr class="memitem:ga2cfb0296ca1aed7a4800e3dcf5f99407" id="r_ga2cfb0296ca1aed7a4800e3dcf5f99407"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga2cfb0296ca1aed7a4800e3dcf5f99407">MTR_synchronized_move</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *<a class="el" href="step_8c.html#a53e76081d475aef890072a6c88aa3c64">handles</a>, double *angles, uint8_t count, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga2cfb0296ca1aed7a4800e3dcf5f99407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a synchronized multi-motor move.  <br /></td></tr>
-<tr class="memitem:ga37093ece16c8b809c20dcecabaf97fe4" id="r_ga37093ece16c8b809c20dcecabaf97fe4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga37093ece16c8b809c20dcecabaf97fe4">MTR_set_run_current</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double current_a, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga37093ece16c8b809c20dcecabaf97fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets TMC2209 run current for a motor.  <br /></td></tr>
-<tr class="memitem:gab0e61e1f0e79b5357260bb7a9bf935a2" id="r_gab0e61e1f0e79b5357260bb7a9bf935a2"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gab0e61e1f0e79b5357260bb7a9bf935a2">MTR_set_hold_current</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double current_a, TickType_t deadline)</td></tr>
-<tr class="memdesc:gab0e61e1f0e79b5357260bb7a9bf935a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets TMC2209 hold current for a motor.  <br /></td></tr>
+<tr class="memitem:ga4cbcc1ea7daeb1461064b7d8099a7310" id="r_ga4cbcc1ea7daeb1461064b7d8099a7310"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4cbcc1ea7daeb1461064b7d8099a7310">MTR_get_current_angle_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double *angle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga4cbcc1ea7daeb1461064b7d8099a7310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the current mechanical output angle.  <br /></td></tr>
+<tr class="memitem:ga0b8329ac04e5afd02a6f20c28772f0ac" id="r_ga0b8329ac04e5afd02a6f20c28772f0ac"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga0b8329ac04e5afd02a6f20c28772f0ac">MTR_get_movement_state_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, <a class="el" href="group__STEP__Module.html#ga7ee0dad77eb682a2ea7cdb8f97d02827">STP_MovementState_t</a> *state, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga0b8329ac04e5afd02a6f20c28772f0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current low-level movement state.  <br /></td></tr>
+<tr class="memitem:ga049b859f9d4ecbd0557d6e60f3a8ab74" id="r_ga049b859f9d4ecbd0557d6e60f3a8ab74"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga049b859f9d4ecbd0557d6e60f3a8ab74">MTR_set_home_position_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga049b859f9d4ecbd0557d6e60f3a8ab74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets current position as home reference.  <br /></td></tr>
+<tr class="memitem:gac063677845dc352c6e8e7dabdcef877a" id="r_gac063677845dc352c6e8e7dabdcef877a"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gac063677845dc352c6e8e7dabdcef877a">MTR_synchronized_move_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *<a class="el" href="step_8c.html#a53e76081d475aef890072a6c88aa3c64">handles</a>, double *angles, uint8_t count, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gac063677845dc352c6e8e7dabdcef877a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a synchronized multi-motor move.  <br /></td></tr>
+<tr class="memitem:ga7e8ab79232046dc6cbca0c39f59a40e1" id="r_ga7e8ab79232046dc6cbca0c39f59a40e1"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga7e8ab79232046dc6cbca0c39f59a40e1">MTR_set_run_current_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double current_a, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga7e8ab79232046dc6cbca0c39f59a40e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets TMC2209 run current for a motor.  <br /></td></tr>
+<tr class="memitem:ga09694cd4ea1715b1860d671cbd53039c" id="r_ga09694cd4ea1715b1860d671cbd53039c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga09694cd4ea1715b1860d671cbd53039c">MTR_set_hold_current_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double current_a, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga09694cd4ea1715b1860d671cbd53039c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets TMC2209 hold current for a motor.  <br /></td></tr>
+<tr class="memitem:gad959cd5529058e79916b8c7fd325f0db" id="r_gad959cd5529058e79916b8c7fd325f0db"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#gad959cd5529058e79916b8c7fd325f0db">MTR_steps_to_angle</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, int32_t steps)</td></tr>
+<tr class="memdesc:gad959cd5529058e79916b8c7fd325f0db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts step count to mechanical angle.  <br /></td></tr>
+<tr class="memitem:gad8b2b14707e03211ba090e859648005f" id="r_gad8b2b14707e03211ba090e859648005f"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#gad8b2b14707e03211ba090e859648005f">MTR_angle_to_steps</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle, <a class="el" href="#ga5142605594253bb6c632b95c962216ea">MTR_roundingMethod_t</a> method)</td></tr>
+<tr class="memdesc:gad8b2b14707e03211ba090e859648005f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts angle to step count using specified rounding method.  <br /></td></tr>
+<tr class="memitem:ga1e5a922e5179e5967f6dda1070a30f51" id="r_ga1e5a922e5179e5967f6dda1070a30f51"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1e5a922e5179e5967f6dda1070a30f51">MTR_enable_freewheeling_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga1e5a922e5179e5967f6dda1070a30f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables freewheeling mode for a motor.  <br /></td></tr>
+<tr class="memitem:ga9bf924638a855afd88622e4f45a5ad26" id="r_ga9bf924638a855afd88622e4f45a5ad26"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9bf924638a855afd88622e4f45a5ad26">MTR_disable_freewheeling_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga9bf924638a855afd88622e4f45a5ad26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables freewheeling mode and restores normal operation.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>High-level API for angle-based motor control and safety handling. </p>
-<p>The motor module combines stepper movement control and TMC2209 configuration into one abstraction per motor. All kinematic commands are expressed in mechanical units (degree, degree/s, degree/s^2, revolutions) and translated internally to step-domain operations. </p>
-</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<div class="textblock"><p>High-level API for angle-based motor control with emergency stop and freewheeling. </p>
+<p>The motor module combines stepper movement control and TMC2209 configuration into one abstraction per motor. All kinematic commands are expressed in mechanical units (degree, degree/s, degree/s^2, revolutions) and translated internally to step-domain operations. Supports synchronized control of multiple motors for SCARA kinematic chains, emergency stop interrupt with latch mechanism, and freewheeling mode for gravity-driven motion. </p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="ga8e9e66465a230b2f6f9534e94a0f1023" name="ga8e9e66465a230b2f6f9534e94a0f1023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e9e66465a230b2f6f9534e94a0f1023">&#9670;&#160;</a></span>MTR_MAX_CMD_HANDLE_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MTR_MAX_CMD_HANDLE_COUNT&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="motor_8h_source.html#l00046">46</a> of file <a class="el" href="motor_8h_source.html">motor.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="gab7b8f555379b16be12ecb2e6ad2da56b" name="gab7b8f555379b16be12ecb2e6ad2da56b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab7b8f555379b16be12ecb2e6ad2da56b">&#9670;&#160;</a></span>MTR_MotorConfig_t</h2>
 
@@ -194,7 +229,7 @@ Functions</h2></td></tr>
 
 <p>Opaque handle type for motor control instances. </p>
 
-<p class="definition">Definition at line <a class="el" href="motor_8h_source.html#l00097">97</a> of file <a class="el" href="motor_8h_source.html">motor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8h_source.html#l00109">109</a> of file <a class="el" href="motor_8h_source.html">motor.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +265,82 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga5142605594253bb6c632b95c962216ea" name="ga5142605594253bb6c632b95c962216ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5142605594253bb6c632b95c962216ea">&#9670;&#160;</a></span>MTR_roundingMethod_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="#ga7bf26db923eb70b2a9ef666ee947cd4c">_MTR_roundingMethod</a> <a class="el" href="#ga5142605594253bb6c632b95c962216ea">MTR_roundingMethod_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga7bf26db923eb70b2a9ef666ee947cd4c" name="ga7bf26db923eb70b2a9ef666ee947cd4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7bf26db923eb70b2a9ef666ee947cd4c">&#9670;&#160;</a></span>_MTR_roundingMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ga7bf26db923eb70b2a9ef666ee947cd4c">_MTR_roundingMethod</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488" name="gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488"></a>ROUND_DOWN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086" name="gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086"></a>ROUND_UP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff" name="gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff"></a>ROUND_NEAREST&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="motor_8h_source.html#l00099">99</a> of file <a class="el" href="motor_8h_source.html">motor.h</a>.</p>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="gad8b2b14707e03211ba090e859648005f" name="gad8b2b14707e03211ba090e859648005f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad8b2b14707e03211ba090e859648005f">&#9670;&#160;</a></span>MTR_angle_to_steps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t MTR_angle_to_steps </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ga5142605594253bb6c632b95c962216ea">MTR_roundingMethod_t</a></td>          <td class="paramname"><span class="paramname"><em>method</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts angle to step count using specified rounding method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle (used to access configuration). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>Angle in degree to convert. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">method</td><td>Rounding method for fractional steps (ROUND_DOWN, ROUND_UP, ROUND_NEAREST).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Equivalent step count after applying the rounding method. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00590">590</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+
+</div>
+</div>
 <a id="ga838ccbc335d1e72d3499bd5c11de244b" name="ga838ccbc335d1e72d3499bd5c11de244b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga838ccbc335d1e72d3499bd5c11de244b">&#9670;&#160;</a></span>MTR_clear_emergency_stop()</h2>
 
@@ -249,7 +359,47 @@ Functions</h2></td></tr>
 <p>Clears the global emergency-stop latch. </p>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if emergency stop was cleared. kStatus_Fail if clearing failed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00522">522</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00440">440</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+
+</div>
+</div>
+<a id="ga9bf924638a855afd88622e4f45a5ad26" name="ga9bf924638a855afd88622e4f45a5ad26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9bf924638a855afd88622e4f45a5ad26">&#9670;&#160;</a></span>MTR_disable_freewheeling_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t MTR_disable_freewheeling_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disables freewheeling mode and restores normal operation. </p>
+<p>Restores the motor's previous hold current and automatically homes the motor to establish position reference after freewheeling.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if freewheeling was disabled and motor was homed successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00574">574</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
@@ -277,18 +427,58 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if emergency stop was triggered. kStatus_Fail if the command could not be processed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00505">505</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00422">422</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="gaec2fc35006e4449e96d11e663002d6a4" name="gaec2fc35006e4449e96d11e663002d6a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaec2fc35006e4449e96d11e663002d6a4">&#9670;&#160;</a></span>MTR_get_current_angle()</h2>
+<a id="ga1e5a922e5179e5967f6dda1070a30f51" name="ga1e5a922e5179e5967f6dda1070a30f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e5a922e5179e5967f6dda1070a30f51">&#9670;&#160;</a></span>MTR_enable_freewheeling_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_get_current_angle </td>
+          <td class="memname">status_t MTR_enable_freewheeling_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables freewheeling mode for a motor. </p>
+<p>In freewheeling mode, the motor coils are deenergized (hold current set to 0), allowing the motor shaft to rotate freely. Previous hold current is saved for restoration. After exiting freewheeling mode, the motor must be homed to establish position reference.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if freewheeling was enabled successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00558">558</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+
+</div>
+</div>
+<a id="ga4cbcc1ea7daeb1461064b7d8099a7310" name="ga4cbcc1ea7daeb1461064b7d8099a7310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4cbcc1ea7daeb1461064b7d8099a7310">&#9670;&#160;</a></span>MTR_get_current_angle_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t MTR_get_current_angle_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -300,7 +490,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -310,13 +505,14 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">angle</td><td>Pointer receiving the current angle in degree. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for query completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for query completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if angle was read successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00534">534</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00452">452</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
@@ -348,18 +544,18 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00276">276</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00297">297</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga9c788c1e551e9e5e14dfb9be9e95f484" name="ga9c788c1e551e9e5e14dfb9be9e95f484"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9c788c1e551e9e5e14dfb9be9e95f484">&#9670;&#160;</a></span>MTR_get_movement_state()</h2>
+<a id="ga0b8329ac04e5afd02a6f20c28772f0ac" name="ga0b8329ac04e5afd02a6f20c28772f0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0b8329ac04e5afd02a6f20c28772f0ac">&#9670;&#160;</a></span>MTR_get_movement_state_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_get_movement_state </td>
+          <td class="memname">status_t MTR_get_movement_state_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -371,7 +567,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -381,13 +577,13 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">state</td><td>Pointer receiving current movement state. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for query completion.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if state was read successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00568">568</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00469">469</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
@@ -410,25 +606,30 @@ Functions</h2></td></tr>
 <p>Must be called before creating motor handles or issuing motor commands.</p>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if initialization succeeded. kStatus_Fail if initialization failed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00228">228</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00259">259</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="gabf251484d458e43c16a4227c9543cd3b" name="gabf251484d458e43c16a4227c9543cd3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf251484d458e43c16a4227c9543cd3b">&#9670;&#160;</a></span>MTR_init_handle()</h2>
+<a id="ga7009cc4a4c8e9292f0d9b72c0ed96f59" name="ga7009cc4a4c8e9292f0d9b72c0ed96f59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7009cc4a4c8e9292f0d9b72c0ed96f59">&#9670;&#160;</a></span>MTR_init_handle_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_init_handle </td>
+          <td class="memname">status_t MTR_init_handle_async </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="#gab7b8f555379b16be12ecb2e6ad2da56b">MTR_MotorConfig_t</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -437,13 +638,14 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>Complete motor configuration. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the handle was created successfully. kStatus_Fail on invalid parameters, timeout, or initialization failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00247">247</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00280">280</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
@@ -465,18 +667,18 @@ Functions</h2></td></tr>
 <p>Indicates whether emergency stop is currently active. </p>
 <dl class="section return"><dt>Returns</dt><dd>Non-zero if emergency stop is active, otherwise 0. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00529">529</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00447">447</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga302f010ac6e1765a66e1cae99e9e9b90" name="ga302f010ac6e1765a66e1cae99e9e9b90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga302f010ac6e1765a66e1cae99e9e9b90">&#9670;&#160;</a></span>MTR_move_absolute_angle()</h2>
+<a id="gaeb9d12348ad1da49d32b93f34b91c043" name="gaeb9d12348ad1da49d32b93f34b91c043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeb9d12348ad1da49d32b93f34b91c043">&#9670;&#160;</a></span>MTR_move_absolute_angle_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_move_absolute_angle </td>
+          <td class="memname">status_t MTR_move_absolute_angle_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -488,7 +690,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -498,24 +705,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>Absolute destination angle in degree. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is accepted. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00333">333</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00337">337</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="gae68f48d296a50522530e07b59b297d50" name="gae68f48d296a50522530e07b59b297d50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae68f48d296a50522530e07b59b297d50">&#9670;&#160;</a></span>MTR_move_angle()</h2>
+<a id="gae07d0c0a3f59090e8ae923b2bdcc903d" name="gae07d0c0a3f59090e8ae923b2bdcc903d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae07d0c0a3f59090e8ae923b2bdcc903d">&#9670;&#160;</a></span>MTR_move_angle_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_move_angle </td>
+          <td class="memname">status_t MTR_move_angle_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -527,7 +735,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -537,24 +750,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angle</td><td>Relative angle in degree (signed). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is accepted. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00299">299</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00320">320</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga56fc79dd3588de5e1bf2c4f692729726" name="ga56fc79dd3588de5e1bf2c4f692729726"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga56fc79dd3588de5e1bf2c4f692729726">&#9670;&#160;</a></span>MTR_move_revolutions()</h2>
+<a id="ga3870ad87b3c15583d72b8e189f325c1a" name="ga3870ad87b3c15583d72b8e189f325c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3870ad87b3c15583d72b8e189f325c1a">&#9670;&#160;</a></span>MTR_move_revolutions_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_move_revolutions </td>
+          <td class="memname">status_t MTR_move_revolutions_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -566,7 +780,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -576,24 +795,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">revolutions</td><td>Relative number of revolutions (signed). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is accepted. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00367">367</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00354">354</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga896850ef24808712726a0d9b8d8747c1" name="ga896850ef24808712726a0d9b8d8747c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga896850ef24808712726a0d9b8d8747c1">&#9670;&#160;</a></span>MTR_set_acceleration()</h2>
+<a id="gaf0f0ade5dd355458856a96f350015c29" name="gaf0f0ade5dd355458856a96f350015c29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0f0ade5dd355458856a96f350015c29">&#9670;&#160;</a></span>MTR_set_acceleration_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_set_acceleration </td>
+          <td class="memname">status_t MTR_set_acceleration_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -605,7 +825,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -615,24 +840,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">acceleration_deg_per_sec2</td><td>Target acceleration in degree/s^2. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if acceleration was applied. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00436">436</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00388">388</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="gab0e61e1f0e79b5357260bb7a9bf935a2" name="gab0e61e1f0e79b5357260bb7a9bf935a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab0e61e1f0e79b5357260bb7a9bf935a2">&#9670;&#160;</a></span>MTR_set_hold_current()</h2>
+<a id="ga09694cd4ea1715b1860d671cbd53039c" name="ga09694cd4ea1715b1860d671cbd53039c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga09694cd4ea1715b1860d671cbd53039c">&#9670;&#160;</a></span>MTR_set_hold_current_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_set_hold_current </td>
+          <td class="memname">status_t MTR_set_hold_current_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -644,7 +870,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -654,31 +885,32 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">current_a</td><td>Hold current in ampere. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if current was updated successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00740">740</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00541">541</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="gaa69b5146e0656c2f170ff33a68c7d104" name="gaa69b5146e0656c2f170ff33a68c7d104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa69b5146e0656c2f170ff33a68c7d104">&#9670;&#160;</a></span>MTR_set_home_position()</h2>
+<a id="ga049b859f9d4ecbd0557d6e60f3a8ab74" name="ga049b859f9d4ecbd0557d6e60f3a8ab74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga049b859f9d4ecbd0557d6e60f3a8ab74">&#9670;&#160;</a></span>MTR_set_home_position_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_set_home_position </td>
+          <td class="memname">status_t MTR_set_home_position_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -687,24 +919,24 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if home position is set. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00636">636</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00488">488</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga37093ece16c8b809c20dcecabaf97fe4" name="ga37093ece16c8b809c20dcecabaf97fe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga37093ece16c8b809c20dcecabaf97fe4">&#9670;&#160;</a></span>MTR_set_run_current()</h2>
+<a id="ga7e8ab79232046dc6cbca0c39f59a40e1" name="ga7e8ab79232046dc6cbca0c39f59a40e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e8ab79232046dc6cbca0c39f59a40e1">&#9670;&#160;</a></span>MTR_set_run_current_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_set_run_current </td>
+          <td class="memname">status_t MTR_set_run_current_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -716,7 +948,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -726,24 +963,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">current_a</td><td>Run current in ampere. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if current was updated successfully. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00706">706</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00524">524</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga8cbbba9920235dca255b9b4f87b76a5f" name="ga8cbbba9920235dca255b9b4f87b76a5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8cbbba9920235dca255b9b4f87b76a5f">&#9670;&#160;</a></span>MTR_set_velocity()</h2>
+<a id="ga6a0e41d4cad8560a57e9cfa4df237fa0" name="ga6a0e41d4cad8560a57e9cfa4df237fa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6a0e41d4cad8560a57e9cfa4df237fa0">&#9670;&#160;</a></span>MTR_set_velocity_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_set_velocity </td>
+          <td class="memname">status_t MTR_set_velocity_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -755,7 +993,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -765,24 +1008,58 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">velocity_deg_per_sec</td><td>Target velocity in degree/s. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if velocity was applied. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00401">401</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00371">371</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga7884f102317dd28048723fee04ec6975" name="ga7884f102317dd28048723fee04ec6975"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7884f102317dd28048723fee04ec6975">&#9670;&#160;</a></span>MTR_stop()</h2>
+<a id="gad959cd5529058e79916b8c7fd325f0db" name="gad959cd5529058e79916b8c7fd325f0db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad959cd5529058e79916b8c7fd325f0db">&#9670;&#160;</a></span>MTR_steps_to_angle()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_stop </td>
+          <td class="memname">double MTR_steps_to_angle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>steps</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts step count to mechanical angle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle (used to access configuration). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">steps</td><td>Step count to convert.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Equivalent angle in degree. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00595">595</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+
+</div>
+</div>
+<a id="gac8522b73d36c87529869867a00ce156b" name="gac8522b73d36c87529869867a00ce156b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac8522b73d36c87529869867a00ce156b">&#9670;&#160;</a></span>MTR_stop_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t MTR_stop_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -794,7 +1071,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -804,24 +1086,25 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">decelerate</td><td>If true, perform controlled deceleration; otherwise stop immediately. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for command completion. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if stop command was accepted. kStatus_Fail on invalid parameters, queue errors, or timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00471">471</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00405">405</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
-<a id="ga2cfb0296ca1aed7a4800e3dcf5f99407" name="ga2cfb0296ca1aed7a4800e3dcf5f99407"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2cfb0296ca1aed7a4800e3dcf5f99407">&#9670;&#160;</a></span>MTR_synchronized_move()</h2>
+<a id="gac063677845dc352c6e8e7dabdcef877a" name="gac063677845dc352c6e8e7dabdcef877a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac063677845dc352c6e8e7dabdcef877a">&#9670;&#160;</a></span>MTR_synchronized_move_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t MTR_synchronized_move </td>
+          <td class="memname">status_t MTR_synchronized_move_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>handles</em></span>, </td>
         </tr>
@@ -838,7 +1121,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -849,13 +1137,14 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="step_8c.html#a53e76081d475aef890072a6c88aa3c64">handles</a></td><td>Array of motor handles. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angles</td><td>Array of relative target angles in degree. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>Number of elements in handles/angles. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for synchronization trigger.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum time to wait for synchronization trigger. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Command handle for waiting/checking command completion.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if all moves are prepared and triggered successfully. kStatus_Fail if any preparation/trigger step fails or deadline expires. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00669">669</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00505">505</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>
@@ -883,40 +1172,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00217">217</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
-
-</div>
-</div>
-<a id="ga13335428d208db0545c7dafcbbf57b34" name="ga13335428d208db0545c7dafcbbf57b34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga13335428d208db0545c7dafcbbf57b34">&#9670;&#160;</a></span>MTR_wait_until_stopped()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">status_t MTR_wait_until_stopped </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Blocks until the motor is stopped or timeout expires. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Maximum wait time.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the motor reached a stopped/idle state. kStatus_Fail if timeout occurs or an error is detected. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00603">603</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor_8c_source.html#l00248">248</a> of file <a class="el" href="motor_8c_source.html">motor.c</a>.</p>
 
 </div>
 </div>

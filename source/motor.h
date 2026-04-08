@@ -1,23 +1,27 @@
 /************************************************************
  * @file    motor.h
- * @brief   High-level motor control interface
+ * @brief   High-level motor control interface with emergency stop and freewheeling
  *
  * This module provides a high-level API for controlling stepper-driven motors
  * in mechanical units (angle and revolutions). It wraps the low-level step
  * generation and TMC2209 driver configuration modules and exposes task-safe
- * operations for movement, state monitoring, and safety handling.
+ * operations for movement, state monitoring, and safety handling. Supports two-motor
+ * synchronized movement for SCARA applications, emergency stop functionality, and
+ * motor freewheeling mode for free-spinning operation.
  * @author  dg
- * @date    2 Mar 2026
+ * @date    6 Apr 2026
  ************************************************************/
 
 /**
  * @defgroup MOTOR_Module Motor Control Module
- * @brief   High-level API for angle-based motor control and safety handling
+ * @brief   High-level API for angle-based motor control with emergency stop and freewheeling
  *
  * The motor module combines stepper movement control and TMC2209 configuration
  * into one abstraction per motor. All kinematic commands are expressed in
  * mechanical units (degree, degree/s, degree/s^2, revolutions) and translated
- * internally to step-domain operations.
+ * internally to step-domain operations. Supports synchronized control of multiple
+ * motors for SCARA kinematic chains, emergency stop interrupt with latch mechanism,
+ * and freewheeling mode for gravity-driven motion.
  *
  * @{
  */
@@ -33,6 +37,7 @@
 #include "fsl_ftm.h"
 #include "fsl_gpio.h"
 #include "fsl_port.h"
+#include "pca9555a.h"
 
 /***********************************
  *     Public Macros / Defines     *
@@ -66,12 +71,8 @@ typedef struct _MTR_MotorStepperConfig
     PORT_Type* stepPort;           /**< PORT module for step pin mux control */
     GPIO_Type* stepGPIO;           /**< GPIO module for step pin */
     uint8_t    stepPin;            /**< Step output pin number */
-    port_mux_t stepMuxFTM;         /**< Pin mux value for FTM mode */
-    port_mux_t stepMuxGPIO;        /**< Pin mux value for GPIO mode */
-    PORT_Type* dirPort;            /**< PORT module for direction pin mux control */
-    GPIO_Type* dirGPIO;            /**< GPIO module for direction pin */
+    PCA_Port_t dirPort;            /**< PORT for direction pin control */
     uint8_t    dirPin;             /**< Direction output pin number */
-    port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
 } MTR_MotorStepperConfig_t;
 
@@ -309,12 +310,7 @@ status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* 
  * @param[in] handles Array of motor handles.
  * @param[in] angles Array of relative target angles in degree.
  * @param[in] count Number of elements in handles/angles.
- * @param[in] deadline Matypedef enum rounding_method
-{
-    ROUND_DOWN,
-    ROUND_UP,
-    ROUND_NEAREST
-} MTR_roundingMethod_t;ximum time to wait for synchronization trigger.
+ * @param[in] deadline Maximum time to wait for synchronization trigger.
  * @param[out] cmdHandle Command handle for waiting/checking command completion.
  *
  * @return kStatus_Success if all moves are prepared and triggered successfully.
@@ -351,9 +347,59 @@ status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, T
 status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
                                     THE_CmdHandle_t* cmdHandle);
 
+/**
+ * @brief Converts step count to mechanical angle.
+ *
+ * @param[in] handle Target motor handle (used to access configuration).
+ * @param[in] steps Step count to convert.
+ *
+ * @return Equivalent angle in degree.
+ */
 double MTR_steps_to_angle(MTR_MotorHandle_t handle, int32_t steps);
 
+/**
+ * @brief Converts angle to step count using specified rounding method.
+ *
+ * @param[in] handle Target motor handle (used to access configuration).
+ * @param[in] angle Angle in degree to convert.
+ * @param[in] method Rounding method for fractional steps (ROUND_DOWN, ROUND_UP, ROUND_NEAREST).
+ *
+ * @return Equivalent step count after applying the rounding method.
+ */
 int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method);
+
+/**
+ * @brief Enables freewheeling mode for a motor.
+ *
+ * In freewheeling mode, the motor coils are deenergized (hold current set to 0),
+ * allowing the motor shaft to rotate freely. Previous hold current is saved for restoration.
+ * After exiting freewheeling mode, the motor must be homed to establish position reference.
+ *
+ * @param[in] handle Target motor handle.
+ * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
+ *
+ * @return kStatus_Success if freewheeling was enabled successfully.
+ *         kStatus_Fail on invalid parameters, queue errors, or timeout.
+ */
+status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                       THE_CmdHandle_t* cmdHandle);
+
+/**
+ * @brief Disables freewheeling mode and restores normal operation.
+ *
+ * Restores the motor's previous hold current and automatically homes the motor
+ * to establish position reference after freewheeling.
+ *
+ * @param[in] handle Target motor handle.
+ * @param[in] deadline Maximum time to wait for command completion.
+ * @param[out] cmdHandle Command handle for waiting/checking command completion.
+ *
+ * @return kStatus_Success if freewheeling was disabled and motor was homed successfully.
+ *         kStatus_Fail on invalid parameters, queue errors, or timeout.
+ */
+status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                        THE_CmdHandle_t* cmdHandle);
 
 /** @} */ /* End of MOTOR_Module */
 

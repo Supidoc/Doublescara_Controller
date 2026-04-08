@@ -1,27 +1,9 @@
 var searchData=
 [
-  ['serialadress_0',['serialAdress',['../struct__MTR__MotorTmcConfig.html#a394fd561405ef1c95dbfc3b5beb29b84',1,'_MTR_MotorTmcConfig::serialAdress'],['../struct__TMC__HandleImpl.html#a15d779d0f589d7da7c8952bc56aaa29b',1,'_TMC_HandleImpl::serialAdress'],['../struct__TMC__Config.html#aa0383243693148fad8ddaa81902ab327',1,'_TMC_Config::serialAdress']]],
-  ['sessionid_1',['sessionId',['../struct__LOG__LogHeader.html#a635ba494bcbbc02ab7ab0d385094dc2b',1,'_LOG_LogHeader::sessionId'],['../log_8c.html#aa0f03c6bf1b666c8a52605befef768ba',1,'sessionId:&#160;log.c']]],
-  ['setacceleration_2',['setAcceleration',['../struct__MTR__CmdQueueItem.html#a144d7764b2f14f6566ddfe80cf0de448',1,'_MTR_CmdQueueItem::setAcceleration'],['../struct__STP__CmdQueueItem.html#ac5f14dfc3c45ded48b40a6b6b0188fa5',1,'_STP_CmdQueueItem::setAcceleration']]],
-  ['setendvelocity_3',['setEndVelocity',['../struct__STP__CmdQueueItem.html#ac4e94fc1dc38b9adf92727d16060438e',1,'_STP_CmdQueueItem']]],
-  ['setholdcurrent_4',['setHoldCurrent',['../struct__MTR__CmdQueueItem.html#a3caf086ca1f7e285d0250dd1f8db44e8',1,'_MTR_CmdQueueItem']]],
-  ['setiholddivider_5',['setIholdDivider',['../struct__TMC__CommandQueueItem.html#a85a0378570b2c846f737e2e5f045d88f',1,'_TMC_CommandQueueItem']]],
-  ['setirundivider_6',['setIrunDivider',['../struct__TMC__CommandQueueItem.html#a221b8280f24c2858f548a35038d11700',1,'_TMC_CommandQueueItem']]],
-  ['setmicrostepping_7',['setMicrostepping',['../struct__TMC__CommandQueueItem.html#ad683c061781d1768a7f072489af7cdb8',1,'_TMC_CommandQueueItem']]],
-  ['setruncurrent_8',['setRunCurrent',['../struct__MTR__CmdQueueItem.html#a401f24ce0369a7f2787b57a0aaa5daa3',1,'_MTR_CmdQueueItem']]],
-  ['setvelocity_9',['setVelocity',['../struct__MTR__CmdQueueItem.html#a6dd3632d061f4a65c0fd79cf320566a5',1,'_MTR_CmdQueueItem']]],
-  ['silent_10',['silent',['../struct__LOG__QueueItem.html#a38cd912b130079cd9ed11f3998b2a220',1,'_LOG_QueueItem']]],
-  ['state_11',['state',['../struct__MTR__GetMovementStateCmdData.html#a01f7068976d5177c63ef8905998a7736',1,'_MTR_GetMovementStateCmdData::state'],['../struct__STP__StepperMovement.html#a73cf227c208ac81a57b21f0d4daffbd7',1,'_STP_StepperMovement::state']]],
-  ['stepangle_12',['stepAngle',['../struct__MTR__MotorHandleImpl.html#a48ff29dd145331650188df5c94e4d671',1,'_MTR_MotorHandleImpl::stepAngle'],['../struct__MTR__MotorConfig.html#a424bbb11a5c2ee1830605ed4f926400a',1,'_MTR_MotorConfig::stepAngle']]],
-  ['stepgpio_13',['stepGPIO',['../struct__MTR__MotorStepperConfig.html#ad1ad58713661e819714d2b97a7349bf8',1,'_MTR_MotorStepperConfig::stepGPIO'],['../struct__STP__StepperHandleImpl.html#afb50c0aaa5120d55af88897c8577cc0e',1,'_STP_StepperHandleImpl::stepGPIO'],['../struct__STP__StepperConfig.html#a972eecf1cbdb97bf9e3c3c51968bc361',1,'_STP_StepperConfig::stepGPIO']]],
-  ['stepmuxftm_14',['stepMuxFTM',['../struct__MTR__MotorStepperConfig.html#a192bc01c2ab5aae65463bffa84414ae5',1,'_MTR_MotorStepperConfig::stepMuxFTM'],['../struct__STP__StepperHandleImpl.html#a2e9a13614c873f1c24f38c84d0e70f2d',1,'_STP_StepperHandleImpl::stepMuxFTM'],['../struct__STP__StepperConfig.html#a48f4b6a8eb83efe3d119a7a725738ae8',1,'_STP_StepperConfig::stepMuxFTM']]],
-  ['stepmuxgpio_15',['stepMuxGPIO',['../struct__MTR__MotorStepperConfig.html#a4a5d7d229b60fa8931618db13b133470',1,'_MTR_MotorStepperConfig::stepMuxGPIO'],['../struct__STP__StepperHandleImpl.html#aa9483582ec3381728987a5c4f86315c6',1,'_STP_StepperHandleImpl::stepMuxGPIO'],['../struct__STP__StepperConfig.html#a678bf3e812c48186b8999b2d31de8abf',1,'_STP_StepperConfig::stepMuxGPIO']]],
-  ['stepperconfig_16',['stepperConfig',['../struct__MTR__MotorConfig.html#ac300a364bd4cf4d6d6260f97e76a4b51',1,'_MTR_MotorConfig']]],
-  ['stepperhandle_17',['stepperHandle',['../struct__MTR__MotorHandleImpl.html#a2dd7eb698826385c5ab8183999976f67',1,'_MTR_MotorHandleImpl']]],
-  ['steppin_18',['stepPin',['../struct__MTR__MotorStepperConfig.html#ada4577201d599814dad748b4ca928ee7',1,'_MTR_MotorStepperConfig::stepPin'],['../struct__STP__StepperHandleImpl.html#a6a2111b2ef4845f6af52313ac18dd328',1,'_STP_StepperHandleImpl::stepPin'],['../struct__STP__StepperConfig.html#ab874ab92a110d8984438834bad39cee0',1,'_STP_StepperConfig::stepPin']]],
-  ['stepport_19',['stepPort',['../struct__MTR__MotorStepperConfig.html#a40a0f220c6927c6d14f80e25f5e5ba01',1,'_MTR_MotorStepperConfig::stepPort'],['../struct__STP__StepperHandleImpl.html#ad379189e0dfa0569f4620095e05da05a',1,'_STP_StepperHandleImpl::stepPort'],['../struct__STP__StepperConfig.html#a6439c06307b0273393c936ff7eab1132',1,'_STP_StepperConfig::stepPort']]],
-  ['steps_20',['steps',['../struct__STP__MoveCmdData.html#aa736f0509d16a97ffc48c460a7021d32',1,'_STP_MoveCmdData']]],
-  ['stop_21',['stop',['../struct__MTR__CmdQueueItem.html#aa69ef6a7505f5fbd14979ecbe0b88af7',1,'_MTR_CmdQueueItem::stop'],['../struct__STP__CmdQueueItem.html#ad1be3530adfbe76982de44162aa76d98',1,'_STP_CmdQueueItem::stop']]],
-  ['sync_22',['sync',['../struct__TMC__Write__Datagram.html#a7fa76c308895e83bd368c6d6f46d430c',1,'_TMC_Write_Datagram::sync'],['../struct__TMC__Read__Datagram.html#a4bcaf52cae23ce728386470e9825e30d',1,'_TMC_Read_Datagram::sync']]],
-  ['synchronizedmove_23',['synchronizedMove',['../struct__MTR__CmdQueueItem.html#a317822318f9bca006d19eb3f9f30e7bb',1,'_MTR_CmdQueueItem']]]
+  ['reductionfactor_0',['reductionFactor',['../struct__MTR__MotorHandleImpl.html#a068b88abfa0f8d3412005f860a64932a',1,'_MTR_MotorHandleImpl::reductionFactor'],['../struct__MTR__MotorConfig.html#a709d3bcd730c3e06ef9653b4499557f8',1,'_MTR_MotorConfig::reductionFactor']]],
+  ['ref_5fcount_1',['ref_count',['../struct__THE__CmdHandleImpl.html#a5fb04743e9edaa738bec73c4a1fffd00',1,'_THE_CmdHandleImpl']]],
+  ['reg_5faddr_2',['reg_addr',['../struct__TMC__Write__Datagram.html#a2bd5bcb4f35c7f1c5c03f00b0f7e9622',1,'_TMC_Write_Datagram::reg_addr'],['../struct__TMC__Read__Datagram.html#a63bf2bc0062d3a53d28bac7f6f049bee',1,'_TMC_Read_Datagram::reg_addr']]],
+  ['reserved_3',['reserved',['../struct__TMC__Write__Datagram.html#a09ddc2854e31e9da2f15eb71527f588b',1,'_TMC_Write_Datagram::reserved'],['../struct__TMC__Read__Datagram.html#a829402b66a89ae63b5a7df508aead65e',1,'_TMC_Read_Datagram::reserved']]],
+  ['returnhandle_4',['returnHandle',['../struct__MTR__ParallelTaskItem.html#a70bd925c1e19044a2b120bbd2f237e30',1,'_MTR_ParallelTaskItem']]],
+  ['revolutions_5',['revolutions',['../struct__MTR__MoveRevolutionsCmdData.html#a5a758474a2036011e5568d27e5d15a1f',1,'_MTR_MoveRevolutionsCmdData']]]
 ];

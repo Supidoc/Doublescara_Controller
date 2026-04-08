@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['init_5fdir_5fpin_0',['init_dir_pin',['../step_8c.html#adba1d68dbe985d96ff4d586237e05600',1,'step.c']]],
-  ['init_5fhandle_1',['init_handle',['../step_8c.html#a331ab04c818f0194c1eaa24d977843fb',1,'init_handle(const STP_StepperConfig_t config, TickType_t deadline):&#160;step.c'],['../tmc2209_8c.html#a50368b2e0c419ead8aad31313f87ad17',1,'init_handle(TMC_Config_t config, TickType_t deadline):&#160;tmc2209.c']]],
-  ['init_5fmotor_2',['init_motor',['../motor_8c.html#a9c3f7e4d5d925e03f7d4ecf8efab716b',1,'motor.c']]],
-  ['init_5fstep_5fpin_3',['init_step_pin',['../step_8c.html#a6277757e5ae26d0cbba3d4d62dc45912',1,'step.c']]]
+  ['get_5fcurrent_5fangle_0',['get_current_angle',['../motor_8c.html#acb20911956d46fc91973712e69746964',1,'motor.c']]],
+  ['get_5fhandle_5ffrom_5ftimer_1',['get_handle_from_timer',['../step_8c.html#a4addfaa1cd32089f48149435915badab',1,'step.c']]],
+  ['get_5fmovement_5fstate_2',['get_movement_state',['../motor_8c.html#af056a81b1cb3297d859385c2a8acae5a',1,'motor.c']]]
 ];

@@ -6,6 +6,7 @@ var struct__STP__StepperMovement =
     [ "accelTableIndex", "struct__STP__StepperMovement.html#a23ccd9c01d7c23dbba03693986bb39bb", null ],
     [ "accelTablePoolIndex", "struct__STP__StepperMovement.html#a73829dc500b931538679afc38579dcf3", null ],
     [ "accelTableSize", "struct__STP__StepperMovement.html#ac676c1214c1434c8399dceeb6a426caa", null ],
+    [ "cmdHandle", "struct__STP__StepperMovement.html#a0bb520b4e20e3fb4c525ae939dc07672", null ],
     [ "currStepCount", "struct__STP__StepperMovement.html#ad69fb7cb6bd981532024403529238f18", null ],
     [ "decelSteps", "struct__STP__StepperMovement.html#aff9fe9df5be329dec0eebc19b40f6c61", null ],
     [ "direction", "struct__STP__StepperMovement.html#aa73a99c554b5e0c424990e907a8ca866", null ],

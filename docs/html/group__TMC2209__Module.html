@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: TMC2209 Stepper Motor Driver</title>
+<title>Double Scara: TMC2209 Stepper Motor Driver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -113,6 +113,7 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga6a1b5e4db27fe14a15171351e35c3493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of the TMC command queue.  <br /></td></tr>
 <tr class="memitem:ga4e94e6caf9a3151acb26285bb3319b31" id="r_ga4e94e6caf9a3151acb26285bb3319b31"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga4e94e6caf9a3151acb26285bb3319b31">TMC_MAX_HANDLE_COUNT</a>&#160;&#160;&#160;5</td></tr>
 <tr class="memdesc:ga4e94e6caf9a3151acb26285bb3319b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of TMC2209 handles that can be created.  <br /></td></tr>
+<tr class="memitem:ga95780650db7177c914d239b38e96281c" id="r_ga95780650db7177c914d239b38e96281c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga95780650db7177c914d239b38e96281c">TMC_MAX_CMD_HANDLE_COUNT</a>&#160;&#160;&#160;20</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -168,20 +169,27 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga4d6999bb2640adbe2a2fce2c6ec570b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function for processing TMC2209 commands.  <br /></td></tr>
 <tr class="memitem:ga64a53e85523cba9e1abb7f7a29baafa4" id="r_ga64a53e85523cba9e1abb7f7a29baafa4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga64a53e85523cba9e1abb7f7a29baafa4">TMC_get_default_config</a> (<a class="el" href="#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> *config)</td></tr>
 <tr class="memdesc:ga64a53e85523cba9e1abb7f7a29baafa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the default configuration for a TMC2209 driver handle.  <br /></td></tr>
-<tr class="memitem:ga8af8a4f06ac58d61065c3558c2d6b80c" id="r_ga8af8a4f06ac58d61065c3558c2d6b80c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga8af8a4f06ac58d61065c3558c2d6b80c">TMC_init_handle</a> (<a class="el" href="#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> config, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga8af8a4f06ac58d61065c3558c2d6b80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a TMC2209 handle with default configuration.  <br /></td></tr>
+<tr class="memitem:gafe1ec1a11587ddb0b181d1d7b85353dc" id="r_gafe1ec1a11587ddb0b181d1d7b85353dc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gafe1ec1a11587ddb0b181d1d7b85353dc">TMC_init_handle_async</a> (<a class="el" href="#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a> config, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gafe1ec1a11587ddb0b181d1d7b85353dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a TMC2209 handle with default configuration asynchronously.  <br /></td></tr>
 <tr class="memitem:ga9c9c009ee4ec2f83359b0bac747d3a02" id="r_ga9c9c009ee4ec2f83359b0bac747d3a02"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9c9c009ee4ec2f83359b0bac747d3a02">TMC_get_handle_by_label</a> (const char *label, <a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> *handle)</td></tr>
 <tr class="memdesc:ga9c9c009ee4ec2f83359b0bac747d3a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a TMC2209 handle by its label.  <br /></td></tr>
-<tr class="memitem:gaee4ca72fd373cde77461813cd2aa69fc" id="r_gaee4ca72fd373cde77461813cd2aa69fc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaee4ca72fd373cde77461813cd2aa69fc">TMC_set_microstepping</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, <a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> microstepping, TickType_t deadline)</td></tr>
-<tr class="memdesc:gaee4ca72fd373cde77461813cd2aa69fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the microstepping resolution for a TMC2209 driver.  <br /></td></tr>
-<tr class="memitem:gac5f5a7c8a0624a8224f80955f53a69a7" id="r_gac5f5a7c8a0624a8224f80955f53a69a7"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gac5f5a7c8a0624a8224f80955f53a69a7">TMC_microstepping_uint_to_enum</a> (uint8_t value, <a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> *microstepping)</td></tr>
-<tr class="memdesc:gac5f5a7c8a0624a8224f80955f53a69a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a uint8_t microstepping value to the corresponding enum member.  <br /></td></tr>
-<tr class="memitem:gab4c0c981a12a0bb3ae5218fab23f4064" id="r_gab4c0c981a12a0bb3ae5218fab23f4064"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gab4c0c981a12a0bb3ae5218fab23f4064">TMC_set_ihold_divider</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t ihold, TickType_t deadline)</td></tr>
-<tr class="memdesc:gab4c0c981a12a0bb3ae5218fab23f4064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IHOLD current divider asynchronously via task queue.  <br /></td></tr>
-<tr class="memitem:ga45ffe3a8f5ff405c641670dfd6ae1cce" id="r_ga45ffe3a8f5ff405c641670dfd6ae1cce"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga45ffe3a8f5ff405c641670dfd6ae1cce">TMC_set_irun_divider</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t irun, TickType_t deadline)</td></tr>
-<tr class="memdesc:ga45ffe3a8f5ff405c641670dfd6ae1cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IRUN current divider asynchronously via task queue.  <br /></td></tr>
+<tr class="memitem:gaae7d0a36006ff54ead11d8fc09ac3a9b" id="r_gaae7d0a36006ff54ead11d8fc09ac3a9b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaae7d0a36006ff54ead11d8fc09ac3a9b">TMC_set_microstepping_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, <a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> microstepping, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gaae7d0a36006ff54ead11d8fc09ac3a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the microstepping resolution for a TMC2209 driver asynchronously.  <br /></td></tr>
+<tr class="memitem:ga9b6a1c1f195a63a7e399801731e14b7b" id="r_ga9b6a1c1f195a63a7e399801731e14b7b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9b6a1c1f195a63a7e399801731e14b7b">TMC_microstepping_uint_to_enum</a> (uint16_t value, <a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> *microstepping)</td></tr>
+<tr class="memdesc:ga9b6a1c1f195a63a7e399801731e14b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a uint8_t microstepping value to the corresponding enum member.  <br /></td></tr>
+<tr class="memitem:ga72ae6a8522043103e2878716769f3fd5" id="r_ga72ae6a8522043103e2878716769f3fd5"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga72ae6a8522043103e2878716769f3fd5">TMC_microstepping_enum_to_uint</a> (<a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a> in, uint16_t *out)</td></tr>
+<tr class="memitem:ga6d1b55916cc95a8af771c80c836ff7bc" id="r_ga6d1b55916cc95a8af771c80c836ff7bc"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga6d1b55916cc95a8af771c80c836ff7bc">TMC_set_ihold_divider_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t ihold, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga6d1b55916cc95a8af771c80c836ff7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IHOLD current divider asynchronously.  <br /></td></tr>
+<tr class="memitem:ga747d58dccb7f2e8d339f8e646b6e56d3" id="r_ga747d58dccb7f2e8d339f8e646b6e56d3"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga747d58dccb7f2e8d339f8e646b6e56d3">TMC_set_irun_divider_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t irun, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga747d58dccb7f2e8d339f8e646b6e56d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the IRUN current divider asynchronously.  <br /></td></tr>
 <tr class="memitem:ga78b08cc2828dcca1085ed6205332ea08" id="r_ga78b08cc2828dcca1085ed6205332ea08"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga78b08cc2828dcca1085ed6205332ea08">TMC_current_to_divider</a> (float desired_current, <a class="el" href="#ga81726756d4e5751b52c7841141c8e8b1">TMC_RoundingMode_t</a> rounding, uint8_t *divider)</td></tr>
 <tr class="memdesc:ga78b08cc2828dcca1085ed6205332ea08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a desired current to a TMC2209 current divider value.  <br /></td></tr>
+<tr class="memitem:gacd6d97b09da63b808b34df37ad1ad69d" id="r_gacd6d97b09da63b808b34df37ad1ad69d"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gacd6d97b09da63b808b34df37ad1ad69d">TMC_enable_freewheeling_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gacd6d97b09da63b808b34df37ad1ad69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
+<tr class="memitem:ga99cab501c7202f88a4f3a12520ecb04e" id="r_ga99cab501c7202f88a4f3a12520ecb04e"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga99cab501c7202f88a4f3a12520ecb04e">TMC_disable_freewheeling_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ga99cab501c7202f88a4f3a12520ecb04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
+<tr class="memitem:gacd60da6e8f316771a0f91f4edb92b586" id="r_gacd60da6e8f316771a0f91f4edb92b586"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gacd60da6e8f316771a0f91f4edb92b586">TMC_set_freewheeling_async</a> (<a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a> handle, uint8_t enabled, TickType_t deadline, <a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:gacd60da6e8f316771a0f91f4edb92b586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets freewheeling mode for a TMC2209 driver asynchronously.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions and types for communicating with and controlling TMC2209 stepper motor drivers. </p>
@@ -201,7 +209,7 @@ Functions</h2></td></tr>
 
 <p>Maximum length of the TMC command queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00045">45</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00049">49</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +227,23 @@ Functions</h2></td></tr>
 
 <p>Enable write confirmation for TMC2209 configuration commands. </p>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00040">40</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00044">44</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+
+</div>
+</div>
+<a id="ga95780650db7177c914d239b38e96281c" name="ga95780650db7177c914d239b38e96281c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga95780650db7177c914d239b38e96281c">&#9670;&#160;</a></span>TMC_MAX_CMD_HANDLE_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TMC_MAX_CMD_HANDLE_COUNT&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00056">56</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +261,7 @@ Functions</h2></td></tr>
 
 <p>Maximum number of TMC2209 handles that can be created. </p>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00050">50</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00054">54</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +297,7 @@ Functions</h2></td></tr>
 
 <p>Opaque pointer to the TMC2209 handle implementation. </p>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00155">155</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00162">162</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -395,7 +419,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00074">74</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00081">81</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -422,7 +446,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00101">101</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00108">108</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -450,7 +474,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00059">59</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8h_source.html#l00065">65</a> of file <a class="el" href="tmc2209_8h_source.html">tmc2209.h</a>.</p>
 
 </div>
 </div>
@@ -495,9 +519,89 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Divider values outside the valid range [0, 31] will cause the function to return kStatus_Fail. </dd>
 <dd>
 Higher divider values result in lower output currents.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga81726756d4e5751b52c7841141c8e8b1" title="Rounding modes for current to divider conversion.">TMC_RoundingMode_t</a>, <a class="el" href="#gab4c0c981a12a0bb3ae5218fab23f4064" title="Sets the IHOLD current divider asynchronously via task queue.">TMC_set_ihold_divider()</a>, <a class="el" href="#ga45ffe3a8f5ff405c641670dfd6ae1cce" title="Sets the IRUN current divider asynchronously via task queue.">TMC_set_irun_divider()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga81726756d4e5751b52c7841141c8e8b1" title="Rounding modes for current to divider conversion.">TMC_RoundingMode_t</a>, TMC_set_ihold_divider(), TMC_set_irun_divider() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00369">369</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00417">417</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="ga99cab501c7202f88a4f3a12520ecb04e" name="ga99cab501c7202f88a4f3a12520ecb04e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga99cab501c7202f88a4f3a12520ecb04e">&#9670;&#160;</a></span>TMC_disable_freewheeling_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t TMC_disable_freewheeling_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disables freewheeling mode for a TMC2209 driver asynchronously. </p>
+<p>When disabled, the hold current is restored to its previous value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued. kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00387">387</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="gacd6d97b09da63b808b34df37ad1ad69d" name="gacd6d97b09da63b808b34df37ad1ad69d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacd6d97b09da63b808b34df37ad1ad69d">&#9670;&#160;</a></span>TMC_enable_freewheeling_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t TMC_enable_freewheeling_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables freewheeling mode for a TMC2209 driver asynchronously. </p>
+<p>When enabled, the hold current is minimized, allowing the motor to rotate freely.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued. kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00370">370</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -526,7 +630,7 @@ Higher divider values result in lower output currents.</dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the default configuration was successfully retrieved and stored in the provided structure. kStatus_Fail if the provided pointer is NULL or an error occurs while retrieving </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00423">423</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00473">473</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -560,7 +664,7 @@ Higher divider values result in lower output currents.</dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if a handle with the specified label is found and returned. kStatus_Fail if the label is NULL, the handle pointer is NULL, or no matching handle is found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00441">441</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00491">491</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -587,48 +691,76 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the initialization is successful. kStatus_Fail if the initialization fails.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task function for processing TMC2209 commands.">TMC_task()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00133">133</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00150">150</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
-<a id="ga8af8a4f06ac58d61065c3558c2d6b80c" name="ga8af8a4f06ac58d61065c3558c2d6b80c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8af8a4f06ac58d61065c3558c2d6b80c">&#9670;&#160;</a></span>TMC_init_handle()</h2>
+<a id="gafe1ec1a11587ddb0b181d1d7b85353dc" name="gafe1ec1a11587ddb0b181d1d7b85353dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafe1ec1a11587ddb0b181d1d7b85353dc">&#9670;&#160;</a></span>TMC_init_handle_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t TMC_init_handle </td>
+          <td class="memname">status_t TMC_init_handle_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#ga2c9718556ec3eb0096214699414f8291">TMC_Config_t</a></td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes a TMC2209 handle with default configuration. </p>
-<p>This function queues a default initialization command for a TMC2209 driver handle. The initialization is performed asynchronously by the TMC_task. The calling task will wait for the completion until the deadline parameter.</p>
+<p>Initializes a TMC2209 handle with default configuration asynchronously. </p>
+<p>This function queues a default initialization command for a TMC2209 driver handle. The initialization is performed asynchronously by the TMC_task. The caller can await completion using the returned command handle.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>TMC config structure to initialize the handle with. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the initialization command.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the initialization command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>If deadline is 0, the function will not wait for completion.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued and completed. kStatus_Fail if the queue is full, the deadline is reached or an error occurs.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd>ulTaskNotifyTake() </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued. kStatus_Fail if the queue is full, cmdHandle is NULL, or an error occurs.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__TaskHelpers__Module.html#ga3188faf445f5f231400e567cc6917ffa" title="Wait for a single command to complete.">THE_cmd_wait_result()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00152">152</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00179">179</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
-<a id="gac5f5a7c8a0624a8224f80955f53a69a7" name="gac5f5a7c8a0624a8224f80955f53a69a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac5f5a7c8a0624a8224f80955f53a69a7">&#9670;&#160;</a></span>TMC_microstepping_uint_to_enum()</h2>
+<a id="ga72ae6a8522043103e2878716769f3fd5" name="ga72ae6a8522043103e2878716769f3fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga72ae6a8522043103e2878716769f3fd5">&#9670;&#160;</a></span>TMC_microstepping_enum_to_uint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t TMC_microstepping_enum_to_uint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8">TMC_MICROSTEPPING_t</a></td>          <td class="paramname"><span class="paramname"><em>in</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00294">294</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="ga9b6a1c1f195a63a7e399801731e14b7b" name="ga9b6a1c1f195a63a7e399801731e14b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9b6a1c1f195a63a7e399801731e14b7b">&#9670;&#160;</a></span>TMC_microstepping_uint_to_enum()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -636,7 +768,7 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
         <tr>
           <td class="memname">status_t TMC_microstepping_uint_to_enum </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -650,7 +782,7 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
 <p>This function converts a raw uint8_t microstepping value to the corresponding <a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8" title="Enumeration of TMC2209 microstepping resolutions. The value corresponds to the register setting for m...">TMC_MICROSTEPPING_t</a> enum value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The uint8_t microstepping value to convert (0-8). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The uint16_t microstepping value to convert. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">microstepping</td><td>Pointer to store the converted enum value. Must not be NULL.</td></tr>
   </table>
   </dd>
@@ -658,18 +790,64 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the value matches a valid enum member. kStatus_Fail if the value does not correspond to any enum member.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8" title="Enumeration of TMC2209 microstepping resolutions. The value corresponds to the register setting for m...">TMC_MICROSTEPPING_t</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00262">262</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00253">253</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
-<a id="gab4c0c981a12a0bb3ae5218fab23f4064" name="gab4c0c981a12a0bb3ae5218fab23f4064"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab4c0c981a12a0bb3ae5218fab23f4064">&#9670;&#160;</a></span>TMC_set_ihold_divider()</h2>
+<a id="gacd60da6e8f316771a0f91f4edb92b586" name="gacd60da6e8f316771a0f91f4edb92b586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacd60da6e8f316771a0f91f4edb92b586">&#9670;&#160;</a></span>TMC_set_freewheeling_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t TMC_set_ihold_divider </td>
+          <td class="memname">status_t TMC_set_freewheeling_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets freewheeling mode for a TMC2209 driver asynchronously. </p>
+<p>When enabled (enabled=1), the hold current is minimized, allowing the motor to rotate freely. When disabled (enabled=0), the hold current is restored to its previous value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enabled</td><td>1 to enable freewheeling, 0 to disable and restore normal operation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued. kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00404">404</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+
+</div>
+</div>
+<a id="ga6d1b55916cc95a8af771c80c836ff7bc" name="ga6d1b55916cc95a8af771c80c836ff7bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6d1b55916cc95a8af771c80c836ff7bc">&#9670;&#160;</a></span>TMC_set_ihold_divider_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t TMC_set_ihold_divider_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -681,35 +859,41 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the IHOLD current divider asynchronously via task queue. </p>
-<p>Queues a command to set the hold current divider value. The operation is executed in the TMC task context. The calling task will wait for the completion until the deadline parameter.</p>
+<p>Sets the IHOLD current divider asynchronously. </p>
+<p>Queues a command to set the hold current divider value. The operation is executed in the TMC task context. The caller can await completion using the returned command handle.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ihold</td><td>The hold current divider value (0-31). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if command was successfully queued and completed. kStatus_Fail if queue operation failed or deadline is reached. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if command was successfully queued. kStatus_Fail if queue operation failed, handle is NULL, or cmdHandle is NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00303">303</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00336">336</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
-<a id="ga45ffe3a8f5ff405c641670dfd6ae1cce" name="ga45ffe3a8f5ff405c641670dfd6ae1cce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga45ffe3a8f5ff405c641670dfd6ae1cce">&#9670;&#160;</a></span>TMC_set_irun_divider()</h2>
+<a id="ga747d58dccb7f2e8d339f8e646b6e56d3" name="ga747d58dccb7f2e8d339f8e646b6e56d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga747d58dccb7f2e8d339f8e646b6e56d3">&#9670;&#160;</a></span>TMC_set_irun_divider_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t TMC_set_irun_divider </td>
+          <td class="memname">status_t TMC_set_irun_divider_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -721,35 +905,41 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the IRUN current divider asynchronously via task queue. </p>
-<p>Queues a command to set the run current divider value and returns immediately. The operation is executed in the TMC task context. The calling task will wait for the completion until the deadline parameter.</p>
+<p>Sets the IRUN current divider asynchronously. </p>
+<p>Queues a command to set the run current divider value. The operation is executed in the TMC task context. The caller can await completion using the returned command handle.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">irun</td><td>The run current divider value (0-31). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if command was successfully queued and completed. kStatus_Fail if queue operation failed or deadline is reached. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if command was successfully queued. kStatus_Fail if queue operation failed, handle is NULL, or cmdHandle is NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00336">336</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00353">353</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
-<a id="gaee4ca72fd373cde77461813cd2aa69fc" name="gaee4ca72fd373cde77461813cd2aa69fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaee4ca72fd373cde77461813cd2aa69fc">&#9670;&#160;</a></span>TMC_set_microstepping()</h2>
+<a id="gaae7d0a36006ff54ead11d8fc09ac3a9b" name="gaae7d0a36006ff54ead11d8fc09ac3a9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae7d0a36006ff54ead11d8fc09ac3a9b">&#9670;&#160;</a></span>TMC_set_microstepping_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">status_t TMC_set_microstepping </td>
+          <td class="memname">status_t TMC_set_microstepping_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#gaf7cd46cb3777ad58a3c8680446fdd9b8">TMC_Handle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
         </tr>
@@ -761,26 +951,31 @@ The <a class="el" href="#ga4d6999bb2640adbe2a2fce2c6ec570b2" title="Task functio
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the microstepping resolution for a TMC2209 driver. </p>
-<p>This function queues a microstepping configuration command for a TMC2209 driver handle. Setting the microstepping is performed asynchronously by the TMC_task. The calling task will wait for the completion until the deadline parameter.</p>
+<p>Sets the microstepping resolution for a TMC2209 driver asynchronously. </p>
+<p>This function queues a microstepping configuration command for a TMC2209 driver handle. The operation is performed asynchronously by the TMC_task. The caller can await completion using the returned command handle.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Handle for the TMC2209 driver to configure. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">microstepping</td><td>The microstepping resolution to set (<a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8" title="Enumeration of TMC2209 microstepping resolutions. The value corresponds to the register setting for m...">TMC_MICROSTEPPING_t</a>). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Pointer to receive command handle for awaiting completion.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>If deadline is 0, the function will not wait for completion.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued and completed. kStatus_Fail if the queue is full, the deadline is reached or an error occurs.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully queued. kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#gac56b6571d46cac5104900b8e593cd2b8" title="Enumeration of TMC2209 microstepping resolutions. The value corresponds to the register setting for m...">TMC_MICROSTEPPING_t</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00187">187</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00195">195</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>
@@ -813,7 +1008,7 @@ This task is blocked on the command queue and will wake when commands are queued
 <dl class="section warning"><dt>Warning</dt><dd>This function does not return; it is expected to run as a perpetual FreeRTOS task.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga626120616f06e287f92803166d5b38f3" title="Initializes the TMC2209 module.">TMC_init()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00143">143</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tmc2209_8c_source.html#l00170">170</a> of file <a class="el" href="tmc2209_8c_source.html">tmc2209.c</a>.</p>
 
 </div>
 </div>

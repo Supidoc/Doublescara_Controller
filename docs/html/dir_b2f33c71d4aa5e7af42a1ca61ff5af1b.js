@@ -1,5 +1,6 @@
 var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
 [
+    [ "config", "dir_ba20024af6d0b0711272f59d7b39445a.html", "dir_ba20024af6d0b0711272f59d7b39445a" ],
     [ "template", "dir_2d9f98fa70bbafc3e12475d4c13448c2.html", "dir_2d9f98fa70bbafc3e12475d4c13448c2" ],
     [ "application.c", "application_8c.html", "application_8c" ],
     [ "application.h", "application_8h.html", "application_8h" ],
@@ -15,13 +16,19 @@ var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
     [ "main.c", "main_8c.html", "main_8c" ],
     [ "motor.c", "motor_8c.html", "motor_8c" ],
     [ "motor.h", "motor_8h.html", "motor_8h" ],
+    [ "motor_configs.h", "motor__configs_8h.html", "motor__configs_8h" ],
     [ "motor_test.c", "motor__test_8c.html", "motor__test_8c" ],
     [ "motor_test.h", "motor__test_8h.html", "motor__test_8h" ],
     [ "motorCmd.c", "motorCmd_8c.html", "motorCmd_8c" ],
     [ "motorCmd.h", "motorCmd_8h.html", "motorCmd_8h" ],
+    [ "pca9555a.c", "pca9555a_8c.html", "pca9555a_8c" ],
+    [ "pca9555a.h", "pca9555a_8h.html", "pca9555a_8h" ],
+    [ "scara_kinematics.c", "scara__kinematics_8c.html", "scara__kinematics_8c" ],
+    [ "scara_kinematics.h", "scara__kinematics_8h.html", "scara__kinematics_8h" ],
     [ "semihost_hardfault.c", "semihost__hardfault_8c.html", "semihost__hardfault_8c" ],
     [ "step.c", "step_8c.html", "step_8c" ],
     [ "step.h", "step_8h.html", "step_8h" ],
+    [ "task_helpers.c", "task__helpers_8c.html", "task__helpers_8c" ],
     [ "task_helpers.h", "task__helpers_8h.html", "task__helpers_8h" ],
     [ "tmc2209.c", "tmc2209_8c.html", "tmc2209_8c" ],
     [ "tmc2209.h", "tmc2209_8h.html", "tmc2209_8h" ]

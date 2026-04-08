@@ -2,7 +2,9 @@ var motorCmd_8c =
 [
     [ "MCMD_COMMAND_TIMEOUT_MS", "motorCmd_8c.html#ab11ed8b7a7fd9809ebe8ec91cf43c926", null ],
     [ "cmd_motor_clear_emergency", "motorCmd_8c.html#ab785724edfb94aae4bcbfd55c0801b5e", null ],
+    [ "cmd_motor_disable_freewheeling", "motorCmd_8c.html#a8594612b10e19650311978ac4b1a771f", null ],
     [ "cmd_motor_emergency_stop", "motorCmd_8c.html#a2ec3c9254388b578ad853439d1f55465", null ],
+    [ "cmd_motor_enable_freewheeling", "motorCmd_8c.html#a1fc1fea18fb2733913ac541d933dc5f4", null ],
     [ "cmd_motor_get_angle", "motorCmd_8c.html#a0c01b1b480b43b85e3fe910df58ec446", null ],
     [ "cmd_motor_get_state", "motorCmd_8c.html#a970590506d4efa82e5e4194e70b7800a", null ],
     [ "cmd_motor_move_absolute", "motorCmd_8c.html#ac843aca55e18e509e38b8ea556115991", null ],
@@ -14,10 +16,14 @@ var motorCmd_8c =
     [ "cmd_motor_set_run_current", "motorCmd_8c.html#a6e90e90c3681ed853e8e084545842b9d", null ],
     [ "cmd_motor_set_velocity", "motorCmd_8c.html#aca86a69ed3f17ef2c418038804fcd854", null ],
     [ "cmd_motor_stop", "motorCmd_8c.html#ae7280ca9b32c95ac269cd355b5cdc43b", null ],
-    [ "MCMD_init", "motorCmd_8c.html#aa3be1460f8c4d323d294f337a706508c", null ],
-    [ "MCMD_task", "motorCmd_8c.html#a9a65695a6bd7f4f925ccd06b2020814b", null ],
+    [ "cmd_motor_synchronized_move", "motorCmd_8c.html#af1c70c2a5e497b204c1e8a9213f32542", null ],
+    [ "MCMD_init", "group__MotorCmd__Module.html#gaa3be1460f8c4d323d294f337a706508c", null ],
+    [ "MCMD_task", "group__MotorCmd__Module.html#ga9a65695a6bd7f4f925ccd06b2020814b", null ],
+    [ "wait_for_mtr_cmd", "motorCmd_8c.html#a385dd4535c8d6f00107f8f24c5474c38", null ],
     [ "xClearEmergencyCmd", "motorCmd_8c.html#ae195518cae3b1186d8e948d38406a815", null ],
+    [ "xDisableFreewheelingCmd", "motorCmd_8c.html#a579caf44262ed312c85b25c74bb0ebb8", null ],
     [ "xEmergencyStopCmd", "motorCmd_8c.html#ace27b3c7f28438ac3f62002c659d9dc3", null ],
+    [ "xEnableFreewheelingCmd", "motorCmd_8c.html#a795e48b284495359fb7359c984cf6bea", null ],
     [ "xGetAngleCmd", "motorCmd_8c.html#a0084bc076594639dd5d51790c00d216a", null ],
     [ "xGetStateCmd", "motorCmd_8c.html#a792cffeebf6f34f5ec1b718216b8fa99", null ],
     [ "xMoveAbsoluteCmd", "motorCmd_8c.html#ab8c51a89259b10b659a219d6f7462724", null ],
@@ -28,5 +34,6 @@ var motorCmd_8c =
     [ "xSetHomeCmd", "motorCmd_8c.html#a468edf0c43256d61ff84cdf1aa8b4bc8", null ],
     [ "xSetRunCurrentCmd", "motorCmd_8c.html#aa9e242377f439f82643506e82685c26f", null ],
     [ "xSetVelocityCmd", "motorCmd_8c.html#ae6058231d16c9eddb70726b2f13a2903", null ],
-    [ "xStopCmd", "motorCmd_8c.html#a9130ba3004d6698ddf20f820fe3eb5ee", null ]
+    [ "xStopCmd", "motorCmd_8c.html#a9130ba3004d6698ddf20f820fe3eb5ee", null ],
+    [ "xSynchronizedMoveCmd", "motorCmd_8c.html#ada92a3622977c51ad3df26880cdd029e", null ]
 ];

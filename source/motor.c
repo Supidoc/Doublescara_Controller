@@ -1,8 +1,12 @@
 /************************************************************
  * @file    motor.c
- * @brief   Task-safe motor control module using FreeRTOS queues
+ * @brief   Task-safe motor control for SCARA with emergency stop and freewheeling
+ * @details Implements asynchronous motor commands via FreeRTOS queues with deadline-based
+ *          completion tracking. Supports synchronized two-motor movement for SCARA kinematics,
+ *          velocity scaling for coordinated arm motion, emergency stop interrupt with latch,
+ *          and freewheeling mode with automatic re-homing on disable.
  * @author  dg
- * @date    2 Mar 2026
+ * @date    6 Apr 2026
  ************************************************************/
 
 /********************
@@ -45,7 +49,9 @@ typedef enum _MTR_CmdType
     MTR_CMD_SYNCHRONIZED_MOVE,
     MTR_CMD_SET_RUN_CURRENT,
     MTR_CMD_SET_HOLD_CURRENT,
-    MTR_CMD_INIT_MOTOR
+    MTR_CMD_INIT_MOTOR,
+    MTR_CMD_ENABLE_FREEWHEELING,
+    MTR_CMD_DISABLE_FREEWHEELING
 } MTR_CmdType_t;
 
 typedef struct _MTR_MoveAngleCmdData
@@ -109,6 +115,14 @@ typedef struct _MTR_InitMotorCmdData
     MTR_MotorConfig_t config;
 } MTR_InitMotorCmdData_t;
 
+typedef struct _MTR_EnableFreewheellingCmdData
+{
+} MTR_EnableFreewheellingCmdData_t;
+
+typedef struct _MTR_DisableFreewheellingCmdData
+{
+} MTR_DisableFreewheellingCmdData_t;
+
 typedef struct _MTR_CmdQueueItem
 {
     MTR_CmdType_t     type;
@@ -117,18 +131,20 @@ typedef struct _MTR_CmdQueueItem
     TickType_t        deadline;  /**< Absolute tick count by which command should complete */
     union
     {
-        MTR_MoveAngleCmdData_t        moveAngle;
-        MTR_MoveRevolutionsCmdData_t  moveRevolutions;
-        MTR_SetVelocityCmdData_t      setVelocity;
-        MTR_SetAccelerationCmdData_t  setAcceleration;
-        MTR_StopCmdData_t             stop;
-        MTR_GetCurrentAngleCmdData_t  getCurrentAngle;
-        MTR_GetMovementStateCmdData_t getMovementState;
-        MTR_WaitUntilStoppedCmdData_t waitUntilStopped;
-        MTR_SynchronizedMoveCmdData_t synchronizedMove;
-        MTR_SetRunCurrentCmdData_t    setRunCurrent;
-        MTR_SetHoldCurrentCmdData_t   setHoldCurrent;
-        MTR_InitMotorCmdData_t        initMotor;
+        MTR_MoveAngleCmdData_t            moveAngle;
+        MTR_MoveRevolutionsCmdData_t      moveRevolutions;
+        MTR_SetVelocityCmdData_t          setVelocity;
+        MTR_SetAccelerationCmdData_t      setAcceleration;
+        MTR_StopCmdData_t                 stop;
+        MTR_GetCurrentAngleCmdData_t      getCurrentAngle;
+        MTR_GetMovementStateCmdData_t     getMovementState;
+        MTR_WaitUntilStoppedCmdData_t     waitUntilStopped;
+        MTR_SynchronizedMoveCmdData_t     synchronizedMove;
+        MTR_SetRunCurrentCmdData_t        setRunCurrent;
+        MTR_SetHoldCurrentCmdData_t       setHoldCurrent;
+        MTR_InitMotorCmdData_t            initMotor;
+        MTR_EnableFreewheellingCmdData_t  enableFreewheeling;
+        MTR_DisableFreewheellingCmdData_t disableFreewheeling;
     } data;
 } MTR_CmdQueueItem_t;
 
@@ -140,6 +156,8 @@ typedef struct _MTR_MotorHandleImpl
     uint8_t      microstep;
     double       reductionFactor;
     char*        label;
+    uint8_t      freewheeling;        /**< 1 if motor is in freewheeling mode, 0 otherwise */
+    double       previousHoldCurrent; /**< Hold current before freewheeling was enabled */
 } MTR_MotorHandleImpl_t;
 
 typedef struct _MTR_HandlesArrayItem
@@ -185,6 +203,8 @@ static status_t synchronized_move(MTR_MotorHandle_t* handles, double* angles, ui
                                   TickType_t deadline);
 static status_t set_run_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline);
 static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline);
+static status_t enable_freewheeling(MTR_MotorHandle_t handle, TickType_t deadline);
+static status_t disable_freewheeling(MTR_MotorHandle_t handle, TickType_t deadline);
 static inline status_t calculate_sync_motion_parameters(MTR_MotorHandle_t* handles, double* angles,
                                                         uint8_t count, int32_t* stepCounts,
                                                         double* originalVelocities,
@@ -211,8 +231,8 @@ static void            process(void);
  *     Private Variables     *
  *****************************/
 
-static MTR_HandlesArrayItem_t motorHandles[MAX_MOTORS] = {0};
-static QueueHandle_t          cmdQueue = NULL;
+static MTR_HandlesArrayItem_t motorHandles[MAX_MOTORS]             = {0};
+static QueueHandle_t          cmdQueue                             = NULL;
 static THE_CmdHandleImpl_t    cmdHandles[MTR_MAX_CMD_HANDLE_COUNT] = {0};
 
 static volatile uint8_t emergencyStopFlag = 0;
@@ -410,7 +430,8 @@ status_t MTR_emergency_stop(MTR_MotorHandle_t handle)
     // Set emergency stop flag directly (no queue)
     emergencyStopFlag = 1;
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Emergency stop triggered - all motors will stop immediately", handle->label);
+    snprintf(logMsg, sizeof(logMsg),
+             "[%s] Emergency stop triggered - all motors will stop immediately", handle->label);
     LOG_WARN(logMsg);
 
     return kStatus_Success;
@@ -534,6 +555,38 @@ status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, 
     return send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
+status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                       THE_CmdHandle_t* cmdHandle)
+{
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_CmdQueueItem_t queueItem;
+    queueItem.type     = MTR_CMD_ENABLE_FREEWHEELING;
+    queueItem.handle   = handle;
+    queueItem.deadline = deadline;
+
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
+}
+
+status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                        THE_CmdHandle_t* cmdHandle)
+{
+    if (handle == NULL || cmdHandle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_CmdQueueItem_t queueItem;
+    queueItem.type     = MTR_CMD_DISABLE_FREEWHEELING;
+    queueItem.handle   = handle;
+    queueItem.deadline = deadline;
+
+    return send_cmd_async(&queueItem, deadline, cmdHandle);
+}
+
 int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method)
 {
     return angle_to_steps(handle, angle, method);
@@ -561,7 +614,7 @@ static void process(void)
         {
             activeTaskCount++;
             taskStatus =
-            THE_cmd_check_all(parallelTasks[i].cmdHandles, parallelTasks[i].count, NULL);
+                THE_cmd_check_all(parallelTasks[i].cmdHandles, parallelTasks[i].count, NULL);
             if (taskStatus == kStatus_Busy)
             {
                 continue;
@@ -684,6 +737,12 @@ static void process(void)
             case MTR_CMD_INIT_MOTOR:
                 cmdStatus = init_motor(queueItem.data.initMotor.config, queueItem.deadline);
                 break;
+            case MTR_CMD_ENABLE_FREEWHEELING:
+                cmdStatus = enable_freewheeling(queueItem.handle, queueItem.deadline);
+                break;
+            case MTR_CMD_DISABLE_FREEWHEELING:
+                cmdStatus = disable_freewheeling(queueItem.handle, queueItem.deadline);
+                break;
             default:
             {
                 static char errMsg[100];
@@ -751,14 +810,16 @@ static status_t send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadlin
     status_t sendStatus = THE_send_cmd(cmdQueue, queueItem, deadline, internaleCmdHandle);
     if (sendStatus != kStatus_Success)
     {
-    	if(cmdHandle != NULL){
+        if (cmdHandle != NULL)
+        {
             THE_remove_cmd_handle_ref(*cmdHandle);
             *cmdHandle = NULL;
-    	}
+        }
         return kStatus_Fail;
     }
-    if(cmdHandle != NULL){
-    *cmdHandle = internaleCmdHandle;
+    if (cmdHandle != NULL)
+    {
+        *cmdHandle = internaleCmdHandle;
     }
     return kStatus_Success;
 }
@@ -769,8 +830,10 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
 
     if (config.stepAngle <= 0.0 || config.microstep == 0 || config.reductionFactor <= 0.0)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Invalid motor configuration: stepAngle=%.4f, microstep=%d, reductionFactor=%.4f",
-                 config.label, config.stepAngle, config.microstep, config.reductionFactor);
+        snprintf(
+            logMsg, sizeof(logMsg),
+            "[%s] Invalid motor configuration: stepAngle=%.4f, microstep=%d, reductionFactor=%.4f",
+            config.label, config.stepAngle, config.microstep, config.reductionFactor);
         LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
@@ -783,12 +846,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     stepperConfig.stepPort              = config.stepperConfig.stepPort;
     stepperConfig.stepGPIO              = config.stepperConfig.stepGPIO;
     stepperConfig.stepPin               = config.stepperConfig.stepPin;
-    stepperConfig.stepMuxFTM            = config.stepperConfig.stepMuxFTM;
-    stepperConfig.stepMuxGPIO           = config.stepperConfig.stepMuxGPIO;
     stepperConfig.dirPort               = config.stepperConfig.dirPort;
-    stepperConfig.dirGPIO               = config.stepperConfig.dirGPIO;
     stepperConfig.dirPin                = config.stepperConfig.dirPin;
-    stepperConfig.dirMux                = config.stepperConfig.dirMux;
     stepperConfig.dirLogicHighClockwise = config.stepperConfig.dirLogicHighClockwise;
     stepperConfig.label                 = config.label;
 
@@ -800,7 +859,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     THE_CmdHandle_t stepCmdHandle = NULL;
     if (STP_init_handle_async(stepperConfig, deadline, &stepCmdHandle) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize stepper motor handle", config.label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize stepper motor handle",
+                 config.label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -821,14 +881,16 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     THE_CmdHandle_t tmcCmdHandle = NULL;
     if (TMC_init_handle_async(tmcConfig, deadline, &tmcCmdHandle) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize TMC driver handle", config.label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to initialize TMC driver handle",
+                 config.label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
 
     if (wait_for_cmd_handle(stepCmdHandle, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Stepper initialization timed out or failed", config.label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Stepper initialization timed out or failed",
+                 config.label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -838,14 +900,16 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     if (STP_get_handle_by_label(config.label, &stepperHandle) != kStatus_Success ||
         stepperHandle == NULL)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to retrieve stepper handle after initialization", config.label);
+        snprintf(logMsg, sizeof(logMsg),
+                 "[%s] Failed to retrieve stepper handle after initialization", config.label);
         LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
 
     if (wait_for_cmd_handle(tmcCmdHandle, deadline) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] TMC initialization timed out or failed", config.label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] TMC initialization timed out or failed",
+                 config.label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -853,7 +917,8 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
     TMC_Handle_t tmcHandle = NULL;
     if (TMC_get_handle_by_label(config.label, &tmcHandle) != kStatus_Success || tmcHandle == NULL)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to retrieve TMC handle after initialization", config.label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to retrieve TMC handle after initialization",
+                 config.label);
         LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
@@ -872,20 +937,25 @@ static status_t init_motor(MTR_MotorConfig_t config, TickType_t deadline)
 
     if (handleIndex == MAX_MOTORS)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] No free motor handle slots available (max %d motors)", config.label, MAX_MOTORS);
+        snprintf(logMsg, sizeof(logMsg),
+                 "[%s] No free motor handle slots available (max %d motors)", config.label,
+                 MAX_MOTORS);
         LOG_FATAL(logMsg);
         return kStatus_Fail;
     }
 
-    MTR_MotorHandle_t newHandle = &motorHandles[handleIndex].handle;
-    newHandle->stepperHandle    = stepperHandle;
-    newHandle->tmcHandle        = tmcHandle;
-    newHandle->stepAngle        = config.stepAngle;
-    newHandle->microstep        = config.microstep;
-    newHandle->reductionFactor  = config.reductionFactor;
-    newHandle->label            = config.label;
+    MTR_MotorHandle_t newHandle    = &motorHandles[handleIndex].handle;
+    newHandle->stepperHandle       = stepperHandle;
+    newHandle->tmcHandle           = tmcHandle;
+    newHandle->stepAngle           = config.stepAngle;
+    newHandle->microstep           = config.microstep;
+    newHandle->reductionFactor     = config.reductionFactor;
+    newHandle->label               = config.label;
+    newHandle->freewheeling        = 0;
+    newHandle->previousHoldCurrent = config.tmcConfig.iHoldCurrentA;
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Motor initialized successfully (step=%.2f°, microstep=%d, reduction=%.2f)",
+    snprintf(logMsg, sizeof(logMsg),
+             "[%s] Motor initialized successfully (step=%.2f°, microstep=%d, reduction=%.2f)",
              config.label, config.stepAngle, config.microstep, config.reductionFactor);
     LOG_INFO(logMsg);
 
@@ -977,7 +1047,8 @@ static status_t move_angle(MTR_MotorHandle_t handle, double angle, TickType_t de
     if (STP_move_relative_async(handle->stepperHandle, steps, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue relative move command", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue relative move command",
+                 handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -1017,7 +1088,8 @@ static status_t move_absolute_angle(MTR_MotorHandle_t handle, double angle, Tick
     if (STP_move_relative_async(handle->stepperHandle, stepsToMove, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue absolute move command", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue absolute move command",
+                 handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -1069,7 +1141,8 @@ static status_t set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_s
             angle_to_steps(handle, fabs(velocity_deg_per_sec), ROUND_NEAREST), deadline,
             &cmdHandle) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue velocity change command", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue velocity change command",
+                 handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -1101,7 +1174,8 @@ static status_t set_acceleration(MTR_MotorHandle_t handle, double acceleration_d
             angle_to_steps(handle, fabs(acceleration_deg_per_sec2), ROUND_NEAREST), deadline,
             &cmdHandle) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue acceleration change command", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue acceleration change command",
+                 handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -1400,7 +1474,8 @@ static status_t set_run_current(MTR_MotorHandle_t handle, double current_a, Tick
     uint8_t divider = 0;
     if (TMC_current_to_divider((float)current_a, TMC_ROUND_NEAREST, &divider) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Requested run current %.3f A is out of valid range", handle->label, current_a);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Requested run current %.3f A is out of valid range",
+                 handle->label, current_a);
         LOG_WARN(logMsg);
         return kStatus_Fail;
     }
@@ -1441,7 +1516,8 @@ static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, Tic
     uint8_t divider = 0;
     if (TMC_current_to_divider((float)current_a, TMC_ROUND_NEAREST, &divider) != kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Requested hold current %.3f A is out of valid range", handle->label, current_a);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Requested hold current %.3f A is out of valid range",
+                 handle->label, current_a);
         LOG_WARN(logMsg);
         return kStatus_Fail;
     }
@@ -1450,7 +1526,8 @@ static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, Tic
     if (TMC_set_ihold_divider_async(handle->tmcHandle, divider, deadline, &cmdHandle) !=
         kStatus_Success)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue hold current command", handle->label);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue hold current command",
+                 handle->label);
         LOG_ERROR(logMsg);
         return kStatus_Fail;
     }
@@ -1464,5 +1541,86 @@ static status_t set_hold_current(MTR_MotorHandle_t handle, double current_a, Tic
              current_a);
     LOG_DEBUG(logMsg);
 
+    return kStatus_Success;
+}
+
+static status_t enable_freewheeling(MTR_MotorHandle_t handle, TickType_t deadline)
+{
+    static char logMsg[100];
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_MotorHandleImpl_t* motorHandle = (MTR_MotorHandleImpl_t*)handle;
+
+    // Call TMC2209 freewheeling enable
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (TMC_enable_freewheeling_async(motorHandle->tmcHandle, deadline, &cmdHandle) !=
+        kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue freewheeling enable command",
+                 handle->label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
+    }
+
+    if (wait_for_cmd_handle(cmdHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    motorHandle->freewheeling = 1;
+    snprintf(logMsg, sizeof(logMsg), "[%s] Freewheeling mode enabled", handle->label);
+    LOG_INFO(logMsg);
+    return kStatus_Success;
+}
+
+static status_t disable_freewheeling(MTR_MotorHandle_t handle, TickType_t deadline)
+{
+    static char logMsg[100];
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_MotorHandleImpl_t* motorHandle = (MTR_MotorHandleImpl_t*)handle;
+
+    if (!motorHandle->freewheeling)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Motor is not in freewheeling mode", handle->label);
+        LOG_WARN(logMsg);
+        return kStatus_Fail;
+    }
+
+    // Call TMC2209 freewheeling disable
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (TMC_disable_freewheeling_async(motorHandle->tmcHandle, deadline, &cmdHandle) !=
+        kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to queue freewheeling disable command",
+                 handle->label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
+    }
+
+    if (wait_for_cmd_handle(cmdHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    // Home the motor after freewheeling
+    if (set_home_position(handle) != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to home motor after disabling freewheeling",
+                 handle->label);
+        LOG_ERROR(logMsg);
+        motorHandle->freewheeling = 0; // Still mark as not freewheeling
+        return kStatus_Fail;
+    }
+
+    motorHandle->freewheeling = 0;
+    snprintf(logMsg, sizeof(logMsg), "[%s] Freewheeling mode disabled, motor homed", handle->label);
+    LOG_INFO(logMsg);
     return kStatus_Success;
 }

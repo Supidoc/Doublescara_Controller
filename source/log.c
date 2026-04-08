@@ -13,6 +13,7 @@
 #include "cli.h"
 #include "cli_utilities.h"
 #include "disk.h"
+#include "event_groups.h"
 #include "peripherals.h"
 #include "queue.h"
 #include "stdio.h"
@@ -26,6 +27,8 @@
 #define LOG_MAGIC 0x4C4F4746 // Magic Number to identify fileformat ASCII "LOGF"
 
 #define LOG_MAX_LEVEL_STRING_SIZE 5
+
+#define LOG_QUEUE_EMPTY_EVENT (1 << 0)
 
 // Example Log Message: [INFO]:[MC_Task]:[t+113210123]: message \r\n\0
 #define LOG_MAX_LOG_LINE_SIZE                                                                      \
@@ -65,11 +68,11 @@ typedef struct _LOG_LogHeader
  *     Private Function Declarations     *
  *****************************************/
 
-static void       assemble_log_string(char* dest, LOG_QueueItem_t queueItem);
+static void       assemble_log_string(char* dest, size_t destSize, LOG_QueueItem_t queueItem);
 static status_t   append_to_file(uint8_t* buffer, size_t bufferLength);
 static void       process(void);
 static status_t   set_session_id(void);
-static void       assemble_header_string(char* dest, LOG_LogHeader_t header);
+static void       assemble_header_string(char* dest, size_t destSize, LOG_LogHeader_t header);
 static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
                               const char* pcCommandString);
 static BaseType_t log_2_cli_command(char* pcWriteBuffer, size_t xWriteBufferLen,
@@ -109,6 +112,12 @@ static uint8_t     enableLogToConsole = 1;
 static LOG_Level_t consoleLogLevel    = LOG_LEVEL_DEBUG;
 static char        consoleOutputString[CLI_MAX_OUTPUT_LENGTH];
 
+static uint8_t logFileOpened = 0;
+
+static SemaphoreHandle_t logFileMutex = NULL;
+
+static EventGroupHandle_t logQueueEmptyEvent = NULL;
+
 /*********************************************
  *      Public Function Implementations		 *
  *********************************************/
@@ -121,6 +130,18 @@ status_t LOG_init(void)
         return kStatus_Fail;
     }
     vQueueAddToRegistry(logQueue, "LOG Queue");
+
+    logFileMutex = xSemaphoreCreateMutex();
+    if (logFileMutex == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    logQueueEmptyEvent = xEventGroupCreate();
+    if (logQueueEmptyEvent == NULL)
+    {
+        return kStatus_Fail;
+    }
 
     if (set_session_id() != kStatus_Success)
     {
@@ -138,8 +159,6 @@ status_t LOG_init(void)
         return kStatus_Fail;
     }
 
-    f_close(&logFile);
-
     LOG_LogHeader_t logHeader;
     logHeader.magic      = LOG_MAGIC;
     logHeader.headerSize = sizeof(LOG_LogHeader_t);
@@ -148,6 +167,18 @@ status_t LOG_init(void)
     logHeader.tickFreqHz = configTICK_RATE_HZ;
 
     if (append_to_file((uint8_t*)&logHeader, sizeof(LOG_LogHeader_t)) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    res = f_sync(&logFile);
+    if (res != FR_OK)
+    {
+        return kStatus_Fail;
+    }
+
+    res = f_close(&logFile);
+    if (res != FR_OK)
     {
         return kStatus_Fail;
     }
@@ -174,6 +205,13 @@ status_t LOG_send_log_message(LOG_Level_t level, char* message, uint8_t silent)
     {
         return kStatus_Fail;
     }
+
+    // Clear the queue empty event bit since we just added a message
+    if (logQueueEmptyEvent != NULL)
+    {
+        xEventGroupClearBits(logQueueEmptyEvent, LOG_QUEUE_EMPTY_EVENT);
+    }
+
     return kStatus_Success;
 }
 
@@ -189,6 +227,24 @@ void LOG_task(void* pvParameters)
     }
 }
 
+status_t LOG_wait_for_queue_empty(TickType_t xTicksToWait)
+{
+    if (logQueueEmptyEvent == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    // Don't clear the bit on return - it stays set as long as queue is empty
+    EventBits_t bits = xEventGroupWaitBits(logQueueEmptyEvent, LOG_QUEUE_EMPTY_EVENT, pdFALSE,
+                                           pdFALSE, xTicksToWait);
+
+    if (bits & LOG_QUEUE_EMPTY_EVENT)
+    {
+        return kStatus_Success;
+    }
+    return kStatus_Fail;
+}
+
 /**********************************************
  *      Private Function Implementations	  *
  **********************************************/
@@ -196,7 +252,6 @@ void LOG_task(void* pvParameters)
 static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
                               const char* pcCommandString)
 {
-    static uint8_t         fileOpened = 0;
     static uint32_t        fileSessionId;
     FRESULT                res;
     LOG_LogHeaderPrefix_t  prefix;
@@ -205,8 +260,20 @@ static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
     static char            localLogFilePath[11];
     static FIL             localLogFile;
 
-    if (fileOpened != 1u)
+    if (logFileOpened == 0)
     {
+        if (xSemaphoreTake(logFileMutex, portMAX_DELAY) != pdTRUE)
+        {
+            return kStatus_Fail;
+        }
+
+        res = f_open(&logFile, LogFilePath, FA_WRITE | FA_OPEN_ALWAYS);
+        if (res != FR_OK)
+        {
+            return kStatus_Fail;
+        }
+        logFileOpened = 1;
+
         uint8_t     parameterFound;
         const char* pcParameter = NULL;
         BaseType_t  parameterStringLength;
@@ -249,9 +316,9 @@ static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
             return pdFALSE;
         }
 
-        assemble_header_string(pcWriteBuffer, header);
+        assemble_header_string(pcWriteBuffer, xWriteBufferLen, header);
 
-        fileOpened = 1u;
+        logFileOpened = 1;
     }
     else
     {
@@ -261,7 +328,7 @@ static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
 
         if (br == sizeof(LOG_QueueItem_t))
         {
-            assemble_log_string(pcWriteBuffer, queueItem);
+            assemble_log_string(pcWriteBuffer, xWriteBufferLen, queueItem);
         }
     }
     if (f_eof(&localLogFile) == 0)
@@ -269,8 +336,24 @@ static BaseType_t log_command(char* pcWriteBuffer, size_t xWriteBufferLen,
         return pdTRUE;
     }
 
+    res = f_sync(&logFile);
+    if (res != FR_OK)
+    {
+        return kStatus_Fail;
+    }
+
+    res = f_close(&logFile);
+    if (res != FR_OK)
+    {
+        return kStatus_Fail;
+    }
+    if (xSemaphoreGive(logFileMutex) != pdTRUE)
+    {
+        return kStatus_Fail;
+    }
+
     f_close(&localLogFile);
-    fileOpened = 0u;
+    logFileOpened = 0;
     return pdFALSE;
 }
 
@@ -331,10 +414,9 @@ static BaseType_t log_2_cli_command(char* pcWriteBuffer, size_t xWriteBufferLen,
     return pdFALSE;
 }
 
-static void assemble_log_string(char* dest, LOG_QueueItem_t queueItem)
+static void assemble_log_string(char* dest, size_t destSize, LOG_QueueItem_t queueItem)
 {
-
-    char* levelString;
+    const char* levelString;
     switch (queueItem.level)
     {
         case LOG_LEVEL_DEBUG:
@@ -352,56 +434,24 @@ static void assemble_log_string(char* dest, LOG_QueueItem_t queueItem)
         case LOG_LEVEL_FATAL:
             levelString = "FATAL";
             break;
-    };
-
-    strcpy(dest, "[");
-
-    strcat(dest, levelString);
-
-    strcat(dest, "]:[");
-
-    strcat(dest, queueItem.taskName);
-
-    strcat(dest, "]:[t+");
+        default:
+            levelString = "UNKNOWN";
+            break;
+    }
 
     uint32_t timestampMs = pdTICKS_TO_MS(queueItem.tick);
-    char     timestampString[21];
-    sprintf(timestampString, "%lu", (uint32_t)timestampMs);
-    strcat(dest, timestampString);
-
-    strcat(dest, "]:");
-
-    strcat(dest, queueItem.msg);
-
-    strcat(dest, " \r\n\0");
+    snprintf(dest, destSize, "[%s]:[%s]:[t+%lu]:%s \r\n", levelString, queueItem.taskName,
+             (uint32_t)timestampMs, queueItem.msg);
 }
 
-static void assemble_header_string(char* dest, LOG_LogHeader_t header)
+static void assemble_header_string(char* dest, size_t destSize, LOG_LogHeader_t header)
 {
-
-    strcpy(dest, "Session: ");
-
-    char sessionIdString[11];
-    sprintf(sessionIdString, "%lu", header.sessionId);
-    strcat(dest, sessionIdString);
-
-    strcat(dest, " Version: ");
-
-    char versionString[6];
-    sprintf(versionString, "%d", header.version);
-    strcat(dest, versionString);
-
-    strcat(dest, " \r\n\0");
+    snprintf(dest, destSize, "Session: %lu Version: %d \r\n", header.sessionId, header.version);
 }
 
 static status_t append_to_file(uint8_t* buffer, size_t bufferLength)
 {
     FRESULT res;
-    res = f_open(&logFile, LogFilePath, FA_WRITE | FA_OPEN_ALWAYS);
-    if (res != FR_OK)
-    {
-        return kStatus_Fail;
-    }
 
     res = f_lseek(&logFile, f_size(&logFile));
     if (res != FR_OK)
@@ -416,18 +466,6 @@ static status_t append_to_file(uint8_t* buffer, size_t bufferLength)
         return kStatus_Fail;
     }
 
-    res = f_sync(&logFile);
-    if (res != FR_OK)
-    {
-        return kStatus_Fail;
-    }
-
-    res = f_close(&logFile);
-    if (res != FR_OK)
-    {
-        return kStatus_Fail;
-    }
-
     return kStatus_Success;
 }
 
@@ -435,6 +473,7 @@ static void process(void)
 {
     LOG_QueueItem_t queueItem;
     BaseType_t      status;
+    FRESULT         res;
     status = xQueueReceive(logQueue, &queueItem, portMAX_DELAY);
     if (status != pdPASS)
     {
@@ -443,15 +482,80 @@ static void process(void)
 
     if (enableLogToConsole && queueItem.level > consoleLogLevel && queueItem.silent == 0)
     {
-        assemble_log_string(consoleOutputString, queueItem);
-        size_t len = strlen((char*)consoleOutputString);
+        const char* levelString;
+        switch (queueItem.level)
+        {
+            case LOG_LEVEL_DEBUG:
+                levelString = "DEBUG";
+                break;
+            case LOG_LEVEL_INFO:
+                levelString = "INFO";
+                break;
+            case LOG_LEVEL_WARN:
+                levelString = "WARN";
+                break;
+            case LOG_LEVEL_ERROR:
+                levelString = "ERROR";
+                break;
+            case LOG_LEVEL_FATAL:
+                levelString = "FATAL";
+                break;
+            default:
+                levelString = "UNKNOWN";
+                break;
+        }
+        size_t len = snprintf(consoleOutputString, CLI_MAX_OUTPUT_LENGTH,
+                              "[%s]:[%s]:[t+%lu]:%s \r\n", levelString, queueItem.taskName,
+                              (uint32_t)pdTICKS_TO_MS(queueItem.tick), queueItem.msg);
 #if CLI_USE_RTT
-        SEGGER_RTT_Write(0, consoleOutputString, len);
+        SEGGER_RTT_Write(0, (const uint8_t*)consoleOutputString, len);
 #else
         LPUART_RTOS_Send(&LPUART0_rtos_handle, (uint8_t*)consoleOutputString, len);
 #endif
     }
+
+    if (logFileOpened == 0)
+    {
+
+        if (xSemaphoreTake(logFileMutex, portMAX_DELAY) != pdTRUE)
+        {
+            return;
+        }
+
+        res = f_open(&logFile, LogFilePath, FA_WRITE | FA_OPEN_ALWAYS);
+        if (res != FR_OK)
+        {
+            return;
+        }
+        logFileOpened = 1;
+    }
+
     append_to_file((uint8_t*)&queueItem, sizeof(queueItem));
+
+    if (xQueuePeek(logQueue, &queueItem, 0) != pdPASS)
+    {
+        res = f_sync(&logFile);
+        if (res != FR_OK)
+        {
+            return;
+        }
+
+        res = f_close(&logFile);
+        if (res != FR_OK)
+        {
+            return;
+        }
+
+        logFileOpened = 0;
+
+        if (xSemaphoreGive(logFileMutex) != pdTRUE)
+        {
+            return;
+        }
+
+        // Signal all waiting tasks that queue is empty
+        xEventGroupSetBits(logQueueEmptyEvent, LOG_QUEUE_EMPTY_EVENT);
+    }
 }
 
 static status_t set_session_id(void)

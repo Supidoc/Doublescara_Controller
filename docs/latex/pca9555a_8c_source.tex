@@ -1,0 +1,349 @@
+\doxysection{pca9555a.\+c}
+\hypertarget{pca9555a_8c_source}{}\label{pca9555a_8c_source}\index{source/pca9555a.c@{source/pca9555a.c}}
+\doxymbox{\hyperlink{pca9555a_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ pca9555a.c}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 2\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pca9555a_8h}{pca9555a.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}stdint.h"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}fsl\_i2c\_freertos.h"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00018}00018\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00020}00020\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00022}00022\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00024}00024\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00026}\doxymbox{\hyperlink{pca9555a_8c_a475a8e0f9c3c404afb81b1940a06f516}{00026}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_I0\ 0x0}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00027}\doxymbox{\hyperlink{pca9555a_8c_a86a98e603bcb3a24c5b43d395005eec7}{00027}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_I1\ 0x1}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00028}\doxymbox{\hyperlink{pca9555a_8c_a9c331d12c744ce288aab6d0f7c659036}{00028}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_O0\ 0x2}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00029}\doxymbox{\hyperlink{pca9555a_8c_abb0dbe73c2443d7c7cfc0586866c89fd}{00029}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_O1\ 0x3}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00030}\doxymbox{\hyperlink{pca9555a_8c_a1d312add07ec1bdc3996af2d264206b6}{00030}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_PI0\ 0x4}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00031}\doxymbox{\hyperlink{pca9555a_8c_afed27e9607f98a71b692b721c636cda4}{00031}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_PI1\ 0x5}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00032}\doxymbox{\hyperlink{pca9555a_8c_ab344e972d0cea3da704b5c3e5494ba8d}{00032}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_C0\ 0x6}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00033}\doxymbox{\hyperlink{pca9555a_8c_a31022e0c585270817a785e3c778d8aa4}{00033}}\ \textcolor{preprocessor}{\#define\ PCA\_REG\_C1\ 0x7}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00035}00035\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00036}00036\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00037}00037\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00039}00039\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00040}00040\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00041}00041\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00043}00043\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00044}00044\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00045}00045\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00047}\doxymbox{\hyperlink{pca9555a_8c_ab6807d601449a7e5b34c653b9ee1680f}{00047}}\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \doxymbox{\hyperlink{pca9555a_8c_ab6807d601449a7e5b34c653b9ee1680f}{pcaMutex}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00049}00049\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00050}00050\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00051}00051\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00052}\doxymbox{\hyperlink{group__PCA9555A_gaf361ecffc6ed08119cf72c49d17d0b93}{00052}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_gaf361ecffc6ed08119cf72c49d17d0b93}{PCA\_init}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00054}00054\ \ \ \ \ \doxymbox{\hyperlink{pca9555a_8c_ab6807d601449a7e5b34c653b9ee1680f}{pcaMutex}}\ =\ xSemaphoreCreateRecursiveMutex();}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{pca9555a_8c_ab6807d601449a7e5b34c653b9ee1680f}{pcaMutex}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00062}\doxymbox{\hyperlink{group__PCA9555A_ga9b5fffd5cfa9578b1b7887b90f09fd9c}{00062}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga9b5fffd5cfa9578b1b7887b90f09fd9c}{PCA\_init\_pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin,\ \doxymbox{\hyperlink{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}{PCA\_Pin\_Config\_t}}\ config)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00063}00063\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00064}00064\ \ \ \ \ i2c\_master\_transfer\_t\ transfer;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00065}00065\ \ \ \ \ transfer.slaveAddress\ \ \ =\ \doxymbox{\hyperlink{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}{PCA\_ADRESS}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00066}00066\ \ \ \ \ transfer.direction\ \ \ \ \ \ =\ kI2C\_Read;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00067}00067\ \ \ \ \ transfer.subaddressSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00068}00068\ \ \ \ \ uint8\_t\ data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (config.\doxymbox{\hyperlink{struct__PCA__Pin__Config_ae632ef3afae76532a6d42f020c7e76a2}{pinDirection}}\ ==\ \doxymbox{\hyperlink{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a0430221f6d3e604bc6a6ae2f8e8cad0a}{PCA\_PIN\_INPUT}})}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (port\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_a1d312add07ec1bdc3996af2d264206b6}{PCA\_REG\_PI0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_afed27e9607f98a71b692b721c636cda4}{PCA\_REG\_PI1}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ transfer.dataSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ transfer.data\ \ \ \ \ =\ \&data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ transfer.flags\ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ input\ pin\ polarity\ register"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ transfer.flags\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ transfer.direction\ =\ kI2C\_Write;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ data\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ (data\ \&\ \string~(0b1\ <<\ pin))\ |\ (config.\doxymbox{\hyperlink{struct__PCA__Pin__Config_a1a3d8967b590c8ca632f3db14de54e03}{polarityInversion}}\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ input\ pin\ polarity"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(\textcolor{stringliteral}{"{}PCA9555A:\ Input\ pin\ configured"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00098}00098\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (port\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_a9c331d12c744ce288aab6d0f7c659036}{PCA\_REG\_O0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_abb0dbe73c2443d7c7cfc0586866c89fd}{PCA\_REG\_O1}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ transfer.dataSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ transfer.data\ \ \ \ \ =\ \&data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ transfer.flags\ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ output\ pin\ configuration"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ transfer.flags\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ transfer.direction\ =\ kI2C\_Write;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ data\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ (data\ \&\ \string~(0b1\ <<\ pin))\ |\ (config.\doxymbox{\hyperlink{struct__PCA__Pin__Config_ab5d9851d665afc92969a795539a29026}{outputLevel}}\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ output\ pin\ level"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(\textcolor{stringliteral}{"{}PCA9555A:\ Output\ pin\ configured"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{if}\ (port\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00126}00126\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_ab344e972d0cea3da704b5c3e5494ba8d}{PCA\_REG\_C0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ transfer.subaddress\ =\ \doxymbox{\hyperlink{pca9555a_8c_a31022e0c585270817a785e3c778d8aa4}{PCA\_REG\_C1}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00133}00133\ \ \ \ \ transfer.dataSize\ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00134}00134\ \ \ \ \ transfer.data\ \ \ \ \ \ =\ \&data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00135}00135\ \ \ \ \ transfer.flags\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00136}00136\ \ \ \ \ transfer.direction\ =\ kI2C\_Read;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00137}00137\ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00138}00138\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ configuration\ register"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00142}00142\ \ \ \ \ transfer.flags\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00143}00143\ \ \ \ \ transfer.direction\ =\ kI2C\_Write;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00144}00144\ \ \ \ \ data\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ (data\ \&\ \string~(0b1\ <<\ pin))\ |\ (config.\doxymbox{\hyperlink{struct__PCA__Pin__Config_ae632ef3afae76532a6d42f020c7e76a2}{pinDirection}}\ <<\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00145}00145\ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00146}00146\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ configuration\ register"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00151}00151\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00153}\doxymbox{\hyperlink{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}{00153}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}{PCA\_Read\_Pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin,\ uint8\_t*\ value)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00154}00154\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00155}00155\ \ \ \ \ uint16\_t\ pins\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00156}00156\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb}{PCA\_Read\_All\_Inputs}}(\&pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00157}00157\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ pin\ -\/\ cannot\ read\ inputs"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00161}00161\ \ \ \ \ *value\ =\ (pins\ \&\ (0b1\ <<\ (port\ *\ 8\ +\ pin)))\ !=\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00162}00162\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00163}00163\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00165}\doxymbox{\hyperlink{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb}{00165}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb}{PCA\_Read\_All\_Inputs}}(uint16\_t*\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00166}00166\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00167}00167\ \ \ \ \ i2c\_master\_transfer\_t\ transfer;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00168}00168\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00170}00170\ \ \ \ \ transfer.slaveAddress\ \ \ =\ \doxymbox{\hyperlink{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}{PCA\_ADRESS}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00171}00171\ \ \ \ \ transfer.direction\ \ \ \ \ \ =\ kI2C\_Read;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00172}00172\ \ \ \ \ transfer.subaddressSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00173}00173\ \ \ \ \ transfer.subaddress\ \ \ \ \ =\ \doxymbox{\hyperlink{pca9555a_8c_a475a8e0f9c3c404afb81b1940a06f516}{PCA\_REG\_I0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00174}00174\ \ \ \ \ transfer.dataSize\ \ \ \ \ \ \ =\ \textcolor{keyword}{sizeof}(data);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00175}00175\ \ \ \ \ transfer.data\ \ \ \ \ \ \ \ \ \ \ =\ (\textcolor{keywordtype}{void}*)\&data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00176}00176\ \ \ \ \ transfer.flags\ \ \ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00178}00178\ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00179}00179\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ input\ register\ -\/\ I2C\ communication\ error"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00182}00182\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00184}00184\ \ \ \ \ *pins\ =\ data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00186}00186\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00188}\doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{00188}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\_Read\_All\_Outputs}}(uint16\_t*\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00189}00189\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00190}00190\ \ \ \ \ i2c\_master\_transfer\_t\ transfer;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00191}00191\ \ \ \ \ uint16\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00193}00193\ \ \ \ \ transfer.slaveAddress\ \ \ =\ \doxymbox{\hyperlink{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}{PCA\_ADRESS}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00194}00194\ \ \ \ \ transfer.direction\ \ \ \ \ \ =\ kI2C\_Read;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00195}00195\ \ \ \ \ transfer.subaddressSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00196}00196\ \ \ \ \ transfer.subaddress\ \ \ \ \ =\ \doxymbox{\hyperlink{pca9555a_8c_a9c331d12c744ce288aab6d0f7c659036}{PCA\_REG\_O0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00197}00197\ \ \ \ \ transfer.dataSize\ \ \ \ \ \ \ =\ \textcolor{keyword}{sizeof}(data);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00198}00198\ \ \ \ \ transfer.data\ \ \ \ \ \ \ \ \ \ \ =\ (\textcolor{keywordtype}{void}*)\&data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00199}00199\ \ \ \ \ transfer.flags\ \ \ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00201}00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00202}00202\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ read\ output\ register\ -\/\ I2C\ communication\ error"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00205}00205\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00207}00207\ \ \ \ \ *pins\ =\ data;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00211}\doxymbox{\hyperlink{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}{00211}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}{PCA\_Write\_Pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin,\ uint8\_t\ value)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00212}00212\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00213}00213\ \ \ \ \ uint16\_t\ pins\ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00214}00214\ \ \ \ \ uint16\_t\ newPinValue\ =\ (value\ \&\ 0b1)\ <<\ (port\ *\ 8\ +\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00216}00216\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\_Read\_All\_Outputs}}(\&pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00217}00217\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ pin\ -\/\ cannot\ read\ current\ output\ state"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00221}00221\ \ \ \ \ pins\ =\ (pins\ \&\ \string~(0b1\ <<\ (port\ *\ 8\ +\ pin)))\ |\ newPinValue;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00223}00223\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\_Write\_All\_Outputs}}(pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00224}00224\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ pin\ output"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00227}00227\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00229}00229\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00231}\doxymbox{\hyperlink{group__PCA9555A_ga8f85119f9f05f6514d831668c6417cee}{00231}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga8f85119f9f05f6514d831668c6417cee}{PCA\_Set\_Pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00232}00232\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00233}00233\ \ \ \ \ uint16\_t\ pins\ =\ 0b1\ <<\ (port\ *\ 8\ +\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00235}00235\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae}{PCA\_Set\_All\_Outputs}}(pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00236}00236\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ set\ pin"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00241}00241\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00243}\doxymbox{\hyperlink{group__PCA9555A_ga7abd96400a6815b71eefe457c084fe43}{00243}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga7abd96400a6815b71eefe457c084fe43}{PCA\_Clear\_Pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00244}00244\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00245}00245\ \ \ \ \ uint16\_t\ pins\ =\ 0b1\ <<\ (port\ *\ 8\ +\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01}{PCA\_Clear\_All\_Outputs}}(pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00248}00248\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ clear\ pin"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00251}00251\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00253}00253\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00255}\doxymbox{\hyperlink{group__PCA9555A_ga76d0d80d27591cc8f575ac36f4628607}{00255}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga76d0d80d27591cc8f575ac36f4628607}{PCA\_Toggle\_Pin}}(\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\_Port\_t}}\ port,\ uint8\_t\ pin)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00257}00257\ \ \ \ \ uint16\_t\ pins\ =\ 0b1\ <<\ (port\ *\ 8\ +\ pin);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00259}00259\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4}{PCA\_Toggle\_All\_Outputs}}(pins)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00260}00260\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ toggle\ pin"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00263}00263\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00265}00265\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00267}\doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{00267}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\_Write\_All\_Outputs}}(uint16\_t\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00268}00268\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00269}00269\ \ \ \ \ i2c\_master\_transfer\_t\ transfer;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00271}00271\ \ \ \ \ transfer.slaveAddress\ \ \ =\ \doxymbox{\hyperlink{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}{PCA\_ADRESS}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00272}00272\ \ \ \ \ transfer.direction\ \ \ \ \ \ =\ kI2C\_Write;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00273}00273\ \ \ \ \ transfer.subaddressSize\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00274}00274\ \ \ \ \ transfer.subaddress\ \ \ \ \ =\ \doxymbox{\hyperlink{pca9555a_8c_a9c331d12c744ce288aab6d0f7c659036}{PCA\_REG\_O0}};}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00275}00275\ \ \ \ \ transfer.dataSize\ \ \ \ \ \ \ =\ \textcolor{keyword}{sizeof}(pins);}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00276}00276\ \ \ \ \ transfer.data\ \ \ \ \ \ \ \ \ \ \ =\ (\textcolor{keywordtype}{void}*)\&pins;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00278}00278\ \ \ \ \ \textcolor{keywordflow}{if}\ (I2C\_RTOS\_Transfer(\doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\_I2C\_HANDLE}},\ \&transfer)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00279}00279\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ write\ output\ register\ -\/\ I2C\ communication\ error"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00282}00282\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00285}00285\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00287}\doxymbox{\hyperlink{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae}{00287}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae}{PCA\_Set\_All\_Outputs}}(uint16\_t\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00288}00288\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00289}00289\ \ \ \ \ uint16\_t\ data\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00290}00290\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\_Read\_All\_Outputs}}(\&data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00291}00291\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00292}00292\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ set\ pins\ -\/\ cannot\ read\ current\ output\ state"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00294}00294\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00295}00295\ \ \ \ \ data\ |=\ pins;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00297}00297\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\_Write\_All\_Outputs}}(data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00298}00298\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ set\ pins\ -\/\ write\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00301}00301\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00302}00302\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00303}00303\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00305}\doxymbox{\hyperlink{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01}{00305}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01}{PCA\_Clear\_All\_Outputs}}(uint16\_t\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00306}00306\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00307}00307\ \ \ \ \ uint16\_t\ data\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00308}00308\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\_Read\_All\_Outputs}}(\&data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00309}00309\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ clear\ pins\ -\/\ cannot\ read\ current\ output\ state"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00313}00313\ \ \ \ \ data\ \&=\ \string~pins;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\_Write\_All\_Outputs}}(data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00316}00316\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ clear\ pins\ -\/\ write\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00319}00319\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00321}00321\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00323}\doxymbox{\hyperlink{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4}{00323}}\ status\_t\ \doxymbox{\hyperlink{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4}{PCA\_Toggle\_All\_Outputs}}(uint16\_t\ pins)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00324}00324\ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00325}00325\ \ \ \ \ uint16\_t\ data\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00326}00326\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\_Read\_All\_Outputs}}(\&data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00327}00327\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ toggle\ pins\ -\/\ cannot\ read\ current\ output\ state"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00330}00330\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00331}00331\ \ \ \ \ data\ \string^=\ pins;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00333}00333\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\_Write\_All\_Outputs}}(data)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00334}00334\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00335}00335\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}PCA9555A:\ Failed\ to\ toggle\ pins\ -\/\ write\ failed"{}});}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00337}00337\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00338}00338\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00339}00339\ \}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00341}00341\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00342}00342\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{pca9555a_8c_source_l00343}00343\ \textcolor{comment}{\ ********************************************/}}
+
+\end{DoxyCode}

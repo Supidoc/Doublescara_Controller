@@ -44,9 +44,9 @@ void BOARD_InitBootPins(void)
 BOARD_InitPins:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: '1', peripheral: UART1, signal: TX, pin_signal: ADC1_SE4a/PTE0/CLKOUT32K/SPI1_PCS1/UART1_TX/I2C1_SDA/RTC_CLKOUT, direction: OUTPUT, open_drain: enable,
+  - {pin_num: '1', peripheral: UART1, signal: TX, pin_signal: ADC1_SE4a/PTE0/CLKOUT32K/SPI1_PCS1/UART1_TX/I2C1_SDA/RTC_CLKOUT, direction: OUTPUT, open_drain: disable,
     pull_select: up, pull_enable: disable}
-  - {pin_num: '2', peripheral: UART1, signal: RX, pin_signal: ADC1_SE5a/PTE1/LLWU_P0/SPI1_SOUT/UART1_RX/I2C1_SCL/SPI1_SIN, open_drain: disable}
+  - {pin_num: '2', peripheral: UART1, signal: RX, pin_signal: ADC1_SE5a/PTE1/LLWU_P0/SPI1_SOUT/UART1_RX/I2C1_SCL/SPI1_SIN, open_drain: disable, pull_select: up, pull_enable: disable}
   - {pin_num: '49', peripheral: LPUART0, signal: TX, pin_signal: PTC4/LLWU_P8/SPI0_PCS0/UART1_TX/FTM0_CH3/FB_AD11/CMP1_OUT/LPUART0_TX}
   - {pin_num: '46', peripheral: LPUART0, signal: RX, pin_signal: CMP1_IN1/PTC3/LLWU_P7/SPI0_PCS1/UART1_RX/FTM0_CH2/CLKOUT/I2S0_TX_BCLK/LPUART0_RX}
   - {pin_num: '57', peripheral: FTM3, signal: 'CH, 0', pin_signal: PTD0/LLWU_P12/SPI0_PCS0/UART2_RTS_b/FTM3_CH0/FB_ALE/FB_CS1_b/FB_TS_b/LPUART0_RTS_b, direction: OUTPUT}
@@ -55,12 +55,12 @@ BOARD_InitPins:
   - {pin_num: '54', peripheral: FTM3, signal: 'CH, 5', pin_signal: ADC1_SE5b/CMP0_IN3/PTC9/FTM3_CH5/I2S0_RX_BCLK/FB_AD6/FTM2_FLT0}
   - {pin_num: '55', peripheral: FTM3, signal: 'CH, 6', pin_signal: ADC1_SE6b/PTC10/I2C1_SCL/FTM3_CH6/I2S0_RX_FS/FB_AD5}
   - {pin_num: '56', peripheral: FTM3, signal: 'CH, 7', pin_signal: ADC1_SE7b/PTC11/LLWU_P11/I2C1_SDA/FTM3_CH7/FB_RW_b}
-  - {pin_num: '63', peripheral: UART0, signal: RX, pin_signal: ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT}
-  - {pin_num: '64', peripheral: UART0, signal: TX, pin_signal: PTD7/UART0_TX/FTM0_CH7/FTM0_FLT1/SPI1_SIN}
-  - {pin_num: '59', peripheral: UART2, signal: RX, pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/LPUART0_RX/I2C0_SCL}
-  - {pin_num: '60', peripheral: UART2, signal: TX, pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/LPUART0_TX/I2C0_SDA}
-  - {pin_num: '35', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE8/ADC1_SE8/PTB0/LLWU_P5/I2C0_SCL/FTM1_CH0/FTM1_QD_PHA}
-  - {pin_num: '36', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE9/ADC1_SE9/PTB1/I2C0_SDA/FTM1_CH1/FTM1_QD_PHB}
+  - {pin_num: '63', peripheral: UART0, signal: RX, pin_signal: ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT, pull_select: up, pull_enable: disable}
+  - {pin_num: '64', peripheral: UART0, signal: TX, pin_signal: PTD7/UART0_TX/FTM0_CH7/FTM0_FLT1/SPI1_SIN, pull_select: up, pull_enable: disable}
+  - {pin_num: '59', peripheral: UART2, signal: RX, pin_signal: PTD2/LLWU_P13/SPI0_SOUT/UART2_RX/FTM3_CH2/FB_AD4/LPUART0_RX/I2C0_SCL, pull_select: up}
+  - {pin_num: '60', peripheral: UART2, signal: TX, pin_signal: PTD3/SPI0_SIN/UART2_TX/FTM3_CH3/FB_AD3/LPUART0_TX/I2C0_SDA, pull_select: up}
+  - {pin_num: '35', peripheral: I2C0, signal: SCL, pin_signal: ADC0_SE8/ADC1_SE8/PTB0/LLWU_P5/I2C0_SCL/FTM1_CH0/FTM1_QD_PHA, open_drain: enable}
+  - {pin_num: '36', peripheral: I2C0, signal: SDA, pin_signal: ADC0_SE9/ADC1_SE9/PTB1/I2C0_SDA/FTM1_CH1/FTM1_QD_PHB, open_drain: enable}
   - {pin_num: '50', peripheral: SPI0, signal: SCK, pin_signal: PTC5/LLWU_P9/SPI0_SCK/LPTMR0_ALT2/I2S0_RXD0/FB_AD10/CMP0_OUT/FTM0_CH2}
   - {pin_num: '52', peripheral: SPI0, signal: SIN, pin_signal: CMP0_IN1/PTC7/SPI0_SIN/USB_SOF_OUT/I2S0_RX_FS/FB_AD8}
   - {pin_num: '51', peripheral: SPI0, signal: SOUT, pin_signal: CMP0_IN0/PTC6/LLWU_P10/SPI0_SOUT/PDB0_EXTRG/I2S0_RX_BCLK/FB_AD9/I2S0_MCLK}
@@ -117,8 +117,24 @@ void BOARD_InitPins(void)
     /* PORTB0 (pin 35) is configured as I2C0_SCL */
     PORT_SetPinMux(PORTB, 0U, kPORT_MuxAlt2);
 
+    PORTB->PCR[0] = ((PORTB->PCR[0] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_ODE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Open Drain Enable: Open drain output is enabled on the corresponding pin, if the pin is
+                      * configured as a digital output. */
+                     | PORT_PCR_ODE(kPORT_OpenDrainEnable));
+
     /* PORTB1 (pin 36) is configured as I2C0_SDA */
     PORT_SetPinMux(PORTB, 1U, kPORT_MuxAlt2);
+
+    PORTB->PCR[1] = ((PORTB->PCR[1] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_ODE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Open Drain Enable: Open drain output is enabled on the corresponding pin, if the pin is
+                      * configured as a digital output. */
+                     | PORT_PCR_ODE(kPORT_OpenDrainEnable));
 
     /* PORTB19 (pin 42) is configured as PTB19 */
     PORT_SetPinMux(BOARD_INITPINS_GPIOB19_PORT, BOARD_INITPINS_GPIOB19_PIN, kPORT_MuxAsGpio);
@@ -168,14 +184,52 @@ void BOARD_InitPins(void)
     /* PORTD2 (pin 59) is configured as UART2_RX */
     PORT_SetPinMux(PORTD, 2U, kPORT_MuxAlt3);
 
+    PORTD->PCR[2] = ((PORTD->PCR[2] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | PORT_PCR_PS(kPORT_PullUp));
+
     /* PORTD3 (pin 60) is configured as UART2_TX */
     PORT_SetPinMux(PORTD, 3U, kPORT_MuxAlt3);
+
+    PORTD->PCR[3] = ((PORTD->PCR[3] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | PORT_PCR_PS(kPORT_PullUp));
 
     /* PORTD6 (pin 63) is configured as UART0_RX */
     PORT_SetPinMux(PORTD, 6U, kPORT_MuxAlt3);
 
+    PORTD->PCR[6] = ((PORTD->PCR[6] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | PORT_PCR_PS(kPORT_PullUp)
+
+                     /* Pull Enable: Internal pullup or pulldown resistor is not enabled on the corresponding pin. */
+                     | PORT_PCR_PE(kPORT_PullDisable));
+
     /* PORTD7 (pin 64) is configured as UART0_TX */
     PORT_SetPinMux(PORTD, 7U, kPORT_MuxAlt3);
+
+    PORTD->PCR[7] = ((PORTD->PCR[7] &
+                      /* Mask bits to zero which are setting */
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | PORT_PCR_PS(kPORT_PullUp)
+
+                     /* Pull Enable: Internal pullup or pulldown resistor is not enabled on the corresponding pin. */
+                     | PORT_PCR_PE(kPORT_PullDisable));
 
     /* PORTE0 (pin 1) is configured as UART1_TX */
     PORT_SetPinMux(BOARD_INITPINS_UART1_TX_PORT, BOARD_INITPINS_UART1_TX_PIN, kPORT_MuxAlt3);
@@ -191,16 +245,22 @@ void BOARD_InitPins(void)
                      /* Pull Enable: Internal pullup or pulldown resistor is not enabled on the corresponding pin. */
                      | PORT_PCR_PE(kPORT_PullDisable)
 
-                     /* Open Drain Enable: Open drain output is enabled on the corresponding pin, if the pin is
-                      * configured as a digital output. */
-                     | PORT_PCR_ODE(kPORT_OpenDrainEnable));
+                     /* Open Drain Enable: Open drain output is disabled on the corresponding pin. */
+                     | PORT_PCR_ODE(kPORT_OpenDrainDisable));
 
     /* PORTE1 (pin 2) is configured as UART1_RX */
     PORT_SetPinMux(BOARD_INITPINS_UART1_RX_PORT, BOARD_INITPINS_UART1_RX_PIN, kPORT_MuxAlt3);
 
     PORTE->PCR[1] = ((PORTE->PCR[1] &
                       /* Mask bits to zero which are setting */
-                      (~(PORT_PCR_ODE_MASK | PORT_PCR_ISF_MASK)))
+                      (~(PORT_PCR_PS_MASK | PORT_PCR_PE_MASK | PORT_PCR_ODE_MASK | PORT_PCR_ISF_MASK)))
+
+                     /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
+                      * corresponding PE field is set. */
+                     | PORT_PCR_PS(kPORT_PullUp)
+
+                     /* Pull Enable: Internal pullup or pulldown resistor is not enabled on the corresponding pin. */
+                     | PORT_PCR_PE(kPORT_PullDisable)
 
                      /* Open Drain Enable: Open drain output is disabled on the corresponding pin. */
                      | PORT_PCR_ODE(kPORT_OpenDrainDisable));

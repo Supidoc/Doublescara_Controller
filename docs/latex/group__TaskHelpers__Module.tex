@@ -5,26 +5,63 @@
 Helper macros and functions for task-\/safe operations.  
 
 
-\doxysubsubsection*{Macros}
+Collaboration diagram for Task Helpers:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{group__TaskHelpers__Module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Topics}
 \begin{DoxyCompactItemize}
 \item 
-\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+BEGIN}}()
-\begin{DoxyCompactList}\small\item\em Begin a task-\/safe operation by capturing the caller\textquotesingle{}s task handle. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+WAIT}}(deadline)
-\begin{DoxyCompactList}\small\item\em Wait for notification from async operation with a deadline. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}{THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+COMPLETE}}(deadline)
-\begin{DoxyCompactList}\small\item\em Complete task-\/safe operation pattern:\+ wait and return. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxymbox{\hyperlink{group__THE__EventBits}{Task Helper Event Bits}}
+\begin{DoxyCompactList}\small\item\em Bitmasks for command completion status tracking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__THE__CmdHandleImpl}{\+\_\+\+THE\+\_\+\+Cmd\+Handle\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__THE__CmdHandleImpl}{\+\_\+\+THE\+\_\+\+Cmd\+Handle\+Impl}} \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}
+\item 
+typedef \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{THE\+\_\+notify\+\_\+task\+\_\+result}} (Task\+Handle\+\_\+t task\+Handle, status\+\_\+t result)
-\begin{DoxyCompactList}\small\item\em Notify a task with operation result. \end{DoxyCompactList}\item 
-static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{THE\+\_\+notify\+\_\+task\+\_\+success}} (Task\+Handle\+\_\+t task\+Handle)
-\begin{DoxyCompactList}\small\item\em Notify task on success, don\textquotesingle{}t notify on failure. \end{DoxyCompactList}\item 
-static void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{THE\+\_\+notify\+\_\+task\+\_\+failure}} (Task\+Handle\+\_\+t task\+Handle)
-\begin{DoxyCompactList}\small\item\em Notify task of failure. \end{DoxyCompactList}\item 
 static Tick\+Type\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\+\_\+deadline\+\_\+from\+\_\+timeout\+\_\+ms}} (uint32\+\_\+t timeout\+\_\+ms)
-\begin{DoxyCompactList}\small\item\em Convert timeout in milliseconds to a deadline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Convert timeout in milliseconds to a deadline. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga67fa33f43a116cd6ed312c88f03b22a9}{THE\+\_\+init\+\_\+cmd\+\_\+handles}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+\begin{DoxyCompactList}\small\item\em Initialize the command handle pool. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga846138383b7f91763f8bed3634d6932c}{THE\+\_\+notify\+\_\+task\+\_\+success}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Notify successful completion of a command. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_ga300435f1a1315edfe34079ed3c761ad8}{THE\+\_\+notify\+\_\+task\+\_\+failure}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Notify failure of a command. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_gae10d3bf6782fd0d63df8a7df0314a240}{THE\+\_\+notify\+\_\+task\+\_\+timeout}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Notify timeout of a command. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga984e958b48ccd52da50b397cec5d5862}{THE\+\_\+get\+\_\+cmd\+\_\+handle}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle, \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+\begin{DoxyCompactList}\small\item\em Get an available command handle from the pool. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_gae219878a5b43d214706e0bb1544439fd}{THE\+\_\+add\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Increment reference count for a command handle. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}{THE\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Decrement reference count for a command handle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_gafb19cdad56a656c066591af5a1f59843}{THE\+\_\+send\+\_\+cmd}} (Queue\+Handle\+\_\+t x\+Queue, const void \texorpdfstring{$\ast$}{*}const pv\+Item\+To\+Queue, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Send a command to a queue with deadline tracking. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}{THE\+\_\+cmd\+\_\+wait\+\_\+result}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle, Tick\+Type\+\_\+t deadline, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Bits)
+\begin{DoxyCompactList}\small\item\em Wait for a single command to complete. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga76b5e525079b87157a9635404a9d758a}{THE\+\_\+cmd\+\_\+check\+\_\+result}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Bits)
+\begin{DoxyCompactList}\small\item\em Check a single command result without waiting. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_gaa5bb810521e5bb62bec71a8e00db07c8}{THE\+\_\+cmd\+\_\+wait\+\_\+any}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t count, Tick\+Type\+\_\+t deadline, size\+\_\+t \texorpdfstring{$\ast$}{*}out\+Completed\+Index, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Bits)
+\begin{DoxyCompactList}\small\item\em Wait for any of multiple commands to complete. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga86d88e2fd991263eb6d5c88e2adc0838}{THE\+\_\+cmd\+\_\+check\+\_\+any}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t count, size\+\_\+t \texorpdfstring{$\ast$}{*}out\+Completed\+Index, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Bits)
+\begin{DoxyCompactList}\small\item\em Check whether any of multiple commands has completed, without waiting. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga4cf6dcb5dd2295e30aeac7b145783b76}{THE\+\_\+cmd\+\_\+wait\+\_\+all}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t count, Tick\+Type\+\_\+t deadline, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Results)
+\begin{DoxyCompactList}\small\item\em Wait for all commands to complete. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TaskHelpers__Module_ga96ff186bcb816577b6c27257a3bec27e}{THE\+\_\+cmd\+\_\+check\+\_\+all}} (\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}}, size\+\_\+t count, Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}out\+Results)
+\begin{DoxyCompactList}\small\item\em Check whether all commands have completed, without waiting. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -32,110 +69,265 @@ Helper macros and functions for task-\/safe operations.
 
 
 
-\label{doc-define-members}
-\Hypertarget{group__TaskHelpers__Module_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_BEGIN@{THE\_TASK\_SAFE\_BEGIN}}
-\index{THE\_TASK\_SAFE\_BEGIN@{THE\_TASK\_SAFE\_BEGIN}!Task Helpers@{Task Helpers}}
-\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_BEGIN}{THE\_TASK\_SAFE\_BEGIN}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745} 
-\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+BEGIN(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{TaskHandle\_t\ callerTaskHandle\ =\ xTaskGetCurrentTaskHandle();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{if\ (callerTaskHandle\ ==\ NULL)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ LOG\_WARN(\textcolor{stringliteral}{"{}Failed\ to\ get\ current\ task\ handle"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}
+\label{doc-typedef-members}
+\Hypertarget{group__TaskHelpers__Module_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}\index{Task Helpers@{Task Helpers}!THE\_CmdHandle\_t@{THE\_CmdHandle\_t}}
+\index{THE\_CmdHandle\_t@{THE\_CmdHandle\_t}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_CmdHandle\_t}{THE\_CmdHandle\_t}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad} 
+typedef \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}
 
 
-Begin a task-\/safe operation by capturing the caller\textquotesingle{}s task handle. 
 
-Usage:\+ Place at the beginning of a public task-\/safe function after parameter validation. Creates a local variable \textquotesingle{}caller\+Task\+Handle\textquotesingle{} that can be used in queue items. 
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00059}{59}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
 
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
-
-\Hypertarget{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_COMPLETE@{THE\_TASK\_SAFE\_COMPLETE}}
-\index{THE\_TASK\_SAFE\_COMPLETE@{THE\_TASK\_SAFE\_COMPLETE}!Task Helpers@{Task Helpers}}
-\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_COMPLETE}{THE\_TASK\_SAFE\_COMPLETE}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24} 
-\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+COMPLETE(\begin{DoxyParamCaption}\item[{}]{deadline}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{THE\_TASK\_SAFE\_WAIT}}(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\textcolor{keywordflow}{return}\ kStatus\_Success;}
-
-\end{DoxyCode}
-
-
-Complete task-\/safe operation pattern:\+ wait and return. 
-
-Combines notification wait with success return. 
-
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00084}{84}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
-
-\Hypertarget{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}\index{Task Helpers@{Task Helpers}!THE\_TASK\_SAFE\_WAIT@{THE\_TASK\_SAFE\_WAIT}}
-\index{THE\_TASK\_SAFE\_WAIT@{THE\_TASK\_SAFE\_WAIT}!Task Helpers@{Task Helpers}}
-\doxysubsubsection{\texorpdfstring{THE\_TASK\_SAFE\_WAIT}{THE\_TASK\_SAFE\_WAIT}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c} 
-\+\#define THE\+\_\+\+TASK\+\_\+\+SAFE\+\_\+\+WAIT(\begin{DoxyParamCaption}\item[{}]{deadline}{}\end{DoxyParamCaption})}
-
-{\bfseries Value:\+}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ if\ (deadline\ !=\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ TickType\_t\ currentTick\ =\ xTaskGetTickCount();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (deadline\ <=\ currentTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Deadline\ for\ task\ notification\ has\ already\ passed"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ TickType\_t\ ticksUntilDeadline\ =\ deadline\ -\/\ currentTick;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (ulTaskNotifyTake(pdTRUE,\ ticksUntilDeadline)\ ==\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}Timeout\ waiting\ for\ notification\ after\ \%u\ ms"{}},\ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})(pdTICKS\_TO\_MS(ticksUntilDeadline)));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\}\ \textcolor{keywordflow}{while}\ (0)}
-
-\end{DoxyCode}
-
-
-Wait for notification from async operation with a deadline. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em deadline} & Deadline for the operation\\
-\hline
-\end{DoxyParams}
-Usage:\+ Place after queueing the command. Waits for notification and returns k\+Status\+\_\+\+Fail after deadline passed without receving notifications.
-
-\begin{DoxyNote}{Note}
-If deadline is 0, the function will not wait for completion and will return immediately. 
-\end{DoxyNote}
-
-
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+\Hypertarget{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}\index{Task Helpers@{Task Helpers}!THE\_CmdHandleImpl\_t@{THE\_CmdHandleImpl\_t}}
+\index{THE\_CmdHandleImpl\_t@{THE\_CmdHandleImpl\_t}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_CmdHandleImpl\_t}{THE\_CmdHandleImpl\_t}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98} 
+typedef struct \doxymbox{\hyperlink{struct__THE__CmdHandleImpl}{\+\_\+\+THE\+\_\+\+Cmd\+Handle\+Impl}} \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}}
 
 
 
 \label{doc-func-members}
 \Hypertarget{group__TaskHelpers__Module_doc-func-members}
 \doxysubsection{Function Documentation}
+\Hypertarget{group__TaskHelpers__Module_gae219878a5b43d214706e0bb1544439fd}\index{Task Helpers@{Task Helpers}!THE\_add\_cmd\_handle\_ref@{THE\_add\_cmd\_handle\_ref}}
+\index{THE\_add\_cmd\_handle\_ref@{THE\_add\_cmd\_handle\_ref}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_add\_cmd\_handle\_ref()}{THE\_add\_cmd\_handle\_ref()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gae219878a5b43d214706e0bb1544439fd} 
+void THE\+\_\+add\+\_\+cmd\+\_\+handle\+\_\+ref (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Increment reference count for a command handle. 
+
+Used to track multiple references to the same command handle 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to increment reference for \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00101}{101}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga96ff186bcb816577b6c27257a3bec27e}\index{Task Helpers@{Task Helpers}!THE\_cmd\_check\_all@{THE\_cmd\_check\_all}}
+\index{THE\_cmd\_check\_all@{THE\_cmd\_check\_all}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_check\_all()}{THE\_cmd\_check\_all()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga96ff186bcb816577b6c27257a3bec27e} 
+status\+\_\+t THE\+\_\+cmd\+\_\+check\+\_\+all (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{count}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Results}{}\end{DoxyParamCaption})}
+
+
+
+Check whether all commands have completed, without waiting. 
+
+Polls all command handles once and returns immediately.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Array of command handles to check. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em count} & Number of handles in the array. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Results} & Optional array to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT) for each command. Caller must allocate array of size count. Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if all commands have THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if any completed command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set. k\+Status\+\_\+\+Timeout if any command is still pending, or any has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00433}{433}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga86d88e2fd991263eb6d5c88e2adc0838}\index{Task Helpers@{Task Helpers}!THE\_cmd\_check\_any@{THE\_cmd\_check\_any}}
+\index{THE\_cmd\_check\_any@{THE\_cmd\_check\_any}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_check\_any()}{THE\_cmd\_check\_any()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga86d88e2fd991263eb6d5c88e2adc0838} 
+status\+\_\+t THE\+\_\+cmd\+\_\+check\+\_\+any (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{count}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Completed\+Index}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Bits}{}\end{DoxyParamCaption})}
+
+
+
+Check whether any of multiple commands has completed, without waiting. 
+
+Polls all command handles once and returns immediately.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Array of command handles to check. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em count} & Number of handles in the array. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Completed\+Index} & Optional pointer to receive index of first completed command. Can be NULL. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Bits} & Optional pointer to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT) of the first completed command. Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if any command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if the first completed command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set. k\+Status\+\_\+\+Timeout if any command is still pending, or first completed has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00305}{305}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga76b5e525079b87157a9635404a9d758a}\index{Task Helpers@{Task Helpers}!THE\_cmd\_check\_result@{THE\_cmd\_check\_result}}
+\index{THE\_cmd\_check\_result@{THE\_cmd\_check\_result}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_check\_result()}{THE\_cmd\_check\_result()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga76b5e525079b87157a9635404a9d758a} 
+status\+\_\+t THE\+\_\+cmd\+\_\+check\+\_\+result (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Bits}{}\end{DoxyParamCaption})}
+
+
+
+Check a single command result without waiting. 
+
+Polls the command result bits once and returns immediately.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to check. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Bits} & Optional pointer to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT). Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set. k\+Status\+\_\+\+Timeout if THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT is set or command not completed yet.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00201}{201}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga4cf6dcb5dd2295e30aeac7b145783b76}\index{Task Helpers@{Task Helpers}!THE\_cmd\_wait\_all@{THE\_cmd\_wait\_all}}
+\index{THE\_cmd\_wait\_all@{THE\_cmd\_wait\_all}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_wait\_all()}{THE\_cmd\_wait\_all()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga4cf6dcb5dd2295e30aeac7b145783b76} 
+status\+\_\+t THE\+\_\+cmd\+\_\+wait\+\_\+all (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{count}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Results}{}\end{DoxyParamCaption})}
+
+
+
+Wait for all commands to complete. 
+
+Blocks until all commands complete or the deadline is reached.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Array of command handles to wait for. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em count} & Number of handles in the array. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for waiting (in ticks). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Results} & Optional array to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT) for each command. Caller must allocate array of size count. Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if all commands have THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if any command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set, deadline exceeded, or not all commands completed. k\+Status\+\_\+\+Timeout if any command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT bit set.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00353}{353}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_gaa5bb810521e5bb62bec71a8e00db07c8}\index{Task Helpers@{Task Helpers}!THE\_cmd\_wait\_any@{THE\_cmd\_wait\_any}}
+\index{THE\_cmd\_wait\_any@{THE\_cmd\_wait\_any}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_wait\_any()}{THE\_cmd\_wait\_any()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gaa5bb810521e5bb62bec71a8e00db07c8} 
+status\+\_\+t THE\+\_\+cmd\+\_\+wait\+\_\+any (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{count}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Completed\+Index}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Bits}{}\end{DoxyParamCaption})}
+
+
+
+Wait for any of multiple commands to complete. 
+
+Blocks until at least one command completes or the deadline is reached.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Array of command handles to wait for. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em count} & Number of handles in the array. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for waiting (in ticks). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Completed\+Index} & Optional pointer to receive index of first completed command. Can be NULL. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Bits} & Optional pointer to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT) of the completed command. Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if any command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if the first completed command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set or deadline exceeded. k\+Status\+\_\+\+Timeout if THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT is set on first completed command.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00235}{235}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}\index{Task Helpers@{Task Helpers}!THE\_cmd\_wait\_result@{THE\_cmd\_wait\_result}}
+\index{THE\_cmd\_wait\_result@{THE\_cmd\_wait\_result}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_cmd\_wait\_result()}{THE\_cmd\_wait\_result()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa} 
+status\+\_\+t THE\+\_\+cmd\+\_\+wait\+\_\+result (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{Event\+Bits\+\_\+t \texorpdfstring{$\ast$}{*}}]{out\+Bits}{}\end{DoxyParamCaption})}
+
+
+
+Wait for a single command to complete. 
+
+Blocks until the command completes (success/\+failure/\+timeout) or the deadline is reached.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to wait for. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for waiting (in ticks). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em out\+Bits} & Optional pointer to receive result bits (THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE, THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT). Can be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if command completed with THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit set. k\+Status\+\_\+\+Fail if command has THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit set or deadline exceeded. k\+Status\+\_\+\+Timeout if THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT is set.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS} 
+
+\doxylink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE} 
+
+\doxylink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00165}{165}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
 \Hypertarget{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}\index{Task Helpers@{Task Helpers}!THE\_deadline\_from\_timeout\_ms@{THE\_deadline\_from\_timeout\_ms}}
 \index{THE\_deadline\_from\_timeout\_ms@{THE\_deadline\_from\_timeout\_ms}!Task Helpers@{Task Helpers}}
 \doxysubsubsection{\texorpdfstring{THE\_deadline\_from\_timeout\_ms()}{THE\_deadline\_from\_timeout\_ms()}}
@@ -156,70 +348,157 @@ Deadline in ticks
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00154}{154}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
 
-\Hypertarget{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_failure@{THE\_notify\_task\_failure}}
+\Hypertarget{group__TaskHelpers__Module_ga984e958b48ccd52da50b397cec5d5862}\index{Task Helpers@{Task Helpers}!THE\_get\_cmd\_handle@{THE\_get\_cmd\_handle}}
+\index{THE\_get\_cmd\_handle@{THE\_get\_cmd\_handle}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_get\_cmd\_handle()}{THE\_get\_cmd\_handle()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga984e958b48ccd52da50b397cec5d5862} 
+status\+\_\+t THE\+\_\+get\+\_\+cmd\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{max\+Handles}{}\end{DoxyParamCaption})}
+
+
+
+Get an available command handle from the pool. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive the allocated command handle \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if a handle was allocated k\+Status\+\_\+\+Fail if no handles are available 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00072}{72}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga67fa33f43a116cd6ed312c88f03b22a9}\index{Task Helpers@{Task Helpers}!THE\_init\_cmd\_handles@{THE\_init\_cmd\_handles}}
+\index{THE\_init\_cmd\_handles@{THE\_init\_cmd\_handles}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_init\_cmd\_handles()}{THE\_init\_cmd\_handles()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga67fa33f43a116cd6ed312c88f03b22a9} 
+void THE\+\_\+init\+\_\+cmd\+\_\+handles (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{max\+Handles}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the command handle pool. 
+
+Sets up the command handle infrastructure for tracking asynchronous command execution. Must be called once before using command handles. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00131}{131}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_ga300435f1a1315edfe34079ed3c761ad8}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_failure@{THE\_notify\_task\_failure}}
 \index{THE\_notify\_task\_failure@{THE\_notify\_task\_failure}!Task Helpers@{Task Helpers}}
 \doxysubsubsection{\texorpdfstring{THE\_notify\_task\_failure()}{THE\_notify\_task\_failure()}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5} 
-void THE\+\_\+notify\+\_\+task\+\_\+failure (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga300435f1a1315edfe34079ed3c761ad8} 
+void THE\+\_\+notify\+\_\+task\+\_\+failure (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Notify task of failure. 
+Notify failure of a command. 
 
-Helper function to notify a task handle with failure. Safe to call with NULL task handle.
-
-
-\begin{DoxyParams}{Parameters}
-{\em task\+Handle} & Task to notify (NULL safe) \\
+Sets the THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE bit in the command handle\textquotesingle{}s event group 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to notify \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00141}{141}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00149}{149}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
 
-\Hypertarget{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_result@{THE\_notify\_task\_result}}
-\index{THE\_notify\_task\_result@{THE\_notify\_task\_result}!Task Helpers@{Task Helpers}}
-\doxysubsubsection{\texorpdfstring{THE\_notify\_task\_result()}{THE\_notify\_task\_result()}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8} 
-void THE\+\_\+notify\+\_\+task\+\_\+result (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{, }\item[{status\+\_\+t}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
-
-
-Notify a task with operation result. 
-
-Helper function to notify a task handle with success (1) or failure (0). Safe to call with NULL task handle.
-
-
-\begin{DoxyParams}{Parameters}
-{\em task\+Handle} & Task to notify (NULL safe) \\
-\hline
-{\em result} & Operation result (k\+Status\+\_\+\+Success or k\+Status\+\_\+\+Fail) \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00109}{109}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
-
-\Hypertarget{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_success@{THE\_notify\_task\_success}}
+\Hypertarget{group__TaskHelpers__Module_ga846138383b7f91763f8bed3634d6932c}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_success@{THE\_notify\_task\_success}}
 \index{THE\_notify\_task\_success@{THE\_notify\_task\_success}!Task Helpers@{Task Helpers}}
 \doxysubsubsection{\texorpdfstring{THE\_notify\_task\_success()}{THE\_notify\_task\_success()}}
-{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d} 
-void THE\+\_\+notify\+\_\+task\+\_\+success (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{task\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_ga846138383b7f91763f8bed3634d6932c} 
+void THE\+\_\+notify\+\_\+task\+\_\+success (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Notify task on success, don\textquotesingle{}t notify on failure. 
+Notify successful completion of a command. 
 
-Helper function to notify a task handle with success. Safe to call with NULL task handle.
-
-
-\begin{DoxyParams}{Parameters}
-{\em task\+Handle} & Task to notify (NULL safe) \\
+Sets the THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS bit in the command handle\textquotesingle{}s event group 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to notify \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{task__helpers_8h_source_l00125}{125}} of file \doxymbox{\hyperlink{task__helpers_8h_source}{task\+\_\+helpers.\+h}}.
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00141}{141}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
 
+\Hypertarget{group__TaskHelpers__Module_gae10d3bf6782fd0d63df8a7df0314a240}\index{Task Helpers@{Task Helpers}!THE\_notify\_task\_timeout@{THE\_notify\_task\_timeout}}
+\index{THE\_notify\_task\_timeout@{THE\_notify\_task\_timeout}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_notify\_task\_timeout()}{THE\_notify\_task\_timeout()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gae10d3bf6782fd0d63df8a7df0314a240} 
+void THE\+\_\+notify\+\_\+task\+\_\+timeout (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Notify timeout of a command. 
+
+Sets the THE\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT bit in the command handle\textquotesingle{}s event group 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to notify \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00157}{157}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}\index{Task Helpers@{Task Helpers}!THE\_remove\_cmd\_handle\_ref@{THE\_remove\_cmd\_handle\_ref}}
+\index{THE\_remove\_cmd\_handle\_ref@{THE\_remove\_cmd\_handle\_ref}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_remove\_cmd\_handle\_ref()}{THE\_remove\_cmd\_handle\_ref()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b} 
+void THE\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Decrement reference count for a command handle. 
+
+When reference count reaches zero, the handle is returned to the pool 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to decrement reference for \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00109}{109}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\Hypertarget{group__TaskHelpers__Module_gafb19cdad56a656c066591af5a1f59843}\index{Task Helpers@{Task Helpers}!THE\_send\_cmd@{THE\_send\_cmd}}
+\index{THE\_send\_cmd@{THE\_send\_cmd}!Task Helpers@{Task Helpers}}
+\doxysubsubsection{\texorpdfstring{THE\_send\_cmd()}{THE\_send\_cmd()}}
+{\footnotesize\ttfamily \label{group__TaskHelpers__Module_gafb19cdad56a656c066591af5a1f59843} 
+status\+\_\+t THE\+\_\+send\+\_\+cmd (\begin{DoxyParamCaption}\item[{Queue\+Handle\+\_\+t}]{x\+Queue}{, }\item[{const void \texorpdfstring{$\ast$}{*}const}]{pv\+Item\+To\+Queue}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Send a command to a queue with deadline tracking. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em x\+Queue} & Free\+RTOS queue to send the command to \\
+\hline
+\doxymbox{\texttt{in}}  & {\em pv\+Item\+To\+Queue} & Pointer to the item to send \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for command completion (in ticks) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle for tracking this operation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if command was queued successfully k\+Status\+\_\+\+Fail if queue is full or deadline is invalid 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{task__helpers_8c_source_l00045}{45}} of file \doxymbox{\hyperlink{task__helpers_8c_source}{task\+\_\+helpers.\+c}}.
+
+\input{group__THE__EventBits}

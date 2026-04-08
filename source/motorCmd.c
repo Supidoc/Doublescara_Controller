@@ -1,8 +1,12 @@
 /************************************************************
  * @file    motorCmd.c
  * @brief   CLI commands for motor control functions
+ * @details Implements CLI command handlers for motor movement, velocity/acceleration control,
+ *          emergency stop, synchronized multi-motor movement, and freewheeling mode.
+ *          Commands: mmove, mabs, mrev, mvel, macc, mstop, mestop, mclear, msync,
+ *          mfree_on, mfree_off, mrun, mhold, mtest, mstatus.
  * @author  dg
- * @date    6 Mar 2026
+ * @date    6 Apr 2026
  ************************************************************/
 
 /********************
@@ -59,6 +63,12 @@ static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBu
                                             const char* pcCommandString);
 static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteBufferLen,
                                              const char* pcCommandString);
+static BaseType_t cmd_motor_synchronized_move(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                              const char* pcCommandString);
+static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                                const char* pcCommandString);
+static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                                 const char* pcCommandString);
 static status_t   wait_for_mtr_cmd(THE_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
@@ -147,6 +157,25 @@ static const CLI_Command_Definition_t xSetHoldCurrentCmd = {
     .pxCommandInterpreter = cmd_motor_set_hold_current,
     .cExpectedNumberOfParameters = -1};
 
+static const CLI_Command_Definition_t xSynchronizedMoveCmd = {
+    .pcCommand    = "msync",
+    .pcHelpString = "msync -m1 <motor1> -a1 <angle1> -m2 <motor2> -a2 <angle2>: Synchronize "
+                    "movement of 2 motors\r\n",
+    .pxCommandInterpreter        = cmd_motor_synchronized_move,
+    .cExpectedNumberOfParameters = -1};
+
+static const CLI_Command_Definition_t xEnableFreewheelingCmd = {
+    .pcCommand    = "mfree_on",
+    .pcHelpString = "mfree_on -m <motor_id>: Enable freewheeling mode (deenergize coils)\r\n",
+    .pxCommandInterpreter        = cmd_motor_enable_freewheeling,
+    .cExpectedNumberOfParameters = -1};
+
+static const CLI_Command_Definition_t xDisableFreewheelingCmd = {
+    .pcCommand            = "mfree_off",
+    .pcHelpString         = "mfree_off -m <motor_id>: Disable freewheeling and home motor\r\n",
+    .pxCommandInterpreter = cmd_motor_disable_freewheeling,
+    .cExpectedNumberOfParameters = -1};
+
 /*******************************************
  *     Public Function Implementations     *
  *******************************************/
@@ -176,6 +205,9 @@ void MCMD_task(void* pvParameters)
     CLI_register_command(&xSetHomeCmd);
     CLI_register_command(&xSetRunCurrentCmd);
     CLI_register_command(&xSetHoldCurrentCmd);
+    CLI_register_command(&xSynchronizedMoveCmd);
+    CLI_register_command(&xEnableFreewheelingCmd);
+    CLI_register_command(&xDisableFreewheelingCmd);
 
     LOG_INFO("Motor commands registered");
 
@@ -805,5 +837,163 @@ static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteB
         snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to set hold current\r\n");
     }
 
+    return pdFALSE;
+}
+
+static BaseType_t cmd_motor_synchronized_move(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                              const char* pcCommandString)
+{
+    MTR_MotorHandle_t handles[2] = {NULL, NULL};
+    double            angles[2]  = {0.0, 0.0};
+    uint8_t           parameterFound;
+    const char*       pcParameter;
+    BaseType_t        parameterStringLength;
+
+    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+
+    // Get motor 1 ID
+    CLU_get_parameter_value_string("-m1", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 1 ID required (-m1)\r\n");
+        return pdFALSE;
+    }
+
+    MTR_get_motor_by_label(pcParameter, &handles[0]);
+    if (handles[0] == NULL)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 1 not found\r\n");
+        return pdFALSE;
+    }
+
+    // Get motor 1 angle
+    CLU_get_parameter_value_string("-a1", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 1 angle required (-a1)\r\n");
+        return pdFALSE;
+    }
+    angles[0] = strtod(pcParameter, NULL);
+
+    // Get motor 2 ID
+    CLU_get_parameter_value_string("-m2", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 2 ID required (-m2)\r\n");
+        return pdFALSE;
+    }
+
+    MTR_get_motor_by_label(pcParameter, &handles[1]);
+    if (handles[1] == NULL)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 2 not found\r\n");
+        return pdFALSE;
+    }
+
+    // Get motor 2 angle
+    CLU_get_parameter_value_string("-a2", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor 2 angle required (-a2)\r\n");
+        return pdFALSE;
+    }
+    angles[1] = strtod(pcParameter, NULL);
+
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_synchronized_move_async(handles, angles, 2, deadline, &cmdHandle) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen,
+                 "Synchronized move executed: Motor1=%.2f deg, Motor2=%.2f deg\r\n", angles[0],
+                 angles[1]);
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Synchronized move failed\r\n");
+    }
+
+    return pdFALSE;
+}
+
+static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                                const char* pcCommandString)
+{
+    MTR_MotorHandle_t handle = NULL;
+    uint8_t           parameterFound;
+    const char*       pcParameter = NULL;
+    BaseType_t        parameterStringLength;
+
+    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+
+    // Get motor ID
+    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor ID required (-m)\r\n");
+        return pdFALSE;
+    }
+
+    MTR_get_motor_by_label(pcParameter, &handle);
+    if (handle == NULL)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor not found\r\n");
+        return pdFALSE;
+    }
+
+    // Call async function and wait
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_enable_freewheeling_async(handle, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Freewheeling enabled\r\n");
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to enable freewheeling\r\n");
+    }
+    return pdFALSE;
+}
+
+static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                                 const char* pcCommandString)
+{
+    MTR_MotorHandle_t handle = NULL;
+    uint8_t           parameterFound;
+    const char*       pcParameter = NULL;
+    BaseType_t        parameterStringLength;
+
+    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+
+    // Get motor ID
+    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor ID required (-m)\r\n");
+        return pdFALSE;
+    }
+
+    MTR_get_motor_by_label(pcParameter, &handle);
+    if (handle == NULL)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor not found\r\n");
+        return pdFALSE;
+    }
+
+    // Call async function and wait
+    THE_CmdHandle_t cmdHandle = NULL;
+    if (MTR_disable_freewheeling_async(handle, deadline, &cmdHandle) == kStatus_Success &&
+        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Freewheeling disabled and motor homed\r\n");
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to disable freewheeling\r\n");
+    }
     return pdFALSE;
 }

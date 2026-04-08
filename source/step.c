@@ -15,7 +15,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "task_helpers.h"
-
+#include "pca9555a.h"
 /************************************
  *     Private Macros / Defines	   *
  ************************************/
@@ -135,12 +135,8 @@ typedef struct _STP_StepperHandleImpl
     PORT_Type* stepPort;           /**< PORT module for step pin mux control */
     GPIO_Type* stepGPIO;           /**< GPIO module for step pin */
     uint8_t    stepPin;            /**< Step output pin number */
-    port_mux_t stepMuxFTM;         /**< Pin mux value for FTM mode */
-    port_mux_t stepMuxGPIO;        /**< Pin mux value for GPIO mode */
-    PORT_Type* dirPort;            /**< PORT module for direction pin mux control */
-    GPIO_Type* dirGPIO;            /**< GPIO module for direction pin */
+    PCA_Port_t dirPort;            /**< PORT for direction pin control */
     uint8_t    dirPin;             /**< Direction output pin number */
-    port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
     int32_t absolutePosition;      /**< The absolute Position of the StepperMotor in steps. Positive
                                       Values are counterclockwise*/
@@ -465,17 +461,13 @@ status_t STP_get_default_config(STP_StepperConfig_t* config)
 
     config->acceleration          = 200;
     config->endVelocity           = 360;
-    config->dirGPIO               = GPIOA;
-    config->dirPin                = 1;
-    config->dirPort               = PORTA;
+    config->dirPin                = 0;
+    config->dirPort               = PCA_PORT_0;
     config->ftmBase               = FTM0;
     config->ftmChannel            = kFTM_Chnl_0;
     config->stepGPIO              = GPIOA;
     config->stepPin               = 0;
     config->stepPort              = PORTA;
-    config->stepMuxFTM            = kPORT_MuxAlt4;
-    config->stepMuxGPIO           = kPORT_MuxAlt1;
-    config->dirMux                = kPORT_MuxAlt1;
     config->label                 = "stepperMotor";
     config->dirLogicHighClockwise = 1;
     return kStatus_Success;
@@ -510,14 +502,16 @@ static status_t send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadlin
     status_t sendStatus = THE_send_cmd(cmdQueue, queueItem, deadline, internaleCmdHandle);
     if (sendStatus != kStatus_Success)
     {
-    	if(cmdHandle != NULL){
+        if (cmdHandle != NULL)
+        {
             THE_remove_cmd_handle_ref(*cmdHandle);
             *cmdHandle = NULL;
-    	}
+        }
         return kStatus_Fail;
     }
-    if(cmdHandle != NULL){
-    *cmdHandle = internaleCmdHandle;
+    if (cmdHandle != NULL)
+    {
+        *cmdHandle = internaleCmdHandle;
     }
     return kStatus_Success;
 }
@@ -704,21 +698,17 @@ static status_t init_handle(const STP_StepperConfig_t config, TickType_t deadlin
     handle->ftmBase    = config.ftmBase;
     handle->ftmChannel = config.ftmChannel;
 
-    handle->stepPort    = config.stepPort;
-    handle->stepGPIO    = config.stepGPIO;
-    handle->stepPin     = config.stepPin;
-    handle->stepMuxFTM  = config.stepMuxFTM;
-    handle->stepMuxGPIO = config.stepMuxGPIO;
+    handle->stepPort = config.stepPort;
+    handle->stepGPIO = config.stepGPIO;
+    handle->stepPin  = config.stepPin;
 
     handle->dirPort               = config.dirPort;
-    handle->dirGPIO               = config.dirGPIO;
     handle->dirPin                = config.dirPin;
     handle->dirLogicHighClockwise = config.dirLogicHighClockwise;
 
     handle->acceleration     = config.acceleration;
     handle->endVelocity      = config.endVelocity;
     handle->label            = config.label;
-    handle->dirMux           = config.dirMux;
     handle->absolutePosition = 0;
 
     if (reset_movement_handle(&handle->movementHandle) != kStatus_Success)
@@ -738,7 +728,8 @@ static status_t init_handle(const STP_StepperConfig_t config, TickType_t deadlin
 
     update_isr_handle_cache();
 
-    snprintf(logMsg, sizeof(logMsg), "[%s] Stepper initialized successfully (accel=%.1f step/s², vel=%.1f step/s)",
+    snprintf(logMsg, sizeof(logMsg),
+             "[%s] Stepper initialized successfully (accel=%.1f step/s², vel=%.1f step/s)",
              handle->label, handle->acceleration, handle->endVelocity);
     LOG_INFO(logMsg);
 
@@ -765,7 +756,7 @@ static status_t init_step_pin(STP_Handle_t handle)
     gpioConfig.outputLogic  = GPIO_PinRead(handle->stepGPIO, handle->stepPin);
 
     GPIO_PinInit(handle->stepGPIO, handle->stepPin, &gpioConfig);
-    PORT_SetPinMux(handle->stepPort, handle->stepPin, handle->stepMuxGPIO);
+    PORT_SetPinMux(handle->stepPort, handle->stepPin, kPORT_MuxAlt1);
 
     return kStatus_Success;
 }
@@ -777,14 +768,10 @@ static status_t init_dir_pin(STP_Handle_t handle)
         return kStatus_Fail;
     }
 
-    gpio_pin_config_t config;
-    config.pinDirection = kGPIO_DigitalOutput;
-
-    GPIO_PinInit(handle->dirGPIO, handle->dirPin, &config);
-    PORT_SetPinInterruptConfig(handle->stepPort, handle->stepPin, kPORT_InterruptEitherEdge);
-
-    PORT_SetPinMux(handle->dirPort, handle->dirPin, handle->dirMux);
-    GPIO_PinWrite(handle->dirGPIO, handle->dirPin, 1);
+    PCA_Pin_Config_t config;
+    config.outputLevel  = PCA_PIN_LOW;
+    config.pinDirection = PCA_PIN_OUTPUT;
+    PCA_init_pin(handle->dirPort, handle->dirPin, config);
 
     return kStatus_Success;
 }
@@ -820,6 +807,11 @@ static status_t plan_motion_profile(STP_Handle_t handle)
 
     handle->movementHandle.currStepCount = 0;
     handle->movementHandle.state         = STP_MOVEMENT_PLANNED;
+
+    if (set_direction_pin(handle) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
 
     static char logMsg[100];
     if (handle->movementHandle.isTrapezoidal)
@@ -1021,14 +1013,10 @@ static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
 
     if (handle->movementHandle.state != STP_MOVEMENT_PLANNED)
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Cannot start movement - not in PLANNED state (current: %d)", 
-                 handle->label, handle->movementHandle.state);
+        snprintf(logMsg, sizeof(logMsg),
+                 "[%s] Cannot start movement - not in PLANNED state (current: %d)", handle->label,
+                 handle->movementHandle.state);
         LOG_ERROR(logMsg);
-        return kStatus_Fail;
-    }
-
-    if (set_direction_pin(handle) != kStatus_Success)
-    {
         return kStatus_Fail;
     }
 
@@ -1045,7 +1033,8 @@ static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
     }
     else
     {
-        snprintf(logMsg, sizeof(logMsg), "[%s] Lookup table retrieve failed for %lu steps at index %d (pool %d)",
+        snprintf(logMsg, sizeof(logMsg),
+                 "[%s] Lookup table retrieve failed for %lu steps at index %d (pool %d)",
                  handle->label, handle->movementHandle.totalSteps, 0, poolIndex);
         LOG_FATAL(logMsg);
         return kStatus_Fail;
@@ -1193,7 +1182,7 @@ static status_t set_direction_pin(STP_Handle_t handle)
     {
         pinValue = handle->movementHandle.direction == STP_COUNTERCLOCKWISE;
     }
-    GPIO_PinWrite(handle->dirGPIO, handle->dirPin, pinValue);
+    PCA_Write_Pin(handle->dirPort, handle->dirPin, pinValue);
 
     return kStatus_Success;
 }
@@ -1239,7 +1228,7 @@ static uint8_t check_movement_completion(void)
 
 static void process_cmd(STP_CmdQueueItem_t queueItem)
 {
-	static char logMsg[100];
+    static char logMsg[100];
     switch (queueItem.type)
     {
         case STP_CMD_MOVE:
@@ -1256,7 +1245,8 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
                 {
                     THE_notify_task_failure(queueItem.cmdHandle);
                     THE_remove_cmd_handle_ref(queueItem.cmdHandle);
-                    snprintf(logMsg, sizeof(logMsg), "[%s] Failed to start stepper execution", queueItem.handle->label);
+                    snprintf(logMsg, sizeof(logMsg), "[%s] Failed to start stepper execution",
+                             queueItem.handle->label);
                     LOG_ERROR(logMsg);
                 }
             }
@@ -1264,7 +1254,7 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
             {
                 THE_notify_task_failure(queueItem.cmdHandle);
                 THE_remove_cmd_handle_ref(queueItem.cmdHandle);
-                snprintf(logMsg, sizeof(logMsg), "[%s] Failed to plan motion profile for %lu steps", 
+                snprintf(logMsg, sizeof(logMsg), "[%s] Failed to plan motion profile for %lu steps",
                          queueItem.handle->label, queueItem.handle->movementHandle.totalSteps);
                 LOG_ERROR(logMsg);
             }
@@ -1297,6 +1287,8 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
             uint8_t anyStarted = 0;
             uint8_t ownerSet   = 0;
 
+            portENTER_CRITICAL();
+            NVIC_DisableIRQ(FTM3_IRQn);
             for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
             {
                 if (handles[i].used == 1 &&
@@ -1317,7 +1309,9 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
                     }
                 }
             }
+            NVIC_EnableIRQ(FTM3_IRQn);
 
+            portEXIT_CRITICAL();
             if (!anyStarted)
             {
                 THE_notify_task_failure(queueItem.cmdHandle);

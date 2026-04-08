@@ -14,11 +14,11 @@
  ************************************************************/
 
 /**
- * @defgroup STEP_Module Stepper Motor Control Module
+ * @defgroup STEP_Module Stepper Generator Module
  * @brief   Functions for controlling stepper motors using FTM with constant
  * acceleration/deceleration
  *
- * This module provides an interface for initializing stepper motor control instances, configuring
+ * This module provides an interface for initializing stepper generatordox instances, configuring
  * movement parameters, and executing stepper movements with acceleration and deceleration profiles.
  * It uses FreeRTOS queues to allow for task-safe command submission and asynchronous execution in a
  * dedicated stepper control task.
@@ -39,6 +39,7 @@
 #include "fsl_gpio.h"
 #include "fsl_port.h"
 #include "task_helpers.h"
+#include "pca9555a.h"
 
 /***********************************
  *     Public Macros / Defines	   *
@@ -153,12 +154,8 @@ typedef struct _STP_StepperConfig
     PORT_Type* stepPort;           /**< PORT module for step pin mux control */
     GPIO_Type* stepGPIO;           /**< GPIO module for step pin */
     uint8_t    stepPin;            /**< Step output pin number */
-    port_mux_t stepMuxFTM;         /**< Pin mux value for FTM mode */
-    port_mux_t stepMuxGPIO;        /**< Pin mux value for GPIO mode */
-    PORT_Type* dirPort;            /**< PORT module for direction pin mux control */
-    GPIO_Type* dirGPIO;            /**< GPIO module for direction pin */
+    PCA_Port_t dirPort;            /**< PORT for direction pin control */
     uint8_t    dirPin;             /**< Direction output pin number */
-    port_mux_t dirMux;             /**< Pin mux value for dir pin */
     uint8_t dirLogicHighClockwise; /**< Flag: 1 if high = clockwise, 0 if high = counterclockwise */
     double  acceleration;          /**< Acceleration in steps/s² */
     double  endVelocity;           /**< Final velocity in steps/s */

@@ -2,14 +2,16 @@
  * @file    log.h
  * @brief   Module for logging data to an SD card
  *
- * This module provides functionality for logging messages to an SD card.
- * It supports multiple log levels, task-safe message queuing, and session-based
- * log file management. The log files are stored in a specific format and can
- * be retrieved using CLI commands.
+ * This module provides functionality for logging messages to an SD card with
+ * optimized string assembly using snprintf(). It supports multiple log levels (DEBUG, INFO,
+ * WARN, ERROR), task-safe message queuing, and session-based log file management.
+ * Log output format: [LEVEL]:[TIMESTAMP]:[MESSAGE]\r\n
+ * The log files can be retrieved using CLI commands.
  *
  * @note    Ensure the disk module is initialized before using this module.
+ * @note    Console output can be suppressed for silent logging while file logging continues.
  * @author  dg
- * @date    3 Jan 2026
+ * @date    6 Apr 2026
  ************************************************************/
 
 /**
@@ -147,6 +149,29 @@ void LOG_task(void* pvParameters);
  * @see LOG_QUEUE_SIZE
  */
 status_t LOG_send_log_message(LOG_Level_t level, char* message, uint8_t silent);
+
+/**
+ * @brief Waits for the log queue to become empty.
+ *
+ * This function blocks the calling task until the log queue is completely empty.
+ * Multiple tasks can wait simultaneously on the same queue; all waiting tasks
+ * will be unblocked when the queue becomes empty.
+ *
+ * @param[in] xTicksToWait The maximum amount of time to wait, in ticks.
+ *                         Use portMAX_DELAY to wait indefinitely.
+ *
+ * @note This function is TASK-SAFE and can be called from any task context.
+ * @note The event bit is automatically cleared after this function returns successfully,
+ *       so the next call will wait for the queue to empty again.
+ * @warning Calling this function immediately after boot (before LOG_init) will fail.
+ *
+ * @return kStatus_Success if the queue became empty within the timeout period.
+ *         kStatus_Fail if the timeout expired or the logging system is not initialized.
+ *
+ * @see LOG_init()
+ * @see LOG_send_log_message()
+ */
+status_t LOG_wait_for_queue_empty(TickType_t xTicksToWait);
 
 /** @} */ // End of LOG_Module
 

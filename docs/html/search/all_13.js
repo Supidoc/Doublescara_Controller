@@ -1,20 +1,8 @@
 var searchData=
 [
-  ['x_5fping_5fcommand_0',['x_ping_command',['../cli_8c.html#accbe28978ecaf120de26941862df1424',1,'cli.c']]],
-  ['xclearemergencycmd_1',['xClearEmergencyCmd',['../motorCmd_8c.html#ae195518cae3b1186d8e948d38406a815',1,'motorCmd.c']]],
-  ['xemergencystopcmd_2',['xEmergencyStopCmd',['../motorCmd_8c.html#ace27b3c7f28438ac3f62002c659d9dc3',1,'motorCmd.c']]],
-  ['xgetanglecmd_3',['xGetAngleCmd',['../motorCmd_8c.html#a0084bc076594639dd5d51790c00d216a',1,'motorCmd.c']]],
-  ['xgetstatecmd_4',['xGetStateCmd',['../motorCmd_8c.html#a792cffeebf6f34f5ec1b718216b8fa99',1,'motorCmd.c']]],
-  ['xlog2clicommanddefinition_5',['xLog2CLICommandDefinition',['../log_8c.html#a09545fadddb32b210456f5f309a469db',1,'log.c']]],
-  ['xlogcommanddefinition_6',['xLogCommandDefinition',['../log_8c.html#af5c21309de04a8c4ab6feb925ef9d189',1,'log.c']]],
-  ['xmoveabsolutecmd_7',['xMoveAbsoluteCmd',['../motorCmd_8c.html#ab8c51a89259b10b659a219d6f7462724',1,'motorCmd.c']]],
-  ['xmoveanglecmd_8',['xMoveAngleCmd',['../motorCmd_8c.html#abc75f17a70fe10fe1c179bb28f795bcb',1,'motorCmd.c']]],
-  ['xmoverevolutionscmd_9',['xMoveRevolutionsCmd',['../motorCmd_8c.html#a965648bbde32ab857fd39583e3de5771',1,'motorCmd.c']]],
-  ['xpingcommanddefinition_10',['xPingCommandDefinition',['../cli_8c.html#acb3d9627c2b46551ae41d72b00527bed',1,'cli.c']]],
-  ['xsetaccelerationcmd_11',['xSetAccelerationCmd',['../motorCmd_8c.html#a9492804f5d17a2f91bfcf22be8ecfc5f',1,'motorCmd.c']]],
-  ['xsetholdcurrentcmd_12',['xSetHoldCurrentCmd',['../motorCmd_8c.html#a8e087273f18e4101734ea96fa887e3dd',1,'motorCmd.c']]],
-  ['xsethomecmd_13',['xSetHomeCmd',['../motorCmd_8c.html#a468edf0c43256d61ff84cdf1aa8b4bc8',1,'motorCmd.c']]],
-  ['xsetruncurrentcmd_14',['xSetRunCurrentCmd',['../motorCmd_8c.html#aa9e242377f439f82643506e82685c26f',1,'motorCmd.c']]],
-  ['xsetvelocitycmd_15',['xSetVelocityCmd',['../motorCmd_8c.html#ae6058231d16c9eddb70726b2f13a2903',1,'motorCmd.c']]],
-  ['xstopcmd_16',['xStopCmd',['../motorCmd_8c.html#a9130ba3004d6698ddf20f820fe3eb5ee',1,'motorCmd.c']]]
+  ['wait_5ffor_5fcmd_5fhandle_0',['wait_for_cmd_handle',['../motor_8c.html#aa83bf6d5e146b93ebd4bf2ac71832220',1,'motor.c']]],
+  ['wait_5ffor_5fmtr_5fcmd_1',['wait_for_mtr_cmd',['../motorCmd_8c.html#a385dd4535c8d6f00107f8f24c5474c38',1,'motorCmd.c']]],
+  ['waitforstart_2',['waitForStart',['../struct__STP__StepperMovement.html#a680f84a40f0962a20f3ac2fa649a5678',1,'_STP_StepperMovement']]],
+  ['waituntilstopped_3',['waitUntilStopped',['../struct__MTR__CmdQueueItem.html#ac7bf5468da77427a0ddebecfbc0fddf2',1,'_MTR_CmdQueueItem']]],
+  ['write_4',['write',['../tmc2209_8c.html#ad2b296addfa224a3fef137c3fc1ab831',1,'tmc2209.c']]]
 ];

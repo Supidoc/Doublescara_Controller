@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['interface_20module_0',['Command Line Interface Module',['../group__CLI__Module.html',1,'']]]
+  ['event_20bits_0',['Task Helper Event Bits',['../group__THE__EventBits.html',1,'']]]
 ];

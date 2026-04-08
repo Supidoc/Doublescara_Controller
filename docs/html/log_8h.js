@@ -22,5 +22,6 @@ var log_8h =
     ] ],
     [ "LOG_init", "group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1", null ],
     [ "LOG_send_log_message", "group__LOG__Module.html#ga534b19869c7498164597bf36b47ccea6", null ],
-    [ "LOG_task", "group__LOG__Module.html#gaf4aa1ff2f9562bf7fce62e14f5c8df9b", null ]
+    [ "LOG_task", "group__LOG__Module.html#gaf4aa1ff2f9562bf7fce62e14f5c8df9b", null ],
+    [ "LOG_wait_for_queue_empty", "group__LOG__Module.html#ga2ddf5f77c872712f2497e3e4b0e19ea4", null ]
 ];

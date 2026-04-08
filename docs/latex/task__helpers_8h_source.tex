@@ -21,92 +21,82 @@
 \DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
 \DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}string.h"{}}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00024}00024\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00025}00025\ \textcolor{comment}{/***********************************}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00026}00026\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00027}00027\ \textcolor{comment}{\ ***********************************/}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00028}00028\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00035}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2be1781b6feab32b6e9bb1d2a28b7745}{00035}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_BEGIN()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00036}00036\ \textcolor{preprocessor}{\ \ \ \ TaskHandle\_t\ callerTaskHandle\ =\ xTaskGetCurrentTaskHandle();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ if\ (callerTaskHandle\ ==\ NULL)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ LOG\_WARN("{}Failed\ to\ get\ current\ task\ handle"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}event\_groups.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00027}00027\ \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00028}00028\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00029}00029\ \textcolor{comment}{\ ***********************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00038}\doxymbox{\hyperlink{group__THE__EventBits_ga15a3101461672e76c955af8d796f16e6}{00038}}\ \textcolor{preprocessor}{\#define\ THE\_CMD\_BIT\_SUCCESS\ (1\ <<\ 0)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00041}\doxymbox{\hyperlink{group__THE__EventBits_ga704cabf79e21a78e76341f89be56b8c5}{00041}}\ \textcolor{preprocessor}{\#define\ THE\_CMD\_BIT\_FAILURE\ (1\ <<\ 1)}}
 \DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00042}00042\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00053}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga2ca67bd40131272ebd551313445f7b6c}{00053}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_WAIT(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (deadline\ !=\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00057}00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ currentTick\ =\ xTaskGetTickCount();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (deadline\ <=\ currentTick)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ char\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ sizeof(logMsg),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Deadline\ for\ task\ notification\ has\ already\ passed"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ ticksUntilDeadline\ =\ deadline\ -\/\ currentTick;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (ulTaskNotifyTake(pdTRUE,\ ticksUntilDeadline)\ ==\ 0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ char\ logMsg[60];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(logMsg,\ sizeof(logMsg),\ "{}Timeout\ waiting\ for\ notification\ after\ \%u\ ms"{},\ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (unsigned\ int)(pdTICKS\_TO\_MS(ticksUntilDeadline)));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LOG\_ERROR(logMsg);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ kStatus\_Fail;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00078}00078\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00084}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5c965e341ca7a2a09eeaeca393b9bf24}{00084}}\ \textcolor{preprocessor}{\#define\ THE\_TASK\_SAFE\_COMPLETE(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ THE\_TASK\_SAFE\_WAIT(deadline)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \ \ return\ kStatus\_Success;}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00087}00087\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00088}00088\ \textcolor{comment}{/***************************}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00089}00089\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00090}00090\ \textcolor{comment}{\ ***************************/}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00091}00091\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00092}00092\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00093}00093\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00094}00094\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00044}\doxymbox{\hyperlink{group__THE__EventBits_gacfc9bcc5fa7c9890752518fb9cb97040}{00044}}\ \textcolor{preprocessor}{\#define\ THE\_CMD\_BIT\_TIMEOUT\ (1\ <<\ 2)}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00048}00048\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00049}00049\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00050}00050\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00052}\doxymbox{\hyperlink{struct__THE__CmdHandleImpl}{00052}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct__THE__CmdHandleImpl}{\_THE\_CmdHandleImpl}}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00054}\doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a5a8f978f88c7b822a06e824435f5cd38}{00054}}\ \ \ \ \ EventGroupHandle\_t\ \doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a5a8f978f88c7b822a06e824435f5cd38}{eventGroup}};}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00055}\doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a4f7ff09dacc8b9ce27315af7c2660c7e}{00055}}\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a4f7ff09dacc8b9ce27315af7c2660c7e}{used}};}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00056}\doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a5fb04743e9edaa738bec73c4a1fffd00}{00056}}\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct__THE__CmdHandleImpl_a5fb04743e9edaa738bec73c4a1fffd00}{ref\_count}};}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00057}\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{00057}}\ \}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\_CmdHandleImpl\_t}};}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00059}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{00059}}\ \textcolor{keyword}{typedef}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\_CmdHandleImpl\_t}}*\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00061}00061\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00062}00062\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00063}00063\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00065}00065\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00066}00066\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00067}00067\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00074}\doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{00074}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ TickType\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(uint32\_t\ timeout\_ms)}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{return}\ xTaskGetTickCount()\ +\ pdMS\_TO\_TICKS(timeout\_ms);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00087}00087\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga67fa33f43a116cd6ed312c88f03b22a9}{THE\_init\_cmd\_handles}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\_CmdHandleImpl\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},\ \textcolor{keywordtype}{size\_t}\ maxHandles);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00094}00094\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga846138383b7f91763f8bed3634d6932c}{THE\_notify\_task\_success}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
 \DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00095}00095\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00096}00096\ \textcolor{comment}{/**************************************}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00097}00097\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00098}00098\ \textcolor{comment}{\ **************************************/}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00099}00099\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00109}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{00109}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga08925a059e6700fb72a7f5d2f766c3f8}{THE\_notify\_task\_result}}(TaskHandle\_t\ taskHandle,\ status\_t\ result)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00110}00110\ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00112}00112\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ result\ ==\ kStatus\_Success\ ?\ 1\ :\ 0,\ eSetValueWithOverwrite);}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00114}00114\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00115}00115\ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00116}00116\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00125}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{00125}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga63d908e4fc48454fffec2be6519f2b7d}{THE\_notify\_task\_success}}(TaskHandle\_t\ taskHandle)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00126}00126\ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00127}00127\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00128}00128\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ 1,\ eSetValueWithOverwrite);}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00130}00130\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00131}00131\ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00132}00132\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00141}\doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{00141}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga092cb248a6564936c93f102e41d63ca5}{THE\_notify\_task\_failure}}(TaskHandle\_t\ taskHandle)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00142}00142\ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (taskHandle\ !=\ NULL)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00144}00144\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ xTaskNotify(taskHandle,\ 0,\ eSetValueWithOverwrite);}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00146}00146\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00147}00147\ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00148}00148\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00154}\doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{00154}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ TickType\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(uint32\_t\ timeout\_ms)}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00155}00155\ \{}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00156}00156\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{return}\ xTaskGetTickCount()\ +\ pdMS\_TO\_TICKS(timeout\_ms);}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00158}00158\ \}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00159}00159\ \ \textcolor{comment}{//\ End\ of\ TaskHelpers\_Module}}
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00161}00161\ }
-\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00162}00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TASK\_HELPERS\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00101}00101\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga300435f1a1315edfe34079ed3c761ad8}{THE\_notify\_task\_failure}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00108}00108\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gae10d3bf6782fd0d63df8a7df0314a240}{THE\_notify\_task\_timeout}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00118}00118\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga984e958b48ccd52da50b397cec5d5862}{THE\_get\_cmd\_handle}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}*\ cmdHandle,\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\_CmdHandleImpl\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ maxHandles);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00126}00126\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gae219878a5b43d214706e0bb1544439fd}{THE\_add\_cmd\_handle\_ref}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00133}00133\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}{THE\_remove\_cmd\_handle\_ref}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00144}00144\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gafb19cdad56a656c066591af5a1f59843}{THE\_send\_cmd}}(QueueHandle\_t\ xQueue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \textcolor{keyword}{const}\ pvItemToQueue,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00165}00165\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}{THE\_cmd\_wait\_result}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle,\ TickType\_t\ deadline,\ EventBits\_t*\ outBits);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00184}00184\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga76b5e525079b87157a9635404a9d758a}{THE\_cmd\_check\_result}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle,\ EventBits\_t*\ outBits);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00209}00209\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gaa5bb810521e5bb62bec71a8e00db07c8}{THE\_cmd\_wait\_any}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},\ \textcolor{keywordtype}{size\_t}\ count,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}*\ outCompletedIndex,\ EventBits\_t*\ outBits);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00234}00234\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga86d88e2fd991263eb6d5c88e2adc0838}{THE\_cmd\_check\_any}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},\ \textcolor{keywordtype}{size\_t}\ count,\ \textcolor{keywordtype}{size\_t}*\ outCompletedIndex,}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EventBits\_t*\ outBits);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00258}00258\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga4cf6dcb5dd2295e30aeac7b145783b76}{THE\_cmd\_wait\_all}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},\ \textcolor{keywordtype}{size\_t}\ count,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EventBits\_t*\ outResults);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00280}00280\ status\_t\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga96ff186bcb816577b6c27257a3bec27e}{THE\_cmd\_check\_all}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}*\ \doxymbox{\hyperlink{motor_8c_ab9a492cc408d9360689e535ca6ad823a}{cmdHandles}},\ \textcolor{keywordtype}{size\_t}\ count,\ EventBits\_t*\ outResults);}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00281}00281\ \ \textcolor{comment}{//\ End\ of\ TaskHelpers\_Module}}
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{task__helpers_8h_source_l00284}00284\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TASK\_HELPERS\_H\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

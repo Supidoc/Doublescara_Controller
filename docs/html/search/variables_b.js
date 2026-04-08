@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['reductionfactor_0',['reductionFactor',['../struct__MTR__MotorHandleImpl.html#a068b88abfa0f8d3412005f860a64932a',1,'_MTR_MotorHandleImpl::reductionFactor'],['../struct__MTR__MotorConfig.html#a709d3bcd730c3e06ef9653b4499557f8',1,'_MTR_MotorConfig::reductionFactor']]],
-  ['reg_5faddr_1',['reg_addr',['../struct__TMC__Write__Datagram.html#a2bd5bcb4f35c7f1c5c03f00b0f7e9622',1,'_TMC_Write_Datagram::reg_addr'],['../struct__TMC__Read__Datagram.html#a63bf2bc0062d3a53d28bac7f6f049bee',1,'_TMC_Read_Datagram::reg_addr']]],
-  ['reserved_2',['reserved',['../struct__TMC__Write__Datagram.html#a09ddc2854e31e9da2f15eb71527f588b',1,'_TMC_Write_Datagram::reserved'],['../struct__TMC__Read__Datagram.html#a829402b66a89ae63b5a7df508aead65e',1,'_TMC_Read_Datagram::reserved']]],
-  ['revolutions_3',['revolutions',['../struct__MTR__MoveRevolutionsCmdData.html#a5a758474a2036011e5568d27e5d15a1f',1,'_MTR_MoveRevolutionsCmdData']]]
+  ['paralleltasks_0',['parallelTasks',['../motor_8c.html#a3e6fa91eaf6f2ee937922906daef8fad',1,'motor.c']]],
+  ['pcamutex_1',['pcaMutex',['../pca9555a_8c.html#ab6807d601449a7e5b34c653b9ee1680f',1,'pca9555a.c']]],
+  ['phasestepcount_2',['phaseStepCount',['../struct__STP__StepperMovement.html#a839988503e15f6d028d4cea673f3af3f',1,'_STP_StepperMovement']]],
+  ['pindirection_3',['pinDirection',['../struct__PCA__Pin__Config.html#ae632ef3afae76532a6d42f020c7e76a2',1,'_PCA_Pin_Config']]],
+  ['polarityinversion_4',['polarityInversion',['../struct__PCA__Pin__Config.html#a1a3d8967b590c8ca632f3db14de54e03',1,'_PCA_Pin_Config']]],
+  ['previousholdcurrent_5',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]]
 ];

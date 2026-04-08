@@ -16,6 +16,8 @@
 #include "fsl_lpuart.h"
 #include "fsl_lpuart_freertos.h"
 #include "fsl_gpio.h"
+#include "fsl_i2c.h"
+#include "fsl_i2c_freertos.h"
 #include "ff.h"
 #include "diskio.h"
 
@@ -51,6 +53,31 @@ extern "C" {
 #define LPUART0_IRQ_PRIORITY 7
 /* Alias for GPIOA peripheral */
 #define GPIOA_GPIO GPIOA
+/* BOARD_InitPeripherals defines for I2C0 */
+/* Definition of peripheral ID */
+#define I2C0_PERIPHERAL I2C0
+/* Definition of the clock source */
+#define I2C0_CLOCK_SOURCE I2C0_CLK_SRC
+/* Definition of the clock source frequency */
+#define I2C0_CLK_FREQ CLOCK_GetFreq(I2C0_CLOCK_SOURCE)
+/* I2C0 interrupt vector ID (number). */
+#define I2C0_IRQN I2C0_IRQn
+/* I2C0 interrupt vector priority. */
+#define I2C0_IRQ_PRIORITY 7
+/* Definition of peripheral ID */
+#define UART0_PERIPHERAL UART0
+/* Definition of the clock source frequency */
+#define UART0_CLOCK_SOURCE CLOCK_GetFreq(UART0_CLK_SRC)
+/* Definition of the backround buffer size */
+#define UART0_BACKGROUND_BUFFER_SIZE 32
+/* UART0 interrupt vector ID (number). */
+#define UART0_SERIAL_RX_TX_IRQN UART0_RX_TX_IRQn
+/* UART0 interrupt vector priority. */
+#define UART0_SERIAL_RX_TX_IRQ_PRIORITY 7
+/* UART0 interrupt vector ID (number). */
+#define UART0_SERIAL_ERROR_IRQN UART0_ERR_IRQn
+/* UART0 interrupt vector priority. */
+#define UART0_SERIAL_ERROR_IRQ_PRIORITY 7
 
 /***********************************************************************************************************************
  * Global variables
@@ -61,6 +88,11 @@ extern uart_rtos_config_t UART1_rtos_config;
 extern lpuart_rtos_handle_t LPUART0_rtos_handle;
 extern lpuart_handle_t LPUART0_lpuart_handle;
 extern lpuart_rtos_config_t LPUART0_rtos_config;
+extern i2c_rtos_handle_t I2C0_rtosHandle;
+extern const i2c_master_config_t I2C0_config;
+extern uart_rtos_handle_t UART0_rtos_handle;
+extern uart_handle_t UART0_uart_handle;
+extern uart_rtos_config_t UART0_rtos_config;
 /* FATFS System object */
 extern FATFS FATFS_System_0;
 

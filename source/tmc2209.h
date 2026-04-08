@@ -312,6 +312,8 @@ status_t TMC_set_microstepping_async(TMC_Handle_t handle, TMC_MICROSTEPPING_t mi
  */
 status_t TMC_microstepping_uint_to_enum(uint16_t value, TMC_MICROSTEPPING_t* microstepping);
 
+status_t TMC_microstepping_enum_to_uint(TMC_MICROSTEPPING_t in, uint16_t* out);
+
 /**
  * @brief Sets the IHOLD current divider asynchronously.
  *
@@ -377,6 +379,53 @@ status_t TMC_set_irun_divider_async(TMC_Handle_t handle, uint8_t irun, TickType_
  */
 status_t TMC_current_to_divider(float desired_current, TMC_RoundingMode_t rounding,
                                 uint8_t* divider);
+
+/**
+ * @brief Enables freewheeling mode for a TMC2209 driver asynchronously.
+ *
+ * When enabled, the hold current is minimized, allowing the motor to rotate freely.
+ *
+ * @param[in] handle Handle for the TMC2209 driver to configure.
+ * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs.
+ */
+status_t TMC_enable_freewheeling_async(TMC_Handle_t handle, TickType_t deadline,
+                                       THE_CmdHandle_t* cmdHandle);
+
+/**
+ * @brief Disables freewheeling mode for a TMC2209 driver asynchronously.
+ *
+ * When disabled, the hold current is restored to its previous value.
+ *
+ * @param[in] handle Handle for the TMC2209 driver to configure.
+ * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs.
+ */
+status_t TMC_disable_freewheeling_async(TMC_Handle_t handle, TickType_t deadline,
+                                        THE_CmdHandle_t* cmdHandle);
+
+/**
+ * @brief Sets freewheeling mode for a TMC2209 driver asynchronously.
+ *
+ * When enabled (enabled=1), the hold current is minimized, allowing the motor to rotate freely.
+ * When disabled (enabled=0), the hold current is restored to its previous value.
+ *
+ * @param[in] handle Handle for the TMC2209 driver to configure.
+ * @param[in] enabled 1 to enable freewheeling, 0 to disable and restore normal operation.
+ * @param[in] deadline Deadline for the operation.
+ * @param[out] cmdHandle Pointer to receive command handle for awaiting completion.
+ *
+ * @return kStatus_Success if the command is successfully queued.
+ *         kStatus_Fail if the queue is full, handle is NULL, cmdHandle is NULL, or an error occurs.
+ */
+status_t TMC_set_freewheeling_async(TMC_Handle_t handle, uint8_t enabled, TickType_t deadline,
+                                    THE_CmdHandle_t* cmdHandle);
 
 /** @} */ // End of TMC2209_Module
 

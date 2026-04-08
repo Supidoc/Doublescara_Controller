@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['task_5fhelpers_2eh_0',['task_helpers.h',['../task__helpers_8h.html',1,'']]],
-  ['tmc2209_2ec_1',['tmc2209.c',['../tmc2209_8c.html',1,'']]],
-  ['tmc2209_2eh_2',['tmc2209.h',['../tmc2209_8h.html',1,'']]]
+  ['scara_5fkinematics_2ec_0',['scara_kinematics.c',['../scara__kinematics_8c.html',1,'']]],
+  ['scara_5fkinematics_2eh_1',['scara_kinematics.h',['../scara__kinematics_8h.html',1,'']]],
+  ['semihost_5fhardfault_2ec_2',['semihost_hardfault.c',['../semihost__hardfault_8c.html',1,'']]],
+  ['step_2ec_3',['step.c',['../step_8c.html',1,'']]],
+  ['step_2eh_4',['step.h',['../step_8h.html',1,'']]]
 ];

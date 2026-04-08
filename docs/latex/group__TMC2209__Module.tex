@@ -22,7 +22,9 @@ struct \doxymbox{\hyperlink{struct__TMC__Config}{\+\_\+\+TMC\+\_\+\+Config}}
 \+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga6a1b5e4db27fe14a15171351e35c3493}{TMC\+\_\+\+COMMAND\+\_\+\+QUEUE\+\_\+\+LENGTH}}~10
 \begin{DoxyCompactList}\small\item\em Maximum length of the TMC command queue. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga4e94e6caf9a3151acb26285bb3319b31}{TMC\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}~5
-\begin{DoxyCompactList}\small\item\em Maximum number of TMC2209 handles that can be created. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Maximum number of TMC2209 handles that can be created. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c}{TMC\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}~20
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -77,20 +79,28 @@ void \doxymbox{\hyperlink{group__TMC2209__Module_ga4d6999bb2640adbe2a2fce2c6ec57
 \begin{DoxyCompactList}\small\item\em Task function for processing TMC2209 commands. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga64a53e85523cba9e1abb7f7a29baafa4}{TMC\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
 \begin{DoxyCompactList}\small\item\em Retrieves the default configuration for a TMC2209 driver handle. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga8af8a4f06ac58d61065c3558c2d6b80c}{TMC\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gafe1ec1a11587ddb0b181d1d7b85353dc}{TMC\+\_\+init\+\_\+handle\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga9c9c009ee4ec2f83359b0bac747d3a02}{TMC\+\_\+get\+\_\+handle\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \begin{DoxyCompactList}\small\item\em Retrieves a TMC2209 handle by its label. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaee4ca72fd373cde77461813cd2aa69fc}{TMC\+\_\+set\+\_\+microstepping}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gac5f5a7c8a0624a8224f80955f53a69a7}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint8\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaae7d0a36006ff54ead11d8fc09ac3a9b}{TMC\+\_\+set\+\_\+microstepping\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga9b6a1c1f195a63a7e399801731e14b7b}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint16\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
 \begin{DoxyCompactList}\small\item\em Converts a uint8\+\_\+t microstepping value to the corresponding enum member. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064}{TMC\+\_\+set\+\_\+ihold\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously via task queue. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce}{TMC\+\_\+set\+\_\+irun\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously via task queue. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga72ae6a8522043103e2878716769f3fd5}{TMC\+\_\+microstepping\+\_\+enum\+\_\+to\+\_\+uint}} (\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} in, uint16\+\_\+t \texorpdfstring{$\ast$}{*}out)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga6d1b55916cc95a8af771c80c836ff7bc}{TMC\+\_\+set\+\_\+ihold\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga747d58dccb7f2e8d339f8e646b6e56d3}{TMC\+\_\+set\+\_\+irun\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga78b08cc2828dcca1085ed6205332ea08}{TMC\+\_\+current\+\_\+to\+\_\+divider}} (float desired\+\_\+current, \doxymbox{\hyperlink{group__TMC2209__Module_ga81726756d4e5751b52c7841141c8e8b1}{TMC\+\_\+\+Rounding\+Mode\+\_\+t}} rounding, uint8\+\_\+t \texorpdfstring{$\ast$}{*}divider)
-\begin{DoxyCompactList}\small\item\em Converts a desired current to a TMC2209 current divider value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Converts a desired current to a TMC2209 current divider value. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd6d97b09da63b808b34df37ad1ad69d}{TMC\+\_\+enable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga99cab501c7202f88a4f3a12520ecb04e}{TMC\+\_\+disable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Disables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd60da6e8f316771a0f91f4edb92b586}{TMC\+\_\+set\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -113,7 +123,7 @@ Maximum length of the TMC command queue.
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00045}{45}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 \Hypertarget{group__TMC2209__Module_ga01c24c42cd5b0d09e5cb3e89083f97b3}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_CONFIRM\_WRITES@{TMC\_CONFIRM\_WRITES}}
 \index{TMC\_CONFIRM\_WRITES@{TMC\_CONFIRM\_WRITES}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -127,7 +137,17 @@ Enable write confirmation for TMC2209 configuration commands.
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00044}{44}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+
+\Hypertarget{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_MAX\_CMD\_HANDLE\_COUNT@{TMC\_MAX\_CMD\_HANDLE\_COUNT}}
+\index{TMC\_MAX\_CMD\_HANDLE\_COUNT@{TMC\_MAX\_CMD\_HANDLE\_COUNT}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_MAX\_CMD\_HANDLE\_COUNT}{TMC\_MAX\_CMD\_HANDLE\_COUNT}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c} 
+\+\#define TMC\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT~20}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 \Hypertarget{group__TMC2209__Module_ga4e94e6caf9a3151acb26285bb3319b31}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_MAX\_HANDLE\_COUNT@{TMC\_MAX\_HANDLE\_COUNT}}
 \index{TMC\_MAX\_HANDLE\_COUNT@{TMC\_MAX\_HANDLE\_COUNT}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -141,7 +161,7 @@ Maximum number of TMC2209 handles that can be created.
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00054}{54}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 
 
@@ -170,7 +190,7 @@ Opaque pointer to the TMC2209 handle implementation.
 
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00155}{155}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00162}{162}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 \Hypertarget{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_MICROSTEPPING\_t@{TMC\_MICROSTEPPING\_t}}
 \index{TMC\_MICROSTEPPING\_t@{TMC\_MICROSTEPPING\_t}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -295,7 +315,7 @@ TMC\+\_\+\+MS\+\_\+\+FULL&Full step. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00081}{81}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 \Hypertarget{group__TMC2209__Module_ga041954e578c45fc0f4ccb00b80014d8f}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!\_TMC\_RoundingMode@{\_TMC\_RoundingMode}}
 \index{\_TMC\_RoundingMode@{\_TMC\_RoundingMode}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -329,7 +349,7 @@ TMC\+\_\+\+ROUND\+\_\+\+NEAREST&Round to nearest integer. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00101}{101}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00108}{108}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 \Hypertarget{group__TMC2209__Module_gad84e465cc543696ae6618635f2dc17c4}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!\_TMC\_SerialAddress@{\_TMC\_SerialAddress}}
 \index{\_TMC\_SerialAddress@{\_TMC\_SerialAddress}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -369,7 +389,7 @@ TMC\+\_\+\+SERIAL\+\_\+\+ADDRESS\+\_\+3&Serial address 3. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00059}{59}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8h_source_l00065}{65}} of file \doxymbox{\hyperlink{tmc2209_8h_source}{tmc2209.\+h}}.
 
 
 
@@ -410,11 +430,67 @@ Divider values outside the valid range \+[0, 31]\+ will cause the function to re
 Higher divider values result in lower output currents.
 \end{DoxyNote}
 \begin{DoxySeeAlso}{See also}
-\doxylink{group__TMC2209__Module_ga81726756d4e5751b52c7841141c8e8b1}{TMC\+\_\+\+Rounding\+Mode\+\_\+t}, \doxylink{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064}{TMC\+\_\+set\+\_\+ihold\+\_\+divider()}, \doxylink{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce}{TMC\+\_\+set\+\_\+irun\+\_\+divider()} 
+\doxylink{group__TMC2209__Module_ga81726756d4e5751b52c7841141c8e8b1}{TMC\+\_\+\+Rounding\+Mode\+\_\+t}, TMC\+\_\+set\+\_\+ihold\+\_\+divider(), TMC\+\_\+set\+\_\+irun\+\_\+divider() 
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00369}{369}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00417}{417}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{group__TMC2209__Module_ga99cab501c7202f88a4f3a12520ecb04e}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_disable\_freewheeling\_async@{TMC\_disable\_freewheeling\_async}}
+\index{TMC\_disable\_freewheeling\_async@{TMC\_disable\_freewheeling\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_disable\_freewheeling\_async()}{TMC\_disable\_freewheeling\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga99cab501c7202f88a4f3a12520ecb04e} 
+status\+\_\+t TMC\+\_\+disable\+\_\+freewheeling\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Disables freewheeling mode for a TMC2209 driver asynchronously. 
+
+When disabled, the hold current is restored to its previous value.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Handle for the TMC2209 driver to configure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full, handle is NULL, cmd\+Handle is NULL, or an error occurs. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00387}{387}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{group__TMC2209__Module_gacd6d97b09da63b808b34df37ad1ad69d}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_enable\_freewheeling\_async@{TMC\_enable\_freewheeling\_async}}
+\index{TMC\_enable\_freewheeling\_async@{TMC\_enable\_freewheeling\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_enable\_freewheeling\_async()}{TMC\_enable\_freewheeling\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_gacd6d97b09da63b808b34df37ad1ad69d} 
+status\+\_\+t TMC\+\_\+enable\+\_\+freewheeling\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Enables freewheeling mode for a TMC2209 driver asynchronously. 
+
+When enabled, the hold current is minimized, allowing the motor to rotate freely.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Handle for the TMC2209 driver to configure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full, handle is NULL, cmd\+Handle is NULL, or an error occurs. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00370}{370}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{group__TMC2209__Module_ga64a53e85523cba9e1abb7f7a29baafa4}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_get\_default\_config@{TMC\_get\_default\_config}}
 \index{TMC\_get\_default\_config@{TMC\_get\_default\_config}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -438,7 +514,7 @@ k\+Status\+\_\+\+Success if the default configuration was successfully retrieved
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00423}{423}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00473}{473}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{group__TMC2209__Module_ga9c9c009ee4ec2f83359b0bac747d3a02}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_get\_handle\_by\_label@{TMC\_get\_handle\_by\_label}}
 \index{TMC\_get\_handle\_by\_label@{TMC\_get\_handle\_by\_label}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -464,7 +540,7 @@ k\+Status\+\_\+\+Success if a handle with the specified label is found and retur
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00441}{441}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00491}{491}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{group__TMC2209__Module_ga626120616f06e287f92803166d5b38f3}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_init@{TMC\_init}}
 \index{TMC\_init@{TMC\_init}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -491,45 +567,54 @@ k\+Status\+\_\+\+Success if the initialization is successful. k\+Status\+\_\+\+F
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00133}{133}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00150}{150}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
-\Hypertarget{group__TMC2209__Module_ga8af8a4f06ac58d61065c3558c2d6b80c}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_init\_handle@{TMC\_init\_handle}}
-\index{TMC\_init\_handle@{TMC\_init\_handle}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
-\doxysubsubsection{\texorpdfstring{TMC\_init\_handle()}{TMC\_init\_handle()}}
-{\footnotesize\ttfamily \label{group__TMC2209__Module_ga8af8a4f06ac58d61065c3558c2d6b80c} 
-status\+\_\+t TMC\+\_\+init\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}}}]{config}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__TMC2209__Module_gafe1ec1a11587ddb0b181d1d7b85353dc}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_init\_handle\_async@{TMC\_init\_handle\_async}}
+\index{TMC\_init\_handle\_async@{TMC\_init\_handle\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_init\_handle\_async()}{TMC\_init\_handle\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_gafe1ec1a11587ddb0b181d1d7b85353dc} 
+status\+\_\+t TMC\+\_\+init\+\_\+handle\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}}}]{config}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Initializes a TMC2209 handle with default configuration. 
+Initializes a TMC2209 handle with default configuration asynchronously. 
 
-This function queues a default initialization command for a TMC2209 driver handle. The initialization is performed asynchronously by the TMC\+\_\+task. The calling task will wait for the completion until the deadline parameter.
+This function queues a default initialization command for a TMC2209 driver handle. The initialization is performed asynchronously by the TMC\+\_\+task. The caller can await completion using the returned command handle.
 
 
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em config} & TMC config structure to initialize the handle with. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the initialization command.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the initialization command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
 \hline
 \end{DoxyParams}
-\begin{DoxyNote}{Note}
-If deadline is 0, the function will not wait for completion.
-\end{DoxyNote}
 \begin{DoxyReturn}{Returns}
-k\+Status\+\_\+\+Success if the command is successfully queued and completed. k\+Status\+\_\+\+Fail if the queue is full, the deadline is reached or an error occurs.
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full, cmd\+Handle is NULL, or an error occurs.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
-ul\+Task\+Notify\+Take() 
+\doxylink{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}{THE\+\_\+cmd\+\_\+wait\+\_\+result()} 
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00152}{152}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00179}{179}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
-\Hypertarget{group__TMC2209__Module_gac5f5a7c8a0624a8224f80955f53a69a7}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_microstepping\_uint\_to\_enum@{TMC\_microstepping\_uint\_to\_enum}}
+\Hypertarget{group__TMC2209__Module_ga72ae6a8522043103e2878716769f3fd5}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_microstepping\_enum\_to\_uint@{TMC\_microstepping\_enum\_to\_uint}}
+\index{TMC\_microstepping\_enum\_to\_uint@{TMC\_microstepping\_enum\_to\_uint}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_microstepping\_enum\_to\_uint()}{TMC\_microstepping\_enum\_to\_uint()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga72ae6a8522043103e2878716769f3fd5} 
+status\+\_\+t TMC\+\_\+microstepping\+\_\+enum\+\_\+to\+\_\+uint (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}}}]{in}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00294}{294}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{group__TMC2209__Module_ga9b6a1c1f195a63a7e399801731e14b7b}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_microstepping\_uint\_to\_enum@{TMC\_microstepping\_uint\_to\_enum}}
 \index{TMC\_microstepping\_uint\_to\_enum@{TMC\_microstepping\_uint\_to\_enum}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
 \doxysubsubsection{\texorpdfstring{TMC\_microstepping\_uint\_to\_enum()}{TMC\_microstepping\_uint\_to\_enum()}}
-{\footnotesize\ttfamily \label{group__TMC2209__Module_gac5f5a7c8a0624a8224f80955f53a69a7} 
-status\+\_\+t TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{microstepping}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga9b6a1c1f195a63a7e399801731e14b7b} 
+status\+\_\+t TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{microstepping}{}\end{DoxyParamCaption})}
 
 
 
@@ -539,7 +624,7 @@ This function converts a raw uint8\+\_\+t microstepping value to the correspondi
 
 
 \begin{DoxyParams}[1]{Parameters}
-\doxymbox{\texttt{in}}  & {\em value} & The uint8\+\_\+t microstepping value to convert (0-\/8). \\
+\doxymbox{\texttt{in}}  & {\em value} & The uint16\+\_\+t microstepping value to convert. \\
 \hline
 \doxymbox{\texttt{out}}  & {\em microstepping} & Pointer to store the converted enum value. Must not be NULL.\\
 \hline
@@ -552,19 +637,49 @@ k\+Status\+\_\+\+Success if the value matches a valid enum member. k\+Status\+\_
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00262}{262}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00253}{253}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
-\Hypertarget{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_ihold\_divider@{TMC\_set\_ihold\_divider}}
-\index{TMC\_set\_ihold\_divider@{TMC\_set\_ihold\_divider}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
-\doxysubsubsection{\texorpdfstring{TMC\_set\_ihold\_divider()}{TMC\_set\_ihold\_divider()}}
-{\footnotesize\ttfamily \label{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064} 
-status\+\_\+t TMC\+\_\+set\+\_\+ihold\+\_\+divider (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{ihold}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__TMC2209__Module_gacd60da6e8f316771a0f91f4edb92b586}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_freewheeling\_async@{TMC\_set\_freewheeling\_async}}
+\index{TMC\_set\_freewheeling\_async@{TMC\_set\_freewheeling\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_set\_freewheeling\_async()}{TMC\_set\_freewheeling\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_gacd60da6e8f316771a0f91f4edb92b586} 
+status\+\_\+t TMC\+\_\+set\+\_\+freewheeling\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{enabled}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Sets the IHOLD current divider asynchronously via task queue. 
+Sets freewheeling mode for a TMC2209 driver asynchronously. 
 
-Queues a command to set the hold current divider value. The operation is executed in the TMC task context. The calling task will wait for the completion until the deadline parameter.
+When enabled (enabled=1), the hold current is minimized, allowing the motor to rotate freely. When disabled (enabled=0), the hold current is restored to its previous value.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Handle for the TMC2209 driver to configure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em enabled} & 1 to enable freewheeling, 0 to disable and restore normal operation. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full, handle is NULL, cmd\+Handle is NULL, or an error occurs. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00404}{404}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+
+\Hypertarget{group__TMC2209__Module_ga6d1b55916cc95a8af771c80c836ff7bc}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_ihold\_divider\_async@{TMC\_set\_ihold\_divider\_async}}
+\index{TMC\_set\_ihold\_divider\_async@{TMC\_set\_ihold\_divider\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_set\_ihold\_divider\_async()}{TMC\_set\_ihold\_divider\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga6d1b55916cc95a8af771c80c836ff7bc} 
+status\+\_\+t TMC\+\_\+set\+\_\+ihold\+\_\+divider\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{ihold}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Sets the IHOLD current divider asynchronously. 
+
+Queues a command to set the hold current divider value. The operation is executed in the TMC task context. The caller can await completion using the returned command handle.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -572,27 +687,29 @@ Queues a command to set the hold current divider value. The operation is execute
 \hline
 \doxymbox{\texttt{in}}  & {\em ihold} & The hold current divider value (0-\/31). \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-k\+Status\+\_\+\+Success if command was successfully queued and completed. k\+Status\+\_\+\+Fail if queue operation failed or deadline is reached. 
+k\+Status\+\_\+\+Success if command was successfully queued. k\+Status\+\_\+\+Fail if queue operation failed, handle is NULL, or cmd\+Handle is NULL. 
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00303}{303}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00336}{336}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
-\Hypertarget{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_irun\_divider@{TMC\_set\_irun\_divider}}
-\index{TMC\_set\_irun\_divider@{TMC\_set\_irun\_divider}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
-\doxysubsubsection{\texorpdfstring{TMC\_set\_irun\_divider()}{TMC\_set\_irun\_divider()}}
-{\footnotesize\ttfamily \label{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce} 
-status\+\_\+t TMC\+\_\+set\+\_\+irun\+\_\+divider (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{irun}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__TMC2209__Module_ga747d58dccb7f2e8d339f8e646b6e56d3}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_irun\_divider\_async@{TMC\_set\_irun\_divider\_async}}
+\index{TMC\_set\_irun\_divider\_async@{TMC\_set\_irun\_divider\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_set\_irun\_divider\_async()}{TMC\_set\_irun\_divider\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_ga747d58dccb7f2e8d339f8e646b6e56d3} 
+status\+\_\+t TMC\+\_\+set\+\_\+irun\+\_\+divider\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{irun}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Sets the IRUN current divider asynchronously via task queue. 
+Sets the IRUN current divider asynchronously. 
 
-Queues a command to set the run current divider value and returns immediately. The operation is executed in the TMC task context. The calling task will wait for the completion until the deadline parameter.
+Queues a command to set the run current divider value. The operation is executed in the TMC task context. The caller can await completion using the returned command handle.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -600,27 +717,29 @@ Queues a command to set the run current divider value and returns immediately. T
 \hline
 \doxymbox{\texttt{in}}  & {\em irun} & The run current divider value (0-\/31). \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-k\+Status\+\_\+\+Success if command was successfully queued and completed. k\+Status\+\_\+\+Fail if queue operation failed or deadline is reached. 
+k\+Status\+\_\+\+Success if command was successfully queued. k\+Status\+\_\+\+Fail if queue operation failed, handle is NULL, or cmd\+Handle is NULL. 
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00336}{336}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00353}{353}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
-\Hypertarget{group__TMC2209__Module_gaee4ca72fd373cde77461813cd2aa69fc}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_microstepping@{TMC\_set\_microstepping}}
-\index{TMC\_set\_microstepping@{TMC\_set\_microstepping}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
-\doxysubsubsection{\texorpdfstring{TMC\_set\_microstepping()}{TMC\_set\_microstepping()}}
-{\footnotesize\ttfamily \label{group__TMC2209__Module_gaee4ca72fd373cde77461813cd2aa69fc} 
-status\+\_\+t TMC\+\_\+set\+\_\+microstepping (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}}}]{microstepping}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__TMC2209__Module_gaae7d0a36006ff54ead11d8fc09ac3a9b}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_set\_microstepping\_async@{TMC\_set\_microstepping\_async}}
+\index{TMC\_set\_microstepping\_async@{TMC\_set\_microstepping\_async}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
+\doxysubsubsection{\texorpdfstring{TMC\_set\_microstepping\_async()}{TMC\_set\_microstepping\_async()}}
+{\footnotesize\ttfamily \label{group__TMC2209__Module_gaae7d0a36006ff54ead11d8fc09ac3a9b} 
+status\+\_\+t TMC\+\_\+set\+\_\+microstepping\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}}}]{microstepping}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Sets the microstepping resolution for a TMC2209 driver. 
+Sets the microstepping resolution for a TMC2209 driver asynchronously. 
 
-This function queues a microstepping configuration command for a TMC2209 driver handle. Setting the microstepping is performed asynchronously by the TMC\+\_\+task. The calling task will wait for the completion until the deadline parameter.
+This function queues a microstepping configuration command for a TMC2209 driver handle. The operation is performed asynchronously by the TMC\+\_\+task. The caller can await completion using the returned command handle.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -628,21 +747,20 @@ This function queues a microstepping configuration command for a TMC2209 driver 
 \hline
 \doxymbox{\texttt{in}}  & {\em microstepping} & The microstepping resolution to set (\doxylink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}). \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive command handle for awaiting completion.\\
 \hline
 \end{DoxyParams}
-\begin{DoxyNote}{Note}
-If deadline is 0, the function will not wait for completion.
-\end{DoxyNote}
 \begin{DoxyReturn}{Returns}
-k\+Status\+\_\+\+Success if the command is successfully queued and completed. k\+Status\+\_\+\+Fail if the queue is full, the deadline is reached or an error occurs.
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full, handle is NULL, cmd\+Handle is NULL, or an error occurs.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
 \doxylink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t} 
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00187}{187}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00195}{195}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 
 \Hypertarget{group__TMC2209__Module_ga4d6999bb2640adbe2a2fce2c6ec570b2}\index{TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}!TMC\_task@{TMC\_task}}
 \index{TMC\_task@{TMC\_task}!TMC2209 Stepper Motor Driver@{TMC2209 Stepper Motor Driver}}
@@ -674,5 +792,5 @@ This function does not return; it is expected to run as a perpetual Free\+RTOS t
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00143}{143}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
+Definition at line \doxymbox{\hyperlink{tmc2209_8c_source_l00170}{170}} of file \doxymbox{\hyperlink{tmc2209_8c_source}{tmc2209.\+c}}.
 

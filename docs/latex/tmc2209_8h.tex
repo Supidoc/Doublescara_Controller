@@ -3,11 +3,12 @@
 {\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
 {\ttfamily \+\#include "{}peripherals.\+h"{}}\newline
 {\ttfamily \+\#include "{}stdint.\+h"{}}\newline
+{\ttfamily \+\#include "{}task\+\_\+helpers.\+h"{}}\newline
 Include dependency graph for tmc2209.\+h:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=333pt]{tmc2209_8h__incl}
+\includegraphics[width=350pt]{tmc2209_8h__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file:\+\nopagebreak
@@ -34,7 +35,9 @@ struct \doxymbox{\hyperlink{struct__TMC__Config}{\+\_\+\+TMC\+\_\+\+Config}}
 \+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga6a1b5e4db27fe14a15171351e35c3493}{TMC\+\_\+\+COMMAND\+\_\+\+QUEUE\+\_\+\+LENGTH}}~10
 \begin{DoxyCompactList}\small\item\em Maximum length of the TMC command queue. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga4e94e6caf9a3151acb26285bb3319b31}{TMC\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}~5
-\begin{DoxyCompactList}\small\item\em Maximum number of TMC2209 handles that can be created. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Maximum number of TMC2209 handles that can be created. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__TMC2209__Module_ga95780650db7177c914d239b38e96281c}{TMC\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}~20
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -89,17 +92,25 @@ void \doxymbox{\hyperlink{group__TMC2209__Module_ga4d6999bb2640adbe2a2fce2c6ec57
 \begin{DoxyCompactList}\small\item\em Task function for processing TMC2209 commands. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga64a53e85523cba9e1abb7f7a29baafa4}{TMC\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
 \begin{DoxyCompactList}\small\item\em Retrieves the default configuration for a TMC2209 driver handle. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga8af8a4f06ac58d61065c3558c2d6b80c}{TMC\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gafe1ec1a11587ddb0b181d1d7b85353dc}{TMC\+\_\+init\+\_\+handle\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_ga2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Initializes a TMC2209 handle with default configuration asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga9c9c009ee4ec2f83359b0bac747d3a02}{TMC\+\_\+get\+\_\+handle\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \begin{DoxyCompactList}\small\item\em Retrieves a TMC2209 handle by its label. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaee4ca72fd373cde77461813cd2aa69fc}{TMC\+\_\+set\+\_\+microstepping}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gac5f5a7c8a0624a8224f80955f53a69a7}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint8\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gaae7d0a36006ff54ead11d8fc09ac3a9b}{TMC\+\_\+set\+\_\+microstepping\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the microstepping resolution for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga9b6a1c1f195a63a7e399801731e14b7b}{TMC\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum}} (uint16\+\_\+t value, \doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}microstepping)
 \begin{DoxyCompactList}\small\item\em Converts a uint8\+\_\+t microstepping value to the corresponding enum member. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gab4c0c981a12a0bb3ae5218fab23f4064}{TMC\+\_\+set\+\_\+ihold\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously via task queue. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga45ffe3a8f5ff405c641670dfd6ae1cce}{TMC\+\_\+set\+\_\+irun\+\_\+divider}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously via task queue. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga72ae6a8522043103e2878716769f3fd5}{TMC\+\_\+microstepping\+\_\+enum\+\_\+to\+\_\+uint}} (\doxymbox{\hyperlink{group__TMC2209__Module_gac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} in, uint16\+\_\+t \texorpdfstring{$\ast$}{*}out)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga6d1b55916cc95a8af771c80c836ff7bc}{TMC\+\_\+set\+\_\+ihold\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IHOLD current divider asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga747d58dccb7f2e8d339f8e646b6e56d3}{TMC\+\_\+set\+\_\+irun\+\_\+divider\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the IRUN current divider asynchronously. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga78b08cc2828dcca1085ed6205332ea08}{TMC\+\_\+current\+\_\+to\+\_\+divider}} (float desired\+\_\+current, \doxymbox{\hyperlink{group__TMC2209__Module_ga81726756d4e5751b52c7841141c8e8b1}{TMC\+\_\+\+Rounding\+Mode\+\_\+t}} rounding, uint8\+\_\+t \texorpdfstring{$\ast$}{*}divider)
-\begin{DoxyCompactList}\small\item\em Converts a desired current to a TMC2209 current divider value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Converts a desired current to a TMC2209 current divider value. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd6d97b09da63b808b34df37ad1ad69d}{TMC\+\_\+enable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_ga99cab501c7202f88a4f3a12520ecb04e}{TMC\+\_\+disable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Disables freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Module_gacd60da6e8f316771a0f91f4edb92b586}{TMC\+\_\+set\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__TMC2209__Module_gaf7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets freewheeling mode for a TMC2209 driver asynchronously. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -29,63 +29,21 @@
  ***********************************/
 
 /**
- * @brief Begin a task-safe operation by capturing the caller's task handle
- *
- * Usage: Place at the beginning of a public task-safe function after parameter validation.
- * Creates a local variable 'callerTaskHandle' that can be used in queue items.
+ * @defgroup THE_EventBits Task Helper Event Bits
+ * @brief Bitmasks for command completion status tracking
+ * @{
  */
-#define THE_TASK_SAFE_BEGIN()                                                                      \
-    TaskHandle_t callerTaskHandle = xTaskGetCurrentTaskHandle();                                   \
-    if (callerTaskHandle == NULL)                                                                  \
-    {                                                                                              \
-        LOG_WARN("Failed to get current task handle");                                             \
-        return kStatus_Fail;                                                                       \
-    }
 
-/**
- * @brief Wait for notification from async operation with a deadline
- *
- * @param deadline Deadline for the operation
- *
- * Usage: Place after queueing the command. Waits for notification and
- * returns kStatus_Fail after deadline passed without receving notifications.
- *
- * @note If deadline is 0, the function will not wait for completion and will return immediately.
- */
-#define THE_TASK_SAFE_WAIT(deadline)                                                               \
-    do                                                                                             \
-    {                                                                                              \
-        if (deadline != 0)                                                                         \
-        {                                                                                          \
-            TickType_t currentTick = xTaskGetTickCount();                                          \
-            if (deadline <= currentTick)                                                           \
-            {                                                                                      \
-                char logMsg[60];                                                                   \
-                snprintf(logMsg, sizeof(logMsg),                                                   \
-                         "Deadline for task notification has already passed");                     \
-                LOG_ERROR(logMsg);                                                                 \
-                return kStatus_Fail;                                                               \
-            }                                                                                      \
-            TickType_t ticksUntilDeadline = deadline - currentTick;                                \
-            if (ulTaskNotifyTake(pdTRUE, ticksUntilDeadline) == 0)                                 \
-            {                                                                                      \
-                char logMsg[60];                                                                   \
-                snprintf(logMsg, sizeof(logMsg), "Timeout waiting for notification after %u ms",   \
-                         (unsigned int)(pdTICKS_TO_MS(ticksUntilDeadline)));                       \
-                LOG_ERROR(logMsg);                                                                 \
-                return kStatus_Fail;                                                               \
-            }                                                                                      \
-        }                                                                                          \
-    } while (0)
+/** @brief Command completed successfully */
+#define THE_CMD_BIT_SUCCESS (1 << 0)
 
-/**
- * @brief Complete task-safe operation pattern: wait and return
- *
- * Combines notification wait with success return.
- */
-#define THE_TASK_SAFE_COMPLETE(deadline)                                                           \
-    THE_TASK_SAFE_WAIT(deadline)                                                                   \
-    return kStatus_Success;
+/** @brief Command failed */
+#define THE_CMD_BIT_FAILURE (1 << 1)
+
+/** @brief Command timed out */
+#define THE_CMD_BIT_TIMEOUT (1 << 2)
+
+/** @} */
 
 /***************************
  *     Public Typedefs     *
@@ -119,21 +77,70 @@ static inline TickType_t THE_deadline_from_timeout_ms(uint32_t timeout_ms)
     return xTaskGetTickCount() + pdMS_TO_TICKS(timeout_ms);
 }
 
+/**
+ * @brief Initialize the command handle pool
+ * @details Sets up the command handle infrastructure for tracking asynchronous
+ *          command execution. Must be called once before using command handles.
+ * @param[in] cmdHandles Pointer to array of command handle structures
+ * @param[in] maxHandles Maximum number of handles in the pool
+ */
 void THE_init_cmd_handles(THE_CmdHandleImpl_t* cmdHandles, size_t maxHandles);
 
+/**
+ * @brief Notify successful completion of a command
+ * @details Sets the THE_CMD_BIT_SUCCESS bit in the command handle's event group
+ * @param[in] cmdHandle Command handle to notify
+ */
 void THE_notify_task_success(THE_CmdHandle_t cmdHandle);
 
+/**
+ * @brief Notify failure of a command
+ * @details Sets the THE_CMD_BIT_FAILURE bit in the command handle's event group
+ * @param[in] cmdHandle Command handle to notify
+ */
 void THE_notify_task_failure(THE_CmdHandle_t cmdHandle);
 
+/**
+ * @brief Notify timeout of a command
+ * @details Sets the THE_CMD_BIT_TIMEOUT bit in the command handle's event group
+ * @param[in] cmdHandle Command handle to notify
+ */
 void THE_notify_task_timeout(THE_CmdHandle_t cmdHandle);
 
+/**
+ * @brief Get an available command handle from the pool
+ * @param[out] cmdHandle Pointer to receive the allocated command handle
+ * @param[in] cmdHandles Pointer to array of command handle structures
+ * @param[in] maxHandles Maximum number of handles in the pool
+ * @return kStatus_Success if a handle was allocated
+ *         kStatus_Fail if no handles are available
+ */
 status_t THE_get_cmd_handle(THE_CmdHandle_t* cmdHandle, THE_CmdHandleImpl_t* cmdHandles,
                             size_t maxHandles);
 
+/**
+ * @brief Increment reference count for a command handle
+ * @details Used to track multiple references to the same command handle
+ * @param[in] cmdHandle Command handle to increment reference for
+ */
 void THE_add_cmd_handle_ref(THE_CmdHandle_t cmdHandle);
 
+/**
+ * @brief Decrement reference count for a command handle
+ * @details When reference count reaches zero, the handle is returned to the pool
+ * @param[in] cmdHandle Command handle to decrement reference for
+ */
 void THE_remove_cmd_handle_ref(THE_CmdHandle_t cmdHandle);
 
+/**
+ * @brief Send a command to a queue with deadline tracking
+ * @param[in] xQueue FreeRTOS queue to send the command to
+ * @param[in] pvItemToQueue Pointer to the item to send
+ * @param[in] deadline Deadline for command completion (in ticks)
+ * @param[in] cmdHandle Command handle for tracking this operation
+ * @return kStatus_Success if command was queued successfully
+ *         kStatus_Fail if queue is full or deadline is invalid
+ */
 status_t THE_send_cmd(QueueHandle_t xQueue, const void* const pvItemToQueue, TickType_t deadline,
                       THE_CmdHandle_t cmdHandle);
 
@@ -144,11 +151,16 @@ status_t THE_send_cmd(QueueHandle_t xQueue, const void* const pvItemToQueue, Tic
  *
  * @param[in] cmdHandle Command handle to wait for.
  * @param[in] deadline Deadline for waiting (in ticks).
- * @param[out] outBits Optional pointer to receive result bits (THE_CMD_BIT_SUCCESS, etc). Can be
- * NULL.
+ * @param[out] outBits Optional pointer to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                      THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT). Can be NULL.
  *
- * @return kStatus_Success if command completed with success bit set.
- *         kStatus_Fail if command failed, timeout, or deadline exceeded.
+ * @return kStatus_Success if command completed with THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if command has THE_CMD_BIT_FAILURE bit set or deadline exceeded.
+ *         kStatus_Timeout if THE_CMD_BIT_TIMEOUT is set.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_wait_result(THE_CmdHandle_t cmdHandle, TickType_t deadline, EventBits_t* outBits);
 
@@ -158,11 +170,16 @@ status_t THE_cmd_wait_result(THE_CmdHandle_t cmdHandle, TickType_t deadline, Eve
  * Polls the command result bits once and returns immediately.
  *
  * @param[in] cmdHandle Command handle to check.
- * @param[out] outBits Optional pointer to receive result bits. Can be NULL.
+ * @param[out] outBits Optional pointer to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                      THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT). Can be NULL.
  *
- * @return kStatus_Success if command completed successfully.
- *         kStatus_Fail if command completed with failure.
- *         kStatus_Timeout if command timed out or is not completed yet.
+ * @return kStatus_Success if command has THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if command has THE_CMD_BIT_FAILURE bit set.
+ *         kStatus_Timeout if THE_CMD_BIT_TIMEOUT is set or command not completed yet.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_check_result(THE_CmdHandle_t cmdHandle, EventBits_t* outBits);
 
@@ -174,12 +191,20 @@ status_t THE_cmd_check_result(THE_CmdHandle_t cmdHandle, EventBits_t* outBits);
  * @param[in] cmdHandles Array of command handles to wait for.
  * @param[in] count Number of handles in the array.
  * @param[in] deadline Deadline for waiting (in ticks).
- * @param[out] outCompletedIndex Optional pointer to receive index of first completed command. Can
- * be NULL.
- * @param[out] outBits Optional pointer to receive result bits of completed command. Can be NULL.
+ * @param[out] outCompletedIndex Optional pointer to receive index of first completed command.
+ *                                Can be NULL.
+ * @param[out] outBits Optional pointer to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                      THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT) of the completed command.
+ *                      Can be NULL.
  *
- * @return kStatus_Success if any command completed successfully.
- *         kStatus_Fail if no commands completed, all failed, or deadline exceeded.
+ * @return kStatus_Success if any command has THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if the first completed command has THE_CMD_BIT_FAILURE bit set
+ *                      or deadline exceeded.
+ *         kStatus_Timeout if THE_CMD_BIT_TIMEOUT is set on first completed command.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_wait_any(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t deadline,
                           size_t* outCompletedIndex, EventBits_t* outBits);
@@ -191,13 +216,20 @@ status_t THE_cmd_wait_any(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
  *
  * @param[in] cmdHandles Array of command handles to check.
  * @param[in] count Number of handles in the array.
- * @param[out] outCompletedIndex Optional pointer to receive index of first completed command. Can
- * be NULL.
- * @param[out] outBits Optional pointer to receive result bits of completed command. Can be NULL.
+ * @param[out] outCompletedIndex Optional pointer to receive index of first completed command.
+ *                                Can be NULL.
+ * @param[out] outBits Optional pointer to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                      THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT) of the first completed command.
+ *                      Can be NULL.
  *
- * @return kStatus_Success if any command completed successfully.
- *         kStatus_Fail if any command completed with failure.
- *         kStatus_Timeout if none are completed yet, or first completed command timed out.
+ * @return kStatus_Success if any command has THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if the first completed command has THE_CMD_BIT_FAILURE bit set.
+ *         kStatus_Timeout if any command is still pending, or first completed has
+ * THE_CMD_BIT_TIMEOUT.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_check_any(THE_CmdHandle_t* cmdHandles, size_t count, size_t* outCompletedIndex,
                            EventBits_t* outBits);
@@ -210,10 +242,18 @@ status_t THE_cmd_check_any(THE_CmdHandle_t* cmdHandles, size_t count, size_t* ou
  * @param[in] cmdHandles Array of command handles to wait for.
  * @param[in] count Number of handles in the array.
  * @param[in] deadline Deadline for waiting (in ticks).
- * @param[out] outResults Optional array to receive result bits for each command. Can be NULL.
+ * @param[out] outResults Optional array to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                         THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT) for each command.
+ *                         Caller must allocate array of size count. Can be NULL.
  *
- * @return kStatus_Success if all commands completed successfully.
- *         kStatus_Fail if any command failed, timed out, or deadline exceeded.
+ * @return kStatus_Success if all commands have THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if any command has THE_CMD_BIT_FAILURE bit set, deadline exceeded,
+ *                      or not all commands completed.
+ *         kStatus_Timeout if any command has THE_CMD_BIT_TIMEOUT bit set.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t deadline,
                           EventBits_t* outResults);
@@ -225,11 +265,17 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
  *
  * @param[in] cmdHandles Array of command handles to check.
  * @param[in] count Number of handles in the array.
- * @param[out] outResults Optional array to receive result bits for each command. Can be NULL.
+ * @param[out] outResults Optional array to receive result bits (THE_CMD_BIT_SUCCESS,
+ *                         THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT) for each command.
+ *                         Caller must allocate array of size count. Can be NULL.
  *
- * @return kStatus_Success if all commands completed successfully.
- *         kStatus_Fail if all commands completed and any command failed.
- *         kStatus_Timeout if any command is still pending, or all completed with timeout only.
+ * @return kStatus_Success if all commands have THE_CMD_BIT_SUCCESS bit set.
+ *         kStatus_Fail if any completed command has THE_CMD_BIT_FAILURE bit set.
+ *         kStatus_Timeout if any command is still pending, or any has THE_CMD_BIT_TIMEOUT.
+ *
+ * @see THE_CMD_BIT_SUCCESS
+ * @see THE_CMD_BIT_FAILURE
+ * @see THE_CMD_BIT_TIMEOUT
  */
 status_t THE_cmd_check_all(THE_CmdHandle_t* cmdHandles, size_t count, EventBits_t* outResults);
 

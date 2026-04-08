@@ -1,5 +1,6 @@
 var struct__STP__CmdQueueItem =
 [
+    [ "cmdHandle", "struct__STP__CmdQueueItem.html#ac2e97995267b8572781f3fcd4ae52eb6", null ],
     [ "config", "struct__STP__CmdQueueItem.html#af454b1494443133c24c459e0f12d3afa", null ],
     [ "data", "struct__STP__CmdQueueItem.html#a6b4b1ded460141f88e98cebded33f45e", null ],
     [ "deadline", "struct__STP__CmdQueueItem.html#ab405d843c893609657f30cf018ff94cd", null ],
@@ -8,6 +9,5 @@ var struct__STP__CmdQueueItem =
     [ "setAcceleration", "struct__STP__CmdQueueItem.html#ac5f14dfc3c45ded48b40a6b6b0188fa5", null ],
     [ "setEndVelocity", "struct__STP__CmdQueueItem.html#ac4e94fc1dc38b9adf92727d16060438e", null ],
     [ "stop", "struct__STP__CmdQueueItem.html#ad1be3530adfbe76982de44162aa76d98", null ],
-    [ "taskHandle", "struct__STP__CmdQueueItem.html#afffdf4e617e02319d724d83b7939bb74", null ],
     [ "type", "struct__STP__CmdQueueItem.html#aab9cd548e1bcfd818bb0b188b89b383a", null ]
 ];

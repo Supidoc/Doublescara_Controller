@@ -1,0 +1,587 @@
+\doxysection{PCA9555A Driver }
+\hypertarget{group__PCA9555A}{}\label{group__PCA9555A}\index{PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__PCA__Pin__Config}{\+\_\+\+PCA\+\_\+\+Pin\+\_\+\+Config}}
+\begin{DoxyCompactList}\small\item\em Pin configuration structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}{PCA\+\_\+\+ADRESS}}~0b0100000
+\begin{DoxyCompactList}\small\item\em 7-\/bit I2C device address for PCA9555A \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}{PCA\+\_\+\+I2\+C\+\_\+\+HANDLE}}~\&I2\+C0\+\_\+rtos\+Handle
+\begin{DoxyCompactList}\small\item\em I2C handle for PCA9555A communication. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9}{\+\_\+\+PCA\+\_\+\+Port}} \doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Port selection for PCA9555A IO expander. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0}{\+\_\+\+PCA\+\_\+\+Pin\+Direction}} \doxymbox{\hyperlink{group__PCA9555A_gaa548f74f46b1c747a1b74e2e5e66b53b}{PCA\+\_\+\+Pin\+Direction\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Pin direction configuration. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192}{\+\_\+\+PCA\+\_\+\+Output\+Level}} \doxymbox{\hyperlink{group__PCA9555A_gabea5f56cc641c3f64ae305576067c040}{PCA\+\_\+\+Output\+Level\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Output level for pin configuration. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd}{\+\_\+\+PCA\+\_\+\+Polarity\+Inversion}} \doxymbox{\hyperlink{group__PCA9555A_gad592aa98f67996ab5bfc9c8e8cc5b8a8}{PCA\+\_\+\+Polarity\+Inversion\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Polarity inversion configuration. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__PCA__Pin__Config}{\+\_\+\+PCA\+\_\+\+Pin\+\_\+\+Config}} \doxymbox{\hyperlink{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}{PCA\+\_\+\+Pin\+\_\+\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Pin configuration structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9}{\+\_\+\+PCA\+\_\+\+Port}} \{ \doxymbox{\hyperlink{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9ab7776e491abb96f57783a9e6dda0f50f}{PCA\+\_\+\+PORT\+\_\+0}} = 0
+, \doxymbox{\hyperlink{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9a29f8ebb0bb244aad271c236e50a9c70f}{PCA\+\_\+\+PORT\+\_\+1}} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em Port selection for PCA9555A IO expander. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0}{\+\_\+\+PCA\+\_\+\+Pin\+Direction}} \{ \doxymbox{\hyperlink{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a0430221f6d3e604bc6a6ae2f8e8cad0a}{PCA\+\_\+\+PIN\+\_\+\+INPUT}} = 1
+, \doxymbox{\hyperlink{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a69fb6720d4a34abf67cac33d2d4e9a4c}{PCA\+\_\+\+PIN\+\_\+\+OUTPUT}} = 0
+ \}
+\begin{DoxyCompactList}\small\item\em Pin direction configuration. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192}{\+\_\+\+PCA\+\_\+\+Output\+Level}} \{ \doxymbox{\hyperlink{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ab28ea4df9c66d589d7742ae6a05b37f6}{PCA\+\_\+\+PIN\+\_\+\+LOW}} = 0
+, \doxymbox{\hyperlink{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ac8543706dbe876419c66618ee5ab1e52}{PCA\+\_\+\+PIN\+\_\+\+HIGH}} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em Output level for pin configuration. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd}{\+\_\+\+PCA\+\_\+\+Polarity\+Inversion}} \{ \doxymbox{\hyperlink{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda854a3c214e7298b458f8eaa63f5141ab}{PCA\+\_\+\+HIGH\+\_\+\+IS\+\_\+\+ONE}} = 0
+, \doxymbox{\hyperlink{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda2f83e1a753be8f1d95cb46415a2c49fc}{PCA\+\_\+\+HIGH\+\_\+\+IS\+\_\+\+ZERO}} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em Polarity inversion configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_gaf361ecffc6ed08119cf72c49d17d0b93}{PCA\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the PCA9555A IO expander. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga9b5fffd5cfa9578b1b7887b90f09fd9c}{PCA\+\_\+init\+\_\+pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin, \doxymbox{\hyperlink{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}{PCA\+\_\+\+Pin\+\_\+\+Config\+\_\+t}} config)
+\begin{DoxyCompactList}\small\item\em Configure a specific pin on the PCA9555A. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}{PCA\+\_\+\+Read\+\_\+\+Pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin, uint8\+\_\+t \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Read the value of a specific pin. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb}{PCA\+\_\+\+Read\+\_\+\+All\+\_\+\+Inputs}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}pins)
+\begin{DoxyCompactList}\small\item\em Read all input pins. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}{PCA\+\_\+\+Read\+\_\+\+All\+\_\+\+Outputs}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}pins)
+\begin{DoxyCompactList}\small\item\em Read all output pins. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}{PCA\+\_\+\+Write\+\_\+\+Pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Write a value to a specific output pin. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga8f85119f9f05f6514d831668c6417cee}{PCA\+\_\+\+Set\+\_\+\+Pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Set a specific output pin high. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga7abd96400a6815b71eefe457c084fe43}{PCA\+\_\+\+Clear\+\_\+\+Pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Clear a specific output pin (set low). \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga76d0d80d27591cc8f575ac36f4628607}{PCA\+\_\+\+Toggle\+\_\+\+Pin}} (\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}} port, uint8\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Toggle a specific output pin. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}{PCA\+\_\+\+Write\+\_\+\+All\+\_\+\+Outputs}} (uint16\+\_\+t pins)
+\begin{DoxyCompactList}\small\item\em Write values to all output pins. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae}{PCA\+\_\+\+Set\+\_\+\+All\+\_\+\+Outputs}} (uint16\+\_\+t pins)
+\begin{DoxyCompactList}\small\item\em Set all output pins high. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01}{PCA\+\_\+\+Clear\+\_\+\+All\+\_\+\+Outputs}} (uint16\+\_\+t pins)
+\begin{DoxyCompactList}\small\item\em Clear all output pins (set low). \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4}{PCA\+\_\+\+Toggle\+\_\+\+All\+\_\+\+Outputs}} (uint16\+\_\+t pins)
+\begin{DoxyCompactList}\small\item\em Toggle all output pins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group__PCA9555A_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_ADRESS@{PCA\_ADRESS}}
+\index{PCA\_ADRESS@{PCA\_ADRESS}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_ADRESS}{PCA\_ADRESS}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gaf9797d0a8c87b6052e4b37529d874fea} 
+\+\#define PCA\+\_\+\+ADRESS~0b0100000}
+
+
+
+7-\/bit I2C device address for PCA9555A 
+
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00031}{31}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+\Hypertarget{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_I2C\_HANDLE@{PCA\_I2C\_HANDLE}}
+\index{PCA\_I2C\_HANDLE@{PCA\_I2C\_HANDLE}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_I2C\_HANDLE}{PCA\_I2C\_HANDLE}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga3b2552569574ab2decef8c652e17e16a} 
+\+\#define PCA\+\_\+\+I2\+C\+\_\+\+HANDLE~\&I2\+C0\+\_\+rtos\+Handle}
+
+
+
+I2C handle for PCA9555A communication. 
+
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00034}{34}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__PCA9555A_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__PCA9555A_gabea5f56cc641c3f64ae305576067c040}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_OutputLevel\_t@{PCA\_OutputLevel\_t}}
+\index{PCA\_OutputLevel\_t@{PCA\_OutputLevel\_t}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_OutputLevel\_t}{PCA\_OutputLevel\_t}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gabea5f56cc641c3f64ae305576067c040} 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192}{\+\_\+\+PCA\+\_\+\+Output\+Level}} \doxymbox{\hyperlink{group__PCA9555A_gabea5f56cc641c3f64ae305576067c040}{PCA\+\_\+\+Output\+Level\+\_\+t}}}
+
+
+
+Output level for pin configuration. 
+
+Defines the default output level for pins configured as outputs \Hypertarget{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Pin\_Config\_t@{PCA\_Pin\_Config\_t}}
+\index{PCA\_Pin\_Config\_t@{PCA\_Pin\_Config\_t}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Pin\_Config\_t}{PCA\_Pin\_Config\_t}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4} 
+typedef struct \doxymbox{\hyperlink{struct__PCA__Pin__Config}{\+\_\+\+PCA\+\_\+\+Pin\+\_\+\+Config}} \doxymbox{\hyperlink{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}{PCA\+\_\+\+Pin\+\_\+\+Config\+\_\+t}}}
+
+
+
+Pin configuration structure. 
+
+Contains all configuration parameters for a single PCA9555A pin \Hypertarget{group__PCA9555A_gaa548f74f46b1c747a1b74e2e5e66b53b}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PinDirection\_t@{PCA\_PinDirection\_t}}
+\index{PCA\_PinDirection\_t@{PCA\_PinDirection\_t}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_PinDirection\_t}{PCA\_PinDirection\_t}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gaa548f74f46b1c747a1b74e2e5e66b53b} 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0}{\+\_\+\+PCA\+\_\+\+Pin\+Direction}} \doxymbox{\hyperlink{group__PCA9555A_gaa548f74f46b1c747a1b74e2e5e66b53b}{PCA\+\_\+\+Pin\+Direction\+\_\+t}}}
+
+
+
+Pin direction configuration. 
+
+Configures whether a pin is used as input or output \Hypertarget{group__PCA9555A_gad592aa98f67996ab5bfc9c8e8cc5b8a8}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PolarityInversion\_t@{PCA\_PolarityInversion\_t}}
+\index{PCA\_PolarityInversion\_t@{PCA\_PolarityInversion\_t}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_PolarityInversion\_t}{PCA\_PolarityInversion\_t}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gad592aa98f67996ab5bfc9c8e8cc5b8a8} 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd}{\+\_\+\+PCA\+\_\+\+Polarity\+Inversion}} \doxymbox{\hyperlink{group__PCA9555A_gad592aa98f67996ab5bfc9c8e8cc5b8a8}{PCA\+\_\+\+Polarity\+Inversion\+\_\+t}}}
+
+
+
+Polarity inversion configuration. 
+
+Enables or disables polarity inversion on input pins \Hypertarget{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Port\_t@{PCA\_Port\_t}}
+\index{PCA\_Port\_t@{PCA\_Port\_t}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Port\_t}{PCA\_Port\_t}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c} 
+typedef enum \doxymbox{\hyperlink{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9}{\+\_\+\+PCA\+\_\+\+Port}} \doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}
+
+
+
+Port selection for PCA9555A IO expander. 
+
+Selects which 8-\/bit port (Port 0 or Port 1) to access 
+
+\label{doc-enum-members}
+\Hypertarget{group__PCA9555A_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192}\index{PCA9555A Driver@{PCA9555A Driver}!\_PCA\_OutputLevel@{\_PCA\_OutputLevel}}
+\index{\_PCA\_OutputLevel@{\_PCA\_OutputLevel}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{\_PCA\_OutputLevel}{\_PCA\_OutputLevel}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192} 
+enum \doxymbox{\hyperlink{group__PCA9555A_gac133c3b772ea0d83d6d99a08e652b192}{\+\_\+\+PCA\+\_\+\+Output\+Level}}}
+
+
+
+Output level for pin configuration. 
+
+Defines the default output level for pins configured as outputs \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PIN\_LOW@{PCA\_PIN\_LOW}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PIN\_LOW@{PCA\_PIN\_LOW}}
+}\Hypertarget{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ab28ea4df9c66d589d7742ae6a05b37f6}\label{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ab28ea4df9c66d589d7742ae6a05b37f6} 
+PCA\+\_\+\+PIN\+\_\+\+LOW&Default output level is low \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PIN\_HIGH@{PCA\_PIN\_HIGH}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PIN\_HIGH@{PCA\_PIN\_HIGH}}
+}\Hypertarget{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ac8543706dbe876419c66618ee5ab1e52}\label{group__PCA9555A_ggac133c3b772ea0d83d6d99a08e652b192ac8543706dbe876419c66618ee5ab1e52} 
+PCA\+\_\+\+PIN\+\_\+\+HIGH&Default output level is high \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00066}{66}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+\Hypertarget{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0}\index{PCA9555A Driver@{PCA9555A Driver}!\_PCA\_PinDirection@{\_PCA\_PinDirection}}
+\index{\_PCA\_PinDirection@{\_PCA\_PinDirection}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{\_PCA\_PinDirection}{\_PCA\_PinDirection}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0} 
+enum \doxymbox{\hyperlink{group__PCA9555A_ga8ad4ff609745dc5ce797b4999bad6aa0}{\+\_\+\+PCA\+\_\+\+Pin\+Direction}}}
+
+
+
+Pin direction configuration. 
+
+Configures whether a pin is used as input or output \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PIN\_INPUT@{PCA\_PIN\_INPUT}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PIN\_INPUT@{PCA\_PIN\_INPUT}}
+}\Hypertarget{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a0430221f6d3e604bc6a6ae2f8e8cad0a}\label{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a0430221f6d3e604bc6a6ae2f8e8cad0a} 
+PCA\+\_\+\+PIN\+\_\+\+INPUT&Configure pin as input \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PIN\_OUTPUT@{PCA\_PIN\_OUTPUT}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PIN\_OUTPUT@{PCA\_PIN\_OUTPUT}}
+}\Hypertarget{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a69fb6720d4a34abf67cac33d2d4e9a4c}\label{group__PCA9555A_gga8ad4ff609745dc5ce797b4999bad6aa0a69fb6720d4a34abf67cac33d2d4e9a4c} 
+PCA\+\_\+\+PIN\+\_\+\+OUTPUT&Configure pin as output \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+\Hypertarget{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd}\index{PCA9555A Driver@{PCA9555A Driver}!\_PCA\_PolarityInversion@{\_PCA\_PolarityInversion}}
+\index{\_PCA\_PolarityInversion@{\_PCA\_PolarityInversion}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{\_PCA\_PolarityInversion}{\_PCA\_PolarityInversion}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd} 
+enum \doxymbox{\hyperlink{group__PCA9555A_ga8cfaaa7d066058d4ef4647f86dcce6fd}{\+\_\+\+PCA\+\_\+\+Polarity\+Inversion}}}
+
+
+
+Polarity inversion configuration. 
+
+Enables or disables polarity inversion on input pins \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_HIGH\_IS\_ONE@{PCA\_HIGH\_IS\_ONE}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_HIGH\_IS\_ONE@{PCA\_HIGH\_IS\_ONE}}
+}\Hypertarget{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda854a3c214e7298b458f8eaa63f5141ab}\label{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda854a3c214e7298b458f8eaa63f5141ab} 
+PCA\+\_\+\+HIGH\+\_\+\+IS\+\_\+\+ONE&Normal polarity (no inversion) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_HIGH\_IS\_ZERO@{PCA\_HIGH\_IS\_ZERO}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_HIGH\_IS\_ZERO@{PCA\_HIGH\_IS\_ZERO}}
+}\Hypertarget{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda2f83e1a753be8f1d95cb46415a2c49fc}\label{group__PCA9555A_gga8cfaaa7d066058d4ef4647f86dcce6fda2f83e1a753be8f1d95cb46415a2c49fc} 
+PCA\+\_\+\+HIGH\+\_\+\+IS\+\_\+\+ZERO&Inverted polarity \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00076}{76}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+\Hypertarget{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9}\index{PCA9555A Driver@{PCA9555A Driver}!\_PCA\_Port@{\_PCA\_Port}}
+\index{\_PCA\_Port@{\_PCA\_Port}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{\_PCA\_Port}{\_PCA\_Port}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9} 
+enum \doxymbox{\hyperlink{group__PCA9555A_gab5f20e155eb4015a082b4c9ff4eb75e9}{\+\_\+\+PCA\+\_\+\+Port}}}
+
+
+
+Port selection for PCA9555A IO expander. 
+
+Selects which 8-\/bit port (Port 0 or Port 1) to access \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PORT\_0@{PCA\_PORT\_0}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PORT\_0@{PCA\_PORT\_0}}
+}\Hypertarget{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9ab7776e491abb96f57783a9e6dda0f50f}\label{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9ab7776e491abb96f57783a9e6dda0f50f} 
+PCA\+\_\+\+PORT\+\_\+0&Port 0 (IO0-\/\+IO7) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCA\_PORT\_1@{PCA\_PORT\_1}!PCA9555A Driver@{PCA9555A Driver}}
+\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_PORT\_1@{PCA\_PORT\_1}}
+}\Hypertarget{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9a29f8ebb0bb244aad271c236e50a9c70f}\label{group__PCA9555A_ggab5f20e155eb4015a082b4c9ff4eb75e9a29f8ebb0bb244aad271c236e50a9c70f} 
+PCA\+\_\+\+PORT\+\_\+1&Port 1 (IO8-\/\+IO15) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8h_source_l00046}{46}} of file \doxymbox{\hyperlink{pca9555a_8h_source}{pca9555a.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__PCA9555A_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Clear\_All\_Outputs@{PCA\_Clear\_All\_Outputs}}
+\index{PCA\_Clear\_All\_Outputs@{PCA\_Clear\_All\_Outputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Clear\_All\_Outputs()}{PCA\_Clear\_All\_Outputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga2d08b6c45ce7595d7e28af1d0c37ce01} 
+status\+\_\+t PCA\+\_\+\+Clear\+\_\+\+All\+\_\+\+Outputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Clear all output pins (set low). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pins} & 16-\/bit bitmask indicating which pins to clear Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if clear successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00305}{305}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga7abd96400a6815b71eefe457c084fe43}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Clear\_Pin@{PCA\_Clear\_Pin}}
+\index{PCA\_Clear\_Pin@{PCA\_Clear\_Pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Clear\_Pin()}{PCA\_Clear\_Pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga7abd96400a6815b71eefe457c084fe43} 
+status\+\_\+t PCA\+\_\+\+Clear\+\_\+\+Pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Clear a specific output pin (set low). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port containing the pin (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if clear successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00243}{243}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_gaf361ecffc6ed08119cf72c49d17d0b93}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_init@{PCA\_init}}
+\index{PCA\_init@{PCA\_init}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_init()}{PCA\_init()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gaf361ecffc6ed08119cf72c49d17d0b93} 
+status\+\_\+t PCA\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the PCA9555A IO expander. 
+
+Performs initial setup and configuration of the PCA9555A device via I2C communication \begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if initialization successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00052}{52}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga9b5fffd5cfa9578b1b7887b90f09fd9c}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_init\_pin@{PCA\_init\_pin}}
+\index{PCA\_init\_pin@{PCA\_init\_pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_init\_pin()}{PCA\_init\_pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga9b5fffd5cfa9578b1b7887b90f09fd9c} 
+status\+\_\+t PCA\+\_\+init\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{, }\item[{\doxymbox{\hyperlink{group__PCA9555A_gae97bf35aa775dd8a8bcb53bd41c656a4}{PCA\+\_\+\+Pin\+\_\+\+Config\+\_\+t}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Configure a specific pin on the PCA9555A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port to configure (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+{\em config} & Configuration structure containing pin settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if configuration successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00062}{62}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Read\_All\_Inputs@{PCA\_Read\_All\_Inputs}}
+\index{PCA\_Read\_All\_Inputs@{PCA\_Read\_All\_Inputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Read\_All\_Inputs()}{PCA\_Read\_All\_Inputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga75ff72342d3b03501f4de4265364a2bb} 
+status\+\_\+t PCA\+\_\+\+Read\+\_\+\+All\+\_\+\+Inputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Read all input pins. 
+
+Reads the state of all 16 pins configured as inputs 
+\begin{DoxyParams}{Parameters}
+{\em pins} & Pointer to store the 16-\/bit input values Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if read successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00165}{165}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Read\_All\_Outputs@{PCA\_Read\_All\_Outputs}}
+\index{PCA\_Read\_All\_Outputs@{PCA\_Read\_All\_Outputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Read\_All\_Outputs()}{PCA\_Read\_All\_Outputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga524cc9763f728b6428c17c8688ff9c7e} 
+status\+\_\+t PCA\+\_\+\+Read\+\_\+\+All\+\_\+\+Outputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Read all output pins. 
+
+Reads the state of all 16 pins configured as outputs 
+\begin{DoxyParams}{Parameters}
+{\em pins} & Pointer to store the 16-\/bit output values Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if read successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00188}{188}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Read\_Pin@{PCA\_Read\_Pin}}
+\index{PCA\_Read\_Pin@{PCA\_Read\_Pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Read\_Pin()}{PCA\_Read\_Pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43} 
+status\+\_\+t PCA\+\_\+\+Read\+\_\+\+Pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Read the value of a specific pin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port to read from (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+{\em value} & Pointer to store the read pin value (0 or 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if read successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00153}{153}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Set\_All\_Outputs@{PCA\_Set\_All\_Outputs}}
+\index{PCA\_Set\_All\_Outputs@{PCA\_Set\_All\_Outputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Set\_All\_Outputs()}{PCA\_Set\_All\_Outputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga5ec102f15469f4482b1175bedcd5b9ae} 
+status\+\_\+t PCA\+\_\+\+Set\+\_\+\+All\+\_\+\+Outputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Set all output pins high. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pins} & 16-\/bit bitmask indicating which pins to set Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if set successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00287}{287}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga8f85119f9f05f6514d831668c6417cee}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Set\_Pin@{PCA\_Set\_Pin}}
+\index{PCA\_Set\_Pin@{PCA\_Set\_Pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Set\_Pin()}{PCA\_Set\_Pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga8f85119f9f05f6514d831668c6417cee} 
+status\+\_\+t PCA\+\_\+\+Set\+\_\+\+Pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Set a specific output pin high. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port containing the pin (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if set successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00231}{231}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Toggle\_All\_Outputs@{PCA\_Toggle\_All\_Outputs}}
+\index{PCA\_Toggle\_All\_Outputs@{PCA\_Toggle\_All\_Outputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Toggle\_All\_Outputs()}{PCA\_Toggle\_All\_Outputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_gabb77837c244d47c5dad0e0dbf8fd87a4} 
+status\+\_\+t PCA\+\_\+\+Toggle\+\_\+\+All\+\_\+\+Outputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Toggle all output pins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pins} & 16-\/bit bitmask indicating which pins to toggle Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if toggle successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00323}{323}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga76d0d80d27591cc8f575ac36f4628607}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Toggle\_Pin@{PCA\_Toggle\_Pin}}
+\index{PCA\_Toggle\_Pin@{PCA\_Toggle\_Pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Toggle\_Pin()}{PCA\_Toggle\_Pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga76d0d80d27591cc8f575ac36f4628607} 
+status\+\_\+t PCA\+\_\+\+Toggle\+\_\+\+Pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Toggle a specific output pin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port containing the pin (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if toggle successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00255}{255}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Write\_All\_Outputs@{PCA\_Write\_All\_Outputs}}
+\index{PCA\_Write\_All\_Outputs@{PCA\_Write\_All\_Outputs}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Write\_All\_Outputs()}{PCA\_Write\_All\_Outputs()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga486fd705d89c924b1cc951185f0be281} 
+status\+\_\+t PCA\+\_\+\+Write\+\_\+\+All\+\_\+\+Outputs (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pins}{}\end{DoxyParamCaption})}
+
+
+
+Write values to all output pins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pins} & 16-\/bit value representing the desired state of all output pins Lower byte (bits 0-\/7) = Port 0, Upper byte (bits 8-\/15) = Port 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if write successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00267}{267}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+
+\Hypertarget{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}\index{PCA9555A Driver@{PCA9555A Driver}!PCA\_Write\_Pin@{PCA\_Write\_Pin}}
+\index{PCA\_Write\_Pin@{PCA\_Write\_Pin}!PCA9555A Driver@{PCA9555A Driver}}
+\doxysubsubsection{\texorpdfstring{PCA\_Write\_Pin()}{PCA\_Write\_Pin()}}
+{\footnotesize\ttfamily \label{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a} 
+status\+\_\+t PCA\+\_\+\+Write\+\_\+\+Pin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__PCA9555A_gad3bd174b072c0e52af5e44604032f31c}{PCA\+\_\+\+Port\+\_\+t}}}]{port}{, }\item[{uint8\+\_\+t}]{pin}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Write a value to a specific output pin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port containing the pin (PCA\+\_\+\+PORT\+\_\+0 or PCA\+\_\+\+PORT\+\_\+1) \\
+\hline
+{\em pin} & Pin number within the port (0-\/7) \\
+\hline
+{\em value} & Value to write (0 for low, 1 for high) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if write successful, error code otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{pca9555a_8c_source_l00211}{211}} of file \doxymbox{\hyperlink{pca9555a_8c_source}{pca9555a.\+c}}.
+

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['x_5fping_5fcommand_0',['x_ping_command',['../cli_8c.html#accbe28978ecaf120de26941862df1424',1,'cli.c']]]
+  ['wait_5ffor_5fcmd_5fhandle_0',['wait_for_cmd_handle',['../motor_8c.html#aa83bf6d5e146b93ebd4bf2ac71832220',1,'motor.c']]],
+  ['wait_5ffor_5fmtr_5fcmd_1',['wait_for_mtr_cmd',['../motorCmd_8c.html#a385dd4535c8d6f00107f8f24c5474c38',1,'motorCmd.c']]],
+  ['write_2',['write',['../tmc2209_8c.html#ad2b296addfa224a3fef137c3fc1ab831',1,'tmc2209.c']]]
 ];

@@ -71,6 +71,9 @@ instance:
       - 0: []
       - 1: []
       - 2: []
+      - 3: []
+      - 4: []
+      - 5: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -97,7 +100,7 @@ instance:
     - uart_rtos_configuration:
       - clockSource: 'BusInterfaceClock'
       - clockSourceFreq: 'GetFreq'
-      - baudrate: '300000'
+      - baudrate: '115200'
       - parity: 'kUART_ParityDisabled'
       - stopbits: 'kUART_OneStopBit'
       - buffer_size: '32'
@@ -116,7 +119,7 @@ uart_handle_t UART1_uart_handle;
 uint8_t UART1_background_buffer[UART1_BACKGROUND_BUFFER_SIZE];
 uart_rtos_config_t UART1_rtos_config = {
   .base = UART1_PERIPHERAL,
-  .baudrate = 300000UL,
+  .baudrate = 115200UL,
   .parity = kUART_ParityDisabled,
   .stopbits = kUART_OneStopBit,
   .buffer = UART1_background_buffer,
@@ -225,6 +228,107 @@ instance:
 
 static void GPIOA_init(void) {
   /* Make sure, the clock gate for port A is enabled (e. g. in pin_mux.c) */
+}
+
+/***********************************************************************************************************************
+ * I2C0 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'I2C0'
+- type: 'i2c'
+- mode: 'freertos'
+- custom_name_enabled: 'false'
+- type_id: 'i2c_2.0.5'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'I2C0'
+- config_sets:
+  - fsl_i2c:
+    - i2c_mode: 'kI2C_Master'
+    - clockSource: 'BusInterfaceClock'
+    - clockSourceFreq: 'GetFreq'
+    - rtos_handle:
+      - enable_custom_name: 'false'
+    - i2c_master_config:
+      - enableMaster: 'true'
+      - enableStopHold: 'false'
+      - baudRate_Bps: '100000'
+      - glitchFilterWidth: '0'
+    - interrupt_priority:
+      - IRQn: 'I2C0_IRQn'
+      - enable_priority: 'true'
+      - priority: '7'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+i2c_rtos_handle_t I2C0_rtosHandle;
+const i2c_master_config_t I2C0_config = {
+  .enableMaster = true,
+  .enableStopHold = false,
+  .baudRate_Bps = 100000UL,
+  .glitchFilterWidth = 0U
+};
+
+static void I2C0_init(void) {
+  /* Initialization function */
+  I2C_RTOS_Init(&I2C0_rtosHandle, I2C0_PERIPHERAL, &I2C0_config, I2C0_CLK_FREQ);
+  /* Interrupt vector I2C0_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(I2C0_IRQN, I2C0_IRQ_PRIORITY);
+}
+
+/***********************************************************************************************************************
+ * UART0 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'UART0'
+- type: 'uart'
+- mode: 'freertos'
+- custom_name_enabled: 'false'
+- type_id: 'uart_2.5.1'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'UART0'
+- config_sets:
+  - fsl_uart_freertos:
+    - uart_rtos_configuration:
+      - clockSource: 'BusInterfaceClock'
+      - clockSourceFreq: 'GetFreq'
+      - baudrate: '115200'
+      - parity: 'kUART_ParityDisabled'
+      - stopbits: 'kUART_OneStopBit'
+      - buffer_size: '32'
+    - interrupt_rx_tx:
+      - IRQn: 'UART0_RX_TX_IRQn'
+      - enable_priority: 'true'
+      - priority: '7'
+    - interrupt_err:
+      - IRQn: 'UART0_ERR_IRQn'
+      - enable_priority: 'true'
+      - priority: '7'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+uart_rtos_handle_t UART0_rtos_handle;
+uart_handle_t UART0_uart_handle;
+uint8_t UART0_background_buffer[UART0_BACKGROUND_BUFFER_SIZE];
+uart_rtos_config_t UART0_rtos_config = {
+  .base = UART0_PERIPHERAL,
+  .baudrate = 115200UL,
+  .parity = kUART_ParityDisabled,
+  .stopbits = kUART_OneStopBit,
+  .buffer = UART0_background_buffer,
+  .buffer_size = UART0_BACKGROUND_BUFFER_SIZE
+};
+
+static void UART0_init(void) {
+  /* UART clock source initialization */
+  UART0_rtos_config.srcclk = UART0_CLOCK_SOURCE;
+  /* UART rtos initialization */
+  UART_RTOS_Init(&UART0_rtos_handle, &UART0_uart_handle, &UART0_rtos_config);
+  /* Interrupt vector UART0_RX_TX_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(UART0_SERIAL_RX_TX_IRQN, UART0_SERIAL_RX_TX_IRQ_PRIORITY);
+  /* Interrupt vector UART0_ERR_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(UART0_SERIAL_ERROR_IRQN, UART0_SERIAL_ERROR_IRQ_PRIORITY);
 }
 
 /***********************************************************************************************************************
@@ -341,6 +445,8 @@ void BOARD_InitPeripherals(void)
   UART1_init();
   LPUART0_init();
   GPIOA_init();
+  I2C0_init();
+  UART0_init();
 }
 
 /***********************************************************************************************************************

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: source/disk.c Source File</title>
+<title>Double Scara: source/disk.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -103,55 +103,58 @@ $(function(){initNavTree('disk_8c_source.html','',''); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *     Includes     *</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> ********************/</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="disk_8h.html">disk.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/************************************</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *     Private Macros / Defines     *</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> ************************************/</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/***************************</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *     Private Typedefs    *</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> ***************************/</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/*****************************************</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> *     Private Function Declarations     *</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *****************************************/</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/****************************</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> *     Public Variables     *</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> ****************************/</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">   29</a></span>FATFS <a class="code hl_variable" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/*****************************</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> *     Private Variables     *</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *****************************/</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/*******************************************</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> *     Public Function Implementations     *</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *******************************************/</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">   39</a></span>status_t <a class="code hl_function" href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">DISK_init</a>(<span class="keywordtype">void</span>)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    FRESULT res;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">/* Mount filesystem */</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    res = f_mount(&amp;<a class="code hl_variable" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a>, <a class="code hl_define" href="group__DISK__Module.html#ga361a0dd22dac0332c66cc132624d2d05">DISK_SD_PATH</a>, 1);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (res != FR_OK)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> kStatus_Success;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
-</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;SEGGER_RTT.h&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/************************************</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> *     Private Macros / Defines     *</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> ************************************/</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/***************************</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *     Private Typedefs    *</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> ***************************/</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/*****************************************</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *     Private Function Declarations     *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *****************************************/</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">/****************************</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *     Public Variables     *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> ****************************/</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">   30</a></span>FATFS <a class="code hl_variable" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">/*****************************</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *     Private Variables     *</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *****************************/</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">/*******************************************</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *     Public Function Implementations     *</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> *******************************************/</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">   40</a></span>status_t <a class="code hl_function" href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">DISK_init</a>(<span class="keywordtype">void</span>)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    FRESULT res;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">/* Mount filesystem */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    res = f_mount(&amp;<a class="code hl_variable" href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a>, <a class="code hl_define" href="group__DISK__Module.html#ga361a0dd22dac0332c66cc132624d2d05">DISK_SD_PATH</a>, 1);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (res != FR_OK)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/********************************************</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"> *     Private Function Implementations     *</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> ********************************************/</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> kStatus_Success;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">/********************************************</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"> *     Private Function Implementations     *</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"> ********************************************/</span></div>
 <div class="ttc" id="adisk_8h_html"><div class="ttname"><a href="disk_8h.html">disk.h</a></div></div>
 <div class="ttc" id="agroup__DISK__Module_html_ga361a0dd22dac0332c66cc132624d2d05"><div class="ttname"><a href="group__DISK__Module.html#ga361a0dd22dac0332c66cc132624d2d05">DISK_SD_PATH</a></div><div class="ttdeci">#define DISK_SD_PATH</div><div class="ttdoc">Path to the SD card disk.</div><div class="ttdef"><b>Definition</b> <a href="disk_8h_source.html#l00049">disk.h:49</a></div></div>
-<div class="ttc" id="agroup__DISK__Module_html_gaa890889c692a0bd26a1bbf2f823c08a7"><div class="ttname"><a href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">DISK_init</a></div><div class="ttdeci">status_t DISK_init(void)</div><div class="ttdoc">Initializes the disk and mounts the filesystem.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">disk.c:39</a></div></div>
-<div class="ttc" id="agroup__DISK__Module_html_gae5bcde72e0e0b29ec86d00ba3e5cd51f"><div class="ttname"><a href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a></div><div class="ttdeci">FATFS fs</div><div class="ttdoc">Filesystem object for managing the mounted filesystem.</div><div class="ttdef"><b>Definition</b> <a href="#l00029">disk.c:29</a></div></div>
+<div class="ttc" id="agroup__DISK__Module_html_gaa890889c692a0bd26a1bbf2f823c08a7"><div class="ttname"><a href="group__DISK__Module.html#gaa890889c692a0bd26a1bbf2f823c08a7">DISK_init</a></div><div class="ttdeci">status_t DISK_init(void)</div><div class="ttdoc">Initializes the disk and mounts the filesystem.</div><div class="ttdef"><b>Definition</b> <a href="#l00040">disk.c:40</a></div></div>
+<div class="ttc" id="agroup__DISK__Module_html_gae5bcde72e0e0b29ec86d00ba3e5cd51f"><div class="ttname"><a href="group__DISK__Module.html#gae5bcde72e0e0b29ec86d00ba3e5cd51f">fs</a></div><div class="ttdeci">FATFS fs</div><div class="ttdoc">Filesystem object for managing the mounted filesystem.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">disk.c:30</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -20,6 +20,6 @@ var searchData=
   ['application_20module_17',['Application Module',['../group__APP__Module.html',1,'']]],
   ['application_2ec_18',['application.c',['../application_8c.html',1,'']]],
   ['application_2eh_19',['application.h',['../application_8h.html',1,'']]],
-  ['assemble_5fheader_5fstring_20',['assemble_header_string',['../log_8c.html#a195e333d775b2d89256ce1d67da9ae02',1,'log.c']]],
-  ['assemble_5flog_5fstring_21',['assemble_log_string',['../log_8c.html#a32a47ba3327a3e217f5ef2c24ea0b1dd',1,'log.c']]]
+  ['assemble_5fheader_5fstring_20',['assemble_header_string',['../log_8c.html#a30b3021476e4daf30329c5977a373c5d',1,'log.c']]],
+  ['assemble_5flog_5fstring_21',['assemble_log_string',['../log_8c.html#a7e0c66a1424e18937bfa2d405e0cabb1',1,'log.c']]]
 ];

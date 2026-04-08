@@ -1,7 +1,9 @@
 var struct__MTR__MotorHandleImpl =
 [
+    [ "freewheeling", "struct__MTR__MotorHandleImpl.html#a28cd45c78c5e295687a491838744b053", null ],
     [ "label", "struct__MTR__MotorHandleImpl.html#abc71b3e593c462fc6a3eba4243a90cf8", null ],
     [ "microstep", "struct__MTR__MotorHandleImpl.html#a25782e0bcd0945f0c673b81b6f5d369d", null ],
+    [ "previousHoldCurrent", "struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e", null ],
     [ "reductionFactor", "struct__MTR__MotorHandleImpl.html#a068b88abfa0f8d3412005f860a64932a", null ],
     [ "stepAngle", "struct__MTR__MotorHandleImpl.html#a48ff29dd145331650188df5c94e4d671", null ],
     [ "stepperHandle", "struct__MTR__MotorHandleImpl.html#a2dd7eb698826385c5ab8183999976f67", null ],

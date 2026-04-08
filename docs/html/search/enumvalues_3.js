@@ -1,23 +1,6 @@
 var searchData=
 [
-  ['stp_5fclockwise_0',['STP_CLOCKWISE',['../group__STEP__Module.html#gga7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812',1,'step.h']]],
-  ['stp_5fcmd_5finit_5fhandle_1',['STP_CMD_INIT_HANDLE',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24',1,'step.c']]],
-  ['stp_5fcmd_5fmove_2',['STP_CMD_MOVE',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5',1,'step.c']]],
-  ['stp_5fcmd_5fmove_5fprepare_3',['STP_CMD_MOVE_PREPARE',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9',1,'step.c']]],
-  ['stp_5fcmd_5fset_5facceleration_4',['STP_CMD_SET_ACCELERATION',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686',1,'step.c']]],
-  ['stp_5fcmd_5fset_5fend_5fvelocity_5',['STP_CMD_SET_END_VELOCITY',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98',1,'step.c']]],
-  ['stp_5fcmd_5fstop_6',['STP_CMD_STOP',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f',1,'step.c']]],
-  ['stp_5fcmd_5ftrigger_5fstart_7',['STP_CMD_TRIGGER_START',['../step_8c.html#ac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d',1,'step.c']]],
-  ['stp_5fcounterclockwise_8',['STP_COUNTERCLOCKWISE',['../group__STEP__Module.html#gga7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54',1,'step.h']]],
-  ['stp_5fmovement_5faccelerating_9',['STP_MOVEMENT_ACCELERATING',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32',1,'step.h']]],
-  ['stp_5fmovement_5fcalled_10',['STP_MOVEMENT_CALLED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc',1,'step.h']]],
-  ['stp_5fmovement_5fconst_5fvelocity_11',['STP_MOVEMENT_CONST_VELOCITY',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce',1,'step.h']]],
-  ['stp_5fmovement_5fdecelrating_12',['STP_MOVEMENT_DECELRATING',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3',1,'step.h']]],
-  ['stp_5fmovement_5ffailed_13',['STP_MOVEMENT_FAILED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff',1,'step.h']]],
-  ['stp_5fmovement_5ffinished_14',['STP_MOVEMENT_FINISHED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559',1,'step.h']]],
-  ['stp_5fmovement_5fidle_15',['STP_MOVEMENT_IDLE',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7',1,'step.h']]],
-  ['stp_5fmovement_5fplanned_16',['STP_MOVEMENT_PLANNED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80',1,'step.h']]],
-  ['stp_5fmovement_5fstarted_17',['STP_MOVEMENT_STARTED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c',1,'step.h']]],
-  ['stp_5fmovement_5fstopped_18',['STP_MOVEMENT_STOPPED',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612',1,'step.h']]],
-  ['stp_5fmovement_5fsuccessful_19',['STP_MOVEMENT_SUCCESSFUL',['../group__STEP__Module.html#gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f',1,'step.h']]]
+  ['round_5fdown_0',['ROUND_DOWN',['../group__MOTOR__Module.html#gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488',1,'motor.h']]],
+  ['round_5fnearest_1',['ROUND_NEAREST',['../group__MOTOR__Module.html#gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff',1,'motor.h']]],
+  ['round_5fup_2',['ROUND_UP',['../group__MOTOR__Module.html#gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086',1,'motor.h']]]
 ];

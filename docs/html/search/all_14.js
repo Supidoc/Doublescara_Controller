@@ -1,7 +1,23 @@
 var searchData=
 [
   ['x_5fping_5fcommand_0',['x_ping_command',['../cli_8c.html#accbe28978ecaf120de26941862df1424',1,'cli.c']]],
-  ['xlogcommanddefinition_1',['xLogCommandDefinition',['../log_8c.html#af5c21309de04a8c4ab6feb925ef9d189',1,'log.c']]],
-  ['xmotortestcommanddefinition_2',['xMotorTestCommandDefinition',['../motor__test_8c.html#a01c16f927074fe2b841bb0d00be3efe3',1,'motor_test.c']]],
-  ['xpingcommanddefinition_3',['xPingCommandDefinition',['../cli_8c.html#acb3d9627c2b46551ae41d72b00527bed',1,'cli.c']]]
+  ['xclearemergencycmd_1',['xClearEmergencyCmd',['../motorCmd_8c.html#ae195518cae3b1186d8e948d38406a815',1,'motorCmd.c']]],
+  ['xdisablefreewheelingcmd_2',['xDisableFreewheelingCmd',['../motorCmd_8c.html#a579caf44262ed312c85b25c74bb0ebb8',1,'motorCmd.c']]],
+  ['xemergencystopcmd_3',['xEmergencyStopCmd',['../motorCmd_8c.html#ace27b3c7f28438ac3f62002c659d9dc3',1,'motorCmd.c']]],
+  ['xenablefreewheelingcmd_4',['xEnableFreewheelingCmd',['../motorCmd_8c.html#a795e48b284495359fb7359c984cf6bea',1,'motorCmd.c']]],
+  ['xgetanglecmd_5',['xGetAngleCmd',['../motorCmd_8c.html#a0084bc076594639dd5d51790c00d216a',1,'motorCmd.c']]],
+  ['xgetstatecmd_6',['xGetStateCmd',['../motorCmd_8c.html#a792cffeebf6f34f5ec1b718216b8fa99',1,'motorCmd.c']]],
+  ['xlog2clicommanddefinition_7',['xLog2CLICommandDefinition',['../log_8c.html#a09545fadddb32b210456f5f309a469db',1,'log.c']]],
+  ['xlogcommanddefinition_8',['xLogCommandDefinition',['../log_8c.html#af5c21309de04a8c4ab6feb925ef9d189',1,'log.c']]],
+  ['xmoveabsolutecmd_9',['xMoveAbsoluteCmd',['../motorCmd_8c.html#ab8c51a89259b10b659a219d6f7462724',1,'motorCmd.c']]],
+  ['xmoveanglecmd_10',['xMoveAngleCmd',['../motorCmd_8c.html#abc75f17a70fe10fe1c179bb28f795bcb',1,'motorCmd.c']]],
+  ['xmoverevolutionscmd_11',['xMoveRevolutionsCmd',['../motorCmd_8c.html#a965648bbde32ab857fd39583e3de5771',1,'motorCmd.c']]],
+  ['xpingcommanddefinition_12',['xPingCommandDefinition',['../cli_8c.html#acb3d9627c2b46551ae41d72b00527bed',1,'cli.c']]],
+  ['xsetaccelerationcmd_13',['xSetAccelerationCmd',['../motorCmd_8c.html#a9492804f5d17a2f91bfcf22be8ecfc5f',1,'motorCmd.c']]],
+  ['xsetholdcurrentcmd_14',['xSetHoldCurrentCmd',['../motorCmd_8c.html#a8e087273f18e4101734ea96fa887e3dd',1,'motorCmd.c']]],
+  ['xsethomecmd_15',['xSetHomeCmd',['../motorCmd_8c.html#a468edf0c43256d61ff84cdf1aa8b4bc8',1,'motorCmd.c']]],
+  ['xsetruncurrentcmd_16',['xSetRunCurrentCmd',['../motorCmd_8c.html#aa9e242377f439f82643506e82685c26f',1,'motorCmd.c']]],
+  ['xsetvelocitycmd_17',['xSetVelocityCmd',['../motorCmd_8c.html#ae6058231d16c9eddb70726b2f13a2903',1,'motorCmd.c']]],
+  ['xstopcmd_18',['xStopCmd',['../motorCmd_8c.html#a9130ba3004d6698ddf20f820fe3eb5ee',1,'motorCmd.c']]],
+  ['xsynchronizedmovecmd_19',['xSynchronizedMoveCmd',['../motorCmd_8c.html#ada92a3622977c51ad3df26880cdd029e',1,'motorCmd.c']]]
 ];

@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "TMC2209 Driver", "index.html", [
+  [ "Double Scara", "index.html", [
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -52,9 +52,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__STEP__Module.html#ga7786c06c4687c5cbe8c2f4b4e41d99cf",
-"step_8c.html#ac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f",
-"tmc2209_8c.html#a42789bba6d69096f4d0a8b35d7b6a796"
+"group__MotorConfigs__Module.html#gae859f4d566df9eeb248b7a92a072f2ef",
+"motor_8c.html#a7e0429af5d2b45a65c693ab8f05fe25b",
+"struct__STP__AccelTablePoolItem.html#a73c825496d723d8a542d6523ad71e712"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

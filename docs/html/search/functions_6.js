@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['get_5fcurrent_5fangle_0',['get_current_angle',['../motor_8c.html#acb20911956d46fc91973712e69746964',1,'motor.c']]],
-  ['get_5fhandle_5ffrom_5ftimer_1',['get_handle_from_timer',['../step_8c.html#a4addfaa1cd32089f48149435915badab',1,'step.c']]],
-  ['get_5fmovement_5fstate_2',['get_movement_state',['../motor_8c.html#a4e3afb4678fce728d08964e74f025e60',1,'motor.c']]]
+  ['free_5faccel_5ftable_0',['free_accel_table',['../step_8c.html#ae09089881e135a335d2f5b9a30ce381f',1,'step.c']]],
+  ['free_5fhandle_1',['free_handle',['../tmc2209_8c.html#abe68bf18e690ee0a0e9badfa372bb2fb',1,'tmc2209.c']]],
+  ['ftm3_5firqhandler_2',['FTM3_IRQHandler',['../step_8c.html#a889cb58d52a26f7eaa5ea6319c9e0f29',1,'step.c']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: Command Line Interface Module</title>
+<title>Double Scara: Command Line Interface Module</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -103,6 +103,7 @@ Macros</h2></td></tr>
 <tr class="memitem:gacb88beab1215559351e794b21e315541" id="r_gacb88beab1215559351e794b21e315541"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gacb88beab1215559351e794b21e315541">CLI_MAX_OUTPUT_LENGTH</a>&#160;&#160;&#160;300</td></tr>
 <tr class="memdesc:gacb88beab1215559351e794b21e315541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum length of the output buffer for CLI responses.  <br /></td></tr>
 <tr class="memitem:gaa114455df5fb9fc866e640d1709e75ed" id="r_gaa114455df5fb9fc866e640d1709e75ed"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gaa114455df5fb9fc866e640d1709e75ed">CLI_SHOW_COMMAND_INPUT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:gac06ccbc6d66238f1d787987165627ed8" id="r_gac06ccbc6d66238f1d787987165627ed8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gac06ccbc6d66238f1d787987165627ed8">CLI_USE_RTT</a>&#160;&#160;&#160;1</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -168,6 +169,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gac06ccbc6d66238f1d787987165627ed8" name="gac06ccbc6d66238f1d787987165627ed8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac06ccbc6d66238f1d787987165627ed8">&#9670;&#160;</a></span>CLI_USE_RTT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CLI_USE_RTT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cli_8h_source.html#l00047">47</a> of file <a class="el" href="cli_8h_source.html">cli.h</a>.</p>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ga1ace59bd0e61934e6e55bfeb18568df2" name="ga1ace59bd0e61934e6e55bfeb18568df2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga1ace59bd0e61934e6e55bfeb18568df2">&#9670;&#160;</a></span>CLI_init()</h2>
@@ -196,7 +213,7 @@ Ensure the UART interface for CLI communication is initialized before calling th
 <dd>
 <a class="el" href="#ga6ad50d71751bda9225ecf7af49516526" title="Registers a new command with the CLI.">CLI_register_command()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00054">54</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00055">55</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
 
 </div>
 </div>
@@ -230,7 +247,7 @@ Commands can be registered at any time after <a class="el" href="#ga1ace59bd0e61
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command is successfully registered. kStatus_Fail if the registration fails or the mutex cannot be acquired.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga1ace59bd0e61934e6e55bfeb18568df2" title="Initializes the Command Line Interface (CLI) module.">CLI_init()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00073">73</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00075">75</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
 
 </div>
 </div>
@@ -263,7 +280,7 @@ This task waits for input from the CLI UART peripheral. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This function does not return; it is expected to run as a perpetual FreeRTOS task.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga1ace59bd0e61934e6e55bfeb18568df2" title="Initializes the Command Line Interface (CLI) module.">CLI_init()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00109">109</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cli_8c_source.html#l00111">111</a> of file <a class="el" href="cli_8c_source.html">cli.c</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,77 @@
+\doxysection{Motor Command Module }
+\hypertarget{group__MotorCmd__Module}{}\label{group__MotorCmd__Module}\index{Motor Command Module@{Motor Command Module}}
+
+
+Motor command registration and processing for CLI with emergency stop and freewheeling.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MotorCmd__Module_gaa3be1460f8c4d323d294f337a706508c}{MCMD\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the motor command module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__MotorCmd__Module_ga9a65695a6bd7f4f925ccd06b2020814b}{MCMD\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing motor control commands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Motor command registration and processing for CLI with emergency stop and freewheeling. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__MotorCmd__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__MotorCmd__Module_gaa3be1460f8c4d323d294f337a706508c}\index{Motor Command Module@{Motor Command Module}!MCMD\_init@{MCMD\_init}}
+\index{MCMD\_init@{MCMD\_init}!Motor Command Module@{Motor Command Module}}
+\doxysubsubsection{\texorpdfstring{MCMD\_init()}{MCMD\_init()}}
+{\footnotesize\ttfamily \label{group__MotorCmd__Module_gaa3be1460f8c4d323d294f337a706508c} 
+status\+\_\+t MCMD\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the motor command module. 
+
+This function initializes the motor command module, setting up any necessary data structures or state. It should be called once during system initialization before starting the MCMD task.
+
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if initialization is successful, or an appropriate error code if it fails.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function is NOT task-\/safe and should only be called from the main initialization code before any tasks are started. 
+
+The \doxylink{group__MotorCmd__Module_ga9a65695a6bd7f4f925ccd06b2020814b}{MCMD\+\_\+task()} should be started after this function completes successfully. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00183}{183}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{group__MotorCmd__Module_ga9a65695a6bd7f4f925ccd06b2020814b}\index{Motor Command Module@{Motor Command Module}!MCMD\_task@{MCMD\_task}}
+\index{MCMD\_task@{MCMD\_task}!Motor Command Module@{Motor Command Module}}
+\doxysubsubsection{\texorpdfstring{MCMD\_task()}{MCMD\_task()}}
+{\footnotesize\ttfamily \label{group__MotorCmd__Module_ga9a65695a6bd7f4f925ccd06b2020814b} 
+void MCMD\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Task function for processing motor control commands. 
+
+This function is intended to be run as a Free\+RTOS task. It registers motor control commands with the CLI and processes any incoming commands related to motor control. The task will run indefinitely, handling motor command requests as they come in.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (not used in this implementation).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function should be started after \doxylink{group__MotorCmd__Module_gaa3be1460f8c4d323d294f337a706508c}{MCMD\+\_\+init()} completes successfully. 
+
+This task is blocked on CLI command processing and will wake when motor control commands are received. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function does not return; it is expected to run as a perpetual Free\+RTOS task. 
+\end{DoxyWarning}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00188}{188}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+

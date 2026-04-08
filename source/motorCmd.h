@@ -1,9 +1,19 @@
 /************************************************************
  * @file    motorCmd.h
- * @brief   Filedescription
+ * @brief   Motor command registration and processing module
+ * @details Provides CLI command handlers for complete motor control including movement,
+ *          emergency stop, synchronized multi-motor control, and freewheeling mode.
+ *          Registered CLI commands: mmove, mabs, mrev, mvel, macc, mstop, mestop,
+ *          mclear, msync, mfree_on, mfree_off, mrun, mhold, mtest, and mstatus.
  * @author  dg
- * @date    11 Mar 2026
+ * @date    6 Apr 2026
  ************************************************************/
+
+/**
+ * @defgroup MotorCmd_Module Motor Command Module
+ * @brief   Motor command registration and processing for CLI with emergency stop and freewheeling
+ * @{
+ */
 
 #ifndef MOTORCMD_H_
 #define MOTORCMD_H_
@@ -60,5 +70,7 @@ status_t MCMD_init(void);
  * @warning This function does not return; it is expected to run as a perpetual FreeRTOS task.
  */
 void MCMD_task(void* pvParameters);
+
+/** @} */ // End of MotorCmd_Module
 
 #endif /* MOTORCMD_H_ */

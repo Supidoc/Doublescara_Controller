@@ -1,6 +1,10 @@
 /************************************************************
  * @file    task_helpers.c
- * @brief   Filedescription
+ * @brief   FreeRTOS task helper utilities for command execution tracking
+ * @details Implements task-safe command handle management and result tracking
+ *          using FreeRTOS event groups. Commands are tracked via bitmasks
+ *          (THE_CMD_BIT_SUCCESS, THE_CMD_BIT_FAILURE, THE_CMD_BIT_TIMEOUT)
+ *          for result status.
  * @author  dgrob
  * @date    18 Mar 2026
  ************************************************************/
@@ -80,7 +84,8 @@ status_t THE_get_cmd_handle(THE_CmdHandle_t* cmdHandle, THE_CmdHandleImpl_t* cmd
         {
             cmdHandles[i].used      = 1;
             cmdHandles[i].ref_count = 0;
-            xEventGroupClearBits(cmdHandles[i].eventGroup, 0b111); // Clear all event bits
+            xEventGroupClearBits(cmdHandles[i].eventGroup,
+                                 (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT));
             if (cmdHandle != NULL)
             {
                 *cmdHandle = &cmdHandles[i];
@@ -137,7 +142,7 @@ void THE_notify_task_success(THE_CmdHandle_t cmdHandle)
 {
     if (cmdHandle != NULL)
     {
-        xEventGroupSetBits(cmdHandle->eventGroup, 0b1 << 0); // Set success bit
+        xEventGroupSetBits(cmdHandle->eventGroup, THE_CMD_BIT_SUCCESS);
     }
 }
 
@@ -145,7 +150,7 @@ void THE_notify_task_failure(THE_CmdHandle_t cmdHandle)
 {
     if (cmdHandle != NULL)
     {
-        xEventGroupSetBits(cmdHandle->eventGroup, 0b1 << 1); // Set failure bit
+        xEventGroupSetBits(cmdHandle->eventGroup, THE_CMD_BIT_FAILURE);
     }
 }
 
@@ -153,7 +158,7 @@ void THE_notify_task_timeout(THE_CmdHandle_t cmdHandle)
 {
     if (cmdHandle != NULL)
     {
-        xEventGroupSetBits(cmdHandle->eventGroup, 0b1 << 2); // Set timeout bit
+        xEventGroupSetBits(cmdHandle->eventGroup, THE_CMD_BIT_TIMEOUT);
     }
 }
 
@@ -171,16 +176,16 @@ status_t THE_cmd_wait_result(THE_CmdHandle_t cmdHandle, TickType_t deadline, Eve
     }
 
     TickType_t  ticksUntilDeadline = deadline - currentTick;
-    EventBits_t bits =
-        xEventGroupWaitBits(cmdHandle->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2), pdFALSE,
-                            pdFALSE, ticksUntilDeadline);
+    EventBits_t bits               = xEventGroupWaitBits(
+        cmdHandle->eventGroup, (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT),
+        pdFALSE, pdFALSE, ticksUntilDeadline);
 
     if (outBits != NULL)
     {
         *outBits = bits;
     }
 
-    if ((bits & (0b1 << 0)) != 0u)
+    if ((bits & THE_CMD_BIT_SUCCESS) != 0u)
     {
         return kStatus_Success;
     }
@@ -201,24 +206,25 @@ status_t THE_cmd_check_result(THE_CmdHandle_t cmdHandle, EventBits_t* outBits)
     }
 
     EventBits_t bits = xEventGroupWaitBits(
-        cmdHandle->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2), pdFALSE, pdFALSE, 0);
+        cmdHandle->eventGroup, (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT),
+        pdFALSE, pdFALSE, 0);
 
     if (outBits != NULL)
     {
         *outBits = bits;
     }
 
-    if ((bits & (0b1 << 0)) != 0u)
+    if ((bits & THE_CMD_BIT_SUCCESS) != 0u)
     {
         return kStatus_Success;
     }
 
-    if ((bits & (0b1 << 1)) != 0u)
+    if ((bits & THE_CMD_BIT_FAILURE) != 0u)
     {
         return kStatus_Fail;
     }
 
-    if ((bits & (0b1 << 2)) != 0u)
+    if ((bits & THE_CMD_BIT_TIMEOUT) != 0u)
     {
         return kStatus_Timeout;
     }
@@ -251,9 +257,10 @@ status_t THE_cmd_wait_any(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
                 continue;
             }
 
-            EventBits_t bits =
-                xEventGroupWaitBits(cmdHandles[i]->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2),
-                                    pdFALSE, pdFALSE, 0);
+            EventBits_t bits = xEventGroupWaitBits(
+                cmdHandles[i]->eventGroup,
+                (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT), pdFALSE, pdFALSE,
+                0);
 
             if (bits != 0)
             {
@@ -266,15 +273,15 @@ status_t THE_cmd_wait_any(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
                     *outBits = bits;
                 }
 
-                if (bits & (0b1 << 1))
+                if (bits & THE_CMD_BIT_FAILURE)
                 {
                     return kStatus_Fail;
                 }
-                else if (bits & (0b1 << 2))
+                else if (bits & THE_CMD_BIT_TIMEOUT)
                 {
                     return kStatus_Timeout;
                 }
-                else if (bits & (0b1 << 0))
+                else if (bits & THE_CMD_BIT_SUCCESS)
                 {
                     return kStatus_Success;
                 }
@@ -311,7 +318,8 @@ status_t THE_cmd_check_any(THE_CmdHandle_t* cmdHandles, size_t count, size_t* ou
         }
 
         EventBits_t bits = xEventGroupWaitBits(
-            cmdHandles[i]->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2), pdFALSE, pdFALSE, 0);
+            cmdHandles[i]->eventGroup,
+            (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT), pdFALSE, pdFALSE, 0);
 
         if (bits != 0u)
         {
@@ -324,15 +332,15 @@ status_t THE_cmd_check_any(THE_CmdHandle_t* cmdHandles, size_t count, size_t* ou
                 *outBits = bits;
             }
 
-            if (bits & (0b1 << 0))
+            if (bits & THE_CMD_BIT_SUCCESS)
             {
                 return kStatus_Success;
             }
-            if (bits & (0b1 << 1))
+            if (bits & THE_CMD_BIT_FAILURE)
             {
                 return kStatus_Fail;
             }
-            if (bits & (0b1 << 2))
+            if (bits & THE_CMD_BIT_TIMEOUT)
             {
                 return kStatus_Timeout;
             }
@@ -371,9 +379,10 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
                 continue;
             }
 
-            EventBits_t bits =
-                xEventGroupWaitBits(cmdHandles[i]->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2),
-                                    pdFALSE, pdFALSE, 0);
+            EventBits_t bits = xEventGroupWaitBits(
+                cmdHandles[i]->eventGroup,
+                (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT), pdFALSE, pdFALSE,
+                0);
 
             if (outResults != NULL)
             {
@@ -384,11 +393,11 @@ status_t THE_cmd_wait_all(THE_CmdHandle_t* cmdHandles, size_t count, TickType_t 
             {
                 allCompleted = 0; // Not yet completed
             }
-            else if ((bits & (0b1 << 1)) != 0u)
+            else if ((bits & THE_CMD_BIT_FAILURE) != 0u)
             {
                 anyFailed = 1;
             }
-            else if ((bits & (0b1 << 2)) != 0u)
+            else if ((bits & THE_CMD_BIT_TIMEOUT) != 0u)
             {
                 anyTimeout = 1;
             }
@@ -440,22 +449,23 @@ status_t THE_cmd_check_all(THE_CmdHandle_t* cmdHandles, size_t count, EventBits_
         }
 
         EventBits_t bits = xEventGroupWaitBits(
-            cmdHandles[i]->eventGroup, (0b1 << 0) | (0b1 << 1) | (0b1 << 2), pdFALSE, pdFALSE, 0);
+            cmdHandles[i]->eventGroup,
+            (THE_CMD_BIT_SUCCESS | THE_CMD_BIT_FAILURE | THE_CMD_BIT_TIMEOUT), pdFALSE, pdFALSE, 0);
 
         if (outResults != NULL)
         {
             outResults[i] = bits;
         }
 
-        if ((bits & (0b1 << 0)) == 0u)
+        if ((bits & THE_CMD_BIT_SUCCESS) == 0u)
         {
             allCompleted = 0;
         }
-        if ((bits & (0b1 << 1)) != 0u)
+        if ((bits & THE_CMD_BIT_FAILURE) != 0u)
         {
             anyFailed = 1;
         }
-        if ((bits & (0b1 << 2)) != 0u)
+        if ((bits & THE_CMD_BIT_TIMEOUT) != 0u)
         {
             anyTimeout = 1;
         }

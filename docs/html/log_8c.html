@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TMC2209 Driver: source/log.c File Reference</title>
+<title>Double Scara: source/log.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TMC2209 Driver
+   <div id="projectname">Double Scara
    </div>
-   <div id="projectbrief">UART-based stepper motor driver interface for TMC2209</div>
+   <div id="projectbrief">Driver for double scara robot</div>
   </td>
  </tr>
  </tbody>
@@ -97,10 +97,12 @@ $(function(){initNavTree('log_8c.html','',''); });
 <code>#include &quot;<a class="el" href="cli_8h_source.html">cli.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cli__utilities_8h_source.html">cli_utilities.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="disk_8h_source.html">disk.h</a>&quot;</code><br />
+<code>#include &quot;event_groups.h&quot;</code><br />
 <code>#include &quot;peripherals.h&quot;</code><br />
 <code>#include &quot;queue.h&quot;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
 <code>#include &lt;<a class="el" href="log_8h_source.html">log.h</a>&gt;</code><br />
+<code>#include &quot;SEGGER_RTT.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for log.c:</div>
 <div class="dyncontent">
@@ -119,6 +121,7 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a59a4d3c0b2cc8938975eff89e7f3d682" id="r_a59a4d3c0b2cc8938975eff89e7f3d682"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a59a4d3c0b2cc8938975eff89e7f3d682">LOG_MAGIC</a>&#160;&#160;&#160;0x4C4F4746</td></tr>
 <tr class="memitem:a8bd2c3efeca31c2a8a212c1c85b49a1f" id="r_a8bd2c3efeca31c2a8a212c1c85b49a1f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8bd2c3efeca31c2a8a212c1c85b49a1f">LOG_MAX_LEVEL_STRING_SIZE</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memitem:a96fa000644cfd44a3e374205b0918d46" id="r_a96fa000644cfd44a3e374205b0918d46"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a96fa000644cfd44a3e374205b0918d46">LOG_QUEUE_EMPTY_EVENT</a>&#160;&#160;&#160;(1 &lt;&lt; 0)</td></tr>
 <tr class="memitem:a132efd65168a21fefcc218034a37d825" id="r_a132efd65168a21fefcc218034a37d825"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a132efd65168a21fefcc218034a37d825">LOG_MAX_LOG_LINE_SIZE</a>&#160;&#160;&#160;(1 + 5 + 3 + configMAX_TASK_NAME_LEN + 5 + 20 + 2 + <a class="el" href="group__LOG__Module.html#gaf74de77a0afba0a5af76a0a8ab9ff5d9">LOG_MAX_MESSAGE_SIZE</a> + 2)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -129,11 +132,11 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a32a47ba3327a3e217f5ef2c24ea0b1dd" id="r_a32a47ba3327a3e217f5ef2c24ea0b1dd"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a32a47ba3327a3e217f5ef2c24ea0b1dd">assemble_log_string</a> (char *dest, <a class="el" href="#ab33882773f01b0f786eda8576b58fcdb">LOG_QueueItem_t</a> queueItem)</td></tr>
+<tr class="memitem:a7e0c66a1424e18937bfa2d405e0cabb1" id="r_a7e0c66a1424e18937bfa2d405e0cabb1"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a7e0c66a1424e18937bfa2d405e0cabb1">assemble_log_string</a> (char *dest, size_t destSize, <a class="el" href="#ab33882773f01b0f786eda8576b58fcdb">LOG_QueueItem_t</a> queueItem)</td></tr>
 <tr class="memitem:a624a9dd88c62e44d1bf5b46c6048ef94" id="r_a624a9dd88c62e44d1bf5b46c6048ef94"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a624a9dd88c62e44d1bf5b46c6048ef94">append_to_file</a> (uint8_t *buffer, size_t bufferLength)</td></tr>
 <tr class="memitem:a6ef0387bd645347b1a61efc620315993" id="r_a6ef0387bd645347b1a61efc620315993"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a6ef0387bd645347b1a61efc620315993">process</a> (void)</td></tr>
 <tr class="memitem:a01fc81526c0fa414360ebac8a73c39d0" id="r_a01fc81526c0fa414360ebac8a73c39d0"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a01fc81526c0fa414360ebac8a73c39d0">set_session_id</a> (void)</td></tr>
-<tr class="memitem:a195e333d775b2d89256ce1d67da9ae02" id="r_a195e333d775b2d89256ce1d67da9ae02"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a195e333d775b2d89256ce1d67da9ae02">assemble_header_string</a> (char *dest, <a class="el" href="#a690221406b70afa26e79befccdab12cf">LOG_LogHeader_t</a> header)</td></tr>
+<tr class="memitem:a30b3021476e4daf30329c5977a373c5d" id="r_a30b3021476e4daf30329c5977a373c5d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a30b3021476e4daf30329c5977a373c5d">assemble_header_string</a> (char *dest, size_t destSize, <a class="el" href="#a690221406b70afa26e79befccdab12cf">LOG_LogHeader_t</a> header)</td></tr>
 <tr class="memitem:ac60dcc4a36c6bade741be7462470351e" id="r_ac60dcc4a36c6bade741be7462470351e"><td class="memItemLeft">static BaseType_t&#160;</td><td class="memItemRight"><a class="el" href="#ac60dcc4a36c6bade741be7462470351e">log_command</a> (char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</td></tr>
 <tr class="memitem:a76d185eeacc3d1437e0ccb5fea47460f" id="r_a76d185eeacc3d1437e0ccb5fea47460f"><td class="memItemLeft">static BaseType_t&#160;</td><td class="memItemRight"><a class="el" href="#a76d185eeacc3d1437e0ccb5fea47460f">log_2_cli_command</a> (char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</td></tr>
 <tr class="memitem:gad8fb5a8d2383abe85c0696d80e0372f1" id="r_gad8fb5a8d2383abe85c0696d80e0372f1"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1">LOG_init</a> (void)</td></tr>
@@ -142,6 +145,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga534b19869c7498164597bf36b47ccea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a log message to the log queue.  <br /></td></tr>
 <tr class="memitem:gaf4aa1ff2f9562bf7fce62e14f5c8df9b" id="r_gaf4aa1ff2f9562bf7fce62e14f5c8df9b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__LOG__Module.html#gaf4aa1ff2f9562bf7fce62e14f5c8df9b">LOG_task</a> (void *pvParameters)</td></tr>
 <tr class="memdesc:gaf4aa1ff2f9562bf7fce62e14f5c8df9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function for processing log messages.  <br /></td></tr>
+<tr class="memitem:ga2ddf5f77c872712f2497e3e4b0e19ea4" id="r_ga2ddf5f77c872712f2497e3e4b0e19ea4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__LOG__Module.html#ga2ddf5f77c872712f2497e3e4b0e19ea4">LOG_wait_for_queue_empty</a> (TickType_t xTicksToWait)</td></tr>
+<tr class="memdesc:ga2ddf5f77c872712f2497e3e4b0e19ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the log queue to become empty.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -154,6 +159,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a55eb56205d877ce5359d83fcc6f3a7ac" id="r_a55eb56205d877ce5359d83fcc6f3a7ac"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a55eb56205d877ce5359d83fcc6f3a7ac">enableLogToConsole</a> = 1</td></tr>
 <tr class="memitem:ad0621726a30a5d8802ab4c7c899cd600" id="r_ad0621726a30a5d8802ab4c7c899cd600"><td class="memItemLeft">static <a class="el" href="group__LOG__Module.html#ga6d319de993cc8d4a0b7da064fc94779d">LOG_Level_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad0621726a30a5d8802ab4c7c899cd600">consoleLogLevel</a> = <a class="el" href="group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba538b2b6e011479d408ecd2be0f6d6177">LOG_LEVEL_DEBUG</a></td></tr>
 <tr class="memitem:ae821fbad801312ee9cf5a8fe81101db2" id="r_ae821fbad801312ee9cf5a8fe81101db2"><td class="memItemLeft">static char&#160;</td><td class="memItemRight"><a class="el" href="#ae821fbad801312ee9cf5a8fe81101db2">consoleOutputString</a> [<a class="el" href="group__CLI__Module.html#gacb88beab1215559351e794b21e315541">CLI_MAX_OUTPUT_LENGTH</a>]</td></tr>
+<tr class="memitem:a3554d356a9190bdfe0f56e31ec65bc0b" id="r_a3554d356a9190bdfe0f56e31ec65bc0b"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a3554d356a9190bdfe0f56e31ec65bc0b">logFileOpened</a> = 0</td></tr>
+<tr class="memitem:a3992b5f2e352c471d9528755c7e608a4" id="r_a3992b5f2e352c471d9528755c7e608a4"><td class="memItemLeft">static SemaphoreHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = NULL</td></tr>
+<tr class="memitem:aeec8bebb97c505dcded290a083dd25b1" id="r_aeec8bebb97c505dcded290a083dd25b1"><td class="memItemLeft">static EventGroupHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = NULL</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a59a4d3c0b2cc8938975eff89e7f3d682" name="a59a4d3c0b2cc8938975eff89e7f3d682"></a>
@@ -168,7 +176,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00025">25</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00027">27</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -184,7 +192,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00027">27</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00029">29</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -200,7 +208,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00030">30</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00034">34</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+
+</div>
+</div>
+<a id="a96fa000644cfd44a3e374205b0918d46" name="a96fa000644cfd44a3e374205b0918d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96fa000644cfd44a3e374205b0918d46">&#9670;&#160;</a></span>LOG_QUEUE_EMPTY_EVENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_QUEUE_EMPTY_EVENT&#160;&#160;&#160;(1 &lt;&lt; 0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00031">31</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -275,12 +299,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00382">382</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00452">452</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
-<a id="a195e333d775b2d89256ce1d67da9ae02" name="a195e333d775b2d89256ce1d67da9ae02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a195e333d775b2d89256ce1d67da9ae02">&#9670;&#160;</a></span>assemble_header_string()</h2>
+<a id="a30b3021476e4daf30329c5977a373c5d" name="a30b3021476e4daf30329c5977a373c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30b3021476e4daf30329c5977a373c5d">&#9670;&#160;</a></span>assemble_header_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,6 +320,11 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>destSize</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="#a690221406b70afa26e79befccdab12cf">LOG_LogHeader_t</a></td>          <td class="paramname"><span class="paramname"><em>header</em></span>&#160;)</td>
         </tr>
       </table>
@@ -306,12 +335,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00364">364</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00447">447</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
-<a id="a32a47ba3327a3e217f5ef2c24ea0b1dd" name="a32a47ba3327a3e217f5ef2c24ea0b1dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32a47ba3327a3e217f5ef2c24ea0b1dd">&#9670;&#160;</a></span>assemble_log_string()</h2>
+<a id="a7e0c66a1424e18937bfa2d405e0cabb1" name="a7e0c66a1424e18937bfa2d405e0cabb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0c66a1424e18937bfa2d405e0cabb1">&#9670;&#160;</a></span>assemble_log_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -327,6 +356,11 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>destSize</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="#ab33882773f01b0f786eda8576b58fcdb">LOG_QueueItem_t</a></td>          <td class="paramname"><span class="paramname"><em>queueItem</em></span>&#160;)</td>
         </tr>
       </table>
@@ -337,7 +371,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00319">319</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00417">417</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -373,7 +407,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00262">262</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00360">360</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -409,7 +443,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00183">183</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00252">252</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -436,7 +470,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00409">409</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00472">472</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -463,7 +497,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00426">426</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00561">561</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -488,7 +522,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00108">108</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00112">112</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -512,7 +546,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00109">109</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00113">113</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -536,7 +570,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00107">107</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00111">111</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -552,7 +586,55 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00085">85</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00089">89</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+
+</div>
+</div>
+<a id="a3992b5f2e352c471d9528755c7e608a4" name="a3992b5f2e352c471d9528755c7e608a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3992b5f2e352c471d9528755c7e608a4">&#9670;&#160;</a></span>logFileMutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SemaphoreHandle_t logFileMutex = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00117">117</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+
+</div>
+</div>
+<a id="a3554d356a9190bdfe0f56e31ec65bc0b" name="a3554d356a9190bdfe0f56e31ec65bc0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3554d356a9190bdfe0f56e31ec65bc0b">&#9670;&#160;</a></span>logFileOpened</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t logFileOpened = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00115">115</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -576,7 +658,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00091">91</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00095">95</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -592,7 +674,31 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00087">87</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00091">91</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+
+</div>
+</div>
+<a id="aeec8bebb97c505dcded290a083dd25b1" name="aeec8bebb97c505dcded290a083dd25b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec8bebb97c505dcded290a083dd25b1">&#9670;&#160;</a></span>logQueueEmptyEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventGroupHandle_t logQueueEmptyEvent = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00119">119</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -616,7 +722,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00089">89</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00093">93</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -645,9 +751,9 @@ Variables</h2></td></tr>
 <div class="line">                        <span class="stringliteral">&quot;console.\r\n\t Choose from: NONE,DEBUG,INFO,WARN,ERROR,FATAL\r\n&quot;</span>,</div>
 <div class="line">.pxCommandInterpreter = <a class="code hl_function" href="#a76d185eeacc3d1437e0ccb5fea47460f">log_2_cli_command</a>,</div>
 <div class="line">.cExpectedNumberOfParameters = -1}</div>
-<div class="ttc" id="alog_8c_html_a76d185eeacc3d1437e0ccb5fea47460f"><div class="ttname"><a href="#a76d185eeacc3d1437e0ccb5fea47460f">log_2_cli_command</a></div><div class="ttdeci">static BaseType_t log_2_cli_command(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</div><div class="ttdef"><b>Definition</b> <a href="log_8c_source.html#l00262">log.c:262</a></div></div>
+<div class="ttc" id="alog_8c_html_a76d185eeacc3d1437e0ccb5fea47460f"><div class="ttname"><a href="#a76d185eeacc3d1437e0ccb5fea47460f">log_2_cli_command</a></div><div class="ttdeci">static BaseType_t log_2_cli_command(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</div><div class="ttdef"><b>Definition</b> <a href="log_8c_source.html#l00360">log.c:360</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00100">100</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00104">104</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>
@@ -677,9 +783,9 @@ Variables</h2></td></tr>
 <div class="line">    <span class="stringliteral">&quot;sessionId is given the current sessions log will be used\r\n&quot;</span>,</div>
 <div class="line">.pxCommandInterpreter        = <a class="code hl_function" href="#ac60dcc4a36c6bade741be7462470351e">log_command</a>,</div>
 <div class="line">.cExpectedNumberOfParameters = -1}</div>
-<div class="ttc" id="alog_8c_html_ac60dcc4a36c6bade741be7462470351e"><div class="ttname"><a href="#ac60dcc4a36c6bade741be7462470351e">log_command</a></div><div class="ttdeci">static BaseType_t log_command(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</div><div class="ttdef"><b>Definition</b> <a href="log_8c_source.html#l00183">log.c:183</a></div></div>
+<div class="ttc" id="alog_8c_html_ac60dcc4a36c6bade741be7462470351e"><div class="ttname"><a href="#ac60dcc4a36c6bade741be7462470351e">log_command</a></div><div class="ttdeci">static BaseType_t log_command(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</div><div class="ttdef"><b>Definition</b> <a href="log_8c_source.html#l00252">log.c:252</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00093">93</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8c_source.html#l00097">97</a> of file <a class="el" href="log_8c_source.html">log.c</a>.</p>
 
 </div>
 </div>

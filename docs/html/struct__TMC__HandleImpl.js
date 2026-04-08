@@ -1,5 +1,6 @@
 var struct__TMC__HandleImpl =
 [
+    [ "freewheeling", "struct__TMC__HandleImpl.html#a869a2c610826285e931dcd032ff6e8c9", null ],
     [ "iholdDivider", "struct__TMC__HandleImpl.html#a41bfea7ddaace7185d87377c6375749b", null ],
     [ "irunDivider", "struct__TMC__HandleImpl.html#a53e1d74f7180037dfa14ccf3eeb9a2cd", null ],
     [ "label", "struct__TMC__HandleImpl.html#af5f588f2cb2db5872b41f2df9578af3c", null ],

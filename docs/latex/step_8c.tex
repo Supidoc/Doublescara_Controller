@@ -7,6 +7,7 @@
 {\ttfamily \+\#include "{}stdio.\+h"{}}\newline
 {\ttfamily \+\#include "{}string.\+h"{}}\newline
 {\ttfamily \+\#include "{}task\+\_\+helpers.\+h"{}}\newline
+{\ttfamily \+\#include "{}pca9555a.\+h"{}}\newline
 Include dependency graph for step.\+c:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -90,10 +91,6 @@ enum \doxymbox{\hyperlink{step_8c_ac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP
 \item 
 static status\+\_\+t \doxymbox{\hyperlink{step_8c_a331ab04c818f0194c1eaa24d977843fb}{init\+\_\+handle}} (const \doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
 \item 
-static status\+\_\+t \doxymbox{\hyperlink{step_8c_ae1f6a35fc922b343703a0f3843cf757b}{step\+\_\+pin\+\_\+mux\+\_\+gpio}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
-\item 
-static status\+\_\+t \doxymbox{\hyperlink{step_8c_a1e9734fa87cb7c5209baef5add2d254d}{step\+\_\+pin\+\_\+mux\+\_\+ftm}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
-\item 
 static status\+\_\+t \doxymbox{\hyperlink{step_8c_acfb245efbd9bf8ea73ec96baa3db4f3a}{plan\+\_\+motion\+\_\+profile}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
 \item 
 static status\+\_\+t \doxymbox{\hyperlink{step_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{calculate\+\_\+acceleration\+\_\+profile}} (uint16\+\_\+t \texorpdfstring{$\ast$}{*}lookup\+Table, uint32\+\_\+t num\+Steps, uint16\+\_\+t step\+Zero\+Delay, uint16\+\_\+t end\+Velocity\+Delay)
@@ -101,8 +98,6 @@ static status\+\_\+t \doxymbox{\hyperlink{step_8c_a2d08a460c866d6442e4a3d5a57cd9
 static status\+\_\+t \doxymbox{\hyperlink{step_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\+\_\+accel\+\_\+table}} (uint32\+\_\+t table\+Size, int8\+\_\+t \texorpdfstring{$\ast$}{*}pool\+Index)
 \item 
 static void \doxymbox{\hyperlink{step_8c_ae09089881e135a335d2f5b9a30ce381f}{free\+\_\+accel\+\_\+table}} (int8\+\_\+t pool\+Index)
-\item 
-static status\+\_\+t \doxymbox{\hyperlink{step_8c_aa9ae1d4d2005d2e3e2dc01792c68c83f}{start\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
 \item 
 static void \doxymbox{\hyperlink{step_8c_a4addfaa1cd32089f48149435915badab}{get\+\_\+handle\+\_\+from\+\_\+timer}} (FTM\+\_\+\+Type \texorpdfstring{$\ast$}{*}ftm\+Base, ftm\+\_\+chnl\+\_\+t ftm\+Channel, \doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \item 
@@ -128,50 +123,60 @@ static void \doxymbox{\hyperlink{step_8c_aec411a881b3aaf231cabef1dbbfcf89f}{upda
 \item 
 static status\+\_\+t \doxymbox{\hyperlink{step_8c_a3fb95aaa3f8cecda9ad30ea62a4757e5}{reset\+\_\+absolute\+\_\+position}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
 \item 
+static uint8\+\_\+t \doxymbox{\hyperlink{step_8c_af2c7e8de750e60ed3ac6d437a8f62142}{check\+\_\+movement\+\_\+completion}} (void)
+\item 
+static void \doxymbox{\hyperlink{step_8c_a7d7bc55da4b23e8c529a5de23b199036}{process\+\_\+cmd}} (\doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} queue\+Item)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_abb11af2b3ed6085f8610da85a9fd19db}{start\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_a5526988470db9dd91a282ab1e5fa114f}{send\+\_\+cmd\+\_\+async}} (\doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}queue\+Item, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\item 
 \doxymbox{\hyperlink{step_8c_ad680f5e53fc79d312053b987c7c8c4a7}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}} ((section("{}.accel\+Tables"{})))
 \item 
 void \doxymbox{\hyperlink{group__STEP__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
 \begin{DoxyCompactList}\small\item\em Task function for processing stepper motor commands. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga567fb9fcd9b23f6926e1973174c4e144}{STP\+\_\+stop}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga031be33b58392782cebe3432b5a168f2}{STP\+\_\+stop\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga622248fdfc5a6e2d70efa01bb46fcfbf}{STP\+\_\+move\+\_\+relative}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gaf2be674a63d62e313828443fb863ac7a}{STP\+\_\+move\+\_\+relative\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gad4d5e25d0042f1075181945caae24470}{STP\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga70af9e1c5600849f09683bc59b09b8e2}{STP\+\_\+init\+\_\+handle\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Initializes a stepper motor with the provided configuration. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \begin{DoxyCompactList}\small\item\em Retrieves the stepper motor handle by its label identifier. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga0b5737fd19148e1b0afd9b4f3b170951}{STP\+\_\+reset\+\_\+absolute\+\_\+position}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga211ab928b813dfae2c5807f5db272ab2}{STP\+\_\+reset\+\_\+absolute\+\_\+position}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
 \begin{DoxyCompactList}\small\item\em Resets the tracked absolute position of a stepper motor to zero. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga7786c06c4687c5cbe8c2f4b4e41d99cf}{STP\+\_\+move\+\_\+relative\+\_\+prepare}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gaf35c3fdcf91288569bcb264e8283bc74}{STP\+\_\+move\+\_\+relative\+\_\+prepare\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Prepares a relative movement command without starting motion immediately. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga4ff6679a699002150aa8390ad6168055}{STP\+\_\+trigger\+\_\+prepared\+\_\+moves}} (Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gacc7a3cb37781c22f5639f7b76971da12}{STP\+\_\+trigger\+\_\+prepared\+\_\+moves\+\_\+async}} (Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Starts all previously prepared movements. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga7da3362dfab0b9c43e86c3cffad6d900}{STP\+\_\+get\+\_\+absolute\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t \texorpdfstring{$\ast$}{*}absolute\+Steps, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\+\_\+get\+\_\+absolute\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t \texorpdfstring{$\ast$}{*}absolute\+Steps)
 \begin{DoxyCompactList}\small\item\em Reads the current absolute step position of a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gac9b96637fd5b28920bb9451771805a38}{STP\+\_\+get\+\_\+acceleration}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}acceleration, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gaa650351470c587dbe89b773ee800708c}{STP\+\_\+get\+\_\+acceleration}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}acceleration)
 \begin{DoxyCompactList}\small\item\em Gets the configured acceleration of a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga19a71e4aad9942e06973e93df7c03dcf}{STP\+\_\+get\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}end\+Velocity, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_gaef3ff2c4a411d2d9d67ba157f81619f5}{STP\+\_\+get\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}end\+Velocity)
 \begin{DoxyCompactList}\small\item\em Gets the configured target end velocity of a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga22f8e0321009758b160999236054a71e}{STP\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}{STP\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state)
 \begin{DoxyCompactList}\small\item\em Retrieves the current movement state of a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga4afa9904f1d7f5eed5cd42d542e4dae2}{STP\+\_\+set\+\_\+acceleration}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double acceleration, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga376c486888a53a7ef0f8f28a9404a7b7}{STP\+\_\+set\+\_\+acceleration\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double acceleration, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets the acceleration parameter for a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga855d48f5ef928db6135bbbce2883ead6}{STP\+\_\+set\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double end\+Velocity, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga6e390769bee31d0ad50599a97b8a693f}{STP\+\_\+set\+\_\+end\+\_\+velocity\+\_\+async}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double end\+Velocity, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets the target end velocity parameter for a motor. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__STEP__Module_ga718622f8935169a07606900d30e35dc3}{STP\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{group__STEP__Module_ga535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
 \begin{DoxyCompactList}\small\item\em Retrieves the default configuration for a stepper motor handle. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{step_8c_a889cb58d52a26f7eaa5ea6319c9e0f29}{FTM3\+\_\+\+IRQHandler}} (void)
 \item 
-static status\+\_\+t \doxymbox{\hyperlink{step_8c_a61964b6e0df06d18ef1522c5eef09cfb}{stop\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration)
+static status\+\_\+t \doxymbox{\hyperlink{step_8c_acbffc3efbb8ce9d72bc5f1977af371c3}{stop\+\_\+steps}} (\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 static \doxymbox{\hyperlink{step_8c_accb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}} \doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}} \+[\doxymbox{\hyperlink{group__STEP__Module_ga1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
 \item 
+static \doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \doxymbox{\hyperlink{step_8c_ab322ae393437013d7632b8164ae96189}{cmd\+Handles}} \+[\doxymbox{\hyperlink{group__STEP__Module_gacbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
+\item 
 static Queue\+Handle\+\_\+t \doxymbox{\hyperlink{step_8c_aeb86091cfe0c5168e3dc293683af1f6b}{cmd\+Queue}} = NULL
 \item 
-\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \doxymbox{\hyperlink{step_8c_a785756bcb96f3c5e34dc48382bfcb804}{FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache}} \+[8]\+
+\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \doxymbox{\hyperlink{step_8c_a785756bcb96f3c5e34dc48382bfcb804}{FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache}} \+[8]\+ = \{NULL\}
 \item 
 static uint8\+\_\+t \doxymbox{\hyperlink{step_8c_a543c0fb112c6a654b9fe80a4059d91f8}{isr\+Debug\+Pin}} = 1
 \item 
@@ -369,7 +374,7 @@ Definition at line \doxymbox{\hyperlink{step_8c_source_l00037}{37}} of file \dox
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00207}{207}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00209}{209}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a47a18d328f3e0085135f6b5a74bc7255}\index{step.c@{step.c}!allocate\_accel\_table@{allocate\_accel\_table}}
 \index{allocate\_accel\_table@{allocate\_accel\_table}!step.c@{step.c}}
@@ -379,7 +384,7 @@ status\+\_\+t allocate\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{uin
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00980}{980}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00942}{942}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a2d08a460c866d6442e4a3d5a57cd97a5}\index{step.c@{step.c}!calculate\_acceleration\_profile@{calculate\_acceleration\_profile}}
 \index{calculate\_acceleration\_profile@{calculate\_acceleration\_profile}!step.c@{step.c}}
@@ -389,7 +394,7 @@ status\+\_\+t calculate\+\_\+acceleration\+\_\+profile (\begin{DoxyParamCaption}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01010}{1010}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00972}{972}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a5348de51178f0f8ebf2b46b808d8be8a}\index{step.c@{step.c}!calculate\_acceleration\_table\_parameters@{calculate\_acceleration\_table\_parameters}}
 \index{calculate\_acceleration\_table\_parameters@{calculate\_acceleration\_table\_parameters}!step.c@{step.c}}
@@ -399,7 +404,7 @@ void calculate\+\_\+acceleration\+\_\+table\+\_\+parameters (\begin{DoxyParamCap
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00920}{920}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00874}{874}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a012866f418e6967b0eaa5034181b7b55}\index{step.c@{step.c}!calculate\_delays@{calculate\_delays}}
 \index{calculate\_delays@{calculate\_delays}!step.c@{step.c}}
@@ -409,7 +414,7 @@ void calculate\+\_\+delays (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00910}{910}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00864}{864}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a23936a7816b4f883b70bf25212345ec3}\index{step.c@{step.c}!calculate\_step\_profile@{calculate\_step\_profile}}
 \index{calculate\_step\_profile@{calculate\_step\_profile}!step.c@{step.c}}
@@ -419,7 +424,17 @@ void calculate\+\_\+step\+\_\+profile (\begin{DoxyParamCaption}\item[{\doxymbox{
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00880}{880}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00834}{834}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_af2c7e8de750e60ed3ac6d437a8f62142}\index{step.c@{step.c}!check\_movement\_completion@{check\_movement\_completion}}
+\index{check\_movement\_completion@{check\_movement\_completion}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{check\_movement\_completion()}{check\_movement\_completion()}}
+{\footnotesize\ttfamily \label{step_8c_af2c7e8de750e60ed3ac6d437a8f62142} 
+uint8\+\_\+t check\+\_\+movement\+\_\+completion (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01190}{1190}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_aef71ea66299390c4c59ba15393955dba}\index{step.c@{step.c}!create\_accel\_table@{create\_accel\_table}}
 \index{create\_accel\_table@{create\_accel\_table}!step.c@{step.c}}
@@ -429,7 +444,7 @@ status\+\_\+t create\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{\doxy
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00941}{941}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00899}{899}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_ae09089881e135a335d2f5b9a30ce381f}\index{step.c@{step.c}!free\_accel\_table@{free\_accel\_table}}
 \index{free\_accel\_table@{free\_accel\_table}!step.c@{step.c}}
@@ -439,7 +454,7 @@ void free\+\_\+accel\+\_\+table (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{po
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01001}{1001}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00963}{963}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a889cb58d52a26f7eaa5ea6319c9e0f29}\index{step.c@{step.c}!FTM3\_IRQHandler@{FTM3\_IRQHandler}}
 \index{FTM3\_IRQHandler@{FTM3\_IRQHandler}!step.c@{step.c}}
@@ -449,7 +464,7 @@ void FTM3\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyP
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00551}{551}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00520}{520}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a4addfaa1cd32089f48149435915badab}\index{step.c@{step.c}!get\_handle\_from\_timer@{get\_handle\_from\_timer}}
 \index{get\_handle\_from\_timer@{get\_handle\_from\_timer}!step.c@{step.c}}
@@ -459,7 +474,7 @@ void get\+\_\+handle\+\_\+from\+\_\+timer (\begin{DoxyParamCaption}\item[{FTM\+\
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01085}{1085}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01055}{1055}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_adba1d68dbe985d96ff4d586237e05600}\index{step.c@{step.c}!init\_dir\_pin@{init\_dir\_pin}}
 \index{init\_dir\_pin@{init\_dir\_pin}!step.c@{step.c}}
@@ -469,7 +484,7 @@ status\+\_\+t init\+\_\+dir\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{\
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00781}{781}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00764}{764}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a331ab04c818f0194c1eaa24d977843fb}\index{step.c@{step.c}!init\_handle@{init\_handle}}
 \index{init\_handle@{init\_handle}!step.c@{step.c}}
@@ -479,7 +494,7 @@ status\+\_\+t init\+\_\+handle (\begin{DoxyParamCaption}\item[{const \doxymbox{\
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00693}{693}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00676}{676}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a6277757e5ae26d0cbba3d4d62dc45912}\index{step.c@{step.c}!init\_step\_pin@{init\_step\_pin}}
 \index{init\_step\_pin@{init\_step\_pin}!step.c@{step.c}}
@@ -489,7 +504,7 @@ status\+\_\+t init\+\_\+step\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxymbox{
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00765}{765}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00747}{747}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_acfb245efbd9bf8ea73ec96baa3db4f3a}\index{step.c@{step.c}!plan\_motion\_profile@{plan\_motion\_profile}}
 \index{plan\_motion\_profile@{plan\_motion\_profile}!step.c@{step.c}}
@@ -499,7 +514,7 @@ status\+\_\+t plan\+\_\+motion\+\_\+profile (\begin{DoxyParamCaption}\item[{\dox
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00832}{832}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00779}{779}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a6ef0387bd645347b1a61efc620315993}\index{step.c@{step.c}!process@{process}}
 \index{process@{process}!step.c@{step.c}}
@@ -509,7 +524,17 @@ void process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\h
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01193}{1193}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01374}{1374}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a7d7bc55da4b23e8c529a5de23b199036}\index{step.c@{step.c}!process\_cmd@{process\_cmd}}
+\index{process\_cmd@{process\_cmd}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{process\_cmd()}{process\_cmd()}}
+{\footnotesize\ttfamily \label{step_8c_a7d7bc55da4b23e8c529a5de23b199036} 
+void process\+\_\+cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}}]{queue\+Item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01229}{1229}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a3fb95aaa3f8cecda9ad30ea62a4757e5}\index{step.c@{step.c}!reset\_absolute\_position@{reset\_absolute\_position}}
 \index{reset\_absolute\_position@{reset\_absolute\_position}!step.c@{step.c}}
@@ -519,7 +544,7 @@ status\+\_\+t reset\+\_\+absolute\+\_\+position (\begin{DoxyParamCaption}\item[{
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00759}{759}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00739}{739}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a21aaa63877a5905ca82f28a059d53bbd}\index{step.c@{step.c}!reset\_movement\_handle@{reset\_movement\_handle}}
 \index{reset\_movement\_handle@{reset\_movement\_handle}!step.c@{step.c}}
@@ -529,7 +554,17 @@ status\+\_\+t reset\+\_\+movement\+\_\+handle (\begin{DoxyParamCaption}\item[{\d
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01100}{1100}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01071}{1071}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
+\Hypertarget{step_8c_a5526988470db9dd91a282ab1e5fa114f}\index{step.c@{step.c}!send\_cmd\_async@{send\_cmd\_async}}
+\index{send\_cmd\_async@{send\_cmd\_async}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{send\_cmd\_async()}{send\_cmd\_async()}}
+{\footnotesize\ttfamily \label{step_8c_a5526988470db9dd91a282ab1e5fa114f} 
+status\+\_\+t send\+\_\+cmd\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step_8c_a4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue\+Item}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00480}{480}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_aa903c1cb5703b8d75214d06d4b3573d4}\index{step.c@{step.c}!set\_direction\_pin@{set\_direction\_pin}}
 \index{set\_direction\_pin@{set\_direction\_pin}!step.c@{step.c}}
@@ -539,47 +574,27 @@ status\+\_\+t set\+\_\+direction\+\_\+pin (\begin{DoxyParamCaption}\item[{\doxym
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01176}{1176}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01169}{1169}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
-\Hypertarget{step_8c_aa9ae1d4d2005d2e3e2dc01792c68c83f}\index{step.c@{step.c}!start\_steps@{start\_steps}}
+\Hypertarget{step_8c_abb11af2b3ed6085f8610da85a9fd19db}\index{step.c@{step.c}!start\_steps@{start\_steps}}
 \index{start\_steps@{start\_steps}!step.c@{step.c}}
 \doxysubsubsection{\texorpdfstring{start\_steps()}{start\_steps()}}
-{\footnotesize\ttfamily \label{step_8c_aa9ae1d4d2005d2e3e2dc01792c68c83f} 
-status\+\_\+t start\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \label{step_8c_abb11af2b3ed6085f8610da85a9fd19db} 
+status\+\_\+t start\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01043}{1043}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01005}{1005}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
-\Hypertarget{step_8c_a1e9734fa87cb7c5209baef5add2d254d}\index{step.c@{step.c}!step\_pin\_mux\_ftm@{step\_pin\_mux\_ftm}}
-\index{step\_pin\_mux\_ftm@{step\_pin\_mux\_ftm}!step.c@{step.c}}
-\doxysubsubsection{\texorpdfstring{step\_pin\_mux\_ftm()}{step\_pin\_mux\_ftm()}}
-{\footnotesize\ttfamily \label{step_8c_a1e9734fa87cb7c5209baef5add2d254d} 
-status\+\_\+t step\+\_\+pin\+\_\+mux\+\_\+ftm (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00816}{816}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
-
-\Hypertarget{step_8c_ae1f6a35fc922b343703a0f3843cf757b}\index{step.c@{step.c}!step\_pin\_mux\_gpio@{step\_pin\_mux\_gpio}}
-\index{step\_pin\_mux\_gpio@{step\_pin\_mux\_gpio}!step.c@{step.c}}
-\doxysubsubsection{\texorpdfstring{step\_pin\_mux\_gpio()}{step\_pin\_mux\_gpio()}}
-{\footnotesize\ttfamily \label{step_8c_ae1f6a35fc922b343703a0f3843cf757b} 
-status\+\_\+t step\+\_\+pin\+\_\+mux\+\_\+gpio (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00799}{799}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
-
-\Hypertarget{step_8c_a61964b6e0df06d18ef1522c5eef09cfb}\index{step.c@{step.c}!stop\_steps@{stop\_steps}}
+\Hypertarget{step_8c_acbffc3efbb8ce9d72bc5f1977af371c3}\index{step.c@{step.c}!stop\_steps@{stop\_steps}}
 \index{stop\_steps@{stop\_steps}!step.c@{step.c}}
 \doxysubsubsection{\texorpdfstring{stop\_steps()}{stop\_steps()}}
-{\footnotesize\ttfamily \label{step_8c_a61964b6e0df06d18ef1522c5eef09cfb} 
-status\+\_\+t stop\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{do\+Deceleration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \label{step_8c_acbffc3efbb8ce9d72bc5f1977af371c3} 
+status\+\_\+t stop\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{do\+Deceleration}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l01133}{1133}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l01104}{1104}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_aec411a881b3aaf231cabef1dbbfcf89f}\index{step.c@{step.c}!update\_isr\_handle\_cache@{update\_isr\_handle\_cache}}
 \index{update\_isr\_handle\_cache@{update\_isr\_handle\_cache}!step.c@{step.c}}
@@ -589,13 +604,23 @@ void update\+\_\+isr\+\_\+handle\+\_\+cache (\begin{DoxyParamCaption}\item[{void
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00970}{970}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00932}{932}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 
 
 \label{doc-var-members}
 \Hypertarget{step_8c_doc-var-members}
 \doxysubsection{Variable Documentation}
+\Hypertarget{step_8c_ab322ae393437013d7632b8164ae96189}\index{step.c@{step.c}!cmdHandles@{cmdHandles}}
+\index{cmdHandles@{cmdHandles}!step.c@{step.c}}
+\doxysubsubsection{\texorpdfstring{cmdHandles}{cmdHandles}}
+{\footnotesize\ttfamily \label{step_8c_ab322ae393437013d7632b8164ae96189} 
+\doxymbox{\hyperlink{group__TaskHelpers__Module_gab336f36f41499b7390e6cc98cbaaef98}{THE\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} cmd\+Handles\+[\doxymbox{\hyperlink{group__STEP__Module_gacbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00199}{199}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+
 \Hypertarget{step_8c_aeb86091cfe0c5168e3dc293683af1f6b}\index{step.c@{step.c}!cmdQueue@{cmdQueue}}
 \index{cmdQueue@{cmdQueue}!step.c@{step.c}}
 \doxysubsubsection{\texorpdfstring{cmdQueue}{cmdQueue}}
@@ -604,17 +629,17 @@ Queue\+Handle\+\_\+t cmd\+Queue = NULL\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00199}{199}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00201}{201}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a785756bcb96f3c5e34dc48382bfcb804}\index{step.c@{step.c}!FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}}
 \index{FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}!step.c@{step.c}}
 \doxysubsubsection{\texorpdfstring{FTM3\_ISR\_handle\_cache}{FTM3\_ISR\_handle\_cache}}
 {\footnotesize\ttfamily \label{step_8c_a785756bcb96f3c5e34dc48382bfcb804} 
-\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache\+[8]\+}
+\doxymbox{\hyperlink{group__STEP__Module_gab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache\+[8]\+ = \{NULL\}}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00201}{201}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00203}{203}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a53e76081d475aef890072a6c88aa3c64}\index{step.c@{step.c}!handles@{handles}}
 \index{handles@{handles}!step.c@{step.c}}
@@ -634,7 +659,7 @@ GPIO\+\_\+\+Type\texorpdfstring{$\ast$}{*} isr\+Debug\+GPIO = GPIOA\hspace{0.3cm
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00204}{204}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00206}{206}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_a543c0fb112c6a654b9fe80a4059d91f8}\index{step.c@{step.c}!isrDebugPin@{isrDebugPin}}
 \index{isrDebugPin@{isrDebugPin}!step.c@{step.c}}
@@ -644,7 +669,7 @@ uint8\+\_\+t isr\+Debug\+Pin = 1\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00203}{203}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00205}{205}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 
 \Hypertarget{step_8c_ac7bcec15e1dc139e61d56887499ee228}\index{step.c@{step.c}!isrDebugPort@{isrDebugPort}}
 \index{isrDebugPort@{isrDebugPort}!step.c@{step.c}}
@@ -654,5 +679,5 @@ PORT\+\_\+\+Type\texorpdfstring{$\ast$}{*} isr\+Debug\+Port = PORTA\hspace{0.3cm
 
 
 
-Definition at line \doxymbox{\hyperlink{step_8c_source_l00205}{205}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
+Definition at line \doxymbox{\hyperlink{step_8c_source_l00207}{207}} of file \doxymbox{\hyperlink{step_8c_source}{step.\+c}}.
 

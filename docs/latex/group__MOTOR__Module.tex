@@ -2,7 +2,7 @@
 \hypertarget{group__MOTOR__Module}{}\label{group__MOTOR__Module}\index{Motor Control Module@{Motor Control Module}}
 
 
-High-\/level API for angle-\/based motor control and safety handling.  
+High-\/level API for angle-\/based motor control with emergency stop and freewheeling.  
 
 
 \doxysubsubsection*{Classes}
@@ -14,6 +14,11 @@ struct \doxymbox{\hyperlink{struct__MTR__MotorStepperConfig}{\+\_\+\+MTR\+\_\+\+
 \begin{DoxyCompactList}\small\item\em Step generation hardware configuration for one motor. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{struct__MTR__MotorConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Config}}
 \begin{DoxyCompactList}\small\item\em Configuration structure for initializing one motor instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__MOTOR__Module_ga8e9e66465a230b2f6f9534e94a0f1023}{MTR\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}~20
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,8 +28,18 @@ typedef struct \doxymbox{\hyperlink{struct__MTR__MotorStepperConfig}{\+\_\+\+MTR
 \begin{DoxyCompactList}\small\item\em Step generation hardware configuration for one motor. \end{DoxyCompactList}\item 
 typedef struct \doxymbox{\hyperlink{struct__MTR__MotorConfig}{\+\_\+\+MTR\+\_\+\+Motor\+Config}} \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Configuration structure for initializing one motor instance. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c}{\+\_\+\+MTR\+\_\+rounding\+Method}} \doxymbox{\hyperlink{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}{MTR\+\_\+rounding\+Method\+\_\+t}}
+\item 
 typedef struct \doxymbox{\hyperlink{struct__MTR__MotorHandleImpl}{\+\_\+\+MTR\+\_\+\+Motor\+Handle\+Impl}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Opaque handle type for motor control instances. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c}{\+\_\+\+MTR\+\_\+rounding\+Method}} \{ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488}{ROUND\+\_\+\+DOWN}}
+, \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086}{ROUND\+\_\+\+UP}}
+, \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\+\_\+\+NEAREST}}
+ \}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,21 +47,21 @@ void \doxymbox{\hyperlink{group__MOTOR__Module_ga494ccfe2699411bf54f0724b59a6f7b
 \begin{DoxyCompactList}\small\item\em Free\+RTOS task entry for the motor control module. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga78bd18ddbc517b9abafa26907d7024b7}{MTR\+\_\+init}} (void)
 \begin{DoxyCompactList}\small\item\em Initializes the motor module infrastructure. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gabf251484d458e43c16a4227c9543cd3b}{MTR\+\_\+init\+\_\+handle}} (const \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga7009cc4a4c8e9292f0d9b72c0ed96f59}{MTR\+\_\+init\+\_\+handle\+\_\+async}} (const \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a motor handle from configuration. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\+\_\+get\+\_\+motor\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
 \begin{DoxyCompactList}\small\item\em Retrieves a motor handle by its label. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gae68f48d296a50522530e07b59b297d50}{MTR\+\_\+move\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gae07d0c0a3f59090e8ae923b2bdcc903d}{MTR\+\_\+move\+\_\+angle\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Commands a relative angular movement. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga302f010ac6e1765a66e1cae99e9e9b90}{MTR\+\_\+move\+\_\+absolute\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaeb9d12348ad1da49d32b93f34b91c043}{MTR\+\_\+move\+\_\+absolute\+\_\+angle\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Commands movement to an absolute output angle. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga56fc79dd3588de5e1bf2c4f692729726}{MTR\+\_\+move\+\_\+revolutions}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double revolutions, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga3870ad87b3c15583d72b8e189f325c1a}{MTR\+\_\+move\+\_\+revolutions\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double revolutions, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Commands a relative movement in revolutions. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga8cbbba9920235dca255b9b4f87b76a5f}{MTR\+\_\+set\+\_\+velocity}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double velocity\+\_\+deg\+\_\+per\+\_\+sec, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga6a0e41d4cad8560a57e9cfa4df237fa0}{MTR\+\_\+set\+\_\+velocity\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double velocity\+\_\+deg\+\_\+per\+\_\+sec, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets motor target velocity. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga896850ef24808712726a0d9b8d8747c1}{MTR\+\_\+set\+\_\+acceleration}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double acceleration\+\_\+deg\+\_\+per\+\_\+sec2, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaf0f0ade5dd355458856a96f350015c29}{MTR\+\_\+set\+\_\+acceleration\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double acceleration\+\_\+deg\+\_\+per\+\_\+sec2, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets motor acceleration. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga7884f102317dd28048723fee04ec6975}{MTR\+\_\+stop}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, bool decelerate, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gac8522b73d36c87529869867a00ce156b}{MTR\+\_\+stop\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, bool decelerate, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Stops ongoing motion. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaa51d8115cce00df1b0ec80007caaa73b}{MTR\+\_\+emergency\+\_\+stop}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle)
 \begin{DoxyCompactList}\small\item\em Triggers emergency stop for the motor subsystem. \end{DoxyCompactList}\item 
@@ -54,26 +69,47 @@ status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga838ccbc335d1e72d3499bd
 \begin{DoxyCompactList}\small\item\em Clears the global emergency-\/stop latch. \end{DoxyCompactList}\item 
 uint8\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\+\_\+is\+\_\+emergency\+\_\+stop\+\_\+active}} (void)
 \begin{DoxyCompactList}\small\item\em Indicates whether emergency stop is currently active. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaec2fc35006e4449e96d11e663002d6a4}{MTR\+\_\+get\+\_\+current\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}angle, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga4cbcc1ea7daeb1461064b7d8099a7310}{MTR\+\_\+get\+\_\+current\+\_\+angle\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}angle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Reads the current mechanical output angle. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga9c788c1e551e9e5e14dfb9be9e95f484}{MTR\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga0b8329ac04e5afd02a6f20c28772f0ac}{MTR\+\_\+get\+\_\+movement\+\_\+state\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Gets the current low-\/level movement state. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga13335428d208db0545c7dafcbbf57b34}{MTR\+\_\+wait\+\_\+until\+\_\+stopped}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Blocks until the motor is stopped or timeout expires. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gaa69b5146e0656c2f170ff33a68c7d104}{MTR\+\_\+set\+\_\+home\+\_\+position}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga049b859f9d4ecbd0557d6e60f3a8ab74}{MTR\+\_\+set\+\_\+home\+\_\+position\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets current position as home reference. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga2cfb0296ca1aed7a4800e3dcf5f99407}{MTR\+\_\+synchronized\+\_\+move}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}, double \texorpdfstring{$\ast$}{*}angles, uint8\+\_\+t count, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gac063677845dc352c6e8e7dabdcef877a}{MTR\+\_\+synchronized\+\_\+move\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}, double \texorpdfstring{$\ast$}{*}angles, uint8\+\_\+t count, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Executes a synchronized multi-\/motor move. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga37093ece16c8b809c20dcecabaf97fe4}{MTR\+\_\+set\+\_\+run\+\_\+current}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga7e8ab79232046dc6cbca0c39f59a40e1}{MTR\+\_\+set\+\_\+run\+\_\+current\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Sets TMC2209 run current for a motor. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gab0e61e1f0e79b5357260bb7a9bf935a2}{MTR\+\_\+set\+\_\+hold\+\_\+current}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline)
-\begin{DoxyCompactList}\small\item\em Sets TMC2209 hold current for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga09694cd4ea1715b1860d671cbd53039c}{MTR\+\_\+set\+\_\+hold\+\_\+current\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double current\+\_\+a, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets TMC2209 hold current for a motor. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{group__MOTOR__Module_gad959cd5529058e79916b8c7fd325f0db}{MTR\+\_\+steps\+\_\+to\+\_\+angle}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, int32\+\_\+t steps)
+\begin{DoxyCompactList}\small\item\em Converts step count to mechanical angle. \end{DoxyCompactList}\item 
+int32\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_gad8b2b14707e03211ba090e859648005f}{MTR\+\_\+angle\+\_\+to\+\_\+steps}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double angle, \doxymbox{\hyperlink{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}{MTR\+\_\+rounding\+Method\+\_\+t}} method)
+\begin{DoxyCompactList}\small\item\em Converts angle to step count using specified rounding method. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga1e5a922e5179e5967f6dda1070a30f51}{MTR\+\_\+enable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enables freewheeling mode for a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Module_ga9bf924638a855afd88622e4f45a5ad26}{MTR\+\_\+disable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Disables freewheeling mode and restores normal operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-High-\/level API for angle-\/based motor control and safety handling. 
+High-\/level API for angle-\/based motor control with emergency stop and freewheeling. 
 
-The motor module combines stepper movement control and TMC2209 configuration into one abstraction per motor. All kinematic commands are expressed in mechanical units (degree, degree/\+s, degree/\+s\texorpdfstring{$^\wedge$}{\string^}2, revolutions) and translated internally to step-\/domain operations. 
+The motor module combines stepper movement control and TMC2209 configuration into one abstraction per motor. All kinematic commands are expressed in mechanical units (degree, degree/\+s, degree/\+s\texorpdfstring{$^\wedge$}{\string^}2, revolutions) and translated internally to step-\/domain operations. Supports synchronized control of multiple motors for SCARA kinematic chains, emergency stop interrupt with latch mechanism, and freewheeling mode for gravity-\/driven motion. 
+
+\label{doc-define-members}
+\Hypertarget{group__MOTOR__Module_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__MOTOR__Module_ga8e9e66465a230b2f6f9534e94a0f1023}\index{Motor Control Module@{Motor Control Module}!MTR\_MAX\_CMD\_HANDLE\_COUNT@{MTR\_MAX\_CMD\_HANDLE\_COUNT}}
+\index{MTR\_MAX\_CMD\_HANDLE\_COUNT@{MTR\_MAX\_CMD\_HANDLE\_COUNT}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_MAX\_CMD\_HANDLE\_COUNT}{MTR\_MAX\_CMD\_HANDLE\_COUNT}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga8e9e66465a230b2f6f9534e94a0f1023} 
+\+\#define MTR\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT~20}
+
+
+
+Definition at line \doxymbox{\hyperlink{motor_8h_source_l00046}{46}} of file \doxymbox{\hyperlink{motor_8h_source}{motor.\+h}}.
+
+
 
 \label{doc-typedef-members}
 \Hypertarget{group__MOTOR__Module_doc-typedef-members}
@@ -100,7 +136,7 @@ Opaque handle type for motor control instances.
 
 
 
-Definition at line \doxymbox{\hyperlink{motor_8h_source_l00097}{97}} of file \doxymbox{\hyperlink{motor_8h_source}{motor.\+h}}.
+Definition at line \doxymbox{\hyperlink{motor_8h_source_l00109}{109}} of file \doxymbox{\hyperlink{motor_8h_source}{motor.\+h}}.
 
 \Hypertarget{group__MOTOR__Module_ga8a4765221bb1f9d6957ab996f3058368}\index{Motor Control Module@{Motor Control Module}!MTR\_MotorStepperConfig\_t@{MTR\_MotorStepperConfig\_t}}
 \index{MTR\_MotorStepperConfig\_t@{MTR\_MotorStepperConfig\_t}!Motor Control Module@{Motor Control Module}}
@@ -122,11 +158,78 @@ typedef struct \doxymbox{\hyperlink{struct__MTR__MotorTmcConfig}{\+\_\+\+MTR\+\_
 
 TMC2209-\/related configuration values for one motor. 
 
+\Hypertarget{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}\index{Motor Control Module@{Motor Control Module}!MTR\_roundingMethod\_t@{MTR\_roundingMethod\_t}}
+\index{MTR\_roundingMethod\_t@{MTR\_roundingMethod\_t}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_roundingMethod\_t}{MTR\_roundingMethod\_t}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea} 
+typedef enum \doxymbox{\hyperlink{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c}{\+\_\+\+MTR\+\_\+rounding\+Method}} \doxymbox{\hyperlink{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}{MTR\+\_\+rounding\+Method\+\_\+t}}}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{group__MOTOR__Module_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c}\index{Motor Control Module@{Motor Control Module}!\_MTR\_roundingMethod@{\_MTR\_roundingMethod}}
+\index{\_MTR\_roundingMethod@{\_MTR\_roundingMethod}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{\_MTR\_roundingMethod}{\_MTR\_roundingMethod}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c} 
+enum \doxymbox{\hyperlink{group__MOTOR__Module_ga7bf26db923eb70b2a9ef666ee947cd4c}{\+\_\+\+MTR\+\_\+rounding\+Method}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROUND\_DOWN@{ROUND\_DOWN}!Motor Control Module@{Motor Control Module}}
+\index{Motor Control Module@{Motor Control Module}!ROUND\_DOWN@{ROUND\_DOWN}}
+}\Hypertarget{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488}\label{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488} 
+ROUND\+\_\+\+DOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROUND\_UP@{ROUND\_UP}!Motor Control Module@{Motor Control Module}}
+\index{Motor Control Module@{Motor Control Module}!ROUND\_UP@{ROUND\_UP}}
+}\Hypertarget{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086}\label{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086} 
+ROUND\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROUND\_NEAREST@{ROUND\_NEAREST}!Motor Control Module@{Motor Control Module}}
+\index{Motor Control Module@{Motor Control Module}!ROUND\_NEAREST@{ROUND\_NEAREST}}
+}\Hypertarget{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}\label{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff} 
+ROUND\+\_\+\+NEAREST&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{motor_8h_source_l00099}{99}} of file \doxymbox{\hyperlink{motor_8h_source}{motor.\+h}}.
+
 
 
 \label{doc-func-members}
 \Hypertarget{group__MOTOR__Module_doc-func-members}
 \doxysubsection{Function Documentation}
+\Hypertarget{group__MOTOR__Module_gad8b2b14707e03211ba090e859648005f}\index{Motor Control Module@{Motor Control Module}!MTR\_angle\_to\_steps@{MTR\_angle\_to\_steps}}
+\index{MTR\_angle\_to\_steps@{MTR\_angle\_to\_steps}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_angle\_to\_steps()}{MTR\_angle\_to\_steps()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gad8b2b14707e03211ba090e859648005f} 
+int32\+\_\+t MTR\+\_\+angle\+\_\+to\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{angle}{, }\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}{MTR\+\_\+rounding\+Method\+\_\+t}}}]{method}{}\end{DoxyParamCaption})}
+
+
+
+Converts angle to step count using specified rounding method. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Target motor handle (used to access configuration). \\
+\hline
+\doxymbox{\texttt{in}}  & {\em angle} & Angle in degree to convert. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em method} & Rounding method for fractional steps (ROUND\+\_\+\+DOWN, ROUND\+\_\+\+UP, ROUND\+\_\+\+NEAREST).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Equivalent step count after applying the rounding method. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00590}{590}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+
 \Hypertarget{group__MOTOR__Module_ga838ccbc335d1e72d3499bd5c11de244b}\index{Motor Control Module@{Motor Control Module}!MTR\_clear\_emergency\_stop@{MTR\_clear\_emergency\_stop}}
 \index{MTR\_clear\_emergency\_stop@{MTR\_clear\_emergency\_stop}!Motor Control Module@{Motor Control Module}}
 \doxysubsubsection{\texorpdfstring{MTR\_clear\_emergency\_stop()}{MTR\_clear\_emergency\_stop()}}
@@ -142,7 +245,35 @@ k\+Status\+\_\+\+Success if emergency stop was cleared. k\+Status\+\_\+\+Fail if
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00522}{522}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00440}{440}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+
+\Hypertarget{group__MOTOR__Module_ga9bf924638a855afd88622e4f45a5ad26}\index{Motor Control Module@{Motor Control Module}!MTR\_disable\_freewheeling\_async@{MTR\_disable\_freewheeling\_async}}
+\index{MTR\_disable\_freewheeling\_async@{MTR\_disable\_freewheeling\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_disable\_freewheeling\_async()}{MTR\_disable\_freewheeling\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga9bf924638a855afd88622e4f45a5ad26} 
+status\+\_\+t MTR\+\_\+disable\+\_\+freewheeling\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Disables freewheeling mode and restores normal operation. 
+
+Restores the motor\textquotesingle{}s previous hold current and automatically homes the motor to establish position reference after freewheeling.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Target motor handle. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if freewheeling was disabled and motor was homed successfully. k\+Status\+\_\+\+Fail on invalid parameters, queue errors, or timeout. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00574}{574}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
 \Hypertarget{group__MOTOR__Module_gaa51d8115cce00df1b0ec80007caaa73b}\index{Motor Control Module@{Motor Control Module}!MTR\_emergency\_stop@{MTR\_emergency\_stop}}
 \index{MTR\_emergency\_stop@{MTR\_emergency\_stop}!Motor Control Module@{Motor Control Module}}
@@ -164,13 +295,41 @@ k\+Status\+\_\+\+Success if emergency stop was triggered. k\+Status\+\_\+\+Fail 
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00505}{505}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00422}{422}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_gaec2fc35006e4449e96d11e663002d6a4}\index{Motor Control Module@{Motor Control Module}!MTR\_get\_current\_angle@{MTR\_get\_current\_angle}}
-\index{MTR\_get\_current\_angle@{MTR\_get\_current\_angle}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_get\_current\_angle()}{MTR\_get\_current\_angle()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_gaec2fc35006e4449e96d11e663002d6a4} 
-status\+\_\+t MTR\+\_\+get\+\_\+current\+\_\+angle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga1e5a922e5179e5967f6dda1070a30f51}\index{Motor Control Module@{Motor Control Module}!MTR\_enable\_freewheeling\_async@{MTR\_enable\_freewheeling\_async}}
+\index{MTR\_enable\_freewheeling\_async@{MTR\_enable\_freewheeling\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_enable\_freewheeling\_async()}{MTR\_enable\_freewheeling\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga1e5a922e5179e5967f6dda1070a30f51} 
+status\+\_\+t MTR\+\_\+enable\+\_\+freewheeling\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Enables freewheeling mode for a motor. 
+
+In freewheeling mode, the motor coils are deenergized (hold current set to 0), allowing the motor shaft to rotate freely. Previous hold current is saved for restoration. After exiting freewheeling mode, the motor must be homed to establish position reference.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Target motor handle. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if freewheeling was enabled successfully. k\+Status\+\_\+\+Fail on invalid parameters, queue errors, or timeout. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00558}{558}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+
+\Hypertarget{group__MOTOR__Module_ga4cbcc1ea7daeb1461064b7d8099a7310}\index{Motor Control Module@{Motor Control Module}!MTR\_get\_current\_angle\_async@{MTR\_get\_current\_angle\_async}}
+\index{MTR\_get\_current\_angle\_async@{MTR\_get\_current\_angle\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_get\_current\_angle\_async()}{MTR\_get\_current\_angle\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga4cbcc1ea7daeb1461064b7d8099a7310} 
+status\+\_\+t MTR\+\_\+get\+\_\+current\+\_\+angle\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -182,7 +341,9 @@ Reads the current mechanical output angle.
 \hline
 \doxymbox{\texttt{out}}  & {\em angle} & Pointer receiving the current angle in degree. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for query completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for query completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -190,7 +351,7 @@ k\+Status\+\_\+\+Success if angle was read successfully. k\+Status\+\_\+\+Fail o
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00534}{534}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00452}{452}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
 \Hypertarget{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}\index{Motor Control Module@{Motor Control Module}!MTR\_get\_motor\_by\_label@{MTR\_get\_motor\_by\_label}}
 \index{MTR\_get\_motor\_by\_label@{MTR\_get\_motor\_by\_label}!Motor Control Module@{Motor Control Module}}
@@ -211,13 +372,13 @@ Retrieves a motor handle by its label.
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00276}{276}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00297}{297}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga9c788c1e551e9e5e14dfb9be9e95f484}\index{Motor Control Module@{Motor Control Module}!MTR\_get\_movement\_state@{MTR\_get\_movement\_state}}
-\index{MTR\_get\_movement\_state@{MTR\_get\_movement\_state}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_get\_movement\_state()}{MTR\_get\_movement\_state()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga9c788c1e551e9e5e14dfb9be9e95f484} 
-status\+\_\+t MTR\+\_\+get\+\_\+movement\+\_\+state (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{state}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga0b8329ac04e5afd02a6f20c28772f0ac}\index{Motor Control Module@{Motor Control Module}!MTR\_get\_movement\_state\_async@{MTR\_get\_movement\_state\_async}}
+\index{MTR\_get\_movement\_state\_async@{MTR\_get\_movement\_state\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_get\_movement\_state\_async()}{MTR\_get\_movement\_state\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga0b8329ac04e5afd02a6f20c28772f0ac} 
+status\+\_\+t MTR\+\_\+get\+\_\+movement\+\_\+state\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{state}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -229,7 +390,7 @@ Gets the current low-\/level movement state.
 \hline
 \doxymbox{\texttt{out}}  & {\em state} & Pointer receiving current movement state. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for query completion.\\
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -237,7 +398,7 @@ k\+Status\+\_\+\+Success if state was read successfully. k\+Status\+\_\+\+Fail o
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00568}{568}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00469}{469}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
 \Hypertarget{group__MOTOR__Module_ga78bd18ddbc517b9abafa26907d7024b7}\index{Motor Control Module@{Motor Control Module}!MTR\_init@{MTR\_init}}
 \index{MTR\_init@{MTR\_init}!Motor Control Module@{Motor Control Module}}
@@ -256,13 +417,13 @@ k\+Status\+\_\+\+Success if initialization succeeded. k\+Status\+\_\+\+Fail if i
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00228}{228}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00259}{259}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_gabf251484d458e43c16a4227c9543cd3b}\index{Motor Control Module@{Motor Control Module}!MTR\_init\_handle@{MTR\_init\_handle}}
-\index{MTR\_init\_handle@{MTR\_init\_handle}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_init\_handle()}{MTR\_init\_handle()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_gabf251484d458e43c16a4227c9543cd3b} 
-status\+\_\+t MTR\+\_\+init\+\_\+handle (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}}}]{config}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga7009cc4a4c8e9292f0d9b72c0ed96f59}\index{Motor Control Module@{Motor Control Module}!MTR\_init\_handle\_async@{MTR\_init\_handle\_async}}
+\index{MTR\_init\_handle\_async@{MTR\_init\_handle\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_init\_handle\_async()}{MTR\_init\_handle\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga7009cc4a4c8e9292f0d9b72c0ed96f59} 
+status\+\_\+t MTR\+\_\+init\+\_\+handle\+\_\+async (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\+\_\+\+Motor\+Config\+\_\+t}}}]{config}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -272,7 +433,9 @@ Creates and initializes a motor handle from configuration.
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em config} & Complete motor configuration. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -280,7 +443,7 @@ k\+Status\+\_\+\+Success if the handle was created successfully. k\+Status\+\_\+
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00247}{247}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00280}{280}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
 \Hypertarget{group__MOTOR__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}\index{Motor Control Module@{Motor Control Module}!MTR\_is\_emergency\_stop\_active@{MTR\_is\_emergency\_stop\_active}}
 \index{MTR\_is\_emergency\_stop\_active@{MTR\_is\_emergency\_stop\_active}!Motor Control Module@{Motor Control Module}}
@@ -297,13 +460,13 @@ Non-\/zero if emergency stop is active, otherwise 0.
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00529}{529}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00447}{447}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga302f010ac6e1765a66e1cae99e9e9b90}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_absolute\_angle@{MTR\_move\_absolute\_angle}}
-\index{MTR\_move\_absolute\_angle@{MTR\_move\_absolute\_angle}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_move\_absolute\_angle()}{MTR\_move\_absolute\_angle()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga302f010ac6e1765a66e1cae99e9e9b90} 
-status\+\_\+t MTR\+\_\+move\+\_\+absolute\+\_\+angle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_gaeb9d12348ad1da49d32b93f34b91c043}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_absolute\_angle\_async@{MTR\_move\_absolute\_angle\_async}}
+\index{MTR\_move\_absolute\_angle\_async@{MTR\_move\_absolute\_angle\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_move\_absolute\_angle\_async()}{MTR\_move\_absolute\_angle\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gaeb9d12348ad1da49d32b93f34b91c043} 
+status\+\_\+t MTR\+\_\+move\+\_\+absolute\+\_\+angle\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -315,7 +478,9 @@ Commands movement to an absolute output angle.
 \hline
 \doxymbox{\texttt{in}}  & {\em angle} & Absolute destination angle in degree. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -323,13 +488,13 @@ k\+Status\+\_\+\+Success if the command is accepted. k\+Status\+\_\+\+Fail on in
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00333}{333}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00337}{337}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_gae68f48d296a50522530e07b59b297d50}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_angle@{MTR\_move\_angle}}
-\index{MTR\_move\_angle@{MTR\_move\_angle}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_move\_angle()}{MTR\_move\_angle()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_gae68f48d296a50522530e07b59b297d50} 
-status\+\_\+t MTR\+\_\+move\+\_\+angle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_gae07d0c0a3f59090e8ae923b2bdcc903d}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_angle\_async@{MTR\_move\_angle\_async}}
+\index{MTR\_move\_angle\_async@{MTR\_move\_angle\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_move\_angle\_async()}{MTR\_move\_angle\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gae07d0c0a3f59090e8ae923b2bdcc903d} 
+status\+\_\+t MTR\+\_\+move\+\_\+angle\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{angle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -341,7 +506,9 @@ Commands a relative angular movement.
 \hline
 \doxymbox{\texttt{in}}  & {\em angle} & Relative angle in degree (signed). \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -349,13 +516,13 @@ k\+Status\+\_\+\+Success if the command is accepted. k\+Status\+\_\+\+Fail on in
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00299}{299}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00320}{320}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga56fc79dd3588de5e1bf2c4f692729726}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_revolutions@{MTR\_move\_revolutions}}
-\index{MTR\_move\_revolutions@{MTR\_move\_revolutions}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_move\_revolutions()}{MTR\_move\_revolutions()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga56fc79dd3588de5e1bf2c4f692729726} 
-status\+\_\+t MTR\+\_\+move\+\_\+revolutions (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{revolutions}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga3870ad87b3c15583d72b8e189f325c1a}\index{Motor Control Module@{Motor Control Module}!MTR\_move\_revolutions\_async@{MTR\_move\_revolutions\_async}}
+\index{MTR\_move\_revolutions\_async@{MTR\_move\_revolutions\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_move\_revolutions\_async()}{MTR\_move\_revolutions\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga3870ad87b3c15583d72b8e189f325c1a} 
+status\+\_\+t MTR\+\_\+move\+\_\+revolutions\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{revolutions}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -367,7 +534,9 @@ Commands a relative movement in revolutions.
 \hline
 \doxymbox{\texttt{in}}  & {\em revolutions} & Relative number of revolutions (signed). \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -375,13 +544,13 @@ k\+Status\+\_\+\+Success if the command is accepted. k\+Status\+\_\+\+Fail on in
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00367}{367}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00354}{354}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga896850ef24808712726a0d9b8d8747c1}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_acceleration@{MTR\_set\_acceleration}}
-\index{MTR\_set\_acceleration@{MTR\_set\_acceleration}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_set\_acceleration()}{MTR\_set\_acceleration()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga896850ef24808712726a0d9b8d8747c1} 
-status\+\_\+t MTR\+\_\+set\+\_\+acceleration (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{acceleration\+\_\+deg\+\_\+per\+\_\+sec2}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_gaf0f0ade5dd355458856a96f350015c29}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_acceleration\_async@{MTR\_set\_acceleration\_async}}
+\index{MTR\_set\_acceleration\_async@{MTR\_set\_acceleration\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_set\_acceleration\_async()}{MTR\_set\_acceleration\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gaf0f0ade5dd355458856a96f350015c29} 
+status\+\_\+t MTR\+\_\+set\+\_\+acceleration\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{acceleration\+\_\+deg\+\_\+per\+\_\+sec2}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -393,7 +562,9 @@ Sets motor acceleration.
 \hline
 \doxymbox{\texttt{in}}  & {\em acceleration\+\_\+deg\+\_\+per\+\_\+sec2} & Target acceleration in degree/\+s\texorpdfstring{$^\wedge$}{\string^}2. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -401,13 +572,13 @@ k\+Status\+\_\+\+Success if acceleration was applied. k\+Status\+\_\+\+Fail on i
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00436}{436}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00388}{388}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_gab0e61e1f0e79b5357260bb7a9bf935a2}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_hold\_current@{MTR\_set\_hold\_current}}
-\index{MTR\_set\_hold\_current@{MTR\_set\_hold\_current}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_set\_hold\_current()}{MTR\_set\_hold\_current()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_gab0e61e1f0e79b5357260bb7a9bf935a2} 
-status\+\_\+t MTR\+\_\+set\+\_\+hold\+\_\+current (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{current\+\_\+a}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga09694cd4ea1715b1860d671cbd53039c}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_hold\_current\_async@{MTR\_set\_hold\_current\_async}}
+\index{MTR\_set\_hold\_current\_async@{MTR\_set\_hold\_current\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_set\_hold\_current\_async()}{MTR\_set\_hold\_current\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga09694cd4ea1715b1860d671cbd53039c} 
+status\+\_\+t MTR\+\_\+set\+\_\+hold\+\_\+current\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{current\+\_\+a}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -419,7 +590,9 @@ Sets TMC2209 hold current for a motor.
 \hline
 \doxymbox{\texttt{in}}  & {\em current\+\_\+a} & Hold current in ampere. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -427,13 +600,13 @@ k\+Status\+\_\+\+Success if current was updated successfully. k\+Status\+\_\+\+F
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00740}{740}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00541}{541}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_gaa69b5146e0656c2f170ff33a68c7d104}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_home\_position@{MTR\_set\_home\_position}}
-\index{MTR\_set\_home\_position@{MTR\_set\_home\_position}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_set\_home\_position()}{MTR\_set\_home\_position()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_gaa69b5146e0656c2f170ff33a68c7d104} 
-status\+\_\+t MTR\+\_\+set\+\_\+home\+\_\+position (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga049b859f9d4ecbd0557d6e60f3a8ab74}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_home\_position\_async@{MTR\_set\_home\_position\_async}}
+\index{MTR\_set\_home\_position\_async@{MTR\_set\_home\_position\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_set\_home\_position\_async()}{MTR\_set\_home\_position\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga049b859f9d4ecbd0557d6e60f3a8ab74} 
+status\+\_\+t MTR\+\_\+set\+\_\+home\+\_\+position\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -443,7 +616,7 @@ Sets current position as home reference.
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{in}}  & {\em handle} & Target motor handle. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -451,13 +624,13 @@ k\+Status\+\_\+\+Success if home position is set. k\+Status\+\_\+\+Fail on inval
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00636}{636}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00488}{488}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga37093ece16c8b809c20dcecabaf97fe4}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_run\_current@{MTR\_set\_run\_current}}
-\index{MTR\_set\_run\_current@{MTR\_set\_run\_current}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_set\_run\_current()}{MTR\_set\_run\_current()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga37093ece16c8b809c20dcecabaf97fe4} 
-status\+\_\+t MTR\+\_\+set\+\_\+run\+\_\+current (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{current\+\_\+a}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga7e8ab79232046dc6cbca0c39f59a40e1}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_run\_current\_async@{MTR\_set\_run\_current\_async}}
+\index{MTR\_set\_run\_current\_async@{MTR\_set\_run\_current\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_set\_run\_current\_async()}{MTR\_set\_run\_current\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga7e8ab79232046dc6cbca0c39f59a40e1} 
+status\+\_\+t MTR\+\_\+set\+\_\+run\+\_\+current\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{current\+\_\+a}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -469,7 +642,9 @@ Sets TMC2209 run current for a motor.
 \hline
 \doxymbox{\texttt{in}}  & {\em current\+\_\+a} & Run current in ampere. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -477,13 +652,13 @@ k\+Status\+\_\+\+Success if current was updated successfully. k\+Status\+\_\+\+F
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00706}{706}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00524}{524}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga8cbbba9920235dca255b9b4f87b76a5f}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_velocity@{MTR\_set\_velocity}}
-\index{MTR\_set\_velocity@{MTR\_set\_velocity}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_set\_velocity()}{MTR\_set\_velocity()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga8cbbba9920235dca255b9b4f87b76a5f} 
-status\+\_\+t MTR\+\_\+set\+\_\+velocity (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{velocity\+\_\+deg\+\_\+per\+\_\+sec}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_ga6a0e41d4cad8560a57e9cfa4df237fa0}\index{Motor Control Module@{Motor Control Module}!MTR\_set\_velocity\_async@{MTR\_set\_velocity\_async}}
+\index{MTR\_set\_velocity\_async@{MTR\_set\_velocity\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_set\_velocity\_async()}{MTR\_set\_velocity\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_ga6a0e41d4cad8560a57e9cfa4df237fa0} 
+status\+\_\+t MTR\+\_\+set\+\_\+velocity\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{velocity\+\_\+deg\+\_\+per\+\_\+sec}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -495,7 +670,9 @@ Sets motor target velocity.
 \hline
 \doxymbox{\texttt{in}}  & {\em velocity\+\_\+deg\+\_\+per\+\_\+sec} & Target velocity in degree/\+s. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -503,13 +680,37 @@ k\+Status\+\_\+\+Success if velocity was applied. k\+Status\+\_\+\+Fail on inval
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00401}{401}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00371}{371}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga7884f102317dd28048723fee04ec6975}\index{Motor Control Module@{Motor Control Module}!MTR\_stop@{MTR\_stop}}
-\index{MTR\_stop@{MTR\_stop}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_stop()}{MTR\_stop()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga7884f102317dd28048723fee04ec6975} 
-status\+\_\+t MTR\+\_\+stop (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{bool}]{decelerate}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_gad959cd5529058e79916b8c7fd325f0db}\index{Motor Control Module@{Motor Control Module}!MTR\_steps\_to\_angle@{MTR\_steps\_to\_angle}}
+\index{MTR\_steps\_to\_angle@{MTR\_steps\_to\_angle}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_steps\_to\_angle()}{MTR\_steps\_to\_angle()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gad959cd5529058e79916b8c7fd325f0db} 
+double MTR\+\_\+steps\+\_\+to\+\_\+angle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{int32\+\_\+t}]{steps}{}\end{DoxyParamCaption})}
+
+
+
+Converts step count to mechanical angle. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Target motor handle (used to access configuration). \\
+\hline
+\doxymbox{\texttt{in}}  & {\em steps} & Step count to convert.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Equivalent angle in degree. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00595}{595}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+
+\Hypertarget{group__MOTOR__Module_gac8522b73d36c87529869867a00ce156b}\index{Motor Control Module@{Motor Control Module}!MTR\_stop\_async@{MTR\_stop\_async}}
+\index{MTR\_stop\_async@{MTR\_stop\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_stop\_async()}{MTR\_stop\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gac8522b73d36c87529869867a00ce156b} 
+status\+\_\+t MTR\+\_\+stop\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{bool}]{decelerate}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -521,7 +722,9 @@ Stops ongoing motion.
 \hline
 \doxymbox{\texttt{in}}  & {\em decelerate} & If true, perform controlled deceleration; otherwise stop immediately. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -529,13 +732,13 @@ k\+Status\+\_\+\+Success if stop command was accepted. k\+Status\+\_\+\+Fail on 
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00471}{471}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00405}{405}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
-\Hypertarget{group__MOTOR__Module_ga2cfb0296ca1aed7a4800e3dcf5f99407}\index{Motor Control Module@{Motor Control Module}!MTR\_synchronized\_move@{MTR\_synchronized\_move}}
-\index{MTR\_synchronized\_move@{MTR\_synchronized\_move}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_synchronized\_move()}{MTR\_synchronized\_move()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga2cfb0296ca1aed7a4800e3dcf5f99407} 
-status\+\_\+t MTR\+\_\+synchronized\+\_\+move (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handles}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{angles}{, }\item[{uint8\+\_\+t}]{count}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
+\Hypertarget{group__MOTOR__Module_gac063677845dc352c6e8e7dabdcef877a}\index{Motor Control Module@{Motor Control Module}!MTR\_synchronized\_move\_async@{MTR\_synchronized\_move\_async}}
+\index{MTR\_synchronized\_move\_async@{MTR\_synchronized\_move\_async}!Motor Control Module@{Motor Control Module}}
+\doxysubsubsection{\texorpdfstring{MTR\_synchronized\_move\_async()}{MTR\_synchronized\_move\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Module_gac063677845dc352c6e8e7dabdcef877a} 
+status\+\_\+t MTR\+\_\+synchronized\+\_\+move\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handles}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{angles}{, }\item[{uint8\+\_\+t}]{count}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
@@ -549,7 +752,9 @@ Executes a synchronized multi-\/motor move.
 \hline
 \doxymbox{\texttt{in}}  & {\em count} & Number of elements in handles/\+angles. \\
 \hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for synchronization trigger.\\
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for synchronization trigger. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Command handle for waiting/\+checking command completion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -557,7 +762,7 @@ k\+Status\+\_\+\+Success if all moves are prepared and triggered successfully. k
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00669}{669}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00505}{505}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 
 \Hypertarget{group__MOTOR__Module_ga494ccfe2699411bf54f0724b59a6f7bc}\index{Motor Control Module@{Motor Control Module}!MTR\_task@{MTR\_task}}
 \index{MTR\_task@{MTR\_task}!Motor Control Module@{Motor Control Module}}
@@ -578,29 +783,5 @@ This task processes queued motor commands and coordinates calls to the stepper a
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00217}{217}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
-
-\Hypertarget{group__MOTOR__Module_ga13335428d208db0545c7dafcbbf57b34}\index{Motor Control Module@{Motor Control Module}!MTR\_wait\_until\_stopped@{MTR\_wait\_until\_stopped}}
-\index{MTR\_wait\_until\_stopped@{MTR\_wait\_until\_stopped}!Motor Control Module@{Motor Control Module}}
-\doxysubsubsection{\texorpdfstring{MTR\_wait\_until\_stopped()}{MTR\_wait\_until\_stopped()}}
-{\footnotesize\ttfamily \label{group__MOTOR__Module_ga13335428d208db0545c7dafcbbf57b34} 
-status\+\_\+t MTR\+\_\+wait\+\_\+until\+\_\+stopped (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{handle}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})}
-
-
-
-Blocks until the motor is stopped or timeout expires. 
-
-
-\begin{DoxyParams}[1]{Parameters}
-\doxymbox{\texttt{in}}  & {\em handle} & Target motor handle. \\
-\hline
-\doxymbox{\texttt{in}}  & {\em deadline} & Maximum wait time.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-k\+Status\+\_\+\+Success if the motor reached a stopped/\+idle state. k\+Status\+\_\+\+Fail if timeout occurs or an error is detected. 
-\end{DoxyReturn}
-
-
-Definition at line \doxymbox{\hyperlink{motor_8c_source_l00603}{603}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor_8c_source_l00248}{248}} of file \doxymbox{\hyperlink{motor_8c_source}{motor.\+c}}.
 

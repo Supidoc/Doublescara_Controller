@@ -10,7 +10,7 @@ Functions for logging messages to SD card with multiple log levels.
 \item 
 \+\#define \doxymbox{\hyperlink{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}{LOG\+\_\+\+MAX\+\_\+\+MESSAGE\+\_\+\+SIZE}}~100
 \begin{DoxyCompactList}\small\item\em Maximum size of a log message (in characters). \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{group__LOG__Module_ga9949d211fdaa2513bcc40b46a2152a19}{LOG\+\_\+\+QUEUE\+\_\+\+SIZE}}~10
+\+\#define \doxymbox{\hyperlink{group__LOG__Module_ga9949d211fdaa2513bcc40b46a2152a19}{LOG\+\_\+\+QUEUE\+\_\+\+SIZE}}~50
 \begin{DoxyCompactList}\small\item\em Size of the log message queue. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\+\_\+\+DEBUG}}(message)
 \begin{DoxyCompactList}\small\item\em Macros for sending log messages at different log levels. \end{DoxyCompactList}\item 
@@ -57,7 +57,9 @@ status\+\_\+t \doxymbox{\hyperlink{group__LOG__Module_gad8fb5a8d2383abe85c0696d8
 void \doxymbox{\hyperlink{group__LOG__Module_gaf4aa1ff2f9562bf7fce62e14f5c8df9b}{LOG\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
 \begin{DoxyCompactList}\small\item\em Task function for processing log messages. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}{LOG\+\_\+send\+\_\+log\+\_\+message}} (\doxymbox{\hyperlink{group__LOG__Module_ga6d319de993cc8d4a0b7da064fc94779d}{LOG\+\_\+\+Level\+\_\+t}} level, char \texorpdfstring{$\ast$}{*}message, uint8\+\_\+t silent)
-\begin{DoxyCompactList}\small\item\em Sends a log message to the log queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sends a log message to the log queue. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__LOG__Module_ga2ddf5f77c872712f2497e3e4b0e19ea4}{LOG\+\_\+wait\+\_\+for\+\_\+queue\+\_\+empty}} (Tick\+Type\+\_\+t x\+Ticks\+To\+Wait)
+\begin{DoxyCompactList}\small\item\em Waits for the log queue to become empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -85,7 +87,7 @@ Macros for sending log messages at different log levels.
 
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga0275e300e7d12c35899eaa10ff77b61d}\index{Logging Module@{Logging Module}!LOG\_DEBUG\_SILENT@{LOG\_DEBUG\_SILENT}}
 \index{LOG\_DEBUG\_SILENT@{LOG\_DEBUG\_SILENT}!Logging Module@{Logging Module}}
@@ -104,7 +106,7 @@ Macros for sending log messages at different log levels without outputting to co
 
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00059}{59}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}\index{Logging Module@{Logging Module}!LOG\_ERROR@{LOG\_ERROR}}
 \index{LOG\_ERROR@{LOG\_ERROR}!Logging Module@{Logging Module}}
@@ -119,7 +121,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00057}{57}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga814cd09e2089e42c7066b325ff88dd28}\index{Logging Module@{Logging Module}!LOG\_ERROR\_SILENT@{LOG\_ERROR\_SILENT}}
 \index{LOG\_ERROR\_SILENT@{LOG\_ERROR\_SILENT}!Logging Module@{Logging Module}}
@@ -134,7 +136,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00051}{51}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00060}{60}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_gaa8eba94ec07702291a93751828d83658}\index{Logging Module@{Logging Module}!LOG\_FATAL@{LOG\_FATAL}}
 \index{LOG\_FATAL@{LOG\_FATAL}!Logging Module@{Logging Module}}
@@ -149,7 +151,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00060}{60}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00054}{54}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_gaedb42d15e96352dfe043d76c2a46c772}\index{Logging Module@{Logging Module}!LOG\_FATAL\_SILENT@{LOG\_FATAL\_SILENT}}
 \index{LOG\_FATAL\_SILENT@{LOG\_FATAL\_SILENT}!Logging Module@{Logging Module}}
@@ -164,7 +166,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00052}{52}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00061}{61}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00063}{63}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}\index{Logging Module@{Logging Module}!LOG\_INFO@{LOG\_INFO}}
 \index{LOG\_INFO@{LOG\_INFO}!Logging Module@{Logging Module}}
@@ -179,7 +181,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00061}{61}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_gaa55dad394419490fbe636529eae7d440}\index{Logging Module@{Logging Module}!LOG\_INFO\_SILENT@{LOG\_INFO\_SILENT}}
 \index{LOG\_INFO\_SILENT@{LOG\_INFO\_SILENT}!Logging Module@{Logging Module}}
@@ -194,7 +196,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00049}{49}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00058}{58}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00060}{60}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}\index{Logging Module@{Logging Module}!LOG\_MAX\_MESSAGE\_SIZE@{LOG\_MAX\_MESSAGE\_SIZE}}
 \index{LOG\_MAX\_MESSAGE\_SIZE@{LOG\_MAX\_MESSAGE\_SIZE}!Logging Module@{Logging Module}}
@@ -208,13 +210,13 @@ Maximum size of a log message (in characters).
 
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga9949d211fdaa2513bcc40b46a2152a19}\index{Logging Module@{Logging Module}!LOG\_QUEUE\_SIZE@{LOG\_QUEUE\_SIZE}}
 \index{LOG\_QUEUE\_SIZE@{LOG\_QUEUE\_SIZE}!Logging Module@{Logging Module}}
 \doxysubsubsection{\texorpdfstring{LOG\_QUEUE\_SIZE}{LOG\_QUEUE\_SIZE}}
 {\footnotesize\ttfamily \label{group__LOG__Module_ga9949d211fdaa2513bcc40b46a2152a19} 
-\+\#define LOG\+\_\+\+QUEUE\+\_\+\+SIZE~10}
+\+\#define LOG\+\_\+\+QUEUE\+\_\+\+SIZE~50}
 
 
 
@@ -222,7 +224,7 @@ Size of the log message queue.
 
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00043}{43}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00045}{45}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_gabfe0c293b360dc335041f1bc67b00647}\index{Logging Module@{Logging Module}!LOG\_WARN@{LOG\_WARN}}
 \index{LOG\_WARN@{LOG\_WARN}!Logging Module@{Logging Module}}
@@ -237,7 +239,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00043}{43}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 \Hypertarget{group__LOG__Module_ga9677c175672df96c738e7e62b0004302}\index{Logging Module@{Logging Module}!LOG\_WARN\_SILENT@{LOG\_WARN\_SILENT}}
 \index{LOG\_WARN\_SILENT@{LOG\_WARN\_SILENT}!Logging Module@{Logging Module}}
@@ -252,7 +254,7 @@ Definition at line \doxymbox{\hyperlink{log_8h_source_l00050}{50}} of file \doxy
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00059}{59}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00061}{61}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 
 
@@ -318,7 +320,7 @@ LOG\+\_\+\+LEVEL\+\_\+\+FATAL&Fatal level -\/ critical system failures. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{log_8h_source_l00070}{70}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
+Definition at line \doxymbox{\hyperlink{log_8h_source_l00072}{72}} of file \doxymbox{\hyperlink{log_8h_source}{log.\+h}}.
 
 
 
@@ -354,7 +356,7 @@ k\+Status\+\_\+\+Success if the initialization is successful. k\+Status\+\_\+\+F
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{log_8c_source_l00115}{115}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00125}{125}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
 
 \Hypertarget{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}\index{Logging Module@{Logging Module}!LOG\_send\_log\_message@{LOG\_send\_log\_message}}
 \index{LOG\_send\_log\_message@{LOG\_send\_log\_message}!Logging Module@{Logging Module}}
@@ -395,7 +397,7 @@ k\+Status\+\_\+\+Success if the message is successfully added to the queue. k\+S
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{log_8c_source_l00148}{148}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00189}{189}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
 
 \Hypertarget{group__LOG__Module_gaf4aa1ff2f9562bf7fce62e14f5c8df9b}\index{Logging Module@{Logging Module}!LOG\_task@{LOG\_task}}
 \index{LOG\_task@{LOG\_task}!Logging Module@{Logging Module}}
@@ -427,5 +429,42 @@ This function does not return; it is expected to run as a perpetual Free\+RTOS t
 \end{DoxySeeAlso}
 
 
-Definition at line \doxymbox{\hyperlink{log_8c_source_l00166}{166}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00218}{218}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
+
+\Hypertarget{group__LOG__Module_ga2ddf5f77c872712f2497e3e4b0e19ea4}\index{Logging Module@{Logging Module}!LOG\_wait\_for\_queue\_empty@{LOG\_wait\_for\_queue\_empty}}
+\index{LOG\_wait\_for\_queue\_empty@{LOG\_wait\_for\_queue\_empty}!Logging Module@{Logging Module}}
+\doxysubsubsection{\texorpdfstring{LOG\_wait\_for\_queue\_empty()}{LOG\_wait\_for\_queue\_empty()}}
+{\footnotesize\ttfamily \label{group__LOG__Module_ga2ddf5f77c872712f2497e3e4b0e19ea4} 
+status\+\_\+t LOG\+\_\+wait\+\_\+for\+\_\+queue\+\_\+empty (\begin{DoxyParamCaption}\item[{Tick\+Type\+\_\+t}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+
+
+Waits for the log queue to become empty. 
+
+This function blocks the calling task until the log queue is completely empty. Multiple tasks can wait simultaneously on the same queue; all waiting tasks will be unblocked when the queue becomes empty.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em x\+Ticks\+To\+Wait} & The maximum amount of time to wait, in ticks. Use port\+MAX\+\_\+\+DELAY to wait indefinitely.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The event bit is automatically cleared after this function returns successfully, so the next call will wait for the queue to empty again. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Calling this function immediately after boot (before LOG\+\_\+init) will fail.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the queue became empty within the timeout period. k\+Status\+\_\+\+Fail if the timeout expired or the logging system is not initialized.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__LOG__Module_gad8fb5a8d2383abe85c0696d80e0372f1}{LOG\+\_\+init()} 
+
+\doxylink{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}{LOG\+\_\+send\+\_\+log\+\_\+message()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{log_8c_source_l00230}{230}} of file \doxymbox{\hyperlink{log_8c_source}{log.\+c}}.
 
