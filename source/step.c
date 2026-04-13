@@ -16,6 +16,7 @@
 #include "string.h"
 #include "task_helpers.h"
 #include "pca9555a.h"
+#include "SEGGER.h"
 /************************************
  *     Private Macros / Defines	   *
  ************************************/
@@ -1004,6 +1005,7 @@ static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t n
 
 static status_t start_steps(STP_Handle_t handle, THE_CmdHandle_t cmdHandle)
 {
+	SEGGER_SYSVIEW_Print("Starting Steps");
     static char logMsg[100];
 
     if (handle == NULL)
@@ -1288,7 +1290,7 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
             uint8_t ownerSet   = 0;
 
             portENTER_CRITICAL();
-            NVIC_DisableIRQ(FTM3_IRQn);
+            
             for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
             {
                 if (handles[i].used == 1 &&
@@ -1309,7 +1311,8 @@ static void process_cmd(STP_CmdQueueItem_t queueItem)
                     }
                 }
             }
-            NVIC_EnableIRQ(FTM3_IRQn);
+            
+
 
             portEXIT_CRITICAL();
             if (!anyStarted)

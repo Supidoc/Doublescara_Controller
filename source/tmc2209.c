@@ -1173,25 +1173,37 @@ status_t set_freewheeling(TMC_Handle_t handle, uint8_t enabled, TickType_t deadl
         return kStatus_Fail;
     }
 
+    status_t iholdStatus;
     if (enabled)
     {
-        set_ihold_divider(handle, 0, deadline);
+        iholdStatus = set_ihold_divider(handle, 0, deadline);
     }
     else
     {
-        set_ihold_divider(handle, handle->iholdDivider, deadline);
+        iholdStatus = set_ihold_divider(handle, handle->iholdDivider, deadline);
+    }
+    if (iholdStatus != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to set IHOLD for freewheeling", handle->label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
     }
 
-    uint32_t pwmconf;
-    read(handle, TMC_PWMCONF_ADDR, &pwmconf, deadline);
+    uint32_t pwmconf = 0;
+    if (read(handle, TMC_PWMCONF_ADDR, &pwmconf, deadline) != kStatus_Success)
+    {
+        snprintf(logMsg, sizeof(logMsg), "[%s] Failed to read PWMCONF for freewheeling", handle->label);
+        LOG_ERROR(logMsg);
+        return kStatus_Fail;
+    }
     pwmconf &= ~(0b11 << 20);
     if (enabled)
     {
-        pwmconf |= 0b01 << 20; // Enable freewheeling for both directions
+        pwmconf |= 0b01 << 20; // Enable freewheeling
     }
     else
     {
-        pwmconf &= ~(0b11 << 20); // Disable freewheeling
+        pwmconf = ~(0b00 << 20); // Disable freewheeling
     }
 
     if (kStatus_Success != write(handle, TMC_PWMCONF_ADDR, &pwmconf, deadline))

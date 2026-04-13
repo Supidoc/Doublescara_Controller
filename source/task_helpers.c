@@ -94,6 +94,7 @@ status_t THE_get_cmd_handle(THE_CmdHandle_t* cmdHandle, THE_CmdHandleImpl_t* cmd
             return kStatus_Success;
         }
     }
+    taskEXIT_CRITICAL();
     *cmdHandle = NULL; // No available command handle
     return kStatus_Fail;
 }

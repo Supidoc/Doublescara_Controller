@@ -811,7 +811,7 @@ static status_t send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadlin
     if (sendStatus != kStatus_Success)
     {
         if (cmdHandle != NULL)
-        {
+        {        
             THE_remove_cmd_handle_ref(*cmdHandle);
             *cmdHandle = NULL;
         }

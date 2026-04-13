@@ -80,7 +80,7 @@ MTR_MotorConfig_t M_L_Arm(void)
     motorConfig.stepperConfig.stepGPIO              = GPIOC;
     motorConfig.stepperConfig.stepPin               = 11;
     motorConfig.stepperConfig.stepPort              = PORTC;
-    motorConfig.stepperConfig.dirLogicHighClockwise = 1;
+    motorConfig.stepperConfig.dirLogicHighClockwise = 0;
 
     // Configure TMC driver
     motorConfig.tmcConfig.serialAdress   = TMC_SERIAL_ADDRESS_2;
@@ -144,10 +144,10 @@ MTR_MotorConfig_t M_Platform(void)
 
     motorConfig.label = "m_platform";
 
-    motorConfig.acceleration    = 200 * 16;
-    motorConfig.endVelocity     = 360 * 16;
+    motorConfig.acceleration    = 1000 * 8;
+    motorConfig.endVelocity     = 360 * 8;
     motorConfig.stepAngle       = 1.8;
-    motorConfig.microstep       = 1;
+    motorConfig.microstep       = 16;
     motorConfig.reductionFactor = 1.0;
 
     // Configure stepper parameters
@@ -166,7 +166,7 @@ MTR_MotorConfig_t M_Platform(void)
     motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
     motorConfig.tmcConfig.iHoldCurrentA = 0.1;
-    motorConfig.tmcConfig.iRunCurrentA  = 0.1;
+    motorConfig.tmcConfig.iRunCurrentA  = 0.6;
     return motorConfig;
 }
 
@@ -185,8 +185,8 @@ MTR_MotorConfig_t M_Magnet(void)
 
     motorConfig.label = "m_magnet";
 
-    motorConfig.acceleration    = 200 * 16;
-    motorConfig.endVelocity     = 360 * 16;
+    motorConfig.acceleration    = 1000 * 128;
+    motorConfig.endVelocity     = 720 * 128;
     motorConfig.stepAngle       = 7.5;
     motorConfig.microstep       = 1;
     motorConfig.reductionFactor = 1.0;
@@ -199,14 +199,14 @@ MTR_MotorConfig_t M_Magnet(void)
     motorConfig.stepperConfig.stepGPIO              = GPIOC;
     motorConfig.stepperConfig.stepPin               = 10;
     motorConfig.stepperConfig.stepPort              = PORTC;
-    motorConfig.stepperConfig.dirLogicHighClockwise = 1;
+    motorConfig.stepperConfig.dirLogicHighClockwise = 0;
 
     // Configure TMC driver
     motorConfig.tmcConfig.serialAdress   = TMC_SERIAL_ADDRESS_3;
     motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
     motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-    motorConfig.tmcConfig.iHoldCurrentA = 0.1;
+    motorConfig.tmcConfig.iHoldCurrentA = 0.05;
     motorConfig.tmcConfig.iRunCurrentA  = 0.1;
     return motorConfig;
 }

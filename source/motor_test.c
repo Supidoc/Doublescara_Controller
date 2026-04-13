@@ -75,7 +75,7 @@ void MTT_task(void* pvParameters)
 void init_motor(MTR_MotorConfig_t config)
 {
     char            logMsg[60];
-    TickType_t      deadline  = THE_deadline_from_timeout_ms(100);
+    TickType_t      deadline  = THE_deadline_from_timeout_ms(400);
     THE_CmdHandle_t cmdHandle = NULL;
     if (MTR_init_handle_async(config, deadline, &cmdHandle) == kStatus_Success &&
         THE_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)

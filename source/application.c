@@ -123,13 +123,13 @@ void APP_run(void)
             ;
     }
     if (create_task(STP_task, "STP_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 4) != kStatus_Success)
+                    configMAX_PRIORITIES - 3) != kStatus_Success)
     {
         while (1)
             ;
     }
     if (create_task(TMC_task, "TMC_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 3) != kStatus_Success)
+                    configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
