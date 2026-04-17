@@ -59,6 +59,8 @@ void STPi_process(void);
  */
 void STPi_process_cmd(STP_CmdQueueItem_t queueItem);
 
+status_t STPi_stop_steps(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle);
+
 #endif // STEP_PROCESS_H_
 
 /** @} */

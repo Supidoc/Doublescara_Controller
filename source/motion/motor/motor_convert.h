@@ -18,7 +18,7 @@
 /********************
  *     Includes    *
  ********************/
-#include "motor.h"
+#include "motor_core.h"
 
 /***********************************
  *     Public Macros / Defines     *
@@ -27,6 +27,13 @@
 /***************************
  *     Public Typedefs     *
  ***************************/
+
+typedef enum _MTR_roundingMethod
+{
+    ROUND_DOWN,
+    ROUND_UP,
+    ROUND_NEAREST
+} MTR_roundingMethod_t;
 
 /****************************
  *     Public Variables     *

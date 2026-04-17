@@ -18,6 +18,8 @@ pin_labels:
 - {pin_num: '2', pin_signal: ADC1_SE5a/PTE1/LLWU_P0/SPI1_SOUT/UART1_RX/I2C1_SCL/SPI1_SIN, label: UART1_RX, identifier: UART1_RX}
 - {pin_num: '57', pin_signal: PTD0/LLWU_P12/SPI0_PCS0/UART2_RTS_b/FTM3_CH0/FB_ALE/FB_CS1_b/FB_TS_b/LPUART0_RTS_b, label: PTD0, identifier: PTD0}
 - {pin_num: '42', pin_signal: PTB19/FTM2_CH1/I2S0_TX_FS/FB_OE_b/FTM2_QD_PHB, label: GPIOB19, identifier: GPIOB19}
+- {pin_num: '62', pin_signal: ADC0_SE6b/PTD5/SPI0_PCS2/UART0_CTS_b/FTM0_CH5/FB_AD1/EWM_OUT_b/SPI1_SCK, label: GPIOD5, identifier: GPIOD5}
+- {pin_num: '61', pin_signal: PTD4/LLWU_P14/SPI0_PCS1/UART0_RTS_b/FTM0_CH4/FB_AD2/EWM_IN/SPI1_PCS0, label: GPIOD4, identifier: GPIOD4}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -72,6 +74,8 @@ BOARD_InitPins:
   - {pin_num: '33', peripheral: OSC, signal: XTAL0, pin_signal: XTAL0/PTA19/FTM1_FLT0/FTM_CLKIN1/LPTMR0_ALT1}
   - {pin_num: '45', peripheral: GPIOC, signal: 'GPIO, 2', pin_signal: ADC0_SE4b/CMP1_IN0/PTC2/SPI0_PCS2/UART1_CTS_b/FTM0_CH1/FB_AD12/I2S0_TX_FS/LPUART0_CTS_b}
   - {pin_num: '42', peripheral: GPIOB, signal: 'GPIO, 19', pin_signal: PTB19/FTM2_CH1/I2S0_TX_FS/FB_OE_b/FTM2_QD_PHB, direction: INPUT}
+  - {pin_num: '62', peripheral: GPIOD, signal: 'GPIO, 5', pin_signal: ADC0_SE6b/PTD5/SPI0_PCS2/UART0_CTS_b/FTM0_CH5/FB_AD1/EWM_OUT_b/SPI1_SCK, direction: INPUT, gpio_interrupt: kPORT_InterruptRisingEdge}
+  - {pin_num: '61', peripheral: GPIOD, signal: 'GPIO, 4', pin_signal: PTD4/LLWU_P14/SPI0_PCS1/UART0_RTS_b/FTM0_CH4/FB_AD2/EWM_IN/SPI1_PCS0, direction: INPUT, gpio_interrupt: kPORT_InterruptRisingEdge}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -101,6 +105,20 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTB19 (pin 42)  */
     GPIO_PinInit(BOARD_INITPINS_GPIOB19_GPIO, BOARD_INITPINS_GPIOB19_PIN, &GPIOB19_config);
+
+    gpio_pin_config_t GPIOD4_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTD4 (pin 61)  */
+    GPIO_PinInit(BOARD_INITPINS_GPIOD4_GPIO, BOARD_INITPINS_GPIOD4_PIN, &GPIOD4_config);
+
+    gpio_pin_config_t GPIOD5_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTD5 (pin 62)  */
+    GPIO_PinInit(BOARD_INITPINS_GPIOD5_GPIO, BOARD_INITPINS_GPIOD5_PIN, &GPIOD5_config);
 
     /* PORTA0 (pin 22) is configured as JTAG_TCLK */
     PORT_SetPinMux(PORTA, 0U, kPORT_MuxAlt7);
@@ -202,6 +220,18 @@ void BOARD_InitPins(void)
                      /* Pull Select: Internal pullup resistor is enabled on the corresponding pin, if the
                       * corresponding PE field is set. */
                      | PORT_PCR_PS(kPORT_PullUp));
+
+    /* PORTD4 (pin 61) is configured as PTD4 */
+    PORT_SetPinMux(BOARD_INITPINS_GPIOD4_PORT, BOARD_INITPINS_GPIOD4_PIN, kPORT_MuxAsGpio);
+
+    /* Interrupt configuration on PORTD4 (pin 61): Interrupt on rising edge */
+    PORT_SetPinInterruptConfig(BOARD_INITPINS_GPIOD4_PORT, BOARD_INITPINS_GPIOD4_PIN, kPORT_InterruptRisingEdge);
+
+    /* PORTD5 (pin 62) is configured as PTD5 */
+    PORT_SetPinMux(BOARD_INITPINS_GPIOD5_PORT, BOARD_INITPINS_GPIOD5_PIN, kPORT_MuxAsGpio);
+
+    /* Interrupt configuration on PORTD5 (pin 62): Interrupt on rising edge */
+    PORT_SetPinInterruptConfig(BOARD_INITPINS_GPIOD5_PORT, BOARD_INITPINS_GPIOD5_PIN, kPORT_InterruptRisingEdge);
 
     /* PORTD6 (pin 63) is configured as UART0_RX */
     PORT_SetPinMux(PORTD, 6U, kPORT_MuxAlt3);

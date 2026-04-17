@@ -18,7 +18,7 @@
 /********************
  *     Includes    *
  ********************/
-#include "motor.h"
+#include "motor_core.h"
 #include "motor_internal.h"
 
 /***********************************

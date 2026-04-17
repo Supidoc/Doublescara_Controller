@@ -28,7 +28,7 @@
 #include "motor_test.h"
 #include "step_core.h"
 #include "tmc2209_core.h"
-#include "motor.h"
+#include "motor_core.h"
 #include "motorCmd.h"
 
 /************************************

@@ -301,6 +301,8 @@ status_t STP_set_acceleration_async(STP_Handle_t handle, double acceleration, Ti
 status_t STP_set_end_velocity_async(STP_Handle_t handle, double endVelocity, TickType_t deadline,
                                     CHD_CmdHandle_t* cmdHandle);
 
+status_t STP_homing_stop(STP_Handle_t handle);
+
 #endif // STEP_CORE_H_
 
 /** @} */

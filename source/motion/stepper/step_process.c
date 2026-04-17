@@ -32,7 +32,6 @@ static status_t TSU_init_handle(const STP_StepperConfig_t config, TickType_t dea
 static status_t init_step_pin(STP_Handle_t handle);
 static status_t init_dir_pin(STP_Handle_t handle);
 static status_t start_steps(STP_Handle_t handle, CHD_CmdHandle_t cmdHandle);
-static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle);
 
 /****************************
  *     Public Variables     *
@@ -195,8 +194,8 @@ void STPi_process_cmd(STP_CmdQueueItem_t queueItem)
         case STP_CMD_STOP:
         {
             LOG_DEBUG("Processing stop command");
-            if (stop_steps(queueItem.handle, queueItem.data.stop.doDeceleration,
-                           queueItem.cmdHandle) != kStatus_Success)
+            if (STPi_stop_steps(queueItem.handle, queueItem.data.stop.doDeceleration,
+                                queueItem.cmdHandle) != kStatus_Success)
             {
                 CDP_notify_task_failure(queueItem.cmdHandle);
                 CHD_remove_cmd_handle_ref(queueItem.cmdHandle);
@@ -243,6 +242,68 @@ void STPi_process_cmd(STP_CmdQueueItem_t queueItem)
             break;
         }
     }
+}
+
+status_t STPi_stop_steps(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)
+{
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    CHD_CmdHandle_t oldCmdHandle = NULL;
+
+    STP_MovementState_t st = handle->movementHandle.state;
+    if (st == STP_MOVEMENT_IDLE || st == STP_MOVEMENT_FINISHED || st == STP_MOVEMENT_STOPPED)
+    {
+        taskEXIT_CRITICAL();
+        return kStatus_Fail;
+    }
+
+    oldCmdHandle = handle->movementHandle.cmdHandle;
+
+    if (doDeceleration == 0)
+    {
+        handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &=
+            ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
+        handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &= ~(FTM_CnSC_CHF_MASK);
+        handle->movementHandle.state = STP_MOVEMENT_STOPPED;
+    }
+    else
+    {
+        if (st == STP_MOVEMENT_PLANNED)
+        {
+            // nothing running yet -> stop immediately
+            handle->movementHandle.state = STP_MOVEMENT_STOPPED;
+        }
+        else if (st == STP_MOVEMENT_ACCELERATING)
+        {
+            handle->movementHandle.isTrapezoidal    = 0;
+            handle->movementHandle.endVelocitySteps = 0;
+            handle->movementHandle.accelSteps       = handle->movementHandle.currStepCount;
+            handle->movementHandle.decelSteps       = handle->movementHandle.currStepCount;
+            handle->movementHandle.totalSteps       = handle->movementHandle.currStepCount * 2;
+        }
+        else if (st == STP_MOVEMENT_CONST_VELOCITY)
+        {
+            handle->movementHandle.endVelocitySteps =
+                handle->movementHandle.currStepCount - handle->movementHandle.accelSteps;
+            handle->movementHandle.totalSteps = handle->movementHandle.accelSteps +
+                                                handle->movementHandle.endVelocitySteps +
+                                                handle->movementHandle.decelSteps;
+        }
+        // if already decelerating: keep as-is
+    }
+
+    handle->movementHandle.cmdHandle = cmdHandle;
+
+    if (oldCmdHandle != NULL && oldCmdHandle != cmdHandle)
+    {
+        CDP_notify_task_failure(oldCmdHandle);
+        CHD_remove_cmd_handle_ref(oldCmdHandle);
+    }
+
+    return kStatus_Success;
 }
 
 /********************************************
@@ -308,71 +369,6 @@ static status_t TSU_init_handle(const STP_StepperConfig_t config, TickType_t dea
              "[%s] Stepper initialized successfully (accel=%.1f step/s², vel=%.1f step/s)",
              handle->label, handle->acceleration, handle->endVelocity);
     LOG_INFO(logMsg);
-
-    return kStatus_Success;
-}
-
-static status_t stop_steps(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)
-{
-    if (handle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    CHD_CmdHandle_t oldCmdHandle = NULL;
-
-    taskENTER_CRITICAL();
-
-    STP_MovementState_t st = handle->movementHandle.state;
-    if (st == STP_MOVEMENT_IDLE || st == STP_MOVEMENT_FINISHED || st == STP_MOVEMENT_STOPPED)
-    {
-        taskEXIT_CRITICAL();
-        return kStatus_Fail;
-    }
-
-    oldCmdHandle = handle->movementHandle.cmdHandle;
-
-    if (doDeceleration == 0)
-    {
-        handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &=
-            ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
-        handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &= ~(FTM_CnSC_CHF_MASK);
-        handle->movementHandle.state = STP_MOVEMENT_STOPPED;
-    }
-    else
-    {
-        if (st == STP_MOVEMENT_PLANNED)
-        {
-            // nothing running yet -> stop immediately
-            handle->movementHandle.state = STP_MOVEMENT_STOPPED;
-        }
-        else if (st == STP_MOVEMENT_ACCELERATING)
-        {
-            handle->movementHandle.isTrapezoidal    = 0;
-            handle->movementHandle.endVelocitySteps = 0;
-            handle->movementHandle.accelSteps       = handle->movementHandle.currStepCount;
-            handle->movementHandle.decelSteps       = handle->movementHandle.currStepCount;
-            handle->movementHandle.totalSteps       = handle->movementHandle.currStepCount * 2;
-        }
-        else if (st == STP_MOVEMENT_CONST_VELOCITY)
-        {
-            handle->movementHandle.endVelocitySteps =
-                handle->movementHandle.currStepCount - handle->movementHandle.accelSteps;
-            handle->movementHandle.totalSteps = handle->movementHandle.accelSteps +
-                                                handle->movementHandle.endVelocitySteps +
-                                                handle->movementHandle.decelSteps;
-        }
-        // if already decelerating: keep as-is
-    }
-
-    handle->movementHandle.cmdHandle = cmdHandle;
-    taskEXIT_CRITICAL();
-
-    if (oldCmdHandle != NULL && oldCmdHandle != cmdHandle)
-    {
-        CDP_notify_task_failure(oldCmdHandle);
-        CHD_remove_cmd_handle_ref(oldCmdHandle);
-    }
 
     return kStatus_Success;
 }

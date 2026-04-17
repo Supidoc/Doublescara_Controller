@@ -13,12 +13,14 @@
  *     Includes    *
  ********************/
 #include "motorCmd.h"
-#include "motor.h"
+#include "motor_core.h"
+#include "motor_convert.h"
 #include "step_core.h"
 #include "FreeRTOS_CLI.h"
 #include "cli.h"
 #include "cli_utilities.h"
 #include "log.h"
+#include "motor_homing.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,6 +31,7 @@
  ************************************/
 
 #define MCMD_COMMAND_TIMEOUT_MS 1000
+#define MCMD_HOMING_TIMEOUT_MS 5000
 
 /***************************
  *     Private Typedefs     *
@@ -69,6 +72,10 @@ static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWri
                                                 const char* pcCommandString);
 static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
                                                  const char* pcCommandString);
+static BaseType_t cmd_motor_home_left_arm(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                          const char* pcCommandString);
+static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                           const char* pcCommandString);
 static status_t   wait_for_mtr_cmd(CHD_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
@@ -176,6 +183,18 @@ static const CLI_Command_Definition_t xDisableFreewheelingCmd = {
     .pxCommandInterpreter = cmd_motor_disable_freewheeling,
     .cExpectedNumberOfParameters = -1};
 
+static const CLI_Command_Definition_t xHomeLeftArmCmd = {
+    .pcCommand                   = "mhome_l",
+    .pcHelpString                = "mhome_l: Home left SCARA arm motor\r\n",
+    .pxCommandInterpreter        = cmd_motor_home_left_arm,
+    .cExpectedNumberOfParameters = 0};
+
+static const CLI_Command_Definition_t xHomeRightArmCmd = {
+    .pcCommand                   = "mhome_r",
+    .pcHelpString                = "mhome_r: Home right SCARA arm motor\r\n",
+    .pxCommandInterpreter        = cmd_motor_home_right_arm,
+    .cExpectedNumberOfParameters = 0};
+
 /*******************************************
  *     Public Function Implementations     *
  *******************************************/
@@ -208,6 +227,8 @@ void MCMD_task(void* pvParameters)
     CLI_register_command(&xSynchronizedMoveCmd);
     CLI_register_command(&xEnableFreewheelingCmd);
     CLI_register_command(&xDisableFreewheelingCmd);
+    CLI_register_command(&xHomeLeftArmCmd);
+    CLI_register_command(&xHomeRightArmCmd);
 
     LOG_INFO("Motor commands registered");
 
@@ -724,9 +745,7 @@ static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen
         return pdFALSE;
     }
 
-    CHD_CmdHandle_t cmdHandle = NULL;
-    if (MTR_set_home_position_async(handle, &cmdHandle) == kStatus_Success &&
-        wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
+    if (MTR_set_home_position(handle) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Home position set\r\n");
     }
@@ -995,5 +1014,41 @@ static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWr
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to disable freewheeling\r\n");
     }
+    return pdFALSE;
+}
+
+static BaseType_t cmd_motor_home_left_arm(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                          const char* pcCommandString)
+{
+    (void)pcCommandString;
+
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_HOMING_TIMEOUT_MS);
+    if (MHM_home_left_arm(deadline) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Left arm homing successful\r\n");
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Left arm homing failed\r\n");
+    }
+
+    return pdFALSE;
+}
+
+static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                           const char* pcCommandString)
+{
+    (void)pcCommandString;
+
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_HOMING_TIMEOUT_MS);
+    if (MHM_home_right_arm(deadline) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Right arm homing successful\r\n");
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Right arm homing failed\r\n");
+    }
+
     return pdFALSE;
 }

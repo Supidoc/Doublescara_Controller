@@ -18,7 +18,7 @@
 /********************
  *     Includes    *
  ********************/
-#include "motor.h"
+#include "motor_core.h"
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "cmd_handle.h"
@@ -178,6 +178,8 @@ extern QueueHandle_t          mtrCmdQueue;
 extern CHD_CmdHandleImpl_t    mtrCmdHandles[MTR_MAX_CMD_HANDLE_COUNT];
 extern MTR_HandlesArrayItem_t motorHandles[MTR_MAX_MOTORS];
 extern MTR_ParallelTaskItem   parallelTasks[MTR_MAX_PARALLEL_TASKS];
+
+extern volatile uint8_t emergencyStopFlag;
 
 /**************************************
  *     Public Function Prototypes    *

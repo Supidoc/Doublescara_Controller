@@ -78,6 +78,16 @@ extern "C" {
 #define UART0_SERIAL_ERROR_IRQN UART0_ERR_IRQn
 /* UART0 interrupt vector priority. */
 #define UART0_SERIAL_ERROR_IRQ_PRIORITY 7
+/* Alias for GPIOD peripheral */
+#define GPIOD_GPIO GPIOD
+/* Alias for PORTD */
+#define GPIOD_PORT PORTD
+/* GPIOD interrupt vector ID (number). */
+#define GPIOD_IRQN PORTD_IRQn
+/* GPIOD interrupt vector priority. */
+#define GPIOD_IRQ_PRIORITY 7
+/* GPIOD interrupt handler identifier. */
+#define GPIOD_IRQHANDLER PORTD_IRQHandler
 
 /***********************************************************************************************************************
  * Global variables

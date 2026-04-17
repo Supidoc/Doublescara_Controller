@@ -299,6 +299,21 @@ status_t STP_get_default_config(STP_StepperConfig_t* config)
     return kStatus_Success;
 }
 
+status_t STP_homing_stop(STP_Handle_t handle)
+{
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    if (STPi_stop_steps(handle, 0, NULL) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
+}
+
 /********************************************
  *     Private Function Implementations     *
  ********************************************/

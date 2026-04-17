@@ -15,6 +15,25 @@
 #include "queue.h"
 #include "string.h"
 #include "stdio.h"
+#include "motor_motion.h"
+
+/************************************
+ *     Private Macros / Defines    *
+ ************************************/
+
+/***************************
+ *     Private Typedefs     *
+ ***************************/
+
+/*****************************************
+ *     Private Function Declarations     *
+ *****************************************/
+
+/****************************
+ *     Public Variables     *
+ ****************************/
+
+volatile uint8_t emergencyStopFlag = 0;
 
 /*****************************
  *     Private Variables     *
@@ -25,8 +44,7 @@ QueueHandle_t          mtrCmdQueue                             = NULL;
 CHD_CmdHandleImpl_t    mtrCmdHandles[MTR_MAX_CMD_HANDLE_COUNT] = {0};
 MTR_ParallelTaskItem   parallelTasks[MTR_MAX_PARALLEL_TASKS]   = {0};
 
-static volatile uint8_t emergencyStopFlag = 0;
-static TaskHandle_t     mtrTaskHandle     = NULL;
+static TaskHandle_t mtrTaskHandle = NULL;
 
 /*******************************************
  *     Public Function Implementations     *
@@ -241,21 +259,14 @@ status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementStat
     return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
 }
 
-status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, CHD_CmdHandle_t* cmdHandle)
+status_t MTR_set_home_position(MTR_MotorHandle_t handle)
 {
     if (handle == NULL)
     {
         return kStatus_Fail;
     }
 
-    TickType_t deadline = xTaskGetTickCount() + pdMS_TO_TICKS(1);
-
-    MTR_CmdQueueItem_t queueItem;
-    queueItem.type     = MTR_CMD_SET_HOME_POSITION;
-    queueItem.handle   = handle;
-    queueItem.deadline = deadline;
-
-    return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
+    return MTRi_set_home_position(handle);
 }
 
 status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,

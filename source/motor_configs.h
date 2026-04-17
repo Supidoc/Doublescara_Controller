@@ -35,7 +35,9 @@
 /********************
  *     Includes    *
  ********************/
-#include "motor.h"
+#include "MK22F51212.h"
+#include "motor_core.h"
+#include "peripherals.h"
 
 /***********************************
  *     Public Macros / Defines     *

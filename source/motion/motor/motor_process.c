@@ -165,10 +165,12 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
         case MTR_CMD_MOVE_ANGLE:
             cmdStatus = MTRi_move_angle(queueItem.handle, queueItem.data.moveAngle.angle,
                                         queueItem.deadline, taskItem);
+            break;
 
         case MTR_CMD_MOVE_ABSOLUTE_ANGLE:
             cmdStatus = MTRi_move_absolute_angle(queueItem.handle, queueItem.data.moveAngle.angle,
                                                  queueItem.deadline, taskItem);
+            break;
 
         case MTR_CMD_MOVE_REVOLUTIONS:
             cmdStatus =
@@ -180,6 +182,7 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
             cmdStatus =
                 MTRi_set_velocity(queueItem.handle, queueItem.data.setVelocity.velocity_deg_per_sec,
                                   queueItem.deadline, taskItem);
+            break;
 
         case MTR_CMD_SET_ACCELERATION:
             cmdStatus = MTRi_set_acceleration(
@@ -190,6 +193,7 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
         case MTR_CMD_STOP:
             cmdStatus = MTRi_stop_motor(queueItem.handle, queueItem.data.stop.decelerate,
                                         queueItem.deadline, taskItem);
+            break;
 
         case MTR_CMD_GET_CURRENT_ANGLE:
             cmdStatus = MTRi_get_current_angle(
@@ -200,11 +204,6 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
             cmdStatus =
                 MTRi_get_movement_state(queueItem.handle, queueItem.data.getMovementState.state);
             break;
-
-        case MTR_CMD_SET_HOME_POSITION:
-            cmdStatus = MTRi_set_home_position(queueItem.handle);
-            break;
-
         case MTR_CMD_SYNCHRONIZED_MOVE:
             cmdStatus = MTRi_synchronized_move(
                 queueItem.data.synchronizedMove.handles, queueItem.data.synchronizedMove.angles,

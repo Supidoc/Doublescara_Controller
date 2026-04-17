@@ -21,7 +21,76 @@
 /********************
  *     Includes    *
  ********************/
-#include "motor_internal.h"
+#include <driver/pca9555a/pca9555a.h>
+#include "MK22F51212.h"
+#include "step_core.h"
+#include "tmc2209_core.h"
+#include "fsl_ftm.h"
+#include "fsl_gpio.h"
+#include "fsl_port.h"
+
+/***********************************
+ *     Public Macros / Defines     *
+ ***********************************/
+
+/** @brief Maximum number of command handles available to motor facade commands. */
+#define MTR_MAX_CMD_HANDLE_COUNT 20
+
+/***************************
+ *     Public Typedefs     *
+ ***************************/
+
+/**
+ * @brief TMC2209-related configuration values for one motor.
+ */
+typedef struct _MTR_MotorTmcConfig
+{
+    uart_rtos_handle_t* uartRTOSHandle; /**< RTOS UART handle used for TMC communication. */
+    uart_handle_t*      uartHandle;     /**< Low-level UART handle used for TMC communication. */
+    TMC_SerialAddress_t serialAdress;   /**< TMC2209 slave address on UART bus. */
+    double              iHoldCurrentA;  /**< Hold current in ampere. */
+    double              iRunCurrentA;   /**< Run current in ampere. */
+} MTR_MotorTmcConfig_t;
+
+/**
+ * @brief Step-generation hardware configuration for one motor.
+ */
+typedef struct _MTR_MotorStepperConfig
+{
+    FTM_Type*  ftmBase;               /**< Pointer to FTM module base address. */
+    ftm_chnl_t ftmChannel;            /**< FTM channel for step output. */
+    PORT_Type* stepPort;              /**< PORT module for step pin mux control. */
+    GPIO_Type* stepGPIO;              /**< GPIO module for step pin. */
+    uint8_t    stepPin;               /**< Step output pin number. */
+    PCA_Port_t dirPort;               /**< PCA9555 port for direction pin control. */
+    uint8_t    dirPin;                /**< Direction output bit index in PCA9555 port. */
+    uint8_t    dirLogicHighClockwise; /**< 1 if high=clockwise, 0 if high=counterclockwise. */
+} MTR_MotorStepperConfig_t;
+
+/**
+ * @brief Configuration structure for initializing one motor instance.
+ *
+ * Groups mechanical conversion parameters and low-level driver configuration
+ * for creating one motor handle.
+ */
+typedef struct _MTR_MotorConfig
+{
+    double  stepAngle;       /**< Full-step angle in degree (for example 1.8). */
+    uint8_t microstep;       /**< Microstep factor (for example 1, 2, 4, ..., 256). */
+    double  reductionFactor; /**< Mechanical transmission ratio motor->output. */
+    double  acceleration;    /**< Acceleration in degree/s^2. */
+    double  endVelocity;     /**< End velocity in degree/s. */
+
+    MTR_MotorTmcConfig_t     tmcConfig;     /**< TMC communication and current settings. */
+    MTR_MotorStepperConfig_t stepperConfig; /**< Step-generation hardware settings. */
+
+    char* label; /**< Human-readable unique motor identifier. */
+} MTR_MotorConfig_t;
+
+/**
+ * @brief Opaque handle type for motor instances.
+ */
+typedef struct _MTR_MotorHandleImpl* MTR_MotorHandle_t;
 
 /**************************************
  *     Public Function Prototypes    *
@@ -166,13 +235,12 @@ status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementStat
                                       CHD_CmdHandle_t* cmdHandle);
 
 /**
- * @brief Queues command to set current motor position as home.
+ * @brief Set current motor position as home.
  *
  * @param[in] handle Target motor handle.
- * @param[out] cmdHandle Optional command handle for completion wait.
  * @return kStatus_Success if queued, otherwise kStatus_Fail.
  */
-status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, CHD_CmdHandle_t* cmdHandle);
+status_t MTR_set_home_position(MTR_MotorHandle_t handle);
 
 /**
  * @brief Queues synchronized movement command for multiple motors.

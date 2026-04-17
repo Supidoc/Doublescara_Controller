@@ -15,10 +15,11 @@
 #include "cli_utilities.h"
 #include "log.h"
 #include "stdio.h"
-#include "motor.h"
+#include "motor_core.h"
 #include "motor_test.h"
 #include "sync_wait.h"
 #include "motor_configs.h"
+#include "motor_homing.h"
 /************************************
  *     Private Macros / Defines    *
  ************************************/
@@ -62,6 +63,8 @@ void MTT_task(void* pvParameters)
     LOG_wait_for_queue_empty(portMAX_DELAY);
     init_motor(M_Rotation());
 
+    MHM_init();
+
     for (;;)
     {
         vTaskDelay(100);
@@ -81,9 +84,13 @@ void init_motor(MTR_MotorConfig_t config)
         SYW_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)
     {
         CHD_remove_cmd_handle_ref(cmdHandle);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Motor init completed", config.label);
+        LOG_INFO(logMsg);
     }
     else
     {
         CHD_remove_cmd_handle_ref(cmdHandle);
+        snprintf(logMsg, sizeof(logMsg), "[%s] Motor init failed or timed out", config.label);
+        LOG_ERROR(logMsg);
     }
 }

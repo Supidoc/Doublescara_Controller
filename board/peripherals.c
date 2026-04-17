@@ -74,6 +74,7 @@ instance:
       - 3: []
       - 4: []
       - 5: []
+      - 6: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -332,6 +333,39 @@ static void UART0_init(void) {
 }
 
 /***********************************************************************************************************************
+ * GPIOD initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'GPIOD'
+- type: 'gpio'
+- mode: 'GPIO'
+- custom_name_enabled: 'false'
+- type_id: 'gpio_2.7.0'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'GPIOD'
+- config_sets:
+  - fsl_gpio:
+    - enable_irq: 'true'
+    - port_interrupt:
+      - IRQn: 'PORTD_IRQn'
+      - enable_interrrupt: 'enabled'
+      - enable_priority: 'true'
+      - priority: '7'
+      - enable_custom_name: 'false'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+
+static void GPIOD_init(void) {
+  /* Make sure, the clock gate for port D is enabled (e. g. in pin_mux.c) */
+  /* Interrupt vector PORTD_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(GPIOD_IRQN, GPIOD_IRQ_PRIORITY);
+  /* Enable interrupt GPIOD_IRQN request in the NVIC */
+  EnableIRQ(GPIOD_IRQN);
+}
+
+/***********************************************************************************************************************
  * FATFS initialization code
  **********************************************************************************************************************/
 /* clang-format off */
@@ -447,6 +481,7 @@ void BOARD_InitPeripherals(void)
   GPIOA_init();
   I2C0_init();
   UART0_init();
+  GPIOD_init();
 }
 
 /***********************************************************************************************************************
