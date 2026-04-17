@@ -26,7 +26,7 @@
 #define MHM_LEFT_ARM_LABEL "m_l_arm"
 #define MHM_RIGHT_ARM_LABEL "m_r_arm"
 #define MHM_LEFT_ARM_DIRECTION STP_COUNTERCLOCKWISE
-#define MHM_RIGHT_ARM_DIRECTION  STP_CLOCKWISE
+#define MHM_RIGHT_ARM_DIRECTION STP_CLOCKWISE
 #define MHM_HOME_MAX_ANGLE_DEG 180u
 
 /***************************
@@ -58,8 +58,8 @@ static uint8_t    r_arm_home_pin  = 4;
 static MTR_MotorHandle_t l_arm_handle = NULL;
 static MTR_MotorHandle_t r_arm_handle = NULL;
 
-static volatile uint8_t  homingSuccessful = 0;
-static volatile MTR_MotorHandle_t homingHandle = NULL;
+static volatile uint8_t           homingSuccessful = 0;
+static volatile MTR_MotorHandle_t homingHandle     = NULL;
 
 static SemaphoreHandle_t homingMutex = NULL;
 /*******************************************
@@ -146,7 +146,7 @@ void MHM_homing_arm_interrupt_handler(PORT_Type* port, uint32_t pin)
 
 static status_t init_homing(void)
 {
-    if(homingMutex != NULL)
+    if (homingMutex != NULL)
     {
         return kStatus_Success;
     }
@@ -162,8 +162,8 @@ static status_t init_homing(void)
 static status_t auto_homing(MTR_MotorHandle_t handle, STP_Direction_t direction, uint16_t maxAngle,
                             TickType_t deadline)
 {
-    status_t   status = kStatus_Fail;
-    BaseType_t mutexLocked = pdFALSE;
+    status_t    status      = kStatus_Fail;
+    BaseType_t  mutexLocked = pdFALSE;
     static char logMsg[100];
 
     if (emergencyStopFlag)
@@ -276,28 +276,28 @@ static status_t wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadli
 }
 
 /* PORTD_IRQn interrupt handler */
-void GPIOD_IRQHANDLER(void) {
-  /* Get pin flags */
-  uint32_t pin_flags = GPIO_PortGetInterruptFlags(GPIOD);
+void GPIOD_IRQHANDLER(void)
+{
+    /* Get pin flags */
+    uint32_t pin_flags = GPIO_PortGetInterruptFlags(GPIOD);
 
-  /* Place your interrupt code here */
+    /* Place your interrupt code here */
 
-  /* Clear pin flags */
-  GPIO_PortClearInterruptFlags(GPIOD, pin_flags);
-  
-  if(pin_flags & (1U << l_arm_home_pin))
-  {
-      MHM_homing_arm_interrupt_handler(l_arm_home_port, l_arm_home_pin);
-  }
-  if(pin_flags & (1U << r_arm_home_pin))
-  {      MHM_homing_arm_interrupt_handler(r_arm_home_port, r_arm_home_pin);
-  }
+    /* Clear pin flags */
+    GPIO_PortClearInterruptFlags(GPIOD, pin_flags);
 
+    if (pin_flags & (1U << l_arm_home_pin))
+    {
+        MHM_homing_arm_interrupt_handler(l_arm_home_port, l_arm_home_pin);
+    }
+    if (pin_flags & (1U << r_arm_home_pin))
+    {
+        MHM_homing_arm_interrupt_handler(r_arm_home_port, r_arm_home_pin);
+    }
 
-  /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
-     Store immediate overlapping exception return operation might vector to incorrect interrupt. */
-  #if defined __CORTEX_M && (__CORTEX_M == 4U)
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
+   Store immediate overlapping exception return operation might vector to incorrect interrupt. */
+#if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
-  #endif
+#endif
 }
-

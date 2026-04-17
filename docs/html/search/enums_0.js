@@ -2,7 +2,7 @@ var searchData=
 [
   ['_5flog_5flevel_0',['_LOG_Level',['../group__LOG__Module.html#gab7c4d49b9a167a32bbe38935536af90b',1,'log.h']]],
   ['_5fmtr_5fcmdtype_1',['_MTR_CmdType',['../group__MOTOR__Internal.html#ga7e0429af5d2b45a65c693ab8f05fe25b',1,'motor_internal.h']]],
-  ['_5fmtr_5froundingmethod_2',['_MTR_roundingMethod',['../group__MOTOR__Module.html#ga7bf26db923eb70b2a9ef666ee947cd4c',1,'motor.h']]],
+  ['_5fmtr_5froundingmethod_2',['_MTR_roundingMethod',['../group__MOTOR__Convert__Internal.html#ga7bf26db923eb70b2a9ef666ee947cd4c',1,'motor_convert.h']]],
   ['_5fpca_5foutputlevel_3',['_PCA_OutputLevel',['../group__PCA9555A.html#gac133c3b772ea0d83d6d99a08e652b192',1,'pca9555a.h']]],
   ['_5fpca_5fpindirection_4',['_PCA_PinDirection',['../group__PCA9555A.html#ga8ad4ff609745dc5ce797b4999bad6aa0',1,'pca9555a.h']]],
   ['_5fpca_5fpolarityinversion_5',['_PCA_PolarityInversion',['../group__PCA9555A.html#ga8cfaaa7d066058d4ef4647f86dcce6fd',1,'pca9555a.h']]],

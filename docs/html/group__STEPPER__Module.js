@@ -10,6 +10,7 @@ var group__STEPPER__Module =
     [ "STP_get_end_velocity", "group__STEPPER__Module.html#gaef3ff2c4a411d2d9d67ba157f81619f5", null ],
     [ "STP_get_handle_by_label", "group__STEPPER__Module.html#ga6c7c41036ed5ec5ca7226a2ca23fbc7d", null ],
     [ "STP_get_movement_state", "group__STEPPER__Module.html#ga8b0dd1c7d2b07ca34a5b100b03336b3d", null ],
+    [ "STP_homing_stop", "group__STEPPER__Module.html#ga642689cbcf06a53289aa15aa93070e1e", null ],
     [ "STP_init", "group__STEPPER__Module.html#ga40d24dc2b8326fda6b24d319269ece4d", null ],
     [ "STP_init_handle_async", "group__STEPPER__Module.html#gabf526b7c6303b8dadfe76f34e52a6f97", null ],
     [ "STP_move_relative_async", "group__STEPPER__Module.html#gafc3a63d18d294ce9f522725d11db6b5e", null ],

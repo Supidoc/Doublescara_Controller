@@ -1,0 +1,26 @@
+var motor__homing_8c =
+[
+    [ "MHM_HOME_MAX_ANGLE_DEG", "motor__homing_8c.html#a88703f7b00c6fb04f952327f435e12c0", null ],
+    [ "MHM_LEFT_ARM_DIRECTION", "motor__homing_8c.html#ab68c4347481772c95bcb1f1b3b61e292", null ],
+    [ "MHM_LEFT_ARM_LABEL", "motor__homing_8c.html#a37f8ebdb1e254b97c407e3e76da4444b", null ],
+    [ "MHM_RIGHT_ARM_DIRECTION", "motor__homing_8c.html#ae4b6b72d573c2017c909f62963e73cf6", null ],
+    [ "MHM_RIGHT_ARM_LABEL", "motor__homing_8c.html#abd27a27b41ff5613283c05e3cb31d5ad", null ],
+    [ "auto_homing", "motor__homing_8c.html#ad17315c0825fccd3b95bf812e63d45c6", null ],
+    [ "GPIOD_IRQHANDLER", "motor__homing_8c.html#a42292ff3cd65f389eeba0293c6dc7d4d", null ],
+    [ "init_homing", "motor__homing_8c.html#aa92368a11a905685386d69e858002a1c", null ],
+    [ "MHM_home_left_arm", "motor__homing_8c.html#a23a4a1bf1a2770d84e9410d909b3cf5a", null ],
+    [ "MHM_home_right_arm", "motor__homing_8c.html#af9033ca7b842c58a619c280f65f1245c", null ],
+    [ "MHM_homing_arm_interrupt_handler", "motor__homing_8c.html#aa278f610d7050ed2fa72afa46947a54b", null ],
+    [ "MHM_init", "motor__homing_8c.html#a0e768e6bb4bd23473105bc202e93e9d4", null ],
+    [ "resolve_arm_handles", "motor__homing_8c.html#a0128360cbf788d941fe229d8475260f3", null ],
+    [ "wait_for_cmd_handle", "motor__homing_8c.html#a528b3ece82abe97c400944720a44049a", null ],
+    [ "homingHandle", "motor__homing_8c.html#ae96c238f2a89e837c76a8beb68e396b9", null ],
+    [ "homingMutex", "motor__homing_8c.html#ae0ed17bd71da5e9207ffca085790e834", null ],
+    [ "homingSuccessful", "motor__homing_8c.html#aa6da5821950d430363ae4e55b4e644d1", null ],
+    [ "l_arm_handle", "motor__homing_8c.html#a11536e762504348670f8937c7ed1fe39", null ],
+    [ "l_arm_home_pin", "motor__homing_8c.html#a76cc7874e6ba7c7edb9367763f3abb7a", null ],
+    [ "l_arm_home_port", "motor__homing_8c.html#ac197d0116aa1634b2d0ab11fe1c0d9d0", null ],
+    [ "r_arm_handle", "motor__homing_8c.html#a0cb42ddf9f6e372e8706dd3f01878bc8", null ],
+    [ "r_arm_home_pin", "motor__homing_8c.html#a83a05bb03b83e0c111232aa7617a4b16", null ],
+    [ "r_arm_home_port", "motor__homing_8c.html#ad94e853d505931ef6e8d3bbaf5036b28", null ]
+];

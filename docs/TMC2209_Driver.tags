@@ -12,7 +12,7 @@
     <includes id="motor__test_8h" name="motor_test.h" local="yes" import="no" module="no" objc="no">motor_test.h</includes>
     <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
     <includes id="tmc2209__core_8h" name="tmc2209_core.h" local="yes" import="no" module="no" objc="no">tmc2209_core.h</includes>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <includes id="motorCmd_8h" name="motorCmd.h" local="yes" import="no" module="no" objc="no">motorCmd.h</includes>
     <member kind="function" static="yes">
       <type>static status_t</type>
@@ -2440,7 +2440,39 @@
     <name>motor_convert.h</name>
     <path>source/motion/motor/</path>
     <filename>motor__convert_8h.html</filename>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <member kind="typedef">
+      <type>enum _MTR_roundingMethod</type>
+      <name>MTR_roundingMethod_t</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>ga5142605594253bb6c632b95c962216ea</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>_MTR_roundingMethod</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>ga7bf26db923eb70b2a9ef666ee947cd4c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_DOWN</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_UP</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_NEAREST</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>double</type>
       <name>MTR_steps_to_angle</name>
@@ -2464,6 +2496,7 @@
     <includes id="motor__process_8h" name="motor_process.h" local="yes" import="no" module="no" objc="no">motor_process.h</includes>
     <includes id="cmd__dispatch_8h" name="cmd_dispatch.h" local="yes" import="no" module="no" objc="no">cmd_dispatch.h</includes>
     <includes id="log_8h" name="log.h" local="yes" import="no" module="no" objc="no">log.h</includes>
+    <includes id="motor__motion_8h" name="motor_motion.h" local="yes" import="no" module="no" objc="no">motor_motion.h</includes>
     <member kind="function">
       <type>void</type>
       <name>MTR_task</name>
@@ -2550,10 +2583,10 @@
     </member>
     <member kind="function">
       <type>status_t</type>
-      <name>MTR_set_home_position_async</name>
+      <name>MTR_set_home_position</name>
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
-      <anchor>ga0db9dcc5dd4f330658c2f7f815904140</anchor>
-      <arglist>(MTR_MotorHandle_t handle, CHD_CmdHandle_t *cmdHandle)</arglist>
+      <anchor>ga3215be0474c3137b5dcd9793930cb8c8</anchor>
+      <arglist>(MTR_MotorHandle_t handle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -2612,6 +2645,13 @@
       <arglist>(void)</arglist>
     </member>
     <member kind="variable">
+      <type>volatile uint8_t</type>
+      <name>emergencyStopFlag</name>
+      <anchorfile>group__MOTOR__Internal.html</anchorfile>
+      <anchor>gaf1047ff67cd2b16bc743c9b996df0d81</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>MTR_HandlesArrayItem_t</type>
       <name>motorHandles</name>
       <anchorfile>group__MOTOR__Internal.html</anchorfile>
@@ -2640,13 +2680,6 @@
       <arglist>[MTR_MAX_PARALLEL_TASKS]</arglist>
     </member>
     <member kind="variable" static="yes">
-      <type>static volatile uint8_t</type>
-      <name>emergencyStopFlag</name>
-      <anchorfile>motor__core_8c.html</anchorfile>
-      <anchor>af1047ff67cd2b16bc743c9b996df0d81</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable" static="yes">
       <type>static TaskHandle_t</type>
       <name>mtrTaskHandle</name>
       <anchorfile>motor__core_8c.html</anchorfile>
@@ -2658,7 +2691,47 @@
     <name>motor_core.h</name>
     <path>source/motion/motor/</path>
     <filename>motor__core_8h.html</filename>
-    <includes id="motor__internal_8h" name="motor_internal.h" local="yes" import="no" module="no" objc="no">motor_internal.h</includes>
+    <includes id="pca9555a_8h" name="pca9555a.h" local="no" import="no" module="no" objc="no">driver/pca9555a/pca9555a.h</includes>
+    <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
+    <includes id="tmc2209__core_8h" name="tmc2209_core.h" local="yes" import="no" module="no" objc="no">tmc2209_core.h</includes>
+    <class kind="struct">_MTR_MotorTmcConfig</class>
+    <class kind="struct">_MTR_MotorStepperConfig</class>
+    <class kind="struct">_MTR_MotorConfig</class>
+    <member kind="define">
+      <type>#define</type>
+      <name>MTR_MAX_CMD_HANDLE_COUNT</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8e9e66465a230b2f6f9534e94a0f1023</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorTmcConfig</type>
+      <name>MTR_MotorTmcConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8e5d65aeb018ac2da54d039d54cdd31a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorStepperConfig</type>
+      <name>MTR_MotorStepperConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8a4765221bb1f9d6957ab996f3058368</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorConfig</type>
+      <name>MTR_MotorConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>gab7b8f555379b16be12ecb2e6ad2da56b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorHandleImpl *</type>
+      <name>MTR_MotorHandle_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga80cb43273307560ca13a8df4797c8f54</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>MTR_task</name>
@@ -2745,10 +2818,10 @@
     </member>
     <member kind="function">
       <type>status_t</type>
-      <name>MTR_set_home_position_async</name>
+      <name>MTR_set_home_position</name>
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
-      <anchor>ga0db9dcc5dd4f330658c2f7f815904140</anchor>
-      <arglist>(MTR_MotorHandle_t handle, CHD_CmdHandle_t *cmdHandle)</arglist>
+      <anchor>ga3215be0474c3137b5dcd9793930cb8c8</anchor>
+      <arglist>(MTR_MotorHandle_t handle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -2835,7 +2908,7 @@
     <name>motor_init.h</name>
     <path>source/motion/motor/</path>
     <filename>motor__init_8h.html</filename>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <includes id="motor__internal_8h" name="motor_internal.h" local="yes" import="no" module="no" objc="no">motor_internal.h</includes>
     <member kind="function">
       <type>status_t</type>
@@ -2849,7 +2922,7 @@
     <name>motor_internal.h</name>
     <path>source/motion/motor/</path>
     <filename>motor__internal_8h.html</filename>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <includes id="cmd__handle_8h" name="cmd_handle.h" local="yes" import="no" module="no" objc="no">cmd_handle.h</includes>
     <class kind="struct">_MTR_MotorHandleImpl</class>
     <class kind="struct">_MTR_HandlesArrayItem</class>
@@ -3153,6 +3226,13 @@
       <anchorfile>group__MOTOR__Internal.html</anchorfile>
       <anchor>ga4cf2fb96c272e16cfd29187dd8c84e87</anchor>
       <arglist>[MTR_MAX_PARALLEL_TASKS]</arglist>
+    </member>
+    <member kind="variable">
+      <type>volatile uint8_t</type>
+      <name>emergencyStopFlag</name>
+      <anchorfile>group__MOTOR__Internal.html</anchorfile>
+      <anchor>gaf1047ff67cd2b16bc743c9b996df0d81</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -3628,6 +3708,13 @@
       <anchor>ga718622f8935169a07606900d30e35dc3</anchor>
       <arglist>(STP_StepperConfig_t *config)</arglist>
     </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STP_homing_stop</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga642689cbcf06a53289aa15aa93070e1e</anchor>
+      <arglist>(STP_Handle_t handle)</arglist>
+    </member>
     <member kind="variable">
       <type>STP_HandlesArrayItem_t</type>
       <name>handles</name>
@@ -3768,6 +3855,13 @@
       <anchorfile>group__STEPPER__Module.html</anchorfile>
       <anchor>gabcd2ae8287932573d44ac30c944b4d58</anchor>
       <arglist>(STP_Handle_t handle, double endVelocity, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STP_homing_stop</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga642689cbcf06a53289aa15aa93070e1e</anchor>
+      <arglist>(STP_Handle_t handle)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -4008,13 +4102,6 @@
       <anchor>a194485342718fdb8b77df2eae25243e2</anchor>
       <arglist>(STP_Handle_t handle, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
-    <member kind="function" static="yes">
-      <type>static status_t</type>
-      <name>stop_steps</name>
-      <anchorfile>step__process_8c.html</anchorfile>
-      <anchor>abab29a1320a17a3fa3c00ed3d7627fd9</anchor>
-      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
-    </member>
     <member kind="function">
       <type>status_t</type>
       <name>STPi_send_cmd_async</name>
@@ -4035,6 +4122,13 @@
       <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
       <anchor>gab2a34e49c14557c23429b940acaf959e</anchor>
       <arglist>(STP_CmdQueueItem_t queueItem)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -4062,6 +4156,13 @@
       <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
       <anchor>gab2a34e49c14557c23429b940acaf959e</anchor>
       <arglist>(STP_CmdQueueItem_t queueItem)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -4397,255 +4498,10 @@
     </member>
   </compound>
   <compound kind="file">
-    <name>motor.c</name>
-    <path>source/</path>
-    <filename>motor_8c.html</filename>
-    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motion/motor/motor_core.h</includes>
-  </compound>
-  <compound kind="file">
-    <name>motor.h</name>
-    <path>source/</path>
-    <filename>motor_8h.html</filename>
-    <includes id="pca9555a_8h" name="pca9555a.h" local="no" import="no" module="no" objc="no">driver/pca9555a/pca9555a.h</includes>
-    <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
-    <includes id="tmc2209__core_8h" name="tmc2209_core.h" local="yes" import="no" module="no" objc="no">tmc2209_core.h</includes>
-    <class kind="struct">_MTR_MotorTmcConfig</class>
-    <class kind="struct">_MTR_MotorStepperConfig</class>
-    <class kind="struct">_MTR_MotorConfig</class>
-    <member kind="define">
-      <type>#define</type>
-      <name>MTR_MAX_CMD_HANDLE_COUNT</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8e9e66465a230b2f6f9534e94a0f1023</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorTmcConfig</type>
-      <name>MTR_MotorTmcConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8e5d65aeb018ac2da54d039d54cdd31a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorStepperConfig</type>
-      <name>MTR_MotorStepperConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8a4765221bb1f9d6957ab996f3058368</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorConfig</type>
-      <name>MTR_MotorConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gab7b8f555379b16be12ecb2e6ad2da56b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>enum _MTR_roundingMethod</type>
-      <name>MTR_roundingMethod_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga5142605594253bb6c632b95c962216ea</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorHandleImpl *</type>
-      <name>MTR_MotorHandle_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga80cb43273307560ca13a8df4797c8f54</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumeration">
-      <type></type>
-      <name>_MTR_roundingMethod</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga7bf26db923eb70b2a9ef666ee947cd4c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_DOWN</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_UP</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_NEAREST</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>MTR_task</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga494ccfe2699411bf54f0724b59a6f7bc</anchor>
-      <arglist>(void *pvParameters)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_init</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga78bd18ddbc517b9abafa26907d7024b7</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_init_handle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga32a7ed4ed137c9dda2798c858e1e9f90</anchor>
-      <arglist>(const MTR_MotorConfig_t config, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>MTR_get_motor_by_label</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gac4e0046683c4e47f0ce912ba0e161c5c</anchor>
-      <arglist>(const char *label, MTR_MotorHandle_t *handle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gabba85eb9f52af1883b128448d47b3cb1</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_absolute_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gae9bcd6416c1e134e40eff593378a9927</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_revolutions_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga0009f234502f98a977e0690ecd2a1200</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_velocity_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa41491a262db51dce2a88bae1129484a</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double velocity_deg_per_sec, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_acceleration_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga7e937f0ad9ddab717463b17cce655c92</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_stop_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga9a91668f2c96621416ea02069623bf20</anchor>
-      <arglist>(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_emergency_stop</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa51d8115cce00df1b0ec80007caaa73b</anchor>
-      <arglist>(MTR_MotorHandle_t handle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_clear_emergency_stop</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga838ccbc335d1e72d3499bd5c11de244b</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>uint8_t</type>
-      <name>MTR_is_emergency_stop_active</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga9b08e661f73cbeb7f005f6c7e7803adb</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_get_current_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa606ac87370e0682d0c0e11b9be662ca</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double *angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_get_movement_state_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga903efe086f153300adb0b1c39d0e9a74</anchor>
-      <arglist>(MTR_MotorHandle_t handle, STP_MovementState_t *state, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_home_position_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga0db9dcc5dd4f330658c2f7f815904140</anchor>
-      <arglist>(MTR_MotorHandle_t handle, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_synchronized_move_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad16d0c7b1d81fc07d8bdefc92d8db945</anchor>
-      <arglist>(MTR_MotorHandle_t *handles, double *angles, uint8_t count, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_run_current_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga1e7513c2f1600d0c3bac4747755fe07b</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double current_a, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_hold_current_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga3725ec3926b4c3f21e134c5c6260b3b5</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double current_a, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>double</type>
-      <name>MTR_steps_to_angle</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad959cd5529058e79916b8c7fd325f0db</anchor>
-      <arglist>(MTR_MotorHandle_t handle, int32_t steps)</arglist>
-    </member>
-    <member kind="function">
-      <type>int32_t</type>
-      <name>MTR_angle_to_steps</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad8b2b14707e03211ba090e859648005f</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_enable_freewheeling_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaf3c97798ed91d32cc6f9010163f7b17f</anchor>
-      <arglist>(MTR_MotorHandle_t handle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_disable_freewheeling_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga5a39510d1566426ceb0fb1d48bdbe2a4</anchor>
-      <arglist>(MTR_MotorHandle_t handle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-  </compound>
-  <compound kind="file">
     <name>motor_configs.h</name>
     <path>source/</path>
     <filename>motor__configs_8h.html</filename>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <member kind="function">
       <type>MTR_MotorConfig_t</type>
       <name>M_L_Arm</name>
@@ -4683,6 +4539,212 @@
     </member>
   </compound>
   <compound kind="file">
+    <name>motor_homing.c</name>
+    <path>source/</path>
+    <filename>motor__homing_8c.html</filename>
+    <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <includes id="log_8h" name="log.h" local="yes" import="no" module="no" objc="no">log.h</includes>
+    <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
+    <includes id="motor__convert_8h" name="motor_convert.h" local="yes" import="no" module="no" objc="no">motor_convert.h</includes>
+    <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <member kind="define">
+      <type>#define</type>
+      <name>MHM_LEFT_ARM_LABEL</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a37f8ebdb1e254b97c407e3e76da4444b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MHM_RIGHT_ARM_LABEL</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>abd27a27b41ff5613283c05e3cb31d5ad</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MHM_LEFT_ARM_DIRECTION</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ab68c4347481772c95bcb1f1b3b61e292</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MHM_RIGHT_ARM_DIRECTION</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ae4b6b72d573c2017c909f62963e73cf6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MHM_HOME_MAX_ANGLE_DEG</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a88703f7b00c6fb04f952327f435e12c0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>init_homing</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>aa92368a11a905685386d69e858002a1c</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>auto_homing</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ad17315c0825fccd3b95bf812e63d45c6</anchor>
+      <arglist>(MTR_MotorHandle_t handle, STP_Direction_t direction, uint16_t maxAngle, TickType_t deadline)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>wait_for_cmd_handle</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a528b3ece82abe97c400944720a44049a</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle, TickType_t deadline)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>resolve_arm_handles</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a0128360cbf788d941fe229d8475260f3</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_init</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a0e768e6bb4bd23473105bc202e93e9d4</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_home_left_arm</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a23a4a1bf1a2770d84e9410d909b3cf5a</anchor>
+      <arglist>(TickType_t deadline)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_home_right_arm</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>af9033ca7b842c58a619c280f65f1245c</anchor>
+      <arglist>(TickType_t deadline)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>MHM_homing_arm_interrupt_handler</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>aa278f610d7050ed2fa72afa46947a54b</anchor>
+      <arglist>(PORT_Type *port, uint32_t pin)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>GPIOD_IRQHANDLER</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a42292ff3cd65f389eeba0293c6dc7d4d</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static PORT_Type *</type>
+      <name>l_arm_home_port</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ac197d0116aa1634b2d0ab11fe1c0d9d0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static uint8_t</type>
+      <name>l_arm_home_pin</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a76cc7874e6ba7c7edb9367763f3abb7a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static PORT_Type *</type>
+      <name>r_arm_home_port</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ad94e853d505931ef6e8d3bbaf5036b28</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static uint8_t</type>
+      <name>r_arm_home_pin</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a83a05bb03b83e0c111232aa7617a4b16</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static MTR_MotorHandle_t</type>
+      <name>l_arm_handle</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a11536e762504348670f8937c7ed1fe39</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static MTR_MotorHandle_t</type>
+      <name>r_arm_handle</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>a0cb42ddf9f6e372e8706dd3f01878bc8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static volatile uint8_t</type>
+      <name>homingSuccessful</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>aa6da5821950d430363ae4e55b4e644d1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static volatile MTR_MotorHandle_t</type>
+      <name>homingHandle</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ae96c238f2a89e837c76a8beb68e396b9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static SemaphoreHandle_t</type>
+      <name>homingMutex</name>
+      <anchorfile>motor__homing_8c.html</anchorfile>
+      <anchor>ae0ed17bd71da5e9207ffca085790e834</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>motor_homing.h</name>
+    <path>source/</path>
+    <filename>motor__homing_8h.html</filename>
+    <includes id="motor__internal_8h" name="motor_internal.h" local="yes" import="no" module="no" objc="no">motor_internal.h</includes>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_init</name>
+      <anchorfile>motor__homing_8h.html</anchorfile>
+      <anchor>a0e768e6bb4bd23473105bc202e93e9d4</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_home_left_arm</name>
+      <anchorfile>motor__homing_8h.html</anchorfile>
+      <anchor>a23a4a1bf1a2770d84e9410d909b3cf5a</anchor>
+      <arglist>(TickType_t deadline)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MHM_home_right_arm</name>
+      <anchorfile>motor__homing_8h.html</anchorfile>
+      <anchor>af9033ca7b842c58a619c280f65f1245c</anchor>
+      <arglist>(TickType_t deadline)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>MHM_homing_arm_interrupt_handler</name>
+      <anchorfile>motor__homing_8h.html</anchorfile>
+      <anchor>aa278f610d7050ed2fa72afa46947a54b</anchor>
+      <arglist>(PORT_Type *port, uint32_t pin)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>motor_test.c</name>
     <path>source/</path>
     <filename>motor__test_8c.html</filename>
@@ -4690,10 +4752,11 @@
     <includes id="cli_8h" name="cli.h" local="yes" import="no" module="no" objc="no">cli.h</includes>
     <includes id="cli__utilities_8h" name="cli_utilities.h" local="yes" import="no" module="no" objc="no">cli_utilities.h</includes>
     <includes id="log_8h" name="log.h" local="yes" import="no" module="no" objc="no">log.h</includes>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <includes id="motor__test_8h" name="motor_test.h" local="yes" import="no" module="no" objc="no">motor_test.h</includes>
     <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
     <includes id="motor__configs_8h" name="motor_configs.h" local="yes" import="no" module="no" objc="no">motor_configs.h</includes>
+    <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
     <member kind="function">
       <type>void</type>
       <name>init_motor</name>
@@ -4761,17 +4824,26 @@
     <path>source/</path>
     <filename>motorCmd_8c.html</filename>
     <includes id="motorCmd_8h" name="motorCmd.h" local="yes" import="no" module="no" objc="no">motorCmd.h</includes>
-    <includes id="motor_8h" name="motor.h" local="yes" import="no" module="no" objc="no">motor.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <includes id="motor__convert_8h" name="motor_convert.h" local="yes" import="no" module="no" objc="no">motor_convert.h</includes>
     <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
     <includes id="cli_8h" name="cli.h" local="yes" import="no" module="no" objc="no">cli.h</includes>
     <includes id="cli__utilities_8h" name="cli_utilities.h" local="yes" import="no" module="no" objc="no">cli_utilities.h</includes>
     <includes id="log_8h" name="log.h" local="yes" import="no" module="no" objc="no">log.h</includes>
+    <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
     <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
     <member kind="define">
       <type>#define</type>
       <name>MCMD_COMMAND_TIMEOUT_MS</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>ab11ed8b7a7fd9809ebe8ec91cf43c926</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MCMD_HOMING_TIMEOUT_MS</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>aae22002f251e542e9fe72d51e868c291</anchor>
       <arglist></arglist>
     </member>
     <member kind="function" static="yes">
@@ -4884,6 +4956,20 @@
       <name>cmd_motor_disable_freewheeling</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>a8594612b10e19650311978ac4b1a771f</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
+      <name>cmd_motor_home_left_arm</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a74fa9df3d9423f4e679164f4a2ec387e</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
+      <name>cmd_motor_home_right_arm</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a5b6d75c4c9152c8e3ed2a8b02e0d0281</anchor>
       <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
     </member>
     <member kind="function" static="yes">
@@ -5017,6 +5103,20 @@
       <name>xDisableFreewheelingCmd</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>a579caf44262ed312c85b25c74bb0ebb8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
+      <name>xHomeLeftArmCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>ac4cf14897e7f795a9f3d94c86fdcf540</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
+      <name>xHomeRightArmCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>ae27e21440366b4c233eafa35004dce2f</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -8014,6 +8114,38 @@
     <name>MOTOR_Convert_Internal</name>
     <title>Motor Convert Internal</title>
     <filename>group__MOTOR__Convert__Internal.html</filename>
+    <member kind="typedef">
+      <type>enum _MTR_roundingMethod</type>
+      <name>MTR_roundingMethod_t</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>ga5142605594253bb6c632b95c962216ea</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>_MTR_roundingMethod</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>ga7bf26db923eb70b2a9ef666ee947cd4c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_DOWN</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_UP</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ROUND_NEAREST</name>
+      <anchorfile>group__MOTOR__Convert__Internal.html</anchorfile>
+      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>double</type>
       <name>MTR_steps_to_angle</name>
@@ -8031,7 +8163,7 @@
   </compound>
   <compound kind="group">
     <name>MOTOR_Facade_Module</name>
-    <title>Motor Facade Module</title>
+    <title>Motor Module</title>
     <filename>group__MOTOR__Facade__Module.html</filename>
     <subgroup>MOTOR_Convert_Internal</subgroup>
     <subgroup>MOTOR_Init_Internal</subgroup>
@@ -8040,6 +8172,44 @@
     <subgroup>MOTOR_Process_Internal</subgroup>
     <subgroup>MOTOR_Sync_Internal</subgroup>
     <subgroup>MOTOR_TMC_Internal</subgroup>
+    <class kind="struct">_MTR_MotorTmcConfig</class>
+    <class kind="struct">_MTR_MotorStepperConfig</class>
+    <class kind="struct">_MTR_MotorConfig</class>
+    <member kind="define">
+      <type>#define</type>
+      <name>MTR_MAX_CMD_HANDLE_COUNT</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8e9e66465a230b2f6f9534e94a0f1023</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorTmcConfig</type>
+      <name>MTR_MotorTmcConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8e5d65aeb018ac2da54d039d54cdd31a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorStepperConfig</type>
+      <name>MTR_MotorStepperConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga8a4765221bb1f9d6957ab996f3058368</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorConfig</type>
+      <name>MTR_MotorConfig_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>gab7b8f555379b16be12ecb2e6ad2da56b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _MTR_MotorHandleImpl *</type>
+      <name>MTR_MotorHandle_t</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>ga80cb43273307560ca13a8df4797c8f54</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>MTR_task</name>
@@ -8126,10 +8296,10 @@
     </member>
     <member kind="function">
       <type>status_t</type>
-      <name>MTR_set_home_position_async</name>
+      <name>MTR_set_home_position</name>
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
-      <anchor>ga0db9dcc5dd4f330658c2f7f815904140</anchor>
-      <arglist>(MTR_MotorHandle_t handle, CHD_CmdHandle_t *cmdHandle)</arglist>
+      <anchor>ga3215be0474c3137b5dcd9793930cb8c8</anchor>
+      <arglist>(MTR_MotorHandle_t handle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -8507,6 +8677,13 @@
       <anchor>ga4cf2fb96c272e16cfd29187dd8c84e87</anchor>
       <arglist>[MTR_MAX_PARALLEL_TASKS]</arglist>
     </member>
+    <member kind="variable">
+      <type>volatile uint8_t</type>
+      <name>emergencyStopFlag</name>
+      <anchorfile>group__MOTOR__Internal.html</anchorfile>
+      <anchor>gaf1047ff67cd2b16bc743c9b996df0d81</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>MOTOR_Motion_Internal</name>
@@ -8767,6 +8944,13 @@
       <anchor>gabcd2ae8287932573d44ac30c944b4d58</anchor>
       <arglist>(STP_Handle_t handle, double endVelocity, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
     </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STP_homing_stop</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga642689cbcf06a53289aa15aa93070e1e</anchor>
+      <arglist>(STP_Handle_t handle)</arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>STEPPER_Internal</name>
@@ -8990,6 +9174,13 @@
       <anchor>gab2a34e49c14557c23429b940acaf959e</anchor>
       <arglist>(STP_CmdQueueItem_t queueItem)</arglist>
     </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>STEPPER_Profile_Internal</name>
@@ -9027,242 +9218,6 @@
       <anchorfile>group__STEPPER__Timing__Internal.html</anchorfile>
       <anchor>gab257a445cc22f28934ab813d37f7a3f8</anchor>
       <arglist>(void)</arglist>
-    </member>
-  </compound>
-  <compound kind="group">
-    <name>MOTOR_Module</name>
-    <title>Motor Control Module</title>
-    <filename>group__MOTOR__Module.html</filename>
-    <class kind="struct">_MTR_MotorTmcConfig</class>
-    <class kind="struct">_MTR_MotorStepperConfig</class>
-    <class kind="struct">_MTR_MotorConfig</class>
-    <member kind="define">
-      <type>#define</type>
-      <name>MTR_MAX_CMD_HANDLE_COUNT</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8e9e66465a230b2f6f9534e94a0f1023</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorTmcConfig</type>
-      <name>MTR_MotorTmcConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8e5d65aeb018ac2da54d039d54cdd31a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorStepperConfig</type>
-      <name>MTR_MotorStepperConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga8a4765221bb1f9d6957ab996f3058368</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorConfig</type>
-      <name>MTR_MotorConfig_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gab7b8f555379b16be12ecb2e6ad2da56b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>enum _MTR_roundingMethod</type>
-      <name>MTR_roundingMethod_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga5142605594253bb6c632b95c962216ea</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>struct _MTR_MotorHandleImpl *</type>
-      <name>MTR_MotorHandle_t</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga80cb43273307560ca13a8df4797c8f54</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumeration">
-      <type></type>
-      <name>_MTR_roundingMethod</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga7bf26db923eb70b2a9ef666ee947cd4c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_DOWN</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_UP</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>ROUND_NEAREST</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>MTR_task</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga494ccfe2699411bf54f0724b59a6f7bc</anchor>
-      <arglist>(void *pvParameters)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_init</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga78bd18ddbc517b9abafa26907d7024b7</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_init_handle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga32a7ed4ed137c9dda2798c858e1e9f90</anchor>
-      <arglist>(const MTR_MotorConfig_t config, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>MTR_get_motor_by_label</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gac4e0046683c4e47f0ce912ba0e161c5c</anchor>
-      <arglist>(const char *label, MTR_MotorHandle_t *handle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gabba85eb9f52af1883b128448d47b3cb1</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_absolute_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gae9bcd6416c1e134e40eff593378a9927</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_move_revolutions_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga0009f234502f98a977e0690ecd2a1200</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double revolutions, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_velocity_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa41491a262db51dce2a88bae1129484a</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double velocity_deg_per_sec, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_acceleration_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga7e937f0ad9ddab717463b17cce655c92</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_stop_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga9a91668f2c96621416ea02069623bf20</anchor>
-      <arglist>(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_emergency_stop</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa51d8115cce00df1b0ec80007caaa73b</anchor>
-      <arglist>(MTR_MotorHandle_t handle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_clear_emergency_stop</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga838ccbc335d1e72d3499bd5c11de244b</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>uint8_t</type>
-      <name>MTR_is_emergency_stop_active</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga9b08e661f73cbeb7f005f6c7e7803adb</anchor>
-      <arglist>(void)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_get_current_angle_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaa606ac87370e0682d0c0e11b9be662ca</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double *angle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_get_movement_state_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga903efe086f153300adb0b1c39d0e9a74</anchor>
-      <arglist>(MTR_MotorHandle_t handle, STP_MovementState_t *state, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_home_position_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga0db9dcc5dd4f330658c2f7f815904140</anchor>
-      <arglist>(MTR_MotorHandle_t handle, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_synchronized_move_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad16d0c7b1d81fc07d8bdefc92d8db945</anchor>
-      <arglist>(MTR_MotorHandle_t *handles, double *angles, uint8_t count, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_run_current_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga1e7513c2f1600d0c3bac4747755fe07b</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double current_a, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_set_hold_current_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga3725ec3926b4c3f21e134c5c6260b3b5</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double current_a, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>double</type>
-      <name>MTR_steps_to_angle</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad959cd5529058e79916b8c7fd325f0db</anchor>
-      <arglist>(MTR_MotorHandle_t handle, int32_t steps)</arglist>
-    </member>
-    <member kind="function">
-      <type>int32_t</type>
-      <name>MTR_angle_to_steps</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gad8b2b14707e03211ba090e859648005f</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_enable_freewheeling_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>gaf3c97798ed91d32cc6f9010163f7b17f</anchor>
-      <arglist>(MTR_MotorHandle_t handle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
-    </member>
-    <member kind="function">
-      <type>status_t</type>
-      <name>MTR_disable_freewheeling_async</name>
-      <anchorfile>group__MOTOR__Module.html</anchorfile>
-      <anchor>ga5a39510d1566426ceb0fb1d48bdbe2a4</anchor>
-      <arglist>(MTR_MotorHandle_t handle, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -9476,9 +9431,9 @@
     <file>log.c</file>
     <file>log.h</file>
     <file>main.c</file>
-    <file>motor.c</file>
-    <file>motor.h</file>
     <file>motor_configs.h</file>
+    <file>motor_homing.c</file>
+    <file>motor_homing.h</file>
     <file>motor_test.c</file>
     <file>motor_test.h</file>
     <file>motorCmd.c</file>

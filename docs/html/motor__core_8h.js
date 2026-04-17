@@ -1,5 +1,10 @@
 var motor__core_8h =
 [
+    [ "MTR_MAX_CMD_HANDLE_COUNT", "group__MOTOR__Facade__Module.html#ga8e9e66465a230b2f6f9534e94a0f1023", null ],
+    [ "MTR_MotorConfig_t", "group__MOTOR__Facade__Module.html#gab7b8f555379b16be12ecb2e6ad2da56b", null ],
+    [ "MTR_MotorHandle_t", "group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54", null ],
+    [ "MTR_MotorStepperConfig_t", "group__MOTOR__Facade__Module.html#ga8a4765221bb1f9d6957ab996f3058368", null ],
+    [ "MTR_MotorTmcConfig_t", "group__MOTOR__Facade__Module.html#ga8e5d65aeb018ac2da54d039d54cdd31a", null ],
     [ "MTR_clear_emergency_stop", "group__MOTOR__Facade__Module.html#ga838ccbc335d1e72d3499bd5c11de244b", null ],
     [ "MTR_disable_freewheeling_async", "group__MOTOR__Facade__Module.html#ga5a39510d1566426ceb0fb1d48bdbe2a4", null ],
     [ "MTR_emergency_stop", "group__MOTOR__Facade__Module.html#gaa51d8115cce00df1b0ec80007caaa73b", null ],
@@ -15,7 +20,7 @@ var motor__core_8h =
     [ "MTR_move_revolutions_async", "group__MOTOR__Facade__Module.html#ga0009f234502f98a977e0690ecd2a1200", null ],
     [ "MTR_set_acceleration_async", "group__MOTOR__Facade__Module.html#ga7e937f0ad9ddab717463b17cce655c92", null ],
     [ "MTR_set_hold_current_async", "group__MOTOR__Facade__Module.html#ga3725ec3926b4c3f21e134c5c6260b3b5", null ],
-    [ "MTR_set_home_position_async", "group__MOTOR__Facade__Module.html#ga0db9dcc5dd4f330658c2f7f815904140", null ],
+    [ "MTR_set_home_position", "group__MOTOR__Facade__Module.html#ga3215be0474c3137b5dcd9793930cb8c8", null ],
     [ "MTR_set_run_current_async", "group__MOTOR__Facade__Module.html#ga1e7513c2f1600d0c3bac4747755fe07b", null ],
     [ "MTR_set_velocity_async", "group__MOTOR__Facade__Module.html#gaa41491a262db51dce2a88bae1129484a", null ],
     [ "MTR_stop_async", "group__MOTOR__Facade__Module.html#ga9a91668f2c96621416ea02069623bf20", null ],

@@ -21,7 +21,7 @@ var searchData=
   ['_5fmtr_5fmoveanglecmddata_18',['_MTR_MoveAngleCmdData',['../struct__MTR__MoveAngleCmdData.html',1,'']]],
   ['_5fmtr_5fmoverevolutionscmddata_19',['_MTR_MoveRevolutionsCmdData',['../struct__MTR__MoveRevolutionsCmdData.html',1,'']]],
   ['_5fmtr_5fparalleltaskitem_20',['_MTR_ParallelTaskItem',['../struct__MTR__ParallelTaskItem.html',1,'']]],
-  ['_5fmtr_5froundingmethod_21',['_MTR_roundingMethod',['../group__MOTOR__Module.html#ga7bf26db923eb70b2a9ef666ee947cd4c',1,'motor.h']]],
+  ['_5fmtr_5froundingmethod_21',['_MTR_roundingMethod',['../group__MOTOR__Convert__Internal.html#ga7bf26db923eb70b2a9ef666ee947cd4c',1,'motor_convert.h']]],
   ['_5fmtr_5fsetaccelerationcmddata_22',['_MTR_SetAccelerationCmdData',['../struct__MTR__SetAccelerationCmdData.html',1,'']]],
   ['_5fmtr_5fsetholdcurrentcmddata_23',['_MTR_SetHoldCurrentCmdData',['../struct__MTR__SetHoldCurrentCmdData.html',1,'']]],
   ['_5fmtr_5fsetruncurrentcmddata_24',['_MTR_SetRunCurrentCmdData',['../struct__MTR__SetRunCurrentCmdData.html',1,'']]],

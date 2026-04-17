@@ -1,5 +1,14 @@
 var NAVTREEINDEX4 =
 {
+"tmc2209__process_8h_source.html":[2,0,0,1,1,4],
+"tmc2209__setup_8c.html":[2,0,0,1,1,5],
+"tmc2209__setup_8c.html#a2dc3bd8477966c796448629c740eb740":[2,0,0,1,1,5,1],
+"tmc2209__setup_8c.html#a4882ec884821cfc943288f0a89c7b966":[2,0,0,1,1,5,0],
+"tmc2209__setup_8c.html#ac09b5c77478480426679a83e24155821":[2,0,0,1,1,5,3],
+"tmc2209__setup_8c.html#af33a21c3a075ce4d06cc8f395ecf3f06":[2,0,0,1,1,5,2],
+"tmc2209__setup_8c.html#af729e817251389added7c43069c20dad":[2,0,0,1,1,5,4],
+"tmc2209__setup_8c_source.html":[2,0,0,1,1,5],
+"tmc2209__setup_8h.html":[2,0,0,1,1,6],
 "tmc2209__setup_8h_source.html":[2,0,0,1,1,6],
 "tmc2209__shared_8h.html":[2,0,0,1,1,7],
 "tmc2209__shared_8h.html#a01c24c42cd5b0d09e5cb3e89083f97b3":[2,0,0,1,1,7,2],

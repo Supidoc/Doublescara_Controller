@@ -5,6 +5,5 @@ var searchData=
   ['command_20line_20interface_20module_2',['Command Line Interface Module',['../group__CLI__Module.html',1,'']]],
   ['command_20module_3',['Motor Command Module',['../group__MotorCmd__Module.html',1,'']]],
   ['configuration_20module_4',['Motor Configuration Module',['../group__MotorConfigs__Module.html',1,'']]],
-  ['control_20module_5',['Motor Control Module',['../group__MOTOR__Module.html',1,'']]],
-  ['convert_20internal_6',['Motor Convert Internal',['../group__MOTOR__Convert__Internal.html',1,'']]]
+  ['convert_20internal_5',['Motor Convert Internal',['../group__MOTOR__Convert__Internal.html',1,'']]]
 ];

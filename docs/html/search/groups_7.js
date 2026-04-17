@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['init_20internal_0',['Motor Init Internal',['../group__MOTOR__Init__Internal.html',1,'']]],
-  ['interface_20module_1',['Command Line Interface Module',['../group__CLI__Module.html',1,'']]],
-  ['internal_2',['Internal',['../group__MOTOR__Convert__Internal.html',1,'Motor Convert Internal'],['../group__MOTOR__Init__Internal.html',1,'Motor Init Internal'],['../group__MOTOR__Internal.html',1,'Motor Internal'],['../group__MOTOR__Motion__Internal.html',1,'Motor Motion Internal'],['../group__MOTOR__Process__Internal.html',1,'Motor Process Internal'],['../group__MOTOR__Sync__Internal.html',1,'Motor Sync Internal'],['../group__MOTOR__TMC__Internal.html',1,'Motor TMC Internal'],['../group__STEPPER__Internal.html',1,'Stepper Internal'],['../group__STEPPER__Process__Internal.html',1,'Stepper Process Internal'],['../group__STEPPER__Profile__Internal.html',1,'Stepper Profile Internal'],['../group__STEPPER__Timing__Internal.html',1,'Stepper Timing Internal'],['../group__TMC2209__Internal.html',1,'TMC2209 Internal'],['../group__TMC2209__Process__Internal.html',1,'TMC2209 Process Internal'],['../group__TMC2209__Setup__Internal.html',1,'TMC2209 Setup Internal'],['../group__TMC2209__UART__Internal.html',1,'TMC2209 UART Internal']]]
+  ['line_20interface_20module_0',['Command Line Interface Module',['../group__CLI__Module.html',1,'']]],
+  ['logging_20module_1',['Logging Module',['../group__LOG__Module.html',1,'']]]
 ];

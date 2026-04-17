@@ -1,7 +1,7 @@
 var searchData=
 [
   ['magic_0',['magic',['../struct__LOG__LogHeaderPrefix.html#a7c967bbd0304a49709e58f90b07a6047',1,'_LOG_LogHeaderPrefix::magic'],['../struct__LOG__LogHeader.html#aede1f42d8f97b5de6b11888826430202',1,'_LOG_LogHeader::magic']]],
-  ['microstep_1',['microstep',['../struct__MTR__MotorHandleImpl.html#a25782e0bcd0945f0c673b81b6f5d369d',1,'_MTR_MotorHandleImpl::microstep'],['../struct__MTR__MotorConfig.html#a33a1999cae89abb7f352f30d1358d1b6',1,'_MTR_MotorConfig::microstep']]],
+  ['microstep_1',['microstep',['../struct__MTR__MotorConfig.html#a33a1999cae89abb7f352f30d1358d1b6',1,'_MTR_MotorConfig::microstep'],['../struct__MTR__MotorHandleImpl.html#a25782e0bcd0945f0c673b81b6f5d369d',1,'_MTR_MotorHandleImpl::microstep']]],
   ['microstepping_2',['microstepping',['../struct__TMC__HandleImpl.html#a3d317c83a5de5777c4218eb0a0e886ea',1,'_TMC_HandleImpl::microstepping'],['../struct__TMC__CommandQueueItem.html#aac30f4d7f37f480c264ed4c937fddb67',1,'_TMC_CommandQueueItem::microstepping'],['../struct__TMC__Config.html#a5f37100fc63e8b1041fc57a2288fb430',1,'_TMC_Config::microstepping']]],
   ['motorhandles_3',['motorHandles',['../group__MOTOR__Internal.html#gaeea8bff4d30a9428743420d040668cc9',1,'motorHandles:&#160;motor_core.c'],['../group__MOTOR__Internal.html#gaeea8bff4d30a9428743420d040668cc9',1,'motorHandles:&#160;motor_core.c']]],
   ['move_4',['move',['../struct__STP__CmdQueueItem.html#a86a5e30eb162c3e66b2172bd7c53c39c',1,'_STP_CmdQueueItem']]],

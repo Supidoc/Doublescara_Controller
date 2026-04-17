@@ -40,6 +40,7 @@ var motor__internal_8h =
       [ "MTR_CMD_DISABLE_FREEWHEELING", "group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25badb0d765fa89ceb4d0a33eed3f45bc2a9", null ]
     ] ],
     [ "MTRi_process_cmd", "group__MOTOR__Internal.html#ga928b9a79d41efe57d584e7422d5d33e1", null ],
+    [ "emergencyStopFlag", "group__MOTOR__Internal.html#gaf1047ff67cd2b16bc743c9b996df0d81", null ],
     [ "motorHandles", "group__MOTOR__Internal.html#gaeea8bff4d30a9428743420d040668cc9", null ],
     [ "mtrCmdHandles", "group__MOTOR__Internal.html#gadfeb8f740ba81e3e261923bb6b4b0251", null ],
     [ "mtrCmdQueue", "group__MOTOR__Internal.html#ga523c31a34713b68f380469e85815e59d", null ],
