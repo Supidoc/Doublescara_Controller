@@ -1,0 +1,542 @@
+\doxysection{Stepper Module }
+\hypertarget{group__STEPPER__Module}{}\label{group__STEPPER__Module}\index{Stepper Module@{Stepper Module}}
+
+
+Public task-\/safe API for stepper movement and configuration commands.  
+
+
+Collaboration diagram for Stepper Module:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{group__STEPPER__Module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__STEPPER__Internal}{Stepper Internal}}
+\begin{DoxyCompactList}\small\item\em Internal command payloads and shared subsystem state. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__STEPPER__Process__Internal}{Stepper Process Internal}}
+\begin{DoxyCompactList}\small\item\em Internal queue send/\+dequeue and stepper command dispatch helpers. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__STEPPER__Profile__Internal}{Stepper Profile Internal}}
+\begin{DoxyCompactList}\small\item\em Internal acceleration/\+deceleration profile planning utilities. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__STEPPER__Timing__Internal}{Stepper Timing Internal}}
+\begin{DoxyCompactList}\small\item\em Internal helpers for movement completion checks and ISR handle cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the stepper motor control module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing stepper motor commands. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga718622f8935169a07606900d30e35dc3}{STP\+\_\+get\+\_\+default\+\_\+config}} (\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Retrieves the default configuration for a stepper motor handle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gabf526b7c6303b8dadfe76f34e52a6f97}{STP\+\_\+init\+\_\+handle\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Initializes a stepper motor with the provided configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d}{STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+label}} (const char \texorpdfstring{$\ast$}{*}label, \doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}handle)
+\begin{DoxyCompactList}\small\item\em Retrieves the stepper motor handle by its label identifier. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\+\_\+move\+\_\+relative\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sends a relative movement command to a stepper motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b}{STP\+\_\+stop\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t do\+Deceleration, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Stops a stepper motor movement. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2}{STP\+\_\+reset\+\_\+absolute\+\_\+position}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Resets the tracked absolute position of a stepper motor to zero. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gadeffd3212366b893459a9bb026bd88b8}{STP\+\_\+move\+\_\+relative\+\_\+prepare\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t steps, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Prepares a relative movement command without starting motion immediately. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gab715c7bd8595a08979240255362b2571}{STP\+\_\+trigger\+\_\+prepared\+\_\+moves\+\_\+async}} (Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Starts all previously prepared movements. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\+\_\+get\+\_\+absolute\+\_\+steps}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, int32\+\_\+t \texorpdfstring{$\ast$}{*}absolute\+Steps)
+\begin{DoxyCompactList}\small\item\em Reads the current absolute step position of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gaa650351470c587dbe89b773ee800708c}{STP\+\_\+get\+\_\+acceleration}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}acceleration)
+\begin{DoxyCompactList}\small\item\em Gets the configured acceleration of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gaef3ff2c4a411d2d9d67ba157f81619f5}{STP\+\_\+get\+\_\+end\+\_\+velocity}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}end\+Velocity)
+\begin{DoxyCompactList}\small\item\em Gets the configured target end velocity of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}{STP\+\_\+get\+\_\+movement\+\_\+state}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state)
+\begin{DoxyCompactList}\small\item\em Retrieves the current movement state of a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda}{STP\+\_\+set\+\_\+acceleration\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double acceleration, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the acceleration parameter for a motor. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58}{STP\+\_\+set\+\_\+end\+\_\+velocity\+\_\+async}} (\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} handle, double end\+Velocity, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Sets the target end velocity parameter for a motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Public task-\/safe API for stepper movement and configuration commands. 
+
+This module exposes the external stepper interface used by higher-\/level modules. 
+
+\label{doc-func-members}
+\Hypertarget{group__STEPPER__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}\index{Stepper Module@{Stepper Module}!STP\_get\_absolute\_steps@{STP\_get\_absolute\_steps}}
+\index{STP\_get\_absolute\_steps@{STP\_get\_absolute\_steps}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_absolute\_steps()}{STP\_get\_absolute\_steps()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6} 
+status\+\_\+t STP\+\_\+get\+\_\+absolute\+\_\+steps (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{absolute\+Steps}{}\end{DoxyParamCaption})}
+
+
+
+Reads the current absolute step position of a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to query. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em absolute\+Steps} & Pointer receiving the absolute position in steps.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the value is returned successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails.. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00202}{202}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gaa650351470c587dbe89b773ee800708c}\index{Stepper Module@{Stepper Module}!STP\_get\_acceleration@{STP\_get\_acceleration}}
+\index{STP\_get\_acceleration@{STP\_get\_acceleration}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_acceleration()}{STP\_get\_acceleration()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gaa650351470c587dbe89b773ee800708c} 
+status\+\_\+t STP\+\_\+get\+\_\+acceleration (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{acceleration}{}\end{DoxyParamCaption})}
+
+
+
+Gets the configured acceleration of a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to query. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em acceleration} & Pointer receiving acceleration in steps/\+s\texorpdfstring{$^\wedge$}{\string^}2.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the acceleration is returned successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00212}{212}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga718622f8935169a07606900d30e35dc3}\index{Stepper Module@{Stepper Module}!STP\_get\_default\_config@{STP\_get\_default\_config}}
+\index{STP\_get\_default\_config@{STP\_get\_default\_config}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_default\_config()}{STP\_get\_default\_config()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga718622f8935169a07606900d30e35dc3} 
+status\+\_\+t STP\+\_\+get\+\_\+default\+\_\+config (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the default configuration for a stepper motor handle. 
+
+This function populates a \doxylink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t} structure with default values for initializing a stepper motor control instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em config} & Pointer to a \doxylink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t} structure to be filled with default configuration values. Must not be NULL.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the default configuration is successfully retrieved. k\+Status\+\_\+\+Fail if the config pointer is NULL. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00281}{281}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gaef3ff2c4a411d2d9d67ba157f81619f5}\index{Stepper Module@{Stepper Module}!STP\_get\_end\_velocity@{STP\_get\_end\_velocity}}
+\index{STP\_get\_end\_velocity@{STP\_get\_end\_velocity}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_end\_velocity()}{STP\_get\_end\_velocity()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gaef3ff2c4a411d2d9d67ba157f81619f5} 
+status\+\_\+t STP\+\_\+get\+\_\+end\+\_\+velocity (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{end\+Velocity}{}\end{DoxyParamCaption})}
+
+
+
+Gets the configured target end velocity of a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to query. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em end\+Velocity} & Pointer receiving end velocity in steps/\+s.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the end velocity is returned successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00222}{222}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d}\index{Stepper Module@{Stepper Module}!STP\_get\_handle\_by\_label@{STP\_get\_handle\_by\_label}}
+\index{STP\_get\_handle\_by\_label@{STP\_get\_handle\_by\_label}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_handle\_by\_label()}{STP\_get\_handle\_by\_label()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d} 
+status\+\_\+t STP\+\_\+get\+\_\+handle\+\_\+by\+\_\+label (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{label}{, }\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the stepper motor handle by its label identifier. 
+
+This function searches for a stepper motor by its label and returns a pointer to its handle structure if found.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em label} & The label identifier of the stepper motor to find. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em handle} & Pointer to store the found stepper motor handle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The label must match exactly as configured during STP\+\_\+init\+\_\+stepper().
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the stepper motor is found. k\+Status\+\_\+\+Fail if the stepper motor with the given label is not found.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+STP\+\_\+init\+\_\+stepper() 
+
+STP\+\_\+\+Stepper\+Handle\+\_\+t 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00139}{139}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}\index{Stepper Module@{Stepper Module}!STP\_get\_movement\_state@{STP\_get\_movement\_state}}
+\index{STP\_get\_movement\_state@{STP\_get\_movement\_state}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_get\_movement\_state()}{STP\_get\_movement\_state()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d} 
+status\+\_\+t STP\+\_\+get\+\_\+movement\+\_\+state (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{\doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the current movement state of a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to query. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em state} & Pointer receiving the current state.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the state is returned successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00232}{232}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}\index{Stepper Module@{Stepper Module}!STP\_init@{STP\_init}}
+\index{STP\_init@{STP\_init}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_init()}{STP\_init()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d} 
+status\+\_\+t STP\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the stepper motor control module. 
+
+This function initializes the movement and configuration queues used for task-\/safe communication. It also initialzes the timer and gpio peripheral for step generation. It must be called before using any other functions in this module.
+
+\begin{DoxyNote}{Note}
+This function is NOT task-\/safe and must be called during system initialization. 
+
+The \doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} should be started after this function completes successfully.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if initialization is successful. k\+Status\+\_\+\+Fail if queue creation fails.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00050}{50}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gabf526b7c6303b8dadfe76f34e52a6f97}\index{Stepper Module@{Stepper Module}!STP\_init\_handle\_async@{STP\_init\_handle\_async}}
+\index{STP\_init\_handle\_async@{STP\_init\_handle\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_init\_handle\_async()}{STP\_init\_handle\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gabf526b7c6303b8dadfe76f34e52a6f97} 
+status\+\_\+t STP\+\_\+init\+\_\+handle\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}}]{config}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a stepper motor with the provided configuration. 
+
+This function sends a configuration command to the stepper control task. The stepper motor will be configured according to the provided parameters.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em config} & Configuration structure containing stepper parameters. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the initialization process. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called after \doxylink{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()}. 
+
+Configuration is applied asynchronously by the \doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()}.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the configuration is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t} 
+
+\doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00123}{123}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}\index{Stepper Module@{Stepper Module}!STP\_move\_relative\_async@{STP\_move\_relative\_async}}
+\index{STP\_move\_relative\_async@{STP\_move\_relative\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_move\_relative\_async()}{STP\_move\_relative\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e} 
+status\+\_\+t STP\+\_\+move\+\_\+relative\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{int32\+\_\+t}]{steps}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Sends a relative movement command to a stepper motor. 
+
+This function adds a movement command to the queue for the specified stepper. The movement will be executed asynchronously by the STP\+\_\+task function. The direction is encoded in the sign of the steps parameter:\+ positive values move counter-\/clockwise (CCW), negative values move clockwise (CW).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to move \\
+\hline
+\doxymbox{\texttt{in}}  & {\em steps} & Number of steps to move (positive=CCW, negative=CW). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The actual movement occurs in the \doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()} and is non-\/blocking. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Multiple calls will queue movements to execute sequentially.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{step__shared_8h_af161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00106}{106}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gadeffd3212366b893459a9bb026bd88b8}\index{Stepper Module@{Stepper Module}!STP\_move\_relative\_prepare\_async@{STP\_move\_relative\_prepare\_async}}
+\index{STP\_move\_relative\_prepare\_async@{STP\_move\_relative\_prepare\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_move\_relative\_prepare\_async()}{STP\_move\_relative\_prepare\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gadeffd3212366b893459a9bb026bd88b8} 
+status\+\_\+t STP\+\_\+move\+\_\+relative\+\_\+prepare\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{int32\+\_\+t}]{steps}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Prepares a relative movement command without starting motion immediately. 
+
+This function stores a movement command in the prepared state so multiple motors can be started in a synchronized way with STP\+\_\+trigger\+\_\+prepared\+\_\+moves().
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to prepare. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em steps} & Relative step count to prepare (positive=CCW, negative=CW). \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion.
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the prepare command is accepted. k\+Status\+\_\+\+Fail if the command cannot be queued or completed before deadline.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+STP\+\_\+trigger\+\_\+prepared\+\_\+moves() 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00171}{171}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2}\index{Stepper Module@{Stepper Module}!STP\_reset\_absolute\_position@{STP\_reset\_absolute\_position}}
+\index{STP\_reset\_absolute\_position@{STP\_reset\_absolute\_position}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_reset\_absolute\_position()}{STP\_reset\_absolute\_position()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2} 
+status\+\_\+t STP\+\_\+reset\+\_\+absolute\+\_\+position (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Resets the tracked absolute position of a stepper motor to zero. 
+
+This function queues a command that clears the software-\/maintained absolute step counter for the selected motor handle.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle whose absolute position is reset.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command is accepted and completed. k\+Status\+\_\+\+Fail if the command cannot be queued. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00161}{161}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda}\index{Stepper Module@{Stepper Module}!STP\_set\_acceleration\_async@{STP\_set\_acceleration\_async}}
+\index{STP\_set\_acceleration\_async@{STP\_set\_acceleration\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_set\_acceleration\_async()}{STP\_set\_acceleration\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda} 
+status\+\_\+t STP\+\_\+set\+\_\+acceleration\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{acceleration}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Sets the acceleration parameter for a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to configure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em acceleration} & New acceleration in steps/\+s\texorpdfstring{$^\wedge$}{\string^}2. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the acceleration is updated successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails, or deadline expires. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00242}{242}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58}\index{Stepper Module@{Stepper Module}!STP\_set\_end\_velocity\_async@{STP\_set\_end\_velocity\_async}}
+\index{STP\_set\_end\_velocity\_async@{STP\_set\_end\_velocity\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_set\_end\_velocity\_async()}{STP\_set\_end\_velocity\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58} 
+status\+\_\+t STP\+\_\+set\+\_\+end\+\_\+velocity\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{double}]{end\+Velocity}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Sets the target end velocity parameter for a motor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to configure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em end\+Velocity} & New end velocity in steps/\+s. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for command completion. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the end velocity is updated successfully. k\+Status\+\_\+\+Fail if parameters are invalid, queueing fails, or deadline expires. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00259}{259}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b}\index{Stepper Module@{Stepper Module}!STP\_stop\_async@{STP\_stop\_async}}
+\index{STP\_stop\_async@{STP\_stop\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_stop\_async()}{STP\_stop\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b} 
+status\+\_\+t STP\+\_\+stop\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{do\+Deceleration}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Stops a stepper motor movement. 
+
+This function sends a command to stop the specified stepper motor. The motor can be stopped immediately or with a deceleration phase to smoothly bring it to rest, depending on the do\+Deceleration parameter.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em handle} & Stepper motor handle to stop \\
+\hline
+\doxymbox{\texttt{in}}  & {\em do\+Deceleration} & If 1, the motor will decelerate to a stop. If 0, the motor will stop immediately. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em Command} & Handle to await for completion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is TASK-\/\+SAFE and can be called from any task context. 
+
+The stop command is queued and executed by the \doxylink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\+\_\+task()}.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the stop command is successfully queued. k\+Status\+\_\+\+Fail if the queue is full or an error occurs.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+STP\+\_\+move\+\_\+relative() 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00089}{89}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}\index{Stepper Module@{Stepper Module}!STP\_task@{STP\_task}}
+\index{STP\_task@{STP\_task}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_task()}{STP\_task()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67} 
+void STP\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Task function for processing stepper motor commands. 
+
+This function is intended to be run as a Free\+RTOS task. It continuously processes configuration and movement commands from the queues and manages the stepper motor state machine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (not used in this implementation).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This task should be started after \doxylink{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()} completes successfully. 
+
+This task is blocked on command queues and wakes when commands are available. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function does not return; it is expected to run as a perpetual Free\+RTOS task.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\+\_\+init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00080}{80}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Module_gab715c7bd8595a08979240255362b2571}\index{Stepper Module@{Stepper Module}!STP\_trigger\_prepared\_moves\_async@{STP\_trigger\_prepared\_moves\_async}}
+\index{STP\_trigger\_prepared\_moves\_async@{STP\_trigger\_prepared\_moves\_async}!Stepper Module@{Stepper Module}}
+\doxysubsubsection{\texorpdfstring{STP\_trigger\_prepared\_moves\_async()}{STP\_trigger\_prepared\_moves\_async()}}
+{\footnotesize\ttfamily \label{group__STEPPER__Module_gab715c7bd8595a08979240255362b2571} 
+status\+\_\+t STP\+\_\+trigger\+\_\+prepared\+\_\+moves\+\_\+async (\begin{DoxyParamCaption}\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Starts all previously prepared movements. 
+
+This function triggers queued prepared movement commands, allowing synchronized motion start across multiple stepper handles.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em deadline} & Maximum time to wait for trigger command completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if prepared movements are triggered successfully. k\+Status\+\_\+\+Fail if the trigger command fails or the deadline is exceeded. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00188}{188}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\input{group__STEPPER__Internal}
+\input{group__STEPPER__Process__Internal}
+\input{group__STEPPER__Profile__Internal}
+\input{group__STEPPER__Timing__Internal}

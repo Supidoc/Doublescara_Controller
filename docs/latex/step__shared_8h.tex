@@ -1,0 +1,325 @@
+\doxysection{source/\+motion/\+stepper/\+step\+\_\+shared.h File Reference}
+\hypertarget{step__shared_8h}{}\label{step__shared_8h}\index{source/motion/stepper/step\_shared.h@{source/motion/stepper/step\_shared.h}}
+{\ttfamily \+\#include $<$driver/\+pca9555a/\+pca9555a.\+h$>$}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+device\+\_\+registers.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+ftm.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+gpio.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+port.\+h"{}}\newline
+Include dependency graph for step\+\_\+shared.\+h:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{step__shared_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{step__shared_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}~6
+\begin{DoxyCompactList}\small\item\em Maximum number of stepper motor handles that can be created. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_a3a6692a2c857999da7316ed7e2df506a}{STP\+\_\+\+CMD\+\_\+\+QUEUE\+\_\+\+SIZE}}~20
+\begin{DoxyCompactList}\small\item\em Size of the command queue. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}~30
+\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE}}~1000
+\begin{DoxyCompactList}\small\item\em Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_a133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~4
+\begin{DoxyCompactList}\small\item\em Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}~8
+\begin{DoxyCompactList}\small\item\em Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor movement states. \end{DoxyCompactList}\item 
+typedef enum \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \doxymbox{\hyperlink{step__shared_8h_af161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor rotation directions. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Opaque handle type for stepper motor control instances. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}} \doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Configuration structure for initializing a stepper motor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \{ \newline
+\doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{STP\+\_\+\+MOVEMENT\+\_\+\+IDLE}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}{STP\+\_\+\+MOVEMENT\+\_\+\+CALLED}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{STP\+\_\+\+MOVEMENT\+\_\+\+PLANNED}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}{STP\+\_\+\+MOVEMENT\+\_\+\+STARTED}}
+, \newline
+\doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{STP\+\_\+\+MOVEMENT\+\_\+\+ACCELERATING}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{STP\+\_\+\+MOVEMENT\+\_\+\+CONST\+\_\+\+VELOCITY}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{STP\+\_\+\+MOVEMENT\+\_\+\+DECELRATING}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{STP\+\_\+\+MOVEMENT\+\_\+\+STOPPED}}
+, \newline
+\doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{STP\+\_\+\+MOVEMENT\+\_\+\+FINISHED}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{STP\+\_\+\+MOVEMENT\+\_\+\+SUCCESSFUL}}
+, \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{STP\+\_\+\+MOVEMENT\+\_\+\+FAILED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor movement states. \end{DoxyCompactList}\item 
+enum \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \{ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\+\_\+\+CLOCKWISE}}
+, \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{STP\+\_\+\+COUNTERCLOCKWISE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of stepper motor rotation directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{step__shared_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{step__shared_8h_a133eba57e315066431ed1579c9689ea0}\index{step\_shared.h@{step\_shared.h}!STP\_ACCEL\_TABLE\_INTERP\_FACTOR@{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}}
+\index{STP\_ACCEL\_TABLE\_INTERP\_FACTOR@{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}}
+{\footnotesize\ttfamily \label{step__shared_8h_a133eba57e315066431ed1579c9689ea0} 
+\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR~4}
+
+
+
+Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}\index{step\_shared.h@{step\_shared.h}!STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}}
+\index{STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_ACCEL\_TABLE\_POOL\_SIZE}{STP\_ACCEL\_TABLE\_POOL\_SIZE}}
+{\footnotesize\ttfamily \label{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d} 
+\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE~8}
+
+
+
+Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_a3a6692a2c857999da7316ed7e2df506a}\index{step\_shared.h@{step\_shared.h}!STP\_CMD\_QUEUE\_SIZE@{STP\_CMD\_QUEUE\_SIZE}}
+\index{STP\_CMD\_QUEUE\_SIZE@{STP\_CMD\_QUEUE\_SIZE}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_CMD\_QUEUE\_SIZE}{STP\_CMD\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \label{step__shared_8h_a3a6692a2c857999da7316ed7e2df506a} 
+\+\#define STP\+\_\+\+CMD\+\_\+\+QUEUE\+\_\+\+SIZE~20}
+
+
+
+Size of the command queue. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_a96f4722e4d8b689802ad458a51537825}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}}
+\index{STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_ACCEL\_TABLE\_SIZE}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}
+{\footnotesize\ttfamily \label{step__shared_8h_a96f4722e4d8b689802ad458a51537825} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE~1000}
+
+
+
+Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_CMD\_HANDLE\_COUNT@{STP\_MAX\_CMD\_HANDLE\_COUNT}}
+\index{STP\_MAX\_CMD\_HANDLE\_COUNT@{STP\_MAX\_CMD\_HANDLE\_COUNT}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_CMD\_HANDLE\_COUNT}{STP\_MAX\_CMD\_HANDLE\_COUNT}}
+{\footnotesize\ttfamily \label{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT~30}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}}
+\index{STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_MAX\_HANDLE\_COUNT}{STP\_MAX\_HANDLE\_COUNT}}
+{\footnotesize\ttfamily \label{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67} 
+\+\#define STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT~6}
+
+
+
+Maximum number of stepper motor handles that can be created. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{step__shared_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{step__shared_8h_af161b3a933f177a9faa9ee2d2cadf820}\index{step\_shared.h@{step\_shared.h}!STP\_Direction\_t@{STP\_Direction\_t}}
+\index{STP\_Direction\_t@{STP\_Direction\_t}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_Direction\_t}{STP\_Direction\_t}}
+{\footnotesize\ttfamily \label{step__shared_8h_af161b3a933f177a9faa9ee2d2cadf820} 
+typedef enum \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}} \doxymbox{\hyperlink{step__shared_8h_af161b3a933f177a9faa9ee2d2cadf820}{STP\+\_\+\+Direction\+\_\+t}}}
+
+
+
+Enumeration of stepper motor rotation directions. 
+
+\Hypertarget{step__shared_8h_ab298b84346872720a60ab557d80f47ba}\index{step\_shared.h@{step\_shared.h}!STP\_Handle\_t@{STP\_Handle\_t}}
+\index{STP\_Handle\_t@{STP\_Handle\_t}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_Handle\_t}{STP\_Handle\_t}}
+{\footnotesize\ttfamily \label{step__shared_8h_ab298b84346872720a60ab557d80f47ba} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}}\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}}}
+
+
+
+Opaque handle type for stepper motor control instances. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00108}{108}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}\index{step\_shared.h@{step\_shared.h}!STP\_MovementState\_t@{STP\_MovementState\_t}}
+\index{STP\_MovementState\_t@{STP\_MovementState\_t}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_MovementState\_t}{STP\_MovementState\_t}}
+{\footnotesize\ttfamily \label{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827} 
+typedef enum \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}} \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}}}
+
+
+
+Enumeration of stepper motor movement states. 
+
+Represents the current state of a stepper motor movement operation. \Hypertarget{step__shared_8h_a535eb32d7f105664817feda22180e59b}\index{step\_shared.h@{step\_shared.h}!STP\_StepperConfig\_t@{STP\_StepperConfig\_t}}
+\index{STP\_StepperConfig\_t@{STP\_StepperConfig\_t}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{STP\_StepperConfig\_t}{STP\_StepperConfig\_t}}
+{\footnotesize\ttfamily \label{step__shared_8h_a535eb32d7f105664817feda22180e59b} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepper\+Config}} \doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\+\_\+\+Stepper\+Config\+\_\+t}}}
+
+
+
+Configuration structure for initializing a stepper motor. 
+
+Contains all necessary configuration parameters to initialize and set up a new stepper motor control instance. 
+
+\label{doc-enum-members}
+\Hypertarget{step__shared_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}\index{step\_shared.h@{step\_shared.h}!\_STP\_Direction@{\_STP\_Direction}}
+\index{\_STP\_Direction@{\_STP\_Direction}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{\_STP\_Direction}{\_STP\_Direction}}
+{\footnotesize\ttfamily \label{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6} 
+enum \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}{\+\_\+\+STP\+\_\+\+Direction}}}
+
+
+
+Enumeration of stepper motor rotation directions. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CLOCKWISE@{STP\_CLOCKWISE}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_CLOCKWISE@{STP\_CLOCKWISE}}
+}\Hypertarget{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}\label{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812} 
+STP\+\_\+\+CLOCKWISE&Rotate clockwise. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_COUNTERCLOCKWISE@{STP\_COUNTERCLOCKWISE}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_COUNTERCLOCKWISE@{STP\_COUNTERCLOCKWISE}}
+}\Hypertarget{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}\label{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54} 
+STP\+\_\+\+COUNTERCLOCKWISE&Rotate counterclockwise. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00096}{96}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+
+\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}\index{step\_shared.h@{step\_shared.h}!\_STP\_MovementState@{\_STP\_MovementState}}
+\index{\_STP\_MovementState@{\_STP\_MovementState}!step\_shared.h@{step\_shared.h}}
+\doxysubsubsection{\texorpdfstring{\_STP\_MovementState}{\_STP\_MovementState}}
+{\footnotesize\ttfamily \label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92} 
+enum \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}{\+\_\+\+STP\+\_\+\+Movement\+State}}}
+
+
+
+Enumeration of stepper motor movement states. 
+
+Represents the current state of a stepper motor movement operation. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_IDLE@{STP\_MOVEMENT\_IDLE}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_IDLE@{STP\_MOVEMENT\_IDLE}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7} 
+STP\+\_\+\+MOVEMENT\+\_\+\+IDLE&Motor is idling. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_CALLED@{STP\_MOVEMENT\_CALLED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_CALLED@{STP\_MOVEMENT\_CALLED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92aa84721ae7d672b7450f6aa56be6266bc} 
+STP\+\_\+\+MOVEMENT\+\_\+\+CALLED&Movement command received, but profile not yet calculated. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_PLANNED@{STP\_MOVEMENT\_PLANNED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_PLANNED@{STP\_MOVEMENT\_PLANNED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80} 
+STP\+\_\+\+MOVEMENT\+\_\+\+PLANNED&Movement profile calculated and ready to start. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_STARTED@{STP\_MOVEMENT\_STARTED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_STARTED@{STP\_MOVEMENT\_STARTED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ab9b65bbe36426aa6c9e5ee22c897de4c} 
+STP\+\_\+\+MOVEMENT\+\_\+\+STARTED&Movement is waiting for synchronized start trigger. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_ACCELERATING@{STP\_MOVEMENT\_ACCELERATING}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_ACCELERATING@{STP\_MOVEMENT\_ACCELERATING}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32} 
+STP\+\_\+\+MOVEMENT\+\_\+\+ACCELERATING&Motor is currently accelerating. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_CONST\_VELOCITY@{STP\_MOVEMENT\_CONST\_VELOCITY}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_CONST\_VELOCITY@{STP\_MOVEMENT\_CONST\_VELOCITY}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce} 
+STP\+\_\+\+MOVEMENT\+\_\+\+CONST\+\_\+\+VELOCITY&Motor is currently running with constant velocity. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_DECELRATING@{STP\_MOVEMENT\_DECELRATING}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_DECELRATING@{STP\_MOVEMENT\_DECELRATING}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3} 
+STP\+\_\+\+MOVEMENT\+\_\+\+DECELRATING&Motor is currently decelerating. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_STOPPED@{STP\_MOVEMENT\_STOPPED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_STOPPED@{STP\_MOVEMENT\_STOPPED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612} 
+STP\+\_\+\+MOVEMENT\+\_\+\+STOPPED&Movement stopped before completion. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_FINISHED@{STP\_MOVEMENT\_FINISHED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_FINISHED@{STP\_MOVEMENT\_FINISHED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559} 
+STP\+\_\+\+MOVEMENT\+\_\+\+FINISHED&Movement completed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_SUCCESSFUL@{STP\_MOVEMENT\_SUCCESSFUL}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_SUCCESSFUL@{STP\_MOVEMENT\_SUCCESSFUL}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f} 
+STP\+\_\+\+MOVEMENT\+\_\+\+SUCCESSFUL&Movement completed successfully. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_MOVEMENT\_FAILED@{STP\_MOVEMENT\_FAILED}!step\_shared.h@{step\_shared.h}}
+\index{step\_shared.h@{step\_shared.h}!STP\_MOVEMENT\_FAILED@{STP\_MOVEMENT\_FAILED}}
+}\Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}\label{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff} 
+STP\+\_\+\+MOVEMENT\+\_\+\+FAILED&Movement failed due to an error. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00067}{67}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+

@@ -1,8 +1,8 @@
 var struct__STP__CmdQueueItem =
 [
-    [ "cmdHandle", "struct__STP__CmdQueueItem.html#ac2e97995267b8572781f3fcd4ae52eb6", null ],
+    [ "cmdHandle", "struct__STP__CmdQueueItem.html#a1b0584c064fb70ddead44713475e80d2", null ],
     [ "config", "struct__STP__CmdQueueItem.html#af454b1494443133c24c459e0f12d3afa", null ],
-    [ "data", "struct__STP__CmdQueueItem.html#a6b4b1ded460141f88e98cebded33f45e", null ],
+    [ "data", "struct__STP__CmdQueueItem.html#a77ca9dac4f50f12f5b5acfea35e3a881", null ],
     [ "deadline", "struct__STP__CmdQueueItem.html#ab405d843c893609657f30cf018ff94cd", null ],
     [ "handle", "struct__STP__CmdQueueItem.html#a83368c601a9f97daf9b19b517b3d56ff", null ],
     [ "move", "struct__STP__CmdQueueItem.html#a86a5e30eb162c3e66b2172bd7c53c39c", null ],

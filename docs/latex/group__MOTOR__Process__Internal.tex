@@ -1,0 +1,109 @@
+\doxysubsection{Motor Process Internal }
+\hypertarget{group__MOTOR__Process__Internal}{}\label{group__MOTOR__Process__Internal}\index{Motor Process Internal@{Motor Process Internal}}
+
+
+Internal queue send/\+dequeue and command dispatch logic.  
+
+
+Collaboration diagram for Motor Process Internal:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__MOTOR__Process__Internal}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Process__Internal_gaf350c09c3a5609166097e3d8b361e647}{MTRi\+\_\+send\+\_\+cmd\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Internal_gaa929e5b0a578f350522e7e9f49df706d}{MTR\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}queue\+Item, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enqueues a motor command for asynchronous execution. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__MOTOR__Process__Internal_ga34dafdb9c14868050d60fe5d613126f7}{MTRi\+\_\+process}} (void)
+\begin{DoxyCompactList}\small\item\em Runs one motor command processing cycle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Process__Internal_ga928b9a79d41efe57d584e7422d5d33e1}{MTRi\+\_\+process\+\_\+cmd}} (\doxymbox{\hyperlink{group__MOTOR__Internal_gaa929e5b0a578f350522e7e9f49df706d}{MTR\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} queue\+Item, \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\+\_\+\+Parallel\+Task\+Item}} \texorpdfstring{$\ast$}{*}task\+Item)
+\begin{DoxyCompactList}\small\item\em Dispatches one command item to the corresponding internal handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Internal queue send/\+dequeue and command dispatch logic. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__MOTOR__Process__Internal_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__MOTOR__Process__Internal_ga34dafdb9c14868050d60fe5d613126f7}\index{Motor Process Internal@{Motor Process Internal}!MTRi\_process@{MTRi\_process}}
+\index{MTRi\_process@{MTRi\_process}!Motor Process Internal@{Motor Process Internal}}
+\doxysubsubsubsection{\texorpdfstring{MTRi\_process()}{MTRi\_process()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Process__Internal_ga34dafdb9c14868050d60fe5d613126f7} 
+void MTRi\+\_\+process (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Runs one motor command processing cycle. 
+
+Dequeues at most one command and advances active parallel command tracking. 
+
+Definition at line \doxymbox{\hyperlink{motor__process_8c_source_l00084}{84}} of file \doxymbox{\hyperlink{motor__process_8c_source}{motor\+\_\+process.\+c}}.
+
+\Hypertarget{group__MOTOR__Process__Internal_ga928b9a79d41efe57d584e7422d5d33e1}\index{Motor Process Internal@{Motor Process Internal}!MTRi\_process\_cmd@{MTRi\_process\_cmd}}
+\index{MTRi\_process\_cmd@{MTRi\_process\_cmd}!Motor Process Internal@{Motor Process Internal}}
+\doxysubsubsubsection{\texorpdfstring{MTRi\_process\_cmd()}{MTRi\_process\_cmd()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Process__Internal_ga928b9a79d41efe57d584e7422d5d33e1} 
+status\+\_\+t MTRi\+\_\+process\+\_\+cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Internal_gaa929e5b0a578f350522e7e9f49df706d}{MTR\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}}]{queue\+Item}{, }\item[{\doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\+\_\+\+Parallel\+Task\+Item}} \texorpdfstring{$\ast$}{*}}]{task\+Item}{}\end{DoxyParamCaption})}
+
+
+
+Dispatches one command item to the corresponding internal handler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em queue\+Item} & Command item to process. \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em task\+Item} & Parallel task bookkeeping entry for async sub-\/commands. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success, k\+Status\+\_\+\+Fail, or k\+Status\+\_\+\+Timeout depending on command result.
+\end{DoxyReturn}
+Dispatches one command item to the corresponding internal handler.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em queue\+Item} & Dequeued motor command item. \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em task\+Item} & Parallel-\/task tracking record for async sub-\/commands. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success, k\+Status\+\_\+\+Fail, or k\+Status\+\_\+\+Timeout depending on execution result. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor__process_8c_source_l00154}{154}} of file \doxymbox{\hyperlink{motor__process_8c_source}{motor\+\_\+process.\+c}}.
+
+\Hypertarget{group__MOTOR__Process__Internal_gaf350c09c3a5609166097e3d8b361e647}\index{Motor Process Internal@{Motor Process Internal}!MTRi\_send\_cmd\_async@{MTRi\_send\_cmd\_async}}
+\index{MTRi\_send\_cmd\_async@{MTRi\_send\_cmd\_async}!Motor Process Internal@{Motor Process Internal}}
+\doxysubsubsubsection{\texorpdfstring{MTRi\_send\_cmd\_async()}{MTRi\_send\_cmd\_async()}}
+{\footnotesize\ttfamily \label{group__MOTOR__Process__Internal_gaf350c09c3a5609166097e3d8b361e647} 
+status\+\_\+t MTRi\+\_\+send\+\_\+cmd\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Internal_gaa929e5b0a578f350522e7e9f49df706d}{MTR\+\_\+\+Cmd\+Queue\+Item\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{queue\+Item}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Enqueues a motor command for asynchronous execution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em queue\+Item} & Command payload to send to motor command queue. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Timeout/\+deadline applied while queueing the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle for completion synchronization. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if queued successfully, k\+Status\+\_\+\+Fail otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{motor__process_8c_source_l00045}{45}} of file \doxymbox{\hyperlink{motor__process_8c_source}{motor\+\_\+process.\+c}}.
+

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['paralleltasks_0',['parallelTasks',['../motor_8c.html#a3e6fa91eaf6f2ee937922906daef8fad',1,'motor.c']]],
+  ['paralleltasks_0',['parallelTasks',['../group__MOTOR__Internal.html#ga4cf2fb96c272e16cfd29187dd8c84e87',1,'parallelTasks:&#160;motor_core.c'],['../group__MOTOR__Internal.html#ga4cf2fb96c272e16cfd29187dd8c84e87',1,'parallelTasks:&#160;motor_core.c']]],
   ['pca9555a_20driver_1',['PCA9555A Driver',['../group__PCA9555A.html',1,'']]],
   ['pca9555a_2ec_2',['pca9555a.c',['../pca9555a_8c.html',1,'']]],
   ['pca9555a_2eh_3',['pca9555a.h',['../pca9555a_8h.html',1,'']]],
@@ -43,10 +43,10 @@ var searchData=
   ['pcamutex_40',['pcaMutex',['../pca9555a_8c.html#ab6807d601449a7e5b34c653b9ee1680f',1,'pca9555a.c']]],
   ['phasestepcount_41',['phaseStepCount',['../struct__STP__StepperMovement.html#a839988503e15f6d028d4cea673f3af3f',1,'_STP_StepperMovement']]],
   ['pindirection_42',['pinDirection',['../struct__PCA__Pin__Config.html#ae632ef3afae76532a6d42f020c7e76a2',1,'_PCA_Pin_Config']]],
-  ['plan_5fmotion_5fprofile_43',['plan_motion_profile',['../step_8c.html#acfb245efbd9bf8ea73ec96baa3db4f3a',1,'step.c']]],
-  ['polarityinversion_44',['polarityInversion',['../struct__PCA__Pin__Config.html#a1a3d8967b590c8ca632f3db14de54e03',1,'_PCA_Pin_Config']]],
-  ['prepare_5fsynchronized_5fmovements_45',['prepare_synchronized_movements',['../motor_8c.html#a0fd06921a3e5470e1090dbe03b7686d0',1,'motor.c']]],
-  ['previousholdcurrent_46',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]],
-  ['process_47',['process',['../cli_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;cli.c'],['../log_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;log.c'],['../motor_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;motor.c'],['../step_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;step.c'],['../tmc2209_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;tmc2209.c']]],
-  ['process_5fcmd_48',['process_cmd',['../step_8c.html#a7d7bc55da4b23e8c529a5de23b199036',1,'step.c']]]
+  ['polarityinversion_43',['polarityInversion',['../struct__PCA__Pin__Config.html#a1a3d8967b590c8ca632f3db14de54e03',1,'_PCA_Pin_Config']]],
+  ['prepare_5fsynchronized_5fmovements_44',['prepare_synchronized_movements',['../motor__sync_8c.html#a96c38876f5ce418349fb1d57a52252b5',1,'motor_sync.c']]],
+  ['previousholdcurrent_45',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]],
+  ['process_46',['process',['../cli_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;cli.c'],['../log_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;log.c']]],
+  ['process_20internal_47',['Process Internal',['../group__MOTOR__Process__Internal.html',1,'Motor Process Internal'],['../group__STEPPER__Process__Internal.html',1,'Stepper Process Internal'],['../group__TMC2209__Process__Internal.html',1,'TMC2209 Process Internal']]],
+  ['profile_20internal_48',['Stepper Profile Internal',['../group__STEPPER__Profile__Internal.html',1,'']]]
 ];

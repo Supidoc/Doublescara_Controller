@@ -19,7 +19,7 @@ var motorCmd_8c =
     [ "cmd_motor_synchronized_move", "motorCmd_8c.html#af1c70c2a5e497b204c1e8a9213f32542", null ],
     [ "MCMD_init", "group__MotorCmd__Module.html#gaa3be1460f8c4d323d294f337a706508c", null ],
     [ "MCMD_task", "group__MotorCmd__Module.html#ga9a65695a6bd7f4f925ccd06b2020814b", null ],
-    [ "wait_for_mtr_cmd", "motorCmd_8c.html#a385dd4535c8d6f00107f8f24c5474c38", null ],
+    [ "wait_for_mtr_cmd", "motorCmd_8c.html#a9c9b713d7e1f0775be398eeaf8a53c44", null ],
     [ "xClearEmergencyCmd", "motorCmd_8c.html#ae195518cae3b1186d8e948d38406a815", null ],
     [ "xDisableFreewheelingCmd", "motorCmd_8c.html#a579caf44262ed312c85b25c74bb0ebb8", null ],
     [ "xEmergencyStopCmd", "motorCmd_8c.html#ace27b3c7f28438ac3f62002c659d9dc3", null ],

@@ -8,6 +8,7 @@
 /********************
  *     Includes		*
  ********************/
+#include <driver/pca9555a/pca9555a.h>
 #include "application.h"
 #include <log.h>
 
@@ -25,11 +26,10 @@
 #include "cli.h"
 #include "disk.h"
 #include "motor_test.h"
-#include "step.h"
-#include "tmc2209.h"
+#include "step_core.h"
+#include "tmc2209_core.h"
 #include "motor.h"
 #include "motorCmd.h"
-#include "pca9555a.h"
 
 /************************************
  *     Private Macros / Defines		*

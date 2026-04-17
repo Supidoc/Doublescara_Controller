@@ -1,0 +1,164 @@
+\doxysection{source/\+task\+\_\+helpers/\+cmd\+\_\+handle.h File Reference}
+\hypertarget{cmd__handle_8h}{}\label{cmd__handle_8h}\index{source/task\_helpers/cmd\_handle.h@{source/task\_helpers/cmd\_handle.h}}
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}event\+\_\+groups.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdlib.\+h"{}}\newline
+Include dependency graph for cmd\+\_\+handle.\+h:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cmd__handle_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cmd__handle_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__CHD__CmdHandleImpl}{\+\_\+\+CHD\+\_\+\+Cmd\+Handle\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__THE__EventBits_gae515d7d513917dba41c41d68d79ba20b}{CHD\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+SUCCESS}}~(1 $<$$<$ 0)
+\begin{DoxyCompactList}\small\item\em Command completed successfully. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__THE__EventBits_ga9fc89681a892ffab31eab75b4d08a76d}{CHD\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+FAILURE}}~(1 $<$$<$ 1)
+\begin{DoxyCompactList}\small\item\em Command failed. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__THE__EventBits_ga9e80327a24089cf6688fe36c279eb7ae}{CHD\+\_\+\+CMD\+\_\+\+BIT\+\_\+\+TIMEOUT}}~(1 $<$$<$ 2)
+\begin{DoxyCompactList}\small\item\em Command timed out. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__CHD__CmdHandleImpl}{\+\_\+\+CHD\+\_\+\+Cmd\+Handle\+Impl}} \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}
+\item 
+typedef \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{cmd__handle_8h_a96e6d81a94d4489e22edeba2ab86523d}{CHD\+\_\+init\+\_\+cmd\+\_\+handles}} (\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+\begin{DoxyCompactList}\small\item\em Initialize the command handle pool. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{cmd__handle_8h_a121a340f467247572190b0306ee40c90}{CHD\+\_\+get\+\_\+cmd\+\_\+handle}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle, \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+\begin{DoxyCompactList}\small\item\em Get an available command handle from the pool. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{cmd__handle_8h_a2fe25554976cdf18536f88a331a62cd7}{CHD\+\_\+add\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Increment reference count for a command handle. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{cmd__handle_8h_a776fcb299196e8e924c537440a791a46}{CHD\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Decrement reference count for a command handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{cmd__handle_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_CmdHandle\_t@{CHD\_CmdHandle\_t}}
+\index{CHD\_CmdHandle\_t@{CHD\_CmdHandle\_t}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_CmdHandle\_t}{CHD\_CmdHandle\_t}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3} 
+typedef \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{cmd__handle_8h_source}{cmd\+\_\+handle.\+h}}.
+
+\Hypertarget{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_CmdHandleImpl\_t@{CHD\_CmdHandleImpl\_t}}
+\index{CHD\_CmdHandleImpl\_t@{CHD\_CmdHandleImpl\_t}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_CmdHandleImpl\_t}{CHD\_CmdHandleImpl\_t}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75} 
+typedef struct \doxymbox{\hyperlink{struct__CHD__CmdHandleImpl}{\+\_\+\+CHD\+\_\+\+Cmd\+Handle\+Impl}} \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{cmd__handle_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cmd__handle_8h_a2fe25554976cdf18536f88a331a62cd7}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_add\_cmd\_handle\_ref@{CHD\_add\_cmd\_handle\_ref}}
+\index{CHD\_add\_cmd\_handle\_ref@{CHD\_add\_cmd\_handle\_ref}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_add\_cmd\_handle\_ref()}{CHD\_add\_cmd\_handle\_ref()}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a2fe25554976cdf18536f88a331a62cd7} 
+void CHD\+\_\+add\+\_\+cmd\+\_\+handle\+\_\+ref (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Increment reference count for a command handle. 
+
+Used to track multiple references to the same command handle 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to increment reference for \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00079}{79}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
+
+\Hypertarget{cmd__handle_8h_a121a340f467247572190b0306ee40c90}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_get\_cmd\_handle@{CHD\_get\_cmd\_handle}}
+\index{CHD\_get\_cmd\_handle@{CHD\_get\_cmd\_handle}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_get\_cmd\_handle()}{CHD\_get\_cmd\_handle()}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a121a340f467247572190b0306ee40c90} 
+status\+\_\+t CHD\+\_\+get\+\_\+cmd\+\_\+handle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{max\+Handles}{}\end{DoxyParamCaption})}
+
+
+
+Get an available command handle from the pool. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive the allocated command handle \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \doxylink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if a handle was allocated k\+Status\+\_\+\+Fail if no handles are available 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00049}{49}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
+
+\Hypertarget{cmd__handle_8h_a96e6d81a94d4489e22edeba2ab86523d}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_init\_cmd\_handles@{CHD\_init\_cmd\_handles}}
+\index{CHD\_init\_cmd\_handles@{CHD\_init\_cmd\_handles}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_init\_cmd\_handles()}{CHD\_init\_cmd\_handles()}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a96e6d81a94d4489e22edeba2ab86523d} 
+void CHD\+\_\+init\+\_\+cmd\+\_\+handles (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handles}{, }\item[{size\+\_\+t}]{max\+Handles}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the command handle pool. 
+
+Sets up the command handle infrastructure for tracking asynchronous command execution. Must be called once before using command handles. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \doxylink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\hline
+\doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00039}{39}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
+
+\Hypertarget{cmd__handle_8h_a776fcb299196e8e924c537440a791a46}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_remove\_cmd\_handle\_ref@{CHD\_remove\_cmd\_handle\_ref}}
+\index{CHD\_remove\_cmd\_handle\_ref@{CHD\_remove\_cmd\_handle\_ref}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_remove\_cmd\_handle\_ref()}{CHD\_remove\_cmd\_handle\_ref()}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a776fcb299196e8e924c537440a791a46} 
+void CHD\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Decrement reference count for a command handle. 
+
+When reference count reaches zero, the handle is returned to the pool 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em cmd\+Handle} & Command handle to decrement reference for \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00087}{87}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
+

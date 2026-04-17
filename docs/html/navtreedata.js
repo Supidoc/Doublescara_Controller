@@ -52,9 +52,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__MotorConfigs__Module.html#gae859f4d566df9eeb248b7a92a072f2ef",
-"motor_8c.html#a7e0429af5d2b45a65c693ab8f05fe25b",
-"struct__STP__AccelTablePoolItem.html#a73c825496d723d8a542d6523ad71e712"
+"group__MOTOR__Facade__Module.html#ga78bd18ddbc517b9abafa26907d7024b7",
+"group__TMC2209__Module.html#gacff2de6243ba1fc196080364cdb03176",
+"struct__LOG__QueueItem.html#ab3fa2205ba7a29a0d837c3ab8400dab8",
+"tmc2209__setup_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

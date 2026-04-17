@@ -32,12 +32,12 @@
 /********************
  *     Includes    *
  ********************/
-#include "step.h"
-#include "tmc2209.h"
+#include <driver/pca9555a/pca9555a.h>
+#include "step_core.h"
+#include "tmc2209_core.h"
 #include "fsl_ftm.h"
 #include "fsl_gpio.h"
 #include "fsl_port.h"
-#include "pca9555a.h"
 
 /***********************************
  *     Public Macros / Defines     *
@@ -147,7 +147,7 @@ status_t MTR_init(void);
  *         kStatus_Fail on invalid parameters, timeout, or initialization failure.
  */
 status_t MTR_init_handle_async(const MTR_MotorConfig_t config, TickType_t deadline,
-                               THE_CmdHandle_t* cmdHandle);
+                               CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Retrieves a motor handle by its label.
@@ -169,7 +169,7 @@ void MTR_get_motor_by_label(const char* label, MTR_MotorHandle_t* handle);
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
-                              THE_CmdHandle_t* cmdHandle);
+                              CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Commands movement to an absolute output angle.
@@ -183,7 +183,7 @@ status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
-                                       THE_CmdHandle_t* cmdHandle);
+                                       CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Commands a relative movement in revolutions.
@@ -197,7 +197,7 @@ status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, T
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions,
-                                    TickType_t deadline, THE_CmdHandle_t* cmdHandle);
+                                    TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets motor target velocity.
@@ -211,7 +211,7 @@ status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
-                                TickType_t deadline, THE_CmdHandle_t* cmdHandle);
+                                TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets motor acceleration.
@@ -225,7 +225,7 @@ status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_pe
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
-                                    TickType_t deadline, THE_CmdHandle_t* cmdHandle);
+                                    TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Stops ongoing motion.
@@ -239,7 +239,7 @@ status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleratio
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_stop_async(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
-                        THE_CmdHandle_t* cmdHandle);
+                        CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Triggers emergency stop for the motor subsystem.
@@ -278,7 +278,7 @@ uint8_t MTR_is_emergency_stop_active(void);
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, TickType_t deadline,
-                                     THE_CmdHandle_t* cmdHandle);
+                                     CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Gets the current low-level movement state.
@@ -291,7 +291,7 @@ status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, Ti
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
-                                      THE_CmdHandle_t* cmdHandle);
+                                      CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets current position as home reference.
@@ -302,7 +302,7 @@ status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementStat
  * @return kStatus_Success if home position is set.
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
-status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* cmdHandle);
+status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Executes a synchronized multi-motor move.
@@ -317,7 +317,7 @@ status_t MTR_set_home_position_async(MTR_MotorHandle_t handle, THE_CmdHandle_t* 
  *         kStatus_Fail if any preparation/trigger step fails or deadline expires.
  */
 status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
-                                     TickType_t deadline, THE_CmdHandle_t* cmdHandle);
+                                     TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets TMC2209 run current for a motor.
@@ -331,7 +331,7 @@ status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles,
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
-                                   THE_CmdHandle_t* cmdHandle);
+                                   CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Sets TMC2209 hold current for a motor.
@@ -345,7 +345,7 @@ status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, T
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
-                                    THE_CmdHandle_t* cmdHandle);
+                                    CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Converts step count to mechanical angle.
@@ -383,7 +383,7 @@ int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingM
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                       THE_CmdHandle_t* cmdHandle);
+                                       CHD_CmdHandle_t* cmdHandle);
 
 /**
  * @brief Disables freewheeling mode and restores normal operation.
@@ -399,7 +399,7 @@ status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t dead
  *         kStatus_Fail on invalid parameters, queue errors, or timeout.
  */
 status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                        THE_CmdHandle_t* cmdHandle);
+                                        CHD_CmdHandle_t* cmdHandle);
 
 /** @} */ /* End of MOTOR_Module */
 

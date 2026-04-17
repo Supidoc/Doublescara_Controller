@@ -1,7 +1,7 @@
 var struct__MTR__CmdQueueItem =
 [
-    [ "cmdHandle", "struct__MTR__CmdQueueItem.html#a916061bffbd7ba99ffcd9e463851addc", null ],
-    [ "data", "struct__MTR__CmdQueueItem.html#ab20b2349b35e69808e341db5594713df", null ],
+    [ "cmdHandle", "struct__MTR__CmdQueueItem.html#ab65a7c8a6273de519b97622b687d539d", null ],
+    [ "data", "struct__MTR__CmdQueueItem.html#a6bc6f0baf318d14d8ff2728f6a1c170e", null ],
     [ "deadline", "struct__MTR__CmdQueueItem.html#ab00a40cd2035effbb8efa48e5f0820b5", null ],
     [ "disableFreewheeling", "struct__MTR__CmdQueueItem.html#a70c0e74963ce9437d3d2ad2cae190b9d", null ],
     [ "enableFreewheeling", "struct__MTR__CmdQueueItem.html#a0d095bd3f6553047e93c672a0887b88f", null ],
@@ -17,6 +17,5 @@ var struct__MTR__CmdQueueItem =
     [ "setVelocity", "struct__MTR__CmdQueueItem.html#a6dd3632d061f4a65c0fd79cf320566a5", null ],
     [ "stop", "struct__MTR__CmdQueueItem.html#aa69ef6a7505f5fbd14979ecbe0b88af7", null ],
     [ "synchronizedMove", "struct__MTR__CmdQueueItem.html#a317822318f9bca006d19eb3f9f30e7bb", null ],
-    [ "type", "struct__MTR__CmdQueueItem.html#a3e443f28693fd8398862eb144e4058a7", null ],
-    [ "waitUntilStopped", "struct__MTR__CmdQueueItem.html#ac7bf5468da77427a0ddebecfbc0fddf2", null ]
+    [ "type", "struct__MTR__CmdQueueItem.html#a3e443f28693fd8398862eb144e4058a7", null ]
 ];

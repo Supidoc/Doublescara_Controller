@@ -1,0 +1,193 @@
+\doxysection{source/\+driver/\+tmc2209/\+tmc2209\+\_\+uart.c File Reference}
+\hypertarget{tmc2209__uart_8c}{}\label{tmc2209__uart_8c}\index{source/driver/tmc2209/tmc2209\_uart.c@{source/driver/tmc2209/tmc2209\_uart.c}}
+{\ttfamily \+\#include "{}tmc2209\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209\+\_\+shared.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209\+\_\+internal.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdint.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdio.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+port.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+uart\+\_\+freertos.\+h"{}}\newline
+{\ttfamily \+\#include "{}log.\+h"{}}\newline
+Include dependency graph for tmc2209\+\_\+uart.\+c:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tmc2209__uart_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__uart_8c_afaa2143bf8dba3429df46c0f202a34aa}{TMC\+\_\+\+READ\+\_\+\+PACKAGE\+\_\+\+SIZE}}~4
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}{TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE}}~8
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__uart_8c_a48b1354844c9504660210a6201022a84}{TMC\+\_\+\+IFCNT\+\_\+\+ADDR}}~0x02
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{tmc2209__uart_8c_a45c54b1933b0b8aaa2fdfd63f96a577a}{create\+\_\+read\+\_\+datagram}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t reg\+\_\+addr, \doxymbox{\hyperlink{group__TMC2209__Internal_gab739de4f2b9cd56f073a922d4a43b518}{TMC\+\_\+\+Read\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}datagram)
+\item 
+static void \doxymbox{\hyperlink{tmc2209__uart_8c_a1ade88d2acb08b0c6c1d1395160ccc79}{create\+\_\+write\+\_\+datagram}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t reg\+\_\+addr, uint32\+\_\+t data, \doxymbox{\hyperlink{group__TMC2209__Internal_gae631c2e78c61df94499ae5181e07dc94}{TMC\+\_\+\+Write\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}datagram)
+\item 
+static void \doxymbox{\hyperlink{tmc2209__uart_8c_a54c8247aecabe20ed92048315bd99a47}{build\+\_\+read\+\_\+package}} (\doxymbox{\hyperlink{group__TMC2209__Internal_gab739de4f2b9cd56f073a922d4a43b518}{TMC\+\_\+\+Read\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}datagram, uint8\+\_\+t \texorpdfstring{$\ast$}{*}package)
+\item 
+static void \doxymbox{\hyperlink{tmc2209__uart_8c_a42789bba6d69096f4d0a8b35d7b6a796}{build\+\_\+write\+\_\+package}} (\doxymbox{\hyperlink{group__TMC2209__Internal_gae631c2e78c61df94499ae5181e07dc94}{TMC\+\_\+\+Write\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}datagram, uint8\+\_\+t \texorpdfstring{$\ast$}{*}package)
+\item 
+static void \doxymbox{\hyperlink{tmc2209__uart_8c_aa2fbab212c5d11897ea0d23f41925b77}{calc\+\_\+\+CRC}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}datagram, size\+\_\+t datagram\+Length)
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{tmc2209__uart_8c_a8574ba0ace7a2ce6bf3f42d112b19e12}{dump\+\_\+rx\+\_\+buffer}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t dump\+Count, Tick\+Type\+\_\+t deadline)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__UART__Internal_gac317eb1d131f8da486a6d135e4989ed3}{TMCi\+\_\+read}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t reg\+Addr, uint32\+\_\+t \texorpdfstring{$\ast$}{*}data, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Reads a 32-\/bit register from a TMC2209 device. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__UART__Internal_ga775d4deadf18fad6cfde69cc7a8cf8ed}{TMCi\+\_\+write}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t reg\+Addr, uint32\+\_\+t \texorpdfstring{$\ast$}{*}data, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Writes a 32-\/bit register to a TMC2209 device. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__UART__Internal_gae9776dd60cd2b3b9ab6d8064411e15bf}{TMCi\+\_\+read\+\_\+transmissioncount}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Reads transmission counter from TMC interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{tmc2209__uart_8c_a656a9fcfb90d26859cffc6a04dc311af}{transmit\+\_\+read\+\_\+package}} \+[\doxymbox{\hyperlink{tmc2209__uart_8c_afaa2143bf8dba3429df46c0f202a34aa}{TMC\+\_\+\+READ\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{tmc2209__uart_8c_a4eb8a305a974cec16a8d4de0595725ee}{transmit\+\_\+response\+\_\+package}} \+[\doxymbox{\hyperlink{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}{TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{tmc2209__uart_8c_ae345025d54190b5415d81a39dcc608df}{transmit\+\_\+write\+\_\+package}} \+[\doxymbox{\hyperlink{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}{TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tmc2209__uart_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tmc2209__uart_8c_a48b1354844c9504660210a6201022a84}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!TMC\_IFCNT\_ADDR@{TMC\_IFCNT\_ADDR}}
+\index{TMC\_IFCNT\_ADDR@{TMC\_IFCNT\_ADDR}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_IFCNT\_ADDR}{TMC\_IFCNT\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a48b1354844c9504660210a6201022a84} 
+\+\#define TMC\+\_\+\+IFCNT\+\_\+\+ADDR~0x02}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00029}{29}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_afaa2143bf8dba3429df46c0f202a34aa}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!TMC\_READ\_PACKAGE\_SIZE@{TMC\_READ\_PACKAGE\_SIZE}}
+\index{TMC\_READ\_PACKAGE\_SIZE@{TMC\_READ\_PACKAGE\_SIZE}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_READ\_PACKAGE\_SIZE}{TMC\_READ\_PACKAGE\_SIZE}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_afaa2143bf8dba3429df46c0f202a34aa} 
+\+\#define TMC\+\_\+\+READ\+\_\+\+PACKAGE\+\_\+\+SIZE~4}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00026}{26}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!TMC\_WRITE\_PACKAGE\_SIZE@{TMC\_WRITE\_PACKAGE\_SIZE}}
+\index{TMC\_WRITE\_PACKAGE\_SIZE@{TMC\_WRITE\_PACKAGE\_SIZE}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_WRITE\_PACKAGE\_SIZE}{TMC\_WRITE\_PACKAGE\_SIZE}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141} 
+\+\#define TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE~8}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00027}{27}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{tmc2209__uart_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{tmc2209__uart_8c_a54c8247aecabe20ed92048315bd99a47}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!build\_read\_package@{build\_read\_package}}
+\index{build\_read\_package@{build\_read\_package}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{build\_read\_package()}{build\_read\_package()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a54c8247aecabe20ed92048315bd99a47} 
+void build\+\_\+read\+\_\+package (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Internal_gab739de4f2b9cd56f073a922d4a43b518}{TMC\+\_\+\+Read\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{datagram}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{package}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00256}{256}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_a42789bba6d69096f4d0a8b35d7b6a796}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!build\_write\_package@{build\_write\_package}}
+\index{build\_write\_package@{build\_write\_package}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{build\_write\_package()}{build\_write\_package()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a42789bba6d69096f4d0a8b35d7b6a796} 
+void build\+\_\+write\+\_\+package (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__TMC2209__Internal_gae631c2e78c61df94499ae5181e07dc94}{TMC\+\_\+\+Write\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{datagram}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{package}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00270}{270}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_aa2fbab212c5d11897ea0d23f41925b77}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!calc\_CRC@{calc\_CRC}}
+\index{calc\_CRC@{calc\_CRC}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{calc\_CRC()}{calc\_CRC()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_aa2fbab212c5d11897ea0d23f41925b77} 
+void calc\+\_\+\+CRC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{datagram}{, }\item[{size\+\_\+t}]{datagram\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00226}{226}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_a45c54b1933b0b8aaa2fdfd63f96a577a}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!create\_read\_datagram@{create\_read\_datagram}}
+\index{create\_read\_datagram@{create\_read\_datagram}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{create\_read\_datagram()}{create\_read\_datagram()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a45c54b1933b0b8aaa2fdfd63f96a577a} 
+void create\+\_\+read\+\_\+datagram (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{reg\+\_\+addr}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Internal_gab739de4f2b9cd56f073a922d4a43b518}{TMC\+\_\+\+Read\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{datagram}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00212}{212}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_a1ade88d2acb08b0c6c1d1395160ccc79}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!create\_write\_datagram@{create\_write\_datagram}}
+\index{create\_write\_datagram@{create\_write\_datagram}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{create\_write\_datagram()}{create\_write\_datagram()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a1ade88d2acb08b0c6c1d1395160ccc79} 
+void create\+\_\+write\+\_\+datagram (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{reg\+\_\+addr}{, }\item[{uint32\+\_\+t}]{data}{, }\item[{\doxymbox{\hyperlink{group__TMC2209__Internal_gae631c2e78c61df94499ae5181e07dc94}{TMC\+\_\+\+Write\+\_\+\+Datagram\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{datagram}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00197}{197}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_a8574ba0ace7a2ce6bf3f42d112b19e12}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!dump\_rx\_buffer@{dump\_rx\_buffer}}
+\index{dump\_rx\_buffer@{dump\_rx\_buffer}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{dump\_rx\_buffer()}{dump\_rx\_buffer()}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a8574ba0ace7a2ce6bf3f42d112b19e12} 
+uint8\+\_\+t dump\+\_\+rx\+\_\+buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}}}]{handle}{, }\item[{uint8\+\_\+t}]{dump\+Count}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00288}{288}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{tmc2209__uart_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{tmc2209__uart_8c_a656a9fcfb90d26859cffc6a04dc311af}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!transmit\_read\_package@{transmit\_read\_package}}
+\index{transmit\_read\_package@{transmit\_read\_package}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{transmit\_read\_package}{transmit\_read\_package}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a656a9fcfb90d26859cffc6a04dc311af} 
+uint8\+\_\+t transmit\+\_\+read\+\_\+package\+[\doxymbox{\hyperlink{tmc2209__uart_8c_afaa2143bf8dba3429df46c0f202a34aa}{TMC\+\_\+\+READ\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00056}{56}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_a4eb8a305a974cec16a8d4de0595725ee}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!transmit\_response\_package@{transmit\_response\_package}}
+\index{transmit\_response\_package@{transmit\_response\_package}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{transmit\_response\_package}{transmit\_response\_package}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_a4eb8a305a974cec16a8d4de0595725ee} 
+uint8\+\_\+t transmit\+\_\+response\+\_\+package\+[\doxymbox{\hyperlink{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}{TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00057}{57}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+
+\Hypertarget{tmc2209__uart_8c_ae345025d54190b5415d81a39dcc608df}\index{tmc2209\_uart.c@{tmc2209\_uart.c}!transmit\_write\_package@{transmit\_write\_package}}
+\index{transmit\_write\_package@{transmit\_write\_package}!tmc2209\_uart.c@{tmc2209\_uart.c}}
+\doxysubsubsection{\texorpdfstring{transmit\_write\_package}{transmit\_write\_package}}
+{\footnotesize\ttfamily \label{tmc2209__uart_8c_ae345025d54190b5415d81a39dcc608df} 
+uint8\+\_\+t transmit\+\_\+write\+\_\+package\+[\doxymbox{\hyperlink{tmc2209__uart_8c_aa5fbce7c8c72c01dade0c56084507141}{TMC\+\_\+\+WRITE\+\_\+\+PACKAGE\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__uart_8c_source_l00058}{58}} of file \doxymbox{\hyperlink{tmc2209__uart_8c_source}{tmc2209\+\_\+uart.\+c}}.
+

@@ -1,0 +1,110 @@
+\doxysection{motor\+\_\+convert.\+c}
+\hypertarget{motor__convert_8c_source}{}\label{motor__convert_8c_source}\index{source/motion/motor/motor\_convert.c@{source/motion/motor/motor\_convert.c}}
+\doxymbox{\hyperlink{motor__convert_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ motor\_convert.c}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 15\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__convert_8h}{motor\_convert.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__internal_8h}{motor\_internal.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}limits.h"{}}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}math.h"{}}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00016}00016\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00017}00017\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00018}00018\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00020}00020\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00022}00022\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00024}00024\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00025}00025\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00026}00026\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00028}00028\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00029}00029\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00030}00030\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00032}00032\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00033}00033\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00034}00034\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00036}00036\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00037}00037\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00038}00038\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00040}\doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{00040}}\ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ int32\_t\ steps)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00041}00041\ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a48ff29dd145331650188df5c94e4d671}{stepAngle}}\ <=\ 0.0\ ||\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a25782e0bcd0945f0c673b81b6f5d369d}{microstep}}\ ==\ 0\ ||\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a068b88abfa0f8d3412005f860a64932a}{reductionFactor}}\ <=\ 0.0)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00048}00048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{double}\ angle\ =\ (double)steps\ *\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a48ff29dd145331650188df5c94e4d671}{stepAngle}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00053}00053\ \ \ \ \ angle\ \ \ \ \ \ \ \ =\ angle\ /\ (double)handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a25782e0bcd0945f0c673b81b6f5d369d}{microstep}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00054}00054\ \ \ \ \ angle\ \ \ \ \ \ \ \ =\ angle\ /\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a068b88abfa0f8d3412005f860a64932a}{reductionFactor}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{return}\ angle;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00058}\doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{00058}}\ int32\_t\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(\doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Module_ga5142605594253bb6c632b95c962216ea}{MTR\_roundingMethod\_t}}\ method)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00061}00061\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a48ff29dd145331650188df5c94e4d671}{stepAngle}}\ <=\ 0.0\ ||\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a25782e0bcd0945f0c673b81b6f5d369d}{microstep}}\ ==\ 0\ ||\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a068b88abfa0f8d3412005f860a64932a}{reductionFactor}}\ <=\ 0.0)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00066}00066\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{double}\ steps\ =\ angle\ *\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a068b88abfa0f8d3412005f860a64932a}{reductionFactor}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00071}00071\ \ \ \ \ steps\ \ \ \ \ \ \ \ =\ steps\ *\ (double)handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a25782e0bcd0945f0c673b81b6f5d369d}{microstep}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00072}00072\ \ \ \ \ steps\ \ \ \ \ \ \ \ =\ steps\ /\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a48ff29dd145331650188df5c94e4d671}{stepAngle}};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (steps\ <\ (\textcolor{keywordtype}{double})INT32\_MIN)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ steps\ =\ (double)INT32\_MIN;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (steps\ >\ (\textcolor{keywordtype}{double})INT32\_MAX)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00079}00079\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ steps\ =\ (double)INT32\_MAX;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00083}00083\ \ \ \ \ int32\_t\ result;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{switch}\ (method)}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca2aecd63c23c754e375bd53b4493dd488}{ROUND\_DOWN}}:}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ (int32\_t)floor(steps);}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca05bcede4e1be4c915d6ee55ac114b086}{ROUND\_UP}}:}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ (int32\_t)ceil(steps);}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}}:}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ (int32\_t)round(steps);}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ (int32\_t)round(steps);}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00102}00102\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00103}00103\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__convert_8c_source_l00104}00104\ \textcolor{comment}{\ ********************************************/}}
+
+\end{DoxyCode}

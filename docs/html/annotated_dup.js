@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "_CHD_CmdHandleImpl", "struct__CHD__CmdHandleImpl.html", "struct__CHD__CmdHandleImpl" ],
     [ "_LOG_LogHeader", "struct__LOG__LogHeader.html", "struct__LOG__LogHeader" ],
     [ "_LOG_LogHeaderPrefix", "struct__LOG__LogHeaderPrefix.html", "struct__LOG__LogHeaderPrefix" ],
     [ "_LOG_QueueItem", "struct__LOG__QueueItem.html", "struct__LOG__QueueItem" ],
@@ -23,7 +24,6 @@ var annotated_dup =
     [ "_MTR_SetVelocityCmdData", "struct__MTR__SetVelocityCmdData.html", "struct__MTR__SetVelocityCmdData" ],
     [ "_MTR_StopCmdData", "struct__MTR__StopCmdData.html", "struct__MTR__StopCmdData" ],
     [ "_MTR_SynchronizedMoveCmdData", "struct__MTR__SynchronizedMoveCmdData.html", "struct__MTR__SynchronizedMoveCmdData" ],
-    [ "_MTR_WaitUntilStoppedCmdData", "struct__MTR__WaitUntilStoppedCmdData.html", null ],
     [ "_PCA_Pin_Config", "struct__PCA__Pin__Config.html", "struct__PCA__Pin__Config" ],
     [ "_STP_AccelTablePoolItem", "struct__STP__AccelTablePoolItem.html", "struct__STP__AccelTablePoolItem" ],
     [ "_STP_CmdQueueItem", "struct__STP__CmdQueueItem.html", "struct__STP__CmdQueueItem" ],
@@ -36,7 +36,6 @@ var annotated_dup =
     [ "_STP_StepperHandleImpl", "struct__STP__StepperHandleImpl.html", "struct__STP__StepperHandleImpl" ],
     [ "_STP_StepperMovement", "struct__STP__StepperMovement.html", "struct__STP__StepperMovement" ],
     [ "_STP_StopCmdData", "struct__STP__StopCmdData.html", "struct__STP__StopCmdData" ],
-    [ "_THE_CmdHandleImpl", "struct__THE__CmdHandleImpl.html", "struct__THE__CmdHandleImpl" ],
     [ "_TMC_CommandQueueItem", "struct__TMC__CommandQueueItem.html", "struct__TMC__CommandQueueItem" ],
     [ "_TMC_Config", "struct__TMC__Config.html", "struct__TMC__Config" ],
     [ "_TMC_HandleArrayItem", "struct__TMC__HandleArrayItem.html", "struct__TMC__HandleArrayItem" ],

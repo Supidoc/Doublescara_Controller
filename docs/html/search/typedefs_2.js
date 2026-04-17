@@ -1,8 +1,26 @@
 var searchData=
 [
-  ['pca_5foutputlevel_5ft_0',['PCA_OutputLevel_t',['../group__PCA9555A.html#gabea5f56cc641c3f64ae305576067c040',1,'pca9555a.h']]],
-  ['pca_5fpin_5fconfig_5ft_1',['PCA_Pin_Config_t',['../group__PCA9555A.html#gae97bf35aa775dd8a8bcb53bd41c656a4',1,'pca9555a.h']]],
-  ['pca_5fpindirection_5ft_2',['PCA_PinDirection_t',['../group__PCA9555A.html#gaa548f74f46b1c747a1b74e2e5e66b53b',1,'pca9555a.h']]],
-  ['pca_5fpolarityinversion_5ft_3',['PCA_PolarityInversion_t',['../group__PCA9555A.html#gad592aa98f67996ab5bfc9c8e8cc5b8a8',1,'pca9555a.h']]],
-  ['pca_5fport_5ft_4',['PCA_Port_t',['../group__PCA9555A.html#gad3bd174b072c0e52af5e44604032f31c',1,'pca9555a.h']]]
+  ['mtr_5fcmdqueueitem_5ft_0',['MTR_CmdQueueItem_t',['../group__MOTOR__Internal.html#gaa929e5b0a578f350522e7e9f49df706d',1,'motor_internal.h']]],
+  ['mtr_5fcmdtype_5ft_1',['MTR_CmdType_t',['../group__MOTOR__Internal.html#gaae46016790b4a0a8e9f06dd1fe568b66',1,'motor_internal.h']]],
+  ['mtr_5fdisablefreewheellingcmddata_5ft_2',['MTR_DisableFreewheellingCmdData_t',['../group__MOTOR__Internal.html#gaebdf369004446cf9c3594f17a4ece24f',1,'motor_internal.h']]],
+  ['mtr_5fenablefreewheellingcmddata_5ft_3',['MTR_EnableFreewheellingCmdData_t',['../group__MOTOR__Internal.html#gaeef75b1737ec933f9054ee1020df6853',1,'motor_internal.h']]],
+  ['mtr_5fgetcurrentanglecmddata_5ft_4',['MTR_GetCurrentAngleCmdData_t',['../group__MOTOR__Internal.html#gae399a58a4ec848e00e2ca58e7287849c',1,'motor_internal.h']]],
+  ['mtr_5fgetmovementstatecmddata_5ft_5',['MTR_GetMovementStateCmdData_t',['../group__MOTOR__Internal.html#gaa3fb881767a12afd15521bda396f9967',1,'motor_internal.h']]],
+  ['mtr_5fhandlesarrayitem_5ft_6',['MTR_HandlesArrayItem_t',['../group__MOTOR__Internal.html#ga218226d9b00e4a50e15eb521ed4885c5',1,'motor_internal.h']]],
+  ['mtr_5finitmotorcmddata_5ft_7',['MTR_InitMotorCmdData_t',['../group__MOTOR__Internal.html#ga47dbfc9753882db7b2d44bf2c8f1206d',1,'motor_internal.h']]],
+  ['mtr_5fmotorconfig_5ft_8',['MTR_MotorConfig_t',['../group__MOTOR__Module.html#gab7b8f555379b16be12ecb2e6ad2da56b',1,'motor.h']]],
+  ['mtr_5fmotorhandle_5ft_9',['MTR_MotorHandle_t',['../group__MOTOR__Module.html#ga80cb43273307560ca13a8df4797c8f54',1,'motor.h']]],
+  ['mtr_5fmotorhandleimpl_5ft_10',['MTR_MotorHandleImpl_t',['../group__MOTOR__Internal.html#ga311d45d93ded9212771f08704b6b667a',1,'motor_internal.h']]],
+  ['mtr_5fmotorstepperconfig_5ft_11',['MTR_MotorStepperConfig_t',['../group__MOTOR__Module.html#ga8a4765221bb1f9d6957ab996f3058368',1,'motor.h']]],
+  ['mtr_5fmotortmcconfig_5ft_12',['MTR_MotorTmcConfig_t',['../group__MOTOR__Module.html#ga8e5d65aeb018ac2da54d039d54cdd31a',1,'motor.h']]],
+  ['mtr_5fmoveanglecmddata_5ft_13',['MTR_MoveAngleCmdData_t',['../group__MOTOR__Internal.html#ga28ae40cde624abb1ca84fab23693f8a6',1,'motor_internal.h']]],
+  ['mtr_5fmoverevolutionscmddata_5ft_14',['MTR_MoveRevolutionsCmdData_t',['../group__MOTOR__Internal.html#ga80a7a5cd92233713546ee71520010b82',1,'motor_internal.h']]],
+  ['mtr_5fparalleltaskitem_15',['MTR_ParallelTaskItem',['../group__MOTOR__Internal.html#gad3624e1db311e66b6ac3e2b16afa6a0d',1,'motor_internal.h']]],
+  ['mtr_5froundingmethod_5ft_16',['MTR_roundingMethod_t',['../group__MOTOR__Module.html#ga5142605594253bb6c632b95c962216ea',1,'motor.h']]],
+  ['mtr_5fsetaccelerationcmddata_5ft_17',['MTR_SetAccelerationCmdData_t',['../group__MOTOR__Internal.html#ga575d017d9133e9f2c42976d7ffdae5ac',1,'motor_internal.h']]],
+  ['mtr_5fsetholdcurrentcmddata_5ft_18',['MTR_SetHoldCurrentCmdData_t',['../group__MOTOR__Internal.html#ga6eb9f10817d0fbf8204861808ababa2c',1,'motor_internal.h']]],
+  ['mtr_5fsetruncurrentcmddata_5ft_19',['MTR_SetRunCurrentCmdData_t',['../group__MOTOR__Internal.html#gae08097ace0352f197d48112da4b6fdba',1,'motor_internal.h']]],
+  ['mtr_5fsetvelocitycmddata_5ft_20',['MTR_SetVelocityCmdData_t',['../group__MOTOR__Internal.html#ga79e92f54f0433d1978cd5c847ea1be74',1,'motor_internal.h']]],
+  ['mtr_5fstopcmddata_5ft_21',['MTR_StopCmdData_t',['../group__MOTOR__Internal.html#gac209c7db389c934d44b4d05f26eeed63',1,'motor_internal.h']]],
+  ['mtr_5fsynchronizedmovecmddata_5ft_22',['MTR_SynchronizedMoveCmdData_t',['../group__MOTOR__Internal.html#gac16e87672e9ce1397ba681190ac0a436',1,'motor_internal.h']]]
 ];

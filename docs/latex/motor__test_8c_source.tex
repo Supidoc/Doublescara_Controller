@@ -12,16 +12,16 @@
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli_8h}{cli.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli__utilities_8h}{cli\_utilities.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor_8h}{motor.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__test_8h}{motor\_test.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{task__helpers_8h}{task\_helpers.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pca9555a_8h}{pca9555a.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{pca9555a_8h}{driver/pca9555a/pca9555a.h}}>}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli_8h}{cli.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli__utilities_8h}{cli\_utilities.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor_8h}{motor.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__test_8h}{motor\_test.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{sync__wait_8h}{sync\_wait.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__configs_8h}{motor\_configs.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00022}00022\ \textcolor{comment}{/************************************}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
@@ -79,16 +79,16 @@
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00075}\doxymbox{\hyperlink{motor__test_8c_a50efeba9028961c6e5447005c23ba4a4}{00075}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{motor__test_8c_a50efeba9028961c6e5447005c23ba4a4}{init\_motor}}(\doxymbox{\hyperlink{group__MOTOR__Module_gab7b8f555379b16be12ecb2e6ad2da56b}{MTR\_MotorConfig\_t}}\ config)}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00076}00076\ \{}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ \ \ \ \ \ \ \ logMsg[60];}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00078}00078\ \ \ \ \ TickType\_t\ \ \ \ \ \ deadline\ \ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(100);}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00079}00079\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga7009cc4a4c8e9292f0d9b72c0ed96f59}{MTR\_init\_handle\_async}}(config,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}{THE\_cmd\_wait\_result}}(cmdHandle,\ deadline,\ NULL)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00078}00078\ \ \ \ \ TickType\_t\ \ \ \ \ \ deadline\ \ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(400);}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00079}00079\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga32a7ed4ed137c9dda2798c858e1e9f90}{MTR\_init\_handle\_async}}(config,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{sync__wait_8c_a2278427cc7aa36b311c455796886196d}{SYW\_cmd\_wait\_result}}(cmdHandle,\ deadline,\ NULL)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00082}00082\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}{THE\_remove\_cmd\_handle\_ref}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(cmdHandle);}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00084}00084\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00086}00086\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}{THE\_remove\_cmd\_handle\_ref}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(cmdHandle);}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00088}00088\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motor__test_8c_source_l00089}00089\ \}}
 

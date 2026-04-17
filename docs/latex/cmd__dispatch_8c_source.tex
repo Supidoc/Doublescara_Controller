@@ -1,0 +1,97 @@
+\doxysection{cmd\+\_\+dispatch.\+c}
+\hypertarget{cmd__dispatch_8c_source}{}\label{cmd__dispatch_8c_source}\index{source/task\_helpers/cmd\_dispatch.c@{source/task\_helpers/cmd\_dispatch.c}}
+\doxymbox{\hyperlink{cmd__dispatch_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ cmd\_dispatch.c}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 13\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__dispatch_8h}{cmd\_dispatch.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00014}00014\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00015}00015\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00016}00016\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00018}00018\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00020}00020\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00022}00022\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00024}00024\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00026}00026\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00028}00028\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00030}00030\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00031}00031\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00032}00032\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00034}00034\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00035}00035\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00036}00036\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00038}\doxymbox{\hyperlink{cmd__dispatch_8c_a1295f6b3982462f4aac53348d8e52b68}{00038}}\ status\_t\ \doxymbox{\hyperlink{cmd__dispatch_8c_a1295f6b3982462f4aac53348d8e52b68}{CDP\_send\_cmd}}(QueueHandle\_t\ xQueue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \textcolor{keyword}{const}\ pvItemToQueue,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00041}00041\ \ \ \ \ TickType\_t\ currentTick\ =\ xTaskGetTickCount();}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00043}00043\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a2fe25554976cdf18536f88a331a62cd7}{CHD\_add\_cmd\_handle\_ref}}(cmdHandle);\ \textcolor{comment}{//\ Increment\ reference\ count\ for\ the\ receiving\ task}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (deadline\ <=\ currentTick)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00046}00046\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_gabfe0c293b360dc335041f1bc67b00647}{LOG\_WARN}}(\textcolor{stringliteral}{"{}Command\ deadline\ has\ already\ passed"{}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00053}00053\ \ \ \ \ TickType\_t\ ticksUntilDeadline\ =\ deadline\ -\/\ currentTick;}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{if}\ (xQueueSend(xQueue,\ pvItemToQueue,\ ticksUntilDeadline)\ !=\ pdTRUE)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(\textcolor{stringliteral}{"{}Failed\ to\ queue\ command\ -\/\ queue\ may\ be\ full"{}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00065}\doxymbox{\hyperlink{cmd__dispatch_8c_a46e12257c7ca31415aa7e513fc0ccbe3}{00065}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a46e12257c7ca31415aa7e513fc0ccbe3}{CDP\_notify\_task\_success}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00068}00068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ xEventGroupSetBits(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_gae515d7d513917dba41c41d68d79ba20b}{CHD\_CMD\_BIT\_SUCCESS}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00071}00071\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00073}\doxymbox{\hyperlink{cmd__dispatch_8c_a6d93010b80e0868b657a08c03594fd4c}{00073}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a6d93010b80e0868b657a08c03594fd4c}{CDP\_notify\_task\_failure}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ xEventGroupSetBits(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_ga9fc89681a892ffab31eab75b4d08a76d}{CHD\_CMD\_BIT\_FAILURE}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00081}\doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{00081}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ xEventGroupSetBits(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_ga9e80327a24089cf6688fe36c279eb7ae}{CHD\_CMD\_BIT\_TIMEOUT}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00089}00089\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00090}00090\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00091}00091\ \textcolor{comment}{\ ********************************************/}}
+
+\end{DoxyCode}

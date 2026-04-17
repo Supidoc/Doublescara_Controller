@@ -1,0 +1,170 @@
+\doxysection{tmc2209\+\_\+process.\+c}
+\hypertarget{tmc2209__process_8c_source}{}\label{tmc2209__process_8c_source}\index{source/driver/tmc2209/tmc2209\_process.c@{source/driver/tmc2209/tmc2209\_process.c}}
+\doxymbox{\hyperlink{tmc2209__process_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ tmc2209\_process.c}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 14\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tmc2209__process_8h}{tmc2209\_process.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tmc2209__shared_8h}{tmc2209\_shared.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tmc2209__internal_8h}{tmc2209\_internal.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tmc2209__setup_8h}{tmc2209\_setup.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__dispatch_8h}{cmd\_dispatch.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00021}00021\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00022}00022\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00023}00023\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00025}00025\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00026}00026\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00027}00027\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00029}00029\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00030}00030\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00031}00031\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00033}00033\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00035}00035\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00037}\doxymbox{\hyperlink{group__TMC2209__Internal_ga0c89a309c5a278b27b9f9efe7640b280}{00037}}\ QueueHandle\_t\ \doxymbox{\hyperlink{group__TMC2209__Internal_ga0c89a309c5a278b27b9f9efe7640b280}{tmcCmdQueue}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00039}\doxymbox{\hyperlink{group__TMC2209__Internal_gacd2173e852cfbe061934ecc0f1f329e6}{00039}}\ \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\_CmdHandleImpl\_t}}\ \doxymbox{\hyperlink{group__TMC2209__Internal_gacd2173e852cfbe061934ecc0f1f329e6}{tmcCmdHandles}}[\doxymbox{\hyperlink{tmc2209__shared_8h_a95780650db7177c914d239b38e96281c}{TMC\_MAX\_CMD\_HANDLE\_COUNT}}];}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00041}00041\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00042}00042\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00043}00043\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00045}00045\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00046}00046\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00047}00047\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00049}\doxymbox{\hyperlink{group__TMC2209__Process__Internal_ga9db17fa9ee4d421c2ee5f53dbe15486c}{00049}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__TMC2209__Process__Internal_ga9db17fa9ee4d421c2ee5f53dbe15486c}{TMCi\_process}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00051}00051\ \ \ \ \ \doxymbox{\hyperlink{group__TMC2209__Internal_ga620acf3b0a063631292095c1f8fb463d}{TMC\_CommandQueueItem\_t}}\ queueItem\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00052}00052\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ \ \ \ \ \ status;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00053}00053\ \ \ \ \ status\ =\ xQueueReceive(\doxymbox{\hyperlink{group__TMC2209__Internal_ga0c89a309c5a278b27b9f9efe7640b280}{tmcCmdQueue}},\ \&queueItem,\ pdMS\_TO\_TICKS(10));}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ pdPASS)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00058}00058\ \ \ \ \ status\_t\ cmdStatus\ =\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{switch}\ (queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_aa85f5613fed14add5fd61ab2fb1827dc}{commandType}})}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede}{TMC\_CMD\_DEFAULT\_INIT}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_gab723554ce08396dc26598db7ed0f9ffe}{TMCi\_init\_handle}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a10f66c10cb2889b0c38d8ac9d2abcbda}{initHandle}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a796417fcbecec9584575aa3b3c28d858}{config}},\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28}{TMC\_CMD\_SET\_MICROSTEPPING}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga75332e5f0b3f239df059b0984356bfce}{TMCi\_set\_microstepping}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}},}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_adb3b47764490b6089c6b9ee0509aed4c}{setMicrostepping}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_aac30f4d7f37f480c264ed4c937fddb67}{microstepping}},}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa}{TMC\_CMD\_SET\_IHOLD\_DIVIDER}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga9f3999b1646633435818cbb2674705b4}{TMCi\_set\_ihold\_divider}}(}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}},\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_aea65c12cbb37b769f5b95d1f67367d40}{setIholdDivider}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_adf908caf91d7ee0d4669e337f23c1c73}{ihold}},\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdStatus\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}}-\/>\doxymbox{\hyperlink{struct__TMC__HandleImpl_a41bfea7ddaace7185d87377c6375749b}{iholdDivider}}\ =\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_aea65c12cbb37b769f5b95d1f67367d40}{setIholdDivider}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_adf908caf91d7ee0d4669e337f23c1c73}{ihold}};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3}{TMC\_CMD\_SET\_IRUN\_DIVIDER}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga7d66ad385fb8a2ecea9cb3cf5a9f0f91}{TMCi\_set\_irun\_divider}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}},\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_ae2d1f34594a440e767e69687456cb9ff}{setIrunDivider}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a65e692506cb6a7d1645932504b1ad900}{irun}},}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdStatus\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}}-\/>\doxymbox{\hyperlink{struct__TMC__HandleImpl_a53e1d74f7180037dfa14ccf3eeb9a2cd}{irunDivider}}\ =\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a235bfc0676d2f58a50f8732c46f6aeb5}{data}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_ae2d1f34594a440e767e69687456cb9ff}{setIrunDivider}}.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a65e692506cb6a7d1645932504b1ad900}{irun}};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498}{TMC\_CMD\_ENABLE\_FREEWHEELING}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga3c66871d7d5bb858f0e013e6e9867bfb}{TMCi\_set\_freewheeling}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}},\ 1,\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdStatus\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}}-\/>\doxymbox{\hyperlink{struct__TMC__HandleImpl_a869a2c610826285e931dcd032ff6e8c9}{freewheeling}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__TMC2209__Internal_ggaa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753}{TMC\_CMD\_DISABLE\_FREEWHEELING}}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga3c66871d7d5bb858f0e013e6e9867bfb}{TMCi\_set\_freewheeling}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}},\ 0,\ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdStatus\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a833f02d770ddbc0d407b7eddd757d423}{handle}}-\/>\doxymbox{\hyperlink{struct__TMC__HandleImpl_a869a2c610826285e931dcd032ff6e8c9}{freewheeling}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ cmdStatus\ =\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{if}\ (queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00105}00105\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a71d3eef2c122c238428034977b0aee42}{deadline}}\ <=\ xTaskGetTickCount())}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (cmdStatus\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__dispatch_8c_a46e12257c7ca31415aa7e513fc0ccbe3}{CDP\_notify\_task\_success}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__dispatch_8c_a6d93010b80e0868b657a08c03594fd4c}{CDP\_notify\_task\_failure}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(queueItem.\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00120}00120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00123}\doxymbox{\hyperlink{group__TMC2209__Process__Internal_ga5e1d30d65b39735d49580d20504f8fb5}{00123}}\ status\_t\ \doxymbox{\hyperlink{group__TMC2209__Process__Internal_ga5e1d30d65b39735d49580d20504f8fb5}{TMCi\_send\_cmd\_async}}(\doxymbox{\hyperlink{group__TMC2209__Internal_ga620acf3b0a063631292095c1f8fb463d}{TMC\_CommandQueueItem\_t}}*\ queueItem,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00125}00125\ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00126}00126\ \ \ \ \ \textcolor{keywordflow}{if}\ (queueItem\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00127}00127\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00130}00130\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ internaleCmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00132}00132\ \ \ \ \ status\_t\ allocStatus\ =}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a121a340f467247572190b0306ee40c90}{CHD\_get\_cmd\_handle}}(\&internaleCmdHandle,\ \doxymbox{\hyperlink{group__TMC2209__Internal_gacd2173e852cfbe061934ecc0f1f329e6}{tmcCmdHandles}},\ \doxymbox{\hyperlink{tmc2209__shared_8h_a95780650db7177c914d239b38e96281c}{TMC\_MAX\_CMD\_HANDLE\_COUNT}});}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{if}\ (allocStatus\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00135}00135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a2fe25554976cdf18536f88a331a62cd7}{CHD\_add\_cmd\_handle\_ref}}(internaleCmdHandle);}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00143}00143\ \ \ \ \ queueItem-\/>\doxymbox{\hyperlink{struct__TMC__CommandQueueItem_a01c1324edac901e7e1eea4ccd30ef7ca}{cmdHandle}}\ =\ internaleCmdHandle;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00145}00145\ \ \ \ \ status\_t\ sendStatus\ =\ \doxymbox{\hyperlink{cmd__dispatch_8c_a1295f6b3982462f4aac53348d8e52b68}{CDP\_send\_cmd}}(\doxymbox{\hyperlink{group__TMC2209__Internal_ga0c89a309c5a278b27b9f9efe7640b280}{tmcCmdQueue}},\ queueItem,\ deadline,\ internaleCmdHandle);}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{if}\ (sendStatus\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00147}00147\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(*cmdHandle);}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ *cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00156}00156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ *cmdHandle\ =\ internaleCmdHandle;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00158}00158\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00162}00162\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00163}00163\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{tmc2209__process_8c_source_l00164}00164\ \textcolor{comment}{\ ********************************************/}}
+
+\end{DoxyCode}

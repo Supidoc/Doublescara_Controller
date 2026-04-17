@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generator_20module_0',['Stepper Generator Module',['../group__STEP__Module.html',1,'']]]
+  ['facade_20module_0',['Motor Facade Module',['../group__MOTOR__Facade__Module.html',1,'']]]
 ];

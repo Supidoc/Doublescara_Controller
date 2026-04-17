@@ -1,0 +1,86 @@
+\doxysection{step\+\_\+core.\+h}
+\hypertarget{step__core_8h_source}{}\label{step__core_8h_source}\index{source/motion/stepper/step\_core.h@{source/motion/stepper/step\_core.h}}
+\doxymbox{\hyperlink{step__core_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ step\_core.h}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Public\ stepper\ facade\ API\ for\ task-\/safe\ motion\ control.}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 13\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00017}00017\ \textcolor{preprocessor}{\#ifndef\ STEP\_CORE\_H\_}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00018}00018\ \textcolor{preprocessor}{\#define\ STEP\_CORE\_H\_}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00020}00020\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00022}00022\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{pca9555a_8h}{driver/pca9555a/pca9555a.h}}>}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}task.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}fsl\_common.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}fsl\_ftm.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}fsl\_gpio.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}fsl\_port.h"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{step__shared_8h}{step\_shared.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00033}00033\ \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00035}00035\ \textcolor{comment}{\ ***********************************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00037}00037\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00038}00038\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00039}00039\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00041}00041\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00042}00042\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00043}00043\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00045}00045\ \textcolor{comment}{/**************************************}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00046}00046\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00047}00047\ \textcolor{comment}{\ **************************************/}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00064}00064\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga40d24dc2b8326fda6b24d319269ece4d}{STP\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00081}00081\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__STEPPER__Module_gae3c0fdafdd95ef3f90018154fff01e67}{STP\_task}}(\textcolor{keywordtype}{void}*\ pvParameters);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00096}00096\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga718622f8935169a07606900d30e35dc3}{STP\_get\_default\_config}}(\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\_StepperConfig\_t}}*\ config);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00117}00117\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gabf526b7c6303b8dadfe76f34e52a6f97}{STP\_init\_handle\_async}}(\doxymbox{\hyperlink{step__shared_8h_a535eb32d7f105664817feda22180e59b}{STP\_StepperConfig\_t}}\ config,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00138}00138\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga6c7c41036ed5ec5ca7226a2ca23fbc7d}{STP\_get\_handle\_by\_label}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ label,\ \doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}*\ handle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00161}00161\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\_move\_relative\_async}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ int32\_t\ steps,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00184}00184\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b}{STP\_stop\_async}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint8\_t\ doDeceleration,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00198}00198\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2}{STP\_reset\_absolute\_position}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00216}00216\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gadeffd3212366b893459a9bb026bd88b8}{STP\_move\_relative\_prepare\_async}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ int32\_t\ steps,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00230}00230\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gab715c7bd8595a08979240255362b2571}{STP\_trigger\_prepared\_moves\_async}}(TickType\_t\ deadline,\ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00241}00241\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\_get\_absolute\_steps}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ int32\_t*\ absoluteSteps);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00252}00252\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gaa650351470c587dbe89b773ee800708c}{STP\_get\_acceleration}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ \textcolor{keywordtype}{double}*\ acceleration);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00263}00263\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gaef3ff2c4a411d2d9d67ba157f81619f5}{STP\_get\_end\_velocity}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ \textcolor{keywordtype}{double}*\ endVelocity);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00274}00274\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}{STP\_get\_movement\_state}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}*\ state);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00287}00287\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda}{STP\_set\_acceleration\_async}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ acceleration,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00301}00301\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58}{STP\_set\_end\_velocity\_async}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ endVelocity,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00304}00304\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ STEP\_CORE\_H\_}}
+\DoxyCodeLine{\Hypertarget{step__core_8h_source_l00305}00305\ }
+
+\end{DoxyCode}

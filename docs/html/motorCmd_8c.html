@@ -94,7 +94,7 @@ $(function(){initNavTree('motorCmd_8c.html','',''); });
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="motorCmd_8h_source.html">motorCmd.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="motor_8h_source.html">motor.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="step_8h_source.html">step.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="step__core_8h_source.html">step_core.h</a>&quot;</code><br />
 <code>#include &quot;FreeRTOS_CLI.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="cli_8h_source.html">cli.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cli__utilities_8h_source.html">cli_utilities.h</a>&quot;</code><br />
@@ -102,7 +102,7 @@ $(function(){initNavTree('motorCmd_8c.html','',''); });
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="task__helpers_8h_source.html">task_helpers.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sync__wait_8h_source.html">sync_wait.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for motorCmd.c:</div>
 <div class="dyncontent">
@@ -133,7 +133,7 @@ Functions</h2></td></tr>
 <tr class="memitem:af1c70c2a5e497b204c1e8a9213f32542" id="r_af1c70c2a5e497b204c1e8a9213f32542"><td class="memItemLeft">static BaseType_t&#160;</td><td class="memItemRight"><a class="el" href="#af1c70c2a5e497b204c1e8a9213f32542">cmd_motor_synchronized_move</a> (char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</td></tr>
 <tr class="memitem:a1fc1fea18fb2733913ac541d933dc5f4" id="r_a1fc1fea18fb2733913ac541d933dc5f4"><td class="memItemLeft">static BaseType_t&#160;</td><td class="memItemRight"><a class="el" href="#a1fc1fea18fb2733913ac541d933dc5f4">cmd_motor_enable_freewheeling</a> (char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</td></tr>
 <tr class="memitem:a8594612b10e19650311978ac4b1a771f" id="r_a8594612b10e19650311978ac4b1a771f"><td class="memItemLeft">static BaseType_t&#160;</td><td class="memItemRight"><a class="el" href="#a8594612b10e19650311978ac4b1a771f">cmd_motor_disable_freewheeling</a> (char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</td></tr>
-<tr class="memitem:a385dd4535c8d6f00107f8f24c5474c38" id="r_a385dd4535c8d6f00107f8f24c5474c38"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a385dd4535c8d6f00107f8f24c5474c38">wait_for_mtr_cmd</a> (<a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a> cmdHandle, TickType_t deadline)</td></tr>
+<tr class="memitem:a9c9b713d7e1f0775be398eeaf8a53c44" id="r_a9c9b713d7e1f0775be398eeaf8a53c44"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a9c9b713d7e1f0775be398eeaf8a53c44">wait_for_mtr_cmd</a> (<a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> cmdHandle, TickType_t deadline)</td></tr>
 <tr class="memitem:gaa3be1460f8c4d323d294f337a706508c" id="r_gaa3be1460f8c4d323d294f337a706508c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="group__MotorCmd__Module.html#gaa3be1460f8c4d323d294f337a706508c">MCMD_init</a> (void)</td></tr>
 <tr class="memdesc:gaa3be1460f8c4d323d294f337a706508c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the motor command module.  <br /></td></tr>
 <tr class="memitem:ga9a65695a6bd7f4f925ccd06b2020814b" id="r_ga9a65695a6bd7f4f925ccd06b2020814b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__MotorCmd__Module.html#ga9a65695a6bd7f4f925ccd06b2020814b">MCMD_task</a> (void *pvParameters)</td></tr>
@@ -752,8 +752,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a385dd4535c8d6f00107f8f24c5474c38" name="a385dd4535c8d6f00107f8f24c5474c38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a385dd4535c8d6f00107f8f24c5474c38">&#9670;&#160;</a></span>wait_for_mtr_cmd()</h2>
+<a id="a9c9b713d7e1f0775be398eeaf8a53c44" name="a9c9b713d7e1f0775be398eeaf8a53c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9b713d7e1f0775be398eeaf8a53c44">&#9670;&#160;</a></span>wait_for_mtr_cmd()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -764,7 +764,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">status_t wait_for_mtr_cmd </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__TaskHelpers__Module.html#ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad">THE_CmdHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>, </td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

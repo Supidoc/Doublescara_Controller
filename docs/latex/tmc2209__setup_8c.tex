@@ -1,0 +1,105 @@
+\doxysection{source/\+driver/\+tmc2209/\+tmc2209\+\_\+setup.c File Reference}
+\hypertarget{tmc2209__setup_8c}{}\label{tmc2209__setup_8c}\index{source/driver/tmc2209/tmc2209\_setup.c@{source/driver/tmc2209/tmc2209\_setup.c}}
+{\ttfamily \+\#include "{}tmc2209\+\_\+setup.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209\+\_\+shared.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209\+\_\+internal.\+h"{}}\newline
+{\ttfamily \+\#include "{}tmc2209\+\_\+uart.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdio.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}log.\+h"{}}\newline
+Include dependency graph for tmc2209\+\_\+setup.\+c:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tmc2209__setup_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__setup_8c_a2dc3bd8477966c796448629c740eb740}{TMC\+\_\+\+GCONF\+\_\+\+ADDR}}~0x00
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__setup_8c_af33a21c3a075ce4d06cc8f395ecf3f06}{TMC\+\_\+\+GSTAT\+\_\+\+ADDR}}~0x01
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__setup_8c_a4882ec884821cfc943288f0a89c7b966}{TMC\+\_\+\+CHOPCONF\+\_\+\+ADDR}}~0x6c
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__setup_8c_ac09b5c77478480426679a83e24155821}{TMC\+\_\+\+IHOLD\+\_\+\+IRUN\+\_\+\+ADDR}}~0x10
+\item 
+\+\#define \doxymbox{\hyperlink{tmc2209__setup_8c_af729e817251389added7c43069c20dad}{TMC\+\_\+\+PWMCONF\+\_\+\+ADDR}}~0x70
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_gab723554ce08396dc26598db7ed0f9ffe}{TMCi\+\_\+init\+\_\+handle}} (\doxymbox{\hyperlink{tmc2209__shared_8h_a2c9718556ec3eb0096214699414f8291}{TMC\+\_\+\+Config\+\_\+t}} config, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Allocates and initializes one TMC handle from config. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga5e4bce4056f731dba7d269efadd0f6c1}{TMCi\+\_\+free\+\_\+handle}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle)
+\begin{DoxyCompactList}\small\item\em Frees one previously allocated TMC handle. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga9f3999b1646633435818cbb2674705b4}{TMCi\+\_\+set\+\_\+ihold\+\_\+divider}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t ihold, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Writes IHOLD divider value to driver. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga7d66ad385fb8a2ecea9cb3cf5a9f0f91}{TMCi\+\_\+set\+\_\+irun\+\_\+divider}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t irun, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Writes IRUN divider value to driver. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga75332e5f0b3f239df059b0984356bfce}{TMCi\+\_\+set\+\_\+microstepping}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{tmc2209__shared_8h_ac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} microstepping, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Applies microstepping configuration. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga24aed8ce8672db1fa16d37b712517826}{TMCi\+\_\+set\+\_\+double\+\_\+edge\+\_\+step\+\_\+pulse}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Enables or disables double-\/edge step mode. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga3c66871d7d5bb858f0e013e6e9867bfb}{TMCi\+\_\+set\+\_\+freewheeling}} (\doxymbox{\hyperlink{tmc2209__shared_8h_af7cd46cb3777ad58a3c8680446fdd9b8}{TMC\+\_\+\+Handle\+\_\+t}} handle, uint8\+\_\+t enabled, Tick\+Type\+\_\+t deadline)
+\begin{DoxyCompactList}\small\item\em Enables or disables freewheeling mode. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga38545c7e5a8168030635c6b509240275}{TMCi\+\_\+microstepping\+\_\+uint\+\_\+to\+\_\+enum\+\_\+impl}} (uint16\+\_\+t in, \doxymbox{\hyperlink{tmc2209__shared_8h_ac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} \texorpdfstring{$\ast$}{*}out)
+\begin{DoxyCompactList}\small\item\em Converts register microstepping value to enum representation. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{group__TMC2209__Setup__Internal_ga02e5f790351dd1f52453b8d684008f68}{TMC\+\_\+microstepping\+\_\+enum\+\_\+to\+\_\+uint\+\_\+impl}} (\doxymbox{\hyperlink{tmc2209__shared_8h_ac56b6571d46cac5104900b8e593cd2b8}{TMC\+\_\+\+MICROSTEPPING\+\_\+t}} in, uint16\+\_\+t \texorpdfstring{$\ast$}{*}out)
+\begin{DoxyCompactList}\small\item\em Converts enum microstepping value to register representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{tmc2209__setup_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{tmc2209__setup_8c_a4882ec884821cfc943288f0a89c7b966}\index{tmc2209\_setup.c@{tmc2209\_setup.c}!TMC\_CHOPCONF\_ADDR@{TMC\_CHOPCONF\_ADDR}}
+\index{TMC\_CHOPCONF\_ADDR@{TMC\_CHOPCONF\_ADDR}!tmc2209\_setup.c@{tmc2209\_setup.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_CHOPCONF\_ADDR}{TMC\_CHOPCONF\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__setup_8c_a4882ec884821cfc943288f0a89c7b966} 
+\+\#define TMC\+\_\+\+CHOPCONF\+\_\+\+ADDR~0x6c}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__setup_8c_source_l00025}{25}} of file \doxymbox{\hyperlink{tmc2209__setup_8c_source}{tmc2209\+\_\+setup.\+c}}.
+
+\Hypertarget{tmc2209__setup_8c_a2dc3bd8477966c796448629c740eb740}\index{tmc2209\_setup.c@{tmc2209\_setup.c}!TMC\_GCONF\_ADDR@{TMC\_GCONF\_ADDR}}
+\index{TMC\_GCONF\_ADDR@{TMC\_GCONF\_ADDR}!tmc2209\_setup.c@{tmc2209\_setup.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_GCONF\_ADDR}{TMC\_GCONF\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__setup_8c_a2dc3bd8477966c796448629c740eb740} 
+\+\#define TMC\+\_\+\+GCONF\+\_\+\+ADDR~0x00}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__setup_8c_source_l00023}{23}} of file \doxymbox{\hyperlink{tmc2209__setup_8c_source}{tmc2209\+\_\+setup.\+c}}.
+
+\Hypertarget{tmc2209__setup_8c_af33a21c3a075ce4d06cc8f395ecf3f06}\index{tmc2209\_setup.c@{tmc2209\_setup.c}!TMC\_GSTAT\_ADDR@{TMC\_GSTAT\_ADDR}}
+\index{TMC\_GSTAT\_ADDR@{TMC\_GSTAT\_ADDR}!tmc2209\_setup.c@{tmc2209\_setup.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_GSTAT\_ADDR}{TMC\_GSTAT\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__setup_8c_af33a21c3a075ce4d06cc8f395ecf3f06} 
+\+\#define TMC\+\_\+\+GSTAT\+\_\+\+ADDR~0x01}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__setup_8c_source_l00024}{24}} of file \doxymbox{\hyperlink{tmc2209__setup_8c_source}{tmc2209\+\_\+setup.\+c}}.
+
+\Hypertarget{tmc2209__setup_8c_ac09b5c77478480426679a83e24155821}\index{tmc2209\_setup.c@{tmc2209\_setup.c}!TMC\_IHOLD\_IRUN\_ADDR@{TMC\_IHOLD\_IRUN\_ADDR}}
+\index{TMC\_IHOLD\_IRUN\_ADDR@{TMC\_IHOLD\_IRUN\_ADDR}!tmc2209\_setup.c@{tmc2209\_setup.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_IHOLD\_IRUN\_ADDR}{TMC\_IHOLD\_IRUN\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__setup_8c_ac09b5c77478480426679a83e24155821} 
+\+\#define TMC\+\_\+\+IHOLD\+\_\+\+IRUN\+\_\+\+ADDR~0x10}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__setup_8c_source_l00026}{26}} of file \doxymbox{\hyperlink{tmc2209__setup_8c_source}{tmc2209\+\_\+setup.\+c}}.
+
+\Hypertarget{tmc2209__setup_8c_af729e817251389added7c43069c20dad}\index{tmc2209\_setup.c@{tmc2209\_setup.c}!TMC\_PWMCONF\_ADDR@{TMC\_PWMCONF\_ADDR}}
+\index{TMC\_PWMCONF\_ADDR@{TMC\_PWMCONF\_ADDR}!tmc2209\_setup.c@{tmc2209\_setup.c}}
+\doxysubsubsection{\texorpdfstring{TMC\_PWMCONF\_ADDR}{TMC\_PWMCONF\_ADDR}}
+{\footnotesize\ttfamily \label{tmc2209__setup_8c_af729e817251389added7c43069c20dad} 
+\+\#define TMC\+\_\+\+PWMCONF\+\_\+\+ADDR~0x70}
+
+
+
+Definition at line \doxymbox{\hyperlink{tmc2209__setup_8c_source_l00027}{27}} of file \doxymbox{\hyperlink{tmc2209__setup_8c_source}{tmc2209\+\_\+setup.\+c}}.
+

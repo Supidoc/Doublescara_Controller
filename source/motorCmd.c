@@ -14,7 +14,7 @@
  ********************/
 #include "motorCmd.h"
 #include "motor.h"
-#include "step.h"
+#include "step_core.h"
 #include "FreeRTOS_CLI.h"
 #include "cli.h"
 #include "cli_utilities.h"
@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "task_helpers.h"
+#include "sync_wait.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -69,7 +69,7 @@ static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWri
                                                 const char* pcCommandString);
 static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWriteBufferLen,
                                                  const char* pcCommandString);
-static status_t   wait_for_mtr_cmd(THE_CmdHandle_t cmdHandle, TickType_t deadline);
+static status_t   wait_for_mtr_cmd(CHD_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
  *     Public Variables     *
@@ -221,15 +221,15 @@ void MCMD_task(void* pvParameters)
  *     Private Function Implementations     *
  ********************************************/
 
-static status_t wait_for_mtr_cmd(THE_CmdHandle_t cmdHandle, TickType_t deadline)
+static status_t wait_for_mtr_cmd(CHD_CmdHandle_t cmdHandle, TickType_t deadline)
 {
     if (cmdHandle == NULL)
     {
         return kStatus_Fail;
     }
 
-    status_t status = THE_cmd_wait_result(cmdHandle, deadline, NULL);
-    THE_remove_cmd_handle_ref(cmdHandle);
+    status_t status = SYW_cmd_wait_result(cmdHandle, deadline, NULL);
+    CHD_remove_cmd_handle_ref(cmdHandle);
     return status;
 }
 
@@ -367,7 +367,7 @@ static BaseType_t cmd_motor_move_revolutions(char* pcWriteBuffer, size_t xWriteB
     }
     revolutions = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_move_revolutions_async(handle, revolutions, portMAX_DELAY, NULL) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Moving %.2f revolutions\r\n", revolutions);
@@ -389,7 +389,7 @@ static BaseType_t cmd_motor_set_velocity(char* pcWriteBuffer, size_t xWriteBuffe
     BaseType_t        parameterStringLength;
     double            velocity;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -417,7 +417,7 @@ static BaseType_t cmd_motor_set_velocity(char* pcWriteBuffer, size_t xWriteBuffe
     }
     velocity = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_set_velocity_async(handle, velocity, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -440,7 +440,7 @@ static BaseType_t cmd_motor_set_acceleration(char* pcWriteBuffer, size_t xWriteB
     BaseType_t        parameterStringLength;
     double            acceleration;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -468,7 +468,7 @@ static BaseType_t cmd_motor_set_acceleration(char* pcWriteBuffer, size_t xWriteB
     }
     acceleration = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_set_acceleration_async(handle, acceleration, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -492,7 +492,7 @@ static BaseType_t cmd_motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen,
     BaseType_t        parameterStringLength;
     bool              decelerate = false;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -518,7 +518,7 @@ static BaseType_t cmd_motor_stop(char* pcWriteBuffer, size_t xWriteBufferLen,
         decelerate = true;
     }
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_stop_async(handle, decelerate, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -541,7 +541,7 @@ static BaseType_t cmd_motor_emergency_stop(char* pcWriteBuffer, size_t xWriteBuf
     const char*       pcParameter;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -597,7 +597,7 @@ static BaseType_t cmd_motor_get_angle(char* pcWriteBuffer, size_t xWriteBufferLe
     BaseType_t        parameterStringLength;
     double            angle;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -615,7 +615,7 @@ static BaseType_t cmd_motor_get_angle(char* pcWriteBuffer, size_t xWriteBufferLe
         return pdFALSE;
     }
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_get_current_angle_async(handle, &angle, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -638,7 +638,7 @@ static BaseType_t cmd_motor_get_state(char* pcWriteBuffer, size_t xWriteBufferLe
     BaseType_t          parameterStringLength;
     STP_MovementState_t state;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -656,7 +656,7 @@ static BaseType_t cmd_motor_get_state(char* pcWriteBuffer, size_t xWriteBufferLe
         return pdFALSE;
     }
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_get_movement_state_async(handle, &state, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -706,7 +706,7 @@ static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen
     const char*       pcParameter;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -724,7 +724,7 @@ static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen
         return pdFALSE;
     }
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_set_home_position_async(handle, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -747,7 +747,7 @@ static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBu
     BaseType_t        parameterStringLength;
     double            current;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -775,7 +775,7 @@ static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBu
     }
     current = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_set_run_current_async(handle, current, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -798,7 +798,7 @@ static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteB
     BaseType_t        parameterStringLength;
     double            current;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -826,7 +826,7 @@ static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteB
     }
     current = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_set_hold_current_async(handle, current, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -849,7 +849,7 @@ static BaseType_t cmd_motor_synchronized_move(char* pcWriteBuffer, size_t xWrite
     const char*       pcParameter;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor 1 ID
     CLU_get_parameter_value_string("-m1", pcCommandString, &parameterFound, &pcParameter,
@@ -903,7 +903,7 @@ static BaseType_t cmd_motor_synchronized_move(char* pcWriteBuffer, size_t xWrite
     }
     angles[1] = strtod(pcParameter, NULL);
 
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_synchronized_move_async(handles, angles, 2, deadline, &cmdHandle) == kStatus_Success)
     {
         snprintf(pcWriteBuffer, xWriteBufferLen,
@@ -926,7 +926,7 @@ static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWri
     const char*       pcParameter = NULL;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -945,7 +945,7 @@ static BaseType_t cmd_motor_enable_freewheeling(char* pcWriteBuffer, size_t xWri
     }
 
     // Call async function and wait
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_enable_freewheeling_async(handle, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {
@@ -966,7 +966,7 @@ static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWr
     const char*       pcParameter = NULL;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = THE_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
 
     // Get motor ID
     CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
@@ -985,7 +985,7 @@ static BaseType_t cmd_motor_disable_freewheeling(char* pcWriteBuffer, size_t xWr
     }
 
     // Call async function and wait
-    THE_CmdHandle_t cmdHandle = NULL;
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_disable_freewheeling_async(handle, deadline, &cmdHandle) == kStatus_Success &&
         wait_for_mtr_cmd(cmdHandle, deadline) == kStatus_Success)
     {

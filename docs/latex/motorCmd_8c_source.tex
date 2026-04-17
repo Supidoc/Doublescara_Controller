@@ -18,7 +18,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00014}00014\ \textcolor{comment}{\ ********************/}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motorCmd_8h}{motorCmd.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor_8h}{motor.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{step_8h}{step.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{step__core_8h}{step\_core.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli_8h}{cli.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli__utilities_8h}{cli\_utilities.h}}"{}}}
@@ -26,7 +26,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ <string.h>}}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{task__helpers_8h}{task\_helpers.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{sync__wait_8h}{sync\_wait.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00026}00026\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00027}00027\ \textcolor{comment}{/************************************}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00028}00028\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
@@ -73,7 +73,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00070}00070\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{motorCmd_8c_a8594612b10e19650311978ac4b1a771f}{cmd\_motor\_disable\_freewheeling}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString);}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00072}00072\ \textcolor{keyword}{static}\ status\_t\ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle,\ TickType\_t\ deadline);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00072}00072\ \textcolor{keyword}{static}\ status\_t\ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle,\ TickType\_t\ deadline);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00073}00073\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00074}00074\ \textcolor{comment}{/****************************}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00075}00075\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
@@ -225,15 +225,15 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00221}00221\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00222}00222\ \textcolor{comment}{\ ********************************************/}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00223}00223\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00224}\doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{00224}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(\doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle,\ TickType\_t\ deadline)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00224}\doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{00224}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle,\ TickType\_t\ deadline)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00225}00225\ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00227}00227\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00229}00229\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00231}00231\ \ \ \ \ status\_t\ status\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga3188faf445f5f231400e567cc6917ffa}{THE\_cmd\_wait\_result}}(cmdHandle,\ deadline,\ NULL);}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00232}00232\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_gacc22b774e34857e7709f1462b6b2a81b}{THE\_remove\_cmd\_handle\_ref}}(cmdHandle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00231}00231\ \ \ \ \ status\_t\ status\ =\ \doxymbox{\hyperlink{sync__wait_8c_a2278427cc7aa36b311c455796886196d}{SYW\_cmd\_wait\_result}}(cmdHandle,\ deadline,\ NULL);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00232}00232\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(cmdHandle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00233}00233\ \ \ \ \ \textcolor{keywordflow}{return}\ status;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00234}00234\ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00235}00235\ }
@@ -255,7 +255,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00252}00252\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00253}00253\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00254}00254\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00254}00254\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00255}00255\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00256}00256\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -272,10 +272,10 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00268}00268\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00269}00269\ \ \ \ \ angle\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00270}00270\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gae07d0c0a3f59090e8ae923b2bdcc903d}{MTR\_move\_angle\_async}}(handle,\ angle,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gabba85eb9f52af1883b128448d47b3cb1}{MTR\_move\_angle\_async}}(handle,\ angle,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00272}00272\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ int32\_t\ stepCount\ =\ \doxymbox{\hyperlink{group__MOTOR__Module_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ realAngle\ =\ \doxymbox{\hyperlink{group__MOTOR__Module_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ stepCount);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ int32\_t\ stepCount\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ realAngle\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ stepCount);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Moving\ \%.2f\ degrees\(\backslash\)r\(\backslash\)n"{}},\ realAngle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00276}00276\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00277}00277\ \ \ \ \ \textcolor{keywordflow}{else}}
@@ -304,7 +304,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00301}00301\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00302}00302\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00303}00303\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00303}00303\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00304}00304\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00305}00305\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -321,10 +321,10 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00317}00317\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00318}00318\ \ \ \ \ angle\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00319}00319\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gaeb9d12348ad1da49d32b93f34b91c043}{MTR\_move\_absolute\_angle\_async}}(handle,\ angle,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gae9bcd6416c1e134e40eff593378a9927}{MTR\_move\_absolute\_angle\_async}}(handle,\ angle,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00321}00321\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ int32\_t\ stepCount\ =\ \doxymbox{\hyperlink{group__MOTOR__Module_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ realAngle\ =\ \doxymbox{\hyperlink{group__MOTOR__Module_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ stepCount);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ int32\_t\ stepCount\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Module_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ realAngle\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ stepCount);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Moving\ to\ absolute\ angle\ \%.2f\ degrees\(\backslash\)r\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ angle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00326}00326\ \ \ \ \ \}}
@@ -354,7 +354,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00351}00351\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00352}00352\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00353}00353\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00353}00353\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00354}00354\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00355}00355\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -371,8 +371,8 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00367}00367\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00368}00368\ \ \ \ \ revolutions\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00369}00369\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00370}00370\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00371}00371\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga3870ad87b3c15583d72b8e189f325c1a}{MTR\_move\_revolutions\_async}}(handle,\ revolutions,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00370}00370\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00371}00371\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga0009f234502f98a977e0690ecd2a1200}{MTR\_move\_revolutions\_async}}(handle,\ revolutions,\ portMAX\_DELAY,\ NULL)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00372}00372\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00373}00373\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Moving\ \%.2f\ revolutions\(\backslash\)r\(\backslash\)n"{}},\ revolutions);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00374}00374\ \ \ \ \ \}}
@@ -393,7 +393,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00389}00389\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00390}00390\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ velocity;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00391}00391\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00392}00392\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00392}00392\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00393}00393\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00394}00394\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00395}00395\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -404,7 +404,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00400}00400\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00401}00401\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00402}00402\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00403}00403\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00403}00403\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00404}00404\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00405}00405\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00406}00406\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -421,9 +421,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00417}00417\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00418}00418\ \ \ \ \ velocity\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00419}00419\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00420}00420\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00421}00421\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga6a0e41d4cad8560a57e9cfa4df237fa0}{MTR\_set\_velocity\_async}}(handle,\ velocity,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00420}00420\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00421}00421\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaa41491a262db51dce2a88bae1129484a}{MTR\_set\_velocity\_async}}(handle,\ velocity,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00423}00423\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Velocity\ set\ to\ \%.2f\ deg/s\(\backslash\)r\(\backslash\)n"{}},\ velocity);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00425}00425\ \ \ \ \ \}}
@@ -444,7 +444,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00440}00440\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00441}00441\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ acceleration;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00442}00442\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00443}00443\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00443}00443\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00444}00444\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00445}00445\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00446}00446\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -455,7 +455,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00452}00452\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00453}00453\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00454}00454\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00454}00454\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00455}00455\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00456}00456\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -472,9 +472,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00468}00468\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00469}00469\ \ \ \ \ acceleration\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00470}00470\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00471}00471\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00472}00472\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gaf0f0ade5dd355458856a96f350015c29}{MTR\_set\_acceleration\_async}}(handle,\ acceleration,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00471}00471\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00472}00472\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga7e937f0ad9ddab717463b17cce655c92}{MTR\_set\_acceleration\_async}}(handle,\ acceleration,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00474}00474\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Acceleration\ set\ to\ \%.2f\ deg/s²\(\backslash\)r\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ acceleration);}
@@ -496,7 +496,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00492}00492\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00493}00493\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ decelerate\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00494}00494\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00495}00495\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00495}00495\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00496}00496\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00497}00497\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00498}00498\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -507,7 +507,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00503}00503\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00504}00504\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00505}00505\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00506}00506\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00506}00506\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00507}00507\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00508}00508\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00509}00509\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -522,9 +522,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00518}00518\ \ \ \ \ \ \ \ \ decelerate\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00519}00519\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00520}00520\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00521}00521\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gac8522b73d36c87529869867a00ce156b}{MTR\_stop\_async}}(handle,\ decelerate,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00523}00523\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00521}00521\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00522}00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9a91668f2c96621416ea02069623bf20}{MTR\_stop\_async}}(handle,\ decelerate,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00523}00523\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00524}00524\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00525}00525\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Motor\ stopped\%s\(\backslash\)r\(\backslash\)n"{}},}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decelerate\ ?\ \textcolor{stringliteral}{"{}\ with\ deceleration"{}}\ :\ \textcolor{stringliteral}{"{}"{}});}
@@ -545,7 +545,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00541}00541\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ pcParameter;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00542}00542\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00543}00543\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00544}00544\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00544}00544\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00545}00545\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00546}00546\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00547}00547\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -556,14 +556,14 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00552}00552\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00553}00553\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00554}00554\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00555}00555\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00555}00555\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00556}00556\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00557}00557\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00558}00558\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00559}00559\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00560}00560\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00561}00561\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00562}00562\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gaa51d8115cce00df1b0ec80007caaa73b}{MTR\_emergency\_stop}}(handle)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00562}00562\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaa51d8115cce00df1b0ec80007caaa73b}{MTR\_emergency\_stop}}(handle)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00563}00563\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00564}00564\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Emergency\ stop\ activated\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00565}00565\ \ \ \ \ \}}
@@ -580,7 +580,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00576}00576\ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00577}00577\ \ \ \ \ (void)pcCommandString;\ \textcolor{comment}{//\ Unused\ parameter}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00578}00578\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00579}00579\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga838ccbc335d1e72d3499bd5c11de244b}{MTR\_clear\_emergency\_stop}}()\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00579}00579\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga838ccbc335d1e72d3499bd5c11de244b}{MTR\_clear\_emergency\_stop}}()\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00580}00580\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00581}00581\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Emergency\ stop\ cleared\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00582}00582\ \ \ \ \ \}}
@@ -601,7 +601,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00597}00597\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00598}00598\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ angle;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00599}00599\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00600}00600\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00600}00600\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00601}00601\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00602}00602\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00603}00603\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -612,16 +612,16 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00608}00608\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00609}00609\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00610}00610\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00611}00611\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00611}00611\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00612}00612\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00613}00613\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00614}00614\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00615}00615\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00616}00616\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00617}00617\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00618}00618\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00619}00619\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga4cbcc1ea7daeb1461064b7d8099a7310}{MTR\_get\_current\_angle\_async}}(handle,\ \&angle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00620}00620\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00618}00618\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00619}00619\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaa606ac87370e0682d0c0e11b9be662ca}{MTR\_get\_current\_angle\_async}}(handle,\ \&angle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00620}00620\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00621}00621\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00622}00622\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Current\ angle:\ \%.2f\ degrees\(\backslash\)r\(\backslash\)n"{}},\ angle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00623}00623\ \ \ \ \ \}}
@@ -640,9 +640,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00636}00636\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ parameterFound;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00637}00637\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ \ \ pcParameter;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00638}00638\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ \ \ parameterStringLength;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00639}00639\ \ \ \ \ \doxymbox{\hyperlink{group__STEP__Module_ga7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}\ state;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00639}00639\ \ \ \ \ \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}\ state;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00640}00640\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00641}00641\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00641}00641\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00642}00642\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00643}00643\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00644}00644\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -653,39 +653,39 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00649}00649\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00650}00650\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00651}00651\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00652}00652\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00652}00652\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00653}00653\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00654}00654\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00655}00655\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00656}00656\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00657}00657\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00658}00658\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00659}00659\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00660}00660\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga0b8329ac04e5afd02a6f20c28772f0ac}{MTR\_get\_movement\_state\_async}}(handle,\ \&state,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00659}00659\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00660}00660\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga903efe086f153300adb0b1c39d0e9a74}{MTR\_get\_movement\_state\_async}}(handle,\ \&state,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00661}00661\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00662}00662\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00663}00663\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ stateStr;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00664}00664\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (state)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00665}00665\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{STP\_MOVEMENT\_STOPPED}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00666}00666\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a3d2abe9cb69232182473feca04211612}{STP\_MOVEMENT\_STOPPED}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00667}00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}STOPPED"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00668}00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00669}00669\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{STP\_MOVEMENT\_ACCELERATING}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00669}00669\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a924cd3110b85b7d782248df822ea8c32}{STP\_MOVEMENT\_ACCELERATING}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00670}00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}ACCELERATING"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00671}00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{STP\_MOVEMENT\_CONST\_VELOCITY}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00672}00672\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92af6dc0617c6709e342820a59fc42cf4ce}{STP\_MOVEMENT\_CONST\_VELOCITY}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}CONSTANT\_VELOCITY"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00674}00674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{STP\_MOVEMENT\_DECELRATING}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a9de1963c096b2c1b2c14dcc48e281aa3}{STP\_MOVEMENT\_DECELRATING}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00676}00676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}DECELERATING"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{STP\_MOVEMENT\_FINISHED}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a400886819238eb8f552af62abf55a559}{STP\_MOVEMENT\_FINISHED}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00679}00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}FINISHED"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00680}00680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{STP\_MOVEMENT\_SUCCESSFUL}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a0c09e76c5530344fb821109b5fab003f}{STP\_MOVEMENT\_SUCCESSFUL}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00682}00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}SUCCESSFUL"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00683}00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00684}00684\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__STEP__Module_gga30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{STP\_MOVEMENT\_FAILED}}:}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00684}00684\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92ac4ff9ebd24b49531ebe1ddb8b1f8aeff}{STP\_MOVEMENT\_FAILED}}:}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00685}00685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stateStr\ =\ \textcolor{stringliteral}{"{}FAILED"{}};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00686}00686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
@@ -710,7 +710,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00706}00706\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ pcParameter;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00707}00707\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00708}00708\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00709}00709\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00709}00709\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00710}00710\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00711}00711\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00712}00712\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -721,16 +721,16 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00717}00717\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00718}00718\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00719}00719\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00720}00720\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00720}00720\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00721}00721\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00722}00722\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00723}00723\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00724}00724\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00725}00725\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00726}00726\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00727}00727\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00728}00728\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga049b859f9d4ecbd0557d6e60f3a8ab74}{MTR\_set\_home\_position\_async}}(handle,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00727}00727\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00728}00728\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga0db9dcc5dd4f330658c2f7f815904140}{MTR\_set\_home\_position\_async}}(handle,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00729}00729\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00730}00730\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00731}00731\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Home\ position\ set\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00732}00732\ \ \ \ \ \}}
@@ -751,7 +751,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00747}00747\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00748}00748\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ current;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00749}00749\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00750}00750\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00750}00750\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00751}00751\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00752}00752\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00753}00753\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -762,7 +762,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00758}00758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00759}00759\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00760}00760\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00761}00761\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00761}00761\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00762}00762\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00763}00763\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00764}00764\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -779,9 +779,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00775}00775\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00776}00776\ \ \ \ \ current\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00777}00777\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00778}00778\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00779}00779\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga7e8ab79232046dc6cbca0c39f59a40e1}{MTR\_set\_run\_current\_async}}(handle,\ current,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00780}00780\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00778}00778\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00779}00779\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga1e7513c2f1600d0c3bac4747755fe07b}{MTR\_set\_run\_current\_async}}(handle,\ current,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00780}00780\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00781}00781\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00782}00782\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Run\ current\ set\ to\ \%.3f\ A\(\backslash\)r\(\backslash\)n"{}},\ current);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00783}00783\ \ \ \ \ \}}
@@ -802,7 +802,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00798}00798\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00799}00799\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ current;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00800}00800\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00801}00801\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00801}00801\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00802}00802\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00803}00803\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00804}00804\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -813,7 +813,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00809}00809\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00810}00810\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00811}00811\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00812}00812\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00812}00812\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00813}00813\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00814}00814\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00815}00815\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -830,9 +830,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00826}00826\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00827}00827\ \ \ \ \ current\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00828}00828\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00829}00829\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00830}00830\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga09694cd4ea1715b1860d671cbd53039c}{MTR\_set\_hold\_current\_async}}(handle,\ current,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00831}00831\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00829}00829\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00830}00830\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga3725ec3926b4c3f21e134c5c6260b3b5}{MTR\_set\_hold\_current\_async}}(handle,\ current,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00831}00831\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00832}00832\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00833}00833\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Hold\ current\ set\ to\ \%.3f\ A\(\backslash\)r\(\backslash\)n"{}},\ current);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00834}00834\ \ \ \ \ \}}
@@ -847,13 +847,13 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00843}\doxymbox{\hyperlink{motorCmd_8c_af1c70c2a5e497b204c1e8a9213f32542}{00843}}\ \textcolor{keyword}{static}\ BaseType\_t\ \doxymbox{\hyperlink{motorCmd_8c_af1c70c2a5e497b204c1e8a9213f32542}{cmd\_motor\_synchronized\_move}}(\textcolor{keywordtype}{char}*\ pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ xWriteBufferLen,}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00844}00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00845}00845\ \{}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00846}00846\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ \doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}[2]\ =\ \{NULL,\ NULL\};}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00846}00846\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}}[2]\ =\ \{NULL,\ NULL\};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00847}00847\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ angles[2]\ \ =\ \{0.0,\ 0.0\};}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00848}00848\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ parameterFound;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00849}00849\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ pcParameter;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00850}00850\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00851}00851\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00852}00852\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00852}00852\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00853}00853\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00854}00854\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ 1\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00855}00855\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m1"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -864,8 +864,8 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00860}00860\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00861}00861\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00862}00862\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00863}00863\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}[0]);}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00864}00864\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}[0]\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00863}00863\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&\doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}}[0]);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00864}00864\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}}[0]\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00865}00865\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00866}00866\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ 1\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00867}00867\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
@@ -890,8 +890,8 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00886}00886\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00887}00887\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00888}00888\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00889}00889\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}[1]);}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00890}00890\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}}[1]\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00889}00889\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&\doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}}[1]);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00890}00890\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}}[1]\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00891}00891\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00892}00892\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ 2\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00893}00893\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
@@ -907,8 +907,8 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00903}00903\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00904}00904\ \ \ \ \ angles[1]\ =\ strtod(pcParameter,\ NULL);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00905}00905\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00906}00906\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00907}00907\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_gac063677845dc352c6e8e7dabdcef877a}{MTR\_synchronized\_move\_async}}(\doxymbox{\hyperlink{step_8c_a53e76081d475aef890072a6c88aa3c64}{handles}},\ angles,\ 2,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00906}00906\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00907}00907\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gad16d0c7b1d81fc07d8bdefc92d8db945}{MTR\_synchronized\_move\_async}}(\doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}},\ angles,\ 2,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00908}00908\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00909}00909\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00910}00910\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Synchronized\ move\ executed:\ Motor1=\%.2f\ deg,\ Motor2=\%.2f\ deg\(\backslash\)r\(\backslash\)n"{}},\ angles[0],}
@@ -930,7 +930,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00926}00926\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ pcParameter\ =\ NULL;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00927}00927\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00928}00928\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00929}00929\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00929}00929\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00930}00930\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00931}00931\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00932}00932\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -941,7 +941,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00937}00937\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00938}00938\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00939}00939\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00940}00940\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00940}00940\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00941}00941\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00942}00942\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00943}00943\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -949,9 +949,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00945}00945\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00946}00946\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00947}00947\ \ \ \ \ \textcolor{comment}{//\ Call\ async\ function\ and\ wait}}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00948}00948\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00949}00949\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga1e5a922e5179e5967f6dda1070a30f51}{MTR\_enable\_freewheeling\_async}}(handle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00950}00950\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00948}00948\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00949}00949\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaf3c97798ed91d32cc6f9010163f7b17f}{MTR\_enable\_freewheeling\_async}}(handle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00950}00950\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00951}00951\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00952}00952\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Freewheeling\ enabled\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00953}00953\ \ \ \ \ \}}
@@ -970,7 +970,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00966}00966\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ pcParameter\ =\ NULL;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00967}00967\ \ \ \ \ BaseType\_t\ \ \ \ \ \ \ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00968}00968\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00969}00969\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{group__TaskHelpers__Module_gac37c20b1f30dddac1bea3f0ea19dd2ce}{THE\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00969}00969\ \ \ \ \ TickType\_t\ deadline\ =\ \doxymbox{\hyperlink{sync__wait_8h_a27807159e4f11d7410eb8236e13a6948}{SYW\_deadline\_from\_timeout\_ms}}(\doxymbox{\hyperlink{motorCmd_8c_ab11ed8b7a7fd9809ebe8ec91cf43c926}{MCMD\_COMMAND\_TIMEOUT\_MS}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00970}00970\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00971}00971\ \ \ \ \ \textcolor{comment}{//\ Get\ motor\ ID}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00972}00972\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/m"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
@@ -981,7 +981,7 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00977}00977\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pdFALSE;}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00978}00978\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00979}00979\ }
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00980}00980\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00980}00980\ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gac4e0046683c4e47f0ce912ba0e161c5c}{MTR\_get\_motor\_by\_label}}(pcParameter,\ \&handle);}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00981}00981\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00982}00982\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00983}00983\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Error:\ Motor\ not\ found\(\backslash\)r\(\backslash\)n"{}});}
@@ -989,9 +989,9 @@
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00985}00985\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00986}00986\ }
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00987}00987\ \ \ \ \ \textcolor{comment}{//\ Call\ async\ function\ and\ wait}}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00988}00988\ \ \ \ \ \doxymbox{\hyperlink{group__TaskHelpers__Module_ga5ccfe42bdecc3c6c6cc9bdafdacbd5ad}{THE\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00989}00989\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Module_ga9bf924638a855afd88622e4f45a5ad26}{MTR\_disable\_freewheeling\_async}}(handle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
-\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00990}00990\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a385dd4535c8d6f00107f8f24c5474c38}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00988}00988\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00989}00989\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga5a39510d1566426ceb0fb1d48bdbe2a4}{MTR\_disable\_freewheeling\_async}}(handle,\ deadline,\ \&cmdHandle)\ ==\ kStatus\_Success\ \&\&}
+\DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00990}00990\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\_for\_mtr\_cmd}}(cmdHandle,\ deadline)\ ==\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00991}00991\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00992}00992\ \ \ \ \ \ \ \ \ snprintf(pcWriteBuffer,\ xWriteBufferLen,\ \textcolor{stringliteral}{"{}Freewheeling\ disabled\ and\ motor\ homed\(\backslash\)r\(\backslash\)n"{}});}
 \DoxyCodeLine{\Hypertarget{motorCmd_8c_source_l00993}00993\ \ \ \ \ \}}

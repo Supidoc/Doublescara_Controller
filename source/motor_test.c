@@ -8,6 +8,7 @@
 /********************
  *     Includes    *
  ********************/
+#include <driver/pca9555a/pca9555a.h>
 #include "FreeRTOS.h"
 #include "FreeRTOS_CLI.h"
 #include "cli.h"
@@ -16,8 +17,7 @@
 #include "stdio.h"
 #include "motor.h"
 #include "motor_test.h"
-#include "task_helpers.h"
-#include "pca9555a.h"
+#include "sync_wait.h"
 #include "motor_configs.h"
 /************************************
  *     Private Macros / Defines    *
@@ -75,15 +75,15 @@ void MTT_task(void* pvParameters)
 void init_motor(MTR_MotorConfig_t config)
 {
     char            logMsg[60];
-    TickType_t      deadline  = THE_deadline_from_timeout_ms(400);
-    THE_CmdHandle_t cmdHandle = NULL;
+    TickType_t      deadline  = SYW_deadline_from_timeout_ms(400);
+    CHD_CmdHandle_t cmdHandle = NULL;
     if (MTR_init_handle_async(config, deadline, &cmdHandle) == kStatus_Success &&
-        THE_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)
+        SYW_cmd_wait_result(cmdHandle, deadline, NULL) == kStatus_Success)
     {
-        THE_remove_cmd_handle_ref(cmdHandle);
+        CHD_remove_cmd_handle_ref(cmdHandle);
     }
     else
     {
-        THE_remove_cmd_handle_ref(cmdHandle);
+        CHD_remove_cmd_handle_ref(cmdHandle);
     }
 }

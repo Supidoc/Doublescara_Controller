@@ -1,0 +1,335 @@
+\doxysubsection{Stepper Internal }
+\hypertarget{group__STEPPER__Internal}{}\label{group__STEPPER__Internal}\index{Stepper Internal@{Stepper Internal}}
+
+
+Internal command payloads and shared subsystem state.  
+
+
+Collaboration diagram for Stepper Internal:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{group__STEPPER__Internal}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__InitHandleCmdData}{\+\_\+\+STP\+\_\+\+Init\+Handle\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__SetAccelerationCmdData}{\+\_\+\+STP\+\_\+\+Set\+Acceleration\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__SetEndVelocityCmdData}{\+\_\+\+STP\+\_\+\+Set\+End\+Velocity\+Cmd\+Data}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}}
+\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperMovement}{\+\_\+\+STP\+\_\+\+Stepper\+Movement}}
+\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}}
+\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}{STP\+\_\+\+TIMER\+\_\+\+FREQ\+\_\+\+HZ}}~250000
+\begin{DoxyCompactList}\small\item\em Timer frequency used for step generation (in Hz). \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEPPER__Internal_ga68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}}~16
+\begin{DoxyCompactList}\small\item\em Fixed-\/point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-\/speed applications Based on principles from "{}\+Generate stepper-\/motor speed profiles in real time"{} by David Austin. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__STEPPER__Internal_ga0151e2810a372d204ed775d1ab17453a}{STP\+\_\+\+DELAY\+\_\+\+SCALE}}~(1 $<$$<$ \doxymbox{\hyperlink{group__STEPPER__Internal_ga68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}})
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \doxymbox{\hyperlink{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga28d0770a77db2b2d164e65ea4f7fb48b}{STP\+\_\+\+Cmd\+Type\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga3c649ff9eed2e379f833048cb9c33e13}{STP\+\_\+\+Move\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga95360ef9659b5071971a756f1aeedbc3}{STP\+\_\+\+Stop\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__InitHandleCmdData}{\+\_\+\+STP\+\_\+\+Init\+Handle\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_gab0cd7ff00602609459729d1224927c14}{STP\+\_\+\+Init\+Handle\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__SetAccelerationCmdData}{\+\_\+\+STP\+\_\+\+Set\+Acceleration\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga87d238ac84a7b2846610d2c9962ae104}{STP\+\_\+\+Set\+Acceleration\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__SetEndVelocityCmdData}{\+\_\+\+STP\+\_\+\+Set\+End\+Velocity\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga4330914c2b22fa38b0ef1c7c1a224b6c}{STP\+\_\+\+Set\+End\+Velocity\+Cmd\+Data\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}}
+\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperMovement}{\+\_\+\+STP\+\_\+\+Stepper\+Movement}} \doxymbox{\hyperlink{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead}{STP\+\_\+\+Stepper\+Movement\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Structure for tracking stepper motor movement state and parameters. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga442713085b833b1faae8f6b0f1269522}{STP\+\_\+\+Stepper\+Handle\+Impl\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Handle structure for a stepper motor instance. \end{DoxyCompactList}\item 
+typedef struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \{ \newline
+\doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5}{STP\+\_\+\+CMD\+\_\+\+MOVE}}
+, \doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f}{STP\+\_\+\+CMD\+\_\+\+STOP}}
+, \doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9}{STP\+\_\+\+CMD\+\_\+\+MOVE\+\_\+\+PREPARE}}
+, \doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d}{STP\+\_\+\+CMD\+\_\+\+TRIGGER\+\_\+\+START}}
+, \newline
+\doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24}{STP\+\_\+\+CMD\+\_\+\+INIT\+\_\+\+HANDLE}}
+, \doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686}{STP\+\_\+\+CMD\+\_\+\+SET\+\_\+\+ACCELERATION}}
+, \doxymbox{\hyperlink{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98}{STP\+\_\+\+CMD\+\_\+\+SET\+\_\+\+END\+\_\+\+VELOCITY}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}{handles}} \+[\doxymbox{\hyperlink{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
+\item 
+\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}} \+[\doxymbox{\hyperlink{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+
+\item 
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{group__STEPPER__Internal_ga77de850a7138b6306a0599a9fc57a340}{stp\+Cmd\+Queue}}
+\item 
+\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga785756bcb96f3c5e34dc48382bfcb804}{FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache}} \+[8]\+
+\item 
+\doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accel\+Table\+Pool}} \+[\doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}]\+
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Internal command payloads and shared subsystem state. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__STEPPER__Internal_doc-define-members}
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group__STEPPER__Internal_ga0151e2810a372d204ed775d1ab17453a}\index{Stepper Internal@{Stepper Internal}!STP\_DELAY\_SCALE@{STP\_DELAY\_SCALE}}
+\index{STP\_DELAY\_SCALE@{STP\_DELAY\_SCALE}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_DELAY\_SCALE}{STP\_DELAY\_SCALE}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga0151e2810a372d204ed775d1ab17453a} 
+\+\#define STP\+\_\+\+DELAY\+\_\+\+SCALE~(1 $<$$<$ \doxymbox{\hyperlink{group__STEPPER__Internal_ga68309b58dfcf99bdff3b4c5f1f5dc794}{STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__internal_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{step__internal_8h_source}{step\+\_\+internal.\+h}}.
+
+\Hypertarget{group__STEPPER__Internal_ga68309b58dfcf99bdff3b4c5f1f5dc794}\index{Stepper Internal@{Stepper Internal}!STP\_DELAY\_SCALE\_BITS@{STP\_DELAY\_SCALE\_BITS}}
+\index{STP\_DELAY\_SCALE\_BITS@{STP\_DELAY\_SCALE\_BITS}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_DELAY\_SCALE\_BITS}{STP\_DELAY\_SCALE\_BITS}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga68309b58dfcf99bdff3b4c5f1f5dc794} 
+\+\#define STP\+\_\+\+DELAY\+\_\+\+SCALE\+\_\+\+BITS~16}
+
+
+
+Fixed-\/point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-\/speed applications Based on principles from "{}\+Generate stepper-\/motor speed profiles in real time"{} by David Austin. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__internal_8h_source_l00041}{41}} of file \doxymbox{\hyperlink{step__internal_8h_source}{step\+\_\+internal.\+h}}.
+
+\Hypertarget{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}\index{Stepper Internal@{Stepper Internal}!STP\_TIMER\_FREQ\_HZ@{STP\_TIMER\_FREQ\_HZ}}
+\index{STP\_TIMER\_FREQ\_HZ@{STP\_TIMER\_FREQ\_HZ}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_TIMER\_FREQ\_HZ}{STP\_TIMER\_FREQ\_HZ}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0} 
+\+\#define STP\+\_\+\+TIMER\+\_\+\+FREQ\+\_\+\+HZ~250000}
+
+
+
+Timer frequency used for step generation (in Hz). 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__internal_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{step__internal_8h_source}{step\+\_\+internal.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{group__STEPPER__Internal_doc-typedef-members}
+\doxysubsubsection{Typedef Documentation}
+\Hypertarget{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}\index{Stepper Internal@{Stepper Internal}!STP\_AccelTablePoolItem\_t@{STP\_AccelTablePoolItem\_t}}
+\index{STP\_AccelTablePoolItem\_t@{STP\_AccelTablePoolItem\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_AccelTablePoolItem\_t}{STP\_AccelTablePoolItem\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c} 
+typedef struct \doxymbox{\hyperlink{struct__STP__AccelTablePoolItem}{\+\_\+\+STP\+\_\+\+Accel\+Table\+Pool\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga4a1e878ffc17b5c90cdd0964d1a843f8}\index{Stepper Internal@{Stepper Internal}!STP\_CmdQueueItem\_t@{STP\_CmdQueueItem\_t}}
+\index{STP\_CmdQueueItem\_t@{STP\_CmdQueueItem\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_CmdQueueItem\_t}{STP\_CmdQueueItem\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga4a1e878ffc17b5c90cdd0964d1a843f8} 
+typedef struct \doxymbox{\hyperlink{struct__STP__CmdQueueItem}{\+\_\+\+STP\+\_\+\+Cmd\+Queue\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga4a1e878ffc17b5c90cdd0964d1a843f8}{STP\+\_\+\+Cmd\+Queue\+Item\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga28d0770a77db2b2d164e65ea4f7fb48b}\index{Stepper Internal@{Stepper Internal}!STP\_CmdType\_t@{STP\_CmdType\_t}}
+\index{STP\_CmdType\_t@{STP\_CmdType\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_CmdType\_t}{STP\_CmdType\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga28d0770a77db2b2d164e65ea4f7fb48b} 
+typedef enum \doxymbox{\hyperlink{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga28d0770a77db2b2d164e65ea4f7fb48b}{STP\+\_\+\+Cmd\+Type\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76}\index{Stepper Internal@{Stepper Internal}!STP\_HandlesArrayItem\_t@{STP\_HandlesArrayItem\_t}}
+\index{STP\_HandlesArrayItem\_t@{STP\_HandlesArrayItem\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_HandlesArrayItem\_t}{STP\_HandlesArrayItem\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76} 
+typedef struct \doxymbox{\hyperlink{struct__STP__HandlesArrayItem}{\+\_\+\+STP\+\_\+\+Handles\+Array\+Item}} \doxymbox{\hyperlink{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_gab0cd7ff00602609459729d1224927c14}\index{Stepper Internal@{Stepper Internal}!STP\_InitHandleCmdData\_t@{STP\_InitHandleCmdData\_t}}
+\index{STP\_InitHandleCmdData\_t@{STP\_InitHandleCmdData\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_InitHandleCmdData\_t}{STP\_InitHandleCmdData\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_gab0cd7ff00602609459729d1224927c14} 
+typedef struct \doxymbox{\hyperlink{struct__STP__InitHandleCmdData}{\+\_\+\+STP\+\_\+\+Init\+Handle\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_gab0cd7ff00602609459729d1224927c14}{STP\+\_\+\+Init\+Handle\+Cmd\+Data\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga3c649ff9eed2e379f833048cb9c33e13}\index{Stepper Internal@{Stepper Internal}!STP\_MoveCmdData\_t@{STP\_MoveCmdData\_t}}
+\index{STP\_MoveCmdData\_t@{STP\_MoveCmdData\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_MoveCmdData\_t}{STP\_MoveCmdData\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga3c649ff9eed2e379f833048cb9c33e13} 
+typedef struct \doxymbox{\hyperlink{struct__STP__MoveCmdData}{\+\_\+\+STP\+\_\+\+Move\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga3c649ff9eed2e379f833048cb9c33e13}{STP\+\_\+\+Move\+Cmd\+Data\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga87d238ac84a7b2846610d2c9962ae104}\index{Stepper Internal@{Stepper Internal}!STP\_SetAccelerationCmdData\_t@{STP\_SetAccelerationCmdData\_t}}
+\index{STP\_SetAccelerationCmdData\_t@{STP\_SetAccelerationCmdData\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_SetAccelerationCmdData\_t}{STP\_SetAccelerationCmdData\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga87d238ac84a7b2846610d2c9962ae104} 
+typedef struct \doxymbox{\hyperlink{struct__STP__SetAccelerationCmdData}{\+\_\+\+STP\+\_\+\+Set\+Acceleration\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga87d238ac84a7b2846610d2c9962ae104}{STP\+\_\+\+Set\+Acceleration\+Cmd\+Data\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga4330914c2b22fa38b0ef1c7c1a224b6c}\index{Stepper Internal@{Stepper Internal}!STP\_SetEndVelocityCmdData\_t@{STP\_SetEndVelocityCmdData\_t}}
+\index{STP\_SetEndVelocityCmdData\_t@{STP\_SetEndVelocityCmdData\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_SetEndVelocityCmdData\_t}{STP\_SetEndVelocityCmdData\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga4330914c2b22fa38b0ef1c7c1a224b6c} 
+typedef struct \doxymbox{\hyperlink{struct__STP__SetEndVelocityCmdData}{\+\_\+\+STP\+\_\+\+Set\+End\+Velocity\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga4330914c2b22fa38b0ef1c7c1a224b6c}{STP\+\_\+\+Set\+End\+Velocity\+Cmd\+Data\+\_\+t}}}
+
+\Hypertarget{group__STEPPER__Internal_ga442713085b833b1faae8f6b0f1269522}\index{Stepper Internal@{Stepper Internal}!STP\_StepperHandleImpl\_t@{STP\_StepperHandleImpl\_t}}
+\index{STP\_StepperHandleImpl\_t@{STP\_StepperHandleImpl\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_StepperHandleImpl\_t}{STP\_StepperHandleImpl\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga442713085b833b1faae8f6b0f1269522} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperHandleImpl}{\+\_\+\+STP\+\_\+\+Stepper\+Handle\+Impl}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga442713085b833b1faae8f6b0f1269522}{STP\+\_\+\+Stepper\+Handle\+Impl\+\_\+t}}}
+
+
+
+Handle structure for a stepper motor instance. 
+
+Contains hardware configuration and control parameters for a single stepper motor, including FTM timer settings, GPIO pins, and movement parameters. \Hypertarget{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead}\index{Stepper Internal@{Stepper Internal}!STP\_StepperMovement\_t@{STP\_StepperMovement\_t}}
+\index{STP\_StepperMovement\_t@{STP\_StepperMovement\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_StepperMovement\_t}{STP\_StepperMovement\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StepperMovement}{\+\_\+\+STP\+\_\+\+Stepper\+Movement}} \doxymbox{\hyperlink{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead}{STP\+\_\+\+Stepper\+Movement\+\_\+t}}}
+
+
+
+Structure for tracking stepper motor movement state and parameters. 
+
+Contains all necessary information for executing a stepper motor movement, including acceleration/\+deceleration profile, current step count, and motor state. \Hypertarget{group__STEPPER__Internal_ga95360ef9659b5071971a756f1aeedbc3}\index{Stepper Internal@{Stepper Internal}!STP\_StopCmdData\_t@{STP\_StopCmdData\_t}}
+\index{STP\_StopCmdData\_t@{STP\_StopCmdData\_t}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{STP\_StopCmdData\_t}{STP\_StopCmdData\_t}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga95360ef9659b5071971a756f1aeedbc3} 
+typedef struct \doxymbox{\hyperlink{struct__STP__StopCmdData}{\+\_\+\+STP\+\_\+\+Stop\+Cmd\+Data}} \doxymbox{\hyperlink{group__STEPPER__Internal_ga95360ef9659b5071971a756f1aeedbc3}{STP\+\_\+\+Stop\+Cmd\+Data\+\_\+t}}}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{group__STEPPER__Internal_doc-enum-members}
+\doxysubsubsection{Enumeration Type Documentation}
+\Hypertarget{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7}\index{Stepper Internal@{Stepper Internal}!\_STP\_CmdType@{\_STP\_CmdType}}
+\index{\_STP\_CmdType@{\_STP\_CmdType}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{\_STP\_CmdType}{\_STP\_CmdType}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7} 
+enum \doxymbox{\hyperlink{group__STEPPER__Internal_gac619e3142c0e69b20136d0794b134aa7}{\+\_\+\+STP\+\_\+\+Cmd\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_MOVE@{STP\_CMD\_MOVE}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_MOVE@{STP\_CMD\_MOVE}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a1fe94459a55383cc85302656c5c20dd5} 
+STP\+\_\+\+CMD\+\_\+\+MOVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_STOP@{STP\_CMD\_STOP}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_STOP@{STP\_CMD\_STOP}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a16f0d55a014eb4e39e50f594e9df350f} 
+STP\+\_\+\+CMD\+\_\+\+STOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_MOVE\_PREPARE@{STP\_CMD\_MOVE\_PREPARE}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_MOVE\_PREPARE@{STP\_CMD\_MOVE\_PREPARE}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a3e7bc8d2b30a1b4c51b143ebb6edaef9} 
+STP\+\_\+\+CMD\+\_\+\+MOVE\+\_\+\+PREPARE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_TRIGGER\_START@{STP\_CMD\_TRIGGER\_START}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_TRIGGER\_START@{STP\_CMD\_TRIGGER\_START}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a2c9e4fc9c171545d6f8400911aabf86d} 
+STP\+\_\+\+CMD\+\_\+\+TRIGGER\+\_\+\+START&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_INIT\_HANDLE@{STP\_CMD\_INIT\_HANDLE}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_INIT\_HANDLE@{STP\_CMD\_INIT\_HANDLE}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7af6b8892de3a75b480d392e3a603a7e24} 
+STP\+\_\+\+CMD\+\_\+\+INIT\+\_\+\+HANDLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_SET\_ACCELERATION@{STP\_CMD\_SET\_ACCELERATION}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_SET\_ACCELERATION@{STP\_CMD\_SET\_ACCELERATION}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7a11897e43bd2bab16d2373eb731fd0686} 
+STP\+\_\+\+CMD\+\_\+\+SET\+\_\+\+ACCELERATION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STP\_CMD\_SET\_END\_VELOCITY@{STP\_CMD\_SET\_END\_VELOCITY}!Stepper Internal@{Stepper Internal}}
+\index{Stepper Internal@{Stepper Internal}!STP\_CMD\_SET\_END\_VELOCITY@{STP\_CMD\_SET\_END\_VELOCITY}}
+}\Hypertarget{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98}\label{group__STEPPER__Internal_ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98} 
+STP\+\_\+\+CMD\+\_\+\+SET\+\_\+\+END\+\_\+\+VELOCITY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{step__internal_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{step__internal_8h_source}{step\+\_\+internal.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{group__STEPPER__Internal_doc-var-members}
+\doxysubsubsection{Variable Documentation}
+\Hypertarget{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}\index{Stepper Internal@{Stepper Internal}!accelTablePool@{accelTablePool}}
+\index{accelTablePool@{accelTablePool}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{accelTablePool}{accelTablePool}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161} 
+\doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\+\_\+\+Accel\+Table\+Pool\+Item\+\_\+t}} accel\+Table\+Pool\+[\doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}\index{Stepper Internal@{Stepper Internal}!cmdHandles@{cmdHandles}}
+\index{cmdHandles@{cmdHandles}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{cmdHandles}{cmdHandles}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473} 
+\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} cmd\+Handles\+[\doxymbox{\hyperlink{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00042}{42}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Internal_ga785756bcb96f3c5e34dc48382bfcb804}\index{Stepper Internal@{Stepper Internal}!FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}}
+\index{FTM3\_ISR\_handle\_cache@{FTM3\_ISR\_handle\_cache}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{FTM3\_ISR\_handle\_cache}{FTM3\_ISR\_handle\_cache}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga785756bcb96f3c5e34dc48382bfcb804} 
+\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\+\_\+\+Handle\+\_\+t}} FTM3\+\_\+\+ISR\+\_\+handle\+\_\+cache\+[8]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__timing_8c_source_l00036}{36}} of file \doxymbox{\hyperlink{step__timing_8c_source}{step\+\_\+timing.\+c}}.
+
+\Hypertarget{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64}\index{Stepper Internal@{Stepper Internal}!handles@{handles}}
+\index{handles@{handles}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{handles}{handles}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga53e76081d475aef890072a6c88aa3c64} 
+\doxymbox{\hyperlink{group__STEPPER__Internal_gaccb1eaaa512044d26829364f7c039b76}{STP\+\_\+\+Handles\+Array\+Item\+\_\+t}} handles\+[\doxymbox{\hyperlink{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67}{STP\+\_\+\+MAX\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00040}{40}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+
+\Hypertarget{group__STEPPER__Internal_ga77de850a7138b6306a0599a9fc57a340}\index{Stepper Internal@{Stepper Internal}!stpCmdQueue@{stpCmdQueue}}
+\index{stpCmdQueue@{stpCmdQueue}!Stepper Internal@{Stepper Internal}}
+\doxysubsubsubsection{\texorpdfstring{stpCmdQueue}{stpCmdQueue}}
+{\footnotesize\ttfamily \label{group__STEPPER__Internal_ga77de850a7138b6306a0599a9fc57a340} 
+Queue\+Handle\+\_\+t stp\+Cmd\+Queue\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{step__core_8c_source_l00044}{44}} of file \doxymbox{\hyperlink{step__core_8c_source}{step\+\_\+core.\+c}}.
+

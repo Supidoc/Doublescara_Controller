@@ -1,27 +1,7 @@
 var searchData=
 [
-  ['mtr_5fcmdqueueitem_5ft_0',['MTR_CmdQueueItem_t',['../motor_8c.html#aa929e5b0a578f350522e7e9f49df706d',1,'motor.c']]],
-  ['mtr_5fcmdtype_5ft_1',['MTR_CmdType_t',['../motor_8c.html#aae46016790b4a0a8e9f06dd1fe568b66',1,'motor.c']]],
-  ['mtr_5fdisablefreewheellingcmddata_5ft_2',['MTR_DisableFreewheellingCmdData_t',['../motor_8c.html#aebdf369004446cf9c3594f17a4ece24f',1,'motor.c']]],
-  ['mtr_5fenablefreewheellingcmddata_5ft_3',['MTR_EnableFreewheellingCmdData_t',['../motor_8c.html#aeef75b1737ec933f9054ee1020df6853',1,'motor.c']]],
-  ['mtr_5fgetcurrentanglecmddata_5ft_4',['MTR_GetCurrentAngleCmdData_t',['../motor_8c.html#ae399a58a4ec848e00e2ca58e7287849c',1,'motor.c']]],
-  ['mtr_5fgetmovementstatecmddata_5ft_5',['MTR_GetMovementStateCmdData_t',['../motor_8c.html#aa3fb881767a12afd15521bda396f9967',1,'motor.c']]],
-  ['mtr_5fhandlesarrayitem_5ft_6',['MTR_HandlesArrayItem_t',['../motor_8c.html#a218226d9b00e4a50e15eb521ed4885c5',1,'motor.c']]],
-  ['mtr_5finitmotorcmddata_5ft_7',['MTR_InitMotorCmdData_t',['../motor_8c.html#a47dbfc9753882db7b2d44bf2c8f1206d',1,'motor.c']]],
-  ['mtr_5fmotorconfig_5ft_8',['MTR_MotorConfig_t',['../group__MOTOR__Module.html#gab7b8f555379b16be12ecb2e6ad2da56b',1,'motor.h']]],
-  ['mtr_5fmotorhandle_5ft_9',['MTR_MotorHandle_t',['../group__MOTOR__Module.html#ga80cb43273307560ca13a8df4797c8f54',1,'motor.h']]],
-  ['mtr_5fmotorhandleimpl_5ft_10',['MTR_MotorHandleImpl_t',['../motor_8c.html#a311d45d93ded9212771f08704b6b667a',1,'motor.c']]],
-  ['mtr_5fmotorstepperconfig_5ft_11',['MTR_MotorStepperConfig_t',['../group__MOTOR__Module.html#ga8a4765221bb1f9d6957ab996f3058368',1,'motor.h']]],
-  ['mtr_5fmotortmcconfig_5ft_12',['MTR_MotorTmcConfig_t',['../group__MOTOR__Module.html#ga8e5d65aeb018ac2da54d039d54cdd31a',1,'motor.h']]],
-  ['mtr_5fmoveanglecmddata_5ft_13',['MTR_MoveAngleCmdData_t',['../motor_8c.html#a28ae40cde624abb1ca84fab23693f8a6',1,'motor.c']]],
-  ['mtr_5fmoverevolutionscmddata_5ft_14',['MTR_MoveRevolutionsCmdData_t',['../motor_8c.html#a80a7a5cd92233713546ee71520010b82',1,'motor.c']]],
-  ['mtr_5fparalleltaskitem_15',['MTR_ParallelTaskItem',['../motor_8c.html#ad3624e1db311e66b6ac3e2b16afa6a0d',1,'motor.c']]],
-  ['mtr_5froundingmethod_5ft_16',['MTR_roundingMethod_t',['../group__MOTOR__Module.html#ga5142605594253bb6c632b95c962216ea',1,'motor.h']]],
-  ['mtr_5fsetaccelerationcmddata_5ft_17',['MTR_SetAccelerationCmdData_t',['../motor_8c.html#a575d017d9133e9f2c42976d7ffdae5ac',1,'motor.c']]],
-  ['mtr_5fsetholdcurrentcmddata_5ft_18',['MTR_SetHoldCurrentCmdData_t',['../motor_8c.html#a6eb9f10817d0fbf8204861808ababa2c',1,'motor.c']]],
-  ['mtr_5fsetruncurrentcmddata_5ft_19',['MTR_SetRunCurrentCmdData_t',['../motor_8c.html#ae08097ace0352f197d48112da4b6fdba',1,'motor.c']]],
-  ['mtr_5fsetvelocitycmddata_5ft_20',['MTR_SetVelocityCmdData_t',['../motor_8c.html#a79e92f54f0433d1978cd5c847ea1be74',1,'motor.c']]],
-  ['mtr_5fstopcmddata_5ft_21',['MTR_StopCmdData_t',['../motor_8c.html#ac209c7db389c934d44b4d05f26eeed63',1,'motor.c']]],
-  ['mtr_5fsynchronizedmovecmddata_5ft_22',['MTR_SynchronizedMoveCmdData_t',['../motor_8c.html#ac16e87672e9ce1397ba681190ac0a436',1,'motor.c']]],
-  ['mtr_5fwaituntilstoppedcmddata_5ft_23',['MTR_WaitUntilStoppedCmdData_t',['../motor_8c.html#a7df7841846381315ecafece8b9350864',1,'motor.c']]]
+  ['log_5flevel_5ft_0',['LOG_Level_t',['../group__LOG__Module.html#ga6d319de993cc8d4a0b7da064fc94779d',1,'log.h']]],
+  ['log_5flogheader_5ft_1',['LOG_LogHeader_t',['../log_8c.html#a690221406b70afa26e79befccdab12cf',1,'log.c']]],
+  ['log_5flogheaderprefix_5ft_2',['LOG_LogHeaderPrefix_t',['../log_8c.html#a5ad8c7523318dcf0aa77331c1086e65a',1,'log.c']]],
+  ['log_5fqueueitem_5ft_3',['LOG_QueueItem_t',['../log_8c.html#ab33882773f01b0f786eda8576b58fcdb',1,'log.c']]]
 ];

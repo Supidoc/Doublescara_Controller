@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['uarthandle_0',['uartHandle',['../struct__MTR__MotorTmcConfig.html#a194ad126d208ab31730ab1b4a17f8b9d',1,'_MTR_MotorTmcConfig::uartHandle'],['../struct__TMC__HandleImpl.html#a78c43759479a593f3d371e9184df5e77',1,'_TMC_HandleImpl::uartHandle'],['../struct__TMC__Config.html#a99998e0eaa697ab9e7d55204b132ac62',1,'_TMC_Config::uartHandle']]],
-  ['uartrtoshandle_1',['uartRTOSHandle',['../struct__MTR__MotorTmcConfig.html#a7680fa97cd2d2cbde413d15a1233def0',1,'_MTR_MotorTmcConfig::uartRTOSHandle'],['../struct__TMC__HandleImpl.html#ac5e4344d4ecc3bec43c69eb14fc73b7f',1,'_TMC_HandleImpl::uartRTOSHandle'],['../struct__TMC__Config.html#a020e85248ae753aea0ad5e91725f84cb',1,'_TMC_Config::uartRTOSHandle']]],
-  ['update_5fisr_5fhandle_5fcache_2',['update_isr_handle_cache',['../step_8c.html#aec411a881b3aaf231cabef1dbbfcf89f',1,'step.c']]],
+  ['uart_20internal_0',['TMC2209 UART Internal',['../group__TMC2209__UART__Internal.html',1,'']]],
+  ['uarthandle_1',['uartHandle',['../struct__TMC__HandleImpl.html#a78c43759479a593f3d371e9184df5e77',1,'_TMC_HandleImpl::uartHandle'],['../struct__TMC__Config.html#a99998e0eaa697ab9e7d55204b132ac62',1,'_TMC_Config::uartHandle'],['../struct__MTR__MotorTmcConfig.html#a194ad126d208ab31730ab1b4a17f8b9d',1,'_MTR_MotorTmcConfig::uartHandle']]],
+  ['uartrtoshandle_2',['uartRTOSHandle',['../struct__TMC__HandleImpl.html#ac5e4344d4ecc3bec43c69eb14fc73b7f',1,'_TMC_HandleImpl::uartRTOSHandle'],['../struct__TMC__Config.html#a020e85248ae753aea0ad5e91725f84cb',1,'_TMC_Config::uartRTOSHandle'],['../struct__MTR__MotorTmcConfig.html#a7680fa97cd2d2cbde413d15a1233def0',1,'_MTR_MotorTmcConfig::uartRTOSHandle']]],
   ['usb_5fdisk_5fenable_3',['USB_DISK_ENABLE',['../ffconf__gen_8h.html#aa3eebe30668422ca30e39f560e9461e7',1,'ffconf_gen.h']]],
   ['usb_5fhost_5fconfig_2eh_4',['usb_host_config.h',['../usb__host__config_8h.html',1,'']]],
   ['usb_5fhost_5fconfig_5faudio_5',['USB_HOST_CONFIG_AUDIO',['../usb__host__config_8h.html#ae59e70190e3828644f0308b551ebef48',1,'usb_host_config.h']]],
@@ -31,6 +31,6 @@ var searchData=
   ['usb_5fhost_5fconfig_5fohci_28',['USB_HOST_CONFIG_OHCI',['../usb__host__config_8h.html#a79381c796509afa80fa13d3604662797',1,'usb_host_config.h']]],
   ['usb_5fhost_5fconfig_5fphdc_29',['USB_HOST_CONFIG_PHDC',['../usb__host__config_8h.html#a34e69a51e1db48adbb863206a0b21e2b',1,'usb_host_config.h']]],
   ['usb_5fhost_5fconfig_5fprinter_30',['USB_HOST_CONFIG_PRINTER',['../usb__host__config_8h.html#aab1885d3bc476d22dd24734779efe828',1,'usb_host_config.h']]],
-  ['used_31',['used',['../struct__MTR__HandlesArrayItem.html#a9194ac3525754d0887986000f11d19a5',1,'_MTR_HandlesArrayItem::used'],['../struct__MTR__ParallelTaskItem.html#acf1af83e1991e3cb5df9adb0ed114875',1,'_MTR_ParallelTaskItem::used'],['../struct__STP__AccelTablePoolItem.html#a73c825496d723d8a542d6523ad71e712',1,'_STP_AccelTablePoolItem::used'],['../struct__STP__HandlesArrayItem.html#a170f735b5a1f0e60c74f2a0b45211980',1,'_STP_HandlesArrayItem::used'],['../struct__THE__CmdHandleImpl.html#a4f7ff09dacc8b9ce27315af7c2660c7e',1,'_THE_CmdHandleImpl::used'],['../struct__TMC__HandleArrayItem.html#a185ac27f3f65bfb1095118b88c80a444',1,'_TMC_HandleArrayItem::used']]],
+  ['used_31',['used',['../struct__TMC__HandleArrayItem.html#a185ac27f3f65bfb1095118b88c80a444',1,'_TMC_HandleArrayItem::used'],['../struct__MTR__HandlesArrayItem.html#a9194ac3525754d0887986000f11d19a5',1,'_MTR_HandlesArrayItem::used'],['../struct__MTR__ParallelTaskItem.html#acf1af83e1991e3cb5df9adb0ed114875',1,'_MTR_ParallelTaskItem::used'],['../struct__STP__AccelTablePoolItem.html#a73c825496d723d8a542d6523ad71e712',1,'_STP_AccelTablePoolItem::used'],['../struct__STP__HandlesArrayItem.html#a170f735b5a1f0e60c74f2a0b45211980',1,'_STP_HandlesArrayItem::used'],['../struct__CHD__CmdHandleImpl.html#a989b226f70c3f4e68c394de8b393dff0',1,'_CHD_CmdHandleImpl::used']]],
   ['utilities_20module_32',['CLI Utilities Module',['../group__CLI__Utilities__Module.html',1,'']]]
 ];
