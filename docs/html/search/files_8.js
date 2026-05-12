@@ -1,13 +1,21 @@
 var searchData=
 [
-  ['tmc2209_5fcore_2ec_0',['tmc2209_core.c',['../tmc2209__core_8c.html',1,'']]],
-  ['tmc2209_5fcore_2eh_1',['tmc2209_core.h',['../tmc2209__core_8h.html',1,'']]],
-  ['tmc2209_5finternal_2eh_2',['tmc2209_internal.h',['../tmc2209__internal_8h.html',1,'']]],
-  ['tmc2209_5fprocess_2ec_3',['tmc2209_process.c',['../tmc2209__process_8c.html',1,'']]],
-  ['tmc2209_5fprocess_2eh_4',['tmc2209_process.h',['../tmc2209__process_8h.html',1,'']]],
-  ['tmc2209_5fsetup_2ec_5',['tmc2209_setup.c',['../tmc2209__setup_8c.html',1,'']]],
-  ['tmc2209_5fsetup_2eh_6',['tmc2209_setup.h',['../tmc2209__setup_8h.html',1,'']]],
-  ['tmc2209_5fshared_2eh_7',['tmc2209_shared.h',['../tmc2209__shared_8h.html',1,'']]],
-  ['tmc2209_5fuart_2ec_8',['tmc2209_uart.c',['../tmc2209__uart_8c.html',1,'']]],
-  ['tmc2209_5fuart_2eh_9',['tmc2209_uart.h',['../tmc2209__uart_8h.html',1,'']]]
+  ['scara_5fkinematics_2ec_0',['scara_kinematics.c',['../scara__kinematics_8c.html',1,'']]],
+  ['scara_5fkinematics_2eh_1',['scara_kinematics.h',['../scara__kinematics_8h.html',1,'']]],
+  ['scara_5fkinematics_5finternal_2eh_2',['scara_kinematics_internal.h',['../scara__kinematics__internal_8h.html',1,'']]],
+  ['scara_5fkinematics_5fprocess_2ec_3',['scara_kinematics_process.c',['../scara__kinematics__process_8c.html',1,'']]],
+  ['scara_5fkinematics_5fprocess_2eh_4',['scara_kinematics_process.h',['../scara__kinematics__process_8h.html',1,'']]],
+  ['semihost_5fhardfault_2ec_5',['semihost_hardfault.c',['../semihost__hardfault_8c.html',1,'']]],
+  ['step_5fcore_2ec_6',['step_core.c',['../step__core_8c.html',1,'']]],
+  ['step_5fcore_2eh_7',['step_core.h',['../step__core_8h.html',1,'']]],
+  ['step_5finternal_2eh_8',['step_internal.h',['../step__internal_8h.html',1,'']]],
+  ['step_5fprocess_2ec_9',['step_process.c',['../step__process_8c.html',1,'']]],
+  ['step_5fprocess_2eh_10',['step_process.h',['../step__process_8h.html',1,'']]],
+  ['step_5fprofile_2ec_11',['step_profile.c',['../step__profile_8c.html',1,'']]],
+  ['step_5fprofile_2eh_12',['step_profile.h',['../step__profile_8h.html',1,'']]],
+  ['step_5fshared_2eh_13',['step_shared.h',['../step__shared_8h.html',1,'']]],
+  ['step_5ftiming_2ec_14',['step_timing.c',['../step__timing_8c.html',1,'']]],
+  ['step_5ftiming_2eh_15',['step_timing.h',['../step__timing_8h.html',1,'']]],
+  ['sync_5fwait_2ec_16',['sync_wait.c',['../sync__wait_8c.html',1,'']]],
+  ['sync_5fwait_2eh_17',['sync_wait.h',['../sync__wait_8h.html',1,'']]]
 ];

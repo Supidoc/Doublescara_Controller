@@ -15,51 +15,70 @@
 #ifndef STEP_PROCESS_H_
 #define STEP_PROCESS_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /********************
  *     Includes    *
  ********************/
 #include "step_internal.h"
 
-/***********************************
- *     Public Macros / Defines     *
- ***********************************/
+    /***********************************
+     *     Public Macros / Defines     *
+     ***********************************/
 
-/***************************
- *     Public Typedefs     *
- ***************************/
+    /***************************
+     *     Public Typedefs     *
+     ***************************/
 
-/****************************
- *     Public Variables     *
- ****************************/
+    /****************************
+     *     Public Variables     *
+     ****************************/
 
-/**************************************
- *     Public Function Prototypes    *
- **************************************/
+    /**************************************
+     *     Public Function Prototypes    *
+     **************************************/
 
-/**
- * @brief Enqueues one stepper command item for asynchronous execution.
- *
- * @param[in,out] queueItem Command payload to enqueue.
- * @param[in] deadline Timeout/deadline while queueing.
- * @param[out] cmdHandle Optional command handle for completion synchronization.
- * @return kStatus_Success if queued, kStatus_Fail otherwise.
- */
-status_t STPi_send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
-                             CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Enqueues one stepper command item for asynchronous execution.
+     *
+     * @param[in,out] queueItem Command payload to enqueue.
+     * @param[in] deadline Timeout/deadline while queueing.
+     * @param[out] cmdHandle Optional command handle for completion synchronization.
+     * @return kStatus_Success if queued, kStatus_Fail otherwise.
+     */
+    status_t STPi_send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
+                                 CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Runs one stepper processing cycle.
- */
-void STPi_process(void);
+    /**
+     * @brief Runs one stepper processing cycle.
+     */
+    void STPi_process(void);
 
-/**
- * @brief Dispatches one dequeued stepper command item.
- *
- * @param[in] queueItem Dequeued command item.
- */
-void STPi_process_cmd(STP_CmdQueueItem_t queueItem);
+    /**
+     * @brief Dispatches one dequeued stepper command item.
+     *
+     * @param[in] queueItem Dequeued command item.
+     */
+    void STPi_process_cmd(STP_CmdQueueItem_t queueItem);
 
-status_t STPi_stop_steps(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle);
+    /**
+     * @brief Stops a stepper motor from task context.
+     */
+    status_t STPi_stop_steps(STP_Handle_t handle, uint8_t doDeceleration,
+                             CHD_CmdHandle_t cmdHandle);
+
+    /**
+     * @brief Stops a stepper motor from ISR context.
+     */
+    status_t STPi_stop_steps_from_isr(STP_Handle_t handle, uint8_t doDeceleration,
+                                      CHD_CmdHandle_t cmdHandle);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // STEP_PROCESS_H_
 

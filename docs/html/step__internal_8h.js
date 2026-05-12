@@ -24,8 +24,8 @@ var step__internal_8h =
       [ "STP_CMD_SET_END_VELOCITY", "group__STEPPER__Internal.html#ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98", null ]
     ] ],
     [ "accelTablePool", "group__STEPPER__Internal.html#ga1d158ecf1936b775fdaf7688f2135161", null ],
-    [ "cmdHandles", "group__STEPPER__Internal.html#ga6b26389d8ba6ce908a268059e285c473", null ],
     [ "FTM3_ISR_handle_cache", "group__STEPPER__Internal.html#ga785756bcb96f3c5e34dc48382bfcb804", null ],
-    [ "handles", "group__STEPPER__Internal.html#ga53e76081d475aef890072a6c88aa3c64", null ],
-    [ "stpCmdQueue", "group__STEPPER__Internal.html#ga77de850a7138b6306a0599a9fc57a340", null ]
+    [ "stpCmdHandles", "group__STEPPER__Internal.html#gaa70be6db6e5de0018f281189690cde6e", null ],
+    [ "stpCmdQueue", "group__STEPPER__Internal.html#ga77de850a7138b6306a0599a9fc57a340", null ],
+    [ "stpHandles", "group__STEPPER__Internal.html#ga7f1c25cdad0642dce363a061fc214134", null ]
 ];

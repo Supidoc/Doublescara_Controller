@@ -78,6 +78,20 @@ void CDP_notify_task_failure(CHD_CmdHandle_t cmdHandle)
     }
 }
 
+void CDP_notify_task_failure_from_isr(CHD_CmdHandle_t cmdHandle)
+{
+    if (cmdHandle != NULL)
+    {
+        BaseType_t pxHigherPriorityTaskWoken;
+        xEventGroupSetBitsFromISR(cmdHandle->eventGroup, CHD_CMD_BIT_FAILURE,
+                                  &pxHigherPriorityTaskWoken);
+        if (pxHigherPriorityTaskWoken)
+        {
+            taskYIELD();
+        }
+    }
+}
+
 void CDP_notify_task_timeout(CHD_CmdHandle_t cmdHandle)
 {
     if (cmdHandle != NULL)

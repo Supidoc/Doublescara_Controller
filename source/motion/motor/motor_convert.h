@@ -15,52 +15,62 @@
 #ifndef MOTOR_CONVERT_H_
 #define MOTOR_CONVERT_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /********************
  *     Includes    *
  ********************/
+#include <stdint.h>
 #include "motor_core.h"
 
-/***********************************
- *     Public Macros / Defines     *
- ***********************************/
+    /***********************************
+     *     Public Macros / Defines     *
+     ***********************************/
 
-/***************************
- *     Public Typedefs     *
- ***************************/
+    /***************************
+     *     Public Typedefs     *
+     ***************************/
 
-typedef enum _MTR_roundingMethod
-{
-    ROUND_DOWN,
-    ROUND_UP,
-    ROUND_NEAREST
-} MTR_roundingMethod_t;
+    typedef enum _MTR_roundingMethod
+    {
+        ROUND_DOWN,
+        ROUND_UP,
+        ROUND_NEAREST
+    } MTR_roundingMethod_t;
 
-/****************************
- *     Public Variables     *
- ****************************/
+    /****************************
+     *     Public Variables     *
+     ****************************/
 
-/**************************************
- *     Public Function Prototypes    *
- **************************************/
+    /**************************************
+     *     Public Function Prototypes    *
+     **************************************/
 
-/**
- * @brief Converts step count to mechanical angle.
- *
- * @param[in] handle Motor handle containing step geometry.
- * @param[in] steps Signed step count.
- * @return Converted angle in degrees.
- */
-double MTR_steps_to_angle(MTR_MotorHandle_t handle, int32_t steps);
+    /**
+     * @brief Converts step count to mechanical angle.
+     *
+     * @param[in] handle Motor handle containing step geometry.
+     * @param[in] steps Signed step count.
+     * @return Converted angle in degrees.
+     */
+    double MTR_steps_to_angle(MTR_MotorHandle_t handle, int32_t steps);
 
-/**
- * @brief Converts mechanical angle to step count.
- *
- * @param[in] handle Motor handle containing step geometry.
- * @param[in] angle Angle in degrees.
- * @param[in] method Rounding method for non-integer step results.
- * @return Signed step count.
- */
-int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method);
+    /**
+     * @brief Converts mechanical angle to step count.
+     *
+     * @param[in] handle Motor handle containing step geometry.
+     * @param[in] angle Angle in degrees.
+     * @param[in] method Rounding method for non-integer step results.
+     * @return Signed step count.
+     */
+    int32_t MTR_angle_to_steps(MTR_MotorHandle_t handle, double angle, MTR_roundingMethod_t method);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MOTOR_CONVERT_H_
 

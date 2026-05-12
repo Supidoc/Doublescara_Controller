@@ -100,7 +100,7 @@ status_t TMCi_init_handle(TMC_Config_t config, TickType_t deadline)
     gconf |= 0b0 << 5; // Output Index of first microstep
     gconf |= 0b1 << 6; // PDN_UART input disabled, use uart
     gconf |= 0b1 << 7; // Microstep resolution set by register
-    gconf |= 0b0 << 8; // No filtering of STEP pulses
+    gconf |= 0b1 << 8; // No filtering of STEP pulses
 
     if (kStatus_Success != TMCi_write(handle, TMC_GCONF_ADDR, &gconf, deadline))
     {

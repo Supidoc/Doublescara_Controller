@@ -32,8 +32,9 @@ static inline void calculate_acceleration_table_parameters(STP_Handle_t handle,
                                                            uint32_t*    tableSize);
 static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint16_t stepZeroDelay,
                                    uint16_t endVelocityDelay, int8_t* poolIndex);
-static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t numSteps,
-                                               uint16_t stepZeroDelay, uint16_t endVelocityDelay);
+static status_t calculate_acceleration_profile(STP_Handle_t handle, uint16_t* lookupTable,
+                                               uint32_t numSteps, uint16_t stepZeroDelay,
+                                               uint16_t endVelocityDelay);
 static status_t allocate_accel_table(uint32_t tableSize, int8_t* poolIndex);
 static void     free_accel_table(int8_t poolIndex);
 static status_t set_direction_pin(STP_Handle_t handle);
@@ -41,9 +42,7 @@ static status_t set_direction_pin(STP_Handle_t handle);
 /****************************
  *     Public Variables     *
  ****************************/
-
-__attribute__((
-    section(".accelTables"))) STP_AccelTablePoolItem_t accelTablePool[STP_ACCEL_TABLE_POOL_SIZE];
+STP_AccelTablePoolItem_t accelTablePool[STP_ACCEL_TABLE_POOL_SIZE];
 
 /*****************************
  *     Private Variables     *
@@ -230,7 +229,7 @@ static status_t create_accel_table(STP_Handle_t handle, uint32_t tableSize, uint
 
     if (tableSize > 0)
     {
-        status = calculate_acceleration_profile(accelTablePool[*poolIndex].table, tableSize,
+        status = calculate_acceleration_profile(handle, accelTablePool[*poolIndex].table, tableSize,
                                                 stepZeroDelay, endVelocityDelay);
 
         if (status != kStatus_Success)
@@ -273,8 +272,9 @@ static void free_accel_table(int8_t poolIndex)
     }
 }
 
-static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t numSteps,
-                                               uint16_t stepZeroDelay, uint16_t endVelocityDelay)
+static status_t calculate_acceleration_profile(STP_Handle_t handle, uint16_t* lookupTable,
+                                               uint32_t numSteps, uint16_t stepZeroDelay,
+                                               uint16_t endVelocityDelay)
 {
     if (lookupTable == NULL || numSteps == 0)
     {
@@ -293,15 +293,18 @@ static status_t calculate_acceleration_profile(uint16_t* lookupTable, uint32_t n
 
         // Calculate next delay: c_n = c_(n-1) - 2*c_(n-1) / (4*n + 1)
         // Using fixed-point arithmetic to maintain fractional precision
-        uint32_t nextDelay = currentDelay - (2 * currentDelay / (4 * n + 1));
-
-        // Clamp to minimum delay (end velocity)
-        if (nextDelay < minDelay)
+        for (uint32_t i = 0; i < handle->movementHandle.accelInterpFactor; i++)
         {
-            nextDelay = minDelay;
-        }
+            uint32_t nextDelay = currentDelay - (2 * currentDelay / (4 * n + 1));
 
-        currentDelay = nextDelay;
+            // Clamp to minimum delay (end velocity)
+            if (nextDelay < minDelay)
+            {
+                nextDelay = minDelay;
+            }
+
+            currentDelay = nextDelay;
+        }
     }
     return kStatus_Success;
 }

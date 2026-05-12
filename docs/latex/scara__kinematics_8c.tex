@@ -1,31 +1,501 @@
 \doxysection{source/\+scara\+\_\+kinematics.c File Reference}
 \hypertarget{scara__kinematics_8c}{}\label{scara__kinematics_8c}\index{source/scara\_kinematics.c@{source/scara\_kinematics.c}}
 {\ttfamily \+\#include "{}scara\+\_\+kinematics.\+h"{}}\newline
-{\ttfamily \+\#include "{}math.\+h"{}}\newline
-Include dependency graph for scara\+\_\+kinematics.\+c:\+\nopagebreak
+{\ttfamily \+\#include "{}scara\+\_\+kinematics\+\_\+internal.\+h"{}}\newline
+{\ttfamily \+\#include "{}scara\+\_\+kinematics\+\_\+process.\+h"{}}\newline
+{\ttfamily \+\#include "{}motor\+\_\+core.\+h"{}}\newline
+{\ttfamily \+\#include "{}motor\+\_\+homing.\+h"{}}\newline
+{\ttfamily \+\#include "{}sync\+\_\+wait.\+h"{}}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+Include dependency graph for scara\+\_\+kinematics.\+c:\+
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=260pt]{scara__kinematics_8c__incl}
+\includegraphics[width=350pt]{scara__kinematics_8c__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a3adf355f0bb0733139030f71d755f57e}{scara\+\_\+inverse\+\_\+kinematics}} (double x, double y, \doxymbox{\hyperlink{scara__kinematics_8h_a6b9f2ad0e7047e9169ca225d96d15142}{SK\+\_\+\+Configuration\+\_\+t}} configuration, double \texorpdfstring{$\ast$}{*}theta1, double \texorpdfstring{$\ast$}{*}theta2)
+static status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}{SKi\+\_\+apply\+\_\+transform}} (const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}top\+Level\+Point, \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}robot\+Point)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}{SKi\+\_\+inverse\+\_\+transform}} (const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}robot\+Point, \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}top\+Level\+Point)
+\item 
+static bool \doxymbox{\hyperlink{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}{SKi\+\_\+point\+\_\+in\+\_\+rect}} (const \doxymbox{\hyperlink{scara__kinematics_8h_ab1c93daab811807f8c4fe4b74a33539a}{SK\+\_\+\+Workspace\+Rect\+\_\+t}} \texorpdfstring{$\ast$}{*}rect, const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}point)
+\item 
+static status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{SKi\+\_\+workspace\+\_\+allowed}} (const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}point, bool \texorpdfstring{$\ast$}{*}allowed)
+\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_acac4dcbb8a11f45cd382bbf66ed3fa3b}{SK\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the kinematics module and command queue. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_af2824b953075ed9864849a9db11bcaaa}{SK\+\_\+init\+\_\+motor\+\_\+handles}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} left\+Motor\+Handle, \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} right\+Motor\+Handle, \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} zeta\+Motor\+Handle)
+\begin{DoxyCompactList}\small\item\em Stores the motor handles used by the kinematics layer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{scara__kinematics_8c_a72ae223e622ac3b8c215a53c0ad99f77}{SK\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function for processing kinematics commands. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_ad64be02f4743561357c3159db1a0257c}{SK\+\_\+set\+\_\+transform\+\_\+async}} (\doxymbox{\hyperlink{scara__kinematics_8h_ad2e42d194e3a55014f76a7f6c90ffa70}{SK\+\_\+\+Transform\+\_\+t}} transform, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Queues an update of the runtime coordinate transform. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a154da1ed72f26b754cdc9d0bbac0b0e6}{SK\+\_\+set\+\_\+workspace\+\_\+limits\+\_\+async}} (\doxymbox{\hyperlink{scara__kinematics_8h_a5de9211a9655a54f3b833884b1743a6d}{SK\+\_\+\+Workspace\+Limits\+\_\+t}} limits, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Queues an update of the workspace limits. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a63130808dc5f45c765768e792a9b9a80}{SK\+\_\+enable\+\_\+workspace\+\_\+limits\+\_\+async}} (bool enabled, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Enables or disables workspace limit checking. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_aa4f604c38d46c2023393078d055470ee}{SK\+\_\+set\+\_\+origin\+\_\+offset\+\_\+async}} (\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} offset, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Queues an update of the zero-\/point offset. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a74348adaab6b489417d541720992dda9}{SK\+\_\+change\+\_\+side\+\_\+async}} (Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Placeholder for switching to the mirrored side. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a613c322a91f008bb7cdd50e601683f23}{SK\+\_\+is\+\_\+point\+\_\+allowed}} (\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} point, bool \texorpdfstring{$\ast$}{*}allowed)
+\begin{DoxyCompactList}\small\item\em Checks whether a point is allowed by the configured workspace limits. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a46c8b87e143361ef751055f6375febeb}{SK\+\_\+inverse\+\_\+kinematics}} (\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} point, double \texorpdfstring{$\ast$}{*}theta1, double \texorpdfstring{$\ast$}{*}theta2, double \texorpdfstring{$\ast$}{*}zetaE)
+\begin{DoxyCompactList}\small\item\em Solves inverse kinematics for the current geometry. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849}{SK\+\_\+forward\+\_\+kinematics}} (double theta1, double theta2, \doxymbox{\hyperlink{scara__kinematics_8h_a653571debd083a9985616ba7e935c734}{SK\+\_\+\+Side\+\_\+t}} side, \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}point, double \texorpdfstring{$\ast$}{*}zetaE)
+\begin{DoxyCompactList}\small\item\em Solves forward kinematics for the current geometry. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a85bc1286e68ddabc28834bcdefaa0be3}{SK\+\_\+move\+\_\+to\+\_\+xy\+\_\+async}} (\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} target\+Point, double delta\+ZetaE, bool rotate\+Zeta, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Executes a Cartesian move through the motor module and waits for completion. \end{DoxyCompactList}\item 
+status\+\_\+t \doxymbox{\hyperlink{scara__kinematics_8c_a284fbb96c16805e1297637cf1b6da65f}{SK\+\_\+home}} (const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} zero\+Offset, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+\begin{DoxyCompactList}\small\item\em Runs homing through the homing module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{scara__kinematics_8h_a96ec1f712f7a968971cf7080fa7cd5ea}{SK\+\_\+\+State\+\_\+t}} \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{sk\+State}}
+\item 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398}{sk\+Left\+Motor\+Handle}} = NULL
+\item 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8}{sk\+Right\+Motor\+Handle}} = NULL
+\item 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35}{sk\+Zeta\+Motor\+Handle}} = NULL
 \end{DoxyCompactItemize}
 
 
 \label{doc-func-members}
 \Hypertarget{scara__kinematics_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{scara__kinematics_8c_a3adf355f0bb0733139030f71d755f57e}\index{scara\_kinematics.c@{scara\_kinematics.c}!scara\_inverse\_kinematics@{scara\_inverse\_kinematics}}
-\index{scara\_inverse\_kinematics@{scara\_inverse\_kinematics}!scara\_kinematics.c@{scara\_kinematics.c}}
-\doxysubsubsection{\texorpdfstring{scara\_inverse\_kinematics()}{scara\_inverse\_kinematics()}}
-{\footnotesize\ttfamily \label{scara__kinematics_8c_a3adf355f0bb0733139030f71d755f57e} 
-status\+\_\+t scara\+\_\+inverse\+\_\+kinematics (\begin{DoxyParamCaption}\item[{double}]{x}{, }\item[{double}]{y}{, }\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a6b9f2ad0e7047e9169ca225d96d15142}{SK\+\_\+\+Configuration\+\_\+t}}}]{configuration}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{theta1}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{theta2}{}\end{DoxyParamCaption})}
+\Hypertarget{scara__kinematics_8c_a74348adaab6b489417d541720992dda9}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_change\_side\_async@{SK\_change\_side\_async}}
+\index{SK\_change\_side\_async@{SK\_change\_side\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_change\_side\_async()}{SK\_change\_side\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a74348adaab6b489417d541720992dda9} 
+status\+\_\+t SK\+\_\+change\+\_\+side\+\_\+async (\begin{DoxyParamCaption}\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00034}{34}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+Placeholder for switching to the mirrored side. 
+
+The motion layer will later provide the path execution. The kinematics layer will only update side state and mirrored target data.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command was accepted. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00134}{134}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a63130808dc5f45c765768e792a9b9a80}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_enable\_workspace\_limits\_async@{SK\_enable\_workspace\_limits\_async}}
+\index{SK\_enable\_workspace\_limits\_async@{SK\_enable\_workspace\_limits\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_enable\_workspace\_limits\_async()}{SK\_enable\_workspace\_limits\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a63130808dc5f45c765768e792a9b9a80} 
+status\+\_\+t SK\+\_\+enable\+\_\+workspace\+\_\+limits\+\_\+async (\begin{DoxyParamCaption}\item[{bool}]{enabled}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Enables or disables workspace limit checking. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em enabled} & New enable state. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command was accepted. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00110}{110}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_forward\_kinematics@{SK\_forward\_kinematics}}
+\index{SK\_forward\_kinematics@{SK\_forward\_kinematics}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_forward\_kinematics()}{SK\_forward\_kinematics()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849} 
+status\+\_\+t SK\+\_\+forward\+\_\+kinematics (\begin{DoxyParamCaption}\item[{double}]{theta1}{, }\item[{double}]{theta2}{, }\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a653571debd083a9985616ba7e935c734}{SK\+\_\+\+Side\+\_\+t}}}]{side}{, }\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{point}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{zetaE}{}\end{DoxyParamCaption})}
+
+
+
+Solves forward kinematics for the current geometry. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em theta1} & Left motor angle in radians. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em theta2} & Right motor angle in radians. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em side} & Current robot side (main or mirrored). \\
+\hline
+\doxymbox{\texttt{out}}  & {\em point} & Pointer to the resulting top-\/level point. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em zetaE} & Optional pointer to end-\/effector angle in radians, where 0 is parallel to the base and positive is counterclockwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if a valid Cartesian point was found. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00268}{268}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a284fbb96c16805e1297637cf1b6da65f}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_home@{SK\_home}}
+\index{SK\_home@{SK\_home}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_home()}{SK\_home()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a284fbb96c16805e1297637cf1b6da65f} 
+status\+\_\+t SK\+\_\+home (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}}}]{zero\+Offset}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Runs homing through the homing module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em zero\+Offset} & Zero-\/point offset to apply after homing, in top-\/level coordinates. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the homing operation. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if homing succeeds. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00380}{380}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_acac4dcbb8a11f45cd382bbf66ed3fa3b}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_init@{SK\_init}}
+\index{SK\_init@{SK\_init}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_init()}{SK\_init()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_acac4dcbb8a11f45cd382bbf66ed3fa3b} 
+status\+\_\+t SK\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the kinematics module and command queue. 
+
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if initialization succeeds. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00056}{56}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_af2824b953075ed9864849a9db11bcaaa}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_init\_motor\_handles@{SK\_init\_motor\_handles}}
+\index{SK\_init\_motor\_handles@{SK\_init\_motor\_handles}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_init\_motor\_handles()}{SK\_init\_motor\_handles()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_af2824b953075ed9864849a9db11bcaaa} 
+status\+\_\+t SK\+\_\+init\+\_\+motor\+\_\+handles (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{left\+Motor\+Handle}{, }\item[{\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{right\+Motor\+Handle}{, }\item[{\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}}}]{zeta\+Motor\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Stores the motor handles used by the kinematics layer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em left\+Motor\+Handle} & Handle for the left motor. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em right\+Motor\+Handle} & Handle for the right motor. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em zeta\+Motor\+Handle} & Handle for the zeta (end-\/effector rotation) motor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the operation succeeds. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00065}{65}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a46c8b87e143361ef751055f6375febeb}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_inverse\_kinematics@{SK\_inverse\_kinematics}}
+\index{SK\_inverse\_kinematics@{SK\_inverse\_kinematics}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_inverse\_kinematics()}{SK\_inverse\_kinematics()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a46c8b87e143361ef751055f6375febeb} 
+status\+\_\+t SK\+\_\+inverse\+\_\+kinematics (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}}}]{point}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{theta1}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{theta2}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{zetaE}{}\end{DoxyParamCaption})}
+
+
+
+Solves inverse kinematics for the current geometry. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em point} & Top-\/level point for which to solve inverse kinematics. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em theta1} & Left motor angle in radians. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em theta2} & Right motor angle in radians. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em zetaE} & Optional pointer to end-\/effector angle in radians, where 0 is parallel to the base and positive is counterclockwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the target is reachable. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00155}{155}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a613c322a91f008bb7cdd50e601683f23}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_is\_point\_allowed@{SK\_is\_point\_allowed}}
+\index{SK\_is\_point\_allowed@{SK\_is\_point\_allowed}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_is\_point\_allowed()}{SK\_is\_point\_allowed()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a613c322a91f008bb7cdd50e601683f23} 
+status\+\_\+t SK\+\_\+is\+\_\+point\+\_\+allowed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}}}]{point}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{allowed}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether a point is allowed by the configured workspace limits. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em point} & Top-\/level point to validate. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em allowed} & True if the point lies inside any enabled rectangle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the check completed. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00145}{145}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a85bc1286e68ddabc28834bcdefaa0be3}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_move\_to\_xy\_async@{SK\_move\_to\_xy\_async}}
+\index{SK\_move\_to\_xy\_async@{SK\_move\_to\_xy\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_move\_to\_xy\_async()}{SK\_move\_to\_xy\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a85bc1286e68ddabc28834bcdefaa0be3} 
+status\+\_\+t SK\+\_\+move\+\_\+to\+\_\+xy\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}}}]{target\+Point}{, }\item[{double}]{delta\+ZetaE}{, }\item[{bool}]{rotate\+Zeta}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Executes a Cartesian move through the motor module and waits for completion. 
+
+This helper updates kinematics commanded state, executes a synchronized motor move, and refreshes the actual pose from motor feedback.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em target\+Point} & Top-\/level x/\+y target. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em delta\+ZetaE} & Optional change in end-\/effector angle, where positive is counterclockwise. Only applied if rotate\+Zeta is true. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em rotate\+Zeta} & Whether to rotate the end-\/effector by delta\+ZetaE. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for all queued operations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the full sequence succeeds. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00365}{365}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_aa4f604c38d46c2023393078d055470ee}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_set\_origin\_offset\_async@{SK\_set\_origin\_offset\_async}}
+\index{SK\_set\_origin\_offset\_async@{SK\_set\_origin\_offset\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_set\_origin\_offset\_async()}{SK\_set\_origin\_offset\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_aa4f604c38d46c2023393078d055470ee} 
+status\+\_\+t SK\+\_\+set\+\_\+origin\+\_\+offset\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}}}]{offset}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Queues an update of the zero-\/point offset. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em offset} & New zero offset in top-\/level coordinates. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command was accepted. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00121}{121}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_ad64be02f4743561357c3159db1a0257c}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_set\_transform\_async@{SK\_set\_transform\_async}}
+\index{SK\_set\_transform\_async@{SK\_set\_transform\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_set\_transform\_async()}{SK\_set\_transform\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_ad64be02f4743561357c3159db1a0257c} 
+status\+\_\+t SK\+\_\+set\+\_\+transform\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_ad2e42d194e3a55014f76a7f6c90ffa70}{SK\+\_\+\+Transform\+\_\+t}}}]{transform}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Queues an update of the runtime coordinate transform. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em transform} & New scale and offset. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command was accepted. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00086}{86}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a154da1ed72f26b754cdc9d0bbac0b0e6}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_set\_workspace\_limits\_async@{SK\_set\_workspace\_limits\_async}}
+\index{SK\_set\_workspace\_limits\_async@{SK\_set\_workspace\_limits\_async}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_set\_workspace\_limits\_async()}{SK\_set\_workspace\_limits\_async()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a154da1ed72f26b754cdc9d0bbac0b0e6} 
+status\+\_\+t SK\+\_\+set\+\_\+workspace\+\_\+limits\+\_\+async (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a5de9211a9655a54f3b833884b1743a6d}{SK\+\_\+\+Workspace\+Limits\+\_\+t}}}]{limits}{, }\item[{Tick\+Type\+\_\+t}]{deadline}{, }\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Queues an update of the workspace limits. 
+
+Rectangle limits are interpreted in top-\/level coordinates before scaling.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em limits} & New rectangle set. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em deadline} & Deadline for the command. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Optional command handle used to wait for completion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+k\+Status\+\_\+\+Success if the command was accepted. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00098}{98}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a72ae223e622ac3b8c215a53c0ad99f77}\index{scara\_kinematics.c@{scara\_kinematics.c}!SK\_task@{SK\_task}}
+\index{SK\_task@{SK\_task}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SK\_task()}{SK\_task()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a72ae223e622ac3b8c215a53c0ad99f77} 
+void SK\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Task function for processing kinematics commands. 
+
+Should be started as a Free\+RTOS task after \doxylink{scara__kinematics_8h_acac4dcbb8a11f45cd382bbf66ed3fa3b}{SK\+\_\+init()}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (not used). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00081}{81}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}\index{scara\_kinematics.c@{scara\_kinematics.c}!SKi\_apply\_transform@{SKi\_apply\_transform}}
+\index{SKi\_apply\_transform@{SKi\_apply\_transform}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SKi\_apply\_transform()}{SKi\_apply\_transform()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe} 
+status\+\_\+t SKi\+\_\+apply\+\_\+transform (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{top\+Level\+Point}{, }\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{robot\+Point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00395}{395}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}\index{scara\_kinematics.c@{scara\_kinematics.c}!SKi\_inverse\_transform@{SKi\_inverse\_transform}}
+\index{SKi\_inverse\_transform@{SKi\_inverse\_transform}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SKi\_inverse\_transform()}{SKi\_inverse\_transform()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123} 
+status\+\_\+t SKi\+\_\+inverse\+\_\+transform (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{robot\+Point}{, }\item[{\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{top\+Level\+Point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00407}{407}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}\index{scara\_kinematics.c@{scara\_kinematics.c}!SKi\_point\_in\_rect@{SKi\_point\_in\_rect}}
+\index{SKi\_point\_in\_rect@{SKi\_point\_in\_rect}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SKi\_point\_in\_rect()}{SKi\_point\_in\_rect()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d} 
+bool SKi\+\_\+point\+\_\+in\+\_\+rect (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_ab1c93daab811807f8c4fe4b74a33539a}{SK\+\_\+\+Workspace\+Rect\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{rect}{, }\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00424}{424}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}\index{scara\_kinematics.c@{scara\_kinematics.c}!SKi\_workspace\_allowed@{SKi\_workspace\_allowed}}
+\index{SKi\_workspace\_allowed@{SKi\_workspace\_allowed}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{SKi\_workspace\_allowed()}{SKi\_workspace\_allowed()}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46} 
+status\+\_\+t SKi\+\_\+workspace\+\_\+allowed (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\+\_\+\+Point\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{point}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{allowed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00435}{435}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{scara__kinematics_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398}\index{scara\_kinematics.c@{scara\_kinematics.c}!skLeftMotorHandle@{skLeftMotorHandle}}
+\index{skLeftMotorHandle@{skLeftMotorHandle}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{skLeftMotorHandle}{skLeftMotorHandle}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398} 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} sk\+Left\+Motor\+Handle = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00048}{48}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8}\index{scara\_kinematics.c@{scara\_kinematics.c}!skRightMotorHandle@{skRightMotorHandle}}
+\index{skRightMotorHandle@{skRightMotorHandle}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{skRightMotorHandle}{skRightMotorHandle}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8} 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} sk\+Right\+Motor\+Handle = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00049}{49}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}\index{scara\_kinematics.c@{scara\_kinematics.c}!skState@{skState}}
+\index{skState@{skState}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{skState}{skState}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666} 
+\doxymbox{\hyperlink{scara__kinematics_8h_a96ec1f712f7a968971cf7080fa7cd5ea}{SK\+\_\+\+State\+\_\+t}} sk\+State}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ .pose\ \ \ \ \ \ \ \ \ \ \ \ =\ \{.x\ =\ 30.0,\ .y\ =\ 220.0\},}
+\DoxyCodeLine{\ \ \ \ .transform\ \ \ \ \ \ \ =\ \{1.0,\ 1.0,\ 0.0,\ 0.0\},}
+\DoxyCodeLine{\ \ \ \ .workspaceLimits\ =\ \{.rectangles\ =\ \{\{0\}\},\ .rectangleCount\ =\ 0U,\ .enabled\ =\ \textcolor{keyword}{false}\},}
+\DoxyCodeLine{\ \ \ \ .side\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f}{SK\_SIDE\_MAIN}},}
+\DoxyCodeLine{\ \ \ \ .calibrated\ \ \ \ \ \ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00040}{40}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
+
+\Hypertarget{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35}\index{scara\_kinematics.c@{scara\_kinematics.c}!skZetaMotorHandle@{skZetaMotorHandle}}
+\index{skZetaMotorHandle@{skZetaMotorHandle}!scara\_kinematics.c@{scara\_kinematics.c}}
+\doxysubsubsection{\texorpdfstring{skZetaMotorHandle}{skZetaMotorHandle}}
+{\footnotesize\ttfamily \label{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35} 
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} sk\+Zeta\+Motor\+Handle = NULL}
+
+
+
+Definition at line \doxymbox{\hyperlink{scara__kinematics_8c_source_l00050}{50}} of file \doxymbox{\hyperlink{scara__kinematics_8c_source}{scara\+\_\+kinematics.\+c}}.
 

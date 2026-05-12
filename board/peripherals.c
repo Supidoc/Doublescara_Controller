@@ -75,6 +75,8 @@ instance:
       - 4: []
       - 5: []
       - 6: []
+      - 7: []
+      - 8: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -366,6 +368,61 @@ static void GPIOD_init(void) {
 }
 
 /***********************************************************************************************************************
+ * UART2 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'UART2'
+- type: 'uart'
+- mode: 'freertos'
+- custom_name_enabled: 'false'
+- type_id: 'uart_2.5.1'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'UART2'
+- config_sets:
+  - fsl_uart_freertos:
+    - uart_rtos_configuration:
+      - clockSource: 'BusInterfaceClock'
+      - clockSourceFreq: 'GetFreq'
+      - baudrate: '115200'
+      - parity: 'kUART_ParityDisabled'
+      - stopbits: 'kUART_OneStopBit'
+      - buffer_size: '1'
+    - interrupt_rx_tx:
+      - IRQn: 'UART2_RX_TX_IRQn'
+      - enable_priority: 'true'
+      - priority: '7'
+    - interrupt_err:
+      - IRQn: 'UART2_ERR_IRQn'
+      - enable_priority: 'true'
+      - priority: '8'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+uart_rtos_handle_t UART2_rtos_handle;
+uart_handle_t UART2_uart_handle;
+uint8_t UART2_background_buffer[UART2_BACKGROUND_BUFFER_SIZE];
+uart_rtos_config_t UART2_rtos_config = {
+  .base = UART2_PERIPHERAL,
+  .baudrate = 115200UL,
+  .parity = kUART_ParityDisabled,
+  .stopbits = kUART_OneStopBit,
+  .buffer = UART2_background_buffer,
+  .buffer_size = UART2_BACKGROUND_BUFFER_SIZE
+};
+
+static void UART2_init(void) {
+  /* UART clock source initialization */
+  UART2_rtos_config.srcclk = UART2_CLOCK_SOURCE;
+  /* UART rtos initialization */
+  UART_RTOS_Init(&UART2_rtos_handle, &UART2_uart_handle, &UART2_rtos_config);
+  /* Interrupt vector UART2_RX_TX_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(UART2_SERIAL_RX_TX_IRQN, UART2_SERIAL_RX_TX_IRQ_PRIORITY);
+  /* Interrupt vector UART2_ERR_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(UART2_SERIAL_ERROR_IRQN, UART2_SERIAL_ERROR_IRQ_PRIORITY);
+}
+
+/***********************************************************************************************************************
  * FATFS initialization code
  **********************************************************************************************************************/
 /* clang-format off */
@@ -482,6 +539,7 @@ void BOARD_InitPeripherals(void)
   I2C0_init();
   UART0_init();
   GPIOD_init();
+  UART2_init();
 }
 
 /***********************************************************************************************************************

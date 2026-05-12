@@ -4,7 +4,7 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ cmd\_dispatch.h}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Command\ queue\ dispatch\ and\ completion\ notification\ helpers.}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 13\ Apr\ 2026}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
@@ -12,38 +12,48 @@
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ CMD\_DISPATCH\_H\_}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00009}00009\ \textcolor{preprocessor}{\#define\ CMD\_DISPATCH\_H\_}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00010}00010\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00011}00011\ \textcolor{comment}{/********************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00012}00012\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00013}00013\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00018}00018\ \textcolor{comment}{/***********************************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00020}00020\ \textcolor{comment}{\ ***********************************/}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00022}00022\ \textcolor{comment}{/***************************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00024}00024\ \textcolor{comment}{\ ***************************/}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00026}00026\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00028}00028\ \textcolor{comment}{\ ****************************/}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00029}00029\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00030}00030\ \textcolor{comment}{/**************************************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00031}00031\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00032}00032\ \textcolor{comment}{\ **************************************/}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00043}00043\ status\_t\ \doxymbox{\hyperlink{cmd__dispatch_8h_a1295f6b3982462f4aac53348d8e52b68}{CDP\_send\_cmd}}(QueueHandle\_t\ xQueue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \textcolor{keyword}{const}\ pvItemToQueue,\ TickType\_t\ deadline,}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00045}00045\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00051}00051\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a46e12257c7ca31415aa7e513fc0ccbe3}{CDP\_notify\_task\_success}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00052}00052\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00058}00058\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a6d93010b80e0868b657a08c03594fd4c}{CDP\_notify\_task\_failure}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00059}00059\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00065}00065\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00066}00066\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00067}00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CMD\_DISPATCH\_H\_}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00011}00011\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00012}00012\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00016}00016\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00017}00017\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00018}00018\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00023}00023\ \textcolor{comment}{\ \ \ \ /***********************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00024}00024\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00025}00025\ \textcolor{comment}{\ \ \ \ \ ***********************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00027}00027\ \textcolor{comment}{\ \ \ \ /***************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00028}00028\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00029}00029\ \textcolor{comment}{\ \ \ \ \ ***************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00031}00031\ \textcolor{comment}{\ \ \ \ /****************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00032}00032\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00033}00033\ \textcolor{comment}{\ \ \ \ \ ****************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00035}00035\ \textcolor{comment}{\ \ \ \ /**************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00036}00036\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00037}00037\ \textcolor{comment}{\ \ \ \ \ **************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00048}00048\ \ \ \ \ status\_t\ \doxymbox{\hyperlink{cmd__dispatch_8h_a1295f6b3982462f4aac53348d8e52b68}{CDP\_send\_cmd}}(QueueHandle\_t\ xQueue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \textcolor{keyword}{const}\ pvItemToQueue,}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a46e12257c7ca31415aa7e513fc0ccbe3}{CDP\_notify\_task\_success}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a6d93010b80e0868b657a08c03594fd4c}{CDP\_notify\_task\_failure}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a575593df81e73c88955e13a8765c09d7}{CDP\_notify\_task\_failure\_from\_isr}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00071}00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8h_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00073}00073\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00075}00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8h_source_l00077}00077\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CMD\_DISPATCH\_H\_}}
 
 \end{DoxyCode}

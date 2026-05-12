@@ -13,6 +13,8 @@
 {\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \+\#include $<$string.\+h$>$}\newline
 {\ttfamily \+\#include "{}sync\+\_\+wait.\+h"{}}\newline
+{\ttfamily \+\#include "{}scara\+\_\+kinematics.\+h"{}}\newline
+{\ttfamily \+\#include "{}grabber.\+h"{}}\newline
 Include dependency graph for motor\+Cmd.\+c:\+
 \nopagebreak
 \begin{figure}[H]
@@ -53,6 +55,8 @@ static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a970590506d4efa82e5e41
 \item 
 static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a6f89aaba86e6924404e90366b8d984d0}{cmd\+\_\+motor\+\_\+set\+\_\+home}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
 \item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a4f62191f02519dd32bc3d8a7099d8fb4}{cmd\+\_\+motor\+\_\+set\+\_\+home\+\_\+offset}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
 static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a6e90e90c3681ed853e8e084545842b9d}{cmd\+\_\+motor\+\_\+set\+\_\+run\+\_\+current}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
 \item 
 static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a53b63339a4207d3896c0e6558c545267}{cmd\+\_\+motor\+\_\+set\+\_\+hold\+\_\+current}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
@@ -66,6 +70,12 @@ static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a8594612b10e1965031197
 static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a74fa9df3d9423f4e679164f4a2ec387e}{cmd\+\_\+motor\+\_\+home\+\_\+left\+\_\+arm}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
 \item 
 static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a5b6d75c4c9152c8e3ed2a8b02e0d0281}{cmd\+\_\+motor\+\_\+home\+\_\+right\+\_\+arm}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a61594637ad613b52a9e193edbbce252e}{cmd\+\_\+scara\+\_\+move\+\_\+xy}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a1ceb05d4e3bb6b3bfb7bb2148e4febee}{cmd\+\_\+grab}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
+\item 
+static Base\+Type\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a3bc63bb32193e5e339adf4a35ccc79f9}{cmd\+\_\+release}} (char \texorpdfstring{$\ast$}{*}pc\+Write\+Buffer, size\+\_\+t x\+Write\+Buffer\+Len, const char \texorpdfstring{$\ast$}{*}pc\+Command\+String)
 \item 
 static status\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}{wait\+\_\+for\+\_\+mtr\+\_\+cmd}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle, Tick\+Type\+\_\+t deadline)
 \item 
@@ -98,6 +108,8 @@ static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{mo
 \item 
 static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a468edf0c43256d61ff84cdf1aa8b4bc8}{x\+Set\+Home\+Cmd}}
 \item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a3fe7ffd663f6c44115b63715702ef853}{x\+Set\+Home\+Offset\+Cmd}}
+\item 
 static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_aa9e242377f439f82643506e82685c26f}{x\+Set\+Run\+Current\+Cmd}}
 \item 
 static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a8e087273f18e4101734ea96fa887e3dd}{x\+Set\+Hold\+Current\+Cmd}}
@@ -111,6 +123,12 @@ static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{mo
 static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_ac4cf14897e7f795a9f3d94c86fdcf540}{x\+Home\+Left\+Arm\+Cmd}}
 \item 
 static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_ae27e21440366b4c233eafa35004dce2f}{x\+Home\+Right\+Arm\+Cmd}}
+\item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_af3d3b1ab7eeaefd6eea17dcbfdebd405}{x\+Scara\+Move\+Cmd}}
+\item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_a2918c3f4e7f7bdfa7c2cec80cec682b4}{x\+Grab\+Cmd}}
+\item 
+static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{motorCmd_8c_ae38df756065bd73d2f80eb7943d8813f}{x\+Release\+Cmd}}
 \end{DoxyCompactItemize}
 
 
@@ -125,7 +143,7 @@ static const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t \doxymbox{\hyperlink{mo
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00033}{33}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00036}{36}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_aae22002f251e542e9fe72d51e868c291}\index{motorCmd.c@{motorCmd.c}!MCMD\_HOMING\_TIMEOUT\_MS@{MCMD\_HOMING\_TIMEOUT\_MS}}
 \index{MCMD\_HOMING\_TIMEOUT\_MS@{MCMD\_HOMING\_TIMEOUT\_MS}!motorCmd.c@{motorCmd.c}}
@@ -135,13 +153,23 @@ Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00033}{33}} of file 
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00034}{34}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00037}{37}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 
 
 \label{doc-func-members}
 \Hypertarget{motorCmd_8c_doc-func-members}
 \doxysubsection{Function Documentation}
+\Hypertarget{motorCmd_8c_a1ceb05d4e3bb6b3bfb7bb2148e4febee}\index{motorCmd.c@{motorCmd.c}!cmd\_grab@{cmd\_grab}}
+\index{cmd\_grab@{cmd\_grab}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{cmd\_grab()}{cmd\_grab()}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a1ceb05d4e3bb6b3bfb7bb2148e4febee} 
+Base\+Type\+\_\+t cmd\+\_\+grab (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01204}{1204}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
 \Hypertarget{motorCmd_8c_ab785724edfb94aae4bcbfd55c0801b5e}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_clear\_emergency@{cmd\_motor\_clear\_emergency}}
 \index{cmd\_motor\_clear\_emergency@{cmd\_motor\_clear\_emergency}!motorCmd.c@{motorCmd.c}}
 \doxysubsubsection{\texorpdfstring{cmd\_motor\_clear\_emergency()}{cmd\_motor\_clear\_emergency()}}
@@ -150,7 +178,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+clear\+\_\+emergency (\begin{DoxyParamCapt
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00595}{595}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00636}{636}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a8594612b10e19650311978ac4b1a771f}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_disable\_freewheeling@{cmd\_motor\_disable\_freewheeling}}
 \index{cmd\_motor\_disable\_freewheeling@{cmd\_motor\_disable\_freewheeling}!motorCmd.c@{motorCmd.c}}
@@ -160,7 +188,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+disable\+\_\+freewheeling (\begin{DoxyPara
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00980}{980}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01069}{1069}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a2ec3c9254388b578ad853439d1f55465}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_emergency\_stop@{cmd\_motor\_emergency\_stop}}
 \index{cmd\_motor\_emergency\_stop@{cmd\_motor\_emergency\_stop}!motorCmd.c@{motorCmd.c}}
@@ -170,7 +198,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+emergency\+\_\+stop (\begin{DoxyParamCapti
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00557}{557}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00598}{598}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a1fc1fea18fb2733913ac541d933dc5f4}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_enable\_freewheeling@{cmd\_motor\_enable\_freewheeling}}
 \index{cmd\_motor\_enable\_freewheeling@{cmd\_motor\_enable\_freewheeling}!motorCmd.c@{motorCmd.c}}
@@ -180,7 +208,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+enable\+\_\+freewheeling (\begin{DoxyParam
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00940}{940}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01029}{1029}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a0c01b1b480b43b85e3fe910df58ec446}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_get\_angle@{cmd\_motor\_get\_angle}}
 \index{cmd\_motor\_get\_angle@{cmd\_motor\_get\_angle}!motorCmd.c@{motorCmd.c}}
@@ -190,7 +218,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+get\+\_\+angle (\begin{DoxyParamCaption}\i
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00612}{612}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00653}{653}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a970590506d4efa82e5e4194e70b7800a}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_get\_state@{cmd\_motor\_get\_state}}
 \index{cmd\_motor\_get\_state@{cmd\_motor\_get\_state}!motorCmd.c@{motorCmd.c}}
@@ -200,7 +228,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+get\+\_\+state (\begin{DoxyParamCaption}\i
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00653}{653}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00694}{694}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a74fa9df3d9423f4e679164f4a2ec387e}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_home\_left\_arm@{cmd\_motor\_home\_left\_arm}}
 \index{cmd\_motor\_home\_left\_arm@{cmd\_motor\_home\_left\_arm}!motorCmd.c@{motorCmd.c}}
@@ -210,7 +238,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+home\+\_\+left\+\_\+arm (\begin{DoxyParamC
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01020}{1020}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01109}{1109}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a5b6d75c4c9152c8e3ed2a8b02e0d0281}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_home\_right\_arm@{cmd\_motor\_home\_right\_arm}}
 \index{cmd\_motor\_home\_right\_arm@{cmd\_motor\_home\_right\_arm}!motorCmd.c@{motorCmd.c}}
@@ -220,7 +248,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+home\+\_\+right\+\_\+arm (\begin{DoxyParam
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01038}{1038}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01127}{1127}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ac843aca55e18e509e38b8ea556115991}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_move\_absolute@{cmd\_motor\_move\_absolute}}
 \index{cmd\_motor\_move\_absolute@{cmd\_motor\_move\_absolute}!motorCmd.c@{motorCmd.c}}
@@ -230,7 +258,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+move\+\_\+absolute (\begin{DoxyParamCaptio
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00306}{306}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00347}{347}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ac07ea204f1c7d69e1a83a9c9e1613ea5}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_move\_angle@{cmd\_motor\_move\_angle}}
 \index{cmd\_motor\_move\_angle@{cmd\_motor\_move\_angle}!motorCmd.c@{motorCmd.c}}
@@ -240,7 +268,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+move\+\_\+angle (\begin{DoxyParamCaption}\
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00257}{257}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00298}{298}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a160ef4c340bfee07d6aa49bd8e6531d7}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_move\_revolutions@{cmd\_motor\_move\_revolutions}}
 \index{cmd\_motor\_move\_revolutions@{cmd\_motor\_move\_revolutions}!motorCmd.c@{motorCmd.c}}
@@ -250,7 +278,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+move\+\_\+revolutions (\begin{DoxyParamCap
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00356}{356}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00397}{397}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a9228a3c8d13d700781c93786b5b3fbc0}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_acceleration@{cmd\_motor\_set\_acceleration}}
 \index{cmd\_motor\_set\_acceleration@{cmd\_motor\_set\_acceleration}!motorCmd.c@{motorCmd.c}}
@@ -260,7 +288,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+acceleration (\begin{DoxyParamCap
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00455}{455}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00496}{496}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a53b63339a4207d3896c0e6558c545267}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_hold\_current@{cmd\_motor\_set\_hold\_current}}
 \index{cmd\_motor\_set\_hold\_current@{cmd\_motor\_set\_hold\_current}!motorCmd.c@{motorCmd.c}}
@@ -270,7 +298,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+hold\+\_\+current (\begin{DoxyPar
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00811}{811}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00900}{900}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a6f89aaba86e6924404e90366b8d984d0}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_home@{cmd\_motor\_set\_home}}
 \index{cmd\_motor\_set\_home@{cmd\_motor\_set\_home}!motorCmd.c@{motorCmd.c}}
@@ -280,7 +308,17 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+home (\begin{DoxyParamCaption}\it
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00722}{722}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00763}{763}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_a4f62191f02519dd32bc3d8a7099d8fb4}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_home\_offset@{cmd\_motor\_set\_home\_offset}}
+\index{cmd\_motor\_set\_home\_offset@{cmd\_motor\_set\_home\_offset}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{cmd\_motor\_set\_home\_offset()}{cmd\_motor\_set\_home\_offset()}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a4f62191f02519dd32bc3d8a7099d8fb4} 
+Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+home\+\_\+offset (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00801}{801}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a6e90e90c3681ed853e8e084545842b9d}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_run\_current@{cmd\_motor\_set\_run\_current}}
 \index{cmd\_motor\_set\_run\_current@{cmd\_motor\_set\_run\_current}!motorCmd.c@{motorCmd.c}}
@@ -290,7 +328,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+run\+\_\+current (\begin{DoxyPara
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00760}{760}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00849}{849}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_aca86a69ed3f17ef2c418038804fcd854}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_set\_velocity@{cmd\_motor\_set\_velocity}}
 \index{cmd\_motor\_set\_velocity@{cmd\_motor\_set\_velocity}!motorCmd.c@{motorCmd.c}}
@@ -300,7 +338,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+set\+\_\+velocity (\begin{DoxyParamCaption
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00404}{404}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00445}{445}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ae7280ca9b32c95ac269cd355b5cdc43b}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_stop@{cmd\_motor\_stop}}
 \index{cmd\_motor\_stop@{cmd\_motor\_stop}!motorCmd.c@{motorCmd.c}}
@@ -310,7 +348,7 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+stop (\begin{DoxyParamCaption}\item[{char 
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00507}{507}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00548}{548}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_af1c70c2a5e497b204c1e8a9213f32542}\index{motorCmd.c@{motorCmd.c}!cmd\_motor\_synchronized\_move@{cmd\_motor\_synchronized\_move}}
 \index{cmd\_motor\_synchronized\_move@{cmd\_motor\_synchronized\_move}!motorCmd.c@{motorCmd.c}}
@@ -320,7 +358,27 @@ Base\+Type\+\_\+t cmd\+\_\+motor\+\_\+synchronized\+\_\+move (\begin{DoxyParamCa
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00862}{862}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00951}{951}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_a3bc63bb32193e5e339adf4a35ccc79f9}\index{motorCmd.c@{motorCmd.c}!cmd\_release@{cmd\_release}}
+\index{cmd\_release@{cmd\_release}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{cmd\_release()}{cmd\_release()}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a3bc63bb32193e5e339adf4a35ccc79f9} 
+Base\+Type\+\_\+t cmd\+\_\+release (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01219}{1219}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_a61594637ad613b52a9e193edbbce252e}\index{motorCmd.c@{motorCmd.c}!cmd\_scara\_move\_xy@{cmd\_scara\_move\_xy}}
+\index{cmd\_scara\_move\_xy@{cmd\_scara\_move\_xy}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{cmd\_scara\_move\_xy()}{cmd\_scara\_move\_xy()}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a61594637ad613b52a9e193edbbce252e} 
+Base\+Type\+\_\+t cmd\+\_\+scara\+\_\+move\+\_\+xy (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Write\+Buffer}{, }\item[{size\+\_\+t}]{x\+Write\+Buffer\+Len}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{pc\+Command\+String}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l01145}{1145}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a9c9b713d7e1f0775be398eeaf8a53c44}\index{motorCmd.c@{motorCmd.c}!wait\_for\_mtr\_cmd@{wait\_for\_mtr\_cmd}}
 \index{wait\_for\_mtr\_cmd@{wait\_for\_mtr\_cmd}!motorCmd.c@{motorCmd.c}}
@@ -330,7 +388,7 @@ status\+\_\+t wait\+\_\+for\+\_\+mtr\+\_\+cmd (\begin{DoxyParamCaption}\item[{\d
 
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00245}{245}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00286}{286}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 
 
@@ -354,7 +412,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Clear\+Emergency\+Cmd\hspac
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00131}{131}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00143}{143}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a579caf44262ed312c85b25c74bb0ebb8}\index{motorCmd.c@{motorCmd.c}!xDisableFreewheelingCmd@{xDisableFreewheelingCmd}}
 \index{xDisableFreewheelingCmd@{xDisableFreewheelingCmd}!motorCmd.c@{motorCmd.c}}
@@ -373,7 +431,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Disable\+Freewheeling\+Cmd\
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00180}{180}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00198}{198}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ace27b3c7f28438ac3f62002c659d9dc3}\index{motorCmd.c@{motorCmd.c}!xEmergencyStopCmd@{xEmergencyStopCmd}}
 \index{xEmergencyStopCmd@{xEmergencyStopCmd}!motorCmd.c@{motorCmd.c}}
@@ -392,7 +450,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Emergency\+Stop\+Cmd\hspace
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00125}{125}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00137}{137}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a795e48b284495359fb7359c984cf6bea}\index{motorCmd.c@{motorCmd.c}!xEnableFreewheelingCmd@{xEnableFreewheelingCmd}}
 \index{xEnableFreewheelingCmd@{xEnableFreewheelingCmd}!motorCmd.c@{motorCmd.c}}
@@ -411,7 +469,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Enable\+Freewheeling\+Cmd\h
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00174}{174}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00192}{192}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a0084bc076594639dd5d51790c00d216a}\index{motorCmd.c@{motorCmd.c}!xGetAngleCmd@{xGetAngleCmd}}
 \index{xGetAngleCmd@{xGetAngleCmd}!motorCmd.c@{motorCmd.c}}
@@ -430,7 +488,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Get\+Angle\+Cmd\hspace{0.3c
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00137}{137}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00149}{149}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a792cffeebf6f34f5ec1b718216b8fa99}\index{motorCmd.c@{motorCmd.c}!xGetStateCmd@{xGetStateCmd}}
 \index{xGetStateCmd@{xGetStateCmd}!motorCmd.c@{motorCmd.c}}
@@ -449,7 +507,25 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Get\+State\+Cmd\hspace{0.3c
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00143}{143}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00155}{155}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_a2918c3f4e7f7bdfa7c2cec80cec682b4}\index{motorCmd.c@{motorCmd.c}!xGrabCmd@{xGrabCmd}}
+\index{xGrabCmd@{xGrabCmd}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{xGrabCmd}{xGrabCmd}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a2918c3f4e7f7bdfa7c2cec80cec682b4} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Grab\+Cmd\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.pcCommand\ \ \ \ =\ \textcolor{stringliteral}{"{}grab"{}},}
+\DoxyCodeLine{\ \ \ .pcHelpString\ =\ \textcolor{stringliteral}{"{}grab:\ Perform\ grab\ sequence\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{\ \ \ .pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{motorCmd_8c_a1ceb05d4e3bb6b3bfb7bb2148e4febee}{cmd\_grab}},}
+\DoxyCodeLine{\ \ \ .cExpectedNumberOfParameters\ =\ 0\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00223}{223}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ac4cf14897e7f795a9f3d94c86fdcf540}\index{motorCmd.c@{motorCmd.c}!xHomeLeftArmCmd@{xHomeLeftArmCmd}}
 \index{xHomeLeftArmCmd@{xHomeLeftArmCmd}!motorCmd.c@{motorCmd.c}}
@@ -468,7 +544,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Home\+Left\+Arm\+Cmd\hspace
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00186}{186}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00204}{204}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ae27e21440366b4c233eafa35004dce2f}\index{motorCmd.c@{motorCmd.c}!xHomeRightArmCmd@{xHomeRightArmCmd}}
 \index{xHomeRightArmCmd@{xHomeRightArmCmd}!motorCmd.c@{motorCmd.c}}
@@ -487,7 +563,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Home\+Right\+Arm\+Cmd\hspac
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00192}{192}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00210}{210}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ab8c51a89259b10b659a219d6f7462724}\index{motorCmd.c@{motorCmd.c}!xMoveAbsoluteCmd@{xMoveAbsoluteCmd}}
 \index{xMoveAbsoluteCmd@{xMoveAbsoluteCmd}!motorCmd.c@{motorCmd.c}}
@@ -506,7 +582,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Move\+Absolute\+Cmd\hspace{
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00095}{95}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00107}{107}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_abc75f17a70fe10fe1c179bb28f795bcb}\index{motorCmd.c@{motorCmd.c}!xMoveAngleCmd@{xMoveAngleCmd}}
 \index{xMoveAngleCmd@{xMoveAngleCmd}!motorCmd.c@{motorCmd.c}}
@@ -525,7 +601,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Move\+Angle\+Cmd\hspace{0.3
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00089}{89}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00101}{101}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a965648bbde32ab857fd39583e3de5771}\index{motorCmd.c@{motorCmd.c}!xMoveRevolutionsCmd@{xMoveRevolutionsCmd}}
 \index{xMoveRevolutionsCmd@{xMoveRevolutionsCmd}!motorCmd.c@{motorCmd.c}}
@@ -544,7 +620,46 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Move\+Revolutions\+Cmd\hspa
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00101}{101}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00113}{113}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_ae38df756065bd73d2f80eb7943d8813f}\index{motorCmd.c@{motorCmd.c}!xReleaseCmd@{xReleaseCmd}}
+\index{xReleaseCmd@{xReleaseCmd}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{xReleaseCmd}{xReleaseCmd}}
+{\footnotesize\ttfamily \label{motorCmd_8c_ae38df756065bd73d2f80eb7943d8813f} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Release\+Cmd\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{.pcCommand\ =\ \textcolor{stringliteral}{"{}release"{}},}
+\DoxyCodeLine{\ \ \ .pcHelpString\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}release:\ Perform\ release\ sequence\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{\ \ \ .pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{motorCmd_8c_a3bc63bb32193e5e339adf4a35ccc79f9}{cmd\_release}},}
+\DoxyCodeLine{\ \ \ .cExpectedNumberOfParameters\ =\ 0\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00228}{228}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_af3d3b1ab7eeaefd6eea17dcbfdebd405}\index{motorCmd.c@{motorCmd.c}!xScaraMoveCmd@{xScaraMoveCmd}}
+\index{xScaraMoveCmd@{xScaraMoveCmd}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{xScaraMoveCmd}{xScaraMoveCmd}}
+{\footnotesize\ttfamily \label{motorCmd_8c_af3d3b1ab7eeaefd6eea17dcbfdebd405} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Scara\+Move\+Cmd\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{.pcCommand\ \ \ \ =\ \textcolor{stringliteral}{"{}skmove"{}},}
+\DoxyCodeLine{.pcHelpString\ =\ \textcolor{stringliteral}{"{}skmove\ -\/x\ <x>\ -\/y\ <y>\ [-\/zeta\ <rotation>]:\ Move\ to\ a\ Cartesian\ target\ with\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}optional\ rotation\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{.pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{motorCmd_8c_a61594637ad613b52a9e193edbbce252e}{cmd\_scara\_move\_xy}},}
+\DoxyCodeLine{.cExpectedNumberOfParameters\ =\ -\/1\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00216}{216}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a9492804f5d17a2f91bfcf22be8ecfc5f}\index{motorCmd.c@{motorCmd.c}!xSetAccelerationCmd@{xSetAccelerationCmd}}
 \index{xSetAccelerationCmd@{xSetAccelerationCmd}!motorCmd.c@{motorCmd.c}}
@@ -563,7 +678,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Acceleration\+Cmd\hspa
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00113}{113}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00125}{125}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a8e087273f18e4101734ea96fa887e3dd}\index{motorCmd.c@{motorCmd.c}!xSetHoldCurrentCmd@{xSetHoldCurrentCmd}}
 \index{xSetHoldCurrentCmd@{xSetHoldCurrentCmd}!motorCmd.c@{motorCmd.c}}
@@ -582,7 +697,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Hold\+Current\+Cmd\hsp
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00161}{161}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00179}{179}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a468edf0c43256d61ff84cdf1aa8b4bc8}\index{motorCmd.c@{motorCmd.c}!xSetHomeCmd@{xSetHomeCmd}}
 \index{xSetHomeCmd@{xSetHomeCmd}!motorCmd.c@{motorCmd.c}}
@@ -601,7 +716,26 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Home\+Cmd\hspace{0.3cm
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00149}{149}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00161}{161}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+
+\Hypertarget{motorCmd_8c_a3fe7ffd663f6c44115b63715702ef853}\index{motorCmd.c@{motorCmd.c}!xSetHomeOffsetCmd@{xSetHomeOffsetCmd}}
+\index{xSetHomeOffsetCmd@{xSetHomeOffsetCmd}!motorCmd.c@{motorCmd.c}}
+\doxysubsubsection{\texorpdfstring{xSetHomeOffsetCmd}{xSetHomeOffsetCmd}}
+{\footnotesize\ttfamily \label{motorCmd_8c_a3fe7ffd663f6c44115b63715702ef853} 
+const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Home\+Offset\+Cmd\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{.pcCommand\ \ \ \ =\ \textcolor{stringliteral}{"{}mhome\_off"{}},}
+\DoxyCodeLine{.pcHelpString\ =\ \textcolor{stringliteral}{"{}mhome\_off\ -\/m\ <motor\_id>\ -\/a\ <offset\_deg>:\ Set\ home\ angle\ offset\ in\ degrees\(\backslash\)r\(\backslash\)n"{}},}
+\DoxyCodeLine{.pxCommandInterpreter\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{motorCmd_8c_a4f62191f02519dd32bc3d8a7099d8fb4}{cmd\_motor\_set\_home\_offset}},}
+\DoxyCodeLine{.cExpectedNumberOfParameters\ =\ -\/1\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00167}{167}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_aa9e242377f439f82643506e82685c26f}\index{motorCmd.c@{motorCmd.c}!xSetRunCurrentCmd@{xSetRunCurrentCmd}}
 \index{xSetRunCurrentCmd@{xSetRunCurrentCmd}!motorCmd.c@{motorCmd.c}}
@@ -620,7 +754,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Run\+Current\+Cmd\hspa
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00155}{155}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00173}{173}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ae6058231d16c9eddb70726b2f13a2903}\index{motorCmd.c@{motorCmd.c}!xSetVelocityCmd@{xSetVelocityCmd}}
 \index{xSetVelocityCmd@{xSetVelocityCmd}!motorCmd.c@{motorCmd.c}}
@@ -639,7 +773,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Set\+Velocity\+Cmd\hspace{0
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00107}{107}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00119}{119}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_a9130ba3004d6698ddf20f820fe3eb5ee}\index{motorCmd.c@{motorCmd.c}!xStopCmd@{xStopCmd}}
 \index{xStopCmd@{xStopCmd}!motorCmd.c@{motorCmd.c}}
@@ -658,7 +792,7 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Stop\+Cmd\hspace{0.3cm}{\tt
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00119}{119}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00131}{131}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 
 \Hypertarget{motorCmd_8c_ada92a3622977c51ad3df26880cdd029e}\index{motorCmd.c@{motorCmd.c}!xSynchronizedMoveCmd@{xSynchronizedMoveCmd}}
 \index{xSynchronizedMoveCmd@{xSynchronizedMoveCmd}!motorCmd.c@{motorCmd.c}}
@@ -678,5 +812,5 @@ const CLI\+\_\+\+Command\+\_\+\+Definition\+\_\+t x\+Synchronized\+Move\+Cmd\hsp
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00167}{167}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
+Definition at line \doxymbox{\hyperlink{motorCmd_8c_source_l00185}{185}} of file \doxymbox{\hyperlink{motorCmd_8c_source}{motor\+Cmd.\+c}}.
 

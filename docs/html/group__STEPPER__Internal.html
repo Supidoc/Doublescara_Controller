@@ -123,6 +123,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ga68309b58dfcf99bdff3b4c5f1f5dc794" id="r_ga68309b58dfcf99bdff3b4c5f1f5dc794"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga68309b58dfcf99bdff3b4c5f1f5dc794">STP_DELAY_SCALE_BITS</a>&#160;&#160;&#160;16</td></tr>
 <tr class="memdesc:ga68309b58dfcf99bdff3b4c5f1f5dc794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-speed applications Based on principles from "Generate stepper-motor speed profiles in real time" by David Austin.  <br /></td></tr>
 <tr class="memitem:ga0151e2810a372d204ed775d1ab17453a" id="r_ga0151e2810a372d204ed775d1ab17453a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga0151e2810a372d204ed775d1ab17453a">STP_DELAY_SCALE</a>&#160;&#160;&#160;(1 &lt;&lt; <a class="el" href="#ga68309b58dfcf99bdff3b4c5f1f5dc794">STP_DELAY_SCALE_BITS</a>)</td></tr>
+<tr class="memdesc:ga0151e2810a372d204ed775d1ab17453a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-point scale factor for delay calculations.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -156,8 +157,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga53e76081d475aef890072a6c88aa3c64" id="r_ga53e76081d475aef890072a6c88aa3c64"><td class="memItemLeft"><a class="el" href="#gaccb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga53e76081d475aef890072a6c88aa3c64">handles</a> [<a class="el" href="step__shared_8h.html#a1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td></tr>
-<tr class="memitem:ga6b26389d8ba6ce908a268059e285c473" id="r_ga6b26389d8ba6ce908a268059e285c473"><td class="memItemLeft"><a class="el" href="cmd__handle_8h.html#a3402dd12f41b772dfdbca6e916c2af75">CHD_CmdHandleImpl_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6b26389d8ba6ce908a268059e285c473">cmdHandles</a> [<a class="el" href="step__shared_8h.html#acbe06552fb5a8ede3d392c2185fb0d75">STP_MAX_CMD_HANDLE_COUNT</a>]</td></tr>
+<tr class="memitem:ga7f1c25cdad0642dce363a061fc214134" id="r_ga7f1c25cdad0642dce363a061fc214134"><td class="memItemLeft"><a class="el" href="#gaccb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga7f1c25cdad0642dce363a061fc214134">stpHandles</a> [<a class="el" href="step__shared_8h.html#a1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td></tr>
+<tr class="memitem:gaa70be6db6e5de0018f281189690cde6e" id="r_gaa70be6db6e5de0018f281189690cde6e"><td class="memItemLeft"><a class="el" href="cmd__handle_8h.html#a3402dd12f41b772dfdbca6e916c2af75">CHD_CmdHandleImpl_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaa70be6db6e5de0018f281189690cde6e">stpCmdHandles</a> [<a class="el" href="step__shared_8h.html#acbe06552fb5a8ede3d392c2185fb0d75">STP_MAX_CMD_HANDLE_COUNT</a>]</td></tr>
 <tr class="memitem:ga77de850a7138b6306a0599a9fc57a340" id="r_ga77de850a7138b6306a0599a9fc57a340"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#ga77de850a7138b6306a0599a9fc57a340">stpCmdQueue</a></td></tr>
 <tr class="memitem:ga785756bcb96f3c5e34dc48382bfcb804" id="r_ga785756bcb96f3c5e34dc48382bfcb804"><td class="memItemLeft"><a class="el" href="step__shared_8h.html#ab298b84346872720a60ab557d80f47ba">STP_Handle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga785756bcb96f3c5e34dc48382bfcb804">FTM3_ISR_handle_cache</a> [8]</td></tr>
 <tr class="memitem:ga1d158ecf1936b775fdaf7688f2135161" id="r_ga1d158ecf1936b775fdaf7688f2135161"><td class="memItemLeft"><a class="el" href="#gaa30dbdeec091aaf82af82e7410e3bf2c">STP_AccelTablePoolItem_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga1d158ecf1936b775fdaf7688f2135161">accelTablePool</a> [<a class="el" href="step__shared_8h.html#aebcc5dd103361004d6a31c3ac589478d">STP_ACCEL_TABLE_POOL_SIZE</a>]</td></tr>
@@ -177,7 +178,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00042">42</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
+<p>Fixed-point scale factor for delay calculations. </p>
+
+<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00052">52</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
 
 </div>
 </div>
@@ -194,8 +197,9 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Fixed-point scale factor for delay calculations Using 16 fractional bits (scale by 65536) to maintain precision This provides sufficient accuracy for high-speed applications Based on principles from "Generate stepper-motor speed profiles in real time" by David Austin. </p>
+<p>Number of fractional bits used for delay scaling. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00041">41</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00050">50</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
 
 </div>
 </div>
@@ -212,8 +216,9 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Timer frequency used for step generation (in Hz). </p>
+<p>Timer frequency used for step generation in Hz. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00033">33</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00041">41</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
 
 </div>
 </div>
@@ -400,7 +405,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98" name="ggac619e3142c0e69b20136d0794b134aa7aae689007e35358ec28c149d0743a3a98"></a>STP_CMD_SET_END_VELOCITY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00048">48</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__internal_8h_source.html#l00058">58</a> of file <a class="el" href="step__internal_8h_source.html">step_internal.h</a>.</p>
 
 </div>
 </div>
@@ -425,29 +430,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="ga6b26389d8ba6ce908a268059e285c473" name="ga6b26389d8ba6ce908a268059e285c473"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6b26389d8ba6ce908a268059e285c473">&#9670;&#160;</a></span>cmdHandles</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="cmd__handle_8h.html#a3402dd12f41b772dfdbca6e916c2af75">CHD_CmdHandleImpl_t</a> cmdHandles[<a class="el" href="step__shared_8h.html#acbe06552fb5a8ede3d392c2185fb0d75">STP_MAX_CMD_HANDLE_COUNT</a>]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00042">42</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__profile_8c_source.html#l00045">45</a> of file <a class="el" href="step__profile_8c_source.html">step_profile.c</a>.</p>
 
 </div>
 </div>
@@ -475,8 +458,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ga53e76081d475aef890072a6c88aa3c64" name="ga53e76081d475aef890072a6c88aa3c64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga53e76081d475aef890072a6c88aa3c64">&#9670;&#160;</a></span>handles</h2>
+<a id="gaa70be6db6e5de0018f281189690cde6e" name="gaa70be6db6e5de0018f281189690cde6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa70be6db6e5de0018f281189690cde6e">&#9670;&#160;</a></span>stpCmdHandles</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -485,7 +468,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#gaccb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a> handles[<a class="el" href="step__shared_8h.html#a1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td>
+          <td class="memname"><a class="el" href="cmd__handle_8h.html#a3402dd12f41b772dfdbca6e916c2af75">CHD_CmdHandleImpl_t</a> stpCmdHandles[<a class="el" href="step__shared_8h.html#acbe06552fb5a8ede3d392c2185fb0d75">STP_MAX_CMD_HANDLE_COUNT</a>]</td>
         </tr>
       </table>
   </td>
@@ -495,7 +478,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00040">40</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00043">43</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
 
 </div>
 </div>
@@ -519,7 +502,31 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00044">44</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00045">45</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
+
+</div>
+</div>
+<a id="ga7f1c25cdad0642dce363a061fc214134" name="ga7f1c25cdad0642dce363a061fc214134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7f1c25cdad0642dce363a061fc214134">&#9670;&#160;</a></span>stpHandles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#gaccb1eaaa512044d26829364f7c039b76">STP_HandlesArrayItem_t</a> stpHandles[<a class="el" href="step__shared_8h.html#a1f9080302b6bc4ca17404d4485c41b67">STP_MAX_HANDLE_COUNT</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="step__core_8c_source.html#l00041">41</a> of file <a class="el" href="step__core_8c_source.html">step_core.c</a>.</p>
 
 </div>
 </div>

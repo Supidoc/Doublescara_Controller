@@ -18,6 +18,7 @@
 #include "motor_convert.h"
 #include "sync_wait.h"
 #include "fsl_gpio.h"
+#include "motor_configs.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -89,7 +90,57 @@ status_t MHM_home_left_arm(TickType_t deadline)
         return kStatus_Fail;
     }
 
-    return auto_homing(l_arm_handle, MHM_LEFT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline);
+    if (auto_homing(l_arm_handle, MHM_LEFT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline) !=
+        kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    CHD_CmdHandle_t accHandle = NULL;
+    CHD_CmdHandle_t velHandle = NULL;
+
+    MTR_MotorConfig_t configLArm = M_L_Arm();
+
+    MTR_set_acceleration_async(l_arm_handle, configLArm.acceleration / 8, deadline, &accHandle);
+    MTR_set_velocity_async(l_arm_handle, configLArm.endVelocity / 8, deadline, &velHandle);
+
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    if (wait_for_cmd_handle(accHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    if (wait_for_cmd_handle(velHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    CHD_CmdHandle_t moveHandle = NULL;
+    MTR_move_absolute_angle_async(l_arm_handle, 10, portMAX_DELAY, &moveHandle);
+    wait_for_cmd_handle(moveHandle, portMAX_DELAY);
+
+    if (auto_homing(l_arm_handle, MHM_LEFT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline) !=
+        kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_set_home_angle_offset(l_arm_handle, 1.5);
+
+    MTR_set_acceleration_async(l_arm_handle, configLArm.acceleration, deadline, &accHandle);
+    MTR_set_velocity_async(l_arm_handle, configLArm.endVelocity, deadline, &velHandle);
+
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    if (wait_for_cmd_handle(accHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    if (wait_for_cmd_handle(velHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
 }
 
 status_t MHM_home_right_arm(TickType_t deadline)
@@ -104,7 +155,57 @@ status_t MHM_home_right_arm(TickType_t deadline)
         return kStatus_Fail;
     }
 
-    return auto_homing(r_arm_handle, MHM_RIGHT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline);
+    if (auto_homing(r_arm_handle, MHM_RIGHT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline) !=
+        kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    CHD_CmdHandle_t accHandle = NULL;
+    CHD_CmdHandle_t velHandle = NULL;
+
+    MTR_MotorConfig_t configLArm = M_R_Arm();
+
+    MTR_set_acceleration_async(r_arm_handle, configLArm.acceleration / 8, deadline, &accHandle);
+    MTR_set_velocity_async(r_arm_handle, configLArm.endVelocity / 8, deadline, &velHandle);
+
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    if (wait_for_cmd_handle(accHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    if (wait_for_cmd_handle(velHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    CHD_CmdHandle_t moveHandle = NULL;
+    MTR_move_absolute_angle_async(r_arm_handle, -10, portMAX_DELAY, &moveHandle);
+    wait_for_cmd_handle(moveHandle, portMAX_DELAY);
+
+    if (auto_homing(r_arm_handle, MHM_RIGHT_ARM_DIRECTION, MHM_HOME_MAX_ANGLE_DEG, deadline) !=
+        kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    MTR_set_home_angle_offset(r_arm_handle, 180);
+
+    MTR_set_acceleration_async(r_arm_handle, configLArm.acceleration, deadline, &accHandle);
+    MTR_set_velocity_async(r_arm_handle, configLArm.endVelocity, deadline, &velHandle);
+
+    vTaskDelay(pdMS_TO_TICKS(100));
+
+    if (wait_for_cmd_handle(accHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+    if (wait_for_cmd_handle(velHandle, deadline) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
 }
 
 void MHM_homing_arm_interrupt_handler(PORT_Type* port, uint32_t pin)

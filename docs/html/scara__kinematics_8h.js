@@ -1,10 +1,39 @@
 var scara__kinematics_8h =
 [
-    [ "SK_Configuration_t", "scara__kinematics_8h.html#a6b9f2ad0e7047e9169ca225d96d15142", null ],
-    [ "_SK_Configuration", "scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796fed", [
-      [ "SK_BOTH_ELBOW_OUT", "scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59", null ],
-      [ "SK_L_ELBOW_OUT_R_ELBOW_IN", "scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71", null ],
-      [ "SK_L_ELBOW_IN_R_ELBOW_OUT", "scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808", null ],
-      [ "SK_BOTH_ELBOW_IN", "scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d", null ]
-    ] ]
+    [ "_SK_Point", "struct__SK__Point.html", "struct__SK__Point" ],
+    [ "_SK_Pose", "struct__SK__Pose.html", "struct__SK__Pose" ],
+    [ "_SK_Transform", "struct__SK__Transform.html", "struct__SK__Transform" ],
+    [ "_SK_WorkspaceRect", "struct__SK__WorkspaceRect.html", "struct__SK__WorkspaceRect" ],
+    [ "_SK_WorkspaceLimits", "struct__SK__WorkspaceLimits.html", "struct__SK__WorkspaceLimits" ],
+    [ "_SK_State", "struct__SK__State.html", "struct__SK__State" ],
+    [ "SK_BASE_SPAN_MM", "scara__kinematics_8h.html#a523ba6e2865ca100ea2692bbe6bbfa0d", null ],
+    [ "SK_LEFT_FAR_ARM_LENGTH_MM", "scara__kinematics_8h.html#a2d1344c8bfddb1b866ac8e57ba20b580", null ],
+    [ "SK_LEFT_ROOT_ARM_LENGTH_MM", "scara__kinematics_8h.html#aff6da966369e4554919f5a487e77624f", null ],
+    [ "SK_MAX_WORKSPACE_RECTS", "scara__kinematics_8h.html#a577dd269897295ca7df9c1390612e612", null ],
+    [ "SK_RIGHT_FAR_ARM_LENGTH_MM", "scara__kinematics_8h.html#a4edd79db6068ad3a858ba7c6fbee3926", null ],
+    [ "SK_RIGHT_ROOT_ARM_LENGTH_MM", "scara__kinematics_8h.html#ac366824d6869fb86062f58d82282edcd", null ],
+    [ "SK_Point_t", "scara__kinematics_8h.html#a4d95bb7e81f6f2a25e380929ceed7d1c", null ],
+    [ "SK_Pose_t", "scara__kinematics_8h.html#a3a5f6ac556189ac2183310fce347cd2e", null ],
+    [ "SK_Side_t", "scara__kinematics_8h.html#a653571debd083a9985616ba7e935c734", null ],
+    [ "SK_State_t", "scara__kinematics_8h.html#a96ec1f712f7a968971cf7080fa7cd5ea", null ],
+    [ "SK_Transform_t", "scara__kinematics_8h.html#ad2e42d194e3a55014f76a7f6c90ffa70", null ],
+    [ "SK_WorkspaceLimits_t", "scara__kinematics_8h.html#a5de9211a9655a54f3b833884b1743a6d", null ],
+    [ "SK_WorkspaceRect_t", "scara__kinematics_8h.html#ab1c93daab811807f8c4fe4b74a33539a", null ],
+    [ "_SK_Side", "scara__kinematics_8h.html#a17d8b3836510fd4db27ffd1315b3d97a", [
+      [ "SK_SIDE_MAIN", "scara__kinematics_8h.html#a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f", null ],
+      [ "SK_SIDE_MIRRORED", "scara__kinematics_8h.html#a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347", null ]
+    ] ],
+    [ "SK_change_side_async", "scara__kinematics_8h.html#a74348adaab6b489417d541720992dda9", null ],
+    [ "SK_enable_workspace_limits_async", "scara__kinematics_8h.html#a63130808dc5f45c765768e792a9b9a80", null ],
+    [ "SK_forward_kinematics", "scara__kinematics_8h.html#aad8095cb459faaba67efba05e9725849", null ],
+    [ "SK_home", "scara__kinematics_8h.html#a284fbb96c16805e1297637cf1b6da65f", null ],
+    [ "SK_init", "scara__kinematics_8h.html#acac4dcbb8a11f45cd382bbf66ed3fa3b", null ],
+    [ "SK_init_motor_handles", "scara__kinematics_8h.html#af2824b953075ed9864849a9db11bcaaa", null ],
+    [ "SK_inverse_kinematics", "scara__kinematics_8h.html#a46c8b87e143361ef751055f6375febeb", null ],
+    [ "SK_is_point_allowed", "scara__kinematics_8h.html#a613c322a91f008bb7cdd50e601683f23", null ],
+    [ "SK_move_to_xy_async", "scara__kinematics_8h.html#a85bc1286e68ddabc28834bcdefaa0be3", null ],
+    [ "SK_set_origin_offset_async", "scara__kinematics_8h.html#aa4f604c38d46c2023393078d055470ee", null ],
+    [ "SK_set_transform_async", "scara__kinematics_8h.html#ad64be02f4743561357c3159db1a0257c", null ],
+    [ "SK_set_workspace_limits_async", "scara__kinematics_8h.html#a154da1ed72f26b754cdc9d0bbac0b0e6", null ],
+    [ "SK_task", "scara__kinematics_8h.html#a72ae223e622ac3b8c215a53c0ad99f77", null ]
 ];

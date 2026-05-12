@@ -5,5 +5,6 @@ var searchData=
   ['phasestepcount_2',['phaseStepCount',['../struct__STP__StepperMovement.html#a839988503e15f6d028d4cea673f3af3f',1,'_STP_StepperMovement']]],
   ['pindirection_3',['pinDirection',['../struct__PCA__Pin__Config.html#ae632ef3afae76532a6d42f020c7e76a2',1,'_PCA_Pin_Config']]],
   ['polarityinversion_4',['polarityInversion',['../struct__PCA__Pin__Config.html#a1a3d8967b590c8ca632f3db14de54e03',1,'_PCA_Pin_Config']]],
-  ['previousholdcurrent_5',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]]
+  ['pose_5',['pose',['../struct__SK__State.html#a0382f74bd34e0785a77e03c74290b994',1,'_SK_State']]],
+  ['previousholdcurrent_6',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]]
 ];

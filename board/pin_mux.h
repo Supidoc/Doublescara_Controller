@@ -46,14 +46,41 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_UART1_RX_PIN_MASK (1U << 1U)      /*!<@brief PORT pin mask */
                                                          /* @} */
 
-/*! @name PORTD0 (number 57), PTD0
+/*! @name PORTD6 (number 63), UART0_RX
   @{ */
 
 /* Symbols to be used with PORT driver */
-#define BOARD_INITPINS_PTD0_PORT PORTD               /*!<@brief PORT peripheral base pointer */
-#define BOARD_INITPINS_PTD0_PIN 0U                   /*!<@brief PORT pin number */
-#define BOARD_INITPINS_PTD0_PIN_MASK (1U << 0U)      /*!<@brief PORT pin mask */
-                                                     /* @} */
+#define BOARD_INITPINS_UART0_RX_PORT PORTD               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_UART0_RX_PIN 6U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_UART0_RX_PIN_MASK (1U << 6U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
+/*! @name PORTD7 (number 64), UART0_TX
+  @{ */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_UART0_TX_PORT PORTD               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_UART0_TX_PIN 7U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_UART0_TX_PIN_MASK (1U << 7U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
+/*! @name PORTD2 (number 59), UART2_RX
+  @{ */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_UART2_RX_PORT PORTD               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_UART2_RX_PIN 2U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_UART2_RX_PIN_MASK (1U << 2U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
+/*! @name PORTD3 (number 60), UART2_TX
+  @{ */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_UART2_TX_PORT PORTD               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_UART2_TX_PIN 3U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_UART2_TX_PIN_MASK (1U << 3U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
 
 /*! @name PORTB19 (number 42), GPIOB19
   @{ */
@@ -93,6 +120,61 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_GPIOD4_PIN 4U                   /*!<@brief PORT pin number */
 #define BOARD_INITPINS_GPIOD4_PIN_MASK (1U << 4U)      /*!<@brief PORT pin mask */
                                                        /* @} */
+
+/*! @name PORTB16 (number 39), GPIOB16
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_GPIOB16_GPIO GPIOB                /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_GPIOB16_INIT_GPIO_VALUE 0U        /*!<@brief GPIO output initial state */
+#define BOARD_INITPINS_GPIOB16_GPIO_PIN_MASK (1U << 16U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_GPIOB16_PORT PORTB                /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_GPIOB16_PIN 16U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_GPIOB16_PIN_MASK (1U << 16U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
+/*! @name PORTB17 (number 40), GPIOB17
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_GPIOB17_GPIO GPIOB                /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_GPIOB17_INIT_GPIO_VALUE 0U        /*!<@brief GPIO output initial state */
+#define BOARD_INITPINS_GPIOB17_GPIO_PIN_MASK (1U << 17U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_GPIOB17_PORT PORTB                /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_GPIOB17_PIN 17U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_GPIOB17_PIN_MASK (1U << 17U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
+
+/*! @name PORTC9 (number 54), GPIOC9
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_GPIOC9_GPIO GPIOC               /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_GPIOC9_GPIO_PIN_MASK (1U << 9U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_GPIOC9_PORT PORTC               /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_GPIOC9_PIN 9U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_GPIOC9_PIN_MASK (1U << 9U)      /*!<@brief PORT pin mask */
+                                                       /* @} */
+
+/*! @name PORTB18 (number 41), GPIOB18
+  @{ */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_GPIOB18_GPIO GPIOB                /*!<@brief GPIO peripheral base pointer */
+#define BOARD_INITPINS_GPIOB18_INIT_GPIO_VALUE 0U        /*!<@brief GPIO output initial state */
+#define BOARD_INITPINS_GPIOB18_GPIO_PIN_MASK (1U << 18U) /*!<@brief GPIO pin mask */
+
+/* Symbols to be used with PORT driver */
+#define BOARD_INITPINS_GPIOB18_PORT PORTB                /*!<@brief PORT peripheral base pointer */
+#define BOARD_INITPINS_GPIOB18_PIN 18U                   /*!<@brief PORT pin number */
+#define BOARD_INITPINS_GPIOB18_PIN_MASK (1U << 18U)      /*!<@brief PORT pin mask */
+                                                         /* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

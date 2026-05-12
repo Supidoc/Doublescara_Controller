@@ -42,7 +42,7 @@
 #endif
 
 #ifndef FSL_OSA_ALLOCATED_HEAP
-#define FSL_OSA_ALLOCATED_HEAP (1U)
+#define FSL_OSA_ALLOCATED_HEAP (0U)
 #endif
 
 #endif /* _FSL_OS_ABSTRACTION_CONFIG_H_ */

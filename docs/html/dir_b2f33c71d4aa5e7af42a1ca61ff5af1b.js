@@ -14,6 +14,9 @@ var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
     [ "disk.c", "disk_8c.html", "disk_8c" ],
     [ "disk.h", "disk_8h.html", "disk_8h" ],
     [ "ffconf.h", "ffconf_8h.html", "ffconf_8h" ],
+    [ "freertos_heap.c", "freertos__heap_8c.html", null ],
+    [ "grabber.c", "grabber_8c.html", "grabber_8c" ],
+    [ "grabber.h", "grabber_8h.html", "grabber_8h" ],
     [ "log.c", "log_8c.html", "log_8c" ],
     [ "log.h", "log_8h.html", "log_8h" ],
     [ "main.c", "main_8c.html", "main_8c" ],
@@ -26,5 +29,8 @@ var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
     [ "motorCmd.h", "motorCmd_8h.html", "motorCmd_8h" ],
     [ "scara_kinematics.c", "scara__kinematics_8c.html", "scara__kinematics_8c" ],
     [ "scara_kinematics.h", "scara__kinematics_8h.html", "scara__kinematics_8h" ],
+    [ "scara_kinematics_internal.h", "scara__kinematics__internal_8h.html", "scara__kinematics__internal_8h" ],
+    [ "scara_kinematics_process.c", "scara__kinematics__process_8c.html", "scara__kinematics__process_8c" ],
+    [ "scara_kinematics_process.h", "scara__kinematics__process_8h.html", "scara__kinematics__process_8h" ],
     [ "semihost_hardfault.c", "semihost__hardfault_8c.html", "semihost__hardfault_8c" ]
 ];

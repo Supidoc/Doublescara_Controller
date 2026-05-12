@@ -15,6 +15,7 @@ var motor__core_8c =
     [ "MTR_move_revolutions_async", "group__MOTOR__Facade__Module.html#ga0009f234502f98a977e0690ecd2a1200", null ],
     [ "MTR_set_acceleration_async", "group__MOTOR__Facade__Module.html#ga7e937f0ad9ddab717463b17cce655c92", null ],
     [ "MTR_set_hold_current_async", "group__MOTOR__Facade__Module.html#ga3725ec3926b4c3f21e134c5c6260b3b5", null ],
+    [ "MTR_set_home_angle_offset", "group__MOTOR__Facade__Module.html#gaf72251790f984d6b7ffdbb8a00b77206", null ],
     [ "MTR_set_home_position", "group__MOTOR__Facade__Module.html#ga3215be0474c3137b5dcd9793930cb8c8", null ],
     [ "MTR_set_run_current_async", "group__MOTOR__Facade__Module.html#ga1e7513c2f1600d0c3bac4747755fe07b", null ],
     [ "MTR_set_velocity_async", "group__MOTOR__Facade__Module.html#gaa41491a262db51dce2a88bae1129484a", null ],

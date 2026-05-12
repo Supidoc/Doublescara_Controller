@@ -36,249 +36,249 @@
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t*\ \ \ \ tableSize);}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00033}00033\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{create\_accel\_table}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint32\_t\ tableSize,\ uint16\_t\ stepZeroDelay,}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ endVelocityDelay,\ int8\_t*\ poolIndex);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00035}00035\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{calculate\_acceleration\_profile}}(uint16\_t*\ lookupTable,\ uint32\_t\ numSteps,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ stepZeroDelay,\ uint16\_t\ endVelocityDelay);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00037}00037\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(uint32\_t\ tableSize,\ int8\_t*\ poolIndex);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00038}00038\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(int8\_t\ poolIndex);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00039}00039\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00040}00040\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00041}00041\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00042}00042\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00043}00043\ \textcolor{comment}{\ ****************************/}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00044}00044\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00045}\doxymbox{\hyperlink{step__profile_8c_ad680f5e53fc79d312053b987c7c8c4a7}{00045}}\ \doxymbox{\hyperlink{step__profile_8c_ad680f5e53fc79d312053b987c7c8c4a7}{\_\_attribute\_\_}}((}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00046}00046\ \ \ \ \ section(\textcolor{stringliteral}{"{}.accelTables"{}})))\ \doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\_AccelTablePoolItem\_t}}\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[\doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}}];}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00048}00048\ \textcolor{comment}{/*****************************}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00049}00049\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00050}00050\ \textcolor{comment}{\ *****************************/}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00051}00051\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00052}00052\ \textcolor{comment}{/*******************************************}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00053}00053\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00054}00054\ \textcolor{comment}{\ *******************************************/}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00055}00055\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00056}00056\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga83cdd9c971a8f7a2541337e02573deec}{STPi\_plan\_motion\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00057}00057\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00059}00059\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00061}00061\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00062}00062\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00063}00063\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{calculate\_step\_profile}}(handle);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00064}00064\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00065}00065\ \ \ \ \ uint16\_t\ stepZeroDelay;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00066}00066\ \ \ \ \ uint16\_t\ endVelocityDelay;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00067}00067\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{calculate\_delays}}(handle,\ \&stepZeroDelay,\ \&endVelocityDelay);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00068}00068\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00069}00069\ \ \ \ \ uint32\_t\ interpFactor;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00070}00070\ \ \ \ \ uint32\_t\ tableSize;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00071}00071\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{calculate\_acceleration\_table\_parameters}}(handle,\ \&interpFactor,\ \&tableSize);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00072}00072\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00073}00073\ \ \ \ \ int8\_t\ poolIndex;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{create\_accel\_table}}(handle,\ tableSize,\ stepZeroDelay,\ endVelocityDelay,\ \&poolIndex)\ !=}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00076}00076\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00078}00078\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00079}00079\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ Store\ table\ information\ in\ movement\ handle}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00081}00081\ \ \ \ \ handle-\/>movementHandle.accelTablePoolIndex\ =\ poolIndex;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00082}00082\ \ \ \ \ handle-\/>movementHandle.accelTableSize\ \ \ \ \ \ =\ tableSize;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00083}00083\ \ \ \ \ handle-\/>movementHandle.accelInterpFactor\ \ \ =\ (uint16\_t)interpFactor;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00084}00084\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00085}00085\ \ \ \ \ handle-\/>movementHandle.currStepCount\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00086}00086\ \ \ \ \ handle-\/>movementHandle.state\ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{STP\_MOVEMENT\_PLANNED}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00087}00087\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(handle)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00089}00089\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00091}00091\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00092}00092\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>movementHandle.isTrapezoidal)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00095}00095\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\%s]\ Motion\ planned:\ trapezoidal\ (accel:\%lu\ const:\%lu\ decel:\%lu)"{}},\ handle-\/>label,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>movementHandle.accelSteps,\ handle-\/>movementHandle.endVelocitySteps,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>movementHandle.decelSteps);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00100}00100\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00102}00102\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Motion\ planned:\ triangular\ (accel:\%lu\ decel:\%lu)"{}},}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>label,\ handle-\/>movementHandle.accelSteps,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>movementHandle.decelSteps);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00106}00106\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00107}00107\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00109}00109\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00110}00110\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00111}\doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga90fc75d2b2852850e53abf076fc5c475}{00111}}\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga90fc75d2b2852850e53abf076fc5c475}{STPi\_reset\_movement\_handle}}(\doxymbox{\hyperlink{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead}{STP\_StepperMovement\_t}}*\ handle)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00112}00112\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00113}00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00114}00114\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00116}00116\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00117}00117\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//\ Free\ lookup\ table\ back\ to\ pool\ if\ allocated}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}}\ >=\ 0)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00120}00120\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}});}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}}\ =\ -\/1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00123}00123\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00124}00124\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00125}00125\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73cf227c208ac81a57b21f0d4daffbd7}{state}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{STP\_MOVEMENT\_IDLE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00126}00126\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00127}00127\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00128}00128\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00129}00129\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00130}00130\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\_CLOCKWISE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00131}00131\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00132}00132\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ad69fb7cb6bd981532024403529238f18}{currStepCount}}\ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00133}00133\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a839988503e15f6d028d4cea673f3af3f}{phaseStepCount}}\ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00134}00134\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa089e6043c5ebdbd85246fc94de81c25}{endVelocityDelay}}\ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00135}00135\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ac676c1214c1434c8399dceeb6a426caa}{accelTableSize}}\ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00136}00136\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa14d82a0a0dded9f45a544694df6209f}{accelInterpFactor}}\ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00137}00137\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a8519e61cb6d2a3ace41af674981f46ad}{accelInterpCounter}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00138}00138\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a23ccd9c01d7c23dbba03693986bb39bb}{accelTableIndex}}\ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00139}00139\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a680f84a40f0962a20f3ac2fa649a5678}{waitForStart}}\ \ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00140}00140\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ad2b7aa91ed1bd597b6be697054514f55}{cmdHandle}}\ \ \ \ \ \ \ \ \ \ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00142}00142\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00143}00143\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00144}00144\ \textcolor{comment}{/********************************************}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00145}00145\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00146}00146\ \textcolor{comment}{\ ********************************************/}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00147}00147\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00148}\doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{00148}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{calculate\_step\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00149}00149\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00150}00150\ \ \ \ \ uint32\_t\ accelSteps\ =}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ (uint32\_t)((handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}}\ *\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}})\ /\ (2\ *\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a003cfcc6455092597210abfc2d338d9a}{acceleration}}));}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00152}00152\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00153}00153\ \ \ \ \ \textcolor{keywordflow}{if}\ (accelSteps\ *\ 2\ >=\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}})}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00154}00154\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00155}00155\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00157}00157\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ /\ 2;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00159}00159\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ =}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ -\/\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00162}00162\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00164}00164\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00165}00165\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00166}00166\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00167}00167\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ =\ 1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00169}00169\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ =\ accelSteps;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ =\ accelSteps;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00172}00172\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ =}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ -\/\ 2\ *\ accelSteps;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00175}00175\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00176}00176\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00177}00177\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00178}\doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{00178}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{calculate\_delays}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint16\_t*\ stepZeroDelay,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t*\ endVelocityDelay)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00180}00180\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00181}00181\ \ \ \ \ *stepZeroDelay\ =\ (uint16\_t)(0.676\ *\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}{STP\_TIMER\_FREQ\_HZ}}\ *\ sqrt(2.0\ /\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a003cfcc6455092597210abfc2d338d9a}{acceleration}})));}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00182}00182\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00183}00183\ \ \ \ \ *endVelocityDelay\ =\ (uint16\_t)(\doxymbox{\hyperlink{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}{STP\_TIMER\_FREQ\_HZ}}\ /\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}}));}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00184}00184\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00185}00185\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa089e6043c5ebdbd85246fc94de81c25}{endVelocityDelay}}\ =\ *endVelocityDelay;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00186}00186\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00187}00187\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00188}\doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{00188}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{calculate\_acceleration\_table\_parameters}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t*\ \ \ \ interpFactor,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t*\ \ \ \ tableSize)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00191}00191\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00192}00192\ \ \ \ \ *interpFactor\ =\ \doxymbox{\hyperlink{step__shared_8h_a133eba57e315066431ed1579c9689ea0}{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00193}00193\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00194}00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (*interpFactor\ <\ 1)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00195}00195\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ *interpFactor\ =\ 1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00197}00197\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00198}00198\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ >\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}\ *\ (*interpFactor))}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00200}00200\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ *interpFactor\ =\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ +\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}\ -\/\ 1)\ /}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00203}00203\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00204}00204\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00205}00205\ \ \ \ \ *tableSize\ =\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ +\ *interpFactor\ -\/\ 1)\ /\ *interpFactor;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00206}00206\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordflow}{if}\ (*tableSize\ >\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}})}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00208}00208\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ *tableSize\ =\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00210}00210\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00211}00211\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00212}00212\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00213}\doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{00213}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{create\_accel\_table}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint32\_t\ tableSize,\ uint16\_t\ stepZeroDelay,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ endVelocityDelay,\ int8\_t*\ poolIndex)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00215}00215\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00216}00216\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00217}00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ poolIndex\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00218}00218\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00220}00220\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00221}00221\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00222}00222\ \ \ \ \ status\_t\ status;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00223}00223\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00224}00224\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(tableSize,\ poolIndex);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00225}00225\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00227}00227\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00229}00229\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{if}\ (tableSize\ >\ 0)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00232}00232\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{step__profile_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{calculate\_acceleration\_profile}}(\doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[*poolIndex].table,\ tableSize,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stepZeroDelay,\ endVelocityDelay);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00235}00235\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(*poolIndex);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00241}00241\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00242}00242\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00243}00243\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00244}00244\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00245}00245\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00246}\doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{00246}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(uint32\_t\ tableSize,\ int8\_t*\ poolIndex)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00247}00247\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{if}\ (poolIndex\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00249}00249\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00251}00251\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00252}00252\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00253}00253\ \ \ \ \ \textcolor{keywordflow}{for}\ (int8\_t\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}};\ i++)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00254}00254\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].used\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00256}00256\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].used\ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].tableSize\ =\ tableSize;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ *poolIndex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ i;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00262}00262\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00263}00263\ \ \ \ \ *poolIndex\ =\ -\/1;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \textcolor{comment}{//\ No\ free\ table\ available}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00265}00265\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00266}00266\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00267}\doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{00267}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(int8\_t\ poolIndex)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00268}00268\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{if}\ (poolIndex\ >=\ 0\ \&\&\ poolIndex\ <\ \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}})}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00270}00270\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[poolIndex].used\ \ \ \ \ \ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[poolIndex].tableSize\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00273}00273\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00274}00274\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00275}00275\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00276}\doxymbox{\hyperlink{step__profile_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{00276}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a2d08a460c866d6442e4a3d5a57cd97a5}{calculate\_acceleration\_profile}}(uint16\_t*\ lookupTable,\ uint32\_t\ numSteps,}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ stepZeroDelay,\ uint16\_t\ endVelocityDelay)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00035}00035\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a2bc1a40f47b58a989f0aa83309577c22}{calculate\_acceleration\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint16\_t*\ lookupTable,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ numSteps,\ uint16\_t\ stepZeroDelay,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ endVelocityDelay);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00038}00038\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(uint32\_t\ tableSize,\ int8\_t*\ poolIndex);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00039}00039\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(int8\_t\ poolIndex);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00040}00040\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00042}00042\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00043}00043\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00044}00044\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00045}\doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{00045}}\ \doxymbox{\hyperlink{group__STEPPER__Internal_gaa30dbdeec091aaf82af82e7410e3bf2c}{STP\_AccelTablePoolItem\_t}}\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[\doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}}];}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00047}00047\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00048}00048\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00049}00049\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00051}00051\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00052}00052\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00053}00053\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00055}\doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga83cdd9c971a8f7a2541337e02573deec}{00055}}\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga83cdd9c971a8f7a2541337e02573deec}{STPi\_plan\_motion\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00058}00058\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00062}00062\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{calculate\_step\_profile}}(handle);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00064}00064\ \ \ \ \ uint16\_t\ stepZeroDelay;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00065}00065\ \ \ \ \ uint16\_t\ endVelocityDelay;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00066}00066\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{calculate\_delays}}(handle,\ \&stepZeroDelay,\ \&endVelocityDelay);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00068}00068\ \ \ \ \ uint32\_t\ interpFactor;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00069}00069\ \ \ \ \ uint32\_t\ tableSize;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00070}00070\ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{calculate\_acceleration\_table\_parameters}}(handle,\ \&interpFactor,\ \&tableSize);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00072}00072\ \ \ \ \ int8\_t\ poolIndex;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{create\_accel\_table}}(handle,\ tableSize,\ stepZeroDelay,\ endVelocityDelay,\ \&poolIndex)\ !=}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00079}00079\ \ \ \ \ \textcolor{comment}{//\ Store\ table\ information\ in\ movement\ handle}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00080}00080\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}}\ =\ poolIndex;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00081}00081\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ac676c1214c1434c8399dceeb6a426caa}{accelTableSize}}\ \ \ \ \ \ =\ tableSize;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00082}00082\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa14d82a0a0dded9f45a544694df6209f}{accelInterpFactor}}\ \ \ =\ (uint16\_t)interpFactor;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00084}00084\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ad69fb7cb6bd981532024403529238f18}{currStepCount}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00085}00085\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a73cf227c208ac81a57b21f0d4daffbd7}{state}}\ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a043c17f071cac123a01abe10d5402a80}{STP\_MOVEMENT\_PLANNED}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(handle)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}})}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\%s]\ Motion\ planned:\ trapezoidal\ (accel:\%lu\ const:\%lu\ decel:\%lu)"{}},\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a4f1793d27c228149d7964185f08eb2f4}{label}},}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}},\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}},}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}});}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00101}00101\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Motion\ planned:\ triangular\ (accel:\%lu\ decel:\%lu)"{}},}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a4f1793d27c228149d7964185f08eb2f4}{label}},\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}},}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}});}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00105}00105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00106}00106\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00108}00108\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00110}\doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga90fc75d2b2852850e53abf076fc5c475}{00110}}\ status\_t\ \doxymbox{\hyperlink{group__STEPPER__Profile__Internal_ga90fc75d2b2852850e53abf076fc5c475}{STPi\_reset\_movement\_handle}}(\doxymbox{\hyperlink{group__STEPPER__Internal_gac52d87d35d26abf504574cc9206ecead}{STP\_StepperMovement\_t}}*\ handle)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00111}00111\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00117}00117\ \ \ \ \ \textcolor{comment}{//\ Free\ lookup\ table\ back\ to\ pool\ if\ allocated}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}}\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00119}00119\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}});}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73829dc500b931538679afc38579dcf3}{accelTablePoolIndex}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00124}00124\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a73cf227c208ac81a57b21f0d4daffbd7}{state}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92a1fc98f3e8c974beaa74cc752d25f08c7}{STP\_MOVEMENT\_IDLE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00125}00125\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00126}00126\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00127}00127\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00128}00128\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ \ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00129}00129\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\_CLOCKWISE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00130}00130\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00131}00131\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ad69fb7cb6bd981532024403529238f18}{currStepCount}}\ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00132}00132\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a839988503e15f6d028d4cea673f3af3f}{phaseStepCount}}\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00133}00133\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa089e6043c5ebdbd85246fc94de81c25}{endVelocityDelay}}\ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00134}00134\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ac676c1214c1434c8399dceeb6a426caa}{accelTableSize}}\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00135}00135\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_aa14d82a0a0dded9f45a544694df6209f}{accelInterpFactor}}\ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00136}00136\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a8519e61cb6d2a3ace41af674981f46ad}{accelInterpCounter}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00137}00137\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a23ccd9c01d7c23dbba03693986bb39bb}{accelTableIndex}}\ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00138}00138\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_a680f84a40f0962a20f3ac2fa649a5678}{waitForStart}}\ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00139}00139\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperMovement_ad2b7aa91ed1bd597b6be697054514f55}{cmdHandle}}\ \ \ \ \ \ \ \ \ \ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00140}00140\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00141}00141\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00143}00143\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00144}00144\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00145}00145\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00147}\doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{00147}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a23936a7816b4f883b70bf25212345ec3}{calculate\_step\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00148}00148\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00149}00149\ \ \ \ \ uint32\_t\ accelSteps\ =}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ (uint32\_t)((handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}}\ *\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}})\ /\ (2\ *\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a003cfcc6455092597210abfc2d338d9a}{acceleration}}));}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{if}\ (accelSteps\ *\ 2\ >=\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}})}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00153}00153\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ =}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ -\/\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00163}00163\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00165}00165\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_adecd727efe98ce6dc2ffaa2ad7e76077}{isTrapezoidal}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ =\ accelSteps;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aff9fe9df5be329dec0eebc19b40f6c61}{decelSteps}}\ =\ accelSteps;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a22bdf8ba2e9f0974feca09b5437128fa}{endVelocitySteps}}\ =}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_a58a2e9dfd8a9499ce2a454988d1666ce}{totalSteps}}\ -\/\ 2\ *\ accelSteps;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00175}00175\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00177}\doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{00177}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a012866f418e6967b0eaa5034181b7b55}{calculate\_delays}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint16\_t*\ stepZeroDelay,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t*\ endVelocityDelay)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00179}00179\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00180}00180\ \ \ \ \ *stepZeroDelay\ =\ (uint16\_t)(0.676\ *\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}{STP\_TIMER\_FREQ\_HZ}}\ *\ sqrt(2.0\ /\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a003cfcc6455092597210abfc2d338d9a}{acceleration}})));}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00182}00182\ \ \ \ \ *endVelocityDelay\ =\ (uint16\_t)(\doxymbox{\hyperlink{group__STEPPER__Internal_ga742a42dd11153d9548874c6a2aa654a0}{STP\_TIMER\_FREQ\_HZ}}\ /\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_acc920b9c599496e838ade85d36dcca0b}{endVelocity}}));}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00184}00184\ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa089e6043c5ebdbd85246fc94de81c25}{endVelocityDelay}}\ =\ *endVelocityDelay;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00185}00185\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00187}\doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{00187}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_a5348de51178f0f8ebf2b46b808d8be8a}{calculate\_acceleration\_table\_parameters}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t*\ \ \ \ interpFactor,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t*\ \ \ \ tableSize)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00190}00190\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00191}00191\ \ \ \ \ *interpFactor\ =\ \doxymbox{\hyperlink{step__shared_8h_a133eba57e315066431ed1579c9689ea0}{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{if}\ (*interpFactor\ <\ 1)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00194}00194\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ *interpFactor\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00198}00198\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ >\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}\ *\ (*interpFactor))}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ *interpFactor\ =\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ +\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}}\ -\/\ 1)\ /}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00202}00202\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00204}00204\ \ \ \ \ *tableSize\ =\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_ab230139f478faaf9a9549807b7a8c2aa}{accelSteps}}\ +\ *interpFactor\ -\/\ 1)\ /\ *interpFactor;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{if}\ (*tableSize\ >\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}})}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00207}00207\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ *tableSize\ =\ \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\_MAX\_ACCEL\_TABLE\_SIZE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00210}00210\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00212}\doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{00212}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aef71ea66299390c4c59ba15393955dba}{create\_accel\_table}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint32\_t\ tableSize,\ uint16\_t\ stepZeroDelay,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ endVelocityDelay,\ int8\_t*\ poolIndex)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00214}00214\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00216}00216\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ poolIndex\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00217}00217\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00219}00219\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00221}00221\ \ \ \ \ status\_t\ status;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00223}00223\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(tableSize,\ poolIndex);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00226}00226\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{if}\ (tableSize\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00231}00231\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{step__profile_8c_a2bc1a40f47b58a989f0aa83309577c22}{calculate\_acceleration\_profile}}(handle,\ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[*poolIndex].table,\ tableSize,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stepZeroDelay,\ endVelocityDelay);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(*poolIndex);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00240}00240\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00243}00243\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00245}\doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{00245}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a47a18d328f3e0085135f6b5a74bc7255}{allocate\_accel\_table}}(uint32\_t\ tableSize,\ int8\_t*\ poolIndex)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00246}00246\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{if}\ (poolIndex\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00248}00248\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00250}00250\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{for}\ (int8\_t\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}};\ i++)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00253}00253\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].used\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00255}00255\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].used\ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[i].tableSize\ =\ tableSize;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ *poolIndex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ i;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00261}00261\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00262}00262\ \ \ \ \ *poolIndex\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00263}00263\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \textcolor{comment}{//\ No\ free\ table\ available}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00264}00264\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00266}\doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{00266}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{step__profile_8c_ae09089881e135a335d2f5b9a30ce381f}{free\_accel\_table}}(int8\_t\ poolIndex)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00267}00267\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00268}00268\ \ \ \ \ \textcolor{keywordflow}{if}\ (poolIndex\ >=\ 0\ \&\&\ poolIndex\ <\ \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\_ACCEL\_TABLE\_POOL\_SIZE}})}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00269}00269\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[poolIndex].used\ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Internal_ga1d158ecf1936b775fdaf7688f2135161}{accelTablePool}}[poolIndex].tableSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00272}00272\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00273}00273\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00275}\doxymbox{\hyperlink{step__profile_8c_a2bc1a40f47b58a989f0aa83309577c22}{00275}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_a2bc1a40f47b58a989f0aa83309577c22}{calculate\_acceleration\_profile}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle,\ uint16\_t*\ lookupTable,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ numSteps,\ uint16\_t\ stepZeroDelay,}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ endVelocityDelay)}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00278}00278\ \{}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00279}00279\ \ \ \ \ \textcolor{keywordflow}{if}\ (lookupTable\ ==\ NULL\ ||\ numSteps\ ==\ 0)}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00280}00280\ \ \ \ \ \{}
@@ -297,38 +297,41 @@
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00293}00293\ }
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ next\ delay:\ c\_n\ =\ c\_(n-\/1)\ -\/\ 2*c\_(n-\/1)\ /\ (4*n\ +\ 1)}}
 \DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Using\ fixed-\/point\ arithmetic\ to\ maintain\ fractional\ precision}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ uint32\_t\ nextDelay\ =\ currentDelay\ -\/\ (2\ *\ currentDelay\ /\ (4\ *\ n\ +\ 1));}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00297}00297\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clamp\ to\ minimum\ delay\ (end\ velocity)}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nextDelay\ <\ minDelay)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ nextDelay\ =\ minDelay;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ currentDelay\ =\ nextDelay;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00305}00305\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00306}00306\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00307}00307\ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00308}00308\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00309}\doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{00309}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00310}00310\ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00311}00311\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00312}00312\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00314}00314\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00315}00315\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00316}00316\ \ \ \ \ uint8\_t\ pinValue;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_abe253cde14a6c0ce66be5aab9a331175}{dirLogicHighClockwise}})}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00318}00318\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ pinValue\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ ==\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\_CLOCKWISE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00320}00320\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00321}00321\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00322}00322\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ pinValue\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ ==\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{STP\_COUNTERCLOCKWISE}};}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00324}00324\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00325}00325\ \ \ \ \ \doxymbox{\hyperlink{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}{PCA\_Write\_Pin}}(handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a38133068a80a6cd91ffeca6c0d945d88}{dirPort}},\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a4a6397fbf4aacc1002744577cbe3ed11}{dirPin}},\ pinValue);}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00326}00326\ }
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00327}00327\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00328}00328\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ i\ =\ 0;\ i\ <\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa14d82a0a0dded9f45a544694df6209f}{accelInterpFactor}};\ i++)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00297}00297\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ nextDelay\ =\ currentDelay\ -\/\ (2\ *\ currentDelay\ /\ (4\ *\ n\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clamp\ to\ minimum\ delay\ (end\ velocity)}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nextDelay\ <\ minDelay)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nextDelay\ =\ minDelay;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ currentDelay\ =\ nextDelay;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00307}00307\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00308}00308\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00309}00309\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00310}00310\ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00312}\doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{00312}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{step__profile_8c_aa903c1cb5703b8d75214d06d4b3573d4}{set\_direction\_pin}}(\doxymbox{\hyperlink{step__shared_8h_ab298b84346872720a60ab557d80f47ba}{STP\_Handle\_t}}\ handle)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00313}00313\ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00314}00314\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00315}00315\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00317}00317\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00319}00319\ \ \ \ \ uint8\_t\ pinValue;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_abe253cde14a6c0ce66be5aab9a331175}{dirLogicHighClockwise}})}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00321}00321\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ pinValue\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ ==\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6ada140f0eeaf71ca503b9c28d9e363812}{STP\_CLOCKWISE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00323}00323\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00324}00324\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00325}00325\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ pinValue\ =\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_ac1af5b074acd1b63448177499edfe120}{movementHandle}}.\doxymbox{\hyperlink{struct__STP__StepperMovement_aa73a99c554b5e0c424990e907a8ca866}{direction}}\ ==\ \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6aec88a1e8286ab764873a4ebaeebd1b54}{STP\_COUNTERCLOCKWISE}};}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00328}00328\ \ \ \ \ \doxymbox{\hyperlink{group__PCA9555A_ga3fc889a3accdd9ab3002b2218ac3aa4a}{PCA\_Write\_Pin}}(handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a38133068a80a6cd91ffeca6c0d945d88}{dirPort}},\ handle-\/>\doxymbox{\hyperlink{struct__STP__StepperHandleImpl_a4a6397fbf4aacc1002744577cbe3ed11}{dirPin}},\ pinValue);}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00330}00330\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{step__profile_8c_source_l00331}00331\ \}}
 
 \end{DoxyCode}

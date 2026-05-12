@@ -1,0 +1,35 @@
+var scara__kinematics__internal_8h =
+[
+    [ "_SK_SetTransformData", "struct__SK__SetTransformData.html", "struct__SK__SetTransformData" ],
+    [ "_SK_SetWorkspaceLimitsData", "struct__SK__SetWorkspaceLimitsData.html", "struct__SK__SetWorkspaceLimitsData" ],
+    [ "_SK_EnableWorkspaceLimitsData", "struct__SK__EnableWorkspaceLimitsData.html", "struct__SK__EnableWorkspaceLimitsData" ],
+    [ "_SK_SetOriginOffsetData", "struct__SK__SetOriginOffsetData.html", "struct__SK__SetOriginOffsetData" ],
+    [ "_SK_MoveToXYData", "struct__SK__MoveToXYData.html", "struct__SK__MoveToXYData" ],
+    [ "_SK_HomeData", "struct__SK__HomeData.html", "struct__SK__HomeData" ],
+    [ "_SK_CmdQueueItem", "struct__SK__CmdQueueItem.html", "struct__SK__CmdQueueItem" ],
+    [ "SK_CMD_QUEUE_SIZE", "scara__kinematics__internal_8h.html#aec13d6c029204a3431bc55a7a0f83028", null ],
+    [ "SK_MAX_CMD_HANDLE_COUNT", "scara__kinematics__internal_8h.html#a26fbe4c05ac3807c42d25abc002b1a81", null ],
+    [ "SK_CmdQueueItem_t", "scara__kinematics__internal_8h.html#a11ff5d4341c3f5451a99b97d1d632923", null ],
+    [ "SK_CmdType_t", "scara__kinematics__internal_8h.html#aa24854b0a9af382a72e47105931608fd", null ],
+    [ "SK_EnableWorkspaceLimitsData_t", "scara__kinematics__internal_8h.html#af76c19019c53ec9d86ad3a5ec43f558c", null ],
+    [ "SK_HomeData_t", "scara__kinematics__internal_8h.html#ad93d4fa5159caf498e40fd3182a41557", null ],
+    [ "SK_MoveToXYData_t", "scara__kinematics__internal_8h.html#ae87547924d705a5e9e88ba0c285f1ad5", null ],
+    [ "SK_SetOriginOffsetData_t", "scara__kinematics__internal_8h.html#a1d5a6c196a3b912f73fcf59cb3101cc3", null ],
+    [ "SK_SetTransformData_t", "scara__kinematics__internal_8h.html#a9cc16b0ddb88b011adc228a3ddd9bdc6", null ],
+    [ "SK_SetWorkspaceLimitsData_t", "scara__kinematics__internal_8h.html#a5b60d822120a5eb190b99ff7c9bb424f", null ],
+    [ "_SK_CmdType", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0", [
+      [ "SK_CMD_SET_TRANSFORM", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0aa8fed31247a3a01887e7a1483f0bab90", null ],
+      [ "SK_CMD_SET_WORKSPACE_LIMITS", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0a5e1a957886b1edabca29a72e771939ea", null ],
+      [ "SK_CMD_ENABLE_WORKSPACE_LIMITS", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0a31e6785814bcbae588cebb669755eaa1", null ],
+      [ "SK_CMD_SET_ORIGIN_OFFSET", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0a73444a9161a033168b057192f5cab688", null ],
+      [ "SK_CMD_CHANGE_SIDE", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0a5c6640113db940a947e7976c76caec6c", null ],
+      [ "SK_CMD_MOVE_TO_XY", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0aca5a926e0e1eeff9d0245c02850423a7", null ],
+      [ "SK_CMD_HOME", "scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0a33b2f5ede8541f98064e41e1ff8b7d14", null ]
+    ] ],
+    [ "skCmdHandles", "scara__kinematics__internal_8h.html#af981e9fb9c6248dcbaf92b28fd22537f", null ],
+    [ "skCmdQueue", "scara__kinematics__internal_8h.html#ac44c8ce3c505cdee6c937b9a6488bf08", null ],
+    [ "skLeftMotorHandle", "scara__kinematics__internal_8h.html#a65dc1acdca57aa1008e065d03ffcc398", null ],
+    [ "skRightMotorHandle", "scara__kinematics__internal_8h.html#ab9834d208499b205c4043db44e73bbc8", null ],
+    [ "skState", "scara__kinematics__internal_8h.html#ae7dc8df29a03951f11e6cad2e418a666", null ],
+    [ "skZetaMotorHandle", "scara__kinematics__internal_8h.html#abea7e0c172c1c9e4266d5a320dc3ce35", null ]
+];

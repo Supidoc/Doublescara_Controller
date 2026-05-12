@@ -4,7 +4,7 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ cli.h}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Module\ for\ an\ interactive\ CLI\ over\ UART}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Module\ for\ an\ interactive\ CLI\ over\ UART.}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00005}00005\ \textcolor{comment}{\ *\ This\ module\ provides\ an\ interactive\ Command\ Line\ Interface\ (CLI)\ over\ UART.}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00006}00006\ \textcolor{comment}{\ *\ It\ allows\ users\ to\ execute\ commands,\ retrieve\ system\ information,\ and\ interact}}
@@ -20,44 +20,53 @@
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifndef\ CLI\_H\_}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00022}00022\ \textcolor{preprocessor}{\#define\ CLI\_H\_}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00023}00023\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00024}00024\ \textcolor{comment}{/********************}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00025}00025\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00026}00026\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00028}00028\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00030}00030\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00031}00031\ \textcolor{comment}{/***********************************}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00032}00032\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00033}00033\ \textcolor{comment}{\ ***********************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00034}00034\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00038}\doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{00038}}\ \textcolor{preprocessor}{\#define\ CLI\_MAX\_INPUT\_LENGTH\ 200}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00024}00024\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00025}00025\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00027}00027\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00029}00029\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00030}00030\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00031}00031\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00036}00036\ \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00037}00037\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Macros\ /\ Defines\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00038}00038\ \textcolor{comment}{\ ***********************************/}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00039}00039\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00043}\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{00043}}\ \textcolor{preprocessor}{\#define\ CLI\_MAX\_OUTPUT\_LENGTH\ 300}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00043}\doxymbox{\hyperlink{group__CLI__Module_gaa717e0c0616c6bd5f138c20d51e472d1}{00043}}\ \textcolor{preprocessor}{\#define\ CLI\_MAX\_INPUT\_LENGTH\ 200}}
 \DoxyCodeLine{\Hypertarget{cli_8h_source_l00044}00044\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00045}\doxymbox{\hyperlink{group__CLI__Module_gaa114455df5fb9fc866e640d1709e75ed}{00045}}\ \textcolor{preprocessor}{\#define\ CLI\_SHOW\_COMMAND\_INPUT\ 1}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00047}\doxymbox{\hyperlink{group__CLI__Module_gac06ccbc6d66238f1d787987165627ed8}{00047}}\ \textcolor{preprocessor}{\#define\ CLI\_USE\_RTT\ 1}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00048}00048\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00049}00049\ \textcolor{comment}{/***************************}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00050}00050\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00051}00051\ \textcolor{comment}{\ ***************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00052}00052\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00053}00053\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00054}00054\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00055}00055\ \textcolor{comment}{\ ****************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00057}00057\ \textcolor{comment}{/**************************************}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00058}00058\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00059}00059\ \textcolor{comment}{\ **************************************/}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00060}00060\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00077}00077\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{CLI\_init}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00078}00078\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00096}00096\ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\textcolor{keyword}{const}\ CLI\_Command\_Definition\_t*\ pxCommandToRegister);}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00097}00097\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00113}00113\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{CLI\_task}}(\textcolor{keywordtype}{void}*\ pvParameters);}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00114}00114\ \ \textcolor{comment}{//\ End\ of\ CLI\_Module}}
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00116}00116\ }
-\DoxyCodeLine{\Hypertarget{cli_8h_source_l00117}00117\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CLI\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00048}\doxymbox{\hyperlink{group__CLI__Module_gacb88beab1215559351e794b21e315541}{00048}}\ \textcolor{preprocessor}{\#define\ CLI\_MAX\_OUTPUT\_LENGTH\ 300}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00050}\doxymbox{\hyperlink{group__CLI__Module_gaa114455df5fb9fc866e640d1709e75ed}{00050}}\ \textcolor{preprocessor}{\#define\ CLI\_SHOW\_COMMAND\_INPUT\ 1}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00053}\doxymbox{\hyperlink{group__CLI__Module_gac06ccbc6d66238f1d787987165627ed8}{00053}}\ \textcolor{preprocessor}{\#define\ CLI\_USE\_RTT\ 1}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ \ /***************************}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ \ \ ***************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ \ /****************************}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ \ \ ****************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ \ /**************************************}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ Public\ Function\ Prototypes\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ \ \ **************************************/}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00083}00083\ \ \ \ \ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga1ace59bd0e61934e6e55bfeb18568df2}{CLI\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00102}00102\ \ \ \ \ status\_t\ \doxymbox{\hyperlink{group__CLI__Module_ga6ad50d71751bda9225ecf7af49516526}{CLI\_register\_command}}(\textcolor{keyword}{const}\ CLI\_Command\_Definition\_t*\ pxCommandToRegister);}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00119}00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__CLI__Module_ga9713ef95d1c385223d7dbdd275342fb6}{CLI\_task}}(\textcolor{keywordtype}{void}*\ pvParameters);}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00121}00121\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00122}00122\ \}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00123}00123\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{cli_8h_source_l00127}00127\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CLI\_H\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

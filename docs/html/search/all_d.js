@@ -44,9 +44,10 @@ var searchData=
   ['phasestepcount_41',['phaseStepCount',['../struct__STP__StepperMovement.html#a839988503e15f6d028d4cea673f3af3f',1,'_STP_StepperMovement']]],
   ['pindirection_42',['pinDirection',['../struct__PCA__Pin__Config.html#ae632ef3afae76532a6d42f020c7e76a2',1,'_PCA_Pin_Config']]],
   ['polarityinversion_43',['polarityInversion',['../struct__PCA__Pin__Config.html#a1a3d8967b590c8ca632f3db14de54e03',1,'_PCA_Pin_Config']]],
-  ['prepare_5fsynchronized_5fmovements_44',['prepare_synchronized_movements',['../motor__sync_8c.html#a96c38876f5ce418349fb1d57a52252b5',1,'motor_sync.c']]],
-  ['previousholdcurrent_45',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]],
-  ['process_46',['process',['../cli_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;cli.c'],['../log_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;log.c']]],
-  ['process_20internal_47',['Process Internal',['../group__MOTOR__Process__Internal.html',1,'Motor Process Internal'],['../group__STEPPER__Process__Internal.html',1,'Stepper Process Internal'],['../group__TMC2209__Process__Internal.html',1,'TMC2209 Process Internal']]],
-  ['profile_20internal_48',['Stepper Profile Internal',['../group__STEPPER__Profile__Internal.html',1,'']]]
+  ['pose_44',['pose',['../struct__SK__State.html#a0382f74bd34e0785a77e03c74290b994',1,'_SK_State']]],
+  ['prepare_5fsynchronized_5fmovements_45',['prepare_synchronized_movements',['../motor__sync_8c.html#a96c38876f5ce418349fb1d57a52252b5',1,'motor_sync.c']]],
+  ['previousholdcurrent_46',['previousHoldCurrent',['../struct__MTR__MotorHandleImpl.html#ab90efdf6465034866b33110ace0c9a4e',1,'_MTR_MotorHandleImpl']]],
+  ['process_47',['process',['../cli_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;cli.c'],['../log_8c.html#a6ef0387bd645347b1a61efc620315993',1,'process(void):&#160;log.c']]],
+  ['process_20internal_48',['Process Internal',['../group__MOTOR__Process__Internal.html',1,'Motor Process Internal'],['../group__STEPPER__Process__Internal.html',1,'Stepper Process Internal'],['../group__TMC2209__Process__Internal.html',1,'TMC2209 Process Internal']]],
+  ['profile_20internal_49',['Stepper Profile Internal',['../group__STEPPER__Profile__Internal.html',1,'']]]
 ];

@@ -73,12 +73,14 @@ status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint
     if (calculate_sync_motion_parameters(handles, angles, count, stepCounts, originalVelocities,
                                          &maxDuration) != kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Failed to calculate sync motion parameters");
         return kStatus_Fail;
     }
 
     if (scale_velocities_for_synchronization(handles, count, stepCounts, originalVelocities,
                                              maxDuration, deadline) != kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Failed to scale velocities for synchronization");
         return kStatus_Fail;
     }
 
@@ -89,18 +91,40 @@ status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint
     if (prepare_synchronized_movements(handles, count, stepCounts, originalVelocities, deadline) !=
         kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Failed to prepare synchronized movements");
         return kStatus_Fail;
+    }
+
+    // Log state of each motor before triggering batch start
+    for (uint8_t i = 0; i < count; i++)
+    {
+        if (handles[i] && handles[i]->stepperHandle)
+        {
+            STP_MovementState_t st;
+            if (STP_get_movement_state(handles[i]->stepperHandle, &st) == kStatus_Success)
+            {
+                snprintf(logMsg, sizeof(logMsg), "[SYNC] Motor %u: state=%d", i, st);
+                LOG_DEBUG(logMsg);
+            }
+            else
+            {
+                snprintf(logMsg, sizeof(logMsg), "[SYNC] Motor %u: failed to get state", i);
+                LOG_ERROR(logMsg);
+            }
+        }
     }
 
     CHD_CmdHandle_t triggerCmdHandle = NULL;
     status_t        triggerResult = STP_trigger_prepared_moves_async(deadline, &triggerCmdHandle);
     if (triggerResult != kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Failed to trigger prepared moves");
         restore_original_velocities(handles, count, originalVelocities, deadline);
         return kStatus_Fail;
     }
     if (wait_for_cmd_handle(triggerCmdHandle, deadline) != kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Trigger wait_for_cmd_handle failed");
         restore_original_velocities(handles, count, originalVelocities, deadline);
         return kStatus_Fail;
     }
@@ -108,6 +132,7 @@ status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint
     if (restore_original_velocities(handles, count, originalVelocities, deadline) !=
         kStatus_Success)
     {
+        LOG_ERROR("[SYNC] Failed to restore original velocities");
         return kStatus_Fail;
     }
 

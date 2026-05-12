@@ -92,7 +92,8 @@ $(function(){initNavTree('step__shared_8h.html','',''); });
   <div class="headertitle"><div class="title">step_shared.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="pca9555a_8h_source.html">driver/pca9555a/pca9555a.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="pca9555a_8h_source.html">driver/pca9555a/pca9555a.h</a>&gt;</code><br />
 <code>#include &quot;fsl_device_registers.h&quot;</code><br />
 <code>#include &quot;fsl_common.h&quot;</code><br />
 <code>#include &quot;fsl_ftm.h&quot;</code><br />
@@ -123,9 +124,10 @@ Macros</h2></td></tr>
 <tr class="memitem:a3a6692a2c857999da7316ed7e2df506a" id="r_a3a6692a2c857999da7316ed7e2df506a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3a6692a2c857999da7316ed7e2df506a">STP_CMD_QUEUE_SIZE</a>&#160;&#160;&#160;20</td></tr>
 <tr class="memdesc:a3a6692a2c857999da7316ed7e2df506a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the command queue.  <br /></td></tr>
 <tr class="memitem:acbe06552fb5a8ede3d392c2185fb0d75" id="r_acbe06552fb5a8ede3d392c2185fb0d75"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#acbe06552fb5a8ede3d392c2185fb0d75">STP_MAX_CMD_HANDLE_COUNT</a>&#160;&#160;&#160;30</td></tr>
+<tr class="memdesc:acbe06552fb5a8ede3d392c2185fb0d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of stepper command handles available.  <br /></td></tr>
 <tr class="memitem:a96f4722e4d8b689802ad458a51537825" id="r_a96f4722e4d8b689802ad458a51537825"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a96f4722e4d8b689802ad458a51537825">STP_MAX_ACCEL_TABLE_SIZE</a>&#160;&#160;&#160;1000</td></tr>
 <tr class="memdesc:a96f4722e4d8b689802ad458a51537825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of steps in the acceleration/deceleration lookup table. This limits the size of pre-calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value.  <br /></td></tr>
-<tr class="memitem:a133eba57e315066431ed1579c9689ea0" id="r_a133eba57e315066431ed1579c9689ea0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a133eba57e315066431ed1579c9689ea0">STP_ACCEL_TABLE_INTERP_FACTOR</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:a133eba57e315066431ed1579c9689ea0" id="r_a133eba57e315066431ed1579c9689ea0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a133eba57e315066431ed1579c9689ea0">STP_ACCEL_TABLE_INTERP_FACTOR</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:a133eba57e315066431ed1579c9689ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation.  <br /></td></tr>
 <tr class="memitem:aebcc5dd103361004d6a31c3ac589478d" id="r_aebcc5dd103361004d6a31c3ac589478d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aebcc5dd103361004d6a31c3ac589478d">STP_ACCEL_TABLE_POOL_SIZE</a>&#160;&#160;&#160;8</td></tr>
 <tr class="memdesc:aebcc5dd103361004d6a31c3ac589478d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed.  <br /></td></tr>
@@ -173,14 +175,14 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STP_ACCEL_TABLE_INTERP_FACTOR&#160;&#160;&#160;4</td>
+          <td class="memname">#define STP_ACCEL_TABLE_INTERP_FACTOR&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00049">49</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00056">56</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -198,7 +200,7 @@ Enumerations</h2></td></tr>
 
 <p>Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00056">56</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00063">63</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -216,7 +218,7 @@ Enumerations</h2></td></tr>
 
 <p>Size of the command queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00033">33</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00039">39</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -234,7 +236,7 @@ Enumerations</h2></td></tr>
 
 <p>Maximum number of steps in the acceleration/deceleration lookup table. This limits the size of pre-calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00042">42</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00049">49</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -250,7 +252,9 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00035">35</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p>Maximum number of stepper command handles available. </p>
+
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00042">42</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -268,7 +272,7 @@ Enumerations</h2></td></tr>
 
 <p>Maximum number of stepper motor handles that can be created. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00028">28</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00034">34</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -303,7 +307,7 @@ Enumerations</h2></td></tr>
 
 <p>Opaque handle type for stepper motor control instances. </p>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00108">108</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00115">115</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -362,7 +366,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00096">96</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00103">103</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +409,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00067">67</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="step__shared_8h_source.html#l00074">74</a> of file <a class="el" href="step__shared_8h_source.html">step_shared.h</a>.</p>
 
 </div>
 </div>

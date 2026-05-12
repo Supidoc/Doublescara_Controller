@@ -44,14 +44,16 @@ typedef \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{C
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{cmd__handle_8h_a96e6d81a94d4489e22edeba2ab86523d}{CHD\+\_\+init\+\_\+cmd\+\_\+handles}} (\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+void \doxymbox{\hyperlink{cmd__handle_8h_a96e6d81a94d4489e22edeba2ab86523d}{CHD\+\_\+init\+\_\+cmd\+\_\+handles}} (\doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handles, size\+\_\+t max\+Handles)
 \begin{DoxyCompactList}\small\item\em Initialize the command handle pool. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{cmd__handle_8h_a121a340f467247572190b0306ee40c90}{CHD\+\_\+get\+\_\+cmd\+\_\+handle}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle, \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}}, size\+\_\+t max\+Handles)
+status\+\_\+t \doxymbox{\hyperlink{cmd__handle_8h_a121a340f467247572190b0306ee40c90}{CHD\+\_\+get\+\_\+cmd\+\_\+handle}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle, \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handles, size\+\_\+t max\+Handles)
 \begin{DoxyCompactList}\small\item\em Get an available command handle from the pool. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{cmd__handle_8h_a2fe25554976cdf18536f88a331a62cd7}{CHD\+\_\+add\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Increment reference count for a command handle. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{cmd__handle_8h_a776fcb299196e8e924c537440a791a46}{CHD\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
-\begin{DoxyCompactList}\small\item\em Decrement reference count for a command handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Decrement reference count for a command handle. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{cmd__handle_8h_a8512f44eddef1b9b824b9ba502d4f8b9}{CHD\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref\+\_\+from\+\_\+isr}} (\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} cmd\+Handle)
+\end{DoxyCompactItemize}
 
 
 \label{doc-typedef-members}
@@ -65,7 +67,7 @@ typedef \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{C
 
 
 
-Definition at line \doxymbox{\hyperlink{cmd__handle_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{cmd__handle_8h_source}{cmd\+\_\+handle.\+h}}.
+Definition at line \doxymbox{\hyperlink{cmd__handle_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{cmd__handle_8h_source}{cmd\+\_\+handle.\+h}}.
 
 \Hypertarget{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_CmdHandleImpl\_t@{CHD\_CmdHandleImpl\_t}}
 \index{CHD\_CmdHandleImpl\_t@{CHD\_CmdHandleImpl\_t}!cmd\_handle.h@{cmd\_handle.h}}
@@ -111,7 +113,7 @@ Get an available command handle from the pool.
 \begin{DoxyParams}[1]{Parameters}
 \doxymbox{\texttt{out}}  & {\em cmd\+Handle} & Pointer to receive the allocated command handle \\
 \hline
-\doxymbox{\texttt{in}}  & {\em \doxylink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\doxymbox{\texttt{in}}  & {\em cmd\+Handles} & Pointer to array of command handle structures \\
 \hline
 \doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
 \hline
@@ -135,7 +137,7 @@ Initialize the command handle pool.
 
 Sets up the command handle infrastructure for tracking asynchronous command execution. Must be called once before using command handles. 
 \begin{DoxyParams}[1]{Parameters}
-\doxymbox{\texttt{in}}  & {\em \doxylink{group__STEPPER__Internal_ga6b26389d8ba6ce908a268059e285c473}{cmd\+Handles}} & Pointer to array of command handle structures \\
+\doxymbox{\texttt{in}}  & {\em cmd\+Handles} & Pointer to array of command handle structures \\
 \hline
 \doxymbox{\texttt{in}}  & {\em max\+Handles} & Maximum number of handles in the pool \\
 \hline
@@ -162,4 +164,14 @@ When reference count reaches zero, the handle is returned to the pool
 
 
 Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00087}{87}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
+
+\Hypertarget{cmd__handle_8h_a8512f44eddef1b9b824b9ba502d4f8b9}\index{cmd\_handle.h@{cmd\_handle.h}!CHD\_remove\_cmd\_handle\_ref\_from\_isr@{CHD\_remove\_cmd\_handle\_ref\_from\_isr}}
+\index{CHD\_remove\_cmd\_handle\_ref\_from\_isr@{CHD\_remove\_cmd\_handle\_ref\_from\_isr}!cmd\_handle.h@{cmd\_handle.h}}
+\doxysubsubsection{\texorpdfstring{CHD\_remove\_cmd\_handle\_ref\_from\_isr()}{CHD\_remove\_cmd\_handle\_ref\_from\_isr()}}
+{\footnotesize\ttfamily \label{cmd__handle_8h_a8512f44eddef1b9b824b9ba502d4f8b9} 
+void CHD\+\_\+remove\+\_\+cmd\+\_\+handle\+\_\+ref\+\_\+from\+\_\+isr (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}}}]{cmd\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cmd__handle_8c_source_l00109}{109}} of file \doxymbox{\hyperlink{cmd__handle_8c_source}{cmd\+\_\+handle.\+c}}.
 

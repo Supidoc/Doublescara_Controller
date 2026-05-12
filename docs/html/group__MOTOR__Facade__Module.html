@@ -171,7 +171,9 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga903efe086f153300adb0b1c39d0e9a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues query for current movement state.  <br /></td></tr>
 <tr class="memitem:ga3215be0474c3137b5dcd9793930cb8c8" id="r_ga3215be0474c3137b5dcd9793930cb8c8"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga3215be0474c3137b5dcd9793930cb8c8">MTR_set_home_position</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle)</td></tr>
 <tr class="memdesc:ga3215be0474c3137b5dcd9793930cb8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set current motor position as home.  <br /></td></tr>
-<tr class="memitem:gad16d0c7b1d81fc07d8bdefc92d8db945" id="r_gad16d0c7b1d81fc07d8bdefc92d8db945"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gad16d0c7b1d81fc07d8bdefc92d8db945">MTR_synchronized_move_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *<a class="el" href="group__STEPPER__Internal.html#ga53e76081d475aef890072a6c88aa3c64">handles</a>, double *angles, uint8_t count, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memitem:gaf72251790f984d6b7ffdbb8a00b77206" id="r_gaf72251790f984d6b7ffdbb8a00b77206"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gaf72251790f984d6b7ffdbb8a00b77206">MTR_set_home_angle_offset</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double angle_offset_deg)</td></tr>
+<tr class="memdesc:gaf72251790f984d6b7ffdbb8a00b77206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies an angle offset to the current home reference.  <br /></td></tr>
+<tr class="memitem:gad16d0c7b1d81fc07d8bdefc92d8db945" id="r_gad16d0c7b1d81fc07d8bdefc92d8db945"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#gad16d0c7b1d81fc07d8bdefc92d8db945">MTR_synchronized_move_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> *handles, double *angles, uint8_t count, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
 <tr class="memdesc:gad16d0c7b1d81fc07d8bdefc92d8db945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues synchronized movement command for multiple motors.  <br /></td></tr>
 <tr class="memitem:ga1e7513c2f1600d0c3bac4747755fe07b" id="r_ga1e7513c2f1600d0c3bac4747755fe07b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1e7513c2f1600d0c3bac4747755fe07b">MTR_set_run_current_async</a> (<a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> handle, double current_a, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
 <tr class="memdesc:ga1e7513c2f1600d0c3bac4747755fe07b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues update of TMC run current.  <br /></td></tr>
@@ -206,7 +208,7 @@ Functions</h2></td></tr>
 
 <p>Maximum number of command handles available to motor facade commands. </p>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8h_source.html#l00037">37</a> of file <a class="el" href="motor__core_8h_source.html">motor_core.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8h_source.html#l00042">42</a> of file <a class="el" href="motor__core_8h_source.html">motor_core.h</a>.</p>
 
 </div>
 </div>
@@ -242,7 +244,7 @@ Functions</h2></td></tr>
 
 <p>Opaque handle type for motor instances. </p>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8h_source.html#l00093">93</a> of file <a class="el" href="motor__core_8h_source.html">motor_core.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8h_source.html#l00099">99</a> of file <a class="el" href="motor__core_8h_source.html">motor_core.h</a>.</p>
 
 </div>
 </div>
@@ -297,7 +299,7 @@ Functions</h2></td></tr>
 <p>Clears emergency stop latch and allows new motion commands. </p>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if latch was cleared. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00373">373</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00401">401</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -336,7 +338,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00341">341</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00369">369</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -364,7 +366,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if emergency stop applied, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00357">357</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00385">385</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -403,7 +405,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00325">325</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00353">353</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -448,7 +450,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00226">226</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00241">241</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -480,7 +482,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00101">101</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00116">116</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -519,7 +521,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00243">243</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00259">259</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -542,7 +544,7 @@ Functions</h2></td></tr>
 <p>Resets internal handle pools and creates required command queue resources.</p>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if initialization completed. kStatus_Fail if required resources could not be created. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00065">65</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00080">80</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -581,7 +583,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if command was queued. kStatus_Fail if validation or queueing failed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00084">84</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00099">99</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -603,7 +605,7 @@ Functions</h2></td></tr>
 <p>Returns emergency-stop latch state. </p>
 <dl class="section return"><dt>Returns</dt><dd>1 if emergency stop is active, otherwise 0. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00380">380</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00408">408</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -648,7 +650,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00141">141</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00156">156</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -693,7 +695,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00124">124</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00139">139</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -738,7 +740,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00158">158</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00173">173</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -783,7 +785,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00192">192</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00207">207</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -828,7 +830,41 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00308">308</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00336">336</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+
+</div>
+</div>
+<a id="gaf72251790f984d6b7ffdbb8a00b77206" name="gaf72251790f984d6b7ffdbb8a00b77206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf72251790f984d6b7ffdbb8a00b77206">&#9670;&#160;</a></span>MTR_set_home_angle_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t MTR_set_home_angle_offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>handle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angle_offset_deg</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies an angle offset to the current home reference. </p>
+<p>This updates the software-maintained absolute motor position so that the current physical position corresponds to <code class="param">angle_offset_deg</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>Target motor handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">angle_offset_deg</td><td>Desired angle at the current physical position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if applied, otherwise kStatus_Fail. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00288">288</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -856,7 +892,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00262">262</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00278">278</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -901,7 +937,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00291">291</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00319">319</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -946,7 +982,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00175">175</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00190">190</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -991,7 +1027,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00209">209</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00224">224</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -1032,7 +1068,7 @@ Functions</h2></td></tr>
 <p>Queues synchronized movement command for multiple motors. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="group__STEPPER__Internal.html#ga53e76081d475aef890072a6c88aa3c64">handles</a></td><td>Array of motor handles. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">handles</td><td>Array of motor handles. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">angles</td><td>Array of relative angles in degrees. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>Number of motors in arrays. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Timeout/deadline for command. </td></tr>
@@ -1042,7 +1078,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>kStatus_Success if queued, otherwise kStatus_Fail. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00272">272</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00298">298</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +1107,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This function does not return. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00053">53</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__core_8c_source.html#l00054">54</a> of file <a class="el" href="motor__core_8c_source.html">motor_core.c</a>.</p>
 
 </div>
 </div>

@@ -82,16 +82,30 @@
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00078}00078\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00079}00079\ \}}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00080}00080\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00081}\doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{00081}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00081}\doxymbox{\hyperlink{cmd__dispatch_8c_a575593df81e73c88955e13a8765c09d7}{00081}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a575593df81e73c88955e13a8765c09d7}{CDP\_notify\_task\_failure\_from\_isr}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00082}00082\ \{}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
 \DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00084}00084\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ xEventGroupSetBits(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_ga9e80327a24089cf6688fe36c279eb7ae}{CHD\_CMD\_BIT\_TIMEOUT}});}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00086}00086\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00087}00087\ \}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00089}00089\ \textcolor{comment}{/********************************************}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00090}00090\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00091}00091\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ BaseType\_t\ pxHigherPriorityTaskWoken;}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ xEventGroupSetBitsFromISR(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_ga9fc89681a892ffab31eab75b4d08a76d}{CHD\_CMD\_BIT\_FAILURE}},}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&pxHigherPriorityTaskWoken);}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pxHigherPriorityTaskWoken)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ taskYIELD();}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00093}00093\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00095}\doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{00095}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__dispatch_8c_a10d44c6117e72d1d9dd3509328c68c7c}{CDP\_notify\_task\_timeout}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00096}00096\ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00098}00098\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ xEventGroupSetBits(cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a545b23f5afe97276025dfc795131739d}{eventGroup}},\ \doxymbox{\hyperlink{group__THE__EventBits_ga9e80327a24089cf6688fe36c279eb7ae}{CHD\_CMD\_BIT\_TIMEOUT}});}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00103}00103\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00104}00104\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{cmd__dispatch_8c_source_l00105}00105\ \textcolor{comment}{\ ********************************************/}}
 
 \end{DoxyCode}

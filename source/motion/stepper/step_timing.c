@@ -49,32 +49,33 @@ uint8_t STPi_check_movement_completion(void)
 
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
-        if (handles[i].used == 1 && handles[i].handle.movementHandle.state != STP_MOVEMENT_IDLE)
+        if (stpHandles[i].used == 1 &&
+            stpHandles[i].handle.movementHandle.state != STP_MOVEMENT_IDLE)
         {
             nonIdleCount++;
-            if ((handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
-                 handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED))
+            if ((stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
+                 stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED))
             {
 
-                if (handles[i].handle.movementHandle.cmdHandle != NULL)
+                if (stpHandles[i].handle.movementHandle.cmdHandle != NULL)
                 {
-                    CDP_notify_task_success(handles[i].handle.movementHandle.cmdHandle);
-                    CHD_remove_cmd_handle_ref(handles[i].handle.movementHandle.cmdHandle);
+                    CDP_notify_task_success(stpHandles[i].handle.movementHandle.cmdHandle);
+                    CHD_remove_cmd_handle_ref(stpHandles[i].handle.movementHandle.cmdHandle);
                 }
 
-                if (handles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED)
+                if (stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED)
                 {
                     snprintf(logMsg, sizeof(logMsg), "[%s] Movement finished",
-                             handles[i].handle.label);
+                             stpHandles[i].handle.label);
                 }
-                else if (handles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
+                else if (stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
                 {
                     snprintf(logMsg, sizeof(logMsg), "[%s] Movement stopped",
-                             handles[i].handle.label);
+                             stpHandles[i].handle.label);
                 }
                 LOG_DEBUG(logMsg);
 
-                STPi_reset_movement_handle(&handles[i].handle.movementHandle);
+                STPi_reset_movement_handle(&stpHandles[i].handle.movementHandle);
             }
         }
     }
@@ -103,12 +104,11 @@ void FTM3_IRQHandler(void)
 
     traceISR_ENTER();
 
-    /* Place your code here */
     for (uint8_t i = 0; i < 8; i++)
     {
         STP_Handle_t stepperHandle;
 
-        if (intStatus & (0b1 << i))
+        if (intStatus & (0b1 << i) && (FTM3->CONTROLS[i].CnSC & FTM_CnSC_CHIE_MASK))
         {
             if (FTM3_ISR_handle_cache[i] == NULL)
             {
@@ -128,7 +128,16 @@ void FTM3_IRQHandler(void)
 
             // Toggle Pin because letting the time do it leads to inconsistencies in stepcount
             // because the start level for the timer output can't be defined
+
             GPIO_PortToggle(stepperHandle->stepGPIO, 0b1 << stepperHandle->stepPin);
+            if (stepperHandle->stepPin == 2)
+            {
+                GPIO_PortToggle(GPIOB, 0b1 << 16);
+            }
+            else if (stepperHandle->stepPin == 9)
+            {
+                GPIO_PortToggle(GPIOB, 0b1 << 17);
+            }
 
             if (currentStepCount >= totalSteps)
             {
@@ -253,10 +262,10 @@ static inline void get_handle_from_timer(FTM_Type* ftmBase, ftm_chnl_t ftmChanne
 {
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
-        if (handles[i].used == 1 && handles[i].handle.ftmBase == ftmBase &&
-            handles[i].handle.ftmChannel == ftmChannel)
+        if (stpHandles[i].used == 1 && stpHandles[i].handle.ftmBase == ftmBase &&
+            stpHandles[i].handle.ftmChannel == ftmChannel)
         {
-            *handle = &handles[i].handle;
+            *handle = &stpHandles[i].handle;
             return;
         }
     }

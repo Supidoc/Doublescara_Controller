@@ -1,12 +1,14 @@
 \doxysection{source/\+motion/\+stepper/\+step\+\_\+shared.h File Reference}
 \hypertarget{step__shared_8h}{}\label{step__shared_8h}\index{source/motion/stepper/step\_shared.h@{source/motion/stepper/step\_shared.h}}
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
 {\ttfamily \+\#include $<$driver/\+pca9555a/\+pca9555a.\+h$>$}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+device\+\_\+registers.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+ftm.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+gpio.\+h"{}}\newline
 {\ttfamily \+\#include "{}fsl\+\_\+port.\+h"{}}\newline
-Include dependency graph for step\+\_\+shared.\+h:\+\nopagebreak
+Include dependency graph for step\+\_\+shared.\+h:\+
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -34,10 +36,10 @@ struct \doxymbox{\hyperlink{struct__STP__StepperConfig}{\+\_\+\+STP\+\_\+\+Stepp
 \+\#define \doxymbox{\hyperlink{step__shared_8h_a3a6692a2c857999da7316ed7e2df506a}{STP\+\_\+\+CMD\+\_\+\+QUEUE\+\_\+\+SIZE}}~20
 \begin{DoxyCompactList}\small\item\em Size of the command queue. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}{STP\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}~30
-\item 
+\begin{DoxyCompactList}\small\item\em Maximum number of stepper command handles available. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{step__shared_8h_a96f4722e4d8b689802ad458a51537825}{STP\+\_\+\+MAX\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+SIZE}}~1000
 \begin{DoxyCompactList}\small\item\em Maximum number of steps in the acceleration/\+deceleration lookup table. This limits the size of pre-\/calculated delay profiles to conserve memory. Movements with more acceleration steps will be clamped to this value. \end{DoxyCompactList}\item 
-\+\#define \doxymbox{\hyperlink{step__shared_8h_a133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~4
+\+\#define \doxymbox{\hyperlink{step__shared_8h_a133eba57e315066431ed1579c9689ea0}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR}}~1
 \begin{DoxyCompactList}\small\item\em Interpolation factor between lookup table entries. Each table entry spans this many acceleration steps. A value of 1 means no interpolation. \end{DoxyCompactList}\item 
 \+\#define \doxymbox{\hyperlink{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}{STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+POOL\+\_\+\+SIZE}}~8
 \begin{DoxyCompactList}\small\item\em Number of acceleration lookup tables in the static pool. Each stepper movement requires one table from the pool. If all tables are in use, new movement commands will fail until a table is freed. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -84,7 +86,7 @@ enum \doxymbox{\hyperlink{step__shared_8h_a7b8721abdbeb4762357244e1e173f1c6}{\+\
 \index{STP\_ACCEL\_TABLE\_INTERP\_FACTOR@{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}!step\_shared.h@{step\_shared.h}}
 \doxysubsubsection{\texorpdfstring{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}{STP\_ACCEL\_TABLE\_INTERP\_FACTOR}}
 {\footnotesize\ttfamily \label{step__shared_8h_a133eba57e315066431ed1579c9689ea0} 
-\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR~4}
+\+\#define STP\+\_\+\+ACCEL\+\_\+\+TABLE\+\_\+\+INTERP\+\_\+\+FACTOR~1}
 
 
 
@@ -92,7 +94,7 @@ Interpolation factor between lookup table entries. Each table entry spans this m
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_aebcc5dd103361004d6a31c3ac589478d}\index{step\_shared.h@{step\_shared.h}!STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}}
 \index{STP\_ACCEL\_TABLE\_POOL\_SIZE@{STP\_ACCEL\_TABLE\_POOL\_SIZE}!step\_shared.h@{step\_shared.h}}
@@ -106,7 +108,7 @@ Number of acceleration lookup tables in the static pool. Each stepper movement r
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00063}{63}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_a3a6692a2c857999da7316ed7e2df506a}\index{step\_shared.h@{step\_shared.h}!STP\_CMD\_QUEUE\_SIZE@{STP\_CMD\_QUEUE\_SIZE}}
 \index{STP\_CMD\_QUEUE\_SIZE@{STP\_CMD\_QUEUE\_SIZE}!step\_shared.h@{step\_shared.h}}
@@ -120,7 +122,7 @@ Size of the command queue.
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_a96f4722e4d8b689802ad458a51537825}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}}
 \index{STP\_MAX\_ACCEL\_TABLE\_SIZE@{STP\_MAX\_ACCEL\_TABLE\_SIZE}!step\_shared.h@{step\_shared.h}}
@@ -134,7 +136,7 @@ Maximum number of steps in the acceleration/\+deceleration lookup table. This li
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_acbe06552fb5a8ede3d392c2185fb0d75}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_CMD\_HANDLE\_COUNT@{STP\_MAX\_CMD\_HANDLE\_COUNT}}
 \index{STP\_MAX\_CMD\_HANDLE\_COUNT@{STP\_MAX\_CMD\_HANDLE\_COUNT}!step\_shared.h@{step\_shared.h}}
@@ -144,7 +146,11 @@ Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00042}{42}} of f
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Maximum number of stepper command handles available. 
+
+
+
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_a1f9080302b6bc4ca17404d4485c41b67}\index{step\_shared.h@{step\_shared.h}!STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}}
 \index{STP\_MAX\_HANDLE\_COUNT@{STP\_MAX\_HANDLE\_COUNT}!step\_shared.h@{step\_shared.h}}
@@ -158,7 +164,7 @@ Maximum number of stepper motor handles that can be created.
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00034}{34}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 
 
@@ -187,7 +193,7 @@ Opaque handle type for stepper motor control instances.
 
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00108}{108}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00115}{115}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}\index{step\_shared.h@{step\_shared.h}!STP\_MovementState\_t@{STP\_MovementState\_t}}
 \index{STP\_MovementState\_t@{STP\_MovementState\_t}!step\_shared.h@{step\_shared.h}}
@@ -240,7 +246,7 @@ STP\+\_\+\+COUNTERCLOCKWISE&Rotate counterclockwise. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00096}{96}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00103}{103}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 
 \Hypertarget{step__shared_8h_a30dcedd34d1af2a987341d390caf1f92}\index{step\_shared.h@{step\_shared.h}!\_STP\_MovementState@{\_STP\_MovementState}}
 \index{\_STP\_MovementState@{\_STP\_MovementState}!step\_shared.h@{step\_shared.h}}
@@ -322,5 +328,5 @@ STP\+\_\+\+MOVEMENT\+\_\+\+FAILED&Movement failed due to an error. \\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00067}{67}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
+Definition at line \doxymbox{\hyperlink{step__shared_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{step__shared_8h_source}{step\+\_\+shared.\+h}}.
 

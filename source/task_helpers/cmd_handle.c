@@ -106,6 +106,26 @@ void CHD_remove_cmd_handle_ref(CHD_CmdHandle_t cmdHandle)
     }
 }
 
+void CHD_remove_cmd_handle_ref_from_isr(CHD_CmdHandle_t cmdHandle)
+{
+
+    if (cmdHandle != NULL)
+    {
+        if (cmdHandle->ref_count > 0)
+        {
+            cmdHandle->ref_count--;
+        }
+        if (cmdHandle->ref_count == 0)
+        {
+            cmdHandle->used = 0;
+        }
+    }
+    else
+    {
+        LOG_DEBUG("Attempted to remove reference from NULL cmd handle");
+    }
+}
+
 /********************************************
  *     Private Function Implementations     *
  ********************************************/

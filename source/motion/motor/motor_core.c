@@ -13,6 +13,7 @@
 #include "cmd_dispatch.h"
 #include "log.h"
 #include "queue.h"
+#include "task.h"
 #include "string.h"
 #include "stdio.h"
 #include "motor_motion.h"
@@ -54,9 +55,23 @@ void MTR_task(void* pvParameters)
 {
     (void)pvParameters;
     LOG_INFO("Started Motor Task");
-    mtrTaskHandle = xTaskGetCurrentTaskHandle();
+    mtrTaskHandle         = xTaskGetCurrentTaskHandle();
+    uint16_t checkCounter = 0;
     for (;;)
     {
+        checkCounter++;
+        if (checkCounter >= 200)
+        {
+            UBaseType_t watermark = uxTaskGetStackHighWaterMark(NULL);
+            if (watermark < 80)
+            {
+                static char logMsg[80];
+                snprintf(logMsg, sizeof(logMsg), "[MTR] Low stack watermark: %u words",
+                         (unsigned int)watermark);
+                LOG_WARN(logMsg);
+            }
+            checkCounter = 0;
+        }
         MTRi_process();
         vTaskDelay(pdMS_TO_TICKS(10));
     }
@@ -231,13 +246,14 @@ status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, Ti
         return kStatus_Fail;
     }
 
-    MTR_CmdQueueItem_t queueItem;
-    queueItem.type                       = MTR_CMD_GET_CURRENT_ANGLE;
-    queueItem.handle                     = handle;
-    queueItem.data.getCurrentAngle.angle = angle;
-    queueItem.deadline                   = deadline;
+    //    MTR_CmdQueueItem_t queueItem;
+    //    queueItem.type                       = MTR_CMD_GET_CURRENT_ANGLE;
+    //    queueItem.handle                     = handle;
+    //    queueItem.data.getCurrentAngle.angle = angle;
+    //    queueItem.deadline                   = deadline;
 
-    return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
+    //    return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
+    return MTRi_get_current_angle(handle, angle);
 }
 
 status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
@@ -269,21 +285,33 @@ status_t MTR_set_home_position(MTR_MotorHandle_t handle)
     return MTRi_set_home_position(handle);
 }
 
+status_t MTR_set_home_angle_offset(MTR_MotorHandle_t handle, double angle_offset_deg)
+{
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    return MTRi_set_home_angle_offset(handle, angle_offset_deg);
+}
+
 status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
                                      TickType_t deadline, CHD_CmdHandle_t* cmdHandle)
 {
-    if (handles == NULL || angles == NULL || count == 0)
+    if (handles == NULL || angles == NULL || count == 0 || count > MTR_MAX_MOTORS)
     {
         return kStatus_Fail;
     }
 
     MTR_CmdQueueItem_t queueItem;
-    queueItem.type                          = MTR_CMD_SYNCHRONIZED_MOVE;
-    queueItem.handle                        = NULL;
-    queueItem.data.synchronizedMove.handles = handles;
-    queueItem.data.synchronizedMove.angles  = angles;
-    queueItem.data.synchronizedMove.count   = count;
-    queueItem.deadline                      = deadline;
+    queueItem.type   = MTR_CMD_SYNCHRONIZED_MOVE;
+    queueItem.handle = NULL;
+    memcpy(queueItem.data.synchronizedMove.handles, handles,
+           sizeof(queueItem.data.synchronizedMove.handles[0]) * count);
+    memcpy(queueItem.data.synchronizedMove.angles, angles,
+           sizeof(queueItem.data.synchronizedMove.angles[0]) * count);
+    queueItem.data.synchronizedMove.count = count;
+    queueItem.deadline                    = deadline;
 
     return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
 }

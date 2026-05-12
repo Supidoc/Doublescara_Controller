@@ -226,9 +226,8 @@ status_t MTRi_stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t d
     return kStatus_Success;
 }
 
-status_t MTRi_get_current_angle(MTR_MotorHandle_t handle, double* angle, TickType_t deadline)
+status_t MTRi_get_current_angle(MTR_MotorHandle_t handle, double* angle)
 {
-    (void)deadline;
     if (MTR_is_emergency_stop_active())
     {
         return kStatus_Fail;
@@ -277,6 +276,31 @@ status_t MTRi_set_home_position(MTR_MotorHandle_t handle)
     LOG_DEBUG(logMsg);
 
     STP_reset_absolute_position(handle->stepperHandle);
+
+    return kStatus_Success;
+}
+
+status_t MTRi_set_home_angle_offset(MTR_MotorHandle_t handle, double angle_offset_deg)
+{
+    static char logMsg[120];
+    if (MTR_is_emergency_stop_active())
+    {
+        return kStatus_Fail;
+    }
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    int32_t offsetSteps = MTR_angle_to_steps(handle, angle_offset_deg, ROUND_NEAREST);
+    if (STP_set_absolute_steps(handle->stepperHandle, offsetSteps) != kStatus_Success)
+    {
+        return kStatus_Fail;
+    }
+
+    snprintf(logMsg, sizeof(logMsg), "[%s] Home angle offset applied: %.2f deg (%ld steps)",
+             handle->label, angle_offset_deg, (long)offsetSteps);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }

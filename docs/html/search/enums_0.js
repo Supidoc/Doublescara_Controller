@@ -7,12 +7,13 @@ var searchData=
   ['_5fpca_5fpindirection_4',['_PCA_PinDirection',['../group__PCA9555A.html#ga8ad4ff609745dc5ce797b4999bad6aa0',1,'pca9555a.h']]],
   ['_5fpca_5fpolarityinversion_5',['_PCA_PolarityInversion',['../group__PCA9555A.html#ga8cfaaa7d066058d4ef4647f86dcce6fd',1,'pca9555a.h']]],
   ['_5fpca_5fport_6',['_PCA_Port',['../group__PCA9555A.html#gab5f20e155eb4015a082b4c9ff4eb75e9',1,'pca9555a.h']]],
-  ['_5fsk_5fconfiguration_7',['_SK_Configuration',['../scara__kinematics_8h.html#aa184ab91b61238aabdf6825082796fed',1,'scara_kinematics.h']]],
-  ['_5fstp_5fcmdtype_8',['_STP_CmdType',['../group__STEPPER__Internal.html#gac619e3142c0e69b20136d0794b134aa7',1,'step_internal.h']]],
-  ['_5fstp_5fdirection_9',['_STP_Direction',['../step__shared_8h.html#a7b8721abdbeb4762357244e1e173f1c6',1,'step_shared.h']]],
-  ['_5fstp_5fmovementstate_10',['_STP_MovementState',['../step__shared_8h.html#a30dcedd34d1af2a987341d390caf1f92',1,'step_shared.h']]],
-  ['_5ftmc_5fcommandtype_11',['_TMC_CommandType',['../group__TMC2209__Internal.html#gaa0f6c8dafed536af99045734e71b0118',1,'tmc2209_internal.h']]],
-  ['_5ftmc_5fmicrostepping_12',['_TMC_MICROSTEPPING',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90',1,'tmc2209_shared.h']]],
-  ['_5ftmc_5froundingmode_13',['_TMC_RoundingMode',['../tmc2209__shared_8h.html#a041954e578c45fc0f4ccb00b80014d8f',1,'tmc2209_shared.h']]],
-  ['_5ftmc_5fserialaddress_14',['_TMC_SerialAddress',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4',1,'tmc2209_shared.h']]]
+  ['_5fsk_5fcmdtype_7',['_SK_CmdType',['../scara__kinematics__internal_8h.html#a83d92dd467faace46338b3853aaeffd0',1,'scara_kinematics_internal.h']]],
+  ['_5fsk_5fside_8',['_SK_Side',['../scara__kinematics_8h.html#a17d8b3836510fd4db27ffd1315b3d97a',1,'scara_kinematics.h']]],
+  ['_5fstp_5fcmdtype_9',['_STP_CmdType',['../group__STEPPER__Internal.html#gac619e3142c0e69b20136d0794b134aa7',1,'step_internal.h']]],
+  ['_5fstp_5fdirection_10',['_STP_Direction',['../step__shared_8h.html#a7b8721abdbeb4762357244e1e173f1c6',1,'step_shared.h']]],
+  ['_5fstp_5fmovementstate_11',['_STP_MovementState',['../step__shared_8h.html#a30dcedd34d1af2a987341d390caf1f92',1,'step_shared.h']]],
+  ['_5ftmc_5fcommandtype_12',['_TMC_CommandType',['../group__TMC2209__Internal.html#gaa0f6c8dafed536af99045734e71b0118',1,'tmc2209_internal.h']]],
+  ['_5ftmc_5fmicrostepping_13',['_TMC_MICROSTEPPING',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90',1,'tmc2209_shared.h']]],
+  ['_5ftmc_5froundingmode_14',['_TMC_RoundingMode',['../tmc2209__shared_8h.html#a041954e578c45fc0f4ccb00b80014d8f',1,'tmc2209_shared.h']]],
+  ['_5ftmc_5fserialaddress_15',['_TMC_SerialAddress',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4',1,'tmc2209_shared.h']]]
 ];

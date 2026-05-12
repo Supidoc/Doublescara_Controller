@@ -14,6 +14,7 @@
     <includes id="tmc2209__core_8h" name="tmc2209_core.h" local="yes" import="no" module="no" objc="no">tmc2209_core.h</includes>
     <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
     <includes id="motorCmd_8h" name="motorCmd.h" local="yes" import="no" module="no" objc="no">motorCmd.h</includes>
+    <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
     <member kind="function" static="yes">
       <type>static status_t</type>
       <name>create_task</name>
@@ -2020,6 +2021,61 @@
     </member>
   </compound>
   <compound kind="file">
+    <name>freertos_heap.c</name>
+    <path>source/</path>
+    <filename>freertos__heap_8c.html</filename>
+  </compound>
+  <compound kind="file">
+    <name>grabber.c</name>
+    <path>source/</path>
+    <filename>grabber_8c.html</filename>
+    <includes id="grabber_8h" name="grabber.h" local="yes" import="no" module="no" objc="no">grabber.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <includes id="motor__configs_8h" name="motor_configs.h" local="yes" import="no" module="no" objc="no">motor_configs.h</includes>
+    <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <includes id="cmd__handle_8h" name="cmd_handle.h" local="yes" import="no" module="no" objc="no">cmd_handle.h</includes>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>wait_and_release</name>
+      <anchorfile>grabber_8c.html</anchorfile>
+      <anchor>a6969198e72fa6fb00b68e0f85a643c3a</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle, TickType_t deadline)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>GRB_grab</name>
+      <anchorfile>grabber_8c.html</anchorfile>
+      <anchor>a4d2e59f38118363afdc6988d4580a088</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>GRB_release</name>
+      <anchorfile>grabber_8c.html</anchorfile>
+      <anchor>a846cbec99aacf98ab8e0261d7a69f987</anchor>
+      <arglist>(void)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>grabber.h</name>
+    <path>source/</path>
+    <filename>grabber_8h.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>GRB_grab</name>
+      <anchorfile>grabber_8h.html</anchorfile>
+      <anchor>a4d2e59f38118363afdc6988d4580a088</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>GRB_release</name>
+      <anchorfile>grabber_8h.html</anchorfile>
+      <anchor>a846cbec99aacf98ab8e0261d7a69f987</anchor>
+      <arglist>(void)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>log.c</name>
     <path>source/</path>
     <filename>log_8c.html</filename>
@@ -2590,6 +2646,13 @@
     </member>
     <member kind="function">
       <type>status_t</type>
+      <name>MTR_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>gaf72251790f984d6b7ffdbb8a00b77206</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
       <name>MTR_synchronized_move_async</name>
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
       <anchor>gad16d0c7b1d81fc07d8bdefc92d8db945</anchor>
@@ -2822,6 +2885,13 @@
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
       <anchor>ga3215be0474c3137b5dcd9793930cb8c8</anchor>
       <arglist>(MTR_MotorHandle_t handle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MTR_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>gaf72251790f984d6b7ffdbb8a00b77206</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -3289,8 +3359,8 @@
       <type>status_t</type>
       <name>MTRi_get_current_angle</name>
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
-      <anchor>ga11635cf6787086172a23cfa56a0dfd87</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double *angle, TickType_t deadline)</arglist>
+      <anchor>ga3773c2085af104433869ef6c613efaed</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double *angle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -3305,6 +3375,13 @@
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
       <anchor>ga3d6d99b516b2f6b048a12df260caa07e</anchor>
       <arglist>(MTR_MotorHandle_t handle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MTRi_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
+      <anchor>ga01342e42b88d587b9638ec99919e9934</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -3358,8 +3435,8 @@
       <type>status_t</type>
       <name>MTRi_get_current_angle</name>
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
-      <anchor>ga11635cf6787086172a23cfa56a0dfd87</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double *angle, TickType_t deadline)</arglist>
+      <anchor>ga3773c2085af104433869ef6c613efaed</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double *angle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -3374,6 +3451,13 @@
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
       <anchor>ga3d6d99b516b2f6b048a12df260caa07e</anchor>
       <arglist>(MTR_MotorHandle_t handle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MTRi_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
+      <anchor>ga01342e42b88d587b9638ec99919e9934</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -3596,6 +3680,13 @@
       <anchor>a3fb95aaa3f8cecda9ad30ea62a4757e5</anchor>
       <arglist>(STP_Handle_t handle)</arglist>
     </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>set_absolute_position</name>
+      <anchorfile>step__core_8c.html</anchorfile>
+      <anchor>af1aa9b9f3cdecdf46ee48e508466b3fc</anchor>
+      <arglist>(STP_Handle_t handle, int32_t absoluteSteps)</arglist>
+    </member>
     <member kind="function">
       <type>status_t</type>
       <name>STP_init</name>
@@ -3668,6 +3759,13 @@
     </member>
     <member kind="function">
       <type>status_t</type>
+      <name>STP_set_absolute_steps</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga3244faf24399f2d70145f071b3a15246</anchor>
+      <arglist>(STP_Handle_t handle, int32_t absoluteSteps)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
       <name>STP_get_acceleration</name>
       <anchorfile>group__STEPPER__Module.html</anchorfile>
       <anchor>gaa650351470c587dbe89b773ee800708c</anchor>
@@ -3717,16 +3815,16 @@
     </member>
     <member kind="variable">
       <type>STP_HandlesArrayItem_t</type>
-      <name>handles</name>
+      <name>stpHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga53e76081d475aef890072a6c88aa3c64</anchor>
+      <anchor>ga7f1c25cdad0642dce363a061fc214134</anchor>
       <arglist>[STP_MAX_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
       <type>CHD_CmdHandleImpl_t</type>
-      <name>cmdHandles</name>
+      <name>stpCmdHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga6b26389d8ba6ce908a268059e285c473</anchor>
+      <anchor>gaa70be6db6e5de0018f281189690cde6e</anchor>
       <arglist>[STP_MAX_CMD_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
@@ -3820,6 +3918,13 @@
       <anchorfile>group__STEPPER__Module.html</anchorfile>
       <anchor>gae764282f6d6459dbaf154801af0c9fc6</anchor>
       <arglist>(STP_Handle_t handle, int32_t *absoluteSteps)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STP_set_absolute_steps</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga3244faf24399f2d70145f071b3a15246</anchor>
+      <arglist>(STP_Handle_t handle, int32_t absoluteSteps)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -4029,16 +4134,16 @@
     </member>
     <member kind="variable">
       <type>STP_HandlesArrayItem_t</type>
-      <name>handles</name>
+      <name>stpHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga53e76081d475aef890072a6c88aa3c64</anchor>
+      <anchor>ga7f1c25cdad0642dce363a061fc214134</anchor>
       <arglist>[STP_MAX_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
       <type>CHD_CmdHandleImpl_t</type>
-      <name>cmdHandles</name>
+      <name>stpCmdHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga6b26389d8ba6ce908a268059e285c473</anchor>
+      <anchor>gaa70be6db6e5de0018f281189690cde6e</anchor>
       <arglist>[STP_MAX_CMD_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
@@ -4076,9 +4181,9 @@
     <includes id="step__profile_8h" name="step_profile.h" local="yes" import="no" module="no" objc="no">step_profile.h</includes>
     <member kind="function" static="yes">
       <type>static status_t</type>
-      <name>TSU_init_handle</name>
+      <name>STPi_init_handle</name>
       <anchorfile>step__process_8c.html</anchorfile>
-      <anchor>a4cf60f92d2b8f16240d6b6600e2bb091</anchor>
+      <anchor>ac276c66e2271dc6fd48e8603bbee55e7</anchor>
       <arglist>(const STP_StepperConfig_t config, TickType_t deadline)</arglist>
     </member>
     <member kind="function" static="yes">
@@ -4101,6 +4206,13 @@
       <anchorfile>step__process_8c.html</anchorfile>
       <anchor>a194485342718fdb8b77df2eae25243e2</anchor>
       <arglist>(STP_Handle_t handle, CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>start_prepared_moves_together</name>
+      <anchorfile>step__process_8c.html</anchorfile>
+      <anchor>a6cec020a7625af8554be80f948a3e45c</anchor>
+      <arglist>(CHD_CmdHandle_t triggerCmdHandle, uint8_t *anyStarted)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -4128,6 +4240,13 @@
       <name>STPi_stop_steps</name>
       <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
       <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps_from_isr</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga0476bdb4733558b03b9ab752ffb33bd3</anchor>
       <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
@@ -4162,6 +4281,13 @@
       <name>STPi_stop_steps</name>
       <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
       <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps_from_isr</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga0476bdb4733558b03b9ab752ffb33bd3</anchor>
       <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
@@ -4203,8 +4329,8 @@
       <type>static status_t</type>
       <name>calculate_acceleration_profile</name>
       <anchorfile>step__profile_8c.html</anchorfile>
-      <anchor>a2d08a460c866d6442e4a3d5a57cd97a5</anchor>
-      <arglist>(uint16_t *lookupTable, uint32_t numSteps, uint16_t stepZeroDelay, uint16_t endVelocityDelay)</arglist>
+      <anchor>a2bc1a40f47b58a989f0aa83309577c22</anchor>
+      <arglist>(STP_Handle_t handle, uint16_t *lookupTable, uint32_t numSteps, uint16_t stepZeroDelay, uint16_t endVelocityDelay)</arglist>
     </member>
     <member kind="function" static="yes">
       <type>static status_t</type>
@@ -4228,11 +4354,11 @@
       <arglist>(STP_Handle_t handle)</arglist>
     </member>
     <member kind="function">
-      <type></type>
-      <name>__attribute__</name>
-      <anchorfile>step__profile_8c.html</anchorfile>
-      <anchor>ad680f5e53fc79d312053b987c7c8c4a7</anchor>
-      <arglist>((section(&quot;.accelTables&quot;)))</arglist>
+      <type>status_t</type>
+      <name>STPi_plan_motion_profile</name>
+      <anchorfile>group__STEPPER__Profile__Internal.html</anchorfile>
+      <anchor>ga83cdd9c971a8f7a2541337e02573deec</anchor>
+      <arglist>(STP_Handle_t handle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -4240,6 +4366,13 @@
       <anchorfile>group__STEPPER__Profile__Internal.html</anchorfile>
       <anchor>ga90fc75d2b2852850e53abf076fc5c475</anchor>
       <arglist>(STP_StepperMovement_t *handle)</arglist>
+    </member>
+    <member kind="variable">
+      <type>STP_AccelTablePoolItem_t</type>
+      <name>accelTablePool</name>
+      <anchorfile>group__STEPPER__Internal.html</anchorfile>
+      <anchor>ga1d158ecf1936b775fdaf7688f2135161</anchor>
+      <arglist>[STP_ACCEL_TABLE_POOL_SIZE]</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -4502,39 +4635,39 @@
     <path>source/</path>
     <filename>motor__configs_8h.html</filename>
     <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_L_Arm</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>gae859f4d566df9eeb248b7a92a072f2ef</anchor>
+      <anchor>gadaff53731bea51f18ea7ae29c6e3dfb1</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_R_Arm</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>gaa62c27ed057341cdc1d69f8d540d45b1</anchor>
+      <anchor>gaea8ce482489e64bb1dc2f2aa949c860a</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Platform</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga6d6b19dc57911552147c37966fac4222</anchor>
+      <anchor>gaeb7b718a922cc4f00d22c5ffef6a1eeb</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Magnet</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga6b49a214a54020e6907b3ef660cd7a0a</anchor>
+      <anchor>gaf21bdd334c4339dbacdcd24dc79974cb</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Rotation</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga095fe9d43ecb99cfde678b740904d386</anchor>
+      <anchor>ga49dcd464b6adab42645a212b50bee849</anchor>
       <arglist>(void)</arglist>
     </member>
   </compound>
@@ -4548,6 +4681,7 @@
     <includes id="step__core_8h" name="step_core.h" local="yes" import="no" module="no" objc="no">step_core.h</includes>
     <includes id="motor__convert_8h" name="motor_convert.h" local="yes" import="no" module="no" objc="no">motor_convert.h</includes>
     <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <includes id="motor__configs_8h" name="motor_configs.h" local="yes" import="no" module="no" objc="no">motor_configs.h</includes>
     <member kind="define">
       <type>#define</type>
       <name>MHM_LEFT_ARM_LABEL</name>
@@ -4757,12 +4891,20 @@
     <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
     <includes id="motor__configs_8h" name="motor_configs.h" local="yes" import="no" module="no" objc="no">motor_configs.h</includes>
     <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
+    <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
     <member kind="function">
       <type>void</type>
       <name>init_motor</name>
       <anchorfile>motor__test_8c.html</anchorfile>
       <anchor>a50efeba9028961c6e5447005c23ba4a4</anchor>
       <arglist>(MTR_MotorConfig_t config)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>MTT_wait_and_release</name>
+      <anchorfile>motor__test_8c.html</anchorfile>
+      <anchor>a30eb127611e9d8d17ac36c0040c992df</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle, TickType_t deadline)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -4832,6 +4974,8 @@
     <includes id="log_8h" name="log.h" local="yes" import="no" module="no" objc="no">log.h</includes>
     <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
     <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
+    <includes id="grabber_8h" name="grabber.h" local="yes" import="no" module="no" objc="no">grabber.h</includes>
     <member kind="define">
       <type>#define</type>
       <name>MCMD_COMMAND_TIMEOUT_MS</name>
@@ -4925,6 +5069,13 @@
     </member>
     <member kind="function" static="yes">
       <type>static BaseType_t</type>
+      <name>cmd_motor_set_home_offset</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a4f62191f02519dd32bc3d8a7099d8fb4</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
       <name>cmd_motor_set_run_current</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>a6e90e90c3681ed853e8e084545842b9d</anchor>
@@ -4970,6 +5121,27 @@
       <name>cmd_motor_home_right_arm</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>a5b6d75c4c9152c8e3ed2a8b02e0d0281</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
+      <name>cmd_scara_move_xy</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a61594637ad613b52a9e193edbbce252e</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
+      <name>cmd_grab</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a1ceb05d4e3bb6b3bfb7bb2148e4febee</anchor>
+      <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static BaseType_t</type>
+      <name>cmd_release</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a3bc63bb32193e5e339adf4a35ccc79f9</anchor>
       <arglist>(char *pcWriteBuffer, size_t xWriteBufferLen, const char *pcCommandString)</arglist>
     </member>
     <member kind="function" static="yes">
@@ -5072,6 +5244,13 @@
     </member>
     <member kind="variable" static="yes">
       <type>static const CLI_Command_Definition_t</type>
+      <name>xSetHomeOffsetCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a3fe7ffd663f6c44115b63715702ef853</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
       <name>xSetRunCurrentCmd</name>
       <anchorfile>motorCmd_8c.html</anchorfile>
       <anchor>aa9e242377f439f82643506e82685c26f</anchor>
@@ -5119,6 +5298,27 @@
       <anchor>ae27e21440366b4c233eafa35004dce2f</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
+      <name>xScaraMoveCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>af3d3b1ab7eeaefd6eea17dcbfdebd405</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
+      <name>xGrabCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>a2918c3f4e7f7bdfa7c2cec80cec682b4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const CLI_Command_Definition_t</type>
+      <name>xReleaseCmd</name>
+      <anchorfile>motorCmd_8c.html</anchorfile>
+      <anchor>ae38df756065bd73d2f80eb7943d8813f</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="file">
     <name>motorCmd.h</name>
@@ -5144,55 +5344,703 @@
     <path>source/</path>
     <filename>scara__kinematics_8c.html</filename>
     <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
+    <includes id="scara__kinematics__internal_8h" name="scara_kinematics_internal.h" local="yes" import="no" module="no" objc="no">scara_kinematics_internal.h</includes>
+    <includes id="scara__kinematics__process_8h" name="scara_kinematics_process.h" local="yes" import="no" module="no" objc="no">scara_kinematics_process.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <includes id="motor__homing_8h" name="motor_homing.h" local="yes" import="no" module="no" objc="no">motor_homing.h</includes>
+    <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_apply_transform</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a11fcccf12178634e3cecf710b005f0fe</anchor>
+      <arglist>(const SK_Point_t *topLevelPoint, SK_Point_t *robotPoint)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_inverse_transform</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a45d2d5c5ea68a32e5e98cb7bcdddd123</anchor>
+      <arglist>(const SK_Point_t *robotPoint, SK_Point_t *topLevelPoint)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static bool</type>
+      <name>SKi_point_in_rect</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a7dd0086dbf927ad525f39d9ca786362d</anchor>
+      <arglist>(const SK_WorkspaceRect_t *rect, const SK_Point_t *point)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_workspace_allowed</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a27c7985b4b265a070ae682382b474a46</anchor>
+      <arglist>(const SK_Point_t *point, bool *allowed)</arglist>
+    </member>
     <member kind="function">
       <type>status_t</type>
-      <name>scara_inverse_kinematics</name>
+      <name>SK_init</name>
       <anchorfile>scara__kinematics_8c.html</anchorfile>
-      <anchor>a3adf355f0bb0733139030f71d755f57e</anchor>
-      <arglist>(double x, double y, SK_Configuration_t configuration, double *theta1, double *theta2)</arglist>
+      <anchor>acac4dcbb8a11f45cd382bbf66ed3fa3b</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_init_motor_handles</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>af2824b953075ed9864849a9db11bcaaa</anchor>
+      <arglist>(MTR_MotorHandle_t leftMotorHandle, MTR_MotorHandle_t rightMotorHandle, MTR_MotorHandle_t zetaMotorHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SK_task</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a72ae223e622ac3b8c215a53c0ad99f77</anchor>
+      <arglist>(void *pvParameters)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_transform_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>ad64be02f4743561357c3159db1a0257c</anchor>
+      <arglist>(SK_Transform_t transform, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_workspace_limits_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a154da1ed72f26b754cdc9d0bbac0b0e6</anchor>
+      <arglist>(SK_WorkspaceLimits_t limits, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_enable_workspace_limits_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a63130808dc5f45c765768e792a9b9a80</anchor>
+      <arglist>(bool enabled, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_origin_offset_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>aa4f604c38d46c2023393078d055470ee</anchor>
+      <arglist>(SK_Point_t offset, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_change_side_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a74348adaab6b489417d541720992dda9</anchor>
+      <arglist>(TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_is_point_allowed</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a613c322a91f008bb7cdd50e601683f23</anchor>
+      <arglist>(SK_Point_t point, bool *allowed)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_inverse_kinematics</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a46c8b87e143361ef751055f6375febeb</anchor>
+      <arglist>(SK_Point_t point, double *theta1, double *theta2, double *zetaE)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_forward_kinematics</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>aad8095cb459faaba67efba05e9725849</anchor>
+      <arglist>(double theta1, double theta2, SK_Side_t side, SK_Point_t *point, double *zetaE)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_move_to_xy_async</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a85bc1286e68ddabc28834bcdefaa0be3</anchor>
+      <arglist>(SK_Point_t targetPoint, double deltaZetaE, bool rotateZeta, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_home</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a284fbb96c16805e1297637cf1b6da65f</anchor>
+      <arglist>(const SK_Point_t zeroOffset, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_State_t</type>
+      <name>skState</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>ae7dc8df29a03951f11e6cad2e418a666</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skLeftMotorHandle</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>a65dc1acdca57aa1008e065d03ffcc398</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skRightMotorHandle</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>ab9834d208499b205c4043db44e73bbc8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skZetaMotorHandle</name>
+      <anchorfile>scara__kinematics_8c.html</anchorfile>
+      <anchor>abea7e0c172c1c9e4266d5a320dc3ce35</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="file">
     <name>scara_kinematics.h</name>
     <path>source/</path>
     <filename>scara__kinematics_8h.html</filename>
-    <member kind="typedef">
-      <type>enum _SK_Configuration</type>
-      <name>SK_Configuration_t</name>
+    <includes id="cmd__handle_8h" name="cmd_handle.h" local="yes" import="no" module="no" objc="no">cmd_handle.h</includes>
+    <includes id="motor__core_8h" name="motor_core.h" local="yes" import="no" module="no" objc="no">motor_core.h</includes>
+    <class kind="struct">_SK_Point</class>
+    <class kind="struct">_SK_Pose</class>
+    <class kind="struct">_SK_Transform</class>
+    <class kind="struct">_SK_WorkspaceRect</class>
+    <class kind="struct">_SK_WorkspaceLimits</class>
+    <class kind="struct">_SK_State</class>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_LEFT_ROOT_ARM_LENGTH_MM</name>
       <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>a6b9f2ad0e7047e9169ca225d96d15142</anchor>
+      <anchor>aff6da966369e4554919f5a487e77624f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_LEFT_FAR_ARM_LENGTH_MM</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a2d1344c8bfddb1b866ac8e57ba20b580</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_RIGHT_ROOT_ARM_LENGTH_MM</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>ac366824d6869fb86062f58d82282edcd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_RIGHT_FAR_ARM_LENGTH_MM</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a4edd79db6068ad3a858ba7c6fbee3926</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_BASE_SPAN_MM</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a523ba6e2865ca100ea2692bbe6bbfa0d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_MAX_WORKSPACE_RECTS</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a577dd269897295ca7df9c1390612e612</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_Point</type>
+      <name>SK_Point_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a4d95bb7e81f6f2a25e380929ceed7d1c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_Pose</type>
+      <name>SK_Pose_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a3a5f6ac556189ac2183310fce347cd2e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_Transform</type>
+      <name>SK_Transform_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>ad2e42d194e3a55014f76a7f6c90ffa70</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_WorkspaceRect</type>
+      <name>SK_WorkspaceRect_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>ab1c93daab811807f8c4fe4b74a33539a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_WorkspaceLimits</type>
+      <name>SK_WorkspaceLimits_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a5de9211a9655a54f3b833884b1743a6d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>enum _SK_Side</type>
+      <name>SK_Side_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a653571debd083a9985616ba7e935c734</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_State</type>
+      <name>SK_State_t</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a96ec1f712f7a968971cf7080fa7cd5ea</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
       <type></type>
-      <name>_SK_Configuration</name>
+      <name>_SK_Side</name>
       <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>aa184ab91b61238aabdf6825082796fed</anchor>
+      <anchor>a17d8b3836510fd4db27ffd1315b3d97a</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>SK_BOTH_ELBOW_OUT</name>
+      <name>SK_SIDE_MAIN</name>
       <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59</anchor>
+      <anchor>a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>SK_L_ELBOW_OUT_R_ELBOW_IN</name>
+      <name>SK_SIDE_MIRRORED</name>
       <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71</anchor>
+      <anchor>a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_init</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>acac4dcbb8a11f45cd382bbf66ed3fa3b</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_init_motor_handles</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>af2824b953075ed9864849a9db11bcaaa</anchor>
+      <arglist>(MTR_MotorHandle_t leftMotorHandle, MTR_MotorHandle_t rightMotorHandle, MTR_MotorHandle_t zetaMotorHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SK_task</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a72ae223e622ac3b8c215a53c0ad99f77</anchor>
+      <arglist>(void *pvParameters)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_transform_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>ad64be02f4743561357c3159db1a0257c</anchor>
+      <arglist>(SK_Transform_t transform, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_workspace_limits_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a154da1ed72f26b754cdc9d0bbac0b0e6</anchor>
+      <arglist>(SK_WorkspaceLimits_t limits, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_enable_workspace_limits_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a63130808dc5f45c765768e792a9b9a80</anchor>
+      <arglist>(bool enabled, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_set_origin_offset_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>aa4f604c38d46c2023393078d055470ee</anchor>
+      <arglist>(SK_Point_t offset, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_change_side_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a74348adaab6b489417d541720992dda9</anchor>
+      <arglist>(TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_is_point_allowed</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a613c322a91f008bb7cdd50e601683f23</anchor>
+      <arglist>(SK_Point_t point, bool *allowed)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_inverse_kinematics</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a46c8b87e143361ef751055f6375febeb</anchor>
+      <arglist>(SK_Point_t point, double *theta1, double *theta2, double *zetaE)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_forward_kinematics</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>aad8095cb459faaba67efba05e9725849</anchor>
+      <arglist>(double theta1, double theta2, SK_Side_t side, SK_Point_t *point, double *zetaE)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_move_to_xy_async</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a85bc1286e68ddabc28834bcdefaa0be3</anchor>
+      <arglist>(SK_Point_t targetPoint, double deltaZetaE, bool rotateZeta, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SK_home</name>
+      <anchorfile>scara__kinematics_8h.html</anchorfile>
+      <anchor>a284fbb96c16805e1297637cf1b6da65f</anchor>
+      <arglist>(const SK_Point_t zeroOffset, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>scara_kinematics_internal.h</name>
+    <path>source/</path>
+    <filename>scara__kinematics__internal_8h.html</filename>
+    <includes id="cmd__handle_8h" name="cmd_handle.h" local="yes" import="no" module="no" objc="no">cmd_handle.h</includes>
+    <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
+    <class kind="struct">_SK_SetTransformData</class>
+    <class kind="struct">_SK_SetWorkspaceLimitsData</class>
+    <class kind="struct">_SK_EnableWorkspaceLimitsData</class>
+    <class kind="struct">_SK_SetOriginOffsetData</class>
+    <class kind="struct">_SK_MoveToXYData</class>
+    <class kind="struct">_SK_HomeData</class>
+    <class kind="struct">_SK_CmdQueueItem</class>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_CMD_QUEUE_SIZE</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>aec13d6c029204a3431bc55a7a0f83028</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>SK_MAX_CMD_HANDLE_COUNT</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a26fbe4c05ac3807c42d25abc002b1a81</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>enum _SK_CmdType</type>
+      <name>SK_CmdType_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>aa24854b0a9af382a72e47105931608fd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_SetTransformData</type>
+      <name>SK_SetTransformData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a9cc16b0ddb88b011adc228a3ddd9bdc6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_SetWorkspaceLimitsData</type>
+      <name>SK_SetWorkspaceLimitsData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a5b60d822120a5eb190b99ff7c9bb424f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_EnableWorkspaceLimitsData</type>
+      <name>SK_EnableWorkspaceLimitsData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>af76c19019c53ec9d86ad3a5ec43f558c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_SetOriginOffsetData</type>
+      <name>SK_SetOriginOffsetData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a1d5a6c196a3b912f73fcf59cb3101cc3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_MoveToXYData</type>
+      <name>SK_MoveToXYData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>ae87547924d705a5e9e88ba0c285f1ad5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_HomeData</type>
+      <name>SK_HomeData_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>ad93d4fa5159caf498e40fd3182a41557</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct _SK_CmdQueueItem</type>
+      <name>SK_CmdQueueItem_t</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a11ff5d4341c3f5451a99b97d1d632923</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>_SK_CmdType</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>SK_L_ELBOW_IN_R_ELBOW_OUT</name>
-      <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808</anchor>
+      <name>SK_CMD_SET_TRANSFORM</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0aa8fed31247a3a01887e7a1483f0bab90</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>SK_BOTH_ELBOW_IN</name>
-      <anchorfile>scara__kinematics_8h.html</anchorfile>
-      <anchor>aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d</anchor>
+      <name>SK_CMD_SET_WORKSPACE_LIMITS</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0a5e1a957886b1edabca29a72e771939ea</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>SK_CMD_ENABLE_WORKSPACE_LIMITS</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0a31e6785814bcbae588cebb669755eaa1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>SK_CMD_SET_ORIGIN_OFFSET</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0a73444a9161a033168b057192f5cab688</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>SK_CMD_CHANGE_SIDE</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0a5c6640113db940a947e7976c76caec6c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>SK_CMD_MOVE_TO_XY</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0aca5a926e0e1eeff9d0245c02850423a7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>SK_CMD_HOME</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a83d92dd467faace46338b3853aaeffd0a33b2f5ede8541f98064e41e1ff8b7d14</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>QueueHandle_t</type>
+      <name>skCmdQueue</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>ac44c8ce3c505cdee6c937b9a6488bf08</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CHD_CmdHandleImpl_t</type>
+      <name>skCmdHandles</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>af981e9fb9c6248dcbaf92b28fd22537f</anchor>
+      <arglist>[SK_MAX_CMD_HANDLE_COUNT]</arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_State_t</type>
+      <name>skState</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>ae7dc8df29a03951f11e6cad2e418a666</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skLeftMotorHandle</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>a65dc1acdca57aa1008e065d03ffcc398</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skRightMotorHandle</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>ab9834d208499b205c4043db44e73bbc8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>MTR_MotorHandle_t</type>
+      <name>skZetaMotorHandle</name>
+      <anchorfile>scara__kinematics__internal_8h.html</anchorfile>
+      <anchor>abea7e0c172c1c9e4266d5a320dc3ce35</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>scara_kinematics_process.c</name>
+    <path>source/</path>
+    <filename>scara__kinematics__process_8c.html</filename>
+    <includes id="scara__kinematics__process_8h" name="scara_kinematics_process.h" local="yes" import="no" module="no" objc="no">scara_kinematics_process.h</includes>
+    <includes id="scara__kinematics__internal_8h" name="scara_kinematics_internal.h" local="yes" import="no" module="no" objc="no">scara_kinematics_internal.h</includes>
+    <includes id="scara__kinematics_8h" name="scara_kinematics.h" local="yes" import="no" module="no" objc="no">scara_kinematics.h</includes>
+    <includes id="cmd__dispatch_8h" name="cmd_dispatch.h" local="yes" import="no" module="no" objc="no">cmd_dispatch.h</includes>
+    <includes id="sync__wait_8h" name="sync_wait.h" local="yes" import="no" module="no" objc="no">sync_wait.h</includes>
+    <includes id="motor__configs_8h" name="motor_configs.h" local="yes" import="no" module="no" objc="no">motor_configs.h</includes>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_handle_set_transform</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a311a95edc0f2db808e4e8fafde41df99</anchor>
+      <arglist>(const SK_SetTransformData_t *data)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_handle_set_workspace_limits</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a8c71e450610a7d694fa194bee78bc6d5</anchor>
+      <arglist>(const SK_SetWorkspaceLimitsData_t *data)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_handle_enable_workspace_limits</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>ab6612d8cad5d20208b26f5c487bbff35</anchor>
+      <arglist>(const SK_EnableWorkspaceLimitsData_t *data)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_handle_set_origin_offset</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a2778b8e6c66d9c8e78b13f41b1d5779b</anchor>
+      <arglist>(const SK_SetOriginOffsetData_t *data)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_handle_change_side</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a83c663bc05479279fd7e7a5b2a4ebf96</anchor>
+      <arglist>(TickType_t deadline)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKI_handle_MoveToXY</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>acda3ae1a9b46e9a641e3f9f1fa97a392</anchor>
+      <arglist>(const SK_MoveToXYData_t *data, TickType_t deadline)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKi_wait_and_release</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>af40e04b1283e45f21ec9fb7cb717485c</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle, TickType_t deadline)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static status_t</type>
+      <name>SKI_side_change_required</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a8d426c6040aa7c99192f9765b60ce9e5</anchor>
+      <arglist>(SK_Point_t startPoint, SK_Point_t targetPoint, bool *required)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static double</type>
+      <name>SKi_rad_to_deg</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a09a640fd77b82b4f7670372fe728a436</anchor>
+      <arglist>(double radians)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static double</type>
+      <name>SKi_deg_to_rad</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a7a9ebf3e575f168b19d8d6029fd6dce8</anchor>
+      <arglist>(double degrees)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SKi_init_queue</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a8facbaf5ede19f315fae98499be22594</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SKi_send_cmd_async</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a903175bdf7be28a74beb33fc41d58d86</anchor>
+      <arglist>(SK_CmdQueueItem_t *queueItem, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SKi_process_cmd</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a7f8f7ed91b96b898b30e3f5ada1284f4</anchor>
+      <arglist>(SK_CmdQueueItem_t queueItem)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SKi_task</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>a9c1a423a52eeb6e13783e985ced2e912</anchor>
+      <arglist>(void *pvParameters)</arglist>
+    </member>
+    <member kind="variable">
+      <type>QueueHandle_t</type>
+      <name>skCmdQueue</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>ac44c8ce3c505cdee6c937b9a6488bf08</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CHD_CmdHandleImpl_t</type>
+      <name>skCmdHandles</name>
+      <anchorfile>scara__kinematics__process_8c.html</anchorfile>
+      <anchor>af981e9fb9c6248dcbaf92b28fd22537f</anchor>
+      <arglist>[SK_MAX_CMD_HANDLE_COUNT]</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>scara_kinematics_process.h</name>
+    <path>source/</path>
+    <filename>scara__kinematics__process_8h.html</filename>
+    <includes id="scara__kinematics__internal_8h" name="scara_kinematics_internal.h" local="yes" import="no" module="no" objc="no">scara_kinematics_internal.h</includes>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SKi_send_cmd_async</name>
+      <anchorfile>scara__kinematics__process_8h.html</anchorfile>
+      <anchor>a903175bdf7be28a74beb33fc41d58d86</anchor>
+      <arglist>(SK_CmdQueueItem_t *queueItem, TickType_t deadline, CHD_CmdHandle_t *cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>SKi_init_queue</name>
+      <anchorfile>scara__kinematics__process_8h.html</anchorfile>
+      <anchor>a8facbaf5ede19f315fae98499be22594</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SKi_process_cmd</name>
+      <anchorfile>scara__kinematics__process_8h.html</anchorfile>
+      <anchor>a7f8f7ed91b96b898b30e3f5ada1284f4</anchor>
+      <arglist>(SK_CmdQueueItem_t queueItem)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SKi_task</name>
+      <anchorfile>scara__kinematics__process_8h.html</anchorfile>
+      <anchor>a9c1a423a52eeb6e13783e985ced2e912</anchor>
+      <arglist>(void *pvParameters)</arglist>
     </member>
   </compound>
   <compound kind="file">
@@ -5236,6 +6084,13 @@
     </member>
     <member kind="function">
       <type>void</type>
+      <name>CDP_notify_task_failure_from_isr</name>
+      <anchorfile>cmd__dispatch_8c.html</anchorfile>
+      <anchor>a575593df81e73c88955e13a8765c09d7</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
       <name>CDP_notify_task_timeout</name>
       <anchorfile>cmd__dispatch_8c.html</anchorfile>
       <anchor>a10d44c6117e72d1d9dd3509328c68c7c</anchor>
@@ -5266,6 +6121,13 @@
       <name>CDP_notify_task_failure</name>
       <anchorfile>cmd__dispatch_8h.html</anchorfile>
       <anchor>a6d93010b80e0868b657a08c03594fd4c</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CDP_notify_task_failure_from_isr</name>
+      <anchorfile>cmd__dispatch_8h.html</anchorfile>
+      <anchor>a575593df81e73c88955e13a8765c09d7</anchor>
       <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
     <member kind="function">
@@ -5308,6 +6170,13 @@
       <name>CHD_remove_cmd_handle_ref</name>
       <anchorfile>cmd__handle_8c.html</anchorfile>
       <anchor>a776fcb299196e8e924c537440a791a46</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CHD_remove_cmd_handle_ref_from_isr</name>
+      <anchorfile>cmd__handle_8c.html</anchorfile>
+      <anchor>a8512f44eddef1b9b824b9ba502d4f8b9</anchor>
       <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
@@ -5377,6 +6246,13 @@
       <name>CHD_remove_cmd_handle_ref</name>
       <anchorfile>cmd__handle_8h.html</anchorfile>
       <anchor>a776fcb299196e8e924c537440a791a46</anchor>
+      <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CHD_remove_cmd_handle_ref_from_isr</name>
+      <anchorfile>cmd__handle_8h.html</anchorfile>
+      <anchor>a8512f44eddef1b9b824b9ba502d4f8b9</anchor>
       <arglist>(CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
   </compound>
@@ -6424,18 +7300,18 @@
     <name>_MTR_SynchronizedMoveCmdData</name>
     <filename>struct__MTR__SynchronizedMoveCmdData.html</filename>
     <member kind="variable">
-      <type>MTR_MotorHandle_t *</type>
+      <type>MTR_MotorHandle_t</type>
       <name>handles</name>
       <anchorfile>struct__MTR__SynchronizedMoveCmdData.html</anchorfile>
-      <anchor>adb6eb2d7b6855b37f81e5482df0b995b</anchor>
-      <arglist></arglist>
+      <anchor>a8e6e257fb22efae1fc6d6729b2a49081</anchor>
+      <arglist>[MTR_MAX_MOTORS]</arglist>
     </member>
     <member kind="variable">
-      <type>double *</type>
+      <type>double</type>
       <name>angles</name>
       <anchorfile>struct__MTR__SynchronizedMoveCmdData.html</anchorfile>
-      <anchor>ac86d4a2e14204f7287645849a16a51e4</anchor>
-      <arglist></arglist>
+      <anchor>a2f3ee321e63c0aad6bb7405c107ea8f1</anchor>
+      <arglist>[MTR_MAX_MOTORS]</arglist>
     </member>
     <member kind="variable">
       <type>uint8_t</type>
@@ -6467,6 +7343,324 @@
       <name>polarityInversion</name>
       <anchorfile>struct__PCA__Pin__Config.html</anchorfile>
       <anchor>a1a3d8967b590c8ca632f3db14de54e03</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_CmdQueueItem</name>
+    <filename>struct__SK__CmdQueueItem.html</filename>
+    <member kind="variable">
+      <type>SK_CmdType_t</type>
+      <name>type</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>aeac216e2e511cf4c4e638f7d70f0577c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>TickType_t</type>
+      <name>deadline</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>ab89a1f74c4c91c73a353d02eb89fac9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CHD_CmdHandle_t</type>
+      <name>cmdHandle</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>af6f576b039a287a46ffc24557881214c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_SetTransformData_t</type>
+      <name>setTransform</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>abd9a2c063ea63a7702aaf8dbf4d16124</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_SetWorkspaceLimitsData_t</type>
+      <name>setWorkspaceLimits</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>a11e367559d00b7a47af04e08bf982203</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_EnableWorkspaceLimitsData_t</type>
+      <name>enableWorkspaceLimits</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>a439e0d9f74c4521a5a0836d4e3cce36b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_SetOriginOffsetData_t</type>
+      <name>setOriginOffset</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>ae1d029033079686ec527b7cf18e939ef</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_MoveToXYData_t</type>
+      <name>moveToXY</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>ad15d58436740d7444e637d1790ae2a68</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_HomeData_t</type>
+      <name>home</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>a59ad0fceee5bc4142064e790fb56d8e6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>union _SK_CmdQueueItem::@356202125340366211266110321114070165122320165166</type>
+      <name>data</name>
+      <anchorfile>struct__SK__CmdQueueItem.html</anchorfile>
+      <anchor>a9cac78b0dff3f5b60e6e6bc6d25749cc</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_EnableWorkspaceLimitsData</name>
+    <filename>struct__SK__EnableWorkspaceLimitsData.html</filename>
+    <member kind="variable">
+      <type>bool</type>
+      <name>enabled</name>
+      <anchorfile>struct__SK__EnableWorkspaceLimitsData.html</anchorfile>
+      <anchor>a1adbebd701199507dd25b6d2920635fe</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_HomeData</name>
+    <filename>struct__SK__HomeData.html</filename>
+    <member kind="variable">
+      <type>SK_Point_t</type>
+      <name>zeroOffset</name>
+      <anchorfile>struct__SK__HomeData.html</anchorfile>
+      <anchor>a922baa924c38070912ddb4d20b37b956</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_MoveToXYData</name>
+    <filename>struct__SK__MoveToXYData.html</filename>
+    <member kind="variable">
+      <type>SK_Point_t</type>
+      <name>targetPoint</name>
+      <anchorfile>struct__SK__MoveToXYData.html</anchorfile>
+      <anchor>a155d79a1a09797f6ad53dfc829dca661</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>deltaZetaE</name>
+      <anchorfile>struct__SK__MoveToXYData.html</anchorfile>
+      <anchor>a2a55d4ca981dbc10b71991a68d6336b6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>rotateZeta</name>
+      <anchorfile>struct__SK__MoveToXYData.html</anchorfile>
+      <anchor>a7dcb5c4787e003e9175631597616b470</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_Point</name>
+    <filename>struct__SK__Point.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>x</name>
+      <anchorfile>struct__SK__Point.html</anchorfile>
+      <anchor>a77d2efbfe1ba1007b6ba5574722d7088</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>y</name>
+      <anchorfile>struct__SK__Point.html</anchorfile>
+      <anchor>a93ff8af49e5067cd7bd27c56e34f5849</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_Pose</name>
+    <filename>struct__SK__Pose.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>x</name>
+      <anchorfile>struct__SK__Pose.html</anchorfile>
+      <anchor>addd8ae57871c2299195a46bc76ae4fc3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>y</name>
+      <anchorfile>struct__SK__Pose.html</anchorfile>
+      <anchor>a1af602c1e8d1add2ebcdea827126acce</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_SetOriginOffsetData</name>
+    <filename>struct__SK__SetOriginOffsetData.html</filename>
+    <member kind="variable">
+      <type>SK_Point_t</type>
+      <name>offset</name>
+      <anchorfile>struct__SK__SetOriginOffsetData.html</anchorfile>
+      <anchor>a8c5f683be117b15fa46c65bd383c1fe1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_SetTransformData</name>
+    <filename>struct__SK__SetTransformData.html</filename>
+    <member kind="variable">
+      <type>SK_Transform_t</type>
+      <name>transform</name>
+      <anchorfile>struct__SK__SetTransformData.html</anchorfile>
+      <anchor>a887f4ef7748df1b4b1dfc07862b5bce3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_SetWorkspaceLimitsData</name>
+    <filename>struct__SK__SetWorkspaceLimitsData.html</filename>
+    <member kind="variable">
+      <type>SK_WorkspaceLimits_t</type>
+      <name>limits</name>
+      <anchorfile>struct__SK__SetWorkspaceLimitsData.html</anchorfile>
+      <anchor>a05dc7b546f1b46b2f3f3c527ab5b88e8</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_State</name>
+    <filename>struct__SK__State.html</filename>
+    <member kind="variable">
+      <type>SK_Pose_t</type>
+      <name>pose</name>
+      <anchorfile>struct__SK__State.html</anchorfile>
+      <anchor>a0382f74bd34e0785a77e03c74290b994</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_Transform_t</type>
+      <name>transform</name>
+      <anchorfile>struct__SK__State.html</anchorfile>
+      <anchor>a6def64753830cac7e68e21dd00c9cf42</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_WorkspaceLimits_t</type>
+      <name>workspaceLimits</name>
+      <anchorfile>struct__SK__State.html</anchorfile>
+      <anchor>ac777b31a17e9b66b5d6686718422e818</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>SK_Side_t</type>
+      <name>side</name>
+      <anchorfile>struct__SK__State.html</anchorfile>
+      <anchor>a0dcac1f7b8b6f1cd56ec06bccfb5ee96</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>calibrated</name>
+      <anchorfile>struct__SK__State.html</anchorfile>
+      <anchor>a15b2466d91b20fe3a6a520636b40afce</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_Transform</name>
+    <filename>struct__SK__Transform.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>scaleX</name>
+      <anchorfile>struct__SK__Transform.html</anchorfile>
+      <anchor>a1bf99ce1178eae474e7ee726e6e8fb77</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>scaleY</name>
+      <anchorfile>struct__SK__Transform.html</anchorfile>
+      <anchor>a9b1645ccec65c2e2921800dbf656b0ce</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>offsetX</name>
+      <anchorfile>struct__SK__Transform.html</anchorfile>
+      <anchor>acc038179c8d603c9d2f1f864d00dabec</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>offsetY</name>
+      <anchorfile>struct__SK__Transform.html</anchorfile>
+      <anchor>ad9bd3b3cbfc229991e026fd6d273c0f7</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_WorkspaceLimits</name>
+    <filename>struct__SK__WorkspaceLimits.html</filename>
+    <member kind="variable">
+      <type>SK_WorkspaceRect_t</type>
+      <name>rectangles</name>
+      <anchorfile>struct__SK__WorkspaceLimits.html</anchorfile>
+      <anchor>ae53d053958b40cc782d2ad9d49e8d7ce</anchor>
+      <arglist>[SK_MAX_WORKSPACE_RECTS]</arglist>
+    </member>
+    <member kind="variable">
+      <type>uint8_t</type>
+      <name>rectangleCount</name>
+      <anchorfile>struct__SK__WorkspaceLimits.html</anchorfile>
+      <anchor>ac7ca51585ac2553cdf18f41ed739a95a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>enabled</name>
+      <anchorfile>struct__SK__WorkspaceLimits.html</anchorfile>
+      <anchor>a4e1517ff93a450a84f0301ab2c3bc96e</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>_SK_WorkspaceRect</name>
+    <filename>struct__SK__WorkspaceRect.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>minX</name>
+      <anchorfile>struct__SK__WorkspaceRect.html</anchorfile>
+      <anchor>a7e66a6d1b86b04178d4145e35a41fb99</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>minY</name>
+      <anchorfile>struct__SK__WorkspaceRect.html</anchorfile>
+      <anchor>a30327f3cb8f19fe55caba114b5947a5a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>maxX</name>
+      <anchorfile>struct__SK__WorkspaceRect.html</anchorfile>
+      <anchor>a7f42359d08e576c8fd3ca4d57d870243</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>maxY</name>
+      <anchorfile>struct__SK__WorkspaceRect.html</anchorfile>
+      <anchor>aca331837a0b4b3ff0d3b6e98b41f3685</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -8303,6 +9497,13 @@
     </member>
     <member kind="function">
       <type>status_t</type>
+      <name>MTR_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
+      <anchor>gaf72251790f984d6b7ffdbb8a00b77206</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
       <name>MTR_synchronized_move_async</name>
       <anchorfile>group__MOTOR__Facade__Module.html</anchorfile>
       <anchor>gad16d0c7b1d81fc07d8bdefc92d8db945</anchor>
@@ -8735,8 +9936,8 @@
       <type>status_t</type>
       <name>MTRi_get_current_angle</name>
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
-      <anchor>ga11635cf6787086172a23cfa56a0dfd87</anchor>
-      <arglist>(MTR_MotorHandle_t handle, double *angle, TickType_t deadline)</arglist>
+      <anchor>ga3773c2085af104433869ef6c613efaed</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double *angle)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -8751,6 +9952,13 @@
       <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
       <anchor>ga3d6d99b516b2f6b048a12df260caa07e</anchor>
       <arglist>(MTR_MotorHandle_t handle)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>MTRi_set_home_angle_offset</name>
+      <anchorfile>group__MOTOR__Motion__Internal.html</anchorfile>
+      <anchor>ga01342e42b88d587b9638ec99919e9934</anchor>
+      <arglist>(MTR_MotorHandle_t handle, double angle_offset_deg)</arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -8908,6 +10116,13 @@
       <anchorfile>group__STEPPER__Module.html</anchorfile>
       <anchor>gae764282f6d6459dbaf154801af0c9fc6</anchor>
       <arglist>(STP_Handle_t handle, int32_t *absoluteSteps)</arglist>
+    </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STP_set_absolute_steps</name>
+      <anchorfile>group__STEPPER__Module.html</anchorfile>
+      <anchor>ga3244faf24399f2d70145f071b3a15246</anchor>
+      <arglist>(STP_Handle_t handle, int32_t absoluteSteps)</arglist>
     </member>
     <member kind="function">
       <type>status_t</type>
@@ -9115,16 +10330,16 @@
     </member>
     <member kind="variable">
       <type>STP_HandlesArrayItem_t</type>
-      <name>handles</name>
+      <name>stpHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga53e76081d475aef890072a6c88aa3c64</anchor>
+      <anchor>ga7f1c25cdad0642dce363a061fc214134</anchor>
       <arglist>[STP_MAX_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
       <type>CHD_CmdHandleImpl_t</type>
-      <name>cmdHandles</name>
+      <name>stpCmdHandles</name>
       <anchorfile>group__STEPPER__Internal.html</anchorfile>
-      <anchor>ga6b26389d8ba6ce908a268059e285c473</anchor>
+      <anchor>gaa70be6db6e5de0018f281189690cde6e</anchor>
       <arglist>[STP_MAX_CMD_HANDLE_COUNT]</arglist>
     </member>
     <member kind="variable">
@@ -9181,6 +10396,13 @@
       <anchor>ga157446e5dd6d6d53d2328dc9ec659a49</anchor>
       <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
     </member>
+    <member kind="function">
+      <type>status_t</type>
+      <name>STPi_stop_steps_from_isr</name>
+      <anchorfile>group__STEPPER__Process__Internal.html</anchorfile>
+      <anchor>ga0476bdb4733558b03b9ab752ffb33bd3</anchor>
+      <arglist>(STP_Handle_t handle, uint8_t doDeceleration, CHD_CmdHandle_t cmdHandle)</arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>STEPPER_Profile_Internal</name>
@@ -9224,39 +10446,39 @@
     <name>MotorConfigs_Module</name>
     <title>Motor Configuration Module</title>
     <filename>group__MotorConfigs__Module.html</filename>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_L_Arm</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>gae859f4d566df9eeb248b7a92a072f2ef</anchor>
+      <anchor>gadaff53731bea51f18ea7ae29c6e3dfb1</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_R_Arm</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>gaa62c27ed057341cdc1d69f8d540d45b1</anchor>
+      <anchor>gaea8ce482489e64bb1dc2f2aa949c860a</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Platform</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga6d6b19dc57911552147c37966fac4222</anchor>
+      <anchor>gaeb7b718a922cc4f00d22c5ffef6a1eeb</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Magnet</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga6b49a214a54020e6907b3ef660cd7a0a</anchor>
+      <anchor>gaf21bdd334c4339dbacdcd24dc79974cb</anchor>
       <arglist>(void)</arglist>
     </member>
-    <member kind="function">
-      <type>MTR_MotorConfig_t</type>
+    <member kind="function" static="yes">
+      <type>static MTR_MotorConfig_t</type>
       <name>M_Rotation</name>
       <anchorfile>group__MotorConfigs__Module.html</anchorfile>
-      <anchor>ga095fe9d43ecb99cfde678b740904d386</anchor>
+      <anchor>ga49dcd464b6adab42645a212b50bee849</anchor>
       <arglist>(void)</arglist>
     </member>
   </compound>
@@ -9428,6 +10650,9 @@
     <file>disk.c</file>
     <file>disk.h</file>
     <file>ffconf.h</file>
+    <file>freertos_heap.c</file>
+    <file>grabber.c</file>
+    <file>grabber.h</file>
     <file>log.c</file>
     <file>log.h</file>
     <file>main.c</file>
@@ -9440,6 +10665,9 @@
     <file>motorCmd.h</file>
     <file>scara_kinematics.c</file>
     <file>scara_kinematics.h</file>
+    <file>scara_kinematics_internal.h</file>
+    <file>scara_kinematics_process.c</file>
+    <file>scara_kinematics_process.h</file>
     <file>semihost_hardfault.c</file>
   </compound>
   <compound kind="dir">

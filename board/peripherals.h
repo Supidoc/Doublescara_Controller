@@ -88,6 +88,20 @@ extern "C" {
 #define GPIOD_IRQ_PRIORITY 7
 /* GPIOD interrupt handler identifier. */
 #define GPIOD_IRQHANDLER PORTD_IRQHandler
+/* Definition of peripheral ID */
+#define UART2_PERIPHERAL UART2
+/* Definition of the clock source frequency */
+#define UART2_CLOCK_SOURCE CLOCK_GetFreq(UART2_CLK_SRC)
+/* Definition of the backround buffer size */
+#define UART2_BACKGROUND_BUFFER_SIZE 1
+/* UART2 interrupt vector ID (number). */
+#define UART2_SERIAL_RX_TX_IRQN UART2_RX_TX_IRQn
+/* UART2 interrupt vector priority. */
+#define UART2_SERIAL_RX_TX_IRQ_PRIORITY 7
+/* UART2 interrupt vector ID (number). */
+#define UART2_SERIAL_ERROR_IRQN UART2_ERR_IRQn
+/* UART2 interrupt vector priority. */
+#define UART2_SERIAL_ERROR_IRQ_PRIORITY 8
 
 /***********************************************************************************************************************
  * Global variables
@@ -103,6 +117,9 @@ extern const i2c_master_config_t I2C0_config;
 extern uart_rtos_handle_t UART0_rtos_handle;
 extern uart_handle_t UART0_uart_handle;
 extern uart_rtos_config_t UART0_rtos_config;
+extern uart_rtos_handle_t UART2_rtos_handle;
+extern uart_handle_t UART2_uart_handle;
+extern uart_rtos_config_t UART2_rtos_config;
 /* FATFS System object */
 extern FATFS FATFS_System_0;
 

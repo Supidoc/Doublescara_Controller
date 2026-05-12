@@ -30,6 +30,7 @@
 #include "tmc2209_core.h"
 #include "motor_core.h"
 #include "motorCmd.h"
+#include "scara_kinematics.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -104,50 +105,61 @@ void APP_init(void)
         while (1)
             ;
     }
+    if (SK_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
 }
 
 void APP_run(void)
 {
     traceSTART();
-    if (create_task(LOG_task, "LOG_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(LOG_task, "LOG_Task", configMINIMAL_STACK_SIZE + 400,
                     configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
 
-    if (create_task(CLI_task, "CLI_Task", configMINIMAL_STACK_SIZE + 200,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
-    {
-        while (1)
-            ;
-    }
-    if (create_task(STP_task, "STP_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(CLI_task, "CLI_Task", configMINIMAL_STACK_SIZE + 400,
                     configMAX_PRIORITIES - 3) != kStatus_Success)
     {
         while (1)
             ;
     }
-    if (create_task(TMC_task, "TMC_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(STP_task, "STP_Task", configMINIMAL_STACK_SIZE + 800,
+                    configMAX_PRIORITIES - 1) != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (create_task(TMC_task, "TMC_Task", configMINIMAL_STACK_SIZE + 800,
                     configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
     }
-    if (create_task(MTT_task, "MTT_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(MTT_task, "MTT_Task", configMINIMAL_STACK_SIZE + 800,
                     configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
-    if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 400,
+    if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 800,
                     configMAX_PRIORITIES - 4) != kStatus_Success)
     {
         while (1)
             ;
     }
-    if (create_task(MCMD_task, "MCMD_Task", configMINIMAL_STACK_SIZE + 200,
+    if (create_task(MCMD_task, "MCMD_Task", configMINIMAL_STACK_SIZE + 800,
                     configMAX_PRIORITIES - 5) != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (create_task(SK_task, "SK_Task", configMINIMAL_STACK_SIZE + 800, configMAX_PRIORITIES - 2) !=
+        kStatus_Success)
     {
         while (1)
             ;
@@ -157,6 +169,9 @@ void APP_run(void)
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName)
 {
+    (void)xTask;
+    (void)pcTaskName;
+    __asm volatile("BKPT #0");
     for (;;)
     {
         asm("nop");

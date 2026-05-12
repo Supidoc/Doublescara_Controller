@@ -30,8 +30,8 @@ var NAVTREE =
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -52,10 +52,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__MOTOR__Facade__Module.html#ga3215be0474c3137b5dcd9793930cb8c8",
-"log_8c.html",
-"struct__LOG__LogHeader.html#aede1f42d8f97b5de6b11888826430202",
-"tmc2209__process_8h_source.html"
+"grabber_8h.html#a4d2e59f38118363afdc6988d4580a088",
+"group__STEPPER__Process__Internal.html#gaa0917c64053aa474082419f2b0a6412d",
+"scara__kinematics_8c.html#aa4f604c38d46c2023393078d055470ee",
+"struct__MTR__SetHoldCurrentCmdData.html#ac7a4b6259c8c47995b36eff41e0789b9",
+"tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4a9d034e2935ff10c640bd55673e66dc15"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

@@ -196,8 +196,8 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
             break;
 
         case MTR_CMD_GET_CURRENT_ANGLE:
-            cmdStatus = MTRi_get_current_angle(
-                queueItem.handle, queueItem.data.getCurrentAngle.angle, queueItem.deadline);
+            cmdStatus =
+                MTRi_get_current_angle(queueItem.handle, queueItem.data.getCurrentAngle.angle);
             break;
 
         case MTR_CMD_GET_MOVEMENT_STATE:
@@ -237,9 +237,19 @@ status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* ta
             break;
         }
     }
-
-    if (cmdStatus == kStatus_Success && taskItem->count == 0)
+    if (taskItem->count == 1)
     {
+        if (SYW_cmd_wait_result(taskItem->cmdHandles[0], queueItem.deadline, NULL) !=
+            kStatus_Success)
+        {
+            cmdStatus = kStatus_Fail;
+        }
+        CHD_remove_cmd_handle_ref(taskItem->cmdHandles[0]);
+        taskItem->count = 0;
+    }
+    if (cmdStatus == kStatus_Success)
+    {
+
         CDP_notify_task_success(queueItem.cmdHandle);
         taskItem->used = 0;
         CHD_remove_cmd_handle_ref(queueItem.cmdHandle);

@@ -4,90 +4,464 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ scara\_kinematics.c}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Filedescription}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Five-\/bar\ SCARA\ kinematics\ core\ implementation}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00004}00004\ \textcolor{comment}{\ *\ @author\ \ dg}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 17\ Mar\ 2026}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00005}00005\ \textcolor{comment}{\ *\ @date\ \ \ \ 17\ Apr\ 2026}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00006}00006\ \textcolor{comment}{\ ************************************************************/}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00007}00007\ }
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{scara__kinematics_8h}{scara\_kinematics.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}math.h"{}}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00013}00013\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00014}00014\ \textcolor{comment}{/************************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00015}00015\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00016}00016\ \textcolor{comment}{\ ************************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00017}00017\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00018}00018\ \textcolor{comment}{/***************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00019}00019\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00020}00020\ \textcolor{comment}{\ ***************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00022}00022\ \textcolor{comment}{/*****************************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00023}00023\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00024}00024\ \textcolor{comment}{\ *****************************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00025}00025\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00026}00026\ \textcolor{comment}{/****************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00028}00028\ \textcolor{comment}{\ ****************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00029}00029\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00030}00030\ \textcolor{comment}{/*****************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00031}00031\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00032}00032\ \textcolor{comment}{\ *****************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00033}00033\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00034}\doxymbox{\hyperlink{scara__kinematics_8c_a3adf355f0bb0733139030f71d755f57e}{00034}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a3adf355f0bb0733139030f71d755f57e}{scara\_inverse\_kinematics}}(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \doxymbox{\hyperlink{scara__kinematics_8h_a6b9f2ad0e7047e9169ca225d96d15142}{SK\_Configuration\_t}}\ configuration,}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ theta1,\ \textcolor{keywordtype}{double}*\ theta2)}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00036}00036\ \{}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00037}00037\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00038}00038\ \ \ \ \ d1E\ \ \ \ =\ sqrt(pow(x,\ 2)\ +\ pow(y,\ 2));}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00039}00039\ \ \ \ \ d2E\ \ \ \ =\ sqrt(pow(x\ -\/\ c,\ 2)\ +\ pow(y,\ 2));}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00040}00040\ \ \ \ \ alpha1\ =\ acos((pow(d1E,\ 2)\ +\ pow(a1,\ 2)\ -\/\ pow(a3,\ 2))\ /\ (2\ *\ a1\ *\ d1E));}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00041}00041\ \ \ \ \ alpha2\ =\ acos((pow(d2E,\ 2)\ +\ pow(a2,\ 2)\ -\/\ pow(a4,\ 2))\ /\ (2\ *\ a2\ *\ d2E));}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00042}00042\ \ \ \ \ beta1\ \ =\ atan2(y,\ x);}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00043}00043\ \ \ \ \ beta2\ \ =\ atan2(y,\ x\ -\/\ c);}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00044}00044\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (isnan(alpha1)\ ||\ isnan(alpha2)\ ||\ isinf(alpha1)\ ||\ isinf(alpha2))}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00046}00046\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \textcolor{comment}{//\ Position\ is\ unreachable}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00048}00048\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00049}00049\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (isnan(beta1)\ ||\ isnan(beta2)\ ||\ isinf(beta1)\ ||\ isinf(beta2))}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00051}00051\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;\ \textcolor{comment}{//\ Position\ is\ unreachable}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00053}00053\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{switch}\ (configuration)}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00056}00056\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{scara__kinematics_8h_aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59}{SK\_BOTH\_ELBOW\_OUT}}:}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ theta1Temp\ =\ beta1\ -\/\ alpha1;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ theta2Temp\ =\ beta2\ -\/\ alpha2;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{scara__kinematics_8h_aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71}{SK\_L\_ELBOW\_OUT\_R\_ELBOW\_IN}}:}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ theta1Temp\ =\ beta1\ -\/\ alpha1;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ theta2Temp\ =\ beta2\ +\ alpha2;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{scara__kinematics_8h_aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808}{SK\_L\_ELBOW\_IN\_R\_ELBOW\_OUT}}:}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ theta1Temp\ =\ beta1\ +\ alpha1;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ theta2Temp\ =\ beta2\ -\/\ alpha2;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{scara__kinematics_8h_aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d}{SK\_BOTH\_ELBOW\_IN}}:}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ theta1Temp\ =\ beta1\ +\ alpha1;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ theta2Temp\ =\ beta2\ +\ alpha2;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00073}00073\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00074}00074\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00075}00075\ \ \ \ \ *theta1\ =\ theta1Temp;}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00076}00076\ \ \ \ \ *theta2\ =\ theta2Temp;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{scara__kinematics__internal_8h}{scara\_kinematics\_internal.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{scara__kinematics__process_8h}{scara\_kinematics\_process.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__core_8h}{motor\_core.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__homing_8h}{motor\_homing.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{sync__wait_8h}{sync\_wait.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00020}00020\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00021}00021\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00022}00022\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00024}00024\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00025}00025\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00026}00026\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00028}00028\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00029}00029\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00030}00030\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00031}00031\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}{SKi\_apply\_transform}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ topLevelPoint,\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ robotPoint);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00032}00032\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}{SKi\_inverse\_transform}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ robotPoint,\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ topLevelPoint);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00033}00033\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}{SKi\_point\_in\_rect}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_ab1c93daab811807f8c4fe4b74a33539a}{SK\_WorkspaceRect\_t}}*\ rect,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ point);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00034}00034\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{SKi\_workspace\_allowed}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ point,\ \textcolor{keywordtype}{bool}*\ allowed);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00036}00036\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00037}00037\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00038}00038\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00040}\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{00040}}\ \doxymbox{\hyperlink{scara__kinematics_8h_a96ec1f712f7a968971cf7080fa7cd5ea}{SK\_State\_t}}\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00041}00041\ \ \ \ \ .pose\ \ \ \ \ \ \ \ \ \ \ \ =\ \{.x\ =\ 30.0,\ .y\ =\ 220.0\},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00042}00042\ \ \ \ \ .transform\ \ \ \ \ \ \ =\ \{1.0,\ 1.0,\ 0.0,\ 0.0\},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00043}00043\ \ \ \ \ .workspaceLimits\ =\ \{.rectangles\ =\ \{\{0\}\},\ .rectangleCount\ =\ 0U,\ .enabled\ =\ \textcolor{keyword}{false}\},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00044}00044\ \ \ \ \ .side\ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f}{SK\_SIDE\_MAIN}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00045}00045\ \ \ \ \ .calibrated\ \ \ \ \ \ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00046}00046\ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00048}\doxymbox{\hyperlink{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398}{00048}}\ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ \doxymbox{\hyperlink{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398}{skLeftMotorHandle}}\ \ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00049}\doxymbox{\hyperlink{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8}{00049}}\ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ \doxymbox{\hyperlink{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8}{skRightMotorHandle}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00050}\doxymbox{\hyperlink{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35}{00050}}\ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ \doxymbox{\hyperlink{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35}{skZetaMotorHandle}}\ \ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00052}00052\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00053}00053\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00054}00054\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00056}\doxymbox{\hyperlink{scara__kinematics_8c_acac4dcbb8a11f45cd382bbf66ed3fa3b}{00056}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_acac4dcbb8a11f45cd382bbf66ed3fa3b}{SK\_init}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{scara__kinematics__process_8c_a8facbaf5ede19f315fae98499be22594}{SKi\_init\_queue}}()\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00065}\doxymbox{\hyperlink{scara__kinematics_8c_af2824b953075ed9864849a9db11bcaaa}{00065}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_af2824b953075ed9864849a9db11bcaaa}{SK\_init\_motor\_handles}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ leftMotorHandle,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ rightMotorHandle,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ zetaMotorHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (leftMotorHandle\ ==\ NULL\ ||\ rightMotorHandle\ ==\ NULL\ ||\ zetaMotorHandle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00074}00074\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8c_a65dc1acdca57aa1008e065d03ffcc398}{skLeftMotorHandle}}\ \ =\ leftMotorHandle;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00075}00075\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8c_ab9834d208499b205c4043db44e73bbc8}{skRightMotorHandle}}\ =\ rightMotorHandle;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00076}00076\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8c_abea7e0c172c1c9e4266d5a320dc3ce35}{skZetaMotorHandle}}\ \ =\ zetaMotorHandle;}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00077}00077\ }
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00079}00079\ \}}
 \DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00080}00080\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00081}00081\ \textcolor{comment}{/*******************************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00082}00082\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00083}00083\ \textcolor{comment}{\ *******************************************/}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00084}00084\ }
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00085}00085\ \textcolor{comment}{/********************************************}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00086}00086\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00087}00087\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00081}\doxymbox{\hyperlink{scara__kinematics_8c_a72ae223e622ac3b8c215a53c0ad99f77}{00081}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{scara__kinematics_8c_a72ae223e622ac3b8c215a53c0ad99f77}{SK\_task}}(\textcolor{keywordtype}{void}*\ pvParameters)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00083}00083\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__process_8c_a9c1a423a52eeb6e13783e985ced2e912}{SKi\_task}}(pvParameters);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00086}\doxymbox{\hyperlink{scara__kinematics_8c_ad64be02f4743561357c3159db1a0257c}{00086}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_ad64be02f4743561357c3159db1a0257c}{SK\_set\_transform\_async}}(\doxymbox{\hyperlink{scara__kinematics_8h_ad2e42d194e3a55014f76a7f6c90ffa70}{SK\_Transform\_t}}\ transform,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00090}00090\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{.type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0aa8fed31247a3a01887e7a1483f0bab90}{SK\_CMD\_SET\_TRANSFORM}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .deadline\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .cmdHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .data.setTransform.transform\ =\ transform\};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00098}\doxymbox{\hyperlink{scara__kinematics_8c_a154da1ed72f26b754cdc9d0bbac0b0e6}{00098}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a154da1ed72f26b754cdc9d0bbac0b0e6}{SK\_set\_workspace\_limits\_async}}(\doxymbox{\hyperlink{scara__kinematics_8h_a5de9211a9655a54f3b833884b1743a6d}{SK\_WorkspaceLimits\_t}}\ limits,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00100}00100\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00102}00102\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{.type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0a5e1a957886b1edabca29a72e771939ea}{SK\_CMD\_SET\_WORKSPACE\_LIMITS}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .deadline\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .cmdHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .data.setWorkspaceLimits.limits\ =\ limits\};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00108}00108\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00110}\doxymbox{\hyperlink{scara__kinematics_8c_a63130808dc5f45c765768e792a9b9a80}{00110}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a63130808dc5f45c765768e792a9b9a80}{SK\_enable\_workspace\_limits\_async}}(\textcolor{keywordtype}{bool}\ enabled,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00112}00112\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00113}00113\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{.type\ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0a31e6785814bcbae588cebb669755eaa1}{SK\_CMD\_ENABLE\_WORKSPACE\_LIMITS}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .deadline\ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .cmdHandle\ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .data.enableWorkspaceLimits.enabled\ =\ enabled\};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00121}\doxymbox{\hyperlink{scara__kinematics_8c_aa4f604c38d46c2023393078d055470ee}{00121}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_aa4f604c38d46c2023393078d055470ee}{SK\_set\_origin\_offset\_async}}(\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ offset,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00124}00124\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ .type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0a73444a9161a033168b057192f5cab688}{SK\_CMD\_SET\_ORIGIN\_OFFSET}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ .deadline\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ .cmdHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ .data.setOriginOffset.offset\ =\ offset,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00129}00129\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00134}\doxymbox{\hyperlink{scara__kinematics_8c_a74348adaab6b489417d541720992dda9}{00134}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a74348adaab6b489417d541720992dda9}{SK\_change\_side\_async}}(TickType\_t\ deadline,\ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00135}00135\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00136}00136\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ .type\ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0a5c6640113db940a947e7976c76caec6c}{SK\_CMD\_CHANGE\_SIDE}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ .deadline\ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ .cmdHandle\ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00140}00140\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00143}00143\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00145}\doxymbox{\hyperlink{scara__kinematics_8c_a613c322a91f008bb7cdd50e601683f23}{00145}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a613c322a91f008bb7cdd50e601683f23}{SK\_is\_point\_allowed}}(\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ point,\ \textcolor{keywordtype}{bool}*\ allowed)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00146}00146\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00147}00147\ \ \ \ \ \textcolor{keywordflow}{if}\ (allowed\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00148}00148\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{SKi\_workspace\_allowed}}(\&point,\ allowed);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00155}\doxymbox{\hyperlink{scara__kinematics_8c_a46c8b87e143361ef751055f6375febeb}{00155}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a46c8b87e143361ef751055f6375febeb}{SK\_inverse\_kinematics}}(\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ point,\ \textcolor{keywordtype}{double}*\ theta1,\ \textcolor{keywordtype}{double}*\ theta2,\ \textcolor{keywordtype}{double}*\ zetaE)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00157}00157\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ robotPoint;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00158}00158\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ d1E;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00159}00159\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ d2E;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00160}00160\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ q1;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00161}00161\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ q2;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00162}00162\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ cosU1;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00163}00163\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ cosU2;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00165}00165\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ c\ \ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a523ba6e2865ca100ea2692bbe6bbfa0d}{SK\_BASE\_SPAN\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00166}00166\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a1\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_aff6da966369e4554919f5a487e77624f}{SK\_LEFT\_ROOT\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00167}00167\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a2\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_ac366824d6869fb86062f58d82282edcd}{SK\_RIGHT\_ROOT\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00168}00168\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a3\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a2d1344c8bfddb1b866ac8e57ba20b580}{SK\_LEFT\_FAR\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00169}00169\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a4\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a4edd79db6068ad3a858ba7c6fbee3926}{SK\_RIGHT\_FAR\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}{SKi\_apply\_transform}}(\&point,\ \&robotPoint)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00172}00172\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00176}00176\ \ \ \ \ \textcolor{keywordtype}{bool}\ allowed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00177}00177\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{SKi\_workspace\_allowed}}(\&point,\ \&allowed)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00180}00180\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (!allowed)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00183}00183\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00185}00185\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00187}00187\ \ \ \ \ d1E\ =\ hypot(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}},\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}});}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00188}00188\ \ \ \ \ d2E\ =\ hypot(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ c,\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}});}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00190}00190\ \ \ \ \ \textcolor{keywordflow}{if}\ ((d1E\ <=\ 0.0)\ ||\ (d2E\ <=\ 0.0))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00191}00191\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00193}00193\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00195}00195\ \ \ \ \ \textcolor{comment}{//\ \ \ \ cosQ3\ =\ (d1E\ *\ d1E\ -\/\ SK\_LEFT\_ROOT\_ARM\_LENGTH\_MM\ *\ SK\_LEFT\_ROOT\_ARM\_LENGTH\_MM\ -\/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00196}00196\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ SK\_LEFT\_FAR\_ARM\_LENGTH\_MM\ *\ SK\_LEFT\_FAR\_ARM\_LENGTH\_MM)\ /}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00197}00197\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ (2.0\ *\ SK\_LEFT\_ROOT\_ARM\_LENGTH\_MM\ *\ SK\_LEFT\_FAR\_ARM\_LENGTH\_MM);}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ \ \ \ cosQ4\ =\ (d2E\ *\ d2E\ -\/\ SK\_RIGHT\_ROOT\_ARM\_LENGTH\_MM\ *\ SK\_RIGHT\_ROOT\_ARM\_LENGTH\_MM\ -\/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00199}00199\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ SK\_RIGHT\_FAR\_ARM\_LENGTH\_MM\ *\ SK\_RIGHT\_FAR\_ARM\_LENGTH\_MM)\ /}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00200}00200\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ (2.0\ *\ SK\_RIGHT\_ROOT\_ARM\_LENGTH\_MM\ *\ SK\_RIGHT\_FAR\_ARM\_LENGTH\_MM);}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00201}00201\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00203}00203\ \ \ \ \ cosU1\ =\ (d1E\ *\ d1E\ +\ a1\ *\ a1\ -\/\ a3\ *\ a3)\ /\ (2.0\ *\ a1\ *\ d1E);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00204}00204\ \ \ \ \ cosU2\ =\ (d2E\ *\ d2E\ +\ a2\ *\ a2\ -\/\ a4\ *\ a4)\ /\ (2.0\ *\ a2\ *\ d2E);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{if}\ ((cosU1\ <\ -\/1.0)\ ||\ (cosU1\ >\ 1.0)\ ||\ (cosU2\ <\ -\/1.0)\ ||\ (cosU2\ >\ 1.0))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00207}00207\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00211}00211\ \ \ \ \ \textcolor{keywordflow}{if}\ (point.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ >=\ 0.0)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00212}00212\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ q1\ =\ atan2(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}},\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}})\ +\ acos(cosU1);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ q2\ =\ atan2(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}},\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ c)\ -\/\ acos(cosU2);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00216}00216\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00217}00217\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ q1\ =\ atan2(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}},\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}})\ -\/\ acos(cosU1);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ q2\ =\ atan2(robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}},\ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ c)\ +\ acos(cosU2);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{if}\ ((!isfinite(q1))\ ||\ (!isfinite(q2)))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00223}00223\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00225}00225\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordtype}{double}\ q1normalized\ =\ q1;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00227}00227\ \ \ \ \ \textcolor{keywordtype}{double}\ q2normalized\ =\ q2;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00229}00229\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 2;\ i++)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00230}00230\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (q1normalized\ <\ 0.0)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ q1normalized\ +=\ 2.0\ *\ M\_PI;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00235}00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (q1normalized\ >\ 2\ *\ M\_PI)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ q1normalized\ -\/=\ 2.0\ *\ M\_PI;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (q2normalized\ <\ 0.0)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ q2normalized\ +=\ 2.0\ *\ M\_PI;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (q2normalized\ >\ 2\ *\ M\_PI)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00245}00245\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ q2normalized\ -\/=\ 2.0\ *\ M\_PI;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordflow}{if}\ (zetaE\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00251}00251\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ point;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00253}00253\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849}{SK\_forward\_kinematics}}(q1normalized,\ q2normalized,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ >=\ 0.0\ ?\ \doxymbox{\hyperlink{scara__kinematics_8h_a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f}{SK\_SIDE\_MAIN}}\ :\ \doxymbox{\hyperlink{scara__kinematics_8h_a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347}{SK\_SIDE\_MIRRORED}},\ \&point,\ zetaE);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00255}00255\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{if}\ (theta1\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00258}00258\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ *theta1\ =\ q1normalized;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00260}00260\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00261}00261\ \ \ \ \ \textcolor{keywordflow}{if}\ (theta2\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00262}00262\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ *theta2\ =\ q2normalized;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00264}00264\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00265}00265\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00266}00266\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00268}\doxymbox{\hyperlink{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849}{00268}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_aad8095cb459faaba67efba05e9725849}{SK\_forward\_kinematics}}(\textcolor{keywordtype}{double}\ theta1,\ \textcolor{keywordtype}{double}\ theta2,\ \doxymbox{\hyperlink{scara__kinematics_8h_a653571debd083a9985616ba7e935c734}{SK\_Side\_t}}\ side,\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ point,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ zetaE)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00270}00270\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00271}00271\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ c\ \ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a523ba6e2865ca100ea2692bbe6bbfa0d}{SK\_BASE\_SPAN\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00272}00272\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a1\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_aff6da966369e4554919f5a487e77624f}{SK\_LEFT\_ROOT\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00273}00273\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a2\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_ac366824d6869fb86062f58d82282edcd}{SK\_RIGHT\_ROOT\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00274}00274\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a3\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a2d1344c8bfddb1b866ac8e57ba20b580}{SK\_LEFT\_FAR\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00275}00275\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a4\ =\ \doxymbox{\hyperlink{scara__kinematics_8h_a4edd79db6068ad3a858ba7c6fbee3926}{SK\_RIGHT\_FAR\_ARM\_LENGTH\_MM}};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00277}00277\ \ \ \ \ \textcolor{keywordflow}{if}\ (point\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00278}00278\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00280}00280\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00282}00282\ \ \ \ \ \textcolor{keywordflow}{if}\ ((a1\ <=\ 0.0)\ ||\ (a2\ <=\ 0.0)\ ||\ (a3\ <=\ 0.0)\ ||\ (a4\ <=\ 0.0))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00283}00283\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00284}00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00285}00285\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00287}00287\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ j1\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ .x\ =\ 0.0,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ .y\ =\ 0.0,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00290}00290\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00292}00292\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ j2\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ .x\ =\ c,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ .y\ =\ 0.0,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00295}00295\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00297}00297\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ j3\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ .x\ =\ a1\ *\ cos(theta1),}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ .y\ =\ a1\ *\ sin(theta1),}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00300}00300\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00302}00302\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ j4\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ .x\ =\ c\ +\ (a2\ *\ cos(theta2)),}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ .y\ =\ a2\ *\ sin(theta2),}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00305}00305\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00307}00307\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ dx\ \ \ \ \ \ \ \ =\ fabs(j4.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ j3.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}});}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00308}00308\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ dy\ \ \ \ \ \ \ \ =\ fabs(j4.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ -\/\ j3.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}});}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00309}00309\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ d\ \ \ \ \ \ \ \ \ =\ hypot(dx,\ dy);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00310}00310\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ q3BetaCos\ =\ ((a3\ *\ a3)\ +\ (d\ *\ d)\ -\/\ (a4\ *\ a4))\ /\ (2.0\ *\ a3\ *\ d);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00312}00312\ \ \ \ \ (void)j1;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00313}00313\ \ \ \ \ (void)j2;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{if}\ ((d\ <=\ 0.0)\ ||\ (d\ >\ (a3\ +\ a4)))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00316}00316\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00318}00318\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{if}\ ((q3BetaCos\ <\ -\/1.0)\ ||\ (q3BetaCos\ >\ 1.0))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00321}00321\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00323}00323\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00325}00325\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ alpha\ =\ atan(dy\ /\ dx);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00326}00326\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ beta\ \ =\ acos(q3BetaCos);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00328}00328\ \ \ \ \ \textcolor{keywordflow}{if}\ ((!isfinite(alpha))\ ||\ (!isfinite(beta)))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00329}00329\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00330}00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00331}00331\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00333}00333\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ robotPoint;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00334}00334\ \ \ \ \ \textcolor{keywordflow}{if}\ (side\ ==\ \doxymbox{\hyperlink{scara__kinematics_8h_a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f}{SK\_SIDE\_MAIN}})}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00335}00335\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00336}00336\ \ \ \ \ \ \ \ \ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ =\ j3.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ +\ (a3\ *\ cos(alpha\ +\ beta));}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00337}00337\ \ \ \ \ \ \ \ \ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ =\ j3.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ +\ (a3\ *\ sin(alpha\ +\ beta));}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00339}00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (zetaE\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00340}00340\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ *zetaE\ =\ alpha\ +\ beta;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00343}00343\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00344}00344\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00345}00345\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ =\ j3.\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ (a3\ *\ cos(alpha\ +\ beta));}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00347}00347\ \ \ \ \ \ \ \ \ robotPoint.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ =\ j3.\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ -\/\ (a3\ *\ sin(alpha\ +\ beta));}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (zetaE\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ *zetaE\ =\ -\/(alpha\ +\ beta);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00352}00352\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00355}00355\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ topLevelPoint;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00356}00356\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}{SKi\_inverse\_transform}}(\&robotPoint,\ \&topLevelPoint)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00357}00357\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00359}00359\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00361}00361\ \ \ \ \ *point\ =\ topLevelPoint;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00362}00362\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00363}00363\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00365}\doxymbox{\hyperlink{scara__kinematics_8c_a85bc1286e68ddabc28834bcdefaa0be3}{00365}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a85bc1286e68ddabc28834bcdefaa0be3}{SK\_move\_to\_xy\_async}}(\doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ targetPoint,\ \textcolor{keywordtype}{double}\ deltaZetaE,\ \textcolor{keywordtype}{bool}\ rotateZeta,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00367}00367\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00368}00368\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00369}00369\ \ \ \ \ \ \ \ \ .type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0aca5a926e0e1eeff9d0245c02850423a7}{SK\_CMD\_MOVE\_TO\_XY}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00370}00370\ \ \ \ \ \ \ \ \ .deadline\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00371}00371\ \ \ \ \ \ \ \ \ .cmdHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ .data.moveToXY.targetPoint\ =\ targetPoint,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00373}00373\ \ \ \ \ \ \ \ \ .data.moveToXY.deltaZetaE\ \ =\ deltaZetaE,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ .data.moveToXY.rotateZeta\ \ =\ rotateZeta,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00375}00375\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00377}00377\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00378}00378\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00380}\doxymbox{\hyperlink{scara__kinematics_8c_a284fbb96c16805e1297637cf1b6da65f}{00380}}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a284fbb96c16805e1297637cf1b6da65f}{SK\_home}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}\ zeroOffset,\ TickType\_t\ deadline,\ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00381}00381\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00382}00382\ \ \ \ \ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a11ff5d4341c3f5451a99b97d1d632923}{SK\_CmdQueueItem\_t}}\ queueItem\ =\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00383}00383\ \ \ \ \ \ \ \ \ .type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{scara__kinematics__internal_8h_a83d92dd467faace46338b3853aaeffd0a33b2f5ede8541f98064e41e1ff8b7d14}{SK\_CMD\_HOME}},}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00384}00384\ \ \ \ \ \ \ \ \ .deadline\ \ \ \ \ \ \ \ \ \ \ \ \ =\ deadline,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00385}00385\ \ \ \ \ \ \ \ \ .cmdHandle\ \ \ \ \ \ \ \ \ \ \ \ =\ NULL,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00386}00386\ \ \ \ \ \ \ \ \ .data.home.zeroOffset\ =\ zeroOffset,}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00387}00387\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00389}00389\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{scara__kinematics__process_8c_a903175bdf7be28a74beb33fc41d58d86}{SKi\_send\_cmd\_async}}(\&queueItem,\ deadline,\ cmdHandle);}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00390}00390\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00392}00392\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00393}00393\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00394}00394\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00395}\doxymbox{\hyperlink{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}{00395}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a11fcccf12178634e3cecf710b005f0fe}{SKi\_apply\_transform}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ topLevelPoint,\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ robotPoint)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00396}00396\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00397}00397\ \ \ \ \ \textcolor{keywordflow}{if}\ ((topLevelPoint\ ==\ NULL)\ ||\ (robotPoint\ ==\ NULL))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00398}00398\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00400}00400\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00402}00402\ \ \ \ \ robotPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ =\ (topLevelPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ *\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleX)\ +\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.offsetX;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00403}00403\ \ \ \ \ robotPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ =\ (topLevelPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ *\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleY)\ +\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.offsetY;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00404}00404\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00405}00405\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00407}\doxymbox{\hyperlink{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}{00407}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a45d2d5c5ea68a32e5e98cb7bcdddd123}{SKi\_inverse\_transform}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ robotPoint,\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ topLevelPoint)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00408}00408\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00409}00409\ \ \ \ \ \textcolor{keywordflow}{if}\ ((robotPoint\ ==\ NULL)\ ||\ (topLevelPoint\ ==\ NULL))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00410}00410\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00412}00412\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00413}00413\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00414}00414\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleX\ ==\ 0.0)\ ||\ (\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleY\ ==\ 0.0))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00415}00415\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00417}00417\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00419}00419\ \ \ \ \ topLevelPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ =\ (robotPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ -\/\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.offsetX)\ /\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleX;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00420}00420\ \ \ \ \ topLevelPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ =\ (robotPoint-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ -\/\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.offsetY)\ /\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.transform.scaleY;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00421}00421\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00422}00422\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00424}\doxymbox{\hyperlink{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}{00424}}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}{SKi\_point\_in\_rect}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_ab1c93daab811807f8c4fe4b74a33539a}{SK\_WorkspaceRect\_t}}*\ rect,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ point)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00425}00425\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00426}00426\ \ \ \ \ \textcolor{keywordflow}{if}\ ((rect\ ==\ NULL)\ ||\ (point\ ==\ NULL))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00427}00427\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00429}00429\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00431}00431\ \ \ \ \ \textcolor{keywordflow}{return}\ (point-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ >=\ rect-\/>\doxymbox{\hyperlink{struct__SK__WorkspaceRect_a7e66a6d1b86b04178d4145e35a41fb99}{minX}})\ \&\&\ (point-\/>\doxymbox{\hyperlink{struct__SK__Point_a77d2efbfe1ba1007b6ba5574722d7088}{x}}\ <=\ rect-\/>\doxymbox{\hyperlink{struct__SK__WorkspaceRect_a7f42359d08e576c8fd3ca4d57d870243}{maxX}})\ \&\&\ (point-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ >=\ rect-\/>\doxymbox{\hyperlink{struct__SK__WorkspaceRect_a30327f3cb8f19fe55caba114b5947a5a}{minY}})\ \&\&}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ (point-\/>\doxymbox{\hyperlink{struct__SK__Point_a93ff8af49e5067cd7bd27c56e34f5849}{y}}\ <=\ rect-\/>\doxymbox{\hyperlink{struct__SK__WorkspaceRect_aca331837a0b4b3ff0d3b6e98b41f3685}{maxY}});}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00433}00433\ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00435}\doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{00435}}\ \textcolor{keyword}{static}\ status\_t\ \doxymbox{\hyperlink{scara__kinematics_8c_a27c7985b4b265a070ae682382b474a46}{SKi\_workspace\_allowed}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{scara__kinematics_8h_a4d95bb7e81f6f2a25e380929ceed7d1c}{SK\_Point\_t}}*\ point,\ \textcolor{keywordtype}{bool}*\ allowed)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00436}00436\ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00437}00437\ \ \ \ \ uint8\_t\ i;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00439}00439\ \ \ \ \ \textcolor{keywordflow}{if}\ ((point\ ==\ NULL)\ ||\ (allowed\ ==\ NULL))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00440}00440\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00441}00441\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00442}00442\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00443}00443\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00444}00444\ \ \ \ \ \textcolor{keywordflow}{if}\ ((!\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.workspaceLimits.enabled)\ ||\ (\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.workspaceLimits.rectangleCount\ ==\ 0U))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00445}00445\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00446}00446\ \ \ \ \ \ \ \ \ *allowed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00447}00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00448}00448\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00450}00450\ \ \ \ \ *allowed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00451}00451\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <\ \doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.workspaceLimits.rectangleCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00452}00452\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00453}00453\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{scara__kinematics_8c_a7dd0086dbf927ad525f39d9ca786362d}{SKi\_point\_in\_rect}}(\&\doxymbox{\hyperlink{scara__kinematics_8c_ae7dc8df29a03951f11e6cad2e418a666}{skState}}.workspaceLimits.rectangles[i],\ point))}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00454}00454\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ *allowed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00458}00458\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00460}00460\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{scara__kinematics_8c_source_l00461}00461\ \}}
 
 \end{DoxyCode}

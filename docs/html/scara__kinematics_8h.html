@@ -92,73 +92,858 @@ $(function(){initNavTree('scara__kinematics_8h.html','',''); });
   <div class="headertitle"><div class="title">scara_kinematics.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;FreeRTOS.h&quot;</code><br />
+<code>#include &quot;fsl_common.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="cmd__handle_8h_source.html">cmd_handle.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="motor__core_8h_source.html">motor_core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for scara_kinematics.h:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="scara__kinematics_8h__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="scara__kinematics_8h__dep__incl.svg" width="206" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="scara__kinematics_8h__dep__incl.svg" width="100%" height="537"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="scara__kinematics_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:_5FSK_5FPoint" id="r__5FSK_5FPoint"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__Point.html">_SK_Point</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a 2D Cartesian point in top-level coordinates.  <a href="struct__SK__Point.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSK_5FPose" id="r__5FSK_5FPose"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__Pose.html">_SK_Pose</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the current end-effector pose (position).  <a href="struct__SK__Pose.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSK_5FTransform" id="r__5FSK_5FTransform"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__Transform.html">_SK_Transform</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate transformation parameters for workspace scaling and offset.  <a href="struct__SK__Transform.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSK_5FWorkspaceRect" id="r__5FSK_5FWorkspaceRect"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__WorkspaceRect.html">_SK_WorkspaceRect</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a rectangular region within the workspace.  <a href="struct__SK__WorkspaceRect.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSK_5FWorkspaceLimits" id="r__5FSK_5FWorkspaceLimits"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__WorkspaceLimits.html">_SK_WorkspaceLimits</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a collection of rectangular workspace limits.  <a href="struct__SK__WorkspaceLimits.html#details">More...</a><br /></td></tr>
+<tr class="memitem:_5FSK_5FState" id="r__5FSK_5FState"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct__SK__State.html">_SK_State</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the complete kinematics state including pose, transforms, and limits.  <a href="struct__SK__State.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aff6da966369e4554919f5a487e77624f" id="r_aff6da966369e4554919f5a487e77624f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aff6da966369e4554919f5a487e77624f">SK_LEFT_ROOT_ARM_LENGTH_MM</a>&#160;&#160;&#160;(150.0)</td></tr>
+<tr class="memdesc:aff6da966369e4554919f5a487e77624f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the left arm's root segment in millimeters (configurable).  <br /></td></tr>
+<tr class="memitem:a2d1344c8bfddb1b866ac8e57ba20b580" id="r_a2d1344c8bfddb1b866ac8e57ba20b580"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2d1344c8bfddb1b866ac8e57ba20b580">SK_LEFT_FAR_ARM_LENGTH_MM</a>&#160;&#160;&#160;(175.0)</td></tr>
+<tr class="memdesc:a2d1344c8bfddb1b866ac8e57ba20b580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the left arm's far segment in millimeters (configurable).  <br /></td></tr>
+<tr class="memitem:ac366824d6869fb86062f58d82282edcd" id="r_ac366824d6869fb86062f58d82282edcd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac366824d6869fb86062f58d82282edcd">SK_RIGHT_ROOT_ARM_LENGTH_MM</a>&#160;&#160;&#160;(150.0)</td></tr>
+<tr class="memdesc:ac366824d6869fb86062f58d82282edcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the right arm's root segment in millimeters (configurable).  <br /></td></tr>
+<tr class="memitem:a4edd79db6068ad3a858ba7c6fbee3926" id="r_a4edd79db6068ad3a858ba7c6fbee3926"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4edd79db6068ad3a858ba7c6fbee3926">SK_RIGHT_FAR_ARM_LENGTH_MM</a>&#160;&#160;&#160;(175.0)</td></tr>
+<tr class="memdesc:a4edd79db6068ad3a858ba7c6fbee3926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the right arm's far segment in millimeters (configurable).  <br /></td></tr>
+<tr class="memitem:a523ba6e2865ca100ea2692bbe6bbfa0d" id="r_a523ba6e2865ca100ea2692bbe6bbfa0d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a523ba6e2865ca100ea2692bbe6bbfa0d">SK_BASE_SPAN_MM</a>&#160;&#160;&#160;(60.0)</td></tr>
+<tr class="memdesc:a523ba6e2865ca100ea2692bbe6bbfa0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distance between the left and right arm base points in millimeters (configurable).  <br /></td></tr>
+<tr class="memitem:a577dd269897295ca7df9c1390612e612" id="r_a577dd269897295ca7df9c1390612e612"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a577dd269897295ca7df9c1390612e612">SK_MAX_WORKSPACE_RECTS</a>&#160;&#160;&#160;(8U)</td></tr>
+<tr class="memdesc:a577dd269897295ca7df9c1390612e612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of workspace rectangles supported.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a6b9f2ad0e7047e9169ca225d96d15142" id="r_a6b9f2ad0e7047e9169ca225d96d15142"><td class="memItemLeft">typedef enum <a class="el" href="#aa184ab91b61238aabdf6825082796fed">_SK_Configuration</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6b9f2ad0e7047e9169ca225d96d15142">SK_Configuration_t</a></td></tr>
-<tr class="memdesc:a6b9f2ad0e7047e9169ca225d96d15142"><td class="mdescLeft">&#160;</td><td class="mdescRight">SCARA elbow configuration options.  <br /></td></tr>
+<tr class="memitem:a4d95bb7e81f6f2a25e380929ceed7d1c" id="r_a4d95bb7e81f6f2a25e380929ceed7d1c"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__Point.html">_SK_Point</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td></tr>
+<tr class="memdesc:a4d95bb7e81f6f2a25e380929ceed7d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a 2D Cartesian point in top-level coordinates.  <br /></td></tr>
+<tr class="memitem:a3a5f6ac556189ac2183310fce347cd2e" id="r_a3a5f6ac556189ac2183310fce347cd2e"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__Pose.html">_SK_Pose</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3a5f6ac556189ac2183310fce347cd2e">SK_Pose_t</a></td></tr>
+<tr class="memdesc:a3a5f6ac556189ac2183310fce347cd2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the current end-effector pose (position).  <br /></td></tr>
+<tr class="memitem:ad2e42d194e3a55014f76a7f6c90ffa70" id="r_ad2e42d194e3a55014f76a7f6c90ffa70"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__Transform.html">_SK_Transform</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad2e42d194e3a55014f76a7f6c90ffa70">SK_Transform_t</a></td></tr>
+<tr class="memdesc:ad2e42d194e3a55014f76a7f6c90ffa70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate transformation parameters for workspace scaling and offset.  <br /></td></tr>
+<tr class="memitem:ab1c93daab811807f8c4fe4b74a33539a" id="r_ab1c93daab811807f8c4fe4b74a33539a"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__WorkspaceRect.html">_SK_WorkspaceRect</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab1c93daab811807f8c4fe4b74a33539a">SK_WorkspaceRect_t</a></td></tr>
+<tr class="memdesc:ab1c93daab811807f8c4fe4b74a33539a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a rectangular region within the workspace.  <br /></td></tr>
+<tr class="memitem:a5de9211a9655a54f3b833884b1743a6d" id="r_a5de9211a9655a54f3b833884b1743a6d"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__WorkspaceLimits.html">_SK_WorkspaceLimits</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5de9211a9655a54f3b833884b1743a6d">SK_WorkspaceLimits_t</a></td></tr>
+<tr class="memdesc:a5de9211a9655a54f3b833884b1743a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a collection of rectangular workspace limits.  <br /></td></tr>
+<tr class="memitem:a653571debd083a9985616ba7e935c734" id="r_a653571debd083a9985616ba7e935c734"><td class="memItemLeft">typedef enum <a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97a">_SK_Side</a>&#160;</td><td class="memItemRight"><a class="el" href="#a653571debd083a9985616ba7e935c734">SK_Side_t</a></td></tr>
+<tr class="memdesc:a653571debd083a9985616ba7e935c734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerates the two possible robot configurations (main or mirrored).  <br /></td></tr>
+<tr class="memitem:a96ec1f712f7a968971cf7080fa7cd5ea" id="r_a96ec1f712f7a968971cf7080fa7cd5ea"><td class="memItemLeft">typedef struct <a class="el" href="struct__SK__State.html">_SK_State</a>&#160;</td><td class="memItemRight"><a class="el" href="#a96ec1f712f7a968971cf7080fa7cd5ea">SK_State_t</a></td></tr>
+<tr class="memdesc:a96ec1f712f7a968971cf7080fa7cd5ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the complete kinematics state including pose, transforms, and limits.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa184ab91b61238aabdf6825082796fed" id="r_aa184ab91b61238aabdf6825082796fed"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#aa184ab91b61238aabdf6825082796fed">_SK_Configuration</a> { <a class="el" href="#aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59">SK_BOTH_ELBOW_OUT</a>
-, <a class="el" href="#aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71">SK_L_ELBOW_OUT_R_ELBOW_IN</a>
-, <a class="el" href="#aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808">SK_L_ELBOW_IN_R_ELBOW_OUT</a>
-, <a class="el" href="#aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d">SK_BOTH_ELBOW_IN</a>
+<tr class="memitem:a17d8b3836510fd4db27ffd1315b3d97a" id="r_a17d8b3836510fd4db27ffd1315b3d97a"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97a">_SK_Side</a> { <a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f">SK_SIDE_MAIN</a> = 0
+, <a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347">SK_SIDE_MIRRORED</a> = 1
  }</td></tr>
-<tr class="memdesc:aa184ab91b61238aabdf6825082796fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">SCARA elbow configuration options.  <a href="#aa184ab91b61238aabdf6825082796fed">More...</a><br /></td></tr>
+<tr class="memdesc:a17d8b3836510fd4db27ffd1315b3d97a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerates the two possible robot configurations (main or mirrored).  <a href="#a17d8b3836510fd4db27ffd1315b3d97a">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acac4dcbb8a11f45cd382bbf66ed3fa3b" id="r_acac4dcbb8a11f45cd382bbf66ed3fa3b"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#acac4dcbb8a11f45cd382bbf66ed3fa3b">SK_init</a> (void)</td></tr>
+<tr class="memdesc:acac4dcbb8a11f45cd382bbf66ed3fa3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the kinematics module and command queue.  <br /></td></tr>
+<tr class="memitem:af2824b953075ed9864849a9db11bcaaa" id="r_af2824b953075ed9864849a9db11bcaaa"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#af2824b953075ed9864849a9db11bcaaa">SK_init_motor_handles</a> (<a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> leftMotorHandle, <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> rightMotorHandle, <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> zetaMotorHandle)</td></tr>
+<tr class="memdesc:af2824b953075ed9864849a9db11bcaaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the motor handles used by the kinematics layer.  <br /></td></tr>
+<tr class="memitem:a72ae223e622ac3b8c215a53c0ad99f77" id="r_a72ae223e622ac3b8c215a53c0ad99f77"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a72ae223e622ac3b8c215a53c0ad99f77">SK_task</a> (void *pvParameters)</td></tr>
+<tr class="memdesc:a72ae223e622ac3b8c215a53c0ad99f77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function for processing kinematics commands.  <br /></td></tr>
+<tr class="memitem:ad64be02f4743561357c3159db1a0257c" id="r_ad64be02f4743561357c3159db1a0257c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ad64be02f4743561357c3159db1a0257c">SK_set_transform_async</a> (<a class="el" href="#ad2e42d194e3a55014f76a7f6c90ffa70">SK_Transform_t</a> transform, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:ad64be02f4743561357c3159db1a0257c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues an update of the runtime coordinate transform.  <br /></td></tr>
+<tr class="memitem:a154da1ed72f26b754cdc9d0bbac0b0e6" id="r_a154da1ed72f26b754cdc9d0bbac0b0e6"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a154da1ed72f26b754cdc9d0bbac0b0e6">SK_set_workspace_limits_async</a> (<a class="el" href="#a5de9211a9655a54f3b833884b1743a6d">SK_WorkspaceLimits_t</a> limits, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:a154da1ed72f26b754cdc9d0bbac0b0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues an update of the workspace limits.  <br /></td></tr>
+<tr class="memitem:a63130808dc5f45c765768e792a9b9a80" id="r_a63130808dc5f45c765768e792a9b9a80"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a63130808dc5f45c765768e792a9b9a80">SK_enable_workspace_limits_async</a> (bool enabled, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:a63130808dc5f45c765768e792a9b9a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables workspace limit checking.  <br /></td></tr>
+<tr class="memitem:aa4f604c38d46c2023393078d055470ee" id="r_aa4f604c38d46c2023393078d055470ee"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#aa4f604c38d46c2023393078d055470ee">SK_set_origin_offset_async</a> (<a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> offset, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:aa4f604c38d46c2023393078d055470ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues an update of the zero-point offset.  <br /></td></tr>
+<tr class="memitem:a74348adaab6b489417d541720992dda9" id="r_a74348adaab6b489417d541720992dda9"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a74348adaab6b489417d541720992dda9">SK_change_side_async</a> (TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:a74348adaab6b489417d541720992dda9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Placeholder for switching to the mirrored side.  <br /></td></tr>
+<tr class="memitem:a613c322a91f008bb7cdd50e601683f23" id="r_a613c322a91f008bb7cdd50e601683f23"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a613c322a91f008bb7cdd50e601683f23">SK_is_point_allowed</a> (<a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> point, bool *allowed)</td></tr>
+<tr class="memdesc:a613c322a91f008bb7cdd50e601683f23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a point is allowed by the configured workspace limits.  <br /></td></tr>
+<tr class="memitem:a46c8b87e143361ef751055f6375febeb" id="r_a46c8b87e143361ef751055f6375febeb"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a46c8b87e143361ef751055f6375febeb">SK_inverse_kinematics</a> (<a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> point, double *theta1, double *theta2, double *zetaE)</td></tr>
+<tr class="memdesc:a46c8b87e143361ef751055f6375febeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves inverse kinematics for the current geometry.  <br /></td></tr>
+<tr class="memitem:aad8095cb459faaba67efba05e9725849" id="r_aad8095cb459faaba67efba05e9725849"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#aad8095cb459faaba67efba05e9725849">SK_forward_kinematics</a> (double theta1, double theta2, <a class="el" href="#a653571debd083a9985616ba7e935c734">SK_Side_t</a> side, <a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> *point, double *zetaE)</td></tr>
+<tr class="memdesc:aad8095cb459faaba67efba05e9725849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves forward kinematics for the current geometry.  <br /></td></tr>
+<tr class="memitem:a85bc1286e68ddabc28834bcdefaa0be3" id="r_a85bc1286e68ddabc28834bcdefaa0be3"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a85bc1286e68ddabc28834bcdefaa0be3">SK_move_to_xy_async</a> (<a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> targetPoint, double deltaZetaE, bool rotateZeta, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:a85bc1286e68ddabc28834bcdefaa0be3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a Cartesian move through the motor module and waits for completion.  <br /></td></tr>
+<tr class="memitem:a284fbb96c16805e1297637cf1b6da65f" id="r_a284fbb96c16805e1297637cf1b6da65f"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a284fbb96c16805e1297637cf1b6da65f">SK_home</a> (const <a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> zeroOffset, TickType_t deadline, <a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *cmdHandle)</td></tr>
+<tr class="memdesc:a284fbb96c16805e1297637cf1b6da65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs homing through the homing module.  <br /></td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a6b9f2ad0e7047e9169ca225d96d15142" name="a6b9f2ad0e7047e9169ca225d96d15142"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b9f2ad0e7047e9169ca225d96d15142">&#9670;&#160;</a></span>SK_Configuration_t</h2>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a523ba6e2865ca100ea2692bbe6bbfa0d" name="a523ba6e2865ca100ea2692bbe6bbfa0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a523ba6e2865ca100ea2692bbe6bbfa0d">&#9670;&#160;</a></span>SK_BASE_SPAN_MM</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef enum <a class="el" href="#aa184ab91b61238aabdf6825082796fed">_SK_Configuration</a> <a class="el" href="#a6b9f2ad0e7047e9169ca225d96d15142">SK_Configuration_t</a></td>
+          <td class="memname">#define SK_BASE_SPAN_MM&#160;&#160;&#160;(60.0)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>SCARA elbow configuration options. </p>
-<p>Specifies which elbow configuration to use for inverse kinematics. Different configurations are used to resolve the elbow-up or elbow-down solution ambiguity in SCARA arm kinematics. </p>
+<p>Distance between the left and right arm base points in millimeters (configurable). </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00055">55</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d1344c8bfddb1b866ac8e57ba20b580" name="a2d1344c8bfddb1b866ac8e57ba20b580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d1344c8bfddb1b866ac8e57ba20b580">&#9670;&#160;</a></span>SK_LEFT_FAR_ARM_LENGTH_MM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SK_LEFT_FAR_ARM_LENGTH_MM&#160;&#160;&#160;(175.0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length of the left arm's far segment in millimeters (configurable). </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00040">40</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a id="aff6da966369e4554919f5a487e77624f" name="aff6da966369e4554919f5a487e77624f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6da966369e4554919f5a487e77624f">&#9670;&#160;</a></span>SK_LEFT_ROOT_ARM_LENGTH_MM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SK_LEFT_ROOT_ARM_LENGTH_MM&#160;&#160;&#160;(150.0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length of the left arm's root segment in millimeters (configurable). </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00035">35</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a id="a577dd269897295ca7df9c1390612e612" name="a577dd269897295ca7df9c1390612e612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577dd269897295ca7df9c1390612e612">&#9670;&#160;</a></span>SK_MAX_WORKSPACE_RECTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SK_MAX_WORKSPACE_RECTS&#160;&#160;&#160;(8U)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum number of workspace rectangles supported. </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00059">59</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a id="a4edd79db6068ad3a858ba7c6fbee3926" name="a4edd79db6068ad3a858ba7c6fbee3926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4edd79db6068ad3a858ba7c6fbee3926">&#9670;&#160;</a></span>SK_RIGHT_FAR_ARM_LENGTH_MM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SK_RIGHT_FAR_ARM_LENGTH_MM&#160;&#160;&#160;(175.0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length of the right arm's far segment in millimeters (configurable). </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00050">50</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a id="ac366824d6869fb86062f58d82282edcd" name="ac366824d6869fb86062f58d82282edcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac366824d6869fb86062f58d82282edcd">&#9670;&#160;</a></span>SK_RIGHT_ROOT_ARM_LENGTH_MM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SK_RIGHT_ROOT_ARM_LENGTH_MM&#160;&#160;&#160;(150.0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length of the right arm's root segment in millimeters (configurable). </p>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00045">45</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a4d95bb7e81f6f2a25e380929ceed7d1c" name="a4d95bb7e81f6f2a25e380929ceed7d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d95bb7e81f6f2a25e380929ceed7d1c">&#9670;&#160;</a></span>SK_Point_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__Point.html">_SK_Point</a> <a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Represents a 2D Cartesian point in top-level coordinates. </p>
+<p>Used to represent end-effector positions and targets in the workspace. </p>
+
+</div>
+</div>
+<a id="a3a5f6ac556189ac2183310fce347cd2e" name="a3a5f6ac556189ac2183310fce347cd2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a5f6ac556189ac2183310fce347cd2e">&#9670;&#160;</a></span>SK_Pose_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__Pose.html">_SK_Pose</a> <a class="el" href="#a3a5f6ac556189ac2183310fce347cd2e">SK_Pose_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Represents the current end-effector pose (position). </p>
+<p>Stores the current Cartesian position of the end-effector in top-level coordinates after applying all transforms. </p>
+
+</div>
+</div>
+<a id="a653571debd083a9985616ba7e935c734" name="a653571debd083a9985616ba7e935c734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a653571debd083a9985616ba7e935c734">&#9670;&#160;</a></span>SK_Side_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97a">_SK_Side</a> <a class="el" href="#a653571debd083a9985616ba7e935c734">SK_Side_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumerates the two possible robot configurations (main or mirrored). </p>
+<p>Allows switching between a standard and horizontally-flipped configuration to reach different areas of the workspace. </p>
+
+</div>
+</div>
+<a id="a96ec1f712f7a968971cf7080fa7cd5ea" name="a96ec1f712f7a968971cf7080fa7cd5ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96ec1f712f7a968971cf7080fa7cd5ea">&#9670;&#160;</a></span>SK_State_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__State.html">_SK_State</a> <a class="el" href="#a96ec1f712f7a968971cf7080fa7cd5ea">SK_State_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stores the complete kinematics state including pose, transforms, and limits. </p>
+<p>Maintains the runtime configuration and state of the kinematics module, including the current end-effector pose, coordinate transformation parameters, workspace constraints, and calibration status. </p>
+
+</div>
+</div>
+<a id="ad2e42d194e3a55014f76a7f6c90ffa70" name="ad2e42d194e3a55014f76a7f6c90ffa70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2e42d194e3a55014f76a7f6c90ffa70">&#9670;&#160;</a></span>SK_Transform_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__Transform.html">_SK_Transform</a> <a class="el" href="#ad2e42d194e3a55014f76a7f6c90ffa70">SK_Transform_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Coordinate transformation parameters for workspace scaling and offset. </p>
+<p>Defines linear scaling and translation applied to convert from mechanical joint angles to top-level Cartesian coordinates. </p>
+
+</div>
+</div>
+<a id="a5de9211a9655a54f3b833884b1743a6d" name="a5de9211a9655a54f3b833884b1743a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de9211a9655a54f3b833884b1743a6d">&#9670;&#160;</a></span>SK_WorkspaceLimits_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__WorkspaceLimits.html">_SK_WorkspaceLimits</a> <a class="el" href="#a5de9211a9655a54f3b833884b1743a6d">SK_WorkspaceLimits_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines a collection of rectangular workspace limits. </p>
+<p>Stores multiple rectangular regions that define safe motion areas. When enabled, the kinematics layer checks that all targets lie within at least one of the defined rectangles. </p>
+
+</div>
+</div>
+<a id="ab1c93daab811807f8c4fe4b74a33539a" name="ab1c93daab811807f8c4fe4b74a33539a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1c93daab811807f8c4fe4b74a33539a">&#9670;&#160;</a></span>SK_WorkspaceRect_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__SK__WorkspaceRect.html">_SK_WorkspaceRect</a> <a class="el" href="#ab1c93daab811807f8c4fe4b74a33539a">SK_WorkspaceRect_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines a rectangular region within the workspace. </p>
+<p>A rectangular constraint used to limit valid motion to safe areas. Coordinates are in top-level space before scaling is applied. </p>
 
 </div>
 </div>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
-<a id="aa184ab91b61238aabdf6825082796fed" name="aa184ab91b61238aabdf6825082796fed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa184ab91b61238aabdf6825082796fed">&#9670;&#160;</a></span>_SK_Configuration</h2>
+<a id="a17d8b3836510fd4db27ffd1315b3d97a" name="a17d8b3836510fd4db27ffd1315b3d97a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d8b3836510fd4db27ffd1315b3d97a">&#9670;&#160;</a></span>_SK_Side</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#aa184ab91b61238aabdf6825082796fed">_SK_Configuration</a></td>
+          <td class="memname">enum <a class="el" href="#a17d8b3836510fd4db27ffd1315b3d97a">_SK_Side</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>SCARA elbow configuration options. </p>
-<p>Specifies which elbow configuration to use for inverse kinematics. Different configurations are used to resolve the elbow-up or elbow-down solution ambiguity in SCARA arm kinematics. </p>
+<p>Enumerates the two possible robot configurations (main or mirrored). </p>
+<p>Allows switching between a standard and horizontally-flipped configuration to reach different areas of the workspace. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59" name="aa184ab91b61238aabdf6825082796fedac7655c1f12a1cf0d318e52cb00fdab59"></a>SK_BOTH_ELBOW_OUT&#160;</td><td class="fielddoc"><p>Both elbows pointing outward </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71" name="aa184ab91b61238aabdf6825082796fedac10df78955cf152225451ce8b67b4f71"></a>SK_L_ELBOW_OUT_R_ELBOW_IN&#160;</td><td class="fielddoc"><p>Left elbow out, right elbow in </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808" name="aa184ab91b61238aabdf6825082796feda8437918ab04a2540bfb3fbe882c1d808"></a>SK_L_ELBOW_IN_R_ELBOW_OUT&#160;</td><td class="fielddoc"><p>Left elbow in, right elbow out </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d" name="aa184ab91b61238aabdf6825082796feda48bbb08f68e118ba6b73e5f7e87fd54d"></a>SK_BOTH_ELBOW_IN&#160;</td><td class="fielddoc"><p>Both elbows pointing inward </p>
-</td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f" name="a17d8b3836510fd4db27ffd1315b3d97aa160f7222f2d971d2f3aee17dc925324f"></a>SK_SIDE_MAIN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347" name="a17d8b3836510fd4db27ffd1315b3d97aa543d917e10b378a694b514c6c71ec347"></a>SK_SIDE_MIRRORED&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00032">32</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8h_source.html#l00136">136</a> of file <a class="el" href="scara__kinematics_8h_source.html">scara_kinematics.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a74348adaab6b489417d541720992dda9" name="a74348adaab6b489417d541720992dda9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74348adaab6b489417d541720992dda9">&#9670;&#160;</a></span>SK_change_side_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_change_side_async </td>
+          <td>(</td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Placeholder for switching to the mirrored side. </p>
+<p>The motion layer will later provide the path execution. The kinematics layer will only update side state and mirrored target data.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command was accepted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00134">134</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a63130808dc5f45c765768e792a9b9a80" name="a63130808dc5f45c765768e792a9b9a80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63130808dc5f45c765768e792a9b9a80">&#9670;&#160;</a></span>SK_enable_workspace_limits_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_enable_workspace_limits_async </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables or disables workspace limit checking. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">enabled</td><td>New enable state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command was accepted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00110">110</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="aad8095cb459faaba67efba05e9725849" name="aad8095cb459faaba67efba05e9725849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad8095cb459faaba67efba05e9725849">&#9670;&#160;</a></span>SK_forward_kinematics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_forward_kinematics </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>theta1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>theta2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a653571debd083a9985616ba7e935c734">SK_Side_t</a></td>          <td class="paramname"><span class="paramname"><em>side</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a> *</td>          <td class="paramname"><span class="paramname"><em>point</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>zetaE</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solves forward kinematics for the current geometry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta1</td><td>Left motor angle in radians. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta2</td><td>Right motor angle in radians. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">side</td><td>Current robot side (main or mirrored). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">point</td><td>Pointer to the resulting top-level point. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">zetaE</td><td>Optional pointer to end-effector angle in radians, where 0 is parallel to the base and positive is counterclockwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if a valid Cartesian point was found. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00268">268</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a284fbb96c16805e1297637cf1b6da65f" name="a284fbb96c16805e1297637cf1b6da65f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284fbb96c16805e1297637cf1b6da65f">&#9670;&#160;</a></span>SK_home()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_home </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>          <td class="paramname"><span class="paramname"><em>zeroOffset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs homing through the homing module. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">zeroOffset</td><td>Zero-point offset to apply after homing, in top-level coordinates. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the homing operation. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if homing succeeds. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00380">380</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="acac4dcbb8a11f45cd382bbf66ed3fa3b" name="acac4dcbb8a11f45cd382bbf66ed3fa3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acac4dcbb8a11f45cd382bbf66ed3fa3b">&#9670;&#160;</a></span>SK_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the kinematics module and command queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if initialization succeeds. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00056">56</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="af2824b953075ed9864849a9db11bcaaa" name="af2824b953075ed9864849a9db11bcaaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2824b953075ed9864849a9db11bcaaa">&#9670;&#160;</a></span>SK_init_motor_handles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_init_motor_handles </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>leftMotorHandle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>rightMotorHandle</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a></td>          <td class="paramname"><span class="paramname"><em>zetaMotorHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stores the motor handles used by the kinematics layer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">leftMotorHandle</td><td>Handle for the left motor. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rightMotorHandle</td><td>Handle for the right motor. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">zetaMotorHandle</td><td>Handle for the zeta (end-effector rotation) motor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the operation succeeds. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00065">65</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a46c8b87e143361ef751055f6375febeb" name="a46c8b87e143361ef751055f6375febeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c8b87e143361ef751055f6375febeb">&#9670;&#160;</a></span>SK_inverse_kinematics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_inverse_kinematics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>          <td class="paramname"><span class="paramname"><em>point</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>theta1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>theta2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *</td>          <td class="paramname"><span class="paramname"><em>zetaE</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solves inverse kinematics for the current geometry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">point</td><td>Top-level point for which to solve inverse kinematics. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">theta1</td><td>Left motor angle in radians. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">theta2</td><td>Right motor angle in radians. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">zetaE</td><td>Optional pointer to end-effector angle in radians, where 0 is parallel to the base and positive is counterclockwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the target is reachable. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00155">155</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a613c322a91f008bb7cdd50e601683f23" name="a613c322a91f008bb7cdd50e601683f23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a613c322a91f008bb7cdd50e601683f23">&#9670;&#160;</a></span>SK_is_point_allowed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_is_point_allowed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>          <td class="paramname"><span class="paramname"><em>point</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *</td>          <td class="paramname"><span class="paramname"><em>allowed</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether a point is allowed by the configured workspace limits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">point</td><td>Top-level point to validate. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">allowed</td><td>True if the point lies inside any enabled rectangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the check completed. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00145">145</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a85bc1286e68ddabc28834bcdefaa0be3" name="a85bc1286e68ddabc28834bcdefaa0be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85bc1286e68ddabc28834bcdefaa0be3">&#9670;&#160;</a></span>SK_move_to_xy_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_move_to_xy_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>          <td class="paramname"><span class="paramname"><em>targetPoint</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>deltaZetaE</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>rotateZeta</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes a Cartesian move through the motor module and waits for completion. </p>
+<p>This helper updates kinematics commanded state, executes a synchronized motor move, and refreshes the actual pose from motor feedback.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">targetPoint</td><td>Top-level x/y target. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deltaZetaE</td><td>Optional change in end-effector angle, where positive is counterclockwise. Only applied if rotateZeta is true. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rotateZeta</td><td>Whether to rotate the end-effector by deltaZetaE. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for all queued operations. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the full sequence succeeds. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00365">365</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="aa4f604c38d46c2023393078d055470ee" name="aa4f604c38d46c2023393078d055470ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f604c38d46c2023393078d055470ee">&#9670;&#160;</a></span>SK_set_origin_offset_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_set_origin_offset_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4d95bb7e81f6f2a25e380929ceed7d1c">SK_Point_t</a></td>          <td class="paramname"><span class="paramname"><em>offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queues an update of the zero-point offset. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">offset</td><td>New zero offset in top-level coordinates. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command was accepted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00121">121</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="ad64be02f4743561357c3159db1a0257c" name="ad64be02f4743561357c3159db1a0257c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64be02f4743561357c3159db1a0257c">&#9670;&#160;</a></span>SK_set_transform_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_set_transform_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ad2e42d194e3a55014f76a7f6c90ffa70">SK_Transform_t</a></td>          <td class="paramname"><span class="paramname"><em>transform</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queues an update of the runtime coordinate transform. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">transform</td><td>New scale and offset. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command was accepted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00086">86</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a154da1ed72f26b754cdc9d0bbac0b0e6" name="a154da1ed72f26b754cdc9d0bbac0b0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154da1ed72f26b754cdc9d0bbac0b0e6">&#9670;&#160;</a></span>SK_set_workspace_limits_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t SK_set_workspace_limits_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a5de9211a9655a54f3b833884b1743a6d">SK_WorkspaceLimits_t</a></td>          <td class="paramname"><span class="paramname"><em>limits</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TickType_t</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>cmdHandle</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queues an update of the workspace limits. </p>
+<p>Rectangle limits are interpreted in top-level coordinates before scaling.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">limits</td><td>New rectangle set. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deadline</td><td>Deadline for the command. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdHandle</td><td>Optional command handle used to wait for completion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>kStatus_Success if the command was accepted. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00098">98</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
+
+</div>
+</div>
+<a id="a72ae223e622ac3b8c215a53c0ad99f77" name="a72ae223e622ac3b8c215a53c0ad99f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ae223e622ac3b8c215a53c0ad99f77">&#9670;&#160;</a></span>SK_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SK_task </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameters</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Task function for processing kinematics commands. </p>
+<p>Should be started as a FreeRTOS task after <a class="el" href="#acac4dcbb8a11f45cd382bbf66ed3fa3b" title="Initializes the kinematics module and command queue.">SK_init()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pvParameters</td><td>Pointer to task parameters (not used). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="scara__kinematics_8c_source.html#l00081">81</a> of file <a class="el" href="scara__kinematics_8c_source.html">scara_kinematics.c</a>.</p>
 
 </div>
 </div>

@@ -25,6 +25,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sync_wait.h"
+#include "scara_kinematics.h"
+
+#include "grabber.h"
+
 
 /************************************
  *     Private Macros / Defines    *
@@ -62,6 +66,8 @@ static BaseType_t cmd_motor_get_state(char* pcWriteBuffer, size_t xWriteBufferLe
                                       const char* pcCommandString);
 static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen,
                                      const char* pcCommandString);
+static BaseType_t cmd_motor_set_home_offset(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                            const char* pcCommandString);
 static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBufferLen,
                                             const char* pcCommandString);
 static BaseType_t cmd_motor_set_hold_current(char* pcWriteBuffer, size_t xWriteBufferLen,
@@ -76,6 +82,11 @@ static BaseType_t cmd_motor_home_left_arm(char* pcWriteBuffer, size_t xWriteBuff
                                           const char* pcCommandString);
 static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBufferLen,
                                            const char* pcCommandString);
+static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                    const char* pcCommandString);
+
+static BaseType_t cmd_grab(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
+static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
 static status_t   wait_for_mtr_cmd(CHD_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
@@ -152,6 +163,12 @@ static const CLI_Command_Definition_t xSetHomeCmd = {
     .pxCommandInterpreter        = cmd_motor_set_home,
     .cExpectedNumberOfParameters = -1};
 
+static const CLI_Command_Definition_t xSetHomeOffsetCmd = {
+    .pcCommand = "mhome_off",
+    .pcHelpString = "mhome_off -m <motor_id> -a <offset_deg>: Set home angle offset in degrees\r\n",
+    .pxCommandInterpreter        = cmd_motor_set_home_offset,
+    .cExpectedNumberOfParameters = -1};
+
 static const CLI_Command_Definition_t xSetRunCurrentCmd = {
     .pcCommand            = "mirun",
     .pcHelpString         = "mirun -m <motor_id> -c <current>: Set run current in amperes\r\n",
@@ -195,6 +212,24 @@ static const CLI_Command_Definition_t xHomeRightArmCmd = {
     .pxCommandInterpreter        = cmd_motor_home_right_arm,
     .cExpectedNumberOfParameters = 0};
 
+static const CLI_Command_Definition_t xScaraMoveCmd = {
+    .pcCommand                   = "skmove",
+    .pcHelpString                = "skmove -x <x> -y <y> [-zeta <rotation>]: Move to a Cartesian target with optional rotation\r\n",
+    .pxCommandInterpreter        = cmd_scara_move_xy,
+    .cExpectedNumberOfParameters = -1};
+
+static const CLI_Command_Definition_t xGrabCmd = {
+    .pcCommand = "grab",
+    .pcHelpString = "grab: Perform grab sequence\r\n",
+    .pxCommandInterpreter = cmd_grab,
+    .cExpectedNumberOfParameters = 0};
+
+static const CLI_Command_Definition_t xReleaseCmd = {
+    .pcCommand = "release",
+    .pcHelpString = "release: Perform release sequence\r\n",
+    .pxCommandInterpreter = cmd_release,
+    .cExpectedNumberOfParameters = 0};
+
 /*******************************************
  *     Public Function Implementations     *
  *******************************************/
@@ -222,6 +257,7 @@ void MCMD_task(void* pvParameters)
     CLI_register_command(&xGetAngleCmd);
     CLI_register_command(&xGetStateCmd);
     CLI_register_command(&xSetHomeCmd);
+    CLI_register_command(&xSetHomeOffsetCmd);
     CLI_register_command(&xSetRunCurrentCmd);
     CLI_register_command(&xSetHoldCurrentCmd);
     CLI_register_command(&xSynchronizedMoveCmd);
@@ -229,6 +265,10 @@ void MCMD_task(void* pvParameters)
     CLI_register_command(&xDisableFreewheelingCmd);
     CLI_register_command(&xHomeLeftArmCmd);
     CLI_register_command(&xHomeRightArmCmd);
+    CLI_register_command(&xScaraMoveCmd);
+
+    CLI_register_command(&xGrabCmd);
+    CLI_register_command(&xReleaseCmd);
 
     LOG_INFO("Motor commands registered");
 
@@ -237,6 +277,8 @@ void MCMD_task(void* pvParameters)
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
+
+
 
 /********************************************
  *     Private Function Implementations     *
@@ -757,6 +799,54 @@ static BaseType_t cmd_motor_set_home(char* pcWriteBuffer, size_t xWriteBufferLen
     return pdFALSE;
 }
 
+static BaseType_t cmd_motor_set_home_offset(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                            const char* pcCommandString)
+{
+    MTR_MotorHandle_t handle = NULL;
+    uint8_t           parameterFound;
+    const char*       pcParameter;
+    BaseType_t        parameterStringLength;
+    double            offsetDeg;
+
+    // Get motor ID
+    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor ID required (-m)\r\n");
+        return pdFALSE;
+    }
+
+    MTR_get_motor_by_label(pcParameter, &handle);
+    if (handle == NULL)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor not found\r\n");
+        return pdFALSE;
+    }
+
+    // Get offset angle
+    CLU_get_parameter_value_string("-a", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Offset angle required (-a)\r\n");
+        return pdFALSE;
+    }
+    offsetDeg = strtod(pcParameter, NULL);
+
+    if (MTR_set_home_angle_offset(handle, offsetDeg) == kStatus_Success)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen,
+                 "Home angle offset set to %.2f degrees\r\n", offsetDeg);
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to set home angle offset\r\n");
+    }
+
+    return pdFALSE;
+}
+
 static BaseType_t cmd_motor_set_run_current(char* pcWriteBuffer, size_t xWriteBufferLen,
                                             const char* pcCommandString)
 {
@@ -1050,5 +1140,91 @@ static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBuf
         snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Right arm homing failed\r\n");
     }
 
+    return pdFALSE;
+}
+
+
+static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
+                                    const char* pcCommandString)
+{
+    uint8_t    parameterFound;
+    const char* pcParameter = NULL;
+    BaseType_t  parameterStringLength;
+    SK_Point_t  target = {0.0, 0.0};
+    double      deltaZeta = 0.0;
+    bool        rotateZeta = false;
+    TickType_t  deadline = SYW_deadline_from_timeout_ms(20000);
+
+    CLU_get_parameter_value_string("-x", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Target X required (-x)\r\n");
+        return pdFALSE;
+    }
+    target.x = strtod(pcParameter, NULL);
+
+    CLU_get_parameter_value_string("-y", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (!parameterFound || parameterStringLength == 0)
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Target Y required (-y)\r\n");
+        return pdFALSE;
+    }
+    target.y = strtod(pcParameter, NULL);
+
+    CLU_get_parameter_value_string("-zeta", pcCommandString, &parameterFound, &pcParameter,
+                                   &parameterStringLength);
+    if (parameterFound && parameterStringLength > 0)
+    {
+        deltaZeta = strtod(pcParameter, NULL);
+        rotateZeta = true;
+    }
+
+    if (SK_move_to_xy_async(target, deltaZeta, rotateZeta, deadline, NULL) ==
+        kStatus_Success)
+    {
+        if (rotateZeta)
+        {
+            snprintf(pcWriteBuffer, xWriteBufferLen, "SCARA move executed: X=%.2f Y=%.2f Zeta=%.2f\r\n",
+                     target.x, target.y, deltaZeta);
+        }
+        else
+        {
+            snprintf(pcWriteBuffer, xWriteBufferLen, "SCARA move executed: X=%.2f Y=%.2f\r\n",
+                     target.x, target.y);
+        }
+    }
+    else
+    {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: SCARA move failed\r\n");
+    }
+
+    return pdFALSE;
+}
+
+static BaseType_t cmd_grab(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
+{
+    (void)pcCommandString;
+    if (pcWriteBuffer && xWriteBufferLen > 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Grabbing...\r\n");
+    }
+    GRB_grab();
+    if (pcWriteBuffer && xWriteBufferLen > 0) {
+        strncat(pcWriteBuffer, "Grab complete\r\n", xWriteBufferLen - strlen(pcWriteBuffer) - 1);
+    }
+    return pdFALSE;
+}
+
+static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
+{
+    (void)pcCommandString;
+    if (pcWriteBuffer && xWriteBufferLen > 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Releasing...\r\n");
+    }
+    GRB_release();
+    if (pcWriteBuffer && xWriteBufferLen > 0) {
+        strncat(pcWriteBuffer, "Release complete\r\n", xWriteBufferLen - strlen(pcWriteBuffer) - 1);
+    }
     return pdFALSE;
 }

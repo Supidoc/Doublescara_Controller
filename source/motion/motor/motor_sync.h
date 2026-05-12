@@ -15,38 +15,48 @@
 #ifndef MOTOR_SYNC_H_
 #define MOTOR_SYNC_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /********************
  *     Includes    *
  ********************/
+#include <stdint.h>
 #include "motor_internal.h"
 
-/***********************************
- *     Public Macros / Defines     *
- ***********************************/
+    /***********************************
+     *     Public Macros / Defines     *
+     ***********************************/
 
-/***************************
- *     Public Typedefs     *
- ***************************/
+    /***************************
+     *     Public Typedefs     *
+     ***************************/
 
-/****************************
- *     Public Variables     *
- ****************************/
+    /****************************
+     *     Public Variables     *
+     ****************************/
 
-/**************************************
- *     Public Function Prototypes    *
- **************************************/
+    /**************************************
+     *     Public Function Prototypes    *
+     **************************************/
 
-/**
- * @brief Executes synchronized movement for a set of motors.
- *
- * @param[in] handles Array of motor handles to command.
- * @param[in] angles Array of relative target angles in degrees.
- * @param[in] count Number of entries in @p handles and @p angles.
- * @param[in] deadline Timeout/deadline for synchronization sequence.
- * @return kStatus_Success on success, kStatus_Fail otherwise.
- */
-status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
-                                TickType_t deadline);
+    /**
+     * @brief Executes synchronized movement for a set of motors.
+     *
+     * @param[in] handles Array of motor handles to command.
+     * @param[in] angles Array of relative target angles in degrees.
+     * @param[in] count Number of entries in @p handles and @p angles.
+     * @param[in] deadline Timeout/deadline for synchronization sequence.
+     * @return kStatus_Success on success, kStatus_Fail otherwise.
+     */
+    status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
+                                    TickType_t deadline);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MOTOR_SYNC_H_
 

@@ -12,6 +12,7 @@ var step__core_8h =
     [ "STP_move_relative_async", "group__STEPPER__Module.html#gafc3a63d18d294ce9f522725d11db6b5e", null ],
     [ "STP_move_relative_prepare_async", "group__STEPPER__Module.html#gadeffd3212366b893459a9bb026bd88b8", null ],
     [ "STP_reset_absolute_position", "group__STEPPER__Module.html#ga211ab928b813dfae2c5807f5db272ab2", null ],
+    [ "STP_set_absolute_steps", "group__STEPPER__Module.html#ga3244faf24399f2d70145f071b3a15246", null ],
     [ "STP_set_acceleration_async", "group__STEPPER__Module.html#ga506da9a17617328aa015d6ae7a2e9eda", null ],
     [ "STP_set_end_velocity_async", "group__STEPPER__Module.html#gabcd2ae8287932573d44ac30c944b4d58", null ],
     [ "STP_stop_async", "group__STEPPER__Module.html#gace468008090ef24b9ecd48c088d2c23b", null ],

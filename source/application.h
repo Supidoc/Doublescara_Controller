@@ -1,6 +1,6 @@
 /************************************************************
  * @file    application.h
- * @brief   Main application module
+ * @brief   Main application module.
  *
  * This module provides the main entry points for initializing and running
  * the application. It serves as the central control for the system, coordinating
@@ -26,46 +26,55 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
-/********************
- *     Includes		*
- ********************/
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
-/***********************************
- *     Public Macros / Defines	   *
- ***********************************/
+    /********************
+     *     Includes		*
+     ********************/
 
-/***************************
- *     Public Typedefs	   *
- ***************************/
+    /***********************************
+     *     Public Macros / Defines	   *
+     ***********************************/
 
-/****************************
- *     Public Variables     *
- ****************************/
+    /***************************
+     *     Public Typedefs	   *
+     ***************************/
 
-/**************************************
- *     Public Function Prototypes	  *
- **************************************/
+    /****************************
+     *     Public Variables     *
+     ****************************/
 
-/**
- * @brief Initializes the application.
- *
- * This function initializes all required modules, peripherals, and tasks
- * for the application. It must be called before running the application.
- *
- * @note This function is typically called once during system startup.
- */
-void APP_init(void);
+    /**************************************
+     *     Public Function Prototypes	  *
+     **************************************/
 
-/**
- * @brief Runs the main application loop.
- *
- * This function contains the main application logic and is intended to be
- * called after APP_Init(). It typically runs indefinitely in an RTOS environment.
- *
- * @note This function should not return under normal operation.
- */
-void APP_run(void);
+    /**
+     * @brief Initializes the application.
+     *
+     * This function initializes all required modules, peripherals, and tasks
+     * for the application. It must be called before running the application.
+     *
+     * @note This function is typically called once during system startup.
+     */
+    void APP_init(void);
 
-/** @} */ // End of APP_Module
+    /**
+     * @brief Runs the main application loop.
+     *
+     * This function contains the main application logic and is intended to be
+     * called after APP_Init(). It typically runs indefinitely in an RTOS environment.
+     *
+     * @note This function should not return under normal operation.
+     */
+    void APP_run(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+/** @} */
 
 #endif /* APPLICATION_H_ */

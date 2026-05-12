@@ -28,6 +28,7 @@
  *****************************************/
 
 static status_t reset_absolute_position(STP_Handle_t handle);
+static status_t set_absolute_position(STP_Handle_t handle, int32_t absoluteSteps);
 
 /****************************
  *     Public Variables     *
@@ -37,9 +38,9 @@ static status_t reset_absolute_position(STP_Handle_t handle);
  *     Private Variables     *
  *****************************/
 
-STP_HandlesArrayItem_t handles[STP_MAX_HANDLE_COUNT];
+STP_HandlesArrayItem_t stpHandles[STP_MAX_HANDLE_COUNT];
 
-CHD_CmdHandleImpl_t cmdHandles[STP_MAX_CMD_HANDLE_COUNT];
+CHD_CmdHandleImpl_t stpCmdHandles[STP_MAX_CMD_HANDLE_COUNT];
 
 QueueHandle_t stpCmdQueue = NULL;
 
@@ -66,13 +67,13 @@ status_t STP_init()
 
     SIM->SCGC6 |= SIM_SCGC6_FTM3_MASK;
 
-    NVIC_SetPriority(FTM3_IRQn, 8);
+    NVIC_SetPriority(FTM3_IRQn, 2);
     NVIC_EnableIRQ(FTM3_IRQn);
 
     FTM3->MOD = 0xFFFF;
     FTM3->SC  = FTM_SC_CLKS(2) | FTM_SC_PS(0);
 
-    CHD_init_cmd_handles(cmdHandles, STP_MAX_CMD_HANDLE_COUNT);
+    CHD_init_cmd_handles(stpCmdHandles, STP_MAX_CMD_HANDLE_COUNT);
 
     return kStatus_Success;
 }
@@ -144,13 +145,13 @@ status_t STP_get_handle_by_label(const char* label, STP_Handle_t* handle)
     }
     for (uint8_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
     {
-        if (handles[i].used)
+        if (stpHandles[i].used)
         {
-            uint32_t handleLength = strlen(handles[i].handle.label);
+            uint32_t handleLength = strlen(stpHandles[i].handle.label);
 
-            if (strncmp(label, handles[i].handle.label, handleLength) == 0)
+            if (strncmp(label, stpHandles[i].handle.label, handleLength) == 0)
             {
-                *handle = &handles[i].handle;
+                *handle = &stpHandles[i].handle;
                 return kStatus_Success;
             }
         }
@@ -207,6 +208,16 @@ status_t STP_get_absolute_steps(STP_Handle_t handle, int32_t* absoluteSteps)
     }
     *absoluteSteps = handle->absolutePosition;
     return kStatus_Success;
+}
+
+status_t STP_set_absolute_steps(STP_Handle_t handle, int32_t absoluteSteps)
+{
+    if (handle == NULL)
+    {
+        return kStatus_Fail;
+    }
+
+    return set_absolute_position(handle, absoluteSteps);
 }
 
 status_t STP_get_acceleration(STP_Handle_t handle, double* acceleration)
@@ -306,7 +317,7 @@ status_t STP_homing_stop(STP_Handle_t handle)
         return kStatus_Fail;
     }
 
-    if (STPi_stop_steps(handle, 0, NULL) != kStatus_Success)
+    if (STPi_stop_steps_from_isr(handle, 0, NULL) != kStatus_Success)
     {
         return kStatus_Fail;
     }
@@ -322,6 +333,14 @@ static status_t reset_absolute_position(STP_Handle_t handle)
 {
     taskENTER_CRITICAL();
     handle->absolutePosition = 0;
+    taskEXIT_CRITICAL();
+    return kStatus_Success;
+}
+
+static status_t set_absolute_position(STP_Handle_t handle, int32_t absoluteSteps)
+{
+    taskENTER_CRITICAL();
+    handle->absolutePosition = absoluteSteps;
     taskEXIT_CRITICAL();
     return kStatus_Success;
 }

@@ -19,6 +19,7 @@
 #include "fsl_gpio.h"
 #include "FreeRTOS.h"
 #include "queue.h"
+#include "task.h"
 #include "fsl_port.h"
 #include "tmc2209_process.h"
 #include "math.h"
@@ -71,8 +72,22 @@ status_t TMC_init(void)
 void TMC_task(void* pvParameters)
 {
     LOG_INFO("Started TMC2209 Task");
+    uint16_t checkCounter = 0;
     for (;;)
     {
+        checkCounter++;
+        if (checkCounter >= 200)
+        {
+            UBaseType_t watermark = uxTaskGetStackHighWaterMark(NULL);
+            if (watermark < 80)
+            {
+                static char logMsg[80];
+                snprintf(logMsg, sizeof(logMsg), "[TMC] Low stack watermark: %u words",
+                         (unsigned int)watermark);
+                LOG_WARN(logMsg);
+            }
+            checkCounter = 0;
+        }
         TMCi_process();
     }
 }

@@ -15,53 +15,62 @@
 #ifndef MOTOR_PROCESS_H_
 #define MOTOR_PROCESS_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /********************
  *     Includes    *
  ********************/
 #include "motor_internal.h"
 
-/***********************************
- *     Public Macros / Defines     *
- ***********************************/
+    /***********************************
+     *     Public Macros / Defines     *
+     ***********************************/
 
-/***************************
- *     Public Typedefs     *
- ***************************/
+    /***************************
+     *     Public Typedefs     *
+     ***************************/
 
-/****************************
- *     Public Variables     *
- ****************************/
+    /****************************
+     *     Public Variables     *
+     ****************************/
 
-/**************************************
- *     Public Function Prototypes    *
- **************************************/
+    /**************************************
+     *     Public Function Prototypes    *
+     **************************************/
 
-/**
- * @brief Enqueues a motor command for asynchronous execution.
- *
- * @param[in,out] queueItem Command payload to send to motor command queue.
- * @param[in] deadline Timeout/deadline applied while queueing the command.
- * @param[out] cmdHandle Optional command handle for completion synchronization.
- * @return kStatus_Success if queued successfully, kStatus_Fail otherwise.
- */
-status_t MTRi_send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
-                             CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Enqueues a motor command for asynchronous execution.
+     *
+     * @param[in,out] queueItem Command payload to send to motor command queue.
+     * @param[in] deadline Timeout/deadline applied while queueing the command.
+     * @param[out] cmdHandle Optional command handle for completion synchronization.
+     * @return kStatus_Success if queued successfully, kStatus_Fail otherwise.
+     */
+    status_t MTRi_send_cmd_async(MTR_CmdQueueItem_t* queueItem, TickType_t deadline,
+                                 CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Runs one motor command processing cycle.
- *
- * Dequeues at most one command and advances active parallel command tracking.
- */
-void MTRi_process(void);
+    /**
+     * @brief Runs one motor command processing cycle.
+     *
+     * Dequeues at most one command and advances active parallel command tracking.
+     */
+    void MTRi_process(void);
 
-/**
- * @brief Dispatches one command item to the corresponding internal handler.
- *
- * @param[in] queueItem Command item to process.
- * @param[in,out] taskItem Parallel task bookkeeping entry for async sub-commands.
- * @return kStatus_Success, kStatus_Fail, or kStatus_Timeout depending on command result.
- */
-status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* taskItem);
+    /**
+     * @brief Dispatches one command item to the corresponding internal handler.
+     *
+     * @param[in] queueItem Command item to process.
+     * @param[in,out] taskItem Parallel task bookkeeping entry for async sub-commands.
+     * @return kStatus_Success, kStatus_Fail, or kStatus_Timeout depending on command result.
+     */
+    status_t MTRi_process_cmd(MTR_CmdQueueItem_t queueItem, MTR_ParallelTaskItem* taskItem);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MOTOR_PROCESS_H_
 

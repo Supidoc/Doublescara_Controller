@@ -18,6 +18,11 @@
 #ifndef MOTOR_CORE_H_
 #define MOTOR_CORE_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /********************
  *     Includes    *
  ********************/
@@ -36,292 +41,309 @@
 /** @brief Maximum number of command handles available to motor facade commands. */
 #define MTR_MAX_CMD_HANDLE_COUNT 20
 
-/***************************
- *     Public Typedefs     *
- ***************************/
+    /***************************
+     *     Public Typedefs     *
+     ***************************/
 
-/**
- * @brief TMC2209-related configuration values for one motor.
- */
-typedef struct _MTR_MotorTmcConfig
-{
-    uart_rtos_handle_t* uartRTOSHandle; /**< RTOS UART handle used for TMC communication. */
-    uart_handle_t*      uartHandle;     /**< Low-level UART handle used for TMC communication. */
-    TMC_SerialAddress_t serialAdress;   /**< TMC2209 slave address on UART bus. */
-    double              iHoldCurrentA;  /**< Hold current in ampere. */
-    double              iRunCurrentA;   /**< Run current in ampere. */
-} MTR_MotorTmcConfig_t;
+    /**
+     * @brief TMC2209-related configuration values for one motor.
+     */
+    typedef struct _MTR_MotorTmcConfig
+    {
+        uart_rtos_handle_t* uartRTOSHandle; /**< RTOS UART handle used for TMC communication. */
+        uart_handle_t*      uartHandle;    /**< Low-level UART handle used for TMC communication. */
+        TMC_SerialAddress_t serialAdress;  /**< TMC2209 slave address on UART bus. */
+        double              iHoldCurrentA; /**< Hold current in ampere. */
+        double              iRunCurrentA;  /**< Run current in ampere. */
+    } MTR_MotorTmcConfig_t;
 
-/**
- * @brief Step-generation hardware configuration for one motor.
- */
-typedef struct _MTR_MotorStepperConfig
-{
-    FTM_Type*  ftmBase;               /**< Pointer to FTM module base address. */
-    ftm_chnl_t ftmChannel;            /**< FTM channel for step output. */
-    PORT_Type* stepPort;              /**< PORT module for step pin mux control. */
-    GPIO_Type* stepGPIO;              /**< GPIO module for step pin. */
-    uint8_t    stepPin;               /**< Step output pin number. */
-    PCA_Port_t dirPort;               /**< PCA9555 port for direction pin control. */
-    uint8_t    dirPin;                /**< Direction output bit index in PCA9555 port. */
-    uint8_t    dirLogicHighClockwise; /**< 1 if high=clockwise, 0 if high=counterclockwise. */
-} MTR_MotorStepperConfig_t;
+    /**
+     * @brief Step-generation hardware configuration for one motor.
+     */
+    typedef struct _MTR_MotorStepperConfig
+    {
+        FTM_Type*  ftmBase;               /**< Pointer to FTM module base address. */
+        ftm_chnl_t ftmChannel;            /**< FTM channel for step output. */
+        PORT_Type* stepPort;              /**< PORT module for step pin mux control. */
+        GPIO_Type* stepGPIO;              /**< GPIO module for step pin. */
+        uint8_t    stepPin;               /**< Step output pin number. */
+        PCA_Port_t dirPort;               /**< PCA9555 port for direction pin control. */
+        uint8_t    dirPin;                /**< Direction output bit index in PCA9555 port. */
+        uint8_t    dirLogicHighClockwise; /**< 1 if high=clockwise, 0 if high=counterclockwise. */
+    } MTR_MotorStepperConfig_t;
 
-/**
- * @brief Configuration structure for initializing one motor instance.
- *
- * Groups mechanical conversion parameters and low-level driver configuration
- * for creating one motor handle.
- */
-typedef struct _MTR_MotorConfig
-{
-    double  stepAngle;       /**< Full-step angle in degree (for example 1.8). */
-    uint8_t microstep;       /**< Microstep factor (for example 1, 2, 4, ..., 256). */
-    double  reductionFactor; /**< Mechanical transmission ratio motor->output. */
-    double  acceleration;    /**< Acceleration in degree/s^2. */
-    double  endVelocity;     /**< End velocity in degree/s. */
+    /**
+     * @brief Configuration structure for initializing one motor instance.
+     *
+     * Groups mechanical conversion parameters and low-level driver configuration
+     * for creating one motor handle.
+     */
+    typedef struct _MTR_MotorConfig
+    {
+        double  stepAngle;       /**< Full-step angle in degree (for example 1.8). */
+        uint8_t microstep;       /**< Microstep factor (for example 1, 2, 4, ..., 256). */
+        double  reductionFactor; /**< Mechanical transmission ratio motor->output. */
+        double  acceleration;    /**< Acceleration in degree/s^2. */
+        double  endVelocity;     /**< End velocity in degree/s. */
 
-    MTR_MotorTmcConfig_t     tmcConfig;     /**< TMC communication and current settings. */
-    MTR_MotorStepperConfig_t stepperConfig; /**< Step-generation hardware settings. */
+        MTR_MotorTmcConfig_t     tmcConfig;     /**< TMC communication and current settings. */
+        MTR_MotorStepperConfig_t stepperConfig; /**< Step-generation hardware settings. */
 
-    char* label; /**< Human-readable unique motor identifier. */
-} MTR_MotorConfig_t;
+        char* label; /**< Human-readable unique motor identifier. */
+    } MTR_MotorConfig_t;
 
-/**
- * @brief Opaque handle type for motor instances.
- */
-typedef struct _MTR_MotorHandleImpl* MTR_MotorHandle_t;
+    /**
+     * @brief Opaque handle type for motor instances.
+     */
 
-/**************************************
- *     Public Function Prototypes    *
- **************************************/
+    typedef struct _MTR_MotorHandleImpl* MTR_MotorHandle_t;
 
-/**
- * @brief Task entry point for the motor subsystem.
- *
- * Runs the motor command processing loop and should be created as a FreeRTOS task
- * after successful module initialization.
- *
- * @param[in] pvParameters FreeRTOS task parameter pointer (unused).
- *
- * @note This function does not return.
- */
-void MTR_task(void* pvParameters);
+    /**************************************
+     *     Public Function Prototypes    *
+     **************************************/
 
-/**
- * @brief Initializes the motor facade module.
- *
- * Resets internal handle pools and creates required command queue resources.
- *
- * @return kStatus_Success if initialization completed.
- *         kStatus_Fail if required resources could not be created.
- */
-status_t MTR_init(void);
+    /**
+     * @brief Task entry point for the motor subsystem.
+     *
+     * Runs the motor command processing loop and should be created as a FreeRTOS task
+     * after successful module initialization.
+     *
+     * @param[in] pvParameters FreeRTOS task parameter pointer (unused).
+     *
+     * @note This function does not return.
+     */
+    void MTR_task(void* pvParameters);
 
-/**
- * @brief Queues asynchronous initialization of one motor handle.
- *
- * @param[in] config Motor configuration used to create and initialize the handle.
- * @param[in] deadline Timeout/deadline for queueing and dependent operations.
- * @param[out] cmdHandle Optional command handle used to wait for completion.
- *
- * @return kStatus_Success if command was queued.
- *         kStatus_Fail if validation or queueing failed.
- */
-status_t MTR_init_handle_async(const MTR_MotorConfig_t config, TickType_t deadline,
-                               CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Initializes the motor facade module.
+     *
+     * Resets internal handle pools and creates required command queue resources.
+     *
+     * @return kStatus_Success if initialization completed.
+     *         kStatus_Fail if required resources could not be created.
+     */
+    status_t MTR_init(void);
 
-/**
- * @brief Resolves a motor handle by its configured label.
- *
- * @param[in] label Null-terminated label string to match.
- * @param[out] handle Destination pointer receiving the matched handle or NULL.
- */
-void MTR_get_motor_by_label(const char* label, MTR_MotorHandle_t* handle);
-
-/**
- * @brief Queues relative movement by angle in degrees.
- *
- * @param[in] handle Target motor handle.
- * @param[in] angle Relative angle in degrees.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
-                              CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues move to an absolute mechanical angle.
- *
- * @param[in] handle Target motor handle.
- * @param[in] angle Absolute target angle in degrees.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
-                                       CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues relative movement in revolutions.
- *
- * @param[in] handle Target motor handle.
- * @param[in] revolutions Relative movement in revolutions.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions,
-                                    TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues update of target velocity.
- *
- * @param[in] handle Target motor handle.
- * @param[in] velocity_deg_per_sec Velocity in degrees per second.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
-                                TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues update of target acceleration.
- *
- * @param[in] handle Target motor handle.
- * @param[in] acceleration_deg_per_sec2 Acceleration in degrees per second squared.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
-                                    TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues stop command for a motor.
- *
- * @param[in] handle Target motor handle.
- * @param[in] decelerate If true, stop with deceleration; otherwise immediate stop.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_stop_async(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
-                        CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues query for current motor angle.
- *
- * @param[in] handle Target motor handle.
- * @param[out] angle Pointer receiving current angle in degrees.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle, TickType_t deadline,
-                                     CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues query for current movement state.
- *
- * @param[in] handle Target motor handle.
- * @param[out] state Pointer receiving movement state.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
-                                      CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Set current motor position as home.
- *
- * @param[in] handle Target motor handle.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_set_home_position(MTR_MotorHandle_t handle);
-
-/**
- * @brief Queues synchronized movement command for multiple motors.
- *
- * @param[in] handles Array of motor handles.
- * @param[in] angles Array of relative angles in degrees.
- * @param[in] count Number of motors in arrays.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
-                                     TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
-
-/**
- * @brief Queues update of TMC run current.
- *
- * @param[in] handle Target motor handle.
- * @param[in] current_a Run current in ampere.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
+    /**
+     * @brief Queues asynchronous initialization of one motor handle.
+     *
+     * @param[in] config Motor configuration used to create and initialize the handle.
+     * @param[in] deadline Timeout/deadline for queueing and dependent operations.
+     * @param[out] cmdHandle Optional command handle used to wait for completion.
+     *
+     * @return kStatus_Success if command was queued.
+     *         kStatus_Fail if validation or queueing failed.
+     */
+    status_t MTR_init_handle_async(const MTR_MotorConfig_t config, TickType_t deadline,
                                    CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Queues update of TMC hold current.
- *
- * @param[in] handle Target motor handle.
- * @param[in] current_a Hold current in ampere.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a, TickType_t deadline,
-                                    CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Resolves a motor handle by its configured label.
+     *
+     * @param[in] label Null-terminated label string to match.
+     * @param[out] handle Destination pointer receiving the matched handle or NULL.
+     */
+    void MTR_get_motor_by_label(const char* label, MTR_MotorHandle_t* handle);
 
-/**
- * @brief Queues command to enable freewheeling mode.
- *
- * @param[in] handle Target motor handle.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                       CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Queues relative movement by angle in degrees.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] angle Relative angle in degrees.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_move_angle_async(MTR_MotorHandle_t handle, double angle, TickType_t deadline,
+                                  CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Queues command to disable freewheeling mode.
- *
- * @param[in] handle Target motor handle.
- * @param[in] deadline Timeout/deadline for command.
- * @param[out] cmdHandle Optional command handle for completion wait.
- * @return kStatus_Success if queued, otherwise kStatus_Fail.
- */
-status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
-                                        CHD_CmdHandle_t* cmdHandle);
+    /**
+     * @brief Queues move to an absolute mechanical angle.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] angle Absolute target angle in degrees.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_move_absolute_angle_async(MTR_MotorHandle_t handle, double angle,
+                                           TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Activates emergency stop latch.
- *
- * @param[in] handle Motor handle used for immediate stop action.
- * @return kStatus_Success if emergency stop applied, otherwise kStatus_Fail.
- */
-status_t MTR_emergency_stop(MTR_MotorHandle_t handle);
+    /**
+     * @brief Queues relative movement in revolutions.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] revolutions Relative movement in revolutions.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_move_revolutions_async(MTR_MotorHandle_t handle, double revolutions,
+                                        TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Clears emergency stop latch and allows new motion commands.
- *
- * @return kStatus_Success if latch was cleared.
- */
-status_t MTR_clear_emergency_stop(void);
+    /**
+     * @brief Queues update of target velocity.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] velocity_deg_per_sec Velocity in degrees per second.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_velocity_async(MTR_MotorHandle_t handle, double velocity_deg_per_sec,
+                                    TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
 
-/**
- * @brief Returns emergency-stop latch state.
- *
- * @return 1 if emergency stop is active, otherwise 0.
- */
-uint8_t MTR_is_emergency_stop_active(void);
+    /**
+     * @brief Queues update of target acceleration.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] acceleration_deg_per_sec2 Acceleration in degrees per second squared.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_acceleration_async(MTR_MotorHandle_t handle, double acceleration_deg_per_sec2,
+                                        TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues stop command for a motor.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] decelerate If true, stop with deceleration; otherwise immediate stop.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_stop_async(MTR_MotorHandle_t handle, bool decelerate, TickType_t deadline,
+                            CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues query for current motor angle.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[out] angle Pointer receiving current angle in degrees.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_get_current_angle_async(MTR_MotorHandle_t handle, double* angle,
+                                         TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues query for current movement state.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[out] state Pointer receiving movement state.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_get_movement_state_async(MTR_MotorHandle_t handle, STP_MovementState_t* state,
+                                          CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Set current motor position as home.
+     *
+     * @param[in] handle Target motor handle.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_home_position(MTR_MotorHandle_t handle);
+
+    /**
+     * @brief Applies an angle offset to the current home reference.
+     *
+     * This updates the software-maintained absolute motor position so that the
+     * current physical position corresponds to @p angle_offset_deg.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] angle_offset_deg Desired angle at the current physical position.
+     * @return kStatus_Success if applied, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_home_angle_offset(MTR_MotorHandle_t handle, double angle_offset_deg);
+
+    /**
+     * @brief Queues synchronized movement command for multiple motors.
+     *
+     * @param[in] handles Array of motor handles.
+     * @param[in] angles Array of relative angles in degrees.
+     * @param[in] count Number of motors in arrays.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_synchronized_move_async(MTR_MotorHandle_t* handles, double* angles, uint8_t count,
+                                         TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues update of TMC run current.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] current_a Run current in ampere.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_run_current_async(MTR_MotorHandle_t handle, double current_a,
+                                       TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues update of TMC hold current.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] current_a Hold current in ampere.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_set_hold_current_async(MTR_MotorHandle_t handle, double current_a,
+                                        TickType_t deadline, CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues command to enable freewheeling mode.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_enable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                           CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Queues command to disable freewheeling mode.
+     *
+     * @param[in] handle Target motor handle.
+     * @param[in] deadline Timeout/deadline for command.
+     * @param[out] cmdHandle Optional command handle for completion wait.
+     * @return kStatus_Success if queued, otherwise kStatus_Fail.
+     */
+    status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
+                                            CHD_CmdHandle_t* cmdHandle);
+
+    /**
+     * @brief Activates emergency stop latch.
+     *
+     * @param[in] handle Motor handle used for immediate stop action.
+     * @return kStatus_Success if emergency stop applied, otherwise kStatus_Fail.
+     */
+    status_t MTR_emergency_stop(MTR_MotorHandle_t handle);
+
+    /**
+     * @brief Clears emergency stop latch and allows new motion commands.
+     *
+     * @return kStatus_Success if latch was cleared.
+     */
+    status_t MTR_clear_emergency_stop(void);
+
+    /**
+     * @brief Returns emergency-stop latch state.
+     *
+     * @return 1 if emergency stop is active, otherwise 0.
+     */
+    uint8_t MTR_is_emergency_stop_active(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MOTOR_CORE_H_
 

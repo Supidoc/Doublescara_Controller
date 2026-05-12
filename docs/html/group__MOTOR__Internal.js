@@ -36,9 +36,9 @@ var group__MOTOR__Internal =
       [ "state", "struct__MTR__GetMovementStateCmdData.html#a01f7068976d5177c63ef8905998a7736", null ]
     ] ],
     [ "_MTR_SynchronizedMoveCmdData", "struct__MTR__SynchronizedMoveCmdData.html", [
-      [ "angles", "struct__MTR__SynchronizedMoveCmdData.html#ac86d4a2e14204f7287645849a16a51e4", null ],
+      [ "angles", "struct__MTR__SynchronizedMoveCmdData.html#a2f3ee321e63c0aad6bb7405c107ea8f1", null ],
       [ "count", "struct__MTR__SynchronizedMoveCmdData.html#a333df5a9846301a735f59e6c9ab496c4", null ],
-      [ "handles", "struct__MTR__SynchronizedMoveCmdData.html#adb6eb2d7b6855b37f81e5482df0b995b", null ]
+      [ "handles", "struct__MTR__SynchronizedMoveCmdData.html#a8e6e257fb22efae1fc6d6729b2a49081", null ]
     ] ],
     [ "_MTR_SetRunCurrentCmdData", "struct__MTR__SetRunCurrentCmdData.html", [
       [ "current_a", "struct__MTR__SetRunCurrentCmdData.html#a10ce284155c45f7cc920451063d71371", null ]

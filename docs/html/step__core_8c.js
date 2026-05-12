@@ -1,6 +1,7 @@
 var step__core_8c =
 [
     [ "reset_absolute_position", "step__core_8c.html#a3fb95aaa3f8cecda9ad30ea62a4757e5", null ],
+    [ "set_absolute_position", "step__core_8c.html#af1aa9b9f3cdecdf46ee48e508466b3fc", null ],
     [ "STP_get_absolute_steps", "group__STEPPER__Module.html#gae764282f6d6459dbaf154801af0c9fc6", null ],
     [ "STP_get_acceleration", "group__STEPPER__Module.html#gaa650351470c587dbe89b773ee800708c", null ],
     [ "STP_get_default_config", "group__STEPPER__Module.html#ga718622f8935169a07606900d30e35dc3", null ],
@@ -13,12 +14,13 @@ var step__core_8c =
     [ "STP_move_relative_async", "group__STEPPER__Module.html#gafc3a63d18d294ce9f522725d11db6b5e", null ],
     [ "STP_move_relative_prepare_async", "group__STEPPER__Module.html#gadeffd3212366b893459a9bb026bd88b8", null ],
     [ "STP_reset_absolute_position", "group__STEPPER__Module.html#ga211ab928b813dfae2c5807f5db272ab2", null ],
+    [ "STP_set_absolute_steps", "group__STEPPER__Module.html#ga3244faf24399f2d70145f071b3a15246", null ],
     [ "STP_set_acceleration_async", "group__STEPPER__Module.html#ga506da9a17617328aa015d6ae7a2e9eda", null ],
     [ "STP_set_end_velocity_async", "group__STEPPER__Module.html#gabcd2ae8287932573d44ac30c944b4d58", null ],
     [ "STP_stop_async", "group__STEPPER__Module.html#gace468008090ef24b9ecd48c088d2c23b", null ],
     [ "STP_task", "group__STEPPER__Module.html#gae3c0fdafdd95ef3f90018154fff01e67", null ],
     [ "STP_trigger_prepared_moves_async", "group__STEPPER__Module.html#gab715c7bd8595a08979240255362b2571", null ],
-    [ "cmdHandles", "group__STEPPER__Internal.html#ga6b26389d8ba6ce908a268059e285c473", null ],
-    [ "handles", "group__STEPPER__Internal.html#ga53e76081d475aef890072a6c88aa3c64", null ],
-    [ "stpCmdQueue", "group__STEPPER__Internal.html#ga77de850a7138b6306a0599a9fc57a340", null ]
+    [ "stpCmdHandles", "group__STEPPER__Internal.html#gaa70be6db6e5de0018f281189690cde6e", null ],
+    [ "stpCmdQueue", "group__STEPPER__Internal.html#ga77de850a7138b6306a0599a9fc57a340", null ],
+    [ "stpHandles", "group__STEPPER__Internal.html#ga7f1c25cdad0642dce363a061fc214134", null ]
 ];

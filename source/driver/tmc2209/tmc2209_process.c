@@ -145,9 +145,9 @@ status_t TMCi_send_cmd_async(TMC_CommandQueueItem_t* queueItem, TickType_t deadl
     status_t sendStatus = CDP_send_cmd(tmcCmdQueue, queueItem, deadline, internaleCmdHandle);
     if (sendStatus != kStatus_Success)
     {
+        CHD_remove_cmd_handle_ref(internaleCmdHandle);
         if (cmdHandle != NULL)
         {
-            CHD_remove_cmd_handle_ref(*cmdHandle);
             *cmdHandle = NULL;
         }
         return kStatus_Fail;

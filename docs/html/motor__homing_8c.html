@@ -102,6 +102,7 @@ $(function(){initNavTree('motor__homing_8c.html','',''); });
 <code>#include &quot;<a class="el" href="motor__convert_8h_source.html">motor_convert.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sync__wait_8h_source.html">sync_wait.h</a>&quot;</code><br />
 <code>#include &quot;fsl_gpio.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="motor__configs_8h_source.html">motor_configs.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for motor_homing.c:</div>
 <div class="dyncontent">
@@ -125,9 +126,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a528b3ece82abe97c400944720a44049a" id="r_a528b3ece82abe97c400944720a44049a"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a528b3ece82abe97c400944720a44049a">wait_for_cmd_handle</a> (<a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> cmdHandle, TickType_t deadline)</td></tr>
 <tr class="memitem:a0128360cbf788d941fe229d8475260f3" id="r_a0128360cbf788d941fe229d8475260f3"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a0128360cbf788d941fe229d8475260f3">resolve_arm_handles</a> (void)</td></tr>
 <tr class="memitem:a0e768e6bb4bd23473105bc202e93e9d4" id="r_a0e768e6bb4bd23473105bc202e93e9d4"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a0e768e6bb4bd23473105bc202e93e9d4">MHM_init</a> (void)</td></tr>
+<tr class="memdesc:a0e768e6bb4bd23473105bc202e93e9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes homing resources and state.  <br /></td></tr>
 <tr class="memitem:a23a4a1bf1a2770d84e9410d909b3cf5a" id="r_a23a4a1bf1a2770d84e9410d909b3cf5a"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a23a4a1bf1a2770d84e9410d909b3cf5a">MHM_home_left_arm</a> (TickType_t deadline)</td></tr>
+<tr class="memdesc:a23a4a1bf1a2770d84e9410d909b3cf5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Homes the left arm motor.  <br /></td></tr>
 <tr class="memitem:af9033ca7b842c58a619c280f65f1245c" id="r_af9033ca7b842c58a619c280f65f1245c"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#af9033ca7b842c58a619c280f65f1245c">MHM_home_right_arm</a> (TickType_t deadline)</td></tr>
+<tr class="memdesc:af9033ca7b842c58a619c280f65f1245c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Homes the right arm motor.  <br /></td></tr>
 <tr class="memitem:aa278f610d7050ed2fa72afa46947a54b" id="r_aa278f610d7050ed2fa72afa46947a54b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa278f610d7050ed2fa72afa46947a54b">MHM_homing_arm_interrupt_handler</a> (PORT_Type *port, uint32_t pin)</td></tr>
+<tr class="memdesc:aa278f610d7050ed2fa72afa46947a54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt handler hook used while a homing sequence is running.  <br /></td></tr>
 <tr class="memitem:a42292ff3cd65f389eeba0293c6dc7d4d" id="r_a42292ff3cd65f389eeba0293c6dc7d4d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a42292ff3cd65f389eeba0293c6dc7d4d">GPIOD_IRQHANDLER</a> (void)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
@@ -155,7 +160,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00030">30</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00031">31</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -171,7 +176,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00028">28</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00029">29</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -187,7 +192,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00026">26</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00027">27</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -203,7 +208,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00029">29</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00030">30</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -219,7 +224,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00027">27</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00028">28</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -261,7 +266,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00162">162</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00263">263</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -280,7 +285,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00279">279</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00380">380</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -307,7 +312,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00147">147</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00248">248</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -326,7 +331,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00080">80</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p>Homes the left arm motor. </p>
+
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00081">81</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -345,7 +352,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00095">95</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p>Homes the right arm motor. </p>
+
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00146">146</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -368,7 +377,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00110">110</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p>Interrupt handler hook used while a homing sequence is running. </p>
+
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00211">211</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -387,7 +398,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00069">69</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p>Initializes homing resources and state. </p>
+
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00070">70</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -414,7 +427,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00253">253</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00354">354</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -445,7 +458,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00266">266</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00367">367</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -470,7 +483,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00062">62</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00063">63</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -494,7 +507,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00064">64</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00065">65</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -518,7 +531,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00061">61</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00062">62</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -542,7 +555,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00058">58</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00059">59</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -566,7 +579,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00054">54</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00055">55</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -590,7 +603,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00053">53</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00054">54</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -614,7 +627,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00059">59</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00060">60</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -638,7 +651,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00056">56</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00057">57</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -662,7 +675,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00055">55</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00056">56</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
