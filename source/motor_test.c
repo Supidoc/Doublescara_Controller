@@ -74,11 +74,14 @@ void MTT_task(void* pvParameters)
     MTR_MotorConfig_t rArmConfig = M_R_Arm();
     MTR_MotorConfig_t platConfig = M_Platform();
     MTR_MotorConfig_t magConfig  = M_Magnet();
+    MTR_MotorConfig_t rotConfig  = M_Rotation();
+
 
     MTR_MotorHandle_t l_arm_handle = NULL;
     MTR_MotorHandle_t r_arm_handle = NULL;
     MTR_MotorHandle_t plat_handle  = NULL;
     MTR_MotorHandle_t mag_handle   = NULL;
+    MTR_MotorHandle_t rot_handle   = NULL;
 
     MTR_get_motor_by_label(lArmConfig.label, &l_arm_handle);
     if (l_arm_handle == NULL)
@@ -93,11 +96,6 @@ void MTT_task(void* pvParameters)
         for (;;)
         {
         }
-    }
-    if (SK_init_motor_handles(l_arm_handle, r_arm_handle, plat_handle) != kStatus_Success)
-    {
-        while (1)
-            ;
     }
 
     MTR_get_motor_by_label(platConfig.label, &plat_handle);
@@ -114,6 +112,20 @@ void MTT_task(void* pvParameters)
         for (;;)
         {
         }
+    }
+
+    MTR_get_motor_by_label(rotConfig.label, &rot_handle);
+    if (rot_handle == NULL)
+    {
+        for (;;)
+        {
+        }
+    }
+
+    if (SK_init_motor_handles(l_arm_handle, r_arm_handle, rot_handle) != kStatus_Success)
+    {
+        while (1)
+            ;
     }
 
     //    CHD_CmdHandle_t platHandle = NULL;
@@ -138,7 +150,7 @@ void MTT_task(void* pvParameters)
     vTaskDelay(pdMS_TO_TICKS(100));
 
     SK_Point_t startPoint = {.x = 30, .y = 130};
-    SK_move_to_xy_async(startPoint, portMAX_DELAY, 0, false, &moveHandle);
+    SK_move_to_xy_async(startPoint, 0, false,portMAX_DELAY, &moveHandle);
     MTT_wait_and_release(moveHandle, portMAX_DELAY);
 
     for (;;)

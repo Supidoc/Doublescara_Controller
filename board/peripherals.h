@@ -93,15 +93,15 @@ extern "C" {
 /* Definition of the clock source frequency */
 #define UART2_CLOCK_SOURCE CLOCK_GetFreq(UART2_CLK_SRC)
 /* Definition of the backround buffer size */
-#define UART2_BACKGROUND_BUFFER_SIZE 1
+#define UART2_BACKGROUND_BUFFER_SIZE 128
 /* UART2 interrupt vector ID (number). */
 #define UART2_SERIAL_RX_TX_IRQN UART2_RX_TX_IRQn
 /* UART2 interrupt vector priority. */
-#define UART2_SERIAL_RX_TX_IRQ_PRIORITY 7
+#define UART2_SERIAL_RX_TX_IRQ_PRIORITY 6
 /* UART2 interrupt vector ID (number). */
 #define UART2_SERIAL_ERROR_IRQN UART2_ERR_IRQn
 /* UART2 interrupt vector priority. */
-#define UART2_SERIAL_ERROR_IRQ_PRIORITY 8
+#define UART2_SERIAL_ERROR_IRQ_PRIORITY 7
 
 /***********************************************************************************************************************
  * Global variables

@@ -227,7 +227,7 @@ status_t TMCi_set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t d
     }
 
     snprintf(logMsg, sizeof(logMsg), "[%s] Hold current divider set to %d", handle->label, ihold);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }
@@ -264,7 +264,7 @@ status_t TMCi_set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t dea
     }
 
     snprintf(logMsg, sizeof(logMsg), "[%s] Run current divider set to %d", handle->label, irun);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }
@@ -296,7 +296,7 @@ status_t TMCi_set_microstepping(TMC_Handle_t handle, TMC_MICROSTEPPING_t microst
     TMC_microstepping_enum_to_uint_impl(microstepping, &microsteppingInteger);
     snprintf(logMsg, sizeof(logMsg), "[%s] Microstepping set to %d", handle->label,
              microsteppingInteger);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }

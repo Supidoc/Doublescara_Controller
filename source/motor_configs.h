@@ -94,7 +94,7 @@ extern "C"
         motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
         motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-        motorConfig.tmcConfig.iHoldCurrentA = 0.5;
+        motorConfig.tmcConfig.iHoldCurrentA = 0.4;
         motorConfig.tmcConfig.iRunCurrentA  = 2.0;
         return motorConfig;
     }
@@ -124,7 +124,7 @@ extern "C"
         motorConfig.stepperConfig.ftmBase               = FTM3;
         motorConfig.stepperConfig.ftmChannel            = kFTM_Chnl_1;
         motorConfig.stepperConfig.stepGPIO              = GPIOD;
-        motorConfig.stepperConfig.stepPin               = 2;
+        motorConfig.stepperConfig.stepPin               = 1;
         motorConfig.stepperConfig.stepPort              = PORTD;
         motorConfig.stepperConfig.dirLogicHighClockwise = 0;
 
@@ -133,7 +133,7 @@ extern "C"
         motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
         motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-        motorConfig.tmcConfig.iHoldCurrentA = 0.5;
+        motorConfig.tmcConfig.iHoldCurrentA = 0.4;
         motorConfig.tmcConfig.iRunCurrentA  = 2.0;
         return motorConfig;
     }
@@ -234,8 +234,8 @@ extern "C"
 
         motorConfig.label = "m_rot";
 
-        motorConfig.acceleration    = 40;
-        motorConfig.endVelocity     = 30;
+        motorConfig.acceleration    = 200;
+        motorConfig.endVelocity     = 100;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
         motorConfig.reductionFactor = 1.0;

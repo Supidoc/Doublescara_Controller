@@ -304,8 +304,8 @@ status_t SK_forward_kinematics(double theta1, double theta2, SK_Side_t side, SK_
         .y = a2 * sin(theta2),
     };
 
-    const double dx        = fabs(j4.x - j3.x);
-    const double dy        = fabs(j4.y - j3.y);
+    const double dx        = j4.x - j3.x;
+    const double dy        = j4.y - j3.y;
     const double d         = hypot(dx, dy);
     const double q3BetaCos = ((a3 * a3) + (d * d) - (a4 * a4)) / (2.0 * a3 * d);
 
@@ -322,7 +322,7 @@ status_t SK_forward_kinematics(double theta1, double theta2, SK_Side_t side, SK_
         return kStatus_Fail;
     }
 
-    const double alpha = atan(dy / dx);
+    const double alpha = atan2(dy, dx);
     const double beta  = acos(q3BetaCos);
 
     if ((!isfinite(alpha)) || (!isfinite(beta)))
@@ -338,7 +338,7 @@ status_t SK_forward_kinematics(double theta1, double theta2, SK_Side_t side, SK_
 
         if (zetaE != NULL)
         {
-            *zetaE = alpha + beta;
+            *zetaE = M_PI-beta +alpha;
         }
     }
     else
@@ -348,7 +348,7 @@ status_t SK_forward_kinematics(double theta1, double theta2, SK_Side_t side, SK_
 
         if (zetaE != NULL)
         {
-            *zetaE = -(alpha + beta);
+            *zetaE = alpha-beta ;
         }
     }
 

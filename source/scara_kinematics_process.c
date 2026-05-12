@@ -341,13 +341,13 @@ static status_t SKI_handle_MoveToXY(const SK_MoveToXYData_t* data, TickType_t de
         return kStatus_Fail;
     }
 
-    double          deltaZetaERad     = 0.0;
+    double          deltaZetaEDEG     = 0.0;
     CHD_CmdHandle_t zetaMoveCmdHandle = NULL;
     if (data->rotateZeta)
     {
-        deltaZetaERad = data->deltaZetaE + zetaEStartRad - zetaEEndRad;
-        MTR_move_angle_async(skZetaMotorHandle, SKi_rad_to_deg(deltaZetaERad), deadline,
-                             &zetaMoveCmdHandle);
+        deltaZetaEDEG = data->deltaZetaE + SKi_rad_to_deg(zetaEStartRad - zetaEEndRad);
+//        MTR_move_angle_async(skZetaMotorHandle, deltaZetaEDEG, deadline,
+//                             &zetaMoveCmdHandle);
     }
 
     if (SKI_side_change_required(startPoint, data->targetPoint, &sideChangeRequired) !=
@@ -378,13 +378,15 @@ static status_t SKI_handle_MoveToXY(const SK_MoveToXYData_t* data, TickType_t de
     double relativeTheta2Deg = absoluteTheta2Deg - currentTheta2Deg;
 
     CHD_CmdHandle_t   moveCmdHandle = NULL;
-    MTR_MotorHandle_t handles[2];
+    MTR_MotorHandle_t handles[3];
     handles[0] = skRightMotorHandle;
     handles[1] = skLeftMotorHandle;
-    double angles[2];
+    handles[2] = skZetaMotorHandle;
+    double angles[3];
     angles[0] = relativeTheta1Deg;
     angles[1] = relativeTheta2Deg;
-    if (MTR_synchronized_move_async(handles, angles, 2U, portMAX_DELAY, &moveCmdHandle) !=
+    angles[2] = deltaZetaEDEG;
+    if (MTR_synchronized_move_async(handles, angles, 3U, portMAX_DELAY, &moveCmdHandle) !=
         kStatus_Success)
     {
         return kStatus_Fail;
@@ -395,10 +397,10 @@ static status_t SKI_handle_MoveToXY(const SK_MoveToXYData_t* data, TickType_t de
     }
     if (data->rotateZeta)
     {
-        if (SKi_wait_and_release(zetaMoveCmdHandle, deadline) != kStatus_Success)
-        {
-            return kStatus_Fail;
-        }
+//        if (SKi_wait_and_release(zetaMoveCmdHandle, deadline) != kStatus_Success)
+//        {
+//            return kStatus_Fail;
+//        }
     }
     vTaskDelay(pdMS_TO_TICKS(100));
 

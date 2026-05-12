@@ -388,15 +388,15 @@ instance:
       - baudrate: '115200'
       - parity: 'kUART_ParityDisabled'
       - stopbits: 'kUART_OneStopBit'
-      - buffer_size: '1'
+      - buffer_size: '128'
     - interrupt_rx_tx:
       - IRQn: 'UART2_RX_TX_IRQn'
       - enable_priority: 'true'
-      - priority: '7'
+      - priority: '6'
     - interrupt_err:
       - IRQn: 'UART2_ERR_IRQn'
       - enable_priority: 'true'
-      - priority: '8'
+      - priority: '7'
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 uart_rtos_handle_t UART2_rtos_handle;

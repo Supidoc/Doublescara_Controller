@@ -31,6 +31,7 @@
 #include "motor_core.h"
 #include "motorCmd.h"
 #include "scara_kinematics.h"
+#include "statemachine.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -159,6 +160,12 @@ void APP_run(void)
             ;
     }
     if (create_task(SK_task, "SK_Task", configMINIMAL_STACK_SIZE + 800, configMAX_PRIORITIES - 2) !=
+        kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    if (create_task(Statemachine_task, "SM_Task", configMINIMAL_STACK_SIZE + 800, configMAX_PRIORITIES - 2) !=
         kStatus_Success)
     {
         while (1)
