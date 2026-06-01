@@ -1,0 +1,280 @@
+\doxysection{UART2 Wrapper }
+\hypertarget{group__UART2__Module}{}\label{group__UART2__Module}\index{UART2 Wrapper@{UART2 Wrapper}}
+
+
+UART2 serial helper functions and IRQ prototypes.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__UART2__Module_ga7b1f411b7cd5a46b22211c1a68715e85}{UART2\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE}}~128
+\item 
+\+\#define \doxymbox{\hyperlink{group__UART2__Module_ga585fe3f22858801e61a0746ae21fbab2}{UART2\+\_\+\+TX\+\_\+\+BUF\+\_\+\+SIZE}}~128
+\item 
+\+\#define \doxymbox{\hyperlink{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5}{NEW\+\_\+\+LINE}}~\textquotesingle{}\textbackslash{}n\textquotesingle{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{group__UART2__Module_ga13b6205bcf40ba329f951b1458b88792}{uart2\+Is\+Valid\+Command}} (int8\+\_\+t ch)
+\begin{DoxyCompactList}\small\item\em Validate whether a received character is a valid command start. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__UART2__Module_ga240c05b87ce67f3129082da78e859214}{uart2\+Write\+Char}} (char ch)
+\begin{DoxyCompactList}\small\item\em Write a single character to the UART transmit buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__UART2__Module_ga9ccada14e65014aa3758674c37885ceb}{uart2\+Write}} (const char \texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Write a NUL-\/terminated string to the UART. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__UART2__Module_gaac596179ad5f07f3f65bfdcce24ef129}{uart2\+Write\+Line}} (const char \texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Write a NUL-\/terminated string followed by the newline character. \end{DoxyCompactList}\item 
+char \doxymbox{\hyperlink{group__UART2__Module_ga95c9a9b2781fd953631f728f63732bfb}{uart2\+Read\+Char}} (void)
+\begin{DoxyCompactList}\small\item\em Read a single character from the UART receive buffer. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group__UART2__Module_ga466071c4f91339193b739b3088c0bf4f}{uart2\+Read\+Line}} (char \texorpdfstring{$\ast$}{*}str, uint16\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Read a line into the provided buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__UART2__Module_gaab4a82c353781aced5e4a6dd7c67bc85}{UART2\+\_\+\+RX\+\_\+\+TX\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em UART2 RX/\+\+TX IRQ handler. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__UART2__Module_gae87c74e247050d9577456786a51e9c6f}{UART2\+\_\+\+ERR\+\_\+\+IRQHandler}} (void)
+\begin{DoxyCompactList}\small\item\em UART2 error IRQ handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+UART2 serial helper functions and IRQ prototypes. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__UART2__Module_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5}\index{UART2 Wrapper@{UART2 Wrapper}!NEW\_LINE@{NEW\_LINE}}
+\index{NEW\_LINE@{NEW\_LINE}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{NEW\_LINE}{NEW\_LINE}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5} 
+\+\#define NEW\+\_\+\+LINE~\textquotesingle{}\textbackslash{}n\textquotesingle{}}
+
+Character used as newline for convenience helpers. 
+
+Definition at line \doxymbox{\hyperlink{uart_8h_source_l00055}{55}} of file \doxymbox{\hyperlink{uart_8h_source}{uart.\+h}}.
+
+\Hypertarget{group__UART2__Module_ga7b1f411b7cd5a46b22211c1a68715e85}\index{UART2 Wrapper@{UART2 Wrapper}!UART2\_RX\_BUF\_SIZE@{UART2\_RX\_BUF\_SIZE}}
+\index{UART2\_RX\_BUF\_SIZE@{UART2\_RX\_BUF\_SIZE}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{UART2\_RX\_BUF\_SIZE}{UART2\_RX\_BUF\_SIZE}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga7b1f411b7cd5a46b22211c1a68715e85} 
+\+\#define UART2\+\_\+\+RX\+\_\+\+BUF\+\_\+\+SIZE~128}
+
+Size of the UART RX software buffer. Can be overridden at compile time. 
+
+Definition at line \doxymbox{\hyperlink{uart_8h_source_l00045}{45}} of file \doxymbox{\hyperlink{uart_8h_source}{uart.\+h}}.
+
+\Hypertarget{group__UART2__Module_ga585fe3f22858801e61a0746ae21fbab2}\index{UART2 Wrapper@{UART2 Wrapper}!UART2\_TX\_BUF\_SIZE@{UART2\_TX\_BUF\_SIZE}}
+\index{UART2\_TX\_BUF\_SIZE@{UART2\_TX\_BUF\_SIZE}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{UART2\_TX\_BUF\_SIZE}{UART2\_TX\_BUF\_SIZE}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga585fe3f22858801e61a0746ae21fbab2} 
+\+\#define UART2\+\_\+\+TX\+\_\+\+BUF\+\_\+\+SIZE~128}
+
+Size of the UART TX software buffer. Can be overridden at compile time. 
+
+Definition at line \doxymbox{\hyperlink{uart_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{uart_8h_source}{uart.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__UART2__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__UART2__Module_gae87c74e247050d9577456786a51e9c6f}\index{UART2 Wrapper@{UART2 Wrapper}!UART2\_ERR\_IRQHandler@{UART2\_ERR\_IRQHandler}}
+\index{UART2\_ERR\_IRQHandler@{UART2\_ERR\_IRQHandler}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{UART2\_ERR\_IRQHandler()}{UART2\_ERR\_IRQHandler()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_gae87c74e247050d9577456786a51e9c6f} 
+void UART2\+\_\+\+ERR\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+UART2 error IRQ handler. 
+
+Entry point for UART2 error interrupts (overrun, framing, parity). \Hypertarget{group__UART2__Module_gaab4a82c353781aced5e4a6dd7c67bc85}\index{UART2 Wrapper@{UART2 Wrapper}!UART2\_RX\_TX\_IRQHandler@{UART2\_RX\_TX\_IRQHandler}}
+\index{UART2\_RX\_TX\_IRQHandler@{UART2\_RX\_TX\_IRQHandler}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{UART2\_RX\_TX\_IRQHandler()}{UART2\_RX\_TX\_IRQHandler()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_gaab4a82c353781aced5e4a6dd7c67bc85} 
+void UART2\+\_\+\+RX\+\_\+\+TX\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+UART2 RX/\+\+TX IRQ handler. 
+
+Entry point for the UART2 RX/\+\+TX interrupt. Link this symbol to the vector table so the driver can handle transmit and receive events. \Hypertarget{group__UART2__Module_ga13b6205bcf40ba329f951b1458b88792}\index{UART2 Wrapper@{UART2 Wrapper}!uart2IsValidCommand@{uart2IsValidCommand}}
+\index{uart2IsValidCommand@{uart2IsValidCommand}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2IsValidCommand()}{uart2IsValidCommand()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga13b6205bcf40ba329f951b1458b88792} 
+bool uart2\+Is\+Valid\+Command (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{ch}{}\end{DoxyParamCaption})}
+
+
+
+Validate whether a received character is a valid command start. 
+
+This helper is typically used by the receive parser to determine if the incoming byte should be treated as the beginning of a command.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & Received character (signed 8-\/bit to match internal parsing code) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the character can start a command, false otherwise
+\end{DoxyReturn}
+Validate whether a received character is a valid command start.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & Character to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the character is considered a valid command start 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00135}{135}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+
+\Hypertarget{group__UART2__Module_ga95c9a9b2781fd953631f728f63732bfb}\index{UART2 Wrapper@{UART2 Wrapper}!uart2ReadChar@{uart2ReadChar}}
+\index{uart2ReadChar@{uart2ReadChar}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2ReadChar()}{uart2ReadChar()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga95c9a9b2781fd953631f728f63732bfb} 
+char uart2\+Read\+Char (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Read a single character from the UART receive buffer. 
+
+\begin{DoxyReturn}{Returns}
+Received character (or 0 if none available depending on implementation)
+\end{DoxyReturn}
+Blocks until a character is available.
+
+\begin{DoxyReturn}{Returns}
+Received character 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00094}{94}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+
+\Hypertarget{group__UART2__Module_ga466071c4f91339193b739b3088c0bf4f}\index{UART2 Wrapper@{UART2 Wrapper}!uart2ReadLine@{uart2ReadLine}}
+\index{uart2ReadLine@{uart2ReadLine}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2ReadLine()}{uart2ReadLine()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga466071c4f91339193b739b3088c0bf4f} 
+uint16\+\_\+t uart2\+Read\+Line (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{str}{, }\item[{uint16\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Read a line into the provided buffer. 
+
+Copies up to {\ttfamily length -\/ 1} characters into {\ttfamily str} and NUL-\/terminates the result. The exact behavior (blocking or non-\/blocking) depends on the implementation.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em str} & Buffer to receive the line \\
+\hline
+ & {\em length} & Size of the buffer in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of bytes written (excluding terminating NUL)
+\end{DoxyReturn}
+Blocks until a newline ({\ttfamily \doxylink{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5}{NEW\+\_\+\+LINE}}) is received or the buffer length is exceeded. The newline character is replaced with a terminating NUL.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em str} & Buffer to receive the line (must be at least {\ttfamily length} bytes) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em length} & Size of {\ttfamily str} in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of bytes written (excluding terminating NUL) 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00113}{113}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+
+\Hypertarget{group__UART2__Module_ga9ccada14e65014aa3758674c37885ceb}\index{UART2 Wrapper@{UART2 Wrapper}!uart2Write@{uart2Write}}
+\index{uart2Write@{uart2Write}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2Write()}{uart2Write()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga9ccada14e65014aa3758674c37885ceb} 
+void uart2\+Write (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})}
+
+
+
+Write a NUL-\/terminated string to the UART. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & NUL-\/terminated string to send\\
+\hline
+\end{DoxyParams}
+If the string is empty, the function returns immediately.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em str} & NUL-\/terminated string to send \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00065}{65}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+
+\Hypertarget{group__UART2__Module_ga240c05b87ce67f3129082da78e859214}\index{UART2 Wrapper@{UART2 Wrapper}!uart2WriteChar@{uart2WriteChar}}
+\index{uart2WriteChar@{uart2WriteChar}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2WriteChar()}{uart2WriteChar()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_ga240c05b87ce67f3129082da78e859214} 
+void uart2\+Write\+Char (\begin{DoxyParamCaption}\item[{char}]{ch}{}\end{DoxyParamCaption})}
+
+
+
+Write a single character to the UART transmit buffer. 
+
+This function may block briefly if the software buffer is full.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & Character to send\\
+\hline
+\end{DoxyParams}
+Write a single character to the UART transmit buffer.
+
+Switching on the TIE interrupt causes an interrupt to be triggered immediately. The function blocks until there is space in the tx buffer queue.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em ch} & Byte to send \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00053}{53}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+
+\Hypertarget{group__UART2__Module_gaac596179ad5f07f3f65bfdcce24ef129}\index{UART2 Wrapper@{UART2 Wrapper}!uart2WriteLine@{uart2WriteLine}}
+\index{uart2WriteLine@{uart2WriteLine}!UART2 Wrapper@{UART2 Wrapper}}
+\doxysubsubsection{\texorpdfstring{uart2WriteLine()}{uart2WriteLine()}}
+{\footnotesize\ttfamily \label{group__UART2__Module_gaac596179ad5f07f3f65bfdcce24ef129} 
+void uart2\+Write\+Line (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})}
+
+
+
+Write a NUL-\/terminated string followed by the newline character. 
+
+Convenience wrapper that appends {\ttfamily \doxylink{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5}{NEW\+\_\+\+LINE}} after the provided string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & NUL-\/terminated string to send\\
+\hline
+\end{DoxyParams}
+Write a NUL-\/terminated string followed by the newline character.
+
+Convenience wrapper that appends {\ttfamily \doxylink{group__UART2__Module_ga7b99dc1e1c86b4897498c2d436ead1b5}{NEW\+\_\+\+LINE}} after the provided string.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em str} & NUL-\/terminated string to send \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{uart2_8c_source_l00081}{81}} of file \doxymbox{\hyperlink{uart2_8c_source}{uart2.\+c}}.
+

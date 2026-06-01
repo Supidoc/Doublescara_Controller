@@ -1,15 +1,12 @@
 var motor__core_8c =
 [
-    [ "MTR_clear_emergency_stop", "group__MOTOR__Facade__Module.html#ga838ccbc335d1e72d3499bd5c11de244b", null ],
     [ "MTR_disable_freewheeling_async", "group__MOTOR__Facade__Module.html#ga5a39510d1566426ceb0fb1d48bdbe2a4", null ],
-    [ "MTR_emergency_stop", "group__MOTOR__Facade__Module.html#gaa51d8115cce00df1b0ec80007caaa73b", null ],
     [ "MTR_enable_freewheeling_async", "group__MOTOR__Facade__Module.html#gaf3c97798ed91d32cc6f9010163f7b17f", null ],
     [ "MTR_get_current_angle_async", "group__MOTOR__Facade__Module.html#gaa606ac87370e0682d0c0e11b9be662ca", null ],
     [ "MTR_get_motor_by_label", "group__MOTOR__Facade__Module.html#gac4e0046683c4e47f0ce912ba0e161c5c", null ],
     [ "MTR_get_movement_state_async", "group__MOTOR__Facade__Module.html#ga903efe086f153300adb0b1c39d0e9a74", null ],
     [ "MTR_init", "group__MOTOR__Facade__Module.html#ga78bd18ddbc517b9abafa26907d7024b7", null ],
     [ "MTR_init_handle_async", "group__MOTOR__Facade__Module.html#ga32a7ed4ed137c9dda2798c858e1e9f90", null ],
-    [ "MTR_is_emergency_stop_active", "group__MOTOR__Facade__Module.html#ga9b08e661f73cbeb7f005f6c7e7803adb", null ],
     [ "MTR_move_absolute_angle_async", "group__MOTOR__Facade__Module.html#gae9bcd6416c1e134e40eff593378a9927", null ],
     [ "MTR_move_angle_async", "group__MOTOR__Facade__Module.html#gabba85eb9f52af1883b128448d47b3cb1", null ],
     [ "MTR_move_revolutions_async", "group__MOTOR__Facade__Module.html#ga0009f234502f98a977e0690ecd2a1200", null ],
@@ -22,7 +19,6 @@ var motor__core_8c =
     [ "MTR_stop_async", "group__MOTOR__Facade__Module.html#ga9a91668f2c96621416ea02069623bf20", null ],
     [ "MTR_synchronized_move_async", "group__MOTOR__Facade__Module.html#gad16d0c7b1d81fc07d8bdefc92d8db945", null ],
     [ "MTR_task", "group__MOTOR__Facade__Module.html#ga494ccfe2699411bf54f0724b59a6f7bc", null ],
-    [ "emergencyStopFlag", "group__MOTOR__Internal.html#gaf1047ff67cd2b16bc743c9b996df0d81", null ],
     [ "motorHandles", "group__MOTOR__Internal.html#gaeea8bff4d30a9428743420d040668cc9", null ],
     [ "mtrCmdHandles", "group__MOTOR__Internal.html#gadfeb8f740ba81e3e261923bb6b4b0251", null ],
     [ "mtrCmdQueue", "group__MOTOR__Internal.html#ga523c31a34713b68f380469e85815e59d", null ],

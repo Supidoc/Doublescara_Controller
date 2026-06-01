@@ -1,10 +1,10 @@
-\doxysection{source/\+motor\+\_\+homing.c File Reference}
-\hypertarget{motor__homing_8c}{}\label{motor__homing_8c}\index{source/motor\_homing.c@{source/motor\_homing.c}}
-{\ttfamily \+\#include "{}motor\+\_\+homing.\+h"{}}\newline
+\doxysection{source/\+motion/\+homing/\+motor\+\_\+homing.c File Reference}
+\hypertarget{motor__homing_8c}{}\label{motor__homing_8c}\index{source/motion/homing/motor\_homing.c@{source/motion/homing/motor\_homing.c}}
+{\ttfamily \+\#include $<$infrastructure/\+log.\+h$>$}\newline
+{\ttfamily \+\#include $<$motion/\+homing/\+motor\+\_\+homing.\+h$>$}\newline
 {\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
 {\ttfamily \+\#include "{}semphr.\+h"{}}\newline
 {\ttfamily \+\#include "{}motor\+\_\+core.\+h"{}}\newline
-{\ttfamily \+\#include "{}log.\+h"{}}\newline
 {\ttfamily \+\#include "{}step\+\_\+core.\+h"{}}\newline
 {\ttfamily \+\#include "{}stdio.\+h"{}}\newline
 {\ttfamily \+\#include "{}motor\+\_\+convert.\+h"{}}\newline
@@ -64,15 +64,15 @@ static PORT\+\_\+\+Type \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{motor__h
 \item 
 static uint8\+\_\+t \doxymbox{\hyperlink{motor__homing_8c_a83a05bb03b83e0c111232aa7617a4b16}{r\+\_\+arm\+\_\+home\+\_\+pin}} = 4
 \item 
-static \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_a11536e762504348670f8937c7ed1fe39}{l\+\_\+arm\+\_\+handle}} = NULL
+static \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_a11536e762504348670f8937c7ed1fe39}{l\+\_\+arm\+\_\+handle}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \item 
-static \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_a0cb42ddf9f6e372e8706dd3f01878bc8}{r\+\_\+arm\+\_\+handle}} = NULL
+static \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_a0cb42ddf9f6e372e8706dd3f01878bc8}{r\+\_\+arm\+\_\+handle}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \item 
 static volatile uint8\+\_\+t \doxymbox{\hyperlink{motor__homing_8c_aa6da5821950d430363ae4e55b4e644d1}{homing\+Successful}} = 0
 \item 
-static volatile \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_ae96c238f2a89e837c76a8beb68e396b9}{homing\+Handle}} = NULL
+static volatile \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} \doxymbox{\hyperlink{motor__homing_8c_ae96c238f2a89e837c76a8beb68e396b9}{homing\+Handle}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \item 
-static Semaphore\+Handle\+\_\+t \doxymbox{\hyperlink{motor__homing_8c_ae0ed17bd71da5e9207ffca085790e834}{homing\+Mutex}} = NULL
+static Semaphore\+Handle\+\_\+t \doxymbox{\hyperlink{motor__homing_8c_ae0ed17bd71da5e9207ffca085790e834}{homing\+Mutex}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \end{DoxyCompactItemize}
 
 
@@ -142,7 +142,7 @@ status\+\_\+t auto\+\_\+homing (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperl
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00263}{263}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00266}{266}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_a42292ff3cd65f389eeba0293c6dc7d4d}\index{motor\_homing.c@{motor\_homing.c}!GPIOD\_IRQHANDLER@{GPIOD\_IRQHANDLER}}
 \index{GPIOD\_IRQHANDLER@{GPIOD\_IRQHANDLER}!motor\_homing.c@{motor\_homing.c}}
@@ -152,7 +152,7 @@ void GPIOD\+\_\+\+IRQHANDLER (\begin{DoxyParamCaption}\item[{void}]{}{}\end{Doxy
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00380}{380}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00379}{379}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_aa92368a11a905685386d69e858002a1c}\index{motor\_homing.c@{motor\_homing.c}!init\_homing@{init\_homing}}
 \index{init\_homing@{init\_homing}!motor\_homing.c@{motor\_homing.c}}
@@ -162,7 +162,7 @@ status\+\_\+t init\+\_\+homing (\begin{DoxyParamCaption}\item[{void}]{}{}\end{Do
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00248}{248}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00251}{251}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_a23a4a1bf1a2770d84e9410d909b3cf5a}\index{motor\_homing.c@{motor\_homing.c}!MHM\_home\_left\_arm@{MHM\_home\_left\_arm}}
 \index{MHM\_home\_left\_arm@{MHM\_home\_left\_arm}!motor\_homing.c@{motor\_homing.c}}
@@ -190,7 +190,7 @@ Homes the right arm motor.
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00146}{146}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00148}{148}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_aa278f610d7050ed2fa72afa46947a54b}\index{motor\_homing.c@{motor\_homing.c}!MHM\_homing\_arm\_interrupt\_handler@{MHM\_homing\_arm\_interrupt\_handler}}
 \index{MHM\_homing\_arm\_interrupt\_handler@{MHM\_homing\_arm\_interrupt\_handler}!motor\_homing.c@{motor\_homing.c}}
@@ -204,7 +204,7 @@ Interrupt handler hook used while a homing sequence is running.
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00211}{211}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00214}{214}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_a0e768e6bb4bd23473105bc202e93e9d4}\index{motor\_homing.c@{motor\_homing.c}!MHM\_init@{MHM\_init}}
 \index{MHM\_init@{MHM\_init}!motor\_homing.c@{motor\_homing.c}}
@@ -228,7 +228,7 @@ status\+\_\+t resolve\+\_\+arm\+\_\+handles (\begin{DoxyParamCaption}\item[{void
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00354}{354}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00353}{353}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 \Hypertarget{motor__homing_8c_a528b3ece82abe97c400944720a44049a}\index{motor\_homing.c@{motor\_homing.c}!wait\_for\_cmd\_handle@{wait\_for\_cmd\_handle}}
 \index{wait\_for\_cmd\_handle@{wait\_for\_cmd\_handle}!motor\_homing.c@{motor\_homing.c}}
@@ -238,7 +238,7 @@ status\+\_\+t wait\+\_\+for\+\_\+cmd\+\_\+handle (\begin{DoxyParamCaption}\item[
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00367}{367}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00366}{366}} of file \doxymbox{\hyperlink{motor__homing_8c_source}{motor\+\_\+homing.\+c}}.
 
 
 
@@ -249,7 +249,7 @@ Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00367}{367}} of
 \index{homingHandle@{homingHandle}!motor\_homing.c@{motor\_homing.c}}
 \doxysubsubsection{\texorpdfstring{homingHandle}{homingHandle}}
 {\footnotesize\ttfamily \label{motor__homing_8c_ae96c238f2a89e837c76a8beb68e396b9} 
-volatile \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} homing\+Handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+volatile \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} homing\+Handle = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -259,7 +259,7 @@ Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00063}{63}} of 
 \index{homingMutex@{homingMutex}!motor\_homing.c@{motor\_homing.c}}
 \doxysubsubsection{\texorpdfstring{homingMutex}{homingMutex}}
 {\footnotesize\ttfamily \label{motor__homing_8c_ae0ed17bd71da5e9207ffca085790e834} 
-Semaphore\+Handle\+\_\+t homing\+Mutex = NULL\hspace{0.3cm}{\ttfamily [static]}}
+Semaphore\+Handle\+\_\+t homing\+Mutex = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -279,7 +279,7 @@ Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00062}{62}} of 
 \index{l\_arm\_handle@{l\_arm\_handle}!motor\_homing.c@{motor\_homing.c}}
 \doxysubsubsection{\texorpdfstring{l\_arm\_handle}{l\_arm\_handle}}
 {\footnotesize\ttfamily \label{motor__homing_8c_a11536e762504348670f8937c7ed1fe39} 
-\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} l\+\_\+arm\+\_\+handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} l\+\_\+arm\+\_\+handle = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -309,7 +309,7 @@ Definition at line \doxymbox{\hyperlink{motor__homing_8c_source_l00054}{54}} of 
 \index{r\_arm\_handle@{r\_arm\_handle}!motor\_homing.c@{motor\_homing.c}}
 \doxysubsubsection{\texorpdfstring{r\_arm\_handle}{r\_arm\_handle}}
 {\footnotesize\ttfamily \label{motor__homing_8c_a0cb42ddf9f6e372e8706dd3f01878bc8} 
-\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} r\+\_\+arm\+\_\+handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} r\+\_\+arm\+\_\+handle = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
 
 
 

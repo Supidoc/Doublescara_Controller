@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['year_0',['year',['../struct__rtc__datetime.html#aa155139d886c469e6f9398415b1edc46',1,'_rtc_datetime']]]
+  ['zerooffset_0',['zeroOffset',['../struct__SK__HomeData.html#a922baa924c38070912ddb4d20b37b956',1,'_SK_HomeData']]]
 ];

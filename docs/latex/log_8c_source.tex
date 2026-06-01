@@ -1,5 +1,5 @@
 \doxysection{log.\+c}
-\hypertarget{log_8c_source}{}\label{log_8c_source}\index{source/log.c@{source/log.c}}
+\hypertarget{log_8c_source}{}\label{log_8c_source}\index{source/infrastructure/log.c@{source/infrastructure/log.c}}
 \doxymbox{\hyperlink{log_8c}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
@@ -12,16 +12,16 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli_8h}{cli.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cli__utilities_8h}{cli\_utilities.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{disk_8h}{disk.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}event\_groups.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{log.h}}>}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{cli_8h}{infrastructure/cli.h}}>}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{cli__utilities_8h}{infrastructure/cli\_utilities.h}}>}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{disk_8h}{infrastructure/disk.h}}>}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{infrastructure/log.h}}>}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS\_CLI.h"{}}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}event\_groups.h"{}}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}peripherals.h"{}}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}SEGGER\_RTT.h"{}}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00022}00022\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00023}00023\ \textcolor{comment}{/************************************}}
@@ -92,7 +92,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00088}00088\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00089}\doxymbox{\hyperlink{log_8c_a735589618833e40aeb952d0741a828e8}{00089}}\ FIL\ \doxymbox{\hyperlink{log_8c_a735589618833e40aeb952d0741a828e8}{logFile}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00090}00090\ }
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00091}\doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{00091}}\ QueueHandle\_t\ \doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00091}\doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{00091}}\ QueueHandle\_t\ \doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}}\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00092}00092\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00093}\doxymbox{\hyperlink{log_8c_aa0f03c6bf1b666c8a52605befef768ba}{00093}}\ \textcolor{keyword}{static}\ uint32\_t\ \doxymbox{\hyperlink{log_8c_aa0f03c6bf1b666c8a52605befef768ba}{sessionId}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00094}00094\ }
@@ -118,9 +118,9 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00114}00114\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00115}\doxymbox{\hyperlink{log_8c_a3554d356a9190bdfe0f56e31ec65bc0b}{00115}}\ \textcolor{keyword}{static}\ uint8\_t\ \doxymbox{\hyperlink{log_8c_a3554d356a9190bdfe0f56e31ec65bc0b}{logFileOpened}}\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00116}00116\ }
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00117}\doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{00117}}\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{logFileMutex}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00117}\doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{00117}}\ \textcolor{keyword}{static}\ SemaphoreHandle\_t\ \doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{logFileMutex}}\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00118}00118\ }
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00119}\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{00119}}\ \textcolor{keyword}{static}\ EventGroupHandle\_t\ \doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00119}\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{00119}}\ \textcolor{keyword}{static}\ EventGroupHandle\_t\ \doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00120}00120\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00121}00121\ \textcolor{comment}{/*********************************************}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00122}00122\ \textcolor{comment}{\ *\ \ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ \ *}}
@@ -129,20 +129,20 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00125}\doxymbox{\hyperlink{group__LOG__Module_gad8fb5a8d2383abe85c0696d80e0372f1}{00125}}\ status\_t\ \doxymbox{\hyperlink{group__LOG__Module_gad8fb5a8d2383abe85c0696d80e0372f1}{LOG\_init}}(\textcolor{keywordtype}{void})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00126}00126\ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00127}00127\ \ \ \ \ \doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}}\ =\ xQueueCreate(\doxymbox{\hyperlink{group__LOG__Module_ga9949d211fdaa2513bcc40b46a2152a19}{LOG\_QUEUE\_SIZE}},\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{log_8c_ab33882773f01b0f786eda8576b58fcdb}{LOG\_QueueItem\_t}}));}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}}\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00129}00129\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00131}00131\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00132}00132\ \ \ \ \ vQueueAddToRegistry(\doxymbox{\hyperlink{log_8c_a312ebbb5fc5830fb0b462aa4f24e9a50}{logQueue}},\ \textcolor{stringliteral}{"{}LOG\ Queue"{}});}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00133}00133\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00134}00134\ \ \ \ \ \doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{logFileMutex}}\ =\ xSemaphoreCreateMutex();}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00135}00135\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{logFileMutex}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00135}00135\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_a3992b5f2e352c471d9528755c7e608a4}{logFileMutex}}\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00136}00136\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00138}00138\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00139}00139\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00140}00140\ \ \ \ \ \doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ =\ xEventGroupCreate();}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00142}00142\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00144}00144\ \ \ \ \ \}}
@@ -192,7 +192,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00188}00188\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00189}\doxymbox{\hyperlink{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}{00189}}\ status\_t\ \doxymbox{\hyperlink{group__LOG__Module_ga534b19869c7498164597bf36b47ccea6}{LOG\_send\_log\_message}}(\doxymbox{\hyperlink{group__LOG__Module_ga6d319de993cc8d4a0b7da064fc94779d}{LOG\_Level\_t}}\ level,\ \textcolor{keywordtype}{char}*\ message,\ uint8\_t\ silent)}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00190}00190\ \{}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00191}00191\ \ \ \ \ \textcolor{keywordflow}{if}\ (message\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00191}00191\ \ \ \ \ \textcolor{keywordflow}{if}\ (message\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00192}00192\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00194}00194\ \ \ \ \ \}}
@@ -200,7 +200,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00196}00196\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00197}00197\ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_a51b070068e57d37ff1dc551d9e818f15}{level}}\ \ =\ level;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00198}00198\ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_a38cd912b130079cd9ed11f3998b2a220}{silent}}\ =\ silent\ \&\&\ 0b1;}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00199}00199\ \ \ \ \ strcpy(queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_a19efc78c7688a9bf9ba1aa28f7d43afe}{taskName}},\ pcTaskGetName(NULL));}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00199}00199\ \ \ \ \ strcpy(queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_a19efc78c7688a9bf9ba1aa28f7d43afe}{taskName}},\ pcTaskGetName(\doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}));}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00200}00200\ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_ab3fa2205ba7a29a0d837c3ab8400dab8}{tick}}\ =\ xTaskGetTickCount();}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00201}00201\ \ \ \ \ strncpy(queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_ade9bd14ba5826fb3dfd2bb1912d5fbc1}{msg}},\ message,\ \doxymbox{\hyperlink{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}{LOG\_MAX\_MESSAGE\_SIZE}}\ -\/\ 1);}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00202}00202\ \ \ \ \ queueItem.\doxymbox{\hyperlink{struct__LOG__QueueItem_ade9bd14ba5826fb3dfd2bb1912d5fbc1}{msg}}[\doxymbox{\hyperlink{group__LOG__Module_gaf74de77a0afba0a5af76a0a8ab9ff5d9}{LOG\_MAX\_MESSAGE\_SIZE}}\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
@@ -211,7 +211,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00207}00207\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00208}00208\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00209}00209\ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ queue\ empty\ event\ bit\ since\ we\ just\ added\ a\ message}}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ !=\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00211}00211\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ xEventGroupClearBits(\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}},\ \doxymbox{\hyperlink{log_8c_a96fa000644cfd44a3e374205b0918d46}{LOG\_QUEUE\_EMPTY\_EVENT}});}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00213}00213\ \ \ \ \ \}}
@@ -233,7 +233,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00229}00229\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00230}\doxymbox{\hyperlink{group__LOG__Module_ga2ddf5f77c872712f2497e3e4b0e19ea4}{00230}}\ status\_t\ \doxymbox{\hyperlink{group__LOG__Module_ga2ddf5f77c872712f2497e3e4b0e19ea4}{LOG\_wait\_for\_queue\_empty}}(TickType\_t\ xTicksToWait)}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00231}00231\ \{}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{log_8c_aeec8bebb97c505dcded290a083dd25b1}{logQueueEmptyEvent}}\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00233}00233\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00235}00235\ \ \ \ \ \}}
@@ -279,7 +279,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{log_8c_a3554d356a9190bdfe0f56e31ec65bc0b}{logFileOpened}}\ =\ 1;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00276}00276\ }
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ uint8\_t\ \ \ \ \ parameterFound;}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcParameter\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcParameter\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ BaseType\_t\ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}-\/s"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&parameterStringLength);}
@@ -289,7 +289,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ fileSessionId\ =\ strtoul(pcParameter,\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ fileSessionId\ =\ strtoul(pcParameter,\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ 0);}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ sprintf(localLogFilePath,\ \doxymbox{\hyperlink{group__DISK__Module_ga361a0dd22dac0332c66cc132624d2d05}{DISK\_SD\_PATH}}\ \textcolor{stringliteral}{"{}\%lu"{}},\ fileSessionId);}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00291}00291\ }
@@ -365,7 +365,7 @@
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcCommandString)}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00362}00362\ \{}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00363}00363\ \ \ \ \ uint8\_t\ \ \ \ \ parameterFound;}
-\DoxyCodeLine{\Hypertarget{log_8c_source_l00364}00364\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcParameter\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{log_8c_source_l00364}00364\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ pcParameter\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00365}00365\ \ \ \ \ BaseType\_t\ \ parameterStringLength;}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00366}00366\ \ \ \ \ \doxymbox{\hyperlink{group__CLI__Utilities__Module_ga90c109013d91a77a524e6ee2bc8c710f}{CLU\_get\_parameter\_value\_string}}(\textcolor{stringliteral}{"{}NONE"{}},\ pcCommandString,\ \&parameterFound,\ \&pcParameter,}
 \DoxyCodeLine{\Hypertarget{log_8c_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&parameterStringLength);}

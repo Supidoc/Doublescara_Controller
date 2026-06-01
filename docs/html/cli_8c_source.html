@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/cli.c Source File</title>
+<title>Double Scara: source/infrastructure/cli.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,12 +102,12 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">/********************</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *     Includes     *</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> ********************/</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="cli_8h.html">cli.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;FreeRTOS.h&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;FreeRTOS_CLI.h&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;peripherals.h&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="log_8h.html">log.h</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="cli_8h.html">infrastructure/cli.h</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="log_8h.html">infrastructure/log.h</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;FreeRTOS.h&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;FreeRTOS_CLI.h&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;peripherals.h&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;SEGGER_RTT.h&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">/************************************</span></div>
@@ -134,7 +134,7 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> *     Private Variables     *</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> *****************************/</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">   43</a></span><span class="keyword">static</span> SemaphoreHandle_t <a class="code hl_variable" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">cliMutex</a> = NULL;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">   43</a></span><span class="keyword">static</span> SemaphoreHandle_t <a class="code hl_variable" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">cliMutex</a> = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="cli_8c.html#acb3d9627c2b46551ae41d72b00527bed">   45</a></span><span class="keyword">static</span> <span class="keyword">const</span> CLI_Command_Definition_t <a class="code hl_variable" href="cli_8c.html#acb3d9627c2b46551ae41d72b00527bed">xPingCommandDefinition</a> = {</div>
@@ -154,7 +154,7 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    BaseType_t status;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_variable" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">cliMutex</a> = xSemaphoreCreateMutex();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">cliMutex</a> == NULL)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="cli_8c.html#add8d1de930cb2d3ef3f3b049ddf0089a">cliMutex</a> == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    {</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
@@ -164,7 +164,7 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    {</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_TRIM);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    SEGGER_RTT_ConfigUpBuffer(0, <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 0, SEGGER_RTT_MODE_NO_BLOCK_TRIM);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    SEGGER_RTT_WriteString(0, RTT_CTRL_CLEAR);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span> kStatus_Success;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
@@ -390,6 +390,7 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <div class="ttc" id="agroup__LOG__Module_html_ga27d98b18ba06759c6ef5c71b1e1a9904"><div class="ttname"><a href="group__LOG__Module.html#ga27d98b18ba06759c6ef5c71b1e1a9904">LOG_ERROR</a></div><div class="ttdeci">#define LOG_ERROR(message)</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00058">log.h:58</a></div></div>
 <div class="ttc" id="agroup__LOG__Module_html_ga87f39d92adfc939c31320aaf4b9f7a37"><div class="ttname"><a href="group__LOG__Module.html#ga87f39d92adfc939c31320aaf4b9f7a37">LOG_DEBUG</a></div><div class="ttdeci">#define LOG_DEBUG(message)</div><div class="ttdoc">Macros for sending log messages at different log levels.</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00055">log.h:55</a></div></div>
 <div class="ttc" id="agroup__LOG__Module_html_gaa55dad394419490fbe636529eae7d440"><div class="ttname"><a href="group__LOG__Module.html#gaa55dad394419490fbe636529eae7d440">LOG_INFO_SILENT</a></div><div class="ttdeci">#define LOG_INFO_SILENT(message)</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00065">log.h:65</a></div></div>
+<div class="ttc" id="agroup__McuFontCour10Normal__module_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition</b> <a href="McuFontCour10Normal_8c_source.html#l00156">McuFontCour10Normal.c:156</a></div></div>
 <div class="ttc" id="alog_8h_html"><div class="ttname"><a href="log_8h.html">log.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -397,7 +398,7 @@ $(function(){initNavTree('cli_8c_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="cli_8c.html">cli.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_71ba2ac0ad0bf0fcc30e9b425f69c132.html">infrastructure</a></li><li class="navelem"><a href="cli_8c.html">cli.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

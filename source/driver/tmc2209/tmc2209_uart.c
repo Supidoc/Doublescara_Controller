@@ -8,6 +8,7 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "tmc2209_uart.h"
 #include "tmc2209_shared.h"
 #include "tmc2209_internal.h"
@@ -17,7 +18,6 @@
 #include "fsl_common.h"
 #include "fsl_port.h"
 #include "fsl_uart_freertos.h"
-#include "log.h"
 
 /************************************
  *     Private Macros / Defines    *

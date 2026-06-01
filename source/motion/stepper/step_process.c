@@ -8,11 +8,11 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "step_process.h"
 #include "step_internal.h"
 #include "step_shared.h"
 #include "cmd_dispatch.h"
-#include "log.h"
 #include "step_timing.h"
 #include "step_profile.h"
 #include "stdio.h"
@@ -79,6 +79,9 @@ status_t STPi_send_cmd_async(STP_CmdQueueItem_t* queueItem, TickType_t deadline,
         }
         return kStatus_Fail;
     }
+    else
+    {
+    }
     if (cmdHandle != NULL)
     {
         *cmdHandle = internaleCmdHandle;
@@ -92,8 +95,9 @@ void STPi_process(void)
 
     STP_CmdQueueItem_t queueItem = {0};
     BaseType_t         status;
-    TickType_t         delay = nonIdleMotors ? pdMS_TO_TICKS(2) : portMAX_DELAY;
-    status                   = xQueueReceive(stpCmdQueue, &queueItem, delay);
+    TickType_t         delay = nonIdleMotors ? pdMS_TO_TICKS(100) : portMAX_DELAY;
+
+    status = xQueueReceive(stpCmdQueue, &queueItem, delay);
     if (status != pdPASS)
     {
         return;
@@ -127,6 +131,7 @@ void STPi_process_cmd(STP_CmdQueueItem_t queueItem)
             }
             else
             {
+                STPi_reset_movement_handle(&queueItem.handle->movementHandle);
                 CDP_notify_task_failure(queueItem.cmdHandle);
                 CHD_remove_cmd_handle_ref(queueItem.cmdHandle);
                 snprintf(logMsg, sizeof(logMsg), "[%s] Failed to plan motion profile for %lu steps",
@@ -149,6 +154,7 @@ void STPi_process_cmd(STP_CmdQueueItem_t queueItem)
             }
             else
             {
+                STPi_reset_movement_handle(&queueItem.handle->movementHandle);
                 CDP_notify_task_failure(queueItem.cmdHandle);
             }
             CHD_remove_cmd_handle_ref(queueItem.cmdHandle);
@@ -166,6 +172,15 @@ void STPi_process_cmd(STP_CmdQueueItem_t queueItem)
             portEXIT_CRITICAL();
             if (startStatus != kStatus_Success || !anyStarted)
             {
+                for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
+                {
+                    if (stpHandles[i].used &&
+                        stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_PLANNED &&
+                        stpHandles[i].handle.movementHandle.waitForStart)
+                    {
+                        STPi_reset_movement_handle(&stpHandles[i].handle.movementHandle);
+                    }
+                }
                 CDP_notify_task_failure(queueItem.cmdHandle);
                 CHD_remove_cmd_handle_ref(queueItem.cmdHandle);
             }
@@ -412,7 +427,7 @@ static status_t STPi_init_handle(const STP_StepperConfig_t config, TickType_t de
     snprintf(logMsg, sizeof(logMsg),
              "[%s] Stepper initialized successfully (accel=%.1f step/s², vel=%.1f step/s)",
              handle->label, handle->acceleration, handle->endVelocity);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }
@@ -513,21 +528,7 @@ static status_t start_prepared_moves_together(CHD_CmdHandle_t triggerCmdHandle, 
     uint16_t        initialDelays[STP_MAX_HANDLE_COUNT];
     uint8_t         startCount = 0;
     uint8_t         ownerSet   = 0;
-    uint32_t        syncBaseCount;
-
-    *anyStarted = 0;
-
-    // Use the timer base of the first used handle (assume all on same timer)
-    for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
-    {
-        if (stpHandles[i].used &&
-            stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_PLANNED &&
-            stpHandles[i].handle.movementHandle.waitForStart)
-        {
-            syncBaseCount = stpHandles[i].handle.ftmBase->CNT;
-            break;
-        }
-    }
+    *anyStarted                = 0;
 
     // Collect all prepared motors and their first-step delays
     for (size_t i = 0; i < STP_MAX_HANDLE_COUNT; i++)
@@ -555,12 +556,13 @@ static status_t start_prepared_moves_together(CHD_CmdHandle_t triggerCmdHandle, 
         }
     }
 
-    // Phase 1: write all compare values first
+    // Phase 1: write all compare values first (use each handle's current CNT)
     for (uint8_t idx = 0; idx < startCount; idx++)
     {
         STP_Handle_t handle = startHandles[idx];
         handle->ftmBase->CONTROLS[handle->ftmChannel].CnSC &= ~FTM_CnSC_CHF_MASK;
-        handle->ftmBase->CONTROLS[handle->ftmChannel].CnV = syncBaseCount + initialDelays[idx];
+        uint32_t baseCnt                                  = handle->ftmBase->CNT;
+        handle->ftmBase->CONTROLS[handle->ftmChannel].CnV = baseCnt + initialDelays[idx];
         if (handle->stepPin == 11)
         {
             GPIO_PortToggle(GPIOB, 0b1 << 16);

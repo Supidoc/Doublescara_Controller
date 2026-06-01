@@ -74,7 +74,7 @@ extern "C"
         motorConfig.label = "m_l_arm";
 
         motorConfig.acceleration    = 400;
-        motorConfig.endVelocity     = 600;
+        motorConfig.endVelocity     = 2400;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
         motorConfig.reductionFactor = 3.0;
@@ -113,7 +113,7 @@ extern "C"
         motorConfig.label = "m_r_arm";
 
         motorConfig.acceleration    = 400;
-        motorConfig.endVelocity     = 600;
+        motorConfig.endVelocity     = 2400;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
         motorConfig.reductionFactor = 3.0;
@@ -237,7 +237,7 @@ extern "C"
         motorConfig.acceleration    = 200;
         motorConfig.endVelocity     = 100;
         motorConfig.stepAngle       = 1.8;
-        motorConfig.microstep       = 16;
+        motorConfig.microstep       = 128;
         motorConfig.reductionFactor = 1.0;
 
         // Configure stepper parameters
@@ -255,8 +255,8 @@ extern "C"
         motorConfig.tmcConfig.uartHandle     = &UART0_uart_handle;
         motorConfig.tmcConfig.uartRTOSHandle = &UART0_rtos_handle;
 
-        motorConfig.tmcConfig.iHoldCurrentA = 0.1;
-        motorConfig.tmcConfig.iRunCurrentA  = 0.2;
+        motorConfig.tmcConfig.iHoldCurrentA = 0.2;
+        motorConfig.tmcConfig.iRunCurrentA  = 0.3;
         return motorConfig;
     }
 

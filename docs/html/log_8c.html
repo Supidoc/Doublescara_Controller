@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/log.c File Reference</title>
+<title>Double Scara: source/infrastructure/log.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,21 +92,21 @@ $(function(){initNavTree('log_8c.html','',''); });
   <div class="headertitle"><div class="title">log.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;FreeRTOS.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="cli_8h_source.html">infrastructure/cli.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="cli__utilities_8h_source.html">infrastructure/cli_utilities.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="disk_8h_source.html">infrastructure/disk.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="log_8h_source.html">infrastructure/log.h</a>&gt;</code><br />
+<code>#include &quot;FreeRTOS.h&quot;</code><br />
 <code>#include &quot;FreeRTOS_CLI.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="cli_8h_source.html">cli.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="cli__utilities_8h_source.html">cli_utilities.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="disk_8h_source.html">disk.h</a>&quot;</code><br />
 <code>#include &quot;event_groups.h&quot;</code><br />
 <code>#include &quot;peripherals.h&quot;</code><br />
 <code>#include &quot;queue.h&quot;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
-<code>#include &lt;<a class="el" href="log_8h_source.html">log.h</a>&gt;</code><br />
 <code>#include &quot;SEGGER_RTT.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for log.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="log_8c__incl.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="log_8c__incl.svg" width="100%" height="468"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="log_8c_source.html">Go to the source code of this file.</a></p>
@@ -151,7 +151,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a735589618833e40aeb952d0741a828e8" id="r_a735589618833e40aeb952d0741a828e8"><td class="memItemLeft">FIL&#160;</td><td class="memItemRight"><a class="el" href="#a735589618833e40aeb952d0741a828e8">logFile</a></td></tr>
-<tr class="memitem:a312ebbb5fc5830fb0b462aa4f24e9a50" id="r_a312ebbb5fc5830fb0b462aa4f24e9a50"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> = NULL</td></tr>
+<tr class="memitem:a312ebbb5fc5830fb0b462aa4f24e9a50" id="r_a312ebbb5fc5830fb0b462aa4f24e9a50"><td class="memItemLeft">QueueHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 <tr class="memitem:aa0f03c6bf1b666c8a52605befef768ba" id="r_aa0f03c6bf1b666c8a52605befef768ba"><td class="memItemLeft">static uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#aa0f03c6bf1b666c8a52605befef768ba">sessionId</a></td></tr>
 <tr class="memitem:abc57636506478a61f444842f8c0555a4" id="r_abc57636506478a61f444842f8c0555a4"><td class="memItemLeft">static char&#160;</td><td class="memItemRight"><a class="el" href="#abc57636506478a61f444842f8c0555a4">LogFilePath</a> [11]</td></tr>
 <tr class="memitem:af5c21309de04a8c4ab6feb925ef9d189" id="r_af5c21309de04a8c4ab6feb925ef9d189"><td class="memItemLeft">static const CLI_Command_Definition_t&#160;</td><td class="memItemRight"><a class="el" href="#af5c21309de04a8c4ab6feb925ef9d189">xLogCommandDefinition</a></td></tr>
@@ -160,8 +160,8 @@ Variables</h2></td></tr>
 <tr class="memitem:ad0621726a30a5d8802ab4c7c899cd600" id="r_ad0621726a30a5d8802ab4c7c899cd600"><td class="memItemLeft">static <a class="el" href="group__LOG__Module.html#ga6d319de993cc8d4a0b7da064fc94779d">LOG_Level_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad0621726a30a5d8802ab4c7c899cd600">consoleLogLevel</a> = <a class="el" href="group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba538b2b6e011479d408ecd2be0f6d6177">LOG_LEVEL_DEBUG</a></td></tr>
 <tr class="memitem:ae821fbad801312ee9cf5a8fe81101db2" id="r_ae821fbad801312ee9cf5a8fe81101db2"><td class="memItemLeft">static char&#160;</td><td class="memItemRight"><a class="el" href="#ae821fbad801312ee9cf5a8fe81101db2">consoleOutputString</a> [<a class="el" href="group__CLI__Module.html#gacb88beab1215559351e794b21e315541">CLI_MAX_OUTPUT_LENGTH</a>]</td></tr>
 <tr class="memitem:a3554d356a9190bdfe0f56e31ec65bc0b" id="r_a3554d356a9190bdfe0f56e31ec65bc0b"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a3554d356a9190bdfe0f56e31ec65bc0b">logFileOpened</a> = 0</td></tr>
-<tr class="memitem:a3992b5f2e352c471d9528755c7e608a4" id="r_a3992b5f2e352c471d9528755c7e608a4"><td class="memItemLeft">static SemaphoreHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = NULL</td></tr>
-<tr class="memitem:aeec8bebb97c505dcded290a083dd25b1" id="r_aeec8bebb97c505dcded290a083dd25b1"><td class="memItemLeft">static EventGroupHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = NULL</td></tr>
+<tr class="memitem:a3992b5f2e352c471d9528755c7e608a4" id="r_a3992b5f2e352c471d9528755c7e608a4"><td class="memItemLeft">static SemaphoreHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memitem:aeec8bebb97c505dcded290a083dd25b1" id="r_aeec8bebb97c505dcded290a083dd25b1"><td class="memItemLeft">static EventGroupHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a59a4d3c0b2cc8938975eff89e7f3d682" name="a59a4d3c0b2cc8938975eff89e7f3d682"></a>
@@ -600,7 +600,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">SemaphoreHandle_t logFileMutex = NULL</td>
+          <td class="memname">SemaphoreHandle_t logFileMutex = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -669,7 +669,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QueueHandle_t logQueue = NULL</td>
+          <td class="memname">QueueHandle_t logQueue = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -688,7 +688,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">EventGroupHandle_t logQueueEmptyEvent = NULL</td>
+          <td class="memname">EventGroupHandle_t logQueueEmptyEvent = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -802,7 +802,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="log_8c.html">log.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_71ba2ac0ad0bf0fcc30e9b425f69c132.html">infrastructure</a></li><li class="navelem"><a href="log_8c.html">log.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

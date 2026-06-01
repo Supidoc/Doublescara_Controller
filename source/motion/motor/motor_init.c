@@ -8,8 +8,8 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_init.h"
-#include "log.h"
 #include "stdio.h"
 #include "step_core.h"
 #include "tmc2209_core.h"
@@ -178,7 +178,7 @@ status_t MTR_init_motor(MTR_MotorConfig_t config, TickType_t deadline,
     snprintf(logMsg, sizeof(logMsg),
              "[%s] Motor initialized successfully (step=%.2f deg, microstep=%d, reduction=%.2f)",
              config.label, config.stepAngle, config.microstep, config.reductionFactor);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }

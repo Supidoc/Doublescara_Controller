@@ -39,6 +39,7 @@
                <pin_label pin_num="63" pin_signal="ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT" label="UART0_RX" identifier="UART0_RX"/>
                <pin_label pin_num="54" pin_signal="ADC1_SE5b/CMP0_IN3/PTC9/FTM3_CH5/I2S0_RX_BCLK/FB_AD6/FTM2_FLT0" label="GPIOC9" identifier="GPIOC9"/>
                <pin_label pin_num="41" pin_signal="PTB18/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA" label="GPIOB18" identifier="GPIOB18"/>
+               <pin_label pin_num="53" pin_signal="ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7" label="GPIOC8" identifier="GPIOC8"/>
             </pin_labels>
             <external_user_signals>
                <properties/>
@@ -94,6 +95,11 @@
                      </feature>
                   </dependency>
                   <dependency resourceType="Peripheral" resourceId="GPIOD" description="Peripheral GPIOD signals are routed in the Pins Tool, but the peripheral is not initialized in the Peripherals Tool." problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="Peripheral" resourceId="GPIOC" description="Peripheral GPIOC signals are routed in the Pins Tool, but the peripheral is not initialized in the Peripherals Tool." problem_level="1" source="Pins:BOARD_InitPins">
                      <feature name="initialized" evaluation="equal">
                         <data>true</data>
                      </feature>
@@ -203,7 +209,12 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="GPIOC" signal="GPIO, 8" pin_num="53" pin_signal="ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7"/>
+                  <pin peripheral="GPIOC" signal="GPIO, 8" pin_num="53" pin_signal="ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="kPORT_InterruptLogicZero"/>
+                     </pin_features>
+                  </pin>
                   <pin peripheral="GPIOC" signal="GPIO, 9" pin_num="54" pin_signal="ADC1_SE5b/CMP0_IN3/PTC9/FTM3_CH5/I2S0_RX_BCLK/FB_AD6/FTM2_FLT0">
                      <pin_features>
                         <pin_feature name="direction" value="INPUT"/>
@@ -541,6 +552,7 @@
                            <struct name="6"/>
                            <struct name="7"/>
                            <struct name="8"/>
+                           <struct name="9"/>
                         </array>
                         <array name="interrupts"/>
                      </config_set>
@@ -893,6 +905,18 @@
                            <setting name="IRQn" value="UART2_ERR_IRQn"/>
                            <setting name="enable_priority" value="true"/>
                            <setting name="priority" value="7"/>
+                        </struct>
+                     </config_set>
+                  </instance>
+                  <instance name="GPIOC" uuid="bc7b8a48-0b46-49cf-a6f0-57a7be5f7932" type="gpio" type_id="gpio_2.7.0" mode="GPIO" peripheral="GPIOC" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="fsl_gpio">
+                        <setting name="enable_irq" value="true"/>
+                        <struct name="port_interrupt">
+                           <setting name="IRQn" value="PORTC_IRQn"/>
+                           <setting name="enable_interrrupt" value="enabled"/>
+                           <setting name="enable_priority" value="true"/>
+                           <setting name="priority" value="7"/>
+                           <setting name="enable_custom_name" value="false"/>
                         </struct>
                      </config_set>
                   </instance>

@@ -319,28 +319,6 @@ extern "C"
     status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t deadline,
                                             CHD_CmdHandle_t* cmdHandle);
 
-    /**
-     * @brief Activates emergency stop latch.
-     *
-     * @param[in] handle Motor handle used for immediate stop action.
-     * @return kStatus_Success if emergency stop applied, otherwise kStatus_Fail.
-     */
-    status_t MTR_emergency_stop(MTR_MotorHandle_t handle);
-
-    /**
-     * @brief Clears emergency stop latch and allows new motion commands.
-     *
-     * @return kStatus_Success if latch was cleared.
-     */
-    status_t MTR_clear_emergency_stop(void);
-
-    /**
-     * @brief Returns emergency-stop latch state.
-     *
-     * @return 1 if emergency stop is active, otherwise 0.
-     */
-    uint8_t MTR_is_emergency_stop_active(void);
-
 #ifdef __cplusplus
 }
 #endif

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/grabber.c File Reference</title>
+<title>Double Scara: source/motion/grabber/grabber.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,7 +92,7 @@ $(function(){initNavTree('grabber_8c.html','',''); });
   <div class="headertitle"><div class="title">grabber.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="grabber_8h_source.html">grabber.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="grabber_8h_source.html">motion/grabber/grabber.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="motor__core_8h_source.html">motor_core.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="motor__configs_8h_source.html">motor_configs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sync__wait_8h_source.html">sync_wait.h</a>&quot;</code><br />
@@ -108,18 +108,98 @@ Include dependency graph for grabber.c:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6969198e72fa6fb00b68e0f85a643c3a" id="r_a6969198e72fa6fb00b68e0f85a643c3a"><td class="memItemLeft">static status_t&#160;</td><td class="memItemRight"><a class="el" href="#a6969198e72fa6fb00b68e0f85a643c3a">wait_and_release</a> (<a class="el" href="cmd__handle_8h.html#a2e82607aeca2e68337104ef9935880d3">CHD_CmdHandle_t</a> cmdHandle, TickType_t deadline)</td></tr>
-<tr class="memitem:a4d2e59f38118363afdc6988d4580a088" id="r_a4d2e59f38118363afdc6988d4580a088"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4d2e59f38118363afdc6988d4580a088">GRB_grab</a> (void)</td></tr>
-<tr class="memitem:a846cbec99aacf98ab8e0261d7a69f987" id="r_a846cbec99aacf98ab8e0261d7a69f987"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a846cbec99aacf98ab8e0261d7a69f987">GRB_release</a> (void)</td></tr>
+<tr class="memitem:ab0fb01db762f0f352e58359b5a808c59" id="r_ab0fb01db762f0f352e58359b5a808c59"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#ab0fb01db762f0f352e58359b5a808c59">GRB_platform_up</a> (void)</td></tr>
+<tr class="memitem:a61a19782d6d41ea3894e9abfd432af72" id="r_a61a19782d6d41ea3894e9abfd432af72"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a61a19782d6d41ea3894e9abfd432af72">GRB_platform_down</a> (void)</td></tr>
+<tr class="memitem:a4811e5ca87a649181d8d4d9fc45d4e6f" id="r_a4811e5ca87a649181d8d4d9fc45d4e6f"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a4811e5ca87a649181d8d4d9fc45d4e6f">GRB_magnet_up</a> (void)</td></tr>
+<tr class="memitem:a2391ebd73ffa4be748fadb205b3f1222" id="r_a2391ebd73ffa4be748fadb205b3f1222"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a2391ebd73ffa4be748fadb205b3f1222">GRB_magnet_down</a> (void)</td></tr>
+<tr class="memitem:a4e28f22971d31490c233ec7cf24bc5d7" id="r_a4e28f22971d31490c233ec7cf24bc5d7"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#a4e28f22971d31490c233ec7cf24bc5d7">GRB_grab</a> (void)</td></tr>
+<tr class="memitem:acb6aa08284e7c1ac1d7a271e78190b92" id="r_acb6aa08284e7c1ac1d7a271e78190b92"><td class="memItemLeft">status_t&#160;</td><td class="memItemRight"><a class="el" href="#acb6aa08284e7c1ac1d7a271e78190b92">GRB_release</a> (void)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a4d2e59f38118363afdc6988d4580a088" name="a4d2e59f38118363afdc6988d4580a088"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d2e59f38118363afdc6988d4580a088">&#9670;&#160;</a></span>GRB_grab()</h2>
+<a id="a4e28f22971d31490c233ec7cf24bc5d7" name="a4e28f22971d31490c233ec7cf24bc5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e28f22971d31490c233ec7cf24bc5d7">&#9670;&#160;</a></span>GRB_grab()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GRB_grab </td>
+          <td class="memname">status_t GRB_grab </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00126">126</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+
+</div>
+</div>
+<a id="a2391ebd73ffa4be748fadb205b3f1222" name="a2391ebd73ffa4be748fadb205b3f1222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2391ebd73ffa4be748fadb205b3f1222">&#9670;&#160;</a></span>GRB_magnet_down()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t GRB_magnet_down </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00105">105</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+
+</div>
+</div>
+<a id="a4811e5ca87a649181d8d4d9fc45d4e6f" name="a4811e5ca87a649181d8d4d9fc45d4e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4811e5ca87a649181d8d4d9fc45d4e6f">&#9670;&#160;</a></span>GRB_magnet_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t GRB_magnet_up </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00084">84</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+
+</div>
+</div>
+<a id="a61a19782d6d41ea3894e9abfd432af72" name="a61a19782d6d41ea3894e9abfd432af72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a19782d6d41ea3894e9abfd432af72">&#9670;&#160;</a></span>GRB_platform_down()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t GRB_platform_down </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00063">63</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+
+</div>
+</div>
+<a id="ab0fb01db762f0f352e58359b5a808c59" name="ab0fb01db762f0f352e58359b5a808c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0fb01db762f0f352e58359b5a808c59">&#9670;&#160;</a></span>GRB_platform_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">status_t GRB_platform_up </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -131,14 +211,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a846cbec99aacf98ab8e0261d7a69f987" name="a846cbec99aacf98ab8e0261d7a69f987"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a846cbec99aacf98ab8e0261d7a69f987">&#9670;&#160;</a></span>GRB_release()</h2>
+<a id="acb6aa08284e7c1ac1d7a271e78190b92" name="acb6aa08284e7c1ac1d7a271e78190b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb6aa08284e7c1ac1d7a271e78190b92">&#9670;&#160;</a></span>GRB_release()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GRB_release </td>
+          <td class="memname">status_t GRB_release </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -146,7 +226,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00079">79</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00169">169</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
 
 </div>
 </div>
@@ -177,7 +257,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00119">119</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="grabber_8c_source.html#l00224">224</a> of file <a class="el" href="grabber_8c_source.html">grabber.c</a>.</p>
 
 </div>
 </div>
@@ -194,7 +274,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="grabber_8c.html">grabber.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_5a3d89802b01ed76e7fc7a2cae772f73.html">motion</a></li><li class="navelem"><a href="dir_f8edfacacf09bb2dfb7f63a0445394d9.html">grabber</a></li><li class="navelem"><a href="grabber_8c.html">grabber.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

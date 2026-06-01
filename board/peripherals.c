@@ -77,6 +77,7 @@ instance:
       - 6: []
       - 7: []
       - 8: []
+      - 9: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -423,6 +424,39 @@ static void UART2_init(void) {
 }
 
 /***********************************************************************************************************************
+ * GPIOC initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'GPIOC'
+- type: 'gpio'
+- mode: 'GPIO'
+- custom_name_enabled: 'false'
+- type_id: 'gpio_2.7.0'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'GPIOC'
+- config_sets:
+  - fsl_gpio:
+    - enable_irq: 'true'
+    - port_interrupt:
+      - IRQn: 'PORTC_IRQn'
+      - enable_interrrupt: 'enabled'
+      - enable_priority: 'true'
+      - priority: '7'
+      - enable_custom_name: 'false'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+
+static void GPIOC_init(void) {
+  /* Make sure, the clock gate for port C is enabled (e. g. in pin_mux.c) */
+  /* Interrupt vector PORTC_IRQn priority settings in the NVIC. */
+  NVIC_SetPriority(GPIOC_IRQN, GPIOC_IRQ_PRIORITY);
+  /* Enable interrupt GPIOC_IRQN request in the NVIC */
+  EnableIRQ(GPIOC_IRQN);
+}
+
+/***********************************************************************************************************************
  * FATFS initialization code
  **********************************************************************************************************************/
 /* clang-format off */
@@ -540,6 +574,7 @@ void BOARD_InitPeripherals(void)
   UART0_init();
   GPIOD_init();
   UART2_init();
+  GPIOC_init();
 }
 
 /***********************************************************************************************************************

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['cmp_5ftype_0',['CMP_Type',['../structCMP__Type.html',1,'']]],
-  ['crc_5ftype_1',['CRC_Type',['../structCRC__Type.html',1,'']]]
+  ['gfont_5fcallbacks_0',['GFONT_Callbacks',['../structGFONT__Callbacks.html',1,'']]],
+  ['gfont_5fcharinfo_1',['GFONT_CharInfo',['../structGFONT__CharInfo.html',1,'']]]
 ];

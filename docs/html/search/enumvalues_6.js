@@ -1,7 +1,24 @@
 var searchData=
 [
-  ['i2c0_5firqn_0',['I2C0_IRQn',['../group__Interrupt__vector__numbers.html#gga666eb0caeb12ec0e281415592ae89083a0f1945c7372a6de732306ea3801c8e2a',1,'MK22F51212_COMMON.h']]],
-  ['i2c1_5firqn_1',['I2C1_IRQn',['../group__Interrupt__vector__numbers.html#gga666eb0caeb12ec0e281415592ae89083af651b1769e03e4653b1a4a7c88132398',1,'MK22F51212_COMMON.h']]],
-  ['i2s0_5frx_5firqn_2',['I2S0_Rx_IRQn',['../group__Interrupt__vector__numbers.html#gga666eb0caeb12ec0e281415592ae89083a4acd0a9915530c775f9da7a330800942',1,'MK22F51212_COMMON.h']]],
-  ['i2s0_5ftx_5firqn_3',['I2S0_Tx_IRQn',['../group__Interrupt__vector__numbers.html#gga666eb0caeb12ec0e281415592ae89083a4448f20d9ed3dc1f3a578593a63875ae',1,'MK22F51212_COMMON.h']]]
+  ['magnet_5fdown_0',['MAGNET_DOWN',['../statemachine__helpers_8h.html#a2afce0a47a93eee73a314d53e4890153ac9f3e6f694a54ac07364d4b5d3962ac4',1,'statemachine_helpers.h']]],
+  ['magnet_5fup_1',['MAGNET_UP',['../statemachine__helpers_8h.html#a2afce0a47a93eee73a314d53e4890153ad8b48bc681917d419f6f9dd1f1ccccbf',1,'statemachine_helpers.h']]],
+  ['mcussd1306_5forientation_5flandscape_2',['McuSSD1306_ORIENTATION_LANDSCAPE',['../group__McuSSD1306__module.html#ggade2f308f14e29711676e929aeaf43d6ba3d69f3937538facef6468a22f279d873',1,'McuSSD1306.h']]],
+  ['mcussd1306_5forientation_5flandscape180_3',['McuSSD1306_ORIENTATION_LANDSCAPE180',['../group__McuSSD1306__module.html#ggade2f308f14e29711676e929aeaf43d6ba0bac27523c0760959ff91aff76d64f45',1,'McuSSD1306.h']]],
+  ['mcussd1306_5forientation_5fportrait_4',['McuSSD1306_ORIENTATION_PORTRAIT',['../group__McuSSD1306__module.html#ggade2f308f14e29711676e929aeaf43d6ba3edac0a24894fc0d89e339ee2974c632',1,'McuSSD1306.h']]],
+  ['mcussd1306_5forientation_5fportrait180_5',['McuSSD1306_ORIENTATION_PORTRAIT180',['../group__McuSSD1306__module.html#ggade2f308f14e29711676e929aeaf43d6ba535a714fcfd9ead94829f911df48d828',1,'McuSSD1306.h']]],
+  ['mtr_5fcmd_5fdisable_5ffreewheeling_6',['MTR_CMD_DISABLE_FREEWHEELING',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25badb0d765fa89ceb4d0a33eed3f45bc2a9',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fenable_5ffreewheeling_7',['MTR_CMD_ENABLE_FREEWHEELING',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25baee58ed4ecea80651efbfd38e1a7ae584',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fget_5fcurrent_5fangle_8',['MTR_CMD_GET_CURRENT_ANGLE',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba22370e53c65d689b985804ebb9dd09ff',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fget_5fmovement_5fstate_9',['MTR_CMD_GET_MOVEMENT_STATE',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba7ac2d2d83c7ed603808d7c756174c5c2',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5finit_5fmotor_10',['MTR_CMD_INIT_MOTOR',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25bad4ccbe599dee3fde4e75813a6ac9671e',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fmove_5fabsolute_5fangle_11',['MTR_CMD_MOVE_ABSOLUTE_ANGLE',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba29c88927276d1e11037c0b3e86d04b16',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fmove_5fangle_12',['MTR_CMD_MOVE_ANGLE',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba2c9602e5e60d0efc14a4ae33a35ac77c',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fmove_5frevolutions_13',['MTR_CMD_MOVE_REVOLUTIONS',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba2571b3ee8605af311842c416e073fc81',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fset_5facceleration_14',['MTR_CMD_SET_ACCELERATION',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25baf5ca6d3184f62edeeb472702e7da06d9',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fset_5fhold_5fcurrent_15',['MTR_CMD_SET_HOLD_CURRENT',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba957d12a2e7a6dc99c911ac2b66f709bd',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fset_5fhome_5fposition_16',['MTR_CMD_SET_HOME_POSITION',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25bab1ae77b4b34feba2ff51e24e719c376d',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fset_5frun_5fcurrent_17',['MTR_CMD_SET_RUN_CURRENT',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba049a0c1c627670961f8b6e5573622b1d',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fset_5fvelocity_18',['MTR_CMD_SET_VELOCITY',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25bab119fcf6892aa8cdbef6a303d35ae4a3',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fstop_19',['MTR_CMD_STOP',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25bad44f28cb192f415e5d444554e166d120',1,'motor_internal.h']]],
+  ['mtr_5fcmd_5fsynchronized_5fmove_20',['MTR_CMD_SYNCHRONIZED_MOVE',['../group__MOTOR__Internal.html#gga7e0429af5d2b45a65c693ab8f05fe25ba071502104abdcd8d542cff37de225261',1,'motor_internal.h']]]
 ];

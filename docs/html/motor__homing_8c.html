@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/motor_homing.c File Reference</title>
+<title>Double Scara: source/motion/homing/motor_homing.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,11 +92,11 @@ $(function(){initNavTree('motor__homing_8c.html','',''); });
   <div class="headertitle"><div class="title">motor_homing.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="motor__homing_8h_source.html">motor_homing.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="log_8h_source.html">infrastructure/log.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="motor__homing_8h_source.html">motion/homing/motor_homing.h</a>&gt;</code><br />
 <code>#include &quot;FreeRTOS.h&quot;</code><br />
 <code>#include &quot;semphr.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="motor__core_8h_source.html">motor_core.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="log_8h_source.html">log.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="step__core_8h_source.html">step_core.h</a>&quot;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="motor__convert_8h_source.html">motor_convert.h</a>&quot;</code><br />
@@ -141,11 +141,11 @@ Variables</h2></td></tr>
 <tr class="memitem:a76cc7874e6ba7c7edb9367763f3abb7a" id="r_a76cc7874e6ba7c7edb9367763f3abb7a"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a76cc7874e6ba7c7edb9367763f3abb7a">l_arm_home_pin</a> = 5</td></tr>
 <tr class="memitem:ad94e853d505931ef6e8d3bbaf5036b28" id="r_ad94e853d505931ef6e8d3bbaf5036b28"><td class="memItemLeft">static PORT_Type *&#160;</td><td class="memItemRight"><a class="el" href="#ad94e853d505931ef6e8d3bbaf5036b28">r_arm_home_port</a> = PORTD</td></tr>
 <tr class="memitem:a83a05bb03b83e0c111232aa7617a4b16" id="r_a83a05bb03b83e0c111232aa7617a4b16"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a83a05bb03b83e0c111232aa7617a4b16">r_arm_home_pin</a> = 4</td></tr>
-<tr class="memitem:a11536e762504348670f8937c7ed1fe39" id="r_a11536e762504348670f8937c7ed1fe39"><td class="memItemLeft">static <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a11536e762504348670f8937c7ed1fe39">l_arm_handle</a> = NULL</td></tr>
-<tr class="memitem:a0cb42ddf9f6e372e8706dd3f01878bc8" id="r_a0cb42ddf9f6e372e8706dd3f01878bc8"><td class="memItemLeft">static <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0cb42ddf9f6e372e8706dd3f01878bc8">r_arm_handle</a> = NULL</td></tr>
+<tr class="memitem:a11536e762504348670f8937c7ed1fe39" id="r_a11536e762504348670f8937c7ed1fe39"><td class="memItemLeft">static <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a11536e762504348670f8937c7ed1fe39">l_arm_handle</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memitem:a0cb42ddf9f6e372e8706dd3f01878bc8" id="r_a0cb42ddf9f6e372e8706dd3f01878bc8"><td class="memItemLeft">static <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0cb42ddf9f6e372e8706dd3f01878bc8">r_arm_handle</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 <tr class="memitem:aa6da5821950d430363ae4e55b4e644d1" id="r_aa6da5821950d430363ae4e55b4e644d1"><td class="memItemLeft">static volatile uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#aa6da5821950d430363ae4e55b4e644d1">homingSuccessful</a> = 0</td></tr>
-<tr class="memitem:ae96c238f2a89e837c76a8beb68e396b9" id="r_ae96c238f2a89e837c76a8beb68e396b9"><td class="memItemLeft">static volatile <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae96c238f2a89e837c76a8beb68e396b9">homingHandle</a> = NULL</td></tr>
-<tr class="memitem:ae0ed17bd71da5e9207ffca085790e834" id="r_ae0ed17bd71da5e9207ffca085790e834"><td class="memItemLeft">static SemaphoreHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#ae0ed17bd71da5e9207ffca085790e834">homingMutex</a> = NULL</td></tr>
+<tr class="memitem:ae96c238f2a89e837c76a8beb68e396b9" id="r_ae96c238f2a89e837c76a8beb68e396b9"><td class="memItemLeft">static volatile <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae96c238f2a89e837c76a8beb68e396b9">homingHandle</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memitem:ae0ed17bd71da5e9207ffca085790e834" id="r_ae0ed17bd71da5e9207ffca085790e834"><td class="memItemLeft">static SemaphoreHandle_t&#160;</td><td class="memItemRight"><a class="el" href="#ae0ed17bd71da5e9207ffca085790e834">homingMutex</a> = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a88703f7b00c6fb04f952327f435e12c0" name="a88703f7b00c6fb04f952327f435e12c0"></a>
@@ -266,7 +266,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00263">263</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00266">266</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00380">380</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00379">379</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -312,7 +312,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00248">248</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00251">251</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -354,7 +354,7 @@ Variables</h2></td></tr>
 
 <p>Homes the right arm motor. </p>
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00146">146</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00148">148</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -379,7 +379,7 @@ Variables</h2></td></tr>
 
 <p>Interrupt handler hook used while a homing sequence is running. </p>
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00211">211</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00214">214</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -427,7 +427,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00354">354</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00353">353</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -458,7 +458,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00367">367</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="motor__homing_8c_source.html#l00366">366</a> of file <a class="el" href="motor__homing_8c_source.html">motor_homing.c</a>.</p>
 
 </div>
 </div>
@@ -473,7 +473,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">volatile <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> homingHandle = NULL</td>
+          <td class="memname">volatile <a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> homingHandle = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -497,7 +497,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">SemaphoreHandle_t homingMutex = NULL</td>
+          <td class="memname">SemaphoreHandle_t homingMutex = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -545,7 +545,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> l_arm_handle = NULL</td>
+          <td class="memname"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> l_arm_handle = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -617,7 +617,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> r_arm_handle = NULL</td>
+          <td class="memname"><a class="el" href="group__MOTOR__Facade__Module.html#ga80cb43273307560ca13a8df4797c8f54">MTR_MotorHandle_t</a> r_arm_handle = <a class="el" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -692,7 +692,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="motor__homing_8c.html">motor_homing.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_5a3d89802b01ed76e7fc7a2cae772f73.html">motion</a></li><li class="navelem"><a href="dir_0b36604d44e25621966b959dc0f86d1e.html">homing</a></li><li class="navelem"><a href="motor__homing_8c.html">motor_homing.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

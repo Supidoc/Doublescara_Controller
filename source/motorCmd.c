@@ -12,23 +12,22 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/cli.h>
+#include <infrastructure/cli_utilities.h>
+#include <infrastructure/log.h>
+#include <motion/grabber/grabber.h>
+#include <motion/homing/motor_homing.h>
+#include <motion/scara_kinematics/scara_kinematics.h>
 #include "motorCmd.h"
 #include "motor_core.h"
 #include "motor_convert.h"
 #include "step_core.h"
 #include "FreeRTOS_CLI.h"
-#include "cli.h"
-#include "cli_utilities.h"
-#include "log.h"
-#include "motor_homing.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "sync_wait.h"
-#include "scara_kinematics.h"
-
-#include "grabber.h"
-
+#include "estop.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -85,8 +84,10 @@ static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBuf
 static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
                                     const char* pcCommandString);
 
-static BaseType_t cmd_grab(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
-static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
+static BaseType_t cmd_grab(char* pcWriteBuffer, size_t xWriteBufferLen,
+                           const char* pcCommandString);
+static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen,
+                              const char* pcCommandString);
 static status_t   wait_for_mtr_cmd(CHD_CmdHandle_t cmdHandle, TickType_t deadline);
 
 /****************************
@@ -134,8 +135,8 @@ static const CLI_Command_Definition_t xStopCmd = {
     .cExpectedNumberOfParameters = -1};
 
 static const CLI_Command_Definition_t xEmergencyStopCmd = {
-    .pcCommand                   = "mestop",
-    .pcHelpString                = "mestop -m <motor_id>: Emergency stop for motor\r\n",
+    .pcCommand                   = "estop",
+    .pcHelpString                = "estop: Emergency stop\r\n",
     .pxCommandInterpreter        = cmd_motor_emergency_stop,
     .cExpectedNumberOfParameters = -1};
 
@@ -164,7 +165,7 @@ static const CLI_Command_Definition_t xSetHomeCmd = {
     .cExpectedNumberOfParameters = -1};
 
 static const CLI_Command_Definition_t xSetHomeOffsetCmd = {
-    .pcCommand = "mhome_off",
+    .pcCommand    = "mhome_off",
     .pcHelpString = "mhome_off -m <motor_id> -a <offset_deg>: Set home angle offset in degrees\r\n",
     .pxCommandInterpreter        = cmd_motor_set_home_offset,
     .cExpectedNumberOfParameters = -1};
@@ -213,22 +214,22 @@ static const CLI_Command_Definition_t xHomeRightArmCmd = {
     .cExpectedNumberOfParameters = 0};
 
 static const CLI_Command_Definition_t xScaraMoveCmd = {
-    .pcCommand                   = "skmove",
-    .pcHelpString                = "skmove -x <x> -y <y> [-zeta <rotation>]: Move to a Cartesian target with optional rotation\r\n",
+    .pcCommand    = "skmove",
+    .pcHelpString = "skmove -x <x> -y <y> [-zeta <rotation>]: Move to a Cartesian target with "
+                    "optional rotation\r\n",
     .pxCommandInterpreter        = cmd_scara_move_xy,
     .cExpectedNumberOfParameters = -1};
 
-static const CLI_Command_Definition_t xGrabCmd = {
-    .pcCommand = "grab",
-    .pcHelpString = "grab: Perform grab sequence\r\n",
-    .pxCommandInterpreter = cmd_grab,
-    .cExpectedNumberOfParameters = 0};
+static const CLI_Command_Definition_t xGrabCmd = {.pcCommand    = "grab",
+                                                  .pcHelpString = "grab: Perform grab sequence\r\n",
+                                                  .pxCommandInterpreter        = cmd_grab,
+                                                  .cExpectedNumberOfParameters = 0};
 
-static const CLI_Command_Definition_t xReleaseCmd = {
-    .pcCommand = "release",
-    .pcHelpString = "release: Perform release sequence\r\n",
-    .pxCommandInterpreter = cmd_release,
-    .cExpectedNumberOfParameters = 0};
+static const CLI_Command_Definition_t xReleaseCmd = {.pcCommand = "release",
+                                                     .pcHelpString =
+                                                         "release: Perform release sequence\r\n",
+                                                     .pxCommandInterpreter        = cmd_release,
+                                                     .cExpectedNumberOfParameters = 0};
 
 /*******************************************
  *     Public Function Implementations     *
@@ -277,8 +278,6 @@ void MCMD_task(void* pvParameters)
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
-
-
 
 /********************************************
  *     Private Function Implementations     *
@@ -604,32 +603,9 @@ static BaseType_t cmd_motor_emergency_stop(char* pcWriteBuffer, size_t xWriteBuf
     const char*       pcParameter;
     BaseType_t        parameterStringLength;
 
-    TickType_t deadline = SYW_deadline_from_timeout_ms(MCMD_COMMAND_TIMEOUT_MS);
+    ESTOP_SetEstop();
 
-    // Get motor ID
-    CLU_get_parameter_value_string("-m", pcCommandString, &parameterFound, &pcParameter,
-                                   &parameterStringLength);
-    if (!parameterFound || parameterStringLength == 0)
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor ID required (-m)\r\n");
-        return pdFALSE;
-    }
-
-    MTR_get_motor_by_label(pcParameter, &handle);
-    if (handle == NULL)
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Motor not found\r\n");
-        return pdFALSE;
-    }
-
-    if (MTR_emergency_stop(handle) == kStatus_Success)
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Emergency stop activated\r\n");
-    }
-    else
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Emergency stop failed\r\n");
-    }
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Emergency stop activated\r\n");
 
     return pdFALSE;
 }
@@ -639,14 +615,7 @@ static BaseType_t cmd_motor_clear_emergency(char* pcWriteBuffer, size_t xWriteBu
 {
     (void)pcCommandString; // Unused parameter
 
-    if (MTR_clear_emergency_stop() == kStatus_Success)
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Emergency stop cleared\r\n");
-    }
-    else
-    {
-        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to clear emergency stop\r\n");
-    }
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Error: Failed to clear emergency stop\r\n");
 
     return pdFALSE;
 }
@@ -836,8 +805,8 @@ static BaseType_t cmd_motor_set_home_offset(char* pcWriteBuffer, size_t xWriteBu
 
     if (MTR_set_home_angle_offset(handle, offsetDeg) == kStatus_Success)
     {
-        snprintf(pcWriteBuffer, xWriteBufferLen,
-                 "Home angle offset set to %.2f degrees\r\n", offsetDeg);
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Home angle offset set to %.2f degrees\r\n",
+                 offsetDeg);
     }
     else
     {
@@ -1143,17 +1112,16 @@ static BaseType_t cmd_motor_home_right_arm(char* pcWriteBuffer, size_t xWriteBuf
     return pdFALSE;
 }
 
-
 static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
                                     const char* pcCommandString)
 {
-    uint8_t    parameterFound;
+    uint8_t     parameterFound;
     const char* pcParameter = NULL;
     BaseType_t  parameterStringLength;
-    SK_Point_t  target = {0.0, 0.0};
-    double      deltaZeta = 0.0;
+    SK_Point_t  target     = {0.0, 0.0};
+    double      deltaZeta  = 0.0;
     bool        rotateZeta = false;
-    TickType_t  deadline = SYW_deadline_from_timeout_ms(20000);
+    TickType_t  deadline   = SYW_deadline_from_timeout_ms(20000);
 
     CLU_get_parameter_value_string("-x", pcCommandString, &parameterFound, &pcParameter,
                                    &parameterStringLength);
@@ -1177,17 +1145,17 @@ static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
                                    &parameterStringLength);
     if (parameterFound && parameterStringLength > 0)
     {
-        deltaZeta = strtod(pcParameter, NULL);
+        deltaZeta  = strtod(pcParameter, NULL);
         rotateZeta = true;
     }
 
-    if (SK_move_to_xy_async(target, deltaZeta, rotateZeta, deadline, NULL) ==
-        kStatus_Success)
+    if (SK_move_to_xy_async(target, deltaZeta, rotateZeta, deadline, NULL) == kStatus_Success)
     {
         if (rotateZeta)
         {
-            snprintf(pcWriteBuffer, xWriteBufferLen, "SCARA move executed: X=%.2f Y=%.2f Zeta=%.2f\r\n",
-                     target.x, target.y, deltaZeta);
+            snprintf(pcWriteBuffer, xWriteBufferLen,
+                     "SCARA move executed: X=%.2f Y=%.2f Zeta=%.2f\r\n", target.x, target.y,
+                     deltaZeta);
         }
         else
         {
@@ -1206,24 +1174,29 @@ static BaseType_t cmd_scara_move_xy(char* pcWriteBuffer, size_t xWriteBufferLen,
 static BaseType_t cmd_grab(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
 {
     (void)pcCommandString;
-    if (pcWriteBuffer && xWriteBufferLen > 0) {
+    if (pcWriteBuffer && xWriteBufferLen > 0)
+    {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Grabbing...\r\n");
     }
     GRB_grab();
-    if (pcWriteBuffer && xWriteBufferLen > 0) {
+    if (pcWriteBuffer && xWriteBufferLen > 0)
+    {
         strncat(pcWriteBuffer, "Grab complete\r\n", xWriteBufferLen - strlen(pcWriteBuffer) - 1);
     }
     return pdFALSE;
 }
 
-static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
+static BaseType_t cmd_release(char* pcWriteBuffer, size_t xWriteBufferLen,
+                              const char* pcCommandString)
 {
     (void)pcCommandString;
-    if (pcWriteBuffer && xWriteBufferLen > 0) {
+    if (pcWriteBuffer && xWriteBufferLen > 0)
+    {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Releasing...\r\n");
     }
     GRB_release();
-    if (pcWriteBuffer && xWriteBufferLen > 0) {
+    if (pcWriteBuffer && xWriteBufferLen > 0)
+    {
         strncat(pcWriteBuffer, "Release complete\r\n", xWriteBufferLen - strlen(pcWriteBuffer) - 1);
     }
     return pdFALSE;

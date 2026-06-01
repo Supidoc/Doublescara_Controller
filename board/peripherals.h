@@ -102,6 +102,16 @@ extern "C" {
 #define UART2_SERIAL_ERROR_IRQN UART2_ERR_IRQn
 /* UART2 interrupt vector priority. */
 #define UART2_SERIAL_ERROR_IRQ_PRIORITY 7
+/* Alias for GPIOC peripheral */
+#define GPIOC_GPIO GPIOC
+/* Alias for PORTC */
+#define GPIOC_PORT PORTC
+/* GPIOC interrupt vector ID (number). */
+#define GPIOC_IRQN PORTC_IRQn
+/* GPIOC interrupt vector priority. */
+#define GPIOC_IRQ_PRIORITY 7
+/* GPIOC interrupt handler identifier. */
+#define GPIOC_IRQHANDLER PORTC_IRQHandler
 
 /***********************************************************************************************************************
  * Global variables

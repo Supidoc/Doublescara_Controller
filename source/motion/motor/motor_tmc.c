@@ -8,9 +8,9 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_tmc.h"
 #include "motor_motion.h"
-#include "log.h"
 #include "stdio.h"
 #include "sync_wait.h"
 #include "tmc2209_core.h"
@@ -44,10 +44,7 @@ static status_t wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadli
 status_t MTRi_set_run_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL)
     {
         return kStatus_Fail;
@@ -86,10 +83,7 @@ status_t MTRi_set_run_current(MTR_MotorHandle_t handle, double current_a, TickTy
 status_t MTRi_set_hold_current(MTR_MotorHandle_t handle, double current_a, TickType_t deadline)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL)
     {
         return kStatus_Fail;

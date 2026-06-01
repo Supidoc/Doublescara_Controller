@@ -8,8 +8,8 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "cmd_handle.h"
-#include "log.h"
 #include "string.h"
 
 /************************************

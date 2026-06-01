@@ -1,0 +1,76 @@
+\doxysection{Emergency Stop }
+\hypertarget{group__Estop__Module}{}\label{group__Estop__Module}\index{Emergency Stop@{Emergency Stop}}
+
+
+Global emergency-\/stop API and helpers.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__Estop__Module_gaecd38ebc7cf97127f58836e52cd5722c}{ESTOP\+\_\+\+Set\+Estop}} (void)
+\begin{DoxyCompactList}\small\item\em Assert the emergency stop. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__Estop__Module_gabafcd53418facc535f7b2f95c6746603}{ESTOP\+\_\+\+Clear\+Estop}} (void)
+\begin{DoxyCompactList}\small\item\em Clear the emergency stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{group__Estop__Module_ga90e982aa17f4f600de4d21923858b547}{estop\+Flag}}
+\begin{DoxyCompactList}\small\item\em Global emergency-\/stop flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global emergency-\/stop API and helpers. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__Estop__Module_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__Estop__Module_gabafcd53418facc535f7b2f95c6746603}\index{Emergency Stop@{Emergency Stop}!ESTOP\_ClearEstop@{ESTOP\_ClearEstop}}
+\index{ESTOP\_ClearEstop@{ESTOP\_ClearEstop}!Emergency Stop@{Emergency Stop}}
+\doxysubsubsection{\texorpdfstring{ESTOP\_ClearEstop()}{ESTOP\_ClearEstop()}}
+{\footnotesize\ttfamily \label{group__Estop__Module_gabafcd53418facc535f7b2f95c6746603} 
+void ESTOP\+\_\+\+Clear\+Estop (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Clear the emergency stop. 
+
+Clears the global E-\/\+Stop flag and allows normal operation to resume. Callers should ensure it is safe to resume motors and actuators before calling this function. 
+
+Definition at line \doxymbox{\hyperlink{estop_8c_source_l00045}{45}} of file \doxymbox{\hyperlink{estop_8c_source}{estop.\+c}}.
+
+\Hypertarget{group__Estop__Module_gaecd38ebc7cf97127f58836e52cd5722c}\index{Emergency Stop@{Emergency Stop}!ESTOP\_SetEstop@{ESTOP\_SetEstop}}
+\index{ESTOP\_SetEstop@{ESTOP\_SetEstop}!Emergency Stop@{Emergency Stop}}
+\doxysubsubsection{\texorpdfstring{ESTOP\_SetEstop()}{ESTOP\_SetEstop()}}
+{\footnotesize\ttfamily \label{group__Estop__Module_gaecd38ebc7cf97127f58836e52cd5722c} 
+void ESTOP\+\_\+\+Set\+Estop (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Assert the emergency stop. 
+
+Sets the global E-\/\+Stop flag and triggers any immediate shutdown actions required by the platform (motor disable, brake engage, etc.). This function is safe to call from task context. If ISR safety is required a separate API should be provided by the implementation. 
+
+Definition at line \doxymbox{\hyperlink{estop_8c_source_l00040}{40}} of file \doxymbox{\hyperlink{estop_8c_source}{estop.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{group__Estop__Module_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__Estop__Module_ga90e982aa17f4f600de4d21923858b547}\index{Emergency Stop@{Emergency Stop}!estopFlag@{estopFlag}}
+\index{estopFlag@{estopFlag}!Emergency Stop@{Emergency Stop}}
+\doxysubsubsection{\texorpdfstring{estopFlag}{estopFlag}}
+{\footnotesize\ttfamily \label{group__Estop__Module_ga90e982aa17f4f600de4d21923858b547} 
+bool estop\+Flag\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Global emergency-\/stop flag. 
+
+True when an emergency-\/stop is active. Modules that perform motion or drive external actuators should check this flag and refrain from issuing commands while it is set. 
+
+Definition at line \doxymbox{\hyperlink{estop_8c_source_l00030}{30}} of file \doxymbox{\hyperlink{estop_8c_source}{estop.\+c}}.
+

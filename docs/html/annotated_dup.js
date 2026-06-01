@@ -54,5 +54,9 @@ var annotated_dup =
     [ "_TMC_HandleArrayItem", "struct__TMC__HandleArrayItem.html", "struct__TMC__HandleArrayItem" ],
     [ "_TMC_HandleImpl", "struct__TMC__HandleImpl.html", "struct__TMC__HandleImpl" ],
     [ "_TMC_Read_Datagram", "struct__TMC__Read__Datagram.html", "struct__TMC__Read__Datagram" ],
-    [ "_TMC_Write_Datagram", "struct__TMC__Write__Datagram.html", "struct__TMC__Write__Datagram" ]
+    [ "_TMC_Write_Datagram", "struct__TMC__Write__Datagram.html", "struct__TMC__Write__Datagram" ],
+    [ "CommandPackage", "structCommandPackage.html", "structCommandPackage" ],
+    [ "GFONT_Callbacks", "structGFONT__Callbacks.html", "structGFONT__Callbacks" ],
+    [ "GFONT_CharInfo", "structGFONT__CharInfo.html", "structGFONT__CharInfo" ],
+    [ "TIMAGE", "structTIMAGE.html", "structTIMAGE" ]
 ];

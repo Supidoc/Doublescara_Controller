@@ -8,13 +8,13 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "tmc2209_setup.h"
 #include "tmc2209_shared.h"
 #include "tmc2209_internal.h"
 #include "tmc2209_uart.h"
 #include "stdio.h"
 #include "fsl_common.h"
-#include "log.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -76,7 +76,7 @@ status_t TMCi_init_handle(TMC_Config_t config, TickType_t deadline)
 
     static char logMsg[100];
     snprintf(logMsg, sizeof(logMsg), "[%s] Initializing handle with config", handle->label);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     if (TMCi_read_transmissioncount(handle, deadline) != kStatus_Success)
     {
@@ -172,7 +172,7 @@ status_t TMCi_init_handle(TMC_Config_t config, TickType_t deadline)
     }
 
     snprintf(logMsg, sizeof(logMsg), "[%s] TMC2209 initialized successfully", handle->label);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     return kStatus_Success;
 }

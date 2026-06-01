@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wait_5ffor_5fcmd_5fhandle_0',['wait_for_cmd_handle',['../motor_8c.html#aa83bf6d5e146b93ebd4bf2ac71832220',1,'motor.c']]],
-  ['wait_5ffor_5fmtr_5fcmd_1',['wait_for_mtr_cmd',['../motorCmd_8c.html#a385dd4535c8d6f00107f8f24c5474c38',1,'motorCmd.c']]],
-  ['write_2',['write',['../tmc2209_8c.html#ad2b296addfa224a3fef137c3fc1ab831',1,'tmc2209.c']]]
+  ['wait_5fand_5frelease_0',['wait_and_release',['../grabber_8c.html#a6969198e72fa6fb00b68e0f85a643c3a',1,'grabber.c']]],
+  ['wait_5ffor_5fcmd_5fhandle_1',['wait_for_cmd_handle',['../motor__homing_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_homing.c'],['../motor__init_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_init.c'],['../motor__sync_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_sync.c'],['../motor__tmc_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_tmc.c']]],
+  ['wait_5ffor_5fmtr_5fcmd_2',['wait_for_mtr_cmd',['../motorCmd_8c.html#a9c9b713d7e1f0775be398eeaf8a53c44',1,'motorCmd.c']]]
 ];

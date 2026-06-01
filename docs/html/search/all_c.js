@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['offset_0',['offset',['../struct__SK__SetOriginOffsetData.html#a8c5f683be117b15fa46c65bd383c1fe1',1,'_SK_SetOriginOffsetData']]],
-  ['offsetx_1',['offsetX',['../struct__SK__Transform.html#acc038179c8d603c9d2f1f864d00dabec',1,'_SK_Transform']]],
-  ['offsety_2',['offsetY',['../struct__SK__Transform.html#ad9bd3b3cbfc229991e026fd6d273c0f7',1,'_SK_Transform']]],
-  ['outputlevel_3',['outputLevel',['../struct__PCA__Pin__Config.html#ab5d9851d665afc92969a795539a29026',1,'_PCA_Pin_Config']]]
+  ['name_0',['name',['../structTIMAGE.html#a9395e1a028fd2b7ac198a6515a210434',1,'TIMAGE']]],
+  ['new_5fline_1',['NEW_LINE',['../group__UART2__Module.html#ga7b99dc1e1c86b4897498c2d436ead1b5',1,'uart.h']]],
+  ['null_2',['NULL',['../group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4',1,'NULL:&#160;McuFontCour10Normal.c'],['../group__McuGFont__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4',1,'NULL:&#160;McuGFont.c']]]
 ];

@@ -8,6 +8,7 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "tmc2209_process.h"
 #include "tmc2209_shared.h"
 #include "tmc2209_internal.h"
@@ -15,7 +16,6 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "cmd_handle.h"
-#include "log.h"
 #include "cmd_dispatch.h"
 
 /************************************

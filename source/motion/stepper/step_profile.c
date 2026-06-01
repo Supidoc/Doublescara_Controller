@@ -8,9 +8,9 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "step_profile.h"
 #include "stdio.h"
-#include "log.h"
 #include "math.h"
 
 /************************************

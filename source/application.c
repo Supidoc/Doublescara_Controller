@@ -9,8 +9,11 @@
  *     Includes		*
  ********************/
 #include <driver/pca9555a/pca9555a.h>
+#include <infrastructure/cli.h>
+#include <infrastructure/disk.h>
+#include <infrastructure/log.h>
 #include "application.h"
-#include <log.h>
+#include <motion/scara_kinematics/scara_kinematics.h>
 
 #include "board.h"
 #include "clock_config.h"
@@ -23,15 +26,14 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "cli.h"
-#include "disk.h"
 #include "motor_test.h"
 #include "step_core.h"
 #include "tmc2209_core.h"
 #include "motor_core.h"
 #include "motorCmd.h"
-#include "scara_kinematics.h"
 #include "statemachine.h"
+#include "led.h"
+#include "estop.h"
 
 /************************************
  *     Private Macros / Defines		*
@@ -86,11 +88,6 @@ void APP_init(void)
         while (1)
             ;
     }
-    if (MTT_init() != kStatus_Success)
-    {
-        while (1)
-            ;
-    }
     if (MTR_init() != kStatus_Success)
     {
         while (1)
@@ -111,6 +108,12 @@ void APP_init(void)
         while (1)
             ;
     }
+    if (LED_init() != kStatus_Success)
+    {
+        while (1)
+            ;
+    }
+    LED_on();
 }
 
 void APP_run(void)
@@ -130,7 +133,7 @@ void APP_run(void)
             ;
     }
     if (create_task(STP_task, "STP_Task", configMINIMAL_STACK_SIZE + 800,
-                    configMAX_PRIORITIES - 1) != kStatus_Success)
+                    configMAX_PRIORITIES - 2) != kStatus_Success)
     {
         while (1)
             ;
@@ -141,14 +144,8 @@ void APP_run(void)
         while (1)
             ;
     }
-    if (create_task(MTT_task, "MTT_Task", configMINIMAL_STACK_SIZE + 800,
-                    configMAX_PRIORITIES - 5) != kStatus_Success)
-    {
-        while (1)
-            ;
-    }
     if (create_task(MTR_task, "MTR_Task", configMINIMAL_STACK_SIZE + 800,
-                    configMAX_PRIORITIES - 4) != kStatus_Success)
+                    configMAX_PRIORITIES - 3) != kStatus_Success)
     {
         while (1)
             ;
@@ -165,12 +162,13 @@ void APP_run(void)
         while (1)
             ;
     }
-    if (create_task(Statemachine_task, "SM_Task", configMINIMAL_STACK_SIZE + 800, configMAX_PRIORITIES - 2) !=
-        kStatus_Success)
+    if (create_task(Statemachine_task, "SM_Task", configMINIMAL_STACK_SIZE + 800,
+                    configMAX_PRIORITIES - 5) != kStatus_Success)
     {
         while (1)
             ;
     }
+    ESTOP_ClearEstop();
     vTaskStartScheduler();
 }
 

@@ -28,6 +28,7 @@ pin_labels:
 - {pin_num: '63', pin_signal: ADC0_SE7b/PTD6/LLWU_P15/SPI0_PCS3/UART0_RX/FTM0_CH6/FB_AD0/FTM0_FLT0/SPI1_SOUT, label: UART0_RX, identifier: UART0_RX}
 - {pin_num: '54', pin_signal: ADC1_SE5b/CMP0_IN3/PTC9/FTM3_CH5/I2S0_RX_BCLK/FB_AD6/FTM2_FLT0, label: GPIOC9, identifier: GPIOC9}
 - {pin_num: '41', pin_signal: PTB18/FTM2_CH0/I2S0_TX_BCLK/FB_AD15/FTM2_QD_PHA, label: GPIOB18, identifier: GPIOB18}
+- {pin_num: '53', pin_signal: ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7, label: GPIOC8, identifier: GPIOC8}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -80,7 +81,7 @@ BOARD_InitPins:
   - {pin_num: '61', peripheral: GPIOD, signal: 'GPIO, 4', pin_signal: PTD4/LLWU_P14/SPI0_PCS1/UART0_RTS_b/FTM0_CH4/FB_AD2/EWM_IN/SPI1_PCS0, direction: INPUT, gpio_interrupt: kPORT_InterruptRisingEdge}
   - {pin_num: '39', peripheral: GPIOB, signal: 'GPIO, 16', pin_signal: PTB16/SPI1_SOUT/UART0_RX/FTM_CLKIN0/FB_AD17/EWM_IN, direction: OUTPUT}
   - {pin_num: '40', peripheral: GPIOB, signal: 'GPIO, 17', pin_signal: PTB17/SPI1_SIN/UART0_TX/FTM_CLKIN1/FB_AD16/EWM_OUT_b, direction: OUTPUT}
-  - {pin_num: '53', peripheral: GPIOC, signal: 'GPIO, 8', pin_signal: ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7}
+  - {pin_num: '53', peripheral: GPIOC, signal: 'GPIO, 8', pin_signal: ADC1_SE4b/CMP0_IN2/PTC8/FTM3_CH4/I2S0_MCLK/FB_AD7, direction: INPUT, gpio_interrupt: kPORT_InterruptLogicZero}
   - {pin_num: '54', peripheral: GPIOC, signal: 'GPIO, 9', pin_signal: ADC1_SE5b/CMP0_IN3/PTC9/FTM3_CH5/I2S0_RX_BCLK/FB_AD6/FTM2_FLT0, direction: INPUT}
   - {pin_num: '55', peripheral: GPIOC, signal: 'GPIO, 10', pin_signal: ADC1_SE6b/PTC10/I2C1_SCL/FTM3_CH6/I2S0_RX_FS/FB_AD5}
   - {pin_num: '56', peripheral: GPIOC, signal: 'GPIO, 11', pin_signal: ADC1_SE7b/PTC11/LLWU_P11/I2C1_SDA/FTM3_CH7/FB_RW_b}
@@ -137,6 +138,13 @@ void BOARD_InitPins(void)
     };
     /* Initialize GPIO functionality on pin PTB19 (pin 42)  */
     GPIO_PinInit(BOARD_INITPINS_GPIOB19_GPIO, BOARD_INITPINS_GPIOB19_PIN, &GPIOB19_config);
+
+    gpio_pin_config_t GPIOC8_config = {
+        .pinDirection = kGPIO_DigitalInput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PTC8 (pin 53)  */
+    GPIO_PinInit(BOARD_INITPINS_GPIOC8_GPIO, BOARD_INITPINS_GPIOC8_PIN, &GPIOC8_config);
 
     gpio_pin_config_t GPIOC9_config = {
         .pinDirection = kGPIO_DigitalInput,
@@ -236,7 +244,10 @@ void BOARD_InitPins(void)
     PORT_SetPinMux(PORTC, 7U, kPORT_MuxAlt2);
 
     /* PORTC8 (pin 53) is configured as PTC8 */
-    PORT_SetPinMux(PORTC, 8U, kPORT_MuxAsGpio);
+    PORT_SetPinMux(BOARD_INITPINS_GPIOC8_PORT, BOARD_INITPINS_GPIOC8_PIN, kPORT_MuxAsGpio);
+
+    /* Interrupt configuration on PORTC8 (pin 53): Interrupt when logic zero */
+    PORT_SetPinInterruptConfig(BOARD_INITPINS_GPIOC8_PORT, BOARD_INITPINS_GPIOC8_PIN, kPORT_InterruptLogicZero);
 
     /* PORTC9 (pin 54) is configured as PTC9 */
     PORT_SetPinMux(BOARD_INITPINS_GPIOC9_PORT, BOARD_INITPINS_GPIOC9_PIN, kPORT_MuxAsGpio);

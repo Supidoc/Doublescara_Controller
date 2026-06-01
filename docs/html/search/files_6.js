@@ -1,26 +1,7 @@
 var searchData=
 [
-  ['main_2ec_0',['main.c',['../main_8c.html',1,'']]],
-  ['motor_5fconfigs_2eh_1',['motor_configs.h',['../motor__configs_8h.html',1,'']]],
-  ['motor_5fconvert_2ec_2',['motor_convert.c',['../motor__convert_8c.html',1,'']]],
-  ['motor_5fconvert_2eh_3',['motor_convert.h',['../motor__convert_8h.html',1,'']]],
-  ['motor_5fcore_2ec_4',['motor_core.c',['../motor__core_8c.html',1,'']]],
-  ['motor_5fcore_2eh_5',['motor_core.h',['../motor__core_8h.html',1,'']]],
-  ['motor_5fhoming_2ec_6',['motor_homing.c',['../motor__homing_8c.html',1,'']]],
-  ['motor_5fhoming_2eh_7',['motor_homing.h',['../motor__homing_8h.html',1,'']]],
-  ['motor_5finit_2ec_8',['motor_init.c',['../motor__init_8c.html',1,'']]],
-  ['motor_5finit_2eh_9',['motor_init.h',['../motor__init_8h.html',1,'']]],
-  ['motor_5finternal_2eh_10',['motor_internal.h',['../motor__internal_8h.html',1,'']]],
-  ['motor_5fmotion_2ec_11',['motor_motion.c',['../motor__motion_8c.html',1,'']]],
-  ['motor_5fmotion_2eh_12',['motor_motion.h',['../motor__motion_8h.html',1,'']]],
-  ['motor_5fprocess_2ec_13',['motor_process.c',['../motor__process_8c.html',1,'']]],
-  ['motor_5fprocess_2eh_14',['motor_process.h',['../motor__process_8h.html',1,'']]],
-  ['motor_5fsync_2ec_15',['motor_sync.c',['../motor__sync_8c.html',1,'']]],
-  ['motor_5fsync_2eh_16',['motor_sync.h',['../motor__sync_8h.html',1,'']]],
-  ['motor_5ftest_2ec_17',['motor_test.c',['../motor__test_8c.html',1,'']]],
-  ['motor_5ftest_2eh_18',['motor_test.h',['../motor__test_8h.html',1,'']]],
-  ['motor_5ftmc_2ec_19',['motor_tmc.c',['../motor__tmc_8c.html',1,'']]],
-  ['motor_5ftmc_2eh_20',['motor_tmc.h',['../motor__tmc_8h.html',1,'']]],
-  ['motorcmd_2ec_21',['motorCmd.c',['../motorCmd_8c.html',1,'']]],
-  ['motorcmd_2eh_22',['motorCmd.h',['../motorCmd_8h.html',1,'']]]
+  ['led_2ec_0',['led.c',['../led_8c.html',1,'']]],
+  ['led_2eh_1',['led.h',['../led_8h.html',1,'']]],
+  ['log_2ec_2',['log.c',['../log_8c.html',1,'']]],
+  ['log_2eh_3',['log.h',['../log_8h.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/cli_utilities.c Source File</title>
+<title>Double Scara: source/infrastructure/cli_utilities.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *     Includes     *</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> ********************/</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="cli__utilities_8h.html">cli_utilities.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="cli__utilities_8h.html">infrastructure/cli_utilities.h</a>&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;string.h&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;stdlib.h&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -140,7 +140,7 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">do</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    {</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        *pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, i, parameterStringLength);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">if</span> (*pcParameter == NULL)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">if</span> (*pcParameter == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        {</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            *parameterStringLength = 0;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            *parameterFound        = 0;</div>
@@ -150,7 +150,7 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">if</span> (cmp == 0)</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        {</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            *pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, i + 1, parameterStringLength);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (*pcParameter == NULL)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (*pcParameter == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            {</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                *parameterFound        = 1;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                *parameterStringLength = 0;</div>
@@ -158,11 +158,11 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (**pcParameter == <span class="charliteral">&#39;-&#39;</span>)</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordtype">double</span> parsedDouble = strtod(*pcParameter, NULL);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordtype">double</span> parsedDouble = strtod(*pcParameter, <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                <span class="keywordflow">if</span> (parsedDouble &gt;= -0.01 &amp;&amp; parsedDouble &lt;= 0.01)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                {</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                    *parameterStringLength = 0;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    *pcParameter           = NULL;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    *pcParameter           = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                }</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                *parameterFound = 1;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">return</span> kStatus_Success;</div>
@@ -174,7 +174,7 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            }</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        i++;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    } <span class="keywordflow">while</span> (*pcParameter != NULL);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    } <span class="keywordflow">while</span> (*pcParameter != <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
@@ -184,13 +184,14 @@ $(function(){initNavTree('cli__utilities_8c_source.html','',''); });
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> ********************************************/</span></div>
 <div class="ttc" id="acli__utilities_8h_html"><div class="ttname"><a href="cli__utilities_8h.html">cli_utilities.h</a></div></div>
 <div class="ttc" id="agroup__CLI__Utilities__Module_html_ga90c109013d91a77a524e6ee2bc8c710f"><div class="ttname"><a href="group__CLI__Utilities__Module.html#ga90c109013d91a77a524e6ee2bc8c710f">CLU_get_parameter_value_string</a></div><div class="ttdeci">status_t CLU_get_parameter_value_string(char *parameterIdentifier, const char *pcCommandString, uint8_t *parameterFound, const char **pcParameter, BaseType_t *parameterStringLength)</div><div class="ttdoc">Retrieves the value of a specified parameter from a command string.</div><div class="ttdef"><b>Definition</b> <a href="#l00040">cli_utilities.c:40</a></div></div>
+<div class="ttc" id="agroup__McuFontCour10Normal__module_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition</b> <a href="McuFontCour10Normal_8c_source.html#l00156">McuFontCour10Normal.c:156</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="cli__utilities_8c.html">cli_utilities.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_71ba2ac0ad0bf0fcc30e9b425f69c132.html">infrastructure</a></li><li class="navelem"><a href="cli__utilities_8c.html">cli_utilities.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

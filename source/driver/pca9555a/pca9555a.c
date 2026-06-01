@@ -9,11 +9,11 @@
  *     Includes    *
  ********************/
 #include <driver/pca9555a/pca9555a.h>
+#include <infrastructure/log.h>
 #include "stdint.h"
 #include "fsl_common.h"
 #include "fsl_i2c_freertos.h"
 #include "FreeRTOS.h"
-#include "log.h"
 
 /************************************
  *     Private Macros / Defines    *

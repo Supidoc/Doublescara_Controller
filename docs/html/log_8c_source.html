@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Double Scara: source/log.c Source File</title>
+<title>Double Scara: source/infrastructure/log.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,16 +102,16 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">/********************</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *     Includes     *</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> ********************/</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;FreeRTOS.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;FreeRTOS_CLI.h&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="cli_8h.html">cli.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="cli__utilities_8h.html">cli_utilities.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="disk_8h.html">disk.h</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;event_groups.h&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;peripherals.h&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;queue.h&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;<a class="code" href="log_8h.html">log.h</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="cli_8h.html">infrastructure/cli.h</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="cli__utilities_8h.html">infrastructure/cli_utilities.h</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="disk_8h.html">infrastructure/disk.h</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="log_8h.html">infrastructure/log.h</a>&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;FreeRTOS.h&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;FreeRTOS_CLI.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;event_groups.h&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;peripherals.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;queue.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;stdio.h&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;SEGGER_RTT.h&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">/************************************</span></div>
@@ -190,7 +190,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="log_8c.html#a735589618833e40aeb952d0741a828e8">   89</a></span>FIL <a class="code hl_variable" href="log_8c.html#a735589618833e40aeb952d0741a828e8">logFile</a>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">   91</a></span>QueueHandle_t <a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> = NULL;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">   91</a></span>QueueHandle_t <a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="log_8c.html#aa0f03c6bf1b666c8a52605befef768ba">   93</a></span><span class="keyword">static</span> uint32_t <a class="code hl_variable" href="log_8c.html#aa0f03c6bf1b666c8a52605befef768ba">sessionId</a>;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
@@ -220,9 +220,9 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="log_8c.html#a3554d356a9190bdfe0f56e31ec65bc0b">  115</a></span><span class="keyword">static</span> uint8_t <a class="code hl_variable" href="log_8c.html#a3554d356a9190bdfe0f56e31ec65bc0b">logFileOpened</a> = 0;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">  117</a></span><span class="keyword">static</span> SemaphoreHandle_t <a class="code hl_variable" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = NULL;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">  117</a></span><span class="keyword">static</span> SemaphoreHandle_t <a class="code hl_variable" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">  119</a></span><span class="keyword">static</span> EventGroupHandle_t <a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = NULL;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">  119</a></span><span class="keyword">static</span> EventGroupHandle_t <a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">/*********************************************</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> *      Public Function Implementations      *</span></div>
@@ -232,20 +232,20 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1">  125</a></span>status_t <a class="code hl_function" href="group__LOG__Module.html#gad8fb5a8d2383abe85c0696d80e0372f1">LOG_init</a>(<span class="keywordtype">void</span>)</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>{</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> = xQueueCreate(<a class="code hl_define" href="group__LOG__Module.html#ga9949d211fdaa2513bcc40b46a2152a19">LOG_QUEUE_SIZE</a>, <span class="keyword">sizeof</span>(<a class="code hl_typedef" href="log_8c.html#ab33882773f01b0f786eda8576b58fcdb">LOG_QueueItem_t</a>));</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> == NULL)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a> == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    {</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    vQueueAddToRegistry(<a class="code hl_variable" href="log_8c.html#a312ebbb5fc5830fb0b462aa4f24e9a50">logQueue</a>, <span class="stringliteral">&quot;LOG Queue&quot;</span>);</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <a class="code hl_variable" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> = xSemaphoreCreateMutex();</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> == NULL)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#a3992b5f2e352c471d9528755c7e608a4">logFileMutex</a> == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    {</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> = xEventGroupCreate();</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> == NULL)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    {</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    }</div>
@@ -297,7 +297,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="group__LOG__Module.html#ga534b19869c7498164597bf36b47ccea6">  189</a></span>status_t <a class="code hl_function" href="group__LOG__Module.html#ga534b19869c7498164597bf36b47ccea6">LOG_send_log_message</a>(<a class="code hl_typedef" href="group__LOG__Module.html#ga6d319de993cc8d4a0b7da064fc94779d">LOG_Level_t</a> level, <span class="keywordtype">char</span>* message, uint8_t silent)</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>{</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">if</span> (message == NULL)</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">if</span> (message == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    {</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    }</div>
@@ -305,7 +305,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#a51b070068e57d37ff1dc551d9e818f15">level</a>  = level;</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#a38cd912b130079cd9ed11f3998b2a220">silent</a> = silent &amp;&amp; 0b1;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    strcpy(queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#a19efc78c7688a9bf9ba1aa28f7d43afe">taskName</a>, pcTaskGetName(NULL));</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    strcpy(queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#a19efc78c7688a9bf9ba1aa28f7d43afe">taskName</a>, pcTaskGetName(<a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>));</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#ab3fa2205ba7a29a0d837c3ab8400dab8">tick</a> = xTaskGetTickCount();</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    strncpy(queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#ade9bd14ba5826fb3dfd2bb1912d5fbc1">msg</a>, message, <a class="code hl_define" href="group__LOG__Module.html#gaf74de77a0afba0a5af76a0a8ab9ff5d9">LOG_MAX_MESSAGE_SIZE</a> - 1);</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    queueItem.<a class="code hl_variable" href="struct__LOG__QueueItem.html#ade9bd14ba5826fb3dfd2bb1912d5fbc1">msg</a>[<a class="code hl_define" href="group__LOG__Module.html#gaf74de77a0afba0a5af76a0a8ab9ff5d9">LOG_MAX_MESSAGE_SIZE</a> - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
@@ -316,7 +316,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="comment">// Clear the queue empty event bit since we just added a message</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> != NULL)</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> != <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    {</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        xEventGroupClearBits(<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a>, <a class="code hl_define" href="log_8c.html#a96fa000644cfd44a3e374205b0918d46">LOG_QUEUE_EMPTY_EVENT</a>);</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
@@ -342,7 +342,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="group__LOG__Module.html#ga2ddf5f77c872712f2497e3e4b0e19ea4">  230</a></span>status_t <a class="code hl_function" href="group__LOG__Module.html#ga2ddf5f77c872712f2497e3e4b0e19ea4">LOG_wait_for_queue_empty</a>(TickType_t xTicksToWait)</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>{</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> == NULL)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="log_8c.html#aeec8bebb97c505dcded290a083dd25b1">logQueueEmptyEvent</a> == <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>)</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    {</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">return</span> kStatus_Fail;</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
@@ -390,7 +390,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <a class="code hl_variable" href="log_8c.html#a3554d356a9190bdfe0f56e31ec65bc0b">logFileOpened</a> = 1;</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        uint8_t     parameterFound;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* pcParameter = NULL;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* pcParameter = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        BaseType_t  parameterStringLength;</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_function" href="group__CLI__Utilities__Module.html#ga90c109013d91a77a524e6ee2bc8c710f">CLU_get_parameter_value_string</a>(<span class="stringliteral">&quot;-s&quot;</span>, pcCommandString, &amp;parameterFound, &amp;pcParameter,</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                                       &amp;parameterStringLength);</div>
@@ -400,7 +400,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        }</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        {</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            fileSessionId = strtoul(pcParameter, NULL, 0);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            fileSessionId = strtoul(pcParameter, <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, 0);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        }</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        sprintf(localLogFilePath, <a class="code hl_define" href="group__DISK__Module.html#ga361a0dd22dac0332c66cc132624d2d05">DISK_SD_PATH</a> <span class="stringliteral">&quot;%lu&quot;</span>, fileSessionId);</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
@@ -478,7 +478,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                                    <span class="keyword">const</span> <span class="keywordtype">char</span>* pcCommandString)</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>{</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    uint8_t     parameterFound;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* pcParameter = NULL;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* pcParameter = <a class="code hl_define" href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>;</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    BaseType_t  parameterStringLength;</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <a class="code hl_function" href="group__CLI__Utilities__Module.html#ga90c109013d91a77a524e6ee2bc8c710f">CLU_get_parameter_value_string</a>(<span class="stringliteral">&quot;NONE&quot;</span>, pcCommandString, &amp;parameterFound, &amp;pcParameter,</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>                                   &amp;parameterStringLength);</div>
@@ -739,6 +739,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <div class="ttc" id="agroup__LOG__Module_html_ggab7c4d49b9a167a32bbe38935536af90ba779dc8dd26898fb0f88cd5f6e02ba1e5"><div class="ttname"><a href="group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba779dc8dd26898fb0f88cd5f6e02ba1e5">LOG_LEVEL_FATAL</a></div><div class="ttdeci">@ LOG_LEVEL_FATAL</div><div class="ttdoc">Fatal level - critical system failures.</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00088">log.h:88</a></div></div>
 <div class="ttc" id="agroup__LOG__Module_html_ggab7c4d49b9a167a32bbe38935536af90ba99c1e5c8e6d557f3993b9ab54a0107f4"><div class="ttname"><a href="group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba99c1e5c8e6d557f3993b9ab54a0107f4">LOG_LEVEL_WARN</a></div><div class="ttdeci">@ LOG_LEVEL_WARN</div><div class="ttdoc">Warning level - warning messages for potential issues.</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00084">log.h:84</a></div></div>
 <div class="ttc" id="agroup__LOG__Module_html_ggab7c4d49b9a167a32bbe38935536af90baedee1e3159bfe7d918b6e29873c5aee4"><div class="ttname"><a href="group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90baedee1e3159bfe7d918b6e29873c5aee4">LOG_LEVEL_INFO</a></div><div class="ttdeci">@ LOG_LEVEL_INFO</div><div class="ttdoc">Info level - general informational messages.</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00082">log.h:82</a></div></div>
+<div class="ttc" id="agroup__McuFontCour10Normal__module_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__McuFontCour10Normal__module.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition</b> <a href="McuFontCour10Normal_8c_source.html#l00156">McuFontCour10Normal.c:156</a></div></div>
 <div class="ttc" id="alog_8c_html_a01fc81526c0fa414360ebac8a73c39d0"><div class="ttname"><a href="log_8c.html#a01fc81526c0fa414360ebac8a73c39d0">set_session_id</a></div><div class="ttdeci">static status_t set_session_id(void)</div><div class="ttdef"><b>Definition</b> <a href="#l00561">log.c:561</a></div></div>
 <div class="ttc" id="alog_8c_html_a09545fadddb32b210456f5f309a469db"><div class="ttname"><a href="log_8c.html#a09545fadddb32b210456f5f309a469db">xLog2CLICommandDefinition</a></div><div class="ttdeci">static const CLI_Command_Definition_t xLog2CLICommandDefinition</div><div class="ttdef"><b>Definition</b> <a href="#l00104">log.c:104</a></div></div>
 <div class="ttc" id="alog_8c_html_a30b3021476e4daf30329c5977a373c5d"><div class="ttname"><a href="log_8c.html#a30b3021476e4daf30329c5977a373c5d">assemble_header_string</a></div><div class="ttdeci">static void assemble_header_string(char *dest, size_t destSize, LOG_LogHeader_t header)</div><div class="ttdef"><b>Definition</b> <a href="#l00447">log.c:447</a></div></div>
@@ -786,7 +787,7 @@ $(function(){initNavTree('log_8c_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="log_8c.html">log.c</a></li>
+    <li class="navelem"><a href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a href="dir_71ba2ac0ad0bf0fcc30e9b425f69c132.html">infrastructure</a></li><li class="navelem"><a href="log_8c.html">log.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

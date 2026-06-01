@@ -8,8 +8,8 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "cmd_dispatch.h"
-#include "log.h"
 
 /************************************
  *     Private Macros / Defines    *

@@ -8,9 +8,9 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_sync.h"
 #include "motor_convert.h"
-#include "log.h"
 #include "step_core.h"
 #include "stdio.h"
 #include "sync_wait.h"
@@ -57,10 +57,7 @@ status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint
                                 TickType_t deadline)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handles == NULL || angles == NULL || count == 0)
     {
         return kStatus_Fail;
@@ -86,7 +83,7 @@ status_t MTRi_synchronized_move(MTR_MotorHandle_t* handles, double* angles, uint
 
     snprintf(logMsg, sizeof(logMsg), "Starting synchronized move: %d motors, duration=%.3fs", count,
              maxDuration);
-    LOG_INFO(logMsg);
+    LOG_DEBUG(logMsg);
 
     if (prepare_synchronized_movements(handles, count, stepCounts, originalVelocities, deadline) !=
         kStatus_Success)

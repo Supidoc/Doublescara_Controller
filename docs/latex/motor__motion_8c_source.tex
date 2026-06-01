@@ -12,9 +12,9 @@
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__motion_8h}{motor\_motion.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__convert_8h}{motor\_convert.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{infrastructure/log.h}}>}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__motion_8h}{motor\_motion.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{motor__convert_8h}{motor\_convert.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}math.h"{}}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{step__core_8h}{step\_core.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}stdio.h"{}}}
@@ -47,270 +47,238 @@
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00044}00044\ \{}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00047}00047\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00049}00049\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ taskItem\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00051}00051\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00053}00053\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00054}00054\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ by\ \%.2f\ degrees"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},\ angle);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00055}00055\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00057}00057\ \ \ \ \ int32\_t\ steps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00058}00058\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00059}00059\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\_move\_relative\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ steps,\ deadline,\ \&cmdHandle)\ !=}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00062}00062\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ relative\ move\ command"{}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00067}00067\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00068}00068\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00069}00069\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00071}00071\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00072}00072\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00073}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga24693bf45729eb771615649c257ebddb}{00073}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga24693bf45729eb771615649c257ebddb}{MTRi\_move\_absolute\_angle}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ angle,\ TickType\_t\ deadline,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00075}00075\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00078}00078\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00080}00080\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ taskItem\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00082}00082\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00084}00084\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00085}00085\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ to\ absolute\ angle\ \%.2f\ degrees"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ angle);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00087}00087\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00089}00089\ \ \ \ \ int32\_t\ currentSteps;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\_get\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ \&currentSteps)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00091}00091\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ read\ current\ position"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00095}00095\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00096}00096\ \ \ \ \ int32\_t\ targetSteps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00097}00097\ \ \ \ \ int32\_t\ stepsToMove\ =\ targetSteps\ -\/\ currentSteps;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00098}00098\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00099}00099\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\_move\_relative\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ stepsToMove,\ deadline,\ \&cmdHandle)\ !=}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00102}00102\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ absolute\ move\ command"{}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00107}00107\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00109}00109\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00110}00110\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00112}00112\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00113}00113\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00114}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga524ec6deef049da1fc935353e1da8c38}{00114}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga524ec6deef049da1fc935353e1da8c38}{MTRi\_move\_revolutions}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ revolutions,\ TickType\_t\ deadline,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00116}00116\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00117}00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00119}00119\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00121}00121\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00123}00123\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00125}00125\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00126}00126\ \ \ \ \ \textcolor{keywordtype}{double}\ angle\ =\ revolutions\ *\ 360.0;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00127}00127\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ \%.2f\ revolutions\ (\%.2f\ degrees)"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ revolutions,\ angle);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00129}00129\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00130}00130\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga662bf8bbc9f7eae251dc865f64cb2e25}{MTRi\_move\_angle}}(handle,\ angle,\ deadline,\ taskItem);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00132}00132\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00133}00133\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00134}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gacf4282f5955d4be9250e1bb8c8709328}{00134}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gacf4282f5955d4be9250e1bb8c8709328}{MTRi\_set\_velocity}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ velocity\_deg\_per\_sec,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00136}00136\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00137}00137\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00139}00139\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00141}00141\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ taskItem\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ taskItem\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00048}00048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00051}00051\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ by\ \%.2f\ degrees"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},\ angle);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00052}00052\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00054}00054\ \ \ \ \ int32\_t\ steps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00056}00056\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\_move\_relative\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ steps,\ deadline,\ \&cmdHandle)\ !=}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ relative\ move\ command"{}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00065}00065\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00066}00066\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00070}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga24693bf45729eb771615649c257ebddb}{00070}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga24693bf45729eb771615649c257ebddb}{MTRi\_move\_absolute\_angle}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ angle,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00072}00072\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ taskItem\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00079}00079\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ to\ absolute\ angle\ \%.2f\ degrees"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ angle);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00081}00081\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00083}00083\ \ \ \ \ int32\_t\ currentSteps;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\_get\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ \&currentSteps)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ read\ current\ position"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00090}00090\ \ \ \ \ int32\_t\ targetSteps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00091}00091\ \ \ \ \ int32\_t\ stepsToMove\ =\ targetSteps\ -\/\ currentSteps;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00093}00093\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gafc3a63d18d294ce9f522725d11db6b5e}{STP\_move\_relative\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ stepsToMove,\ deadline,\ \&cmdHandle)\ !=}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ absolute\ move\ command"{}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00103}00103\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00104}00104\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00108}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga524ec6deef049da1fc935353e1da8c38}{00108}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga524ec6deef049da1fc935353e1da8c38}{MTRi\_move\_revolutions}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ revolutions,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00111}00111\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00113}00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00114}00114\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00117}00117\ \ \ \ \ \textcolor{keywordtype}{double}\ angle\ =\ revolutions\ *\ 360.0;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00118}00118\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Moving\ \%.2f\ revolutions\ (\%.2f\ degrees)"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ revolutions,\ angle);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00120}00120\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga662bf8bbc9f7eae251dc865f64cb2e25}{MTRi\_move\_angle}}(handle,\ angle,\ deadline,\ taskItem);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00123}00123\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00125}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gacf4282f5955d4be9250e1bb8c8709328}{00125}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gacf4282f5955d4be9250e1bb8c8709328}{MTRi\_set\_velocity}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ velocity\_deg\_per\_sec,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00127}00127\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00128}00128\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ taskItem\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00131}00131\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00134}00134\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ velocity\ to\ \%.2f\ deg/sec"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ velocity\_deg\_per\_sec);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00136}00136\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00138}00138\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00139}00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58}{STP\_set\_end\_velocity\_async}}(}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ fabs(velocity\_deg\_per\_sec),\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}}),\ deadline,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \&cmdHandle)\ !=\ kStatus\_Success)}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00143}00143\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00145}00145\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00146}00146\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ velocity\ to\ \%.2f\ deg/sec"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ velocity\_deg\_per\_sec);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00148}00148\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ velocity\ change\ command"{}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00148}00148\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00149}00149\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00150}00150\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gabcd2ae8287932573d44ac30c944b4d58}{STP\_set\_end\_velocity\_async}}(}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ fabs(velocity\_deg\_per\_sec),\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}}),\ deadline,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \&cmdHandle)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00155}00155\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ velocity\ change\ command"{}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00160}00160\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00161}00161\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00162}00162\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00163}00163\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00165}00165\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00166}00166\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00167}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga2c3db0cb595f076294de75022f493edd}{00167}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga2c3db0cb595f076294de75022f493edd}{MTRi\_set\_acceleration}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ acceleration\_deg\_per\_sec2,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00169}00169\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00170}00170\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00172}00172\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00174}00174\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00175}00175\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ taskItem\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00176}00176\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00150}00150\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00151}00151\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00155}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga2c3db0cb595f076294de75022f493edd}{00155}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga2c3db0cb595f076294de75022f493edd}{MTRi\_set\_acceleration}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ acceleration\_deg\_per\_sec2,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TickType\_t\ deadline,\ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00157}00157\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00158}00158\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ taskItem\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00161}00161\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00163}00163\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00164}00164\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ acceleration\ to\ \%.2f\ deg/sec2"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ acceleration\_deg\_per\_sec2);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00166}00166\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00168}00168\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda}{STP\_set\_acceleration\_async}}(}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ fabs(acceleration\_deg\_per\_sec2),\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}}),\ deadline,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \&cmdHandle)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00173}00173\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ acceleration\ change\ command"{}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00178}00178\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00179}00179\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ acceleration\ to\ \%.2f\ deg/sec2"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ acceleration\_deg\_per\_sec2);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00181}00181\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00182}00182\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00183}00183\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_ga506da9a17617328aa015d6ae7a2e9eda}{STP\_set\_acceleration\_async}}(}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ fabs(acceleration\_deg\_per\_sec2),\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}}),\ deadline,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \&cmdHandle)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00188}00188\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ acceleration\ change\ command"{}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00180}00180\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00181}00181\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00183}00183\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00185}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gaf0d66849bf82e0e91a339eecb8e85286}{00185}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gaf0d66849bf82e0e91a339eecb8e85286}{MTRi\_stop\_motor}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{bool}\ decelerate,\ TickType\_t\ deadline,}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00187}00187\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00188}00188\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00190}00190\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ taskItem\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00191}00191\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00193}00193\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00194}00194\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00195}00195\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00196}00196\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00197}00197\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00198}00198\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00199}00199\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00200}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gaf0d66849bf82e0e91a339eecb8e85286}{00200}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_gaf0d66849bf82e0e91a339eecb8e85286}{MTRi\_stop\_motor}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{bool}\ decelerate,\ TickType\_t\ deadline,}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\_ParallelTaskItem}}*\ taskItem)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00202}00202\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00203}00203\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00204}00204\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00205}00205\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00207}00207\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ taskItem\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00209}00209\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00211}00211\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00212}00212\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Stopping\ motor\ (decelerate=\%d)"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ decelerate);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00214}00214\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00215}00215\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00216}00216\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00217}00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b}{STP\_stop\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ decelerate,\ deadline,\ \&cmdHandle)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00218}00218\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ stop\ command"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00194}00194\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Stopping\ motor\ (decelerate=\%d)"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ decelerate);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00196}00196\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00198}00198\ \ \ \ \ \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gace468008090ef24b9ecd48c088d2c23b}{STP\_stop\_async}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ decelerate,\ deadline,\ \&cmdHandle)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00200}00200\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Failed\ to\ queue\ stop\ command"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga27d98b18ba06759c6ef5c71b1e1a9904}{LOG\_ERROR}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00204}00204\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00206}00206\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00207}00207\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00211}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3773c2085af104433869ef6c613efaed}{00211}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3773c2085af104433869ef6c613efaed}{MTRi\_get\_current\_angle}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}*\ angle)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00212}00212\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ angle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00214}00214\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00216}00216\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00218}00218\ \ \ \ \ int32\_t\ absoluteSteps;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00219}00219\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\_get\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ \&absoluteSteps)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00220}00220\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00222}00222\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00223}00223\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00224}00224\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_afde001cef0565319bbfd00180c46bc81}{cmdHandles}}[0]\ =\ cmdHandle;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00225}00225\ \ \ \ \ taskItem-\/>\doxymbox{\hyperlink{struct__MTR__ParallelTaskItem_abf7a28ae289a0391f509c6aad12aac67}{count}}\ \ \ \ \ \ \ \ \ =\ 1;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00227}00227\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00228}00228\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00229}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3773c2085af104433869ef6c613efaed}{00229}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3773c2085af104433869ef6c613efaed}{MTRi\_get\_current\_angle}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}*\ angle)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00230}00230\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00232}00232\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00234}00234\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00235}00235\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ angle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00236}00236\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00238}00238\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00239}00239\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00240}00240\ \ \ \ \ int32\_t\ absoluteSteps;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00241}00241\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_gae764282f6d6459dbaf154801af0c9fc6}{STP\_get\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ \&absoluteSteps)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00242}00242\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00244}00244\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00245}00245\ \ \ \ \ *angle\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ absoluteSteps);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00246}00246\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00248}00248\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00249}00249\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00250}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga6728b666574ea30c1b3a5c41e3310362}{00250}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga6728b666574ea30c1b3a5c41e3310362}{MTRi\_get\_movement\_state}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}*\ state)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00251}00251\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00253}00253\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00255}00255\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00256}00256\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL\ ||\ state\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00257}00257\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00259}00259\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00260}00260\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00261}00261\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}{STP\_get\_movement\_state}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ state);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00262}00262\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00263}00263\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00264}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3d6d99b516b2f6b048a12df260caa07e}{00264}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3d6d99b516b2f6b048a12df260caa07e}{MTRi\_set\_home\_position}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00265}00265\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00266}00266\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00268}00268\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00270}00270\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00271}00271\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00272}00272\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00274}00274\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00275}00275\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ home\ position"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00276}00276\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00277}00277\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00278}00278\ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2}{STP\_reset\_absolute\_position}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00279}00279\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00280}00280\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00281}00281\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00282}00282\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00283}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga01342e42b88d587b9638ec99919e9934}{00283}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga01342e42b88d587b9638ec99919e9934}{MTRi\_set\_home\_angle\_offset}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ angle\_offset\_deg)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00284}00284\ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00285}00285\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[120];}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00286}00286\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\_is\_emergency\_stop\_active}}())}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00287}00287\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00289}00289\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00290}00290\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ NULL)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00291}00291\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00293}00293\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00294}00294\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00295}00295\ \ \ \ \ int32\_t\ offsetSteps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle\_offset\_deg,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00296}00296\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_ga3244faf24399f2d70145f071b3a15246}{STP\_set\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ offsetSteps)\ !=\ kStatus\_Success)}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00297}00297\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00299}00299\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00300}00300\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00301}00301\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Home\ angle\ offset\ applied:\ \%.2f\ deg\ (\%ld\ steps)"{}},}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},\ angle\_offset\_deg,\ (\textcolor{keywordtype}{long})offsetSteps);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00303}00303\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00304}00304\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00305}00305\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00306}00306\ \}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00307}00307\ }
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00308}00308\ \textcolor{comment}{/********************************************}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00309}00309\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
-\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00310}00310\ \textcolor{comment}{\ ********************************************/}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00223}00223\ \ \ \ \ *angle\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad959cd5529058e79916b8c7fd325f0db}{MTR\_steps\_to\_angle}}(handle,\ absoluteSteps);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00226}00226\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00228}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga6728b666574ea30c1b3a5c41e3310362}{00228}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga6728b666574ea30c1b3a5c41e3310362}{MTRi\_get\_movement\_state}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\_MovementState\_t}}*\ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00229}00229\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ||\ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00231}00231\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00233}00233\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00235}00235\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__STEPPER__Module_ga8b0dd1c7d2b07ca34a5b100b03336b3d}{STP\_get\_movement\_state}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00236}00236\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00238}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3d6d99b516b2f6b048a12df260caa07e}{00238}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga3d6d99b516b2f6b048a12df260caa07e}{MTRi\_set\_home\_position}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00239}00239\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00240}00240\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[100];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00243}00243\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00245}00245\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00246}00246\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Setting\ home\ position"{}},\ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00247}00247\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00249}00249\ \ \ \ \ \doxymbox{\hyperlink{group__STEPPER__Module_ga211ab928b813dfae2c5807f5db272ab2}{STP\_reset\_absolute\_position}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00251}00251\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00252}00252\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00254}\doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga01342e42b88d587b9638ec99919e9934}{00254}}\ status\_t\ \doxymbox{\hyperlink{group__MOTOR__Motion__Internal_ga01342e42b88d587b9638ec99919e9934}{MTRi\_set\_home\_angle\_offset}}(\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\_MotorHandle\_t}}\ handle,\ \textcolor{keywordtype}{double}\ angle\_offset\_deg)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00255}00255\ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00256}00256\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ logMsg[120];}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00259}00259\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00261}00261\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00263}00263\ \ \ \ \ int32\_t\ offsetSteps\ =\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gad8b2b14707e03211ba090e859648005f}{MTR\_angle\_to\_steps}}(handle,\ angle\_offset\_deg,\ \doxymbox{\hyperlink{group__MOTOR__Convert__Internal_gga7bf26db923eb70b2a9ef666ee947cd4ca37c79418cb6371cec5ecc3331fae2aff}{ROUND\_NEAREST}});}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__STEPPER__Module_ga3244faf24399f2d70145f071b3a15246}{STP\_set\_absolute\_steps}}(handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_a2dd7eb698826385c5ab8183999976f67}{stepperHandle}},\ offsetSteps)\ !=\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00265}00265\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00269}00269\ \ \ \ \ snprintf(logMsg,\ \textcolor{keyword}{sizeof}(logMsg),\ \textcolor{stringliteral}{"{}[\%s]\ Home\ angle\ offset\ applied:\ \%.2f\ deg\ (\%ld\ steps)"{}},}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ handle-\/>\doxymbox{\hyperlink{struct__MTR__MotorHandleImpl_abc71b3e593c462fc6a3eba4243a90cf8}{label}},\ angle\_offset\_deg,\ (\textcolor{keywordtype}{long})offsetSteps);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00271}00271\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga87f39d92adfc939c31320aaf4b9f7a37}{LOG\_DEBUG}}(logMsg);}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Success;}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00274}00274\ \}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00276}00276\ \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00277}00277\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{motor__motion_8c_source_l00278}00278\ \textcolor{comment}{\ ********************************************/}}
 
 \end{DoxyCode}

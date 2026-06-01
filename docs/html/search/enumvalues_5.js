@@ -1,25 +1,10 @@
 var searchData=
 [
-  ['tmc_5fcmd_5fdefault_5finit_0',['TMC_CMD_DEFAULT_INIT',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118ad425846d25cc51b835b8bafe8b109ede',1,'tmc2209_internal.h']]],
-  ['tmc_5fcmd_5fdisable_5ffreewheeling_1',['TMC_CMD_DISABLE_FREEWHEELING',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118a2740ad02227acc90ed6026c9ef2eb753',1,'tmc2209_internal.h']]],
-  ['tmc_5fcmd_5fenable_5ffreewheeling_2',['TMC_CMD_ENABLE_FREEWHEELING',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118a50bd8eb14b8d145c398e34adca529498',1,'tmc2209_internal.h']]],
-  ['tmc_5fcmd_5fset_5fihold_5fdivider_3',['TMC_CMD_SET_IHOLD_DIVIDER',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118a37d87bd7d3080af927da6d120a9fd7aa',1,'tmc2209_internal.h']]],
-  ['tmc_5fcmd_5fset_5firun_5fdivider_4',['TMC_CMD_SET_IRUN_DIVIDER',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118a49882e5e74566ac845d763351d442fe3',1,'tmc2209_internal.h']]],
-  ['tmc_5fcmd_5fset_5fmicrostepping_5',['TMC_CMD_SET_MICROSTEPPING',['../group__TMC2209__Internal.html#ggaa0f6c8dafed536af99045734e71b0118aa24b32a9c1c0eb87401b30a2e4460e28',1,'tmc2209_internal.h']]],
-  ['tmc_5fms_5f128_6',['TMC_MS_128',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a040cfa23bdc8f46c19f01ff0bfa39fff',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f16_7',['TMC_MS_16',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a53cb8f9a4577eb71204dc364afbf3a83',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f2_8',['TMC_MS_2',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a1245bd027049b4219d7fd57c8b70b9ab',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f256_9',['TMC_MS_256',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a591dd25202ba6590ccdaa58cc4d6eb8f',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f32_10',['TMC_MS_32',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a8234ea452a14bf8e9bc77b9a86b46078',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f4_11',['TMC_MS_4',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90aad1fe7b50537f3410ac5999a6b3f92c4',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f64_12',['TMC_MS_64',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a25fa9c414c7f653e8ea865cfb32d981a',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5f8_13',['TMC_MS_8',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a2b45a05bef6ad7b2de38648bf046f291',1,'tmc2209_shared.h']]],
-  ['tmc_5fms_5ffull_14',['TMC_MS_FULL',['../tmc2209__shared_8h.html#a883f81305a19337cfeb70a2ed2c59a90a7a9a7afa0de063234de1d6ef64e1cd2d',1,'tmc2209_shared.h']]],
-  ['tmc_5fround_5fceil_15',['TMC_ROUND_CEIL',['../tmc2209__shared_8h.html#a041954e578c45fc0f4ccb00b80014d8fa7b67f405b5f0d93da77f1b9eeddae97a',1,'tmc2209_shared.h']]],
-  ['tmc_5fround_5ffloor_16',['TMC_ROUND_FLOOR',['../tmc2209__shared_8h.html#a041954e578c45fc0f4ccb00b80014d8fa206ab2875482d055ad6475aaa035c0fd',1,'tmc2209_shared.h']]],
-  ['tmc_5fround_5fnearest_17',['TMC_ROUND_NEAREST',['../tmc2209__shared_8h.html#a041954e578c45fc0f4ccb00b80014d8fac6c88709c63f3e8cabb0fa056b6f2574',1,'tmc2209_shared.h']]],
-  ['tmc_5fserial_5faddress_5f0_18',['TMC_SERIAL_ADDRESS_0',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4a4804f7154d3b0c13e3923bd12502b772',1,'tmc2209_shared.h']]],
-  ['tmc_5fserial_5faddress_5f1_19',['TMC_SERIAL_ADDRESS_1',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4a9d034e2935ff10c640bd55673e66dc15',1,'tmc2209_shared.h']]],
-  ['tmc_5fserial_5faddress_5f2_20',['TMC_SERIAL_ADDRESS_2',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4ac6dbd5b07c1a22c5da11d7b8af8f040b',1,'tmc2209_shared.h']]],
-  ['tmc_5fserial_5faddress_5f3_21',['TMC_SERIAL_ADDRESS_3',['../tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4ac785d8e83fa46e4b170af24caa87156b',1,'tmc2209_shared.h']]]
+  ['led_5foff_0',['LED_OFF',['../statemachine__helpers_8h.html#a2afce0a47a93eee73a314d53e4890153afc0ca8cc6cbe215fd3f1ae6d40255b40',1,'statemachine_helpers.h']]],
+  ['led_5fon_1',['LED_ON',['../statemachine__helpers_8h.html#a2afce0a47a93eee73a314d53e4890153add01b80eb93658fb4cf7eb9aceb89a1d',1,'statemachine_helpers.h']]],
+  ['log_5flevel_5fdebug_2',['LOG_LEVEL_DEBUG',['../group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba538b2b6e011479d408ecd2be0f6d6177',1,'log.h']]],
+  ['log_5flevel_5ferror_3',['LOG_LEVEL_ERROR',['../group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba5b40f003febbc3b535649d63f4b8a44f',1,'log.h']]],
+  ['log_5flevel_5ffatal_4',['LOG_LEVEL_FATAL',['../group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba779dc8dd26898fb0f88cd5f6e02ba1e5',1,'log.h']]],
+  ['log_5flevel_5finfo_5',['LOG_LEVEL_INFO',['../group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90baedee1e3159bfe7d918b6e29873c5aee4',1,'log.h']]],
+  ['log_5flevel_5fwarn_6',['LOG_LEVEL_WARN',['../group__LOG__Module.html#ggab7c4d49b9a167a32bbe38935536af90ba99c1e5c8e6d557f3993b9ab54a0107f4',1,'log.h']]]
 ];

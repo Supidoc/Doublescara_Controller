@@ -8,12 +8,12 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "tmc2209_core.h"
 #include "tmc2209_shared.h"
 #include "tmc2209_internal.h"
 #include "tmc2209_uart.h"
 #include "tmc2209_setup.h"
-#include "log.h"
 #include "stdio.h"
 #include "fsl_uart_freertos.h"
 #include "fsl_gpio.h"

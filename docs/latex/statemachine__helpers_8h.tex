@@ -1,0 +1,278 @@
+\doxysection{source/\+statemachine\+\_\+helpers.h File Reference}
+\hypertarget{statemachine__helpers_8h}{}\label{statemachine__helpers_8h}\index{source/statemachine\_helpers.h@{source/statemachine\_helpers.h}}
+
+
+Helpers for the application state machine (command parsing \& utils).  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for statemachine\+\_\+helpers.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{statemachine__helpers_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{statemachine__helpers_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structCommandPackage}{Command\+Package}}
+\begin{DoxyCompactList}\small\item\em \doxylink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command} package structure used to pass parsed commands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command}} \{ \newline
+\doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0cb1b2c6a7db1f1084886c98909a3f36}{INIT}} = 1
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153add01b80eb93658fb4cf7eb9aceb89a1d}{LED\+\_\+\+ON}} = 2
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153afc0ca8cc6cbe215fd3f1ae6d40255b40}{LED\+\_\+\+OFF}} = 3
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a810e14ea37755784ec2db5dec9373db2}{GOTO\+\_\+\+XY\+\_\+\+ROTATE}} = 4
+, \newline
+\doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153af665433b86d1083d1ac4f0f334cb1608}{Z\+\_\+\+UP}} = 5
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a944b436cac3480f4407a8b6e2a54f0d8}{Z\+\_\+\+DOWN}} = 6
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad8b48bc681917d419f6f9dd1f1ccccbf}{MAGNET\+\_\+\+UP}} = 7
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ac9f3e6f694a54ac07364d4b5d3962ac4}{MAGNET\+\_\+\+DOWN}} = 8
+, \newline
+\doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b9af67858708d770f017e4aae85900d}{FINISH}} = 9
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b49019b2af9a80adeebeb741f277984}{GRAB}} = 10
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad590443978dc58d64aed5001f56efcdf}{RELEASE}} = 11
+, \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0f886785b600b91048fcdc434c6b4a8e}{ERR}} = 255
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command} identifiers for the state machine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{statemachine__helpers_8h_a0913dc6b3a79d06314b2c33103fc9cb3}{Execute\+Cmd}} (\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} pkg)
+\begin{DoxyCompactList}\small\item\em Execute the command contained in {\ttfamily pkg}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{statemachine__helpers_8h_af29489a36b3e7f2c0571340c71390924}{Read\+Cmd}} (\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} \texorpdfstring{$\ast$}{*}pkg, const char \texorpdfstring{$\ast$}{*}received\+Message)
+\begin{DoxyCompactList}\small\item\em Parse a received line into a \doxylink{structCommandPackage}{Command\+Package}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8h_a219d2f481df8d56bc65bf20f442bd072}{Send\+OK}} (uint8\+\_\+t trans\+ID)
+\begin{DoxyCompactList}\small\item\em Send an OK acknowledgement for {\ttfamily trans\+ID}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8h_a90cd8488044dda543884672f781166da}{Send\+Error}} (uint8\+\_\+t trans\+ID)
+\begin{DoxyCompactList}\small\item\em Send an ERROR acknowledgement for {\ttfamily trans\+ID}. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{statemachine__helpers_8h_a8a2f307aeb38a86d2090747ee39fa551}{Command\+To\+String}} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em Return a textual name for command {\ttfamily cmd}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8h_a0fd9fffa7220be645f605ad41a23551f}{Show1\+Liner}} (const unsigned char \texorpdfstring{$\ast$}{*}text0)
+\begin{DoxyCompactList}\small\item\em Show a short one-\/line text (display/\+log helper). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helpers for the application state machine (command parsing \& utils). 
+
+Parsing helpers, command definitions and small utility functions used by the statemachine task. 
+
+Definition in file \doxymbox{\hyperlink{statemachine__helpers_8h_source}{statemachine\+\_\+helpers.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{statemachine__helpers_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!Command@{Command}}
+\index{Command@{Command}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{Command}{Command}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153} 
+enum \doxymbox{\hyperlink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command}}}
+
+
+
+\doxylink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command} identifiers for the state machine. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INIT@{INIT}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!INIT@{INIT}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0cb1b2c6a7db1f1084886c98909a3f36}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0cb1b2c6a7db1f1084886c98909a3f36} 
+INIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_ON@{LED\_ON}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!LED\_ON@{LED\_ON}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153add01b80eb93658fb4cf7eb9aceb89a1d}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153add01b80eb93658fb4cf7eb9aceb89a1d} 
+LED\+\_\+\+ON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_OFF@{LED\_OFF}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!LED\_OFF@{LED\_OFF}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153afc0ca8cc6cbe215fd3f1ae6d40255b40}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153afc0ca8cc6cbe215fd3f1ae6d40255b40} 
+LED\+\_\+\+OFF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GOTO\_XY\_ROTATE@{GOTO\_XY\_ROTATE}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!GOTO\_XY\_ROTATE@{GOTO\_XY\_ROTATE}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a810e14ea37755784ec2db5dec9373db2}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a810e14ea37755784ec2db5dec9373db2} 
+GOTO\+\_\+\+XY\+\_\+\+ROTATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Z\_UP@{Z\_UP}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!Z\_UP@{Z\_UP}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153af665433b86d1083d1ac4f0f334cb1608}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153af665433b86d1083d1ac4f0f334cb1608} 
+Z\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Z\_DOWN@{Z\_DOWN}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!Z\_DOWN@{Z\_DOWN}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a944b436cac3480f4407a8b6e2a54f0d8}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a944b436cac3480f4407a8b6e2a54f0d8} 
+Z\+\_\+\+DOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAGNET\_UP@{MAGNET\_UP}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!MAGNET\_UP@{MAGNET\_UP}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad8b48bc681917d419f6f9dd1f1ccccbf}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad8b48bc681917d419f6f9dd1f1ccccbf} 
+MAGNET\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAGNET\_DOWN@{MAGNET\_DOWN}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!MAGNET\_DOWN@{MAGNET\_DOWN}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ac9f3e6f694a54ac07364d4b5d3962ac4}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ac9f3e6f694a54ac07364d4b5d3962ac4} 
+MAGNET\+\_\+\+DOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FINISH@{FINISH}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!FINISH@{FINISH}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b9af67858708d770f017e4aae85900d}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b9af67858708d770f017e4aae85900d} 
+FINISH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GRAB@{GRAB}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!GRAB@{GRAB}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b49019b2af9a80adeebeb741f277984}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a8b49019b2af9a80adeebeb741f277984} 
+GRAB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RELEASE@{RELEASE}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!RELEASE@{RELEASE}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad590443978dc58d64aed5001f56efcdf}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153ad590443978dc58d64aed5001f56efcdf} 
+RELEASE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ERR@{ERR}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\index{statemachine\_helpers.h@{statemachine\_helpers.h}!ERR@{ERR}}
+}\Hypertarget{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0f886785b600b91048fcdc434c6b4a8e}\label{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153a0f886785b600b91048fcdc434c6b4a8e} 
+ERR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{statemachine__helpers_8h_source}{statemachine\+\_\+helpers.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{statemachine__helpers_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{statemachine__helpers_8h_a8a2f307aeb38a86d2090747ee39fa551}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!CommandToString@{CommandToString}}
+\index{CommandToString@{CommandToString}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{CommandToString()}{CommandToString()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a8a2f307aeb38a86d2090747ee39fa551} 
+const char \texorpdfstring{$\ast$}{*} Command\+To\+String (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Return a textual name for command {\ttfamily cmd}. 
+
+Useful for logging or display. 
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00173}{173}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8h_a0913dc6b3a79d06314b2c33103fc9cb3}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!ExecuteCmd@{ExecuteCmd}}
+\index{ExecuteCmd@{ExecuteCmd}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{ExecuteCmd()}{ExecuteCmd()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a0913dc6b3a79d06314b2c33103fc9cb3} 
+bool Execute\+Cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}}}]{pkg}{}\end{DoxyParamCaption})}
+
+
+
+Execute the command contained in {\ttfamily pkg}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pkg} & \doxylink{structCommandPackage}{Command\+Package} by value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false on unknown or failed command 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00055}{55}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8h_af29489a36b3e7f2c0571340c71390924}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!ReadCmd@{ReadCmd}}
+\index{ReadCmd@{ReadCmd}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{ReadCmd()}{ReadCmd()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_af29489a36b3e7f2c0571340c71390924} 
+bool Read\+Cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} \texorpdfstring{$\ast$}{*}}]{pkg}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{received\+Message}{}\end{DoxyParamCaption})}
+
+
+
+Parse a received line into a \doxylink{structCommandPackage}{Command\+Package}. 
+
+Expected format:\+ "{}cmd,x,y,rotate,trans\+ID"{}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em pkg} & Pointer to package to fill \\
+\hline
+\doxymbox{\texttt{in}}  & {\em received\+Message} & NUL-\/terminated received string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if parsing succeeded and command is known, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00129}{129}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8h_a90cd8488044dda543884672f781166da}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!SendError@{SendError}}
+\index{SendError@{SendError}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{SendError()}{SendError()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a90cd8488044dda543884672f781166da} 
+void Send\+Error (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{trans\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Send an ERROR acknowledgement for {\ttfamily trans\+ID}. 
+
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00166}{166}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8h_a219d2f481df8d56bc65bf20f442bd072}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!SendOK@{SendOK}}
+\index{SendOK@{SendOK}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{SendOK()}{SendOK()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a219d2f481df8d56bc65bf20f442bd072} 
+void Send\+OK (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{trans\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Send an OK acknowledgement for {\ttfamily trans\+ID}. 
+
+Typically sends "{}\+OK,$<$trans\+ID$>$"{} over the serial interface. 
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00159}{159}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8h_a0fd9fffa7220be645f605ad41a23551f}\index{statemachine\_helpers.h@{statemachine\_helpers.h}!Show1Liner@{Show1Liner}}
+\index{Show1Liner@{Show1Liner}!statemachine\_helpers.h@{statemachine\_helpers.h}}
+\doxysubsubsection{\texorpdfstring{Show1Liner()}{Show1Liner()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8h_a0fd9fffa7220be645f605ad41a23551f} 
+void Show1\+Liner (\begin{DoxyParamCaption}\item[{const unsigned char \texorpdfstring{$\ast$}{*}}]{text0}{}\end{DoxyParamCaption})}
+
+
+
+Show a short one-\/line text (display/\+log helper). 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\doxymbox{\hyperlink{todo__todo000001}{Todo}}]Make sure things are reentrant! \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00206}{206}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+

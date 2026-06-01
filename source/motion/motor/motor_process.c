@@ -8,6 +8,7 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_process.h"
 #include "motor_init.h"
 #include "motor_motion.h"
@@ -15,8 +16,8 @@
 #include "motor_tmc.h"
 #include "cmd_dispatch.h"
 #include "sync_wait.h"
-#include "log.h"
 #include "stdio.h"
+#include "estop.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -92,6 +93,10 @@ void MTRi_process(void)
     {
         if (parallelTasks[i].used)
         {
+        	if(estopFlag){
+                CDP_notify_task_failure(parallelTasks[i].returnHandle);
+                continue;
+        	}
             activeTaskCount++;
             taskStatus =
                 SYW_cmd_check_all(parallelTasks[i].cmdHandles, parallelTasks[i].count, NULL);
@@ -111,6 +116,7 @@ void MTRi_process(void)
             {
                 CDP_notify_task_failure(parallelTasks[i].returnHandle);
             }
+
             CHD_remove_cmd_handle_ref(parallelTasks[i].returnHandle);
             parallelTasks[i].used = 0;
         }
@@ -121,14 +127,6 @@ void MTRi_process(void)
     queueStatus = xQueueReceive(mtrCmdQueue, &queueItem, delay);
     if (queueStatus != pdPASS)
     {
-        return;
-    }
-
-    if (MTR_is_emergency_stop_active())
-    {
-        LOG_DEBUG("Command ignored due to active emergency stop");
-        CDP_notify_task_failure(queueItem.cmdHandle);
-        CHD_remove_cmd_handle_ref(queueItem.cmdHandle);
         return;
     }
 

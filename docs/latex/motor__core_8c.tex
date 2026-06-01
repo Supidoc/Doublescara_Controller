@@ -1,9 +1,9 @@
 \doxysection{source/\+motion/\+motor/\+motor\+\_\+core.c File Reference}
 \hypertarget{motor__core_8c}{}\label{motor__core_8c}\index{source/motion/motor/motor\_core.c@{source/motion/motor/motor\_core.c}}
+{\ttfamily \+\#include $<$infrastructure/\+log.\+h$>$}\newline
 {\ttfamily \+\#include "{}motor\+\_\+core.\+h"{}}\newline
 {\ttfamily \+\#include "{}motor\+\_\+process.\+h"{}}\newline
 {\ttfamily \+\#include "{}cmd\+\_\+dispatch.\+h"{}}\newline
-{\ttfamily \+\#include "{}log.\+h"{}}\newline
 {\ttfamily \+\#include "{}queue.\+h"{}}\newline
 {\ttfamily \+\#include "{}task.\+h"{}}\newline
 {\ttfamily \+\#include "{}string.\+h"{}}\newline
@@ -42,7 +42,7 @@ status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9a91668f2c9662
 \begin{DoxyCompactList}\small\item\em Queues stop command for a motor. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaa606ac87370e0682d0c0e11b9be662ca}{MTR\+\_\+get\+\_\+current\+\_\+angle\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, double \texorpdfstring{$\ast$}{*}angle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Queues query for current motor angle. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga903efe086f153300adb0b1c39d0e9a74}{MTR\+\_\+get\+\_\+movement\+\_\+state\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}state, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
+status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga903efe086f153300adb0b1c39d0e9a74}{MTR\+\_\+get\+\_\+movement\+\_\+state\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, \doxymbox{\hyperlink{step__shared_8h_a7ee0dad77eb682a2ea7cdb8f97d02827}{STP\+\_\+\+Movement\+State\+\_\+t}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Queues query for current movement state. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga3215be0474c3137b5dcd9793930cb8c8}{MTR\+\_\+set\+\_\+home\+\_\+position}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle)
 \begin{DoxyCompactList}\small\item\em Set current motor position as home. \end{DoxyCompactList}\item 
@@ -57,27 +57,19 @@ status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga3725ec3926b4c3
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaf3c97798ed91d32cc6f9010163f7b17f}{MTR\+\_\+enable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
 \begin{DoxyCompactList}\small\item\em Queues command to enable freewheeling mode. \end{DoxyCompactList}\item 
 status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga5a39510d1566426ceb0fb1d48bdbe2a4}{MTR\+\_\+disable\+\_\+freewheeling\+\_\+async}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle, Tick\+Type\+\_\+t deadline, \doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\+\_\+\+Cmd\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}cmd\+Handle)
-\begin{DoxyCompactList}\small\item\em Queues command to disable freewheeling mode. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_gaa51d8115cce00df1b0ec80007caaa73b}{MTR\+\_\+emergency\+\_\+stop}} (\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga80cb43273307560ca13a8df4797c8f54}{MTR\+\_\+\+Motor\+Handle\+\_\+t}} handle)
-\begin{DoxyCompactList}\small\item\em Activates emergency stop latch. \end{DoxyCompactList}\item 
-status\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga838ccbc335d1e72d3499bd5c11de244b}{MTR\+\_\+clear\+\_\+emergency\+\_\+stop}} (void)
-\begin{DoxyCompactList}\small\item\em Clears emergency stop latch and allows new motion commands. \end{DoxyCompactList}\item 
-uint8\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga9b08e661f73cbeb7f005f6c7e7803adb}{MTR\+\_\+is\+\_\+emergency\+\_\+stop\+\_\+active}} (void)
-\begin{DoxyCompactList}\small\item\em Returns emergency-\/stop latch state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Queues command to disable freewheeling mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-volatile uint8\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Internal_gaf1047ff67cd2b16bc743c9b996df0d81}{emergency\+Stop\+Flag}} = 0
-\item 
 \doxymbox{\hyperlink{group__MOTOR__Internal_ga218226d9b00e4a50e15eb521ed4885c5}{MTR\+\_\+\+Handles\+Array\+Item\+\_\+t}} \doxymbox{\hyperlink{group__MOTOR__Internal_gaeea8bff4d30a9428743420d040668cc9}{motor\+Handles}} \+[\doxymbox{\hyperlink{group__MOTOR__Internal_ga381cc324faff73ce344d43b4267ae441}{MTR\+\_\+\+MAX\+\_\+\+MOTORS}}]\+ = \{0\}
 \item 
-Queue\+Handle\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Internal_ga523c31a34713b68f380469e85815e59d}{mtr\+Cmd\+Queue}} = NULL
+Queue\+Handle\+\_\+t \doxymbox{\hyperlink{group__MOTOR__Internal_ga523c31a34713b68f380469e85815e59d}{mtr\+Cmd\+Queue}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \item 
 \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\+\_\+\+Cmd\+Handle\+Impl\+\_\+t}} \doxymbox{\hyperlink{group__MOTOR__Internal_gadfeb8f740ba81e3e261923bb6b4b0251}{mtr\+Cmd\+Handles}} \+[\doxymbox{\hyperlink{group__MOTOR__Facade__Module_ga8e9e66465a230b2f6f9534e94a0f1023}{MTR\+\_\+\+MAX\+\_\+\+CMD\+\_\+\+HANDLE\+\_\+\+COUNT}}]\+ = \{0\}
 \item 
 \doxymbox{\hyperlink{group__MOTOR__Internal_gad3624e1db311e66b6ac3e2b16afa6a0d}{MTR\+\_\+\+Parallel\+Task\+Item}} \doxymbox{\hyperlink{group__MOTOR__Internal_ga4cf2fb96c272e16cfd29187dd8c84e87}{parallel\+Tasks}} \+[\doxymbox{\hyperlink{group__MOTOR__Internal_gaa91de8731d1c6ff8e42985bda6ee075f}{MTR\+\_\+\+MAX\+\_\+\+PARALLEL\+\_\+\+TASKS}}]\+ = \{0\}
 \item 
-static Task\+Handle\+\_\+t \doxymbox{\hyperlink{motor__core_8c_aa9fdb3e84270ebd3a3a26dd892ce3278}{mtr\+Task\+Handle}} = NULL
+static Task\+Handle\+\_\+t \doxymbox{\hyperlink{motor__core_8c_aa9fdb3e84270ebd3a3a26dd892ce3278}{mtr\+Task\+Handle}} = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
 \end{DoxyCompactItemize}
 
 
@@ -88,9 +80,9 @@ static Task\+Handle\+\_\+t \doxymbox{\hyperlink{motor__core_8c_aa9fdb3e84270ebd3
 \index{mtrTaskHandle@{mtrTaskHandle}!motor\_core.c@{motor\_core.c}}
 \doxysubsubsection{\texorpdfstring{mtrTaskHandle}{mtrTaskHandle}}
 {\footnotesize\ttfamily \label{motor__core_8c_aa9fdb3e84270ebd3a3a26dd892ce3278} 
-Task\+Handle\+\_\+t mtr\+Task\+Handle = NULL\hspace{0.3cm}{\ttfamily [static]}}
+Task\+Handle\+\_\+t mtr\+Task\+Handle = \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{motor__core_8c_source_l00048}{48}} of file \doxymbox{\hyperlink{motor__core_8c_source}{motor\+\_\+core.\+c}}.
+Definition at line \doxymbox{\hyperlink{motor__core_8c_source_l00046}{46}} of file \doxymbox{\hyperlink{motor__core_8c_source}{motor\+\_\+core.\+c}}.
 

@@ -1,0 +1,164 @@
+\doxysection{source/\+display/\+\+Mcu\+SSD1306.c File Reference}
+\hypertarget{McuSSD1306_8c}{}\label{McuSSD1306_8c}\index{source/display/McuSSD1306.c@{source/display/McuSSD1306.c}}
+{\ttfamily \+\#include $<$display/\+\+Mcu\+SSD1306.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+common.\+h"{}}\newline
+{\ttfamily \+\#include "{}fsl\+\_\+i2c\+\_\+freertos.\+h"{}}\newline
+{\ttfamily \+\#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}log.\+h"{}}\newline
+{\ttfamily \+\#include "{}peripherals.\+h"{}}\newline
+Include dependency graph for Mcu\+SSD1306.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{McuSSD1306_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga98c763adfeea8e9831c46ec269e47ae9}{ERR\+\_\+\+OK}}~0
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga3630fbd3339b17f5dfd6164153e6b1ee}{ERR\+\_\+\+RANGE}}~1
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga485a8b9b574a9c263fff30c708dd1c4c}{SSD1306\+\_\+\+CMD\+\_\+\+REG}}~0x00
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga93257589186c8ab438eb4bf0e2f5dbc3}{SSD1306\+\_\+\+DATA\+\_\+\+REG}}~0x40
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gafe8311a1cf58658999df626f089df45a}{SSD1306\+\_\+\+SET\+\_\+\+CONTRAST}}~0x81
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gac173096416e8ba709a5eb320bde9be63}{SSD1306\+\_\+\+DISPLAY\+\_\+\+ALL\+\_\+\+ON\+\_\+\+RESUME}}~0x\+A4
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga9abfe1f93610bb95ba208e11957ed867}{SSD1306\+\_\+\+DISPLAY\+\_\+\+ALL\+\_\+\+ON}}~0x\+A5
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga64d491cbcdb3dc0a48f6bae261fa39b6}{SSD1306\+\_\+\+NORMAL\+\_\+\+DISPLAY}}~0x\+A6
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga11b20f2dbe4ae08443082c663927cc74}{SSD1306\+\_\+\+INVERT\+\_\+\+DISPLAY}}~0x\+A7
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga55e34e510760766cfd7d73cde58360db}{SSD1306\+\_\+\+DISPLAY\+\_\+\+OFF}}~0x\+AE
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga0f0b91552d62eb58551521d137710aea}{SSD1306\+\_\+\+DISPLAY\+\_\+\+ON}}~0x\+AF
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga00d1b0194d44f6022d4ddc92d72d75e8}{SSD1306\+\_\+\+SET\+\_\+\+DISPLAY\+\_\+\+OFFSET}}~0x\+D3
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga2437417dce03c77ecd5104b741c823b2}{SSD1306\+\_\+\+SET\+\_\+\+COM\+\_\+\+PINS}}~0x\+DA
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga49950e7864566c5163d06fc75c17ab61}{SSD1306\+\_\+\+SET\+\_\+\+VCOM\+\_\+\+DETECT}}~0x\+DB
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga0dde5f56c7e3318fdd06ad6d542bc08d}{SSD1306\+\_\+\+SET\+\_\+\+DISPLAY\+\_\+\+CLOCK\+\_\+\+DIV}}~0x\+D5
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga9e285eddc84b360c27b56505bed3742b}{SSD1306\+\_\+\+SET\+\_\+\+PRECHARGE}}~0x\+D9
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga432cb26de8fedc90d7bc2a0d41d33908}{SSD1306\+\_\+\+SET\+\_\+\+MULTIPLEX}}~0x\+A8
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga5e786171bdf464c5669c9d5f5faadd73}{SSD1306\+\_\+\+SET\+\_\+\+LOW\+\_\+\+COLUMN}}~0x00
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga492e2b2151a7d72a78db65e6a89b87f2}{SSD1306\+\_\+\+SET\+\_\+\+HIGH\+\_\+\+COLUMN}}~0x10
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga9df459f8ded2e3307e4d3b88cf84c0c4}{SSD1306\+\_\+\+SET\+\_\+\+START\+\_\+\+LINE}}~0x40
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga2afdc82b5e671dff9287a5b0e8254166}{SSD1306\+\_\+\+MEMORY\+\_\+\+MODE}}~0x20
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gacedb2ebd3b43e9fa66a624d5c5dccffd}{SSD1306\+\_\+\+COLUMN\+\_\+\+ADDR}}~0x21
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gaae97ab571f88b3f5f2dd4d34e095633c}{SSD1306\+\_\+\+PAGE\+\_\+\+ADDR}}~0x22
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga0f5f8a6fdcac2b1c0ba5199519b50da0}{SSD1306\+\_\+\+COM\+\_\+\+SCAN\+\_\+\+INC}}~0x\+C0
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga78a452d5b09254ca3e0ce9123071e401}{SSD1306\+\_\+\+COM\+\_\+\+SCAN\+\_\+\+DEC}}~0x\+C8
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gac828c4a8a214b589ecc00bf7a7eaf83e}{SSD1306\+\_\+\+SEG\+\_\+\+REMAP}}~0x\+A0
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga614e028e5f6024c70a6e98c85fecd818}{SSD1306\+\_\+\+CHARGE\+\_\+\+PUMP}}~0x8D
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga149a744ecd4a7b155ecc6efd3d3e0477}{SSD1306\+\_\+\+EXTERNAL\+\_\+\+VCC}}~0x1
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gaca2dec1ef1ea3d7ea602b1837febcd46}{SSD1306\+\_\+\+SWITCH\+\_\+\+CAP\+\_\+\+VCC}}~0x2
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga68ef82f75395902f0bf7050d2695dfe6}{SSD1306\+\_\+\+ACTIVATE\+\_\+\+SCROLL}}~0x2F
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga227f3a6e509369f291fae65eb8c97bf6}{SSD1306\+\_\+\+DEACTIVATE\+\_\+\+SCROLL}}~0x2E
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga2a98851854770476f4b9758c4c484a11}{SSD1306\+\_\+\+SET\+\_\+\+VERTICAL\+\_\+\+SCROLL\+\_\+\+AREA}}~0x\+A3
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga50443d2bd447f0fb0d6679615c1b266f}{SSD1306\+\_\+\+RIGHT\+\_\+\+HORIZONTAL\+\_\+\+SCROLL}}~0x26
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga2addbca0876e3203b6b7aeb3fd33d356}{SSD1306\+\_\+\+LEFT\+\_\+\+HORIZONTAL\+\_\+\+SCROLL}}~0x27
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_ga469e5cd03047fa065fd3f1f2603a7778}{SSD1306\+\_\+\+VERTICAL\+\_\+\+AND\+\_\+\+RIGHT\+\_\+\+HORIZONTAL\+\_\+\+SCROLL}}~0x29
+\item 
+\+\#define \doxymbox{\hyperlink{group__McuSSD1306__module_gadb15eba18d086c75d206aecb314a9df9}{SSD1306\+\_\+\+VERTICAL\+\_\+\+AND\+\_\+\+LEFT\+\_\+\+HORIZONTAL\+\_\+\+SCROLL}}~0x2A
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{group__McuSSD1306__module_gacf1238fefe88fa94c71147bc49e27298}{SSD1306\+\_\+\+Write\+Command}} (uint8\+\_\+t cmd)
+\item 
+static void \doxymbox{\hyperlink{group__McuSSD1306__module_gad7a09965bb8c870f4f46b51dcc7165a2}{SSD1306\+\_\+\+Write\+Data}} (uint8\+\_\+t data)
+\item 
+static void \doxymbox{\hyperlink{group__McuSSD1306__module_ga86581fc218a782e2ab4f84d19819bf8a}{SSD1306\+\_\+\+Write\+Data\+Block}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga103bf8ad18a9ea99d622b019a06bb699}{SSD1306\+\_\+\+Set\+Page\+Start\+Addr}} (uint8\+\_\+t page)
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_gab48f02f00de7f79c755c318022b60d96}{SSD1306\+\_\+\+Set\+Col\+Start\+Addr}} (uint8\+\_\+t col)
+\item 
+static void \doxymbox{\hyperlink{group__McuSSD1306__module_gaaa0fc078f3c1e9cba67bb9bf157bb12e}{SSD1306\+\_\+\+Print\+Char}} (uint8\+\_\+t ch)
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga07c0f0d21eef0fb84967869de4fc7cb1}{Mcu\+SSD1306\+\_\+\+Read\+Data\+Word}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga73b7c8fe23845764a0270575ca4d296b}{Mcu\+SSD1306\+\_\+\+Write\+Data}} (uint8\+\_\+t data)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gae3aed28a0baa808b1c5228bd3da2be6b}{Mcu\+SSD1306\+\_\+\+Open\+Window}} (\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} x0, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} y0, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} x1, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} y1)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gace9d6d93e44bda90caf50d3c8c62b4b6}{Mcu\+SSD1306\+\_\+\+Close\+Window}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gad3a5599176d75e878c0d7dabcf276cea}{Mcu\+SSD1306\+\_\+\+Clear}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga1b49bc188af36068cfa7ef0287df2561}{Mcu\+SSD1306\+\_\+\+Update\+Region}} (\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} x, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} y, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} w, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} h)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga33b7a8daecea2f418f91e83f66bea954}{Mcu\+SSD1306\+\_\+\+Update\+Full}} (void)
+\item 
+\doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{Mcu\+SSD1306\+\_\+\+Display\+Orientation}} \doxymbox{\hyperlink{group__McuSSD1306__module_ga3a19b86d96e1ddb47c65ad8552d802c8}{Mcu\+SSD1306\+\_\+\+Get\+Display\+Orientation}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gac76a60ec1dcfe59e12c33d71118f8a98}{Mcu\+SSD1306\+\_\+\+Set\+Display\+Orientation}} (\doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{Mcu\+SSD1306\+\_\+\+Display\+Orientation}} new\+Orientation)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga78558118dfddc2c18479cc233d021aef}{Mcu\+SSD1306\+\_\+\+Get\+LCD}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga9e4f057dcae4c44b9a6ad339342ef3e3}{Mcu\+SSD1306\+\_\+\+Give\+LCD}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga9f1563464efc2e61084075f1b299bd31}{Mcu\+SSD1306\+\_\+\+Init\+Comm\+Channel}} (void)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga7139947563eb1682993e58d891f62e16}{Mcu\+SSD1306\+\_\+\+Set\+Contrast}} (uint8\+\_\+t contrast)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga315075f5ff4b36cf949340267e4af589}{Mcu\+SSD1306\+\_\+\+Display\+On}} (bool on)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_gaeec82097ceb9ac9e82b4c77c2d11724b}{Mcu\+SSD1306\+\_\+\+Display\+Invert}} (bool invert)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga27218e064441a71736bbc6c8d460a37c}{Mcu\+SSD1306\+\_\+\+Set\+Display\+Clock\+Div}} (uint8\+\_\+t clock\+Div)
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_gab1f7999e91cb6bac8929a01289fc2f5e}{Mcu\+SSD1306\+\_\+\+Set\+Row\+Col}} (uint8\+\_\+t row, uint8\+\_\+t col)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gad9ca76c79d71556865d2eddfa939a261}{Mcu\+SSD1306\+\_\+\+Print\+String}} (uint8\+\_\+t line, uint8\+\_\+t col, uint8\+\_\+t \texorpdfstring{$\ast$}{*}str)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga002eb5dc1c9cd54c6ef9aecd0c0c7b22}{Mcu\+SSD1306\+\_\+\+Clear\+Line}} (uint8\+\_\+t line)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_gab784e4d46449f120bc6d33d043ab51b1}{Mcu\+SSD1306\+\_\+\+Init}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga8f6c48c74eec38bd91b1d3508e15f712}{Mcu\+SSD1306\+\_\+\+Put\+Pixel}} (\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} x, \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{Mcu\+SSD1306\+\_\+\+Pixel\+Dim}} y, \doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{Mcu\+SSD1306\+\_\+\+Pixel\+Color}} color)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga02f2d24d65406fa28e5f9054d4a6e532}{Mcu\+SSD1306\+\_\+\+Deinit}} (void)
+\item 
+void \doxymbox{\hyperlink{group__McuSSD1306__module_ga7cf4c091bf9512bbf3887c3db7a960de}{Mcu\+SSD1306\+\_\+\+Clear\+Buffer}} (\doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{Mcu\+SSD1306\+\_\+\+Pixel\+Color}} color)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga123a49f40865178a0d54a68f43622d33}{Mcu\+SSD1306\+\_\+\+Display\+Buf}} \+[((Mcu\+SSD1306\+\_\+\+DISPLAY\+\_\+\+HW\+\_\+\+NOF\+\_\+\+ROWS -\/ 1)/\+8)+1]\+\+[Mcu\+SSD1306\+\_\+\+DISPLAY\+\_\+\+HW\+\_\+\+NOF\+\_\+\+COLUMNS]\+
+\item 
+static unsigned char \doxymbox{\hyperlink{group__McuSSD1306__module_ga5db22dd335f4031161c299c8959c2a97}{font}} \+[$\,$]\+
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga2d03daa097ed9d8b9bafc949492ab71e}{act\+Col}} = 0
+\item 
+static uint8\+\_\+t \doxymbox{\hyperlink{group__McuSSD1306__module_ga7ef23f3c7427f487865ba3b6de0ffb2e}{act\+Page}} = 0
+\end{DoxyCompactItemize}

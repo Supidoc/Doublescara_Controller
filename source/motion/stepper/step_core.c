@@ -8,12 +8,12 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "step_core.h"
 #include "step_internal.h"
 #include "fsl_common.h"
 #include "fsl_ftm.h"
 #include "step_process.h"
-#include "log.h"
 
 /************************************
  *     Private Macros / Defines    *

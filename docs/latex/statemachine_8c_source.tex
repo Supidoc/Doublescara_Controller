@@ -1,0 +1,221 @@
+\doxysection{statemachine.\+c}
+\hypertarget{statemachine_8c_source}{}\label{statemachine_8c_source}\index{source/statemachine.c@{source/statemachine.c}}
+\doxymbox{\hyperlink{statemachine_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00001}00001\ \textcolor{comment}{/************************************************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ \ \ \ statemachine.c}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ \ \ Implementation\ of\ the\ application\ state\ machine\ task}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00005}00005\ \textcolor{comment}{\ *\ State\ machine\ loop\ that\ receives\ commands,\ parses\ them\ and\ executes}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00006}00006\ \textcolor{comment}{\ *\ high-\/level\ actions\ through\ helper\ functions.\ This\ file\ contains\ task}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00007}00007\ \textcolor{comment}{\ *\ logic\ only;\ helpers\ are\ implemented\ in\ \`{}statemachine\_helpers.c`.}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00008}00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00009}00009\ \textcolor{comment}{\ *\ Author:\ BSc}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00010}00010\ \textcolor{comment}{\ *\ Date:\ \ \ 21\ Apr\ 2026}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00011}00011\ \textcolor{comment}{\ ************************************************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00013}00013\ \textcolor{comment}{/********************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00014}00014\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00015}00015\ \textcolor{comment}{\ ********************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{McuGDisplaySSD1306_8h}{display/McuGDisplaySSD1306.h}}>}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{infrastructure/log.h}}>}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pca9555a_8h}{pca9555a.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{statemachine__helpers_8h}{statemachine\_helpers.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{statemachine_8h}{statemachine.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00023}00023\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{uart_8h}{uart.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{estop_8h}{estop.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00026}00026\ \textcolor{comment}{/************************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Macros\ /\ Defines\ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00028}00028\ \textcolor{comment}{\ ************************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00030}00030\ \textcolor{comment}{/***************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00031}00031\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Typedefs\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00032}00032\ \textcolor{comment}{\ ***************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00034}00034\ \textcolor{comment}{/*****************************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00035}00035\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Function\ Declarations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00036}00036\ \textcolor{comment}{\ *****************************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00038}00038\ \textcolor{comment}{/****************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00039}00039\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00040}00040\ \textcolor{comment}{\ ****************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00042}00042\ \textcolor{comment}{/*****************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00043}00043\ \textcolor{comment}{\ *\ \ \ \ \ Private\ Variables\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00044}00044\ \textcolor{comment}{\ *****************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00046}\doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{00046}}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{group__Statemachine__Module_ga5d74787dedbc4e11c1ab15bf487e61f8}{State}}\ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00048}\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{00048}}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{structCommandPackage}{CommandPackage}}\ \doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00050}00050\ \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00051}00051\ \textcolor{comment}{\ *\ \ \ \ \ Public\ Function\ Implementations\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00052}00052\ \textcolor{comment}{\ *******************************************/}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00054}\doxymbox{\hyperlink{group__Statemachine__Module_ga3b074b3d59636f128338813d60f176d9}{00054}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__Statemachine__Module_ga3b074b3d59636f128338813d60f176d9}{Statemachine\_task}}(\textcolor{keywordtype}{void}*\ pvParameters)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00055}00055\ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00056}00056\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_gab784e4d46449f120bc6d33d043ab51b1}{McuSSD1306\_Init}}();}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00057}00057\ \ \ \ \ \doxymbox{\hyperlink{group__McuGDisplaySSD1306__module_ga6de1145e137ab07fa5f6c54edda2b903}{McuGDisplaySSD1306\_Init}}();}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00059}00059\ \ \ \ \ uint8\_t\ pinvalue;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00060}00060\ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.transID\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00061}00061\ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.cmd\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ initialized\ \ \ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{while}\ (!initialized)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ Start\ Button\ pressed\ */}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}{PCA\_Read\_Pin}}(1,\ 2,\ \&pinvalue)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pinvalue\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__UART2__Module_gaac596179ad5f07f3f65bfdcce24ef129}{uart2WriteLine}}(\textcolor{stringliteral}{"{}START"{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ response[3]\ =\ \{0\};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ received\ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_t\ status;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}(\textcolor{stringliteral}{"{}Waiting\ for\ Communications\ with\ RPI..."{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1Liner}}(\textcolor{stringliteral}{"{}Connecting\ to\ RPI..."{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ UART\_RTOS\_Receive(\&UART2\_rtos\_handle,\ (uint8\_t*)response,\ \textcolor{keyword}{sizeof}(response),}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&received,\ 5000);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ response[\textcolor{keyword}{sizeof}(response)\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (received\ !=\ \textcolor{keyword}{sizeof}(response))}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(response,\ \textcolor{stringliteral}{"{}OK"{}})\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8afd6a0e4343048b10646dd2976cc5ad18}{IDLE}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initialized\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ wrong\ answer,\ wait\ for\ a\ new\ response\ */}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ vTaskDelay(pdMS\_TO\_TICKS(100));}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00111}00111\ \ \ \ \ \doxymbox{\hyperlink{group__LOG__Module_ga1df2a84bb8d3b43c8c49f1aff655190a}{LOG\_INFO}}(\textcolor{stringliteral}{"{}Communications\ Initialized"{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00112}00112\ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1Liner}}(\textcolor{stringliteral}{"{}Idle"{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00114}00114\ \ \ \ \ \textcolor{comment}{/*\ statemachine\ main\ loop\ */}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00116}00116\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}})}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8afd6a0e4343048b10646dd2976cc5ad18}{IDLE}}:}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ receivedLine[32];}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ index\ \ \ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \ \ \ \ receivedChar\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ received\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\_t\ status;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ UART\_RTOS\_Receive(\&UART2\_rtos\_handle,\ (uint8\_t*)\&receivedChar,\ 1,}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&received,\ 1000);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (received\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (receivedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)r'})}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (receivedChar\ ==\ \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receivedLine[index]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ <\ \textcolor{keyword}{sizeof}(receivedLine)\ -\/\ 1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receivedLine[index++]\ =\ receivedChar;}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{statemachine__helpers_8c_af29489a36b3e7f2c0571340c71390924}{ReadCmd}}(\&\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}},\ receivedLine))}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a887d2cbfd9131de5cc3745731421b34b}{EXECUTE}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[32];}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \textcolor{stringliteral}{"{}\%s\ running"{}},\ \doxymbox{\hyperlink{statemachine__helpers_8c_a8a2f307aeb38a86d2090747ee39fa551}{CommandToString}}(\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.cmd));}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1Liner}}(buffer);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vTaskDelay(pdMS\_TO\_TICKS(10));}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a887d2cbfd9131de5cc3745731421b34b}{EXECUTE}}:}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__Estop__Module_ga90e982aa17f4f600de4d21923858b547}{estopFlag}}\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{statemachine__helpers_8c_a0913dc6b3a79d06314b2c33103fc9cb3}{ExecuteCmd}}(\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}))}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a9c954bcf443428c80b0f107b3bc48749}{DONE}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a9c954bcf443428c80b0f107b3bc48749}{DONE}}:}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a219d2f481df8d56bc65bf20f442bd072}{SendOK}}(\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.transID);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8afd6a0e4343048b10646dd2976cc5ad18}{IDLE}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1Liner}}(\textcolor{stringliteral}{"{}Idle"{}});}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8a2fd6f336d08340583bd620a7f5694c90}{ERROR}}:}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ send\ error\ and\ wait\ for\ start\ button\ */}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a90cd8488044dda543884672f781166da}{SendError}}(\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.transID);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[64];}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \textcolor{stringliteral}{"{}error\ at\ \%s,\ press\ start\ to\ retry"{}},}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a8a2f307aeb38a86d2090747ee39fa551}{CommandToString}}(\doxymbox{\hyperlink{statemachine_8c_a856dc95ff85cfbdcfb30b506ec1ae000}{currentpkg}}.cmd));}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1Liner}}(buffer);}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{group__PCA9555A_ga5466f3180e9f6cbe494cd934d4f68b43}{PCA\_Read\_Pin}}(1,\ 2,\ \&pinvalue)\ ==\ kStatus\_Success)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pinvalue\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{statemachine_8c_a876b486d3a5241a126bd5751c5f70f79}{state}}\ =\ \doxymbox{\hyperlink{group__Statemachine__Module_gga5d74787dedbc4e11c1ab15bf487e61f8afd6a0e4343048b10646dd2976cc5ad18}{IDLE}};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vTaskDelay(pdMS\_TO\_TICKS(100));}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00214}00214\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{statemachine_8c_source_l00215}00215\ \}}
+
+\end{DoxyCode}

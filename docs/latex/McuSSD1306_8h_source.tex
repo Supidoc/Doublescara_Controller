@@ -1,0 +1,572 @@
+\doxysection{Mcu\+SSD1306.\+h}
+\hypertarget{McuSSD1306_8h_source}{}\label{McuSSD1306_8h_source}\index{source/display/McuSSD1306.h@{source/display/McuSSD1306.h}}
+\doxymbox{\hyperlink{McuSSD1306_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00001}00001\ \textcolor{comment}{/*\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00002}00002\ \textcolor{comment}{**\ \ \ \ \ This\ component\ module\ is\ generated\ by\ Processor\ Expert.\ Do\ not\ modify\ it.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00003}00003\ \textcolor{comment}{**\ \ \ \ \ Filename\ \ \ \ :\ McuSSD1306.h}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00004}00004\ \textcolor{comment}{**\ \ \ \ \ Project\ \ \ \ \ :\ FRDM-\/K64F\_Generator}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00005}00005\ \textcolor{comment}{**\ \ \ \ \ Processor\ \ \ :\ MK64FN1M0VLL12}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00006}00006\ \textcolor{comment}{**\ \ \ \ \ Component\ \ \ :\ SSD1306}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00007}00007\ \textcolor{comment}{**\ \ \ \ \ Version\ \ \ \ \ :\ Component\ 01.051,\ Driver\ 01.00,\ CPU\ db:\ 3.00.000}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00008}00008\ \textcolor{comment}{**\ \ \ \ \ Compiler\ \ \ \ :\ GNU\ C\ Compiler}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00009}00009\ \textcolor{comment}{**\ \ \ \ \ Date/Time\ \ \ :\ 2024-\/07-\/29,\ 14:57,\ \#\ CodeGen:\ 841}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00010}00010\ \textcolor{comment}{**\ \ \ \ \ Abstract\ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Display\ driver\ for\ the\ SSD1306\ OLED\ module}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00012}00012\ \textcolor{comment}{**\ \ \ \ \ Settings\ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00013}00013\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Component\ name\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ McuSSD1306}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00014}00014\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Type\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 128x64}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00015}00015\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Driver\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ SSD1306}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00016}00016\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Orientation\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ landscape}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00017}00017\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Width\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 128}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00018}00018\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Height\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 64}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00019}00019\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Bytes\ in\ rows\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00020}00020\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Bytes\ in\ x\ direction\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ yes}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00021}00021\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ MSB\ first\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00022}00022\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Bits\ per\ pixel\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00023}00023\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Window\ capability\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00024}00024\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Display\ Memory\ Write\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00025}00025\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Display\ Memory\ Read\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00026}00026\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Use\ RAM\ Buffer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ yes}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00027}00027\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Clear\ display\ in\ init\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ no}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00028}00028\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Initialize\ on\ Init\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ yes}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00029}00029\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ Init\ Delay\ (ms)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 100}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00030}00030\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ HW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00031}00031\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ I2C\ Device\ Address\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 0x3C}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00032}00032\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ I2C\ Transaction\ Delay\ (us)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00033}00033\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ Block\ Transfer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ yes}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00034}00034\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ I2C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ McuGenericI2C}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00035}00035\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ Reset\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ Disabled}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00036}00036\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ System\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00037}00037\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ Wait\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ McuWait}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00038}00038\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ SDK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ McuLib}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00039}00039\ \textcolor{comment}{**\ \ \ \ \ Contents\ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00040}00040\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetWidth\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ McuSSD1306\_PixelDim\ McuSSD1306\_GetWidth(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00041}00041\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetHeight\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ McuSSD1306\_PixelDim\ McuSSD1306\_GetHeight(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00042}00042\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetLongerSide\ \ \ \ \ \ \ \ \ -\/\ McuSSD1306\_PixelDim\ McuSSD1306\_GetLongerSide(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00043}00043\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetShorterSide\ \ \ \ \ \ \ \ -\/\ McuSSD1306\_PixelDim\ McuSSD1306\_GetShorterSide(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00044}00044\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ SetDisplayOrientation\ -\/\ void}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00045}00045\ \textcolor{comment}{*\ McuSSD1306\_SetDisplayOrientation(McuSSD1306\_DisplayOrientation...}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00046}00046\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetDisplayOrientation\ -\/\ McuSSD1306\_DisplayOrientation}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00047}00047\ \textcolor{comment}{*\ McuSSD1306\_GetDisplayOrientation(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00048}00048\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ ClearBuffer\ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_ClearBuffer(McuSSD1306\_PixelColor\ color);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00049}00049\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ PutPixel\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_PutPixel(McuSSD1306\_PixelDim\ x,}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00050}00050\ \textcolor{comment}{*\ McuSSD1306\_PixelDim\ y,...}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00051}00051\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Clear\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_Clear(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00052}00052\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ UpdateFull\ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_UpdateFull(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00053}00053\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ UpdateRegion\ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_UpdateRegion(McuSSD1306\_PixelDim\ x,}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00054}00054\ \textcolor{comment}{*\ McuSSD1306\_PixelDim\ y,...}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00055}00055\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ InitCommChannel\ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_InitCommChannel(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00056}00056\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ SetContrast\ \ \ \ \ \ \ \ \ \ \ -\/\ uint8\_t\ McuSSD1306\_SetContrast(uint8\_t\ contrast);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00057}00057\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ SetDisplayClockDiv\ \ \ \ -\/\ uint8\_t\ McuSSD1306\_SetDisplayClockDiv(uint8\_t\ clockDiv);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00058}00058\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ DisplayOn\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ uint8\_t\ McuSSD1306\_DisplayOn(bool\ on);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00059}00059\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ DisplayInvert\ \ \ \ \ \ \ \ \ -\/\ uint8\_t\ McuSSD1306\_DisplayInvert(bool\ invert);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00060}00060\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GetLCD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_GetLCD(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00061}00061\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ GiveLCD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_GiveLCD(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00062}00062\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ SetRowCol\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ uint8\_t\ McuSSD1306\_SetRowCol(uint8\_t\ row,\ uint8\_t\ col);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00063}00063\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ PrintString\ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_PrintString(uint8\_t\ line,\ uint8\_t\ col,\ uint8\_t}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00064}00064\ \textcolor{comment}{*\ *str);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00065}00065\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ ClearLine\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_ClearLine(uint8\_t\ line);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00066}00066\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Deinit\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_Deinit(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00067}00067\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Init\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ void\ McuSSD1306\_Init(void);}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00068}00068\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00069}00069\ \textcolor{comment}{**\ *\ Copyright\ (c)\ 2017-\/2022,\ Erich\ Styger}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00070}00070\ \textcolor{comment}{**\ \ *\ Web:\ \ \ \ \ \ \ \ \ https://mcuoneclipse.com}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00071}00071\ \textcolor{comment}{**\ \ *\ SourceForge:\ https://sourceforge.net/projects/mcuoneclipse}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00072}00072\ \textcolor{comment}{**\ \ *\ Git:\ \ \ \ \ \ \ \ \ https://github.com/ErichStyger/McuOnEclipse\_PEx}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00073}00073\ \textcolor{comment}{**\ \ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00074}00074\ \textcolor{comment}{**\ \ *}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00075}00075\ \textcolor{comment}{**\ \ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without\ modification,}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00076}00076\ \textcolor{comment}{**\ \ *\ are\ permitted\ provided\ that\ the\ following\ conditions\ are\ met:}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00077}00077\ \textcolor{comment}{**\ \ *}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00078}00078\ \textcolor{comment}{**\ \ *\ -\/\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright\ notice,\ this\ list}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00079}00079\ \textcolor{comment}{**\ \ *\ \ \ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00080}00080\ \textcolor{comment}{**\ \ *}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00081}00081\ \textcolor{comment}{**\ \ *\ -\/\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright\ notice,\ this}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00082}00082\ \textcolor{comment}{**\ \ *\ \ \ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the\ documentation\ and/or}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00083}00083\ \textcolor{comment}{**\ \ *\ \ \ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00084}00084\ \textcolor{comment}{**\ \ *}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00085}00085\ \textcolor{comment}{**\ \ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS\ "{}AS\ IS"{}\ AND}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00086}00086\ \textcolor{comment}{**\ \ *\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT\ LIMITED\ TO,\ THE\ IMPLIED}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00087}00087\ \textcolor{comment}{**\ \ *\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ ARE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00088}00088\ \textcolor{comment}{**\ \ *\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ THE\ COPYRIGHT\ HOLDER\ OR\ CONTRIBUTORS\ BE\ LIABLE\ FOR}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00089}00089\ \textcolor{comment}{**\ \ *\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,\ SPECIAL,\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00090}00090\ \textcolor{comment}{**\ \ *\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00091}00091\ \textcolor{comment}{**\ \ *\ LOSS\ OF\ USE,\ DATA,\ OR\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00092}00092\ \textcolor{comment}{**\ \ *\ ANY\ THEORY\ OF\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00093}00093\ \textcolor{comment}{**\ \ *\ (INCLUDING\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF\ THIS}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00094}00094\ \textcolor{comment}{**\ \ *\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00095}00095\ \textcolor{comment}{**\ \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00107}00107\ \textcolor{preprocessor}{\#ifndef\ \_\_McuSSD1306\_H}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00108}00108\ \textcolor{preprocessor}{\#define\ \_\_McuSSD1306\_H}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00110}00110\ \textcolor{comment}{/*\ MODULE\ McuSSD1306.\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00111}00111\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{display__config_8h}{display\_config.h}}"{}}\ \textcolor{comment}{/*\ configuration\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00112}00112\ \textcolor{preprocessor}{\#include\ <stddef.h>}\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ for\ size\_t\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00113}00113\ \textcolor{preprocessor}{\#include\ "{}stdbool.h"{}}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00114}00114\ \textcolor{preprocessor}{\#include\ "{}stdint.h"{}}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00116}00116\ \textcolor{preprocessor}{\#if\ McuSSD1306\_CONFIG\_SSD1306\_SIZE\_TYPE\ ==\ 12864}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00117}00117\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_COLUMNS\ 128u\ }\textcolor{comment}{/*\ number\ of\ columns\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00118}00118\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_ROWS\ 64u\ \ \ \ \ }\textcolor{comment}{/*\ number\ of\ rows\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00119}00119\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_PAGES\ 8u\ \ \ \ \ }\textcolor{comment}{/*\ number\ of\ pages\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00120}00120\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_SSD1306\_SIZE\_TYPE\ ==\ 12832}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00121}00121\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_COLUMNS\ 128u\ }\textcolor{comment}{/*\ number\ of\ columns\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00122}00122\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_ROWS\ 32u\ \ \ \ \ }\textcolor{comment}{/*\ number\ of\ rows\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00123}00123\ \textcolor{preprocessor}{\#define\ McuSSD1306\_DISPLAY\_HW\_NOF\_PAGES\ 4u\ \ \ \ \ }\textcolor{comment}{/*\ number\ of\ pages\ in\ hardware\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00124}00124\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00125}00125\ \textcolor{preprocessor}{\#error\ "{}unknown\ display\ type,\ must\ be\ 128x64\ or\ 128x32"{}}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00126}00126\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00128}\doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{00128}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{bool}\ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{McuSSD1306\_PixelColor}};\ \textcolor{comment}{/*\ type\ to\ hold\ color\ information\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00129}\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{00129}}\ \textcolor{keyword}{typedef}\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}};\ \ \ \textcolor{comment}{/*\ one\ byte\ is\ enough\ to\ describe\ the\ x/y\ position\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00130}00130\ \textcolor{keyword}{typedef}\ uint16\_t}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00131}\doxymbox{\hyperlink{group__McuSSD1306__module_ga8a01f0f2aa311abdd95d3f6015b4a910}{00131}}\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8a01f0f2aa311abdd95d3f6015b4a910}{McuSSD1306\_PixelCount}};\ \textcolor{comment}{/*\ needed\ type\ to\ hold\ the\ number\ of\ pixels\ on\ the\ display.\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00133}00133\ \textcolor{keyword}{extern}\ uint8\_t}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00134}00134\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ga123a49f40865178a0d54a68f43622d33}{McuSSD1306\_DisplayBuf}}[((McuSSD1306\_DISPLAY\_HW\_NOF\_ROWS\ -\/\ 1)\ /\ 8)\ +\ 1]}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [McuSSD1306\_DISPLAY\_HW\_NOF\_COLUMNS];\ \textcolor{comment}{/*\ buffer\ for\ the\ display\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00137}\doxymbox{\hyperlink{group__McuSSD1306__module_gaa3a446f4cbc0b980108273b779b87f55}{00137}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_PIXEL\_BLACK\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ 0\ is\ a\ black\ pixel\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00138}\doxymbox{\hyperlink{group__McuSSD1306__module_gaeca4cdcc2c4b42e95346df0a1bc35855}{00138}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_PIXEL\_WHITE\ 1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ 1\ is\ a\ color/white\ pixel\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00139}\doxymbox{\hyperlink{group__McuSSD1306__module_gaf395b940290a4ced1172a4fbe9637da1}{00139}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_PIXEL\_SET\ McuSSD1306\_PIXEL\_WHITE\ }\textcolor{comment}{/*\ color\ for\ a\ pixel\ set\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00140}\doxymbox{\hyperlink{group__McuSSD1306__module_ga72641870dea25d9ebf476d01dc00daab}{00140}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_PIXEL\_CLR\ McuSSD1306\_PIXEL\_BLACK\ }\textcolor{comment}{/*\ color\ for\ a\ pixel\ cleared\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00142}\doxymbox{\hyperlink{group__McuSSD1306__module_gad75bae5e550ee3f9242d37c7e79e6518}{00142}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BLACK\ McuSSD1306\_PIXEL\_BLACK}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00143}\doxymbox{\hyperlink{group__McuSSD1306__module_ga842d05408af021a87ea227ca50317d44}{00143}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_WHITE\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00144}\doxymbox{\hyperlink{group__McuSSD1306__module_gaf1eab2619b7874f78236f1ae14c5fdf0}{00144}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_RED\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00145}\doxymbox{\hyperlink{group__McuSSD1306__module_gad67acec68682a871f4c8729676b496fd}{00145}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BRIGHT\_RED\ McuSSD1306\_COLOR\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00146}\doxymbox{\hyperlink{group__McuSSD1306__module_ga04e51a5837fee4359e9e3456f096e79f}{00146}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_DARK\_RED\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00147}\doxymbox{\hyperlink{group__McuSSD1306__module_ga497132b8741cc8c608b49c34bd373255}{00147}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_GREEN\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00148}\doxymbox{\hyperlink{group__McuSSD1306__module_gad24de74e883423748ff3f748736e0c64}{00148}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BRIGHT\_GREEN\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00149}\doxymbox{\hyperlink{group__McuSSD1306__module_ga0abbfd9ebebb4a02087dbe95ac9b6c90}{00149}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_DARK\_GREEN\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00150}\doxymbox{\hyperlink{group__McuSSD1306__module_gab04c7f206a948ec787cd5a7e6311dd67}{00150}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BLUE\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00151}\doxymbox{\hyperlink{group__McuSSD1306__module_ga27c2b4295cea7272ab6bd7efe0eb02c5}{00151}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BRIGHT\_BLUE\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00152}\doxymbox{\hyperlink{group__McuSSD1306__module_gaa8335526fc9fd91f1ab60526fa2631f7}{00152}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_DARK\_BLUE\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00153}\doxymbox{\hyperlink{group__McuSSD1306__module_gafd7c5f1224b243f34ef15fcdffae1b5d}{00153}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_YELLOW\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00154}\doxymbox{\hyperlink{group__McuSSD1306__module_gaa3f95eea64ba6e6a7139812d911441a3}{00154}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BRIGHT\_YELLOW\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00155}\doxymbox{\hyperlink{group__McuSSD1306__module_ga360d0f29a7f0b59c7d7c29f3c9ce16dd}{00155}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_ORANGE\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00156}\doxymbox{\hyperlink{group__McuSSD1306__module_gaad4a43bdbe2aaa7b2be43a4d14f191ef}{00156}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_GREY\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00157}\doxymbox{\hyperlink{group__McuSSD1306__module_ga5072fb859a75d111e9a236866e2baa66}{00157}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_COLOR\_BRIGHT\_GREY\ McuSSD1306\_PIXEL\_WHITE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00159}\doxymbox{\hyperlink{group__McuSSD1306__module_ga109562716359b646ad3a6122deedb8fc}{00159}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_PIXEL\_ON\ McuSSD1306\_COLOR\_WHITE\ \ }\textcolor{comment}{/*\ value\ of\ a\ pixel\ if\ it\ is\ 'on'\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00160}\doxymbox{\hyperlink{group__McuSSD1306__module_gad751d178a7776b9dcbca23f91912ce05}{00160}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_PIXEL\_OFF\ McuSSD1306\_COLOR\_BLACK\ }\textcolor{comment}{/*\ value\ of\ a\ pixel\ if\ it\ is\ 'off'\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00162}\doxymbox{\hyperlink{group__McuSSD1306__module_ga222deca7ffbb0f6c553510833b1320e5}{00162}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_HW\_LONGER\_SIDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00163}00163\ \textcolor{preprocessor}{\ \ \ \ McuSSD1306\_DISPLAY\_HW\_NOF\_COLUMNS\ }\textcolor{comment}{/*\ Hardware\ display\ longer\ side\ in\ pixels\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00164}\doxymbox{\hyperlink{group__McuSSD1306__module_ga086fbb08bec63ca1c0f5db6803e90014}{00164}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_HW\_SHORTER\_SIDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ McuSSD1306\_DISPLAY\_HW\_NOF\_ROWS\ }\textcolor{comment}{/*\ Hardware\ display\ shorter\ side\ in\ pixels\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00167}\doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{00167}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00168}00168\ \{}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00169}\doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba3edac0a24894fc0d89e339ee2974c632}{00169}}\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba3edac0a24894fc0d89e339ee2974c632}{McuSSD1306\_ORIENTATION\_PORTRAIT}}\ \ \ \ \ =\ 0,}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00170}\doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba535a714fcfd9ead94829f911df48d828}{00170}}\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba535a714fcfd9ead94829f911df48d828}{McuSSD1306\_ORIENTATION\_PORTRAIT180}}\ \ =\ 1,}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00171}\doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba3d69f3937538facef6468a22f279d873}{00171}}\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba3d69f3937538facef6468a22f279d873}{McuSSD1306\_ORIENTATION\_LANDSCAPE}}\ \ \ \ =\ 2,}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00172}\doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba0bac27523c0760959ff91aff76d64f45}{00172}}\ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ggade2f308f14e29711676e929aeaf43d6ba0bac27523c0760959ff91aff76d64f45}{McuSSD1306\_ORIENTATION\_LANDSCAPE180}}\ =\ 3}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00173}00173\ \}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{McuSSD1306\_DisplayOrientation}};}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00175}\doxymbox{\hyperlink{group__McuSSD1306__module_ga6ea4c98ebd979c9df8da01eb98e3b8a7}{00175}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_WritePixel(data)\ McuSSD1306\_WriteDataWord(data)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00177}\doxymbox{\hyperlink{group__McuSSD1306__module_ga4b8b5bdb548577b1b76d6f66896e999a}{00177}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_ReadPixel(data)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00178}00178\ \textcolor{preprocessor}{\ \ \ \ 0\ }\textcolor{comment}{/*\ with\ the\ I2C\ interface\ it\ is\ NOT\ possible\ to\ read\ from\ display\ memory\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00180}00180\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gad3a5599176d75e878c0d7dabcf276cea}{McuSSD1306\_Clear}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00181}00181\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00182}00182\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00183}00183\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ Clear\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00184}00184\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00185}00185\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00186}00186\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Clears\ the\ whole\ display\ memory.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00187}00187\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00188}00188\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00189}00189\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00190}00190\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00192}00192\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gab784e4d46449f120bc6d33d043ab51b1}{McuSSD1306\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00193}00193\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00194}00194\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00195}00195\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ Init\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00196}00196\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00197}00197\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00198}00198\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Display\ driver\ initialization}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00199}00199\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00200}00200\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00201}00201\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00202}00202\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00204}00204\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga33b7a8daecea2f418f91e83f66bea954}{McuSSD1306\_UpdateFull}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00205}00205\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00206}00206\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00207}00207\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ UpdateFull\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00208}00208\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00209}00209\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00210}00210\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Updates\ the\ whole\ display\ from\ the\ microcontroller\ RAM}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00211}00211\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ display\ buffer.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00212}00212\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00213}00213\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00214}00214\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00215}00215\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00217}00217\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga1b49bc188af36068cfa7ef0287df2561}{McuSSD1306\_UpdateRegion}}(\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ x,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ y,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ w,}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ h);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00219}00219\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00220}00220\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00221}00221\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ UpdateRegion\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00222}00222\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00223}00223\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00224}00224\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Updates\ a\ region\ of\ the\ display.\ This\ is\ only\ a\ stub\ for}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00225}00225\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ this\ display\ as\ we\ are\ using\ windowing.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00226}00226\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00227}00227\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00228}00228\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ x\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ x\ coordinate}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00229}00229\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ y\ coordinate}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00230}00230\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ w\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ width\ of\ the\ region}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00231}00231\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Height\ of\ the\ region}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00232}00232\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00233}00233\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00234}00234\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00236}00236\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gae3aed28a0baa808b1c5228bd3da2be6b}{McuSSD1306\_OpenWindow}}(\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ x0,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ y0,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ x1,}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ y1);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00238}00238\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00239}00239\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00240}00240\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ McuSSD1306\_OpenWindow\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00241}00241\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00242}00242\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00243}00243\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ This\ method\ is\ internal.\ It\ is\ used\ by\ Processor\ Expert\ only.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00244}00244\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00245}00245\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00247}00247\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gace9d6d93e44bda90caf50d3c8c62b4b6}{McuSSD1306\_CloseWindow}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00249}00249\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00250}00250\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00251}00251\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ McuSSD1306\_CloseWindow\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00252}00252\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00253}00253\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00254}00254\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ This\ method\ is\ internal.\ It\ is\ used\ by\ Processor\ Expert\ only.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00255}00255\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00256}00256\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00258}00258\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga73b7c8fe23845764a0270575ca4d296b}{McuSSD1306\_WriteData}}(uint8\_t\ data);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00259}00259\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00260}00260\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00261}00261\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ McuSSD1306\_WriteData\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00262}00262\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00263}00263\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00264}00264\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ This\ method\ is\ internal.\ It\ is\ used\ by\ Processor\ Expert\ only.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00265}00265\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00266}00266\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00268}00268\ \doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{McuSSD1306\_DisplayOrientation}}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga3a19b86d96e1ddb47c65ad8552d802c8}{McuSSD1306\_GetDisplayOrientation}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00269}00269\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00270}00270\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00271}00271\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetDisplayOrientation\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00272}00272\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00273}00273\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00274}00274\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Returns\ the\ current\ display\ orientation}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00275}00275\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00276}00276\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00277}00277\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ current\ display\ orientation}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00278}00278\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00279}00279\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00281}00281\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gac76a60ec1dcfe59e12c33d71118f8a98}{McuSSD1306\_SetDisplayOrientation}}(\doxymbox{\hyperlink{group__McuSSD1306__module_gade2f308f14e29711676e929aeaf43d6b}{McuSSD1306\_DisplayOrientation}}\ newOrientation);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00282}00282\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00283}00283\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00284}00284\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ SetDisplayOrientation\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00285}00285\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00286}00286\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00287}00287\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Sets\ the\ display\ orientation.\ If\ you\ enable\ this\ method,}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00288}00288\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ then\ the\ orientation\ of\ the\ display\ can\ be\ changed\ at}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00289}00289\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ runtime.\ However,\ this\ requires\ additional\ resources.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00290}00290\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00291}00291\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00292}00292\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ newOrientation\ \ -\/\ new\ orientation\ to}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00293}00293\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ be\ used}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00294}00294\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00295}00295\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00296}00296\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00298}00298\ \textcolor{preprocessor}{\#if\ McuSSD1306\_CONFIG\_DYNAMIC\_DISPLAY\_ORIENTATION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00299}00299\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga1ed51291d4dcc50744f39c1c8e05d317}{McuSSD1306\_GetWidth}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00300}00300\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_PORTRAIT}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00301}\doxymbox{\hyperlink{group__McuSSD1306__module_ga1ed51291d4dcc50744f39c1c8e05d317}{00301}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetWidth()\ McuSSD1306\_HW\_SHORTER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00302}00302\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_PORTRAIT180}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00303}00303\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetWidth()\ McuSSD1306\_HW\_SHORTER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00304}00304\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_LANDSCAPE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00305}00305\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetWidth()\ McuSSD1306\_HW\_LONGER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00306}00306\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_LANDSCAPE180}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00307}00307\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetWidth()\ McuSSD1306\_HW\_LONGER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00308}00308\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00309}00309\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00310}00310\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00311}00311\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetWidth\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00312}00312\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00313}00313\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00314}00314\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Returns\ the\ width\ of\ the\ display\ in\ pixels\ (in\ x\ direction)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00315}00315\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00316}00316\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00317}00317\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Width\ of\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00318}00318\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00319}00319\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00321}00321\ \textcolor{preprocessor}{\#if\ McuSSD1306\_CONFIG\_DYNAMIC\_DISPLAY\_ORIENTATION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00322}00322\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga786dcf5ea50f3a06b4b3aa1479a3fe2e}{McuSSD1306\_GetHeight}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00323}00323\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_PORTRAIT}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00324}\doxymbox{\hyperlink{group__McuSSD1306__module_ga786dcf5ea50f3a06b4b3aa1479a3fe2e}{00324}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetHeight()\ McuSSD1306\_HW\_LONGER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00325}00325\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_PORTRAIT180}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00326}00326\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetHeight()\ McuSSD1306\_HW\_LONGER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00327}00327\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_LANDSCAPE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetHeight()\ McuSSD1306\_HW\_SHORTER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00329}00329\ \textcolor{preprocessor}{\#elif\ McuSSD1306\_CONFIG\_FIXED\_DISPLAY\_ORIENTATION\ ==\ McuSSD1306\_CONFIG\_ORIENTATION\_LANDSCAPE180}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00330}00330\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetHeight()\ McuSSD1306\_HW\_SHORTER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00331}00331\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00332}00332\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00333}00333\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00334}00334\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetHeight\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00335}00335\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00336}00336\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00337}00337\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Returns\ the\ height\ of\ the\ display\ in\ pixels\ (in\ y\ direction)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00338}00338\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00339}00339\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00340}00340\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Height\ of\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00341}00341\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00342}00342\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00343}00343\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00344}\doxymbox{\hyperlink{group__McuSSD1306__module_ga7f389f3214e9800090f6873c9e370cd7}{00344}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetLongerSide()\ McuSSD1306\_HW\_LONGER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00345}00345\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00346}00346\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00347}00347\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetLongerSide\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00348}00348\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00349}00349\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00350}00350\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Returns\ the\ size\ of\ the\ longer\ side\ of\ the\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00351}00351\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00352}00352\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00353}00353\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ number\ of\ pixels}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00354}00354\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00355}00355\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00357}\doxymbox{\hyperlink{group__McuSSD1306__module_gab506ef1e3ed1054110bdcfafa73ce197}{00357}}\ \textcolor{preprocessor}{\#define\ McuSSD1306\_GetShorterSide()\ McuSSD1306\_HW\_SHORTER\_SIDE}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00358}00358\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00359}00359\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00360}00360\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetShorterSide\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00361}00361\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00362}00362\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00363}00363\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Returns\ the\ size\ of\ the\ shorter\ side\ of\ the\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00364}00364\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00365}00365\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00366}00366\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ number\ of\ pixels}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00367}00367\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00368}00368\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00370}00370\ uint16\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga07c0f0d21eef0fb84967869de4fc7cb1}{McuSSD1306\_ReadDataWord}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00371}00371\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00372}00372\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00373}00373\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ McuSSD1306\_ReadDataWord\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00374}00374\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00375}00375\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00376}00376\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ This\ method\ is\ internal.\ It\ is\ used\ by\ Processor\ Expert\ only.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00377}00377\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00378}00378\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00380}00380\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga78558118dfddc2c18479cc233d021aef}{McuSSD1306\_GetLCD}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00381}00381\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00382}00382\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00383}00383\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GetLCD\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00384}00384\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00385}00385\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00386}00386\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Method\ to\ be\ called\ for\ mutual\ exclusive\ access\ to\ the\ LCD}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00387}00387\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00388}00388\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00389}00389\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00390}00390\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00392}00392\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga9e4f057dcae4c44b9a6ad339342ef3e3}{McuSSD1306\_GiveLCD}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00393}00393\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00394}00394\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00395}00395\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ GiveLCD\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00396}00396\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00397}00397\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00398}00398\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Method\ to\ be\ called\ for\ mutual\ exclusive\ access\ to\ the\ LCD}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00399}00399\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00400}00400\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00401}00401\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00402}00402\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00404}00404\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga9f1563464efc2e61084075f1b299bd31}{McuSSD1306\_InitCommChannel}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00405}00405\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00406}00406\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00407}00407\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ InitCommChannel\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00408}00408\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00409}00409\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00410}00410\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Method\ to\ initialize\ communication\ to\ the\ LCD.\ Needed\ if\ the}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00411}00411\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ bus\ to\ the\ LCD\ is\ shared\ with\ other\ components\ and\ settings}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00412}00412\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ are\ different.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00413}00413\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00414}00414\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00415}00415\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00416}00416\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00418}00418\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga7139947563eb1682993e58d891f62e16}{McuSSD1306\_SetContrast}}(uint8\_t\ contrast);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00419}00419\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00420}00420\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00421}00421\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ SetContrast\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00422}00422\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00423}00423\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00424}00424\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Sets\ the\ display\ contrast\ level\ (default:0x7F)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00425}00425\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00426}00426\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00427}00427\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ contrast\ \ \ \ \ \ \ \ -\/\ Contrast\ level\ (default\ 0x7F).}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00428}00428\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Contrast\ increases\ as\ the\ value\ increases.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00429}00429\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00430}00430\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Error\ code}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00431}00431\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00432}00432\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00434}00434\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga315075f5ff4b36cf949340267e4af589}{McuSSD1306\_DisplayOn}}(\textcolor{keywordtype}{bool}\ on);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00435}00435\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00436}00436\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00437}00437\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ DisplayOn\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00438}00438\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00439}00439\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00440}00440\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Turns\ the\ display\ on\ or\ off\ (sleep)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00441}00441\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00442}00442\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00443}00443\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ on\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ turns\ the\ display\ on\ or\ off}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00444}00444\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00445}00445\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Error\ code}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00446}00446\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00447}00447\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00448}00448\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00449}00449\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_gaeec82097ceb9ac9e82b4c77c2d11724b}{McuSSD1306\_DisplayInvert}}(\textcolor{keywordtype}{bool}\ invert);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00450}00450\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00451}00451\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00452}00452\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ DisplayInvert\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00453}00453\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00454}00454\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00455}00455\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Used\ to\ inverse\ the\ display.\ In\ normal\ mode,\ 1\ one\ in\ the}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00456}00456\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ display\ RAM\ is\ a\ pixel\ set\ and\ a\ 0\ means\ pixel\ clear.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00457}00457\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00458}00458\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00459}00459\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ invert\ \ \ \ \ \ \ \ \ \ -\/\ if\ TRUE,\ a\ 1\ is\ pixel\ clear\ and\ a\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00460}00460\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\ a\ pixel\ set.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00461}00461\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00462}00462\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Error\ code}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00463}00463\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00464}00464\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00466}00466\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_gad9ca76c79d71556865d2eddfa939a261}{McuSSD1306\_PrintString}}(uint8\_t\ line,\ uint8\_t\ col,\ uint8\_t*\ str);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00467}00467\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00468}00468\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00469}00469\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ PrintString\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00470}00470\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00471}00471\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00472}00472\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Simple\ low\ level\ method\ printing\ text\ to\ the\ display.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00473}00473\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Newline\ is\ supported.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00474}00474\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00475}00475\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00476}00476\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ line\ \ \ \ \ \ \ \ \ \ \ \ -\/\ line\ number,\ starting\ with\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00477}00477\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ col\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ column\ number,\ starting\ with\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00478}00478\ \textcolor{comment}{**\ \ \ \ \ \ \ *\ str\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Pointer\ to\ string\ to\ be\ printed\ on\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00479}00479\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00480}00480\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00481}00481\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00483}00483\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8f6c48c74eec38bd91b1d3508e15f712}{McuSSD1306\_PutPixel}}(\doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ x,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga8e993523ebdddc5cc55912ef916d1a6c}{McuSSD1306\_PixelDim}}\ y,\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{McuSSD1306\_PixelColor}}\ color);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00484}00484\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00485}00485\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00486}00486\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ PutPixel\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00487}00487\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00488}00488\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00489}00489\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Draws\ a\ pixel\ into\ the\ display\ buffer\ (not\ on\ the\ display).}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00490}00490\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00491}00491\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00492}00492\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ x\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ x\ position\ of\ the\ pixel}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00493}00493\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ y\ position\ of\ the\ pixel}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00494}00494\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ color\ \ \ \ \ \ \ \ \ \ \ -\/\ color\ value\ of\ the\ pixel}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00495}00495\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00496}00496\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00497}00497\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00499}00499\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga02f2d24d65406fa28e5f9054d4a6e532}{McuSSD1306\_Deinit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00500}00500\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00501}00501\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00502}00502\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ Deinit\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00503}00503\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00504}00504\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00505}00505\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Driver\ de-\/initialization}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00506}00506\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :\ None}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00507}00507\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00508}00508\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00509}00509\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00511}00511\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_gab1f7999e91cb6bac8929a01289fc2f5e}{McuSSD1306\_SetRowCol}}(uint8\_t\ row,\ uint8\_t\ col);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00512}00512\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00513}00513\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00514}00514\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ SetRowCol\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00515}00515\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00516}00516\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00517}00517\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Sets\ the\ column\ and\ row\ position,\ useful\ for\ start\ writing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00518}00518\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ text\ with\ PrintString()}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00519}00519\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00520}00520\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00521}00521\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ row\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ row\ (or\ line)\ number,\ starting\ with\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00522}00522\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ col\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ column\ number,\ starting\ with\ 0}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00523}00523\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00524}00524\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Error\ code}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00525}00525\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00526}00526\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00528}00528\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga002eb5dc1c9cd54c6ef9aecd0c0c7b22}{McuSSD1306\_ClearLine}}(uint8\_t\ line);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00529}00529\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00530}00530\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00531}00531\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ ClearLine\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00532}00532\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00533}00533\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00534}00534\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Clear\ a\ text\ line\ on\ the\ display}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00535}00535\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00536}00536\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00537}00537\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ line\ \ \ \ \ \ \ \ \ \ \ \ -\/\ Line\ number,\ starting\ with\ zero}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00538}00538\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00539}00539\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00540}00540\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00541}00541\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00542}00542\ uint8\_t\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga27218e064441a71736bbc6c8d460a37c}{McuSSD1306\_SetDisplayClockDiv}}(uint8\_t\ clockDiv);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00543}00543\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00544}00544\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00545}00545\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ SetDisplayClockDiv\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00546}00546\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00547}00547\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00548}00548\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Sets\ the\ display\ clock\ divider\ (default\ 0x80).\ This\ can\ be}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00549}00549\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ used\ to\ affect\ display\ refresh\ rate\ or\ to\ reduce\ audible}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00550}00550\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ noise.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00551}00551\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00552}00552\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00553}00553\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ clockDiv\ \ \ \ \ \ \ \ -\/\ Clock\ Divider\ (default\ 0x80).}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00554}00554\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00555}00555\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ Error\ code}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00556}00556\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00557}00557\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00558}00558\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00559}00559\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__McuSSD1306__module_ga7cf4c091bf9512bbf3887c3db7a960de}{McuSSD1306\_ClearBuffer}}(\doxymbox{\hyperlink{group__McuSSD1306__module_ga5360b499ceea9f4aa508aadface82ff0}{McuSSD1306\_PixelColor}}\ color);}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00560}00560\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00561}00561\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00562}00562\ \textcolor{comment}{**\ \ \ \ \ Method\ \ \ \ \ \ :\ \ ClearBuffer\ (component\ SSD1306)}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00563}00563\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00564}00564\ \textcolor{comment}{**\ \ \ \ \ Description\ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00565}00565\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ Writes\ a\ color\ to\ the\ full\ display\ buffer\ and\ clears\ it.}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00566}00566\ \textcolor{comment}{**\ \ \ \ \ Parameters\ \ :}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00567}00567\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ NAME\ \ \ \ \ \ \ \ \ \ \ \ -\/\ DESCRIPTION}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00568}00568\ \textcolor{comment}{**\ \ \ \ \ \ \ \ \ color\ \ \ \ \ \ \ \ \ \ \ -\/\ color\ value\ of\ the\ pixel}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00569}00569\ \textcolor{comment}{**\ \ \ \ \ Returns\ \ \ \ \ :\ Nothing}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00570}00570\ \textcolor{comment}{**\ ===================================================================}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00571}00571\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00572}00572\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00573}00573\ \textcolor{comment}{/*\ END\ McuSSD1306.\ */}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00574}00574\ }
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00575}00575\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{McuSSD1306_8h_source_l00576}00576\ \textcolor{comment}{/*\ ifndef\ \_\_McuSSD1306\_H\ */}}
+
+\end{DoxyCode}

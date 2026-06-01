@@ -12,8 +12,8 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00008}00008\ \textcolor{comment}{/********************}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00009}00009\ \textcolor{comment}{\ *\ \ \ \ \ Includes\ \ \ \ *}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00010}00010\ \textcolor{comment}{\ ********************/}}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{log_8h}{log.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{log_8h}{infrastructure/log.h}}>}}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmd__handle_8h}{cmd\_handle.h}}"{}}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}string.h"{}}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00014}00014\ }
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00015}00015\ \textcolor{comment}{/************************************}}
@@ -53,7 +53,7 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00049}\doxymbox{\hyperlink{cmd__handle_8c_a121a340f467247572190b0306ee40c90}{00049}}\ status\_t\ \doxymbox{\hyperlink{cmd__handle_8c_a121a340f467247572190b0306ee40c90}{CHD\_get\_cmd\_handle}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}*\ cmdHandle,\ \doxymbox{\hyperlink{cmd__handle_8h_a3402dd12f41b772dfdbca6e916c2af75}{CHD\_CmdHandleImpl\_t}}*\ cmdHandles,}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ maxHandles)}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00051}00051\ \{}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ ==\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00053}00053\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00055}00055\ \ \ \ \ \}}
@@ -67,7 +67,7 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ cmdHandles[i].\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a663cd00a972f14396dcba96d861f3dd5}{ref\_count}}\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ xEventGroupClearBits(cmdHandles[i].eventGroup,}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\doxymbox{\hyperlink{group__THE__EventBits_gae515d7d513917dba41c41d68d79ba20b}{CHD\_CMD\_BIT\_SUCCESS}}\ |\ \doxymbox{\hyperlink{group__THE__EventBits_ga9fc89681a892ffab31eab75b4d08a76d}{CHD\_CMD\_BIT\_FAILURE}}\ |\ \doxymbox{\hyperlink{group__THE__EventBits_ga9e80327a24089cf6688fe36c279eb7ae}{CHD\_CMD\_BIT\_TIMEOUT}}));}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *cmdHandle\ =\ \&cmdHandles[i];}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
@@ -76,13 +76,13 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00073}00073\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00074}00074\ \ \ \ \ taskEXIT\_CRITICAL();}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00075}00075\ \ \ \ \ *cmdHandle\ =\ NULL;\ \textcolor{comment}{//\ No\ available\ command\ handle}}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00075}00075\ \ \ \ \ *cmdHandle\ =\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};\ \textcolor{comment}{//\ No\ available\ command\ handle}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{return}\ kStatus\_Fail;}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00077}00077\ \}}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00078}00078\ }
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00079}\doxymbox{\hyperlink{cmd__handle_8c_a2fe25554976cdf18536f88a331a62cd7}{00079}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__handle_8c_a2fe25554976cdf18536f88a331a62cd7}{CHD\_add\_cmd\_handle\_ref}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00080}00080\ \{}
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00082}00082\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00083}00083\ \ \ \ \ \ \ \ \ cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a663cd00a972f14396dcba96d861f3dd5}{ref\_count}}++;}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00084}00084\ \ \ \ \ \}}
@@ -91,7 +91,7 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00087}\doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{00087}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__handle_8c_a776fcb299196e8e924c537440a791a46}{CHD\_remove\_cmd\_handle\_ref}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00088}00088\ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00089}00089\ }
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00091}00091\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ taskENTER\_CRITICAL();}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a663cd00a972f14396dcba96d861f3dd5}{ref\_count}}\ >\ 0)}
@@ -113,7 +113,7 @@
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00109}\doxymbox{\hyperlink{cmd__handle_8c_a8512f44eddef1b9b824b9ba502d4f8b9}{00109}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cmd__handle_8c_a8512f44eddef1b9b824b9ba502d4f8b9}{CHD\_remove\_cmd\_handle\_ref\_from\_isr}}(\doxymbox{\hyperlink{cmd__handle_8h_a2e82607aeca2e68337104ef9935880d3}{CHD\_CmdHandle\_t}}\ cmdHandle)}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00110}00110\ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00111}00111\ }
-\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle\ !=\ \doxymbox{\hyperlink{group__McuFontCour10Normal__module_ga070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}})}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00113}00113\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cmdHandle-\/>\doxymbox{\hyperlink{struct__CHD__CmdHandleImpl_a663cd00a972f14396dcba96d861f3dd5}{ref\_count}}\ >\ 0)}
 \DoxyCodeLine{\Hypertarget{cmd__handle_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \{}

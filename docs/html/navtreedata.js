@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Double Scara", "index.html", [
+    [ "Todo List", "todo.html", null ],
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -39,11 +40,11 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", "globals_func" ],
-        [ "Variables", "globals_vars.html", null ],
+        [ "Variables", "globals_vars.html", "globals_vars" ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
   ] ]
@@ -51,12 +52,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"grabber_8h.html#a4d2e59f38118363afdc6988d4580a088",
-"group__STEPPER__Process__Internal.html#gaa0917c64053aa474082419f2b0a6412d",
-"scara__kinematics_8c.html#aa4f604c38d46c2023393078d055470ee",
-"struct__MTR__SetHoldCurrentCmdData.html#ac7a4b6259c8c47995b36eff41e0789b9",
-"tmc2209__shared_8h.html#ad84e465cc543696ae6618635f2dc17c4a9d034e2935ff10c640bd55673e66dc15"
+"McuFontCour10Normal_8c.html",
+"functions_t.html",
+"group__MOTOR__Motion__Internal.html#ga3773c2085af104433869ef6c613efaed",
+"group__McuGDisplaySSD1306__module.html#ga108363968f1b83d6e0abfd69c2745180",
+"group__McuGFont__module.html#gaf14d2cdda730e4061df074d7b839cab3",
+"group__TMC2209__Internal.html#ga620acf3b0a063631292095c1f8fb463d",
+"scara__kinematics_8c.html#a284fbb96c16805e1297637cf1b6da65f",
+"struct__LOG__QueueItem.html",
+"struct__TMC__HandleImpl.html#a53e1d74f7180037dfa14ccf3eeb9a2cd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

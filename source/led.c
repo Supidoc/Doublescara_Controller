@@ -29,7 +29,7 @@ status_t LED_init(void)
 {
     gpio_pin_config_t config = {
         .pinDirection = kGPIO_DigitalOutput,
-        .outputLogic = 0U  // Start aus
+        .outputLogic  = 0U // Start aus
     };
     GPIO_PinInit(LED_GPIO, LED_PIN, &config);
     return kStatus_Success;
@@ -37,13 +37,13 @@ status_t LED_init(void)
 
 void LED_toggle(void)
 {
-    while(1)
+    while (1)
     {
         LED_on();
-        vTaskDelay(pdMS_TO_TICKS(5000));  // 5 Sekunden an
-        
+        vTaskDelay(pdMS_TO_TICKS(5000)); // 5 Sekunden an
+
         LED_off();
-        vTaskDelay(pdMS_TO_TICKS(5000));  // 5 Sekunden aus
+        vTaskDelay(pdMS_TO_TICKS(5000)); // 5 Sekunden aus
     }
 }
 
@@ -54,5 +54,5 @@ void LED_on(void)
 
 void LED_off(void)
 {
-    GPIO_PinWrite(LED_GPIO, LED_PIN, 0U);   // Low == aus
+    GPIO_PinWrite(LED_GPIO, LED_PIN, 0U); // Low == aus
 }

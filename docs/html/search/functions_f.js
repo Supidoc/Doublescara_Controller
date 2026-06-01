@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['wait_5fand_5frelease_0',['wait_and_release',['../grabber_8c.html#a6969198e72fa6fb00b68e0f85a643c3a',1,'grabber.c']]],
-  ['wait_5ffor_5fcmd_5fhandle_1',['wait_for_cmd_handle',['../motor__init_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_init.c'],['../motor__sync_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_sync.c'],['../motor__tmc_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_tmc.c'],['../motor__homing_8c.html#a528b3ece82abe97c400944720a44049a',1,'wait_for_cmd_handle(CHD_CmdHandle_t cmdHandle, TickType_t deadline):&#160;motor_homing.c']]],
-  ['wait_5ffor_5fmtr_5fcmd_2',['wait_for_mtr_cmd',['../motorCmd_8c.html#a9c9b713d7e1f0775be398eeaf8a53c44',1,'motorCmd.c']]]
+  ['uart2_5ferr_5firqhandler_0',['UART2_ERR_IRQHandler',['../group__UART2__Module.html#gae87c74e247050d9577456786a51e9c6f',1,'uart.h']]],
+  ['uart2_5frx_5ftx_5firqhandler_1',['UART2_RX_TX_IRQHandler',['../group__UART2__Module.html#gaab4a82c353781aced5e4a6dd7c67bc85',1,'uart.h']]],
+  ['uart2isvalidcommand_2',['uart2IsValidCommand',['../group__UART2__Module.html#ga13b6205bcf40ba329f951b1458b88792',1,'uart2IsValidCommand(int8_t ch):&#160;uart2.c'],['../group__UART2__Module.html#ga13b6205bcf40ba329f951b1458b88792',1,'uart2IsValidCommand(int8_t ch):&#160;uart2.c']]],
+  ['uart2readchar_3',['uart2ReadChar',['../group__UART2__Module.html#ga95c9a9b2781fd953631f728f63732bfb',1,'uart2ReadChar(void):&#160;uart2.c'],['../group__UART2__Module.html#ga95c9a9b2781fd953631f728f63732bfb',1,'uart2ReadChar(void):&#160;uart2.c']]],
+  ['uart2readline_4',['uart2ReadLine',['../group__UART2__Module.html#ga466071c4f91339193b739b3088c0bf4f',1,'uart2ReadLine(char *str, uint16_t length):&#160;uart2.c'],['../group__UART2__Module.html#ga466071c4f91339193b739b3088c0bf4f',1,'uart2ReadLine(char *str, uint16_t length):&#160;uart2.c']]],
+  ['uart2write_5',['uart2Write',['../group__UART2__Module.html#ga9ccada14e65014aa3758674c37885ceb',1,'uart2Write(const char *str):&#160;uart2.c'],['../group__UART2__Module.html#ga9ccada14e65014aa3758674c37885ceb',1,'uart2Write(const char *str):&#160;uart2.c']]],
+  ['uart2writechar_6',['uart2WriteChar',['../group__UART2__Module.html#ga240c05b87ce67f3129082da78e859214',1,'uart2WriteChar(char ch):&#160;uart2.c'],['../group__UART2__Module.html#ga240c05b87ce67f3129082da78e859214',1,'uart2WriteChar(char ch):&#160;uart2.c']]],
+  ['uart2writeline_7',['uart2WriteLine',['../group__UART2__Module.html#gaac596179ad5f07f3f65bfdcce24ef129',1,'uart2WriteLine(const char *str):&#160;uart2.c'],['../group__UART2__Module.html#gaac596179ad5f07f3f65bfdcce24ef129',1,'uart2WriteLine(const char *str):&#160;uart2.c']]]
 ];

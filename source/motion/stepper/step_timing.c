@@ -8,13 +8,14 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "step_timing.h"
 #include "step_internal.h"
 #include "step_shared.h"
 #include "stdio.h"
 #include "step_profile.h"
 #include "cmd_dispatch.h"
-#include "log.h"
+#include "estop.h"
 
 /************************************
  *     Private Macros / Defines    *
@@ -53,8 +54,13 @@ uint8_t STPi_check_movement_completion(void)
             stpHandles[i].handle.movementHandle.state != STP_MOVEMENT_IDLE)
         {
             nonIdleCount++;
-            if ((stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
-                 stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED))
+            if (stpHandles[i].handle.movementHandle.cmdHandle != NULL &&stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_FAILED )
+            {
+                CDP_notify_task_success(stpHandles[i].handle.movementHandle.cmdHandle);
+                CHD_remove_cmd_handle_ref(stpHandles[i].handle.movementHandle.cmdHandle);
+            }
+            else if (stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_FINISHED ||
+                 stpHandles[i].handle.movementHandle.state == STP_MOVEMENT_STOPPED)
             {
 
                 if (stpHandles[i].handle.movementHandle.cmdHandle != NULL)
@@ -104,64 +110,83 @@ void FTM3_IRQHandler(void)
 
     traceISR_ENTER();
 
-    for (uint8_t i = 0; i < 8; i++)
-    {
-        STP_Handle_t stepperHandle;
-
-        if (intStatus & (0b1 << i) && (FTM3->CONTROLS[i].CnSC & FTM_CnSC_CHIE_MASK))
+        for (uint8_t i = 0; i < 8; i++)
         {
-            if (FTM3_ISR_handle_cache[i] == NULL)
+            STP_Handle_t stepperHandle;
+
+            if (intStatus & (0b1 << i) && (FTM3->CONTROLS[i].CnSC & FTM_CnSC_CHIE_MASK))
             {
-                continue;
-            }
-            stepperHandle = FTM3_ISR_handle_cache[i];
-
-            stepperHandle->movementHandle.currStepCount++;
-
-            stepperHandle->absolutePosition +=
-                (stepperHandle->movementHandle.direction == STP_COUNTERCLOCKWISE) ? 1 : -1;
-
-            uint32_t currentStepCount   = stepperHandle->movementHandle.currStepCount;
-            uint32_t totalSteps         = stepperHandle->movementHandle.totalSteps;
-            uint32_t accelSteps         = stepperHandle->movementHandle.accelSteps;
-            uint32_t constVelocitySteps = stepperHandle->movementHandle.endVelocitySteps;
-
-            // Toggle Pin because letting the time do it leads to inconsistencies in stepcount
-            // because the start level for the timer output can't be defined
-
-            GPIO_PortToggle(stepperHandle->stepGPIO, 0b1 << stepperHandle->stepPin);
-            if (stepperHandle->stepPin == 2)
-            {
-                GPIO_PortToggle(GPIOB, 0b1 << 16);
-            }
-            else if (stepperHandle->stepPin == 9)
-            {
-                GPIO_PortToggle(GPIOB, 0b1 << 17);
-            }
-
-            if (currentStepCount >= totalSteps)
-            {
-                stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnSC &=
-                    ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
-
-                stepperHandle->movementHandle.state = STP_MOVEMENT_FINISHED;
-                continue;
-            }
-            if (stepperHandle->movementHandle.state == STP_MOVEMENT_STARTED)
-            {
-                stepperHandle->movementHandle.state              = STP_MOVEMENT_ACCELERATING;
-                stepperHandle->movementHandle.phaseStepCount     = 0;
-                stepperHandle->movementHandle.accelInterpCounter = 0;
-                stepperHandle->movementHandle.accelTableIndex    = 0;
-            }
-            else if (stepperHandle->movementHandle.state == STP_MOVEMENT_ACCELERATING &&
-                     currentStepCount > stepperHandle->movementHandle.accelSteps)
-            {
-                if (stepperHandle->movementHandle.isTrapezoidal)
+                if (FTM3_ISR_handle_cache[i] == NULL)
                 {
-                    stepperHandle->movementHandle.state = STP_MOVEMENT_CONST_VELOCITY;
+                    continue;
                 }
-                else
+                stepperHandle = FTM3_ISR_handle_cache[i];
+
+                if (estopFlag)
+                 {
+                    stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnSC &=
+                           ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
+
+                       stepperHandle->movementHandle.state = STP_MOVEMENT_FAILED;
+                       continue;
+                 }
+
+                stepperHandle->movementHandle.currStepCount++;
+
+                stepperHandle->absolutePosition +=
+                    (stepperHandle->movementHandle.direction == STP_COUNTERCLOCKWISE) ? 1 : -1;
+
+                uint32_t currentStepCount   = stepperHandle->movementHandle.currStepCount;
+                uint32_t totalSteps         = stepperHandle->movementHandle.totalSteps;
+                uint32_t accelSteps         = stepperHandle->movementHandle.accelSteps;
+                uint32_t constVelocitySteps = stepperHandle->movementHandle.endVelocitySteps;
+
+                // Toggle Pin because letting the time do it leads to inconsistencies in stepcount
+                // because the start level for the timer output can't be defined
+
+                GPIO_PortToggle(stepperHandle->stepGPIO, 0b1 << stepperHandle->stepPin);
+                if (stepperHandle->stepPin == 2)
+                {
+                    GPIO_PortToggle(GPIOB, 0b1 << 16);
+                }
+                else if (stepperHandle->stepPin == 9)
+                {
+                    GPIO_PortToggle(GPIOB, 0b1 << 17);
+                }
+
+                if (currentStepCount >= totalSteps)
+                {
+                    stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnSC &=
+                        ~(FTM_CnSC_CHIE_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
+
+                    stepperHandle->movementHandle.state = STP_MOVEMENT_FINISHED;
+                    continue;
+                }
+                if (stepperHandle->movementHandle.state == STP_MOVEMENT_STARTED)
+                {
+                    stepperHandle->movementHandle.state              = STP_MOVEMENT_ACCELERATING;
+                    stepperHandle->movementHandle.phaseStepCount     = 0;
+                    stepperHandle->movementHandle.accelInterpCounter = 0;
+                    stepperHandle->movementHandle.accelTableIndex    = 0;
+                }
+                else if (stepperHandle->movementHandle.state == STP_MOVEMENT_ACCELERATING &&
+                         currentStepCount > stepperHandle->movementHandle.accelSteps)
+                {
+                    if (stepperHandle->movementHandle.isTrapezoidal)
+                    {
+                        stepperHandle->movementHandle.state = STP_MOVEMENT_CONST_VELOCITY;
+                    }
+                    else
+                    {
+                        stepperHandle->movementHandle.state              = STP_MOVEMENT_DECELRATING;
+                        stepperHandle->movementHandle.phaseStepCount     = 0;
+                        stepperHandle->movementHandle.accelInterpCounter = 0;
+                        stepperHandle->movementHandle.accelTableIndex =
+                            stepperHandle->movementHandle.accelTableSize - 1;
+                    }
+                }
+                else if (stepperHandle->movementHandle.state == STP_MOVEMENT_CONST_VELOCITY &&
+                         currentStepCount > accelSteps + constVelocitySteps)
                 {
                     stepperHandle->movementHandle.state              = STP_MOVEMENT_DECELRATING;
                     stepperHandle->movementHandle.phaseStepCount     = 0;
@@ -169,86 +194,74 @@ void FTM3_IRQHandler(void)
                     stepperHandle->movementHandle.accelTableIndex =
                         stepperHandle->movementHandle.accelTableSize - 1;
                 }
-            }
-            else if (stepperHandle->movementHandle.state == STP_MOVEMENT_CONST_VELOCITY &&
-                     currentStepCount > accelSteps + constVelocitySteps)
-            {
-                stepperHandle->movementHandle.state              = STP_MOVEMENT_DECELRATING;
-                stepperHandle->movementHandle.phaseStepCount     = 0;
-                stepperHandle->movementHandle.accelInterpCounter = 0;
-                stepperHandle->movementHandle.accelTableIndex =
-                    stepperHandle->movementHandle.accelTableSize - 1;
-            }
 
-            // Increment phase step counter
-            stepperHandle->movementHandle.phaseStepCount++;
+                // Increment phase step counter
+                stepperHandle->movementHandle.phaseStepCount++;
 
-            uint16_t actualDelay;
-            int8_t   poolIndex = stepperHandle->movementHandle.accelTablePoolIndex;
+                uint16_t actualDelay;
+                int8_t   poolIndex = stepperHandle->movementHandle.accelTablePoolIndex;
 
-            if (stepperHandle->movementHandle.state == STP_MOVEMENT_ACCELERATING)
-            {
-                // Use counter-based repeat factor (no division!)
-                if (poolIndex >= 0 && poolIndex < STP_ACCEL_TABLE_POOL_SIZE &&
-                    stepperHandle->movementHandle.accelTableIndex <
-                        accelTablePool[poolIndex].tableSize)
+                if (stepperHandle->movementHandle.state == STP_MOVEMENT_ACCELERATING)
                 {
-                    actualDelay = accelTablePool[poolIndex]
-                                      .table[stepperHandle->movementHandle.accelTableIndex];
-                    // Increment counter and advance table index when counter reaches factor
-                    stepperHandle->movementHandle.accelInterpCounter++;
-                    if (stepperHandle->movementHandle.accelInterpCounter >=
-                        stepperHandle->movementHandle.accelInterpFactor)
+                    // Use counter-based repeat factor (no division!)
+                    if (poolIndex >= 0 && poolIndex < STP_ACCEL_TABLE_POOL_SIZE &&
+                        stepperHandle->movementHandle.accelTableIndex <
+                            accelTablePool[poolIndex].tableSize)
                     {
-                        stepperHandle->movementHandle.accelInterpCounter = 0;
-                        stepperHandle->movementHandle.accelTableIndex++;
-                    }
-                }
-                else
-                {
-                    actualDelay = stepperHandle->movementHandle.endVelocityDelay;
-                }
-            }
-            else if (stepperHandle->movementHandle.state == STP_MOVEMENT_CONST_VELOCITY)
-            {
-                // Constant velocity: use endVelocityDelay directly
-                actualDelay = stepperHandle->movementHandle.endVelocityDelay;
-            }
-            else if (stepperHandle->movementHandle.state == STP_MOVEMENT_DECELRATING)
-            {
-                // Use counter-based repeat factor reading table backwards (no division!)
-                if (poolIndex >= 0 && poolIndex < STP_ACCEL_TABLE_POOL_SIZE &&
-                    stepperHandle->movementHandle.accelTableIndex <
-                        accelTablePool[poolIndex].tableSize)
-                {
-                    actualDelay = accelTablePool[poolIndex]
-                                      .table[stepperHandle->movementHandle.accelTableIndex];
-                    // Increment counter and decrement table index when counter reaches factor
-                    stepperHandle->movementHandle.accelInterpCounter++;
-                    if (stepperHandle->movementHandle.accelInterpCounter >=
-                        stepperHandle->movementHandle.accelInterpFactor)
-                    {
-                        stepperHandle->movementHandle.accelInterpCounter = 0;
-                        if (stepperHandle->movementHandle.accelTableIndex > 0)
+                        actualDelay = accelTablePool[poolIndex]
+                                          .table[stepperHandle->movementHandle.accelTableIndex];
+                        // Increment counter and advance table index when counter reaches factor
+                        stepperHandle->movementHandle.accelInterpCounter++;
+                        if (stepperHandle->movementHandle.accelInterpCounter >=
+                            stepperHandle->movementHandle.accelInterpFactor)
                         {
-                            stepperHandle->movementHandle.accelTableIndex--;
+                            stepperHandle->movementHandle.accelInterpCounter = 0;
+                            stepperHandle->movementHandle.accelTableIndex++;
                         }
                     }
+                    else
+                    {
+                        actualDelay = stepperHandle->movementHandle.endVelocityDelay;
+                    }
+                }
+                else if (stepperHandle->movementHandle.state == STP_MOVEMENT_CONST_VELOCITY)
+                {
+                    // Constant velocity: use endVelocityDelay directly
+                    actualDelay = stepperHandle->movementHandle.endVelocityDelay;
+                }
+                else if (stepperHandle->movementHandle.state == STP_MOVEMENT_DECELRATING)
+                {
+                    // Use counter-based repeat factor reading table backwards (no division!)
+                    if (poolIndex >= 0 && poolIndex < STP_ACCEL_TABLE_POOL_SIZE &&
+                        stepperHandle->movementHandle.accelTableIndex <
+                            accelTablePool[poolIndex].tableSize)
+                    {
+                        actualDelay = accelTablePool[poolIndex]
+                                          .table[stepperHandle->movementHandle.accelTableIndex];
+                        // Increment counter and decrement table index when counter reaches factor
+                        stepperHandle->movementHandle.accelInterpCounter++;
+                        if (stepperHandle->movementHandle.accelInterpCounter >=
+                            stepperHandle->movementHandle.accelInterpFactor)
+                        {
+                            stepperHandle->movementHandle.accelInterpCounter = 0;
+                            if (stepperHandle->movementHandle.accelTableIndex > 0)
+                            {
+                                stepperHandle->movementHandle.accelTableIndex--;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        actualDelay = stepperHandle->movementHandle.endVelocityDelay;
+                    }
                 }
                 else
                 {
                     actualDelay = stepperHandle->movementHandle.endVelocityDelay;
                 }
+                stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnV += actualDelay;
             }
-            else
-            {
-                actualDelay = stepperHandle->movementHandle.endVelocityDelay;
-            }
-            stepperHandle->ftmBase->CONTROLS[stepperHandle->ftmChannel].CnV += actualDelay;
-        }
-    }
-
-    traceISR_EXIT();
+        }    traceISR_EXIT();
 
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F
    Store immediate overlapping exception return operation might vector to incorrect interrupt. */

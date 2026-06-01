@@ -8,10 +8,10 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_core.h"
 #include "motor_process.h"
 #include "cmd_dispatch.h"
-#include "log.h"
 #include "queue.h"
 #include "task.h"
 #include "string.h"
@@ -33,8 +33,6 @@
 /****************************
  *     Public Variables     *
  ****************************/
-
-volatile uint8_t emergencyStopFlag = 0;
 
 /*****************************
  *     Private Variables     *
@@ -92,7 +90,6 @@ status_t MTR_init(void)
     vQueueAddToRegistry(mtrCmdQueue, "MTR Command Queue");
 
     CHD_init_cmd_handles(mtrCmdHandles, MTR_MAX_CMD_HANDLE_COUNT);
-    emergencyStopFlag = 0;
     return kStatus_Success;
 }
 
@@ -380,32 +377,4 @@ status_t MTR_disable_freewheeling_async(MTR_MotorHandle_t handle, TickType_t dea
     queueItem.deadline = deadline;
 
     return MTRi_send_cmd_async(&queueItem, deadline, cmdHandle);
-}
-
-status_t MTR_emergency_stop(MTR_MotorHandle_t handle)
-{
-    static char logMsg[100];
-    if (handle == NULL)
-    {
-        return kStatus_Fail;
-    }
-
-    emergencyStopFlag = 1;
-    snprintf(logMsg, sizeof(logMsg),
-             "[%s] Emergency stop triggered - all motors will stop immediately", handle->label);
-    LOG_WARN(logMsg);
-
-    return kStatus_Success;
-}
-
-status_t MTR_clear_emergency_stop(void)
-{
-    emergencyStopFlag = 0;
-    LOG_INFO("Emergency stop flag cleared");
-    return kStatus_Success;
-}
-
-uint8_t MTR_is_emergency_stop_active(void)
-{
-    return emergencyStopFlag;
 }

@@ -186,8 +186,6 @@ extern "C"
     extern MTR_HandlesArrayItem_t motorHandles[MTR_MAX_MOTORS];
     extern MTR_ParallelTaskItem   parallelTasks[MTR_MAX_PARALLEL_TASKS];
 
-    extern volatile uint8_t emergencyStopFlag;
-
     /**************************************
      *     Public Function Prototypes    *
      **************************************/

@@ -8,9 +8,9 @@
 /********************
  *     Includes    *
  ********************/
+#include <infrastructure/log.h>
 #include "motor_motion.h"
 #include "motor_convert.h"
-#include "log.h"
 #include "math.h"
 #include "step_core.h"
 #include "stdio.h"
@@ -43,10 +43,7 @@ status_t MTRi_move_angle(MTR_MotorHandle_t handle, double angle, TickType_t dead
                          MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL || taskItem == NULL)
     {
         return kStatus_Fail;
@@ -74,10 +71,7 @@ status_t MTRi_move_absolute_angle(MTR_MotorHandle_t handle, double angle, TickTy
                                   MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL || taskItem == NULL)
     {
         return kStatus_Fail;
@@ -115,10 +109,7 @@ status_t MTRi_move_revolutions(MTR_MotorHandle_t handle, double revolutions, Tic
                                MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL)
     {
         return kStatus_Fail;
@@ -135,10 +126,7 @@ status_t MTRi_set_velocity(MTR_MotorHandle_t handle, double velocity_deg_per_sec
                            TickType_t deadline, MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL || taskItem == NULL)
     {
         return kStatus_Fail;
@@ -168,10 +156,7 @@ status_t MTRi_set_acceleration(MTR_MotorHandle_t handle, double acceleration_deg
                                TickType_t deadline, MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL || taskItem == NULL)
     {
         return kStatus_Fail;
@@ -201,10 +186,7 @@ status_t MTRi_stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t d
                          MTR_ParallelTaskItem* taskItem)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL || taskItem == NULL)
     {
         return kStatus_Fail;
@@ -228,10 +210,6 @@ status_t MTRi_stop_motor(MTR_MotorHandle_t handle, bool decelerate, TickType_t d
 
 status_t MTRi_get_current_angle(MTR_MotorHandle_t handle, double* angle)
 {
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
     if (handle == NULL || angle == NULL)
     {
         return kStatus_Fail;
@@ -249,10 +227,6 @@ status_t MTRi_get_current_angle(MTR_MotorHandle_t handle, double* angle)
 
 status_t MTRi_get_movement_state(MTR_MotorHandle_t handle, STP_MovementState_t* state)
 {
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
     if (handle == NULL || state == NULL)
     {
         return kStatus_Fail;
@@ -264,10 +238,7 @@ status_t MTRi_get_movement_state(MTR_MotorHandle_t handle, STP_MovementState_t* 
 status_t MTRi_set_home_position(MTR_MotorHandle_t handle)
 {
     static char logMsg[100];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL)
     {
         return kStatus_Fail;
@@ -283,10 +254,7 @@ status_t MTRi_set_home_position(MTR_MotorHandle_t handle)
 status_t MTRi_set_home_angle_offset(MTR_MotorHandle_t handle, double angle_offset_deg)
 {
     static char logMsg[120];
-    if (MTR_is_emergency_stop_active())
-    {
-        return kStatus_Fail;
-    }
+
     if (handle == NULL)
     {
         return kStatus_Fail;

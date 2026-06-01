@@ -1,0 +1,167 @@
+\doxysection{source/\+statemachine\+\_\+helpers.c File Reference}
+\hypertarget{statemachine__helpers_8c}{}\label{statemachine__helpers_8c}\index{source/statemachine\_helpers.c@{source/statemachine\_helpers.c}}
+
+
+\doxylink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command} parsing and helper implementations for the state machine.  
+
+
+{\ttfamily \+\#include $<$display/\+\+Mcu\+Font\+Cour10\+Normal.\+h$>$}\newline
+{\ttfamily \+\#include $<$display/\+\+Mcu\+Font\+Display.\+h$>$}\newline
+{\ttfamily \+\#include $<$display/\+\+Mcu\+GDisplay\+SSD1306.\+h$>$}\newline
+{\ttfamily \+\#include $<$motion/\+grabber/\+grabber.\+h$>$}\newline
+{\ttfamily \+\#include $<$motion/\+scara\+\_\+kinematics/\+scara\+\_\+kinematics.\+h$>$}\newline
+{\ttfamily \+\#include "{}statemachine\+\_\+helpers.\+h"{}}\newline
+{\ttfamily \+\#include "{}led.\+h"{}}\newline
+{\ttfamily \+\#include "{}pin\+\_\+mux.\+h"{}}\newline
+{\ttfamily \+\#include "{}uart.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}cmd\+\_\+handle.\+h"{}}\newline
+{\ttfamily \+\#include "{}sync\+\_\+wait.\+h"{}}\newline
+Include dependency graph for statemachine\+\_\+helpers.\+c:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{statemachine__helpers_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{statemachine__helpers_8c_a0913dc6b3a79d06314b2c33103fc9cb3}{Execute\+Cmd}} (\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} pkg)
+\begin{DoxyCompactList}\small\item\em Execute the command contained in {\ttfamily pkg}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{statemachine__helpers_8c_af29489a36b3e7f2c0571340c71390924}{Read\+Cmd}} (\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} \texorpdfstring{$\ast$}{*}pkg, const char \texorpdfstring{$\ast$}{*}received\+Message)
+\begin{DoxyCompactList}\small\item\em Parse a received line into a \doxylink{structCommandPackage}{Command\+Package}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8c_a219d2f481df8d56bc65bf20f442bd072}{Send\+OK}} (uint8\+\_\+t trans\+ID)
+\begin{DoxyCompactList}\small\item\em Send an OK acknowledgement for {\ttfamily trans\+ID}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8c_a90cd8488044dda543884672f781166da}{Send\+Error}} (uint8\+\_\+t trans\+ID)
+\begin{DoxyCompactList}\small\item\em Send an ERROR acknowledgement for {\ttfamily trans\+ID}. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{statemachine__helpers_8c_a8a2f307aeb38a86d2090747ee39fa551}{Command\+To\+String}} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em Return a textual name for command {\ttfamily cmd}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}{Show1\+Liner}} (const unsigned char \texorpdfstring{$\ast$}{*}text0)
+\begin{DoxyCompactList}\small\item\em Show a short one-\/line text (display/\+log helper). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{statemachine__helpers_8h_a2afce0a47a93eee73a314d53e4890153}{Command} parsing and helper implementations for the state machine. 
+
+Implements command execution, parsing and simple display/\+log helpers used by the statemachine task.
+
+Author:\+ BSc Date:\+ 18 Apr 2026 
+
+Definition in file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{statemachine__helpers_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{statemachine__helpers_8c_a8a2f307aeb38a86d2090747ee39fa551}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!CommandToString@{CommandToString}}
+\index{CommandToString@{CommandToString}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{CommandToString()}{CommandToString()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_a8a2f307aeb38a86d2090747ee39fa551} 
+const char \texorpdfstring{$\ast$}{*} Command\+To\+String (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Return a textual name for command {\ttfamily cmd}. 
+
+Useful for logging or display. 
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00173}{173}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8c_a0913dc6b3a79d06314b2c33103fc9cb3}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!ExecuteCmd@{ExecuteCmd}}
+\index{ExecuteCmd@{ExecuteCmd}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{ExecuteCmd()}{ExecuteCmd()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_a0913dc6b3a79d06314b2c33103fc9cb3} 
+bool Execute\+Cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}}}]{pkg}{}\end{DoxyParamCaption})}
+
+
+
+Execute the command contained in {\ttfamily pkg}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pkg} & \doxylink{structCommandPackage}{Command\+Package} by value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false on unknown or failed command 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00055}{55}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8c_af29489a36b3e7f2c0571340c71390924}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!ReadCmd@{ReadCmd}}
+\index{ReadCmd@{ReadCmd}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{ReadCmd()}{ReadCmd()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_af29489a36b3e7f2c0571340c71390924} 
+bool Read\+Cmd (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structCommandPackage}{Command\+Package}} \texorpdfstring{$\ast$}{*}}]{pkg}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{received\+Message}{}\end{DoxyParamCaption})}
+
+
+
+Parse a received line into a \doxylink{structCommandPackage}{Command\+Package}. 
+
+Expected format:\+ "{}cmd,x,y,rotate,trans\+ID"{}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em pkg} & Pointer to package to fill \\
+\hline
+\doxymbox{\texttt{in}}  & {\em received\+Message} & NUL-\/terminated received string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if parsing succeeded and command is known, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00129}{129}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8c_a90cd8488044dda543884672f781166da}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!SendError@{SendError}}
+\index{SendError@{SendError}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{SendError()}{SendError()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_a90cd8488044dda543884672f781166da} 
+void Send\+Error (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{trans\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Send an ERROR acknowledgement for {\ttfamily trans\+ID}. 
+
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00166}{166}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8c_a219d2f481df8d56bc65bf20f442bd072}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!SendOK@{SendOK}}
+\index{SendOK@{SendOK}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{SendOK()}{SendOK()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_a219d2f481df8d56bc65bf20f442bd072} 
+void Send\+OK (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{trans\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Send an OK acknowledgement for {\ttfamily trans\+ID}. 
+
+Typically sends "{}\+OK,$<$trans\+ID$>$"{} over the serial interface. 
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00159}{159}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
+\Hypertarget{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f}\index{statemachine\_helpers.c@{statemachine\_helpers.c}!Show1Liner@{Show1Liner}}
+\index{Show1Liner@{Show1Liner}!statemachine\_helpers.c@{statemachine\_helpers.c}}
+\doxysubsubsection{\texorpdfstring{Show1Liner()}{Show1Liner()}}
+{\footnotesize\ttfamily \label{statemachine__helpers_8c_a0fd9fffa7220be645f605ad41a23551f} 
+void Show1\+Liner (\begin{DoxyParamCaption}\item[{const unsigned char \texorpdfstring{$\ast$}{*}}]{text0}{}\end{DoxyParamCaption})}
+
+
+
+Show a short one-\/line text (display/\+log helper). 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\doxymbox{\hyperlink{todo__todo000001}{Todo}}]Make sure things are reentrant! \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{statemachine__helpers_8c_source_l00206}{206}} of file \doxymbox{\hyperlink{statemachine__helpers_8c_source}{statemachine\+\_\+helpers.\+c}}.
+
