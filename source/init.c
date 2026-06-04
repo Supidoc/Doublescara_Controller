@@ -205,7 +205,7 @@ status_t INIT_init_robot(void){
 	    }
 
 	    CHD_CmdHandle_t magHandle = NULL;
-	    if(MTR_move_absolute_angle_async(mag_handle, -3000, portMAX_DELAY, &magHandle) != kStatus_Success)
+	    if(MTR_move_absolute_angle_async(mag_handle, -3800, portMAX_DELAY, &magHandle) != kStatus_Success)
 	    {
 	    	return kStatus_Fail;
 	    }

@@ -73,7 +73,7 @@ extern "C"
 
         motorConfig.label = "m_l_arm";
 
-        motorConfig.acceleration    = 400;
+        motorConfig.acceleration    = 300;
         motorConfig.endVelocity     = 2400;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
@@ -112,8 +112,8 @@ extern "C"
 
         motorConfig.label = "m_r_arm";
 
-        motorConfig.acceleration    = 400;
-        motorConfig.endVelocity     = 2400;
+        motorConfig.acceleration    = 300;
+        motorConfig.endVelocity     = 2000;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
         motorConfig.reductionFactor = 3.0;

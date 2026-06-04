@@ -46,7 +46,7 @@ extern "C"
  * This limits the size of pre-calculated delay profiles to conserve memory.
  * Movements with more acceleration steps will be clamped to this value.
  */
-#define STP_MAX_ACCEL_TABLE_SIZE 1000
+#define STP_MAX_ACCEL_TABLE_SIZE 4000
 
 /**
  * @brief Interpolation factor between lookup table entries.
@@ -60,7 +60,7 @@ extern "C"
  * Each stepper movement requires one table from the pool.
  * If all tables are in use, new movement commands will fail until a table is freed.
  */
-#define STP_ACCEL_TABLE_POOL_SIZE 8
+#define STP_ACCEL_TABLE_POOL_SIZE 4
 
     /***************************
      *     Public Typedefs     *

@@ -368,6 +368,7 @@ static status_t SKI_handle_MoveToXY(const SK_MoveToXYData_t* data, TickType_t de
         SKi_handle_change_side(deadline);
     }
 
+    vTaskDelay(pdMS_TO_TICKS(200));
     double absoluteTheta1Deg = SKi_rad_to_deg(theta1Rad);
     double absoluteTheta2Deg = SKi_rad_to_deg(theta2Rad);
 
@@ -416,7 +417,7 @@ static status_t SKI_handle_MoveToXY(const SK_MoveToXYData_t* data, TickType_t de
             return kStatus_Fail;
         }
     }
-    vTaskDelay(pdMS_TO_TICKS(100));
+    vTaskDelay(pdMS_TO_TICKS(200));
 
     skState.pose.x = data->targetPoint.x;
     skState.pose.y = data->targetPoint.y;

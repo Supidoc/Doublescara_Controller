@@ -145,11 +145,11 @@ void FTM3_IRQHandler(void)
                 // because the start level for the timer output can't be defined
 
                 GPIO_PortToggle(stepperHandle->stepGPIO, 0b1 << stepperHandle->stepPin);
-                if (stepperHandle->stepPin == 2)
+                if (stepperHandle->stepPin == 11)
                 {
                     GPIO_PortToggle(GPIOB, 0b1 << 16);
                 }
-                else if (stepperHandle->stepPin == 9)
+                else if (stepperHandle->stepPin == 1)
                 {
                     GPIO_PortToggle(GPIOB, 0b1 << 17);
                 }

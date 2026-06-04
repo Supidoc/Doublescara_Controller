@@ -146,6 +146,26 @@ bool ExecuteCmd(CommandPackage pkg)
         	Show2Liner("Finished","");
             INIT_move_to_start_point();
         	Show2Liner("Finished", "Press Start");
+        	uint8_t counter = 0;
+             while (1)
+             					{
+             						if (PCA_Read_Pin(PCA_PORT_1, 2, &pinvalue) == kStatus_Success)
+             						{
+             							if (pinvalue != 0)
+             							{
+             								break;
+             							}
+             						}
+             						if(counter % 3 == 0){
+             							LED_toggle();
+             							counter == 0;
+             						}else{
+                 		            	counter++;
+             						}
+
+             						vTaskDelay(pdMS_TO_TICKS(100));
+             					}
+            LED_off();
 
 
         	                while (1)

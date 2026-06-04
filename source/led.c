@@ -37,14 +37,10 @@ status_t LED_init(void)
 
 void LED_toggle(void)
 {
-    while (1)
-    {
-        LED_on();
-        vTaskDelay(pdMS_TO_TICKS(5000)); // 5 Sekunden an
-
-        LED_off();
-        vTaskDelay(pdMS_TO_TICKS(5000)); // 5 Sekunden aus
-    }
+    	if (GPIO_PinRead(LED_GPIO, LED_PIN) == 0U)
+    		LED_on();
+    	else
+    		LED_off();
 }
 
 void LED_on(void)

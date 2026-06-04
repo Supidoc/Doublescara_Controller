@@ -91,7 +91,7 @@ status_t GRB_magnet_up(void)
         return kStatus_Fail;
     }
     CHD_CmdHandle_t magHandle = NULL;
-    if (MTR_move_angle_async(mag_handle, -2400, portMAX_DELAY, &magHandle) != kStatus_Success)
+    if (MTR_move_angle_async(mag_handle, -3200, portMAX_DELAY, &magHandle) != kStatus_Success)
     {
         return kStatus_Fail;
     }
@@ -112,7 +112,7 @@ status_t GRB_magnet_down(void)
         return kStatus_Fail;
     }
     CHD_CmdHandle_t magHandle = NULL;
-    if (MTR_move_angle_async(mag_handle, 2400, portMAX_DELAY, &magHandle) != kStatus_Success)
+    if (MTR_move_angle_async(mag_handle, 3200, portMAX_DELAY, &magHandle) != kStatus_Success)
     {
         return kStatus_Fail;
     }
@@ -150,7 +150,7 @@ status_t GRB_grab(void)
     }
 
     CHD_CmdHandle_t magHandle = NULL;
-    if (MTR_move_angle_async(mag_handle, 2400, portMAX_DELAY, &magHandle) != kStatus_Success)
+    if (MTR_move_angle_async(mag_handle, 3200, portMAX_DELAY, &magHandle) != kStatus_Success)
     {
         return kStatus_Fail;
     }
@@ -197,7 +197,7 @@ status_t GRB_release(void)
     }
 
     CHD_CmdHandle_t magHandle = NULL;
-    if (MTR_move_angle_async(mag_handle, -2400, portMAX_DELAY, &magHandle) != kStatus_Success)
+    if (MTR_move_angle_async(mag_handle, -3200, portMAX_DELAY, &magHandle) != kStatus_Success)
     {
         return kStatus_Fail;
     }

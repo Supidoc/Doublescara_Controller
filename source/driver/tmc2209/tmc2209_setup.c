@@ -217,6 +217,9 @@ status_t TMCi_set_ihold_divider(TMC_Handle_t handle, uint8_t ihold, TickType_t d
 
     ihold_irun &= ~(0b11111 << 0);        // Clear IHOLD bits
     ihold_irun |= (ihold & 0b11111) << 0; // Set new IHOLD bits
+    ihold_irun &= ~(0b1111 << 16);
+    ihold_irun |= (0b0011 << 16);
+
 
     if (TMCi_write(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
@@ -253,6 +256,9 @@ status_t TMCi_set_irun_divider(TMC_Handle_t handle, uint8_t irun, TickType_t dea
 
     ihold_irun &= ~(0b11111 << 8);       // Clear IRUN bits
     ihold_irun |= (irun & 0b11111) << 8; // Set new IRUN bits
+
+    ihold_irun &= ~(0b1111 << 16);
+    ihold_irun |= (0b0011 << 16);
 
     if (TMCi_write(handle, TMC_IHOLD_IRUN_ADDR, &ihold_irun, deadline) != kStatus_Success)
     {
