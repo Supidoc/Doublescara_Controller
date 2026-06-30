@@ -73,7 +73,7 @@ extern "C"
 
         motorConfig.label = "m_l_arm";
 
-        motorConfig.acceleration    = 300;
+        motorConfig.acceleration    = 150;
         motorConfig.endVelocity     = 2400;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
@@ -94,8 +94,8 @@ extern "C"
         motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
         motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-        motorConfig.tmcConfig.iHoldCurrentA = 0.4;
-        motorConfig.tmcConfig.iRunCurrentA  = 2.0;
+        motorConfig.tmcConfig.iHoldCurrentA = 0.0;
+        motorConfig.tmcConfig.iRunCurrentA  = 0.8;
         return motorConfig;
     }
 
@@ -112,7 +112,7 @@ extern "C"
 
         motorConfig.label = "m_r_arm";
 
-        motorConfig.acceleration    = 300;
+        motorConfig.acceleration    = 150;
         motorConfig.endVelocity     = 2000;
         motorConfig.stepAngle       = 1.8;
         motorConfig.microstep       = 16;
@@ -133,8 +133,8 @@ extern "C"
         motorConfig.tmcConfig.uartHandle     = &UART1_uart_handle;
         motorConfig.tmcConfig.uartRTOSHandle = &UART1_rtos_handle;
 
-        motorConfig.tmcConfig.iHoldCurrentA = 0.4;
-        motorConfig.tmcConfig.iRunCurrentA  = 2.0;
+        motorConfig.tmcConfig.iHoldCurrentA = 0.0;
+        motorConfig.tmcConfig.iRunCurrentA  = 0.8;
         return motorConfig;
     }
 
